@@ -1,0 +1,26 @@
+.fmc{
+    background: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px 0px #000;
+    position: relative;
+    top: 15vh;
+}
+
+.clg{
+    margin-top: -90px;
+}
+
+.bg{
+    background: url('../img/Paneles-solares-tesla.jpg') no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+}
+
+/*Hay un error al tratar de que el fondo sea responsivo - Problemas con las dimensiones*/
+@media only screen and (max-width: 678px){
+    .bgñ{
+        background-size: 300%;
+    }
+}
