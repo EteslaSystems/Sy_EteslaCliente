@@ -2,7 +2,7 @@
 @section('cotizadores')
     <!-- Card - Panel/Inversor -->
     <div class="card">
-        <div class="card-header"><img src="https://img.icons8.com/material-outlined/24/000000/lightning-bolt.png"> <label class="label-cotizador"><strong>Cotizador de media tensión (Configuración)</strong></label></div>
+        <div class="card-header"><img src="https://img.icons8.com/material-outlined/24/000000/lightning-bolt.png"><label class="label-cotizador"><strong>&nbsp;Cotizador de media tensión (Configuración)</strong></label></div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
@@ -39,7 +39,7 @@
     <!-- Card - GDMTO/GDMTH -->
     <div class="card">
         <div class="card-header">
-            <label class="label-cotizador"><img src="https://img.icons8.com/ios-filled/24/000000/light-automation.png"> <strong>Datos de Consumo</strong></label>
+            <label class="label-cotizador"><img src="https://img.icons8.com/ios-filled/24/000000/light-automation.png"><strong>&nbsp;Datos de Consumo</strong></label>
             <div class="btn-group btn-group-toggle pull-right">
                 <button type="button" class="btn btn-primary" onclick="GDMTO()">GDMTO</button>
                 <button type="button" class="btn btn-primary" onclick="GDMTH()">GDMTH</button>
@@ -325,89 +325,87 @@
                 </div>
             </div>
             <div class="container-fluid" style="display:none;" id="divGDMTH">
-                <div class="card">
-                    <div class="card-header"><label class="label-cotizador"><strong>Tarifas CFE</strong></label></div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="inPagoTransmision">Pago de transmisión</label>
-                                            <input type="number" class="form-control" id="inPagoTransmision">        
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="B(mxn/kWh)">B(mxn/kWh)</label>
-                                            <input type="number" class="form-control" id="B(mxn/kWh)">        
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="I(mxn/kWh)">I(mxn/kWh)</label>
-                                            <input type="number" class="form-control" id="I(mxn/kWh)">        
-                                        </div>
-                                    </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label>B(kWh)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="P(mxn/kWh)">P(mxn/kWh)</label>
-                                            <input type="number" class="form-control" id="P(mxn/kWh)">        
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label>I(kWh)&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="C(mxn/kW)">C(mxn/kW)</label>
-                                            <input type="number" class="form-control" id="C(mxn/kW)">        
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label>P(kWh)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="input-group mb-2">
-                                            <label for="D(mxn/kW)">D(mxn/kW)</label>
-                                            <input type="number" class="form-control" id="D(mxn/kW)">        
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label for="">B(kw)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label for="">I(kw)&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label for="">P(kw)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
+
+                <span class="label-cotizador" style="color: green"><strong>Tarifas CFE</strong></span><br><br>
+
                 <div class="row">
                     <div class="col">
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label>B(kWh)</label>
-                                    <input type="number" class="form-control">  
+                                    <label for="inPagoTransmision">Pago de transmisión&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="inPagoTransmision" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label>I(kWh)</label>
-                                    <input type="number" class="form-control">  
+                                    <label for="B(mxn/kWh)">B(mxn/kWh)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="B(mxn/kWh)" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label>P(kWh)</label>
-                                    <input type="number" class="form-control">  
+                                    <label for="I(mxn/kWh)">I(mxn/kWh)&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="I(mxn/kWh)" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -416,30 +414,68 @@
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">B(kw)</label>
-                                    <input type="number" class="form-control">      
+                                    <label for="P(mxn/kWh)">P(mxn/kWh)&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="P(mxn/kWh)" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">I(kw)</label>
-                                    <input type="number" class="form-control">      
+                                    <label for="C(mxn/kW)">C(mxn/kW) &nbsp;&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="C(mxn/kW)" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">P(kw)</label>
-                                    <input type="number" class="form-control">  
+                                    <label for="D(mxn/kW)">D(mxn/kW)&nbsp;&nbsp;&nbsp;</label>
+                                    <input type="number" min="0" value="0" class="form-control" id="D(mxn/kW)" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
-    </div>
+    </div><br>
+
+<!--Scrip que valida que solo se ingresen valores numéricos en las cajas de texto, con un solo punto y máximo 2 decimales.-->
+<script type="text/javascript">
+    function filterFloat(evt,input){
+        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
+        var key = window.Event ? evt.which : evt.keyCode;
+        var chark = String.fromCharCode(key);
+        var tempValue = input.value+chark;
+        if(key >= 48 && key <= 57) {
+            if(filter(tempValue)=== false) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if(key == 8 || key == 13 || key == 0) {
+                return true;              
+            } else if(key == 46) {
+                if(filter(tempValue)=== false) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+    function filter(__val__){
+        var preg = /^([0-9]+\.?[0-9]{0,2})$/;
+        if(preg.test(__val__) === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 @endsection

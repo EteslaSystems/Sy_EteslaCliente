@@ -76,3 +76,13 @@
     line-height: 1.2;
     padding-right: 15px;
 }
+
+#preview-surface img, #preview-measurer img {
+    width: 100%;
+    height: 130px;
+}
+
+#preview-shadow img {
+    width: 100%;
+    height: 230px;
+}

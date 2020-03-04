@@ -1,0 +1,38 @@
+[2019-12-02 17:07:40] local.ERROR: Command "cache:cear" is not defined.
+
+Did you mean one of these?
+    cache:clear
+    cache:forget
+    cache:table
+    config:clear
+    event:clear
+    optimize:clear
+    route:clear
+    view:clear {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"cache:cear\" is not defined.
+
+Did you mean one of these?
+    cache:clear
+    cache:forget
+    cache:table
+    config:clear
+    event:clear
+    optimize:clear
+    route:clear
+    view:clear at C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php:660)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php(237): Symfony\\Component\\Console\\Application->find('cache:cear')
+#1 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php(149): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\xampp\\htdocs\\EteslaPanelesSolares\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2019-12-02 23:24:21] local.ERROR: Command "srv" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"srv\" is not defined. at C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php:660)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php(237): Symfony\\Component\\Console\\Application->find('srv')
+#1 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\symfony\\console\\Application.php(149): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\xampp\\htdocs\\EteslaPanelesSolares\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\xampp\\htdocs\\EteslaPanelesSolares\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 

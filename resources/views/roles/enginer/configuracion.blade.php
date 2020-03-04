@@ -1,5 +1,8 @@
 @extends('roles/enginer')
 @section('enginerContent')
+    <!-- Token CSRF -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Fin Token CSRF -->
     <div class="card">
         <div class="card-body">
             <div class="row justify-content-center">
@@ -39,7 +42,6 @@
                     <div class="col-4 align-self-center">
                         <div class="input-group mb-2">
                             <button id="btnAgregarItem" class="btn btn-lg btn-success" onclick="agregarItem();" disabled>+</button>
-                            <button id="btnMostrarItem" class="btn btn-lg btn-success" onclick="mostrarItems();">Mostrar</button>
                         </div>
                     </div>
                 </div>
@@ -49,24 +51,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
+                <table id="tblConfigurationPrevious" class="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th>Material</th>
                             <th>Cantidad</th>
                             <th>Marca</th>
                             <th>Caracteristicas</th>
+                            <th>Acciones</th>
                         </tr>
                     <thead>
                     <tbody>
-
+                    
                     </tbody>
                 </table>
             </div>
         </div>
-        <button id="btnGuardarConfiguracion" class="btn btn-lg btn-success pull-right" style="display:none;">Guardar</button>
+        <button id="btnGuardarConfiguracion" class="btn btn-lg btn-success pull-right" style="display:none;" onclick="enviarDatosAlServer();">Guardar</button>
     </div>
 @endsection
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 <script src="js/configuracion.js"></script>

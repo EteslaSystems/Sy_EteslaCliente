@@ -3,18 +3,19 @@
     Para asi poder activar el botón de "+"
 */      
 var contadorValidador = 0;
-var arrayConfiguracion = [];
+var objConfiguracion = {};
+var arrayConfiguracion = []; //Este va al server
+var arrayConfigTable = []; //Este es el alimenta la tabla dinamica
 
 function agregarItem(){
     //var idItem;
-    reglasAntesDeAgregarItem();
     /*Se obtiene los valores de los campos de la vista*/
     var material = document.getElementById('inpMaterial').value;
     var cantidad = document.getElementById('inpCantidad').value;
     var marca = document.getElementById('inpMarca').value;
     var caracteristicas = document.getElementById('inpCaracteristicas').value;
 
-    var objConfiguracion = {
+    objConfiguracion = {
         /*Se define objeto y sus propiedades*/
         //idItemConf: idItem,
         materialConf: material,
@@ -24,32 +25,37 @@ function agregarItem(){
     };
     //idItem = idItem + 1;
 
-    /*Se agrega objeto seteado al array*/
+    /*Se agrega objeto seteado a los arrays*/
+    arrayConfigTable.push(objConfiguracion);
     arrayConfiguracion.push(/*idItem,*/objConfiguracion);
-
-    /*Mostrar el contenido del array en la tabla de la vista*/
-
+    
+    reglasAntesDeAgregarItem();
     limpiarCampos();
-    /*document.getElementById('btnAgregarItem').disabled = true; 
-    -
-    Volver a bloquear el boton de "+ - Agregar item"
-
-    WARNING: CUANDO SE VUELVE A BLOQUEAR EL BOTON,
-             NO SE PUEDE VOLVER A DESBLOQUEAR, CUANDO SE INTENTA
-             LLENAR DE NUEVO EL FORMULARIO.
-             ***HACER UN EVENTO QUE SIEMPRE ESTE A LA ESCUCHA PARA DESBLOQUEAR EL CONTROL***
-    */
+    mostrarItems();
+    document.getElementById('inpMaterial').focus();
+    document.getElementById('btnAgregarItem').disabled = true; 
 }
 
 function mostrarItems(){
-    if(arrayConfiguracion.length > 0){
-        /*for(const i = 1; i <= arrayConfiguracion.length; i++) {
+    /*Muestra contenido del array de objetos dentro de una tabla dinamica en la vista*/
+    document.getElementById("tblConfigurationPrevious").insertRow(-1).innerHTML = 
+            '<tr><td>'+arrayConfiguracion[0].materialConf/*+'</td>'+'<td>'+element.cantidadConf+'</td>'+'<td>'+element.marcaConf+'</td>'+'<td>'+element.caracteristicaConf+'</td>'+'<td>'+'<button id="btnEditRegisterConf" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>'+'</td>'+'<td>'+'<button id="btnDeletRegisterConf" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>'*/+'</td>'+'</tr>'; 
+    //console.log(arrayConfiguracion);
+
+    /*if(arrayConfiguracion.length > 0){
+        arrayConfiguracion.forEach(element => {
+            console.log(element.materialConf);
+        });
+        document.getElementById("tblConfigurationPrevious").insertRow(-1).innerHTML = 
+            '<tr><td>'+arrayConfiguracion[objConfiguracion.materialConf]+'</td>'/*+'<td>'+element.cantidadConf+'</td>'+'<td>'+element.marcaConf+'</td>'+'<td>'+element.caracteristicaConf+'</td>'+'<td>'+'<button id="btnEditRegisterConf" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>'+'</td>'+'<td>'+'<button id="btnDeletRegisterConf" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>'+'</td>'+'</tr>'; 
+            /*
+                (1)Empujar el objeto con sus propiedades a un nuevo array, el cual sera mandado a la 
+                peticion del server.
+                (2)Mientras que a 'arrayConfiguracion' se limpia para darle lugar a los demas objConfiguracion
             
-        }*/
-        console.log(Object.values(arrayConfiguracion));
     }else{
         alert('Array vacio');
-    }
+    }*/
 }
 
 function reglasAntesDeAgregarItem(){
@@ -61,6 +67,7 @@ function reglasAntesDeAgregarItem(){
 }
 
 function validarCamposObligatoriosVacios(){
+    /* Se validan los campos que son obligatorios para poder habilitar el boton de "+"*/
     inpMaterial = document.getElementById('inpMaterial');
     inpCantidad = document.getElementById('inpCantidad');
 
@@ -68,10 +75,30 @@ function validarCamposObligatoriosVacios(){
 
     if(contadorValidador == 2){
         document.getElementById('btnAgregarItem').disabled = false;
+        contadorValidador = 0;
     }
 }
 
 function limpiarCampos(){
     $('input[type="text"]').val('');
     $('input[type="number"]').val('');
+}
+
+function enviarDatosAlServer()
+{
+    console.log(arrayConfiguracion);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/enviarConfiguracion",
+        traditional: true,
+        data: {arrayConfiguracion}
+    });
 }

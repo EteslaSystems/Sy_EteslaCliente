@@ -93,3 +93,5 @@ Route::get('/instalacion', function(){
 Route::get('configuracion', function(){
     return view('roles/enginer/configuracion');
 });
+
+Route::post('enviarConfiguracion',['as'=>'enviarConfiguracion','uses'=>'ConfiguracionController@enviarConfiguracion']);
