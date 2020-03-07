@@ -10,6 +10,10 @@
         <title>Etesla Paneles Solares - @section('titleAuth')@show</title>
     </head>
     <body>
+        @if(Session::has('message'))
+            {!! Session::get('message') !!}
+        @endif
+
         @yield('bodyLog')
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
