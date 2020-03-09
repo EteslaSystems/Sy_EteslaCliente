@@ -120,6 +120,7 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Fideloper\\Proxy\\' => 16,
             'Faker\\' => 6,
             'Facade\\Ignition\\' => 16,
@@ -335,6 +336,10 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Fideloper\\Proxy\\' => 
         array (
@@ -1189,6 +1194,10 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/ValidGenerator.php',
         'Fideloper\\Proxy\\TrustProxies' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustProxies.php',
         'Fideloper\\Proxy\\TrustedProxyServiceProvider' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
+        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
+        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
+        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
+        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
@@ -3782,6 +3791,7 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\NullSessionHandler' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/Handler/NullSessionHandler.php',
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\PdoSessionHandler' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/Handler/PdoSessionHandler.php',
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\RedisSessionHandler' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/Handler/RedisSessionHandler.php',
+        'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\SessionHandlerFactory' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/Handler/SessionHandlerFactory.php',
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\StrictSessionHandler' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/Handler/StrictSessionHandler.php',
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\MetadataBag' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/MetadataBag.php',
         'Symfony\\Component\\HttpFoundation\\Session\\Storage\\MockArraySessionStorage' => __DIR__ . '/..' . '/symfony/http-foundation/Session/Storage/MockArraySessionStorage.php',
@@ -3951,6 +3961,9 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'Symfony\\Component\\Mime\\Address' => __DIR__ . '/..' . '/symfony/mime/Address.php',
         'Symfony\\Component\\Mime\\BodyRendererInterface' => __DIR__ . '/..' . '/symfony/mime/BodyRendererInterface.php',
         'Symfony\\Component\\Mime\\CharacterStream' => __DIR__ . '/..' . '/symfony/mime/CharacterStream.php',
+        'Symfony\\Component\\Mime\\Crypto\\SMime' => __DIR__ . '/..' . '/symfony/mime/Crypto/SMime.php',
+        'Symfony\\Component\\Mime\\Crypto\\SMimeEncrypter' => __DIR__ . '/..' . '/symfony/mime/Crypto/SMimeEncrypter.php',
+        'Symfony\\Component\\Mime\\Crypto\\SMimeSigner' => __DIR__ . '/..' . '/symfony/mime/Crypto/SMimeSigner.php',
         'Symfony\\Component\\Mime\\DependencyInjection\\AddMimeTypeGuesserPass' => __DIR__ . '/..' . '/symfony/mime/DependencyInjection/AddMimeTypeGuesserPass.php',
         'Symfony\\Component\\Mime\\Email' => __DIR__ . '/..' . '/symfony/mime/Email.php',
         'Symfony\\Component\\Mime\\Encoder\\AddressEncoderInterface' => __DIR__ . '/..' . '/symfony/mime/Encoder/AddressEncoderInterface.php',
@@ -3989,7 +4002,6 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'Symfony\\Component\\Mime\\MimeTypeGuesserInterface' => __DIR__ . '/..' . '/symfony/mime/MimeTypeGuesserInterface.php',
         'Symfony\\Component\\Mime\\MimeTypes' => __DIR__ . '/..' . '/symfony/mime/MimeTypes.php',
         'Symfony\\Component\\Mime\\MimeTypesInterface' => __DIR__ . '/..' . '/symfony/mime/MimeTypesInterface.php',
-        'Symfony\\Component\\Mime\\NamedAddress' => __DIR__ . '/..' . '/symfony/mime/NamedAddress.php',
         'Symfony\\Component\\Mime\\Part\\AbstractMultipartPart' => __DIR__ . '/..' . '/symfony/mime/Part/AbstractMultipartPart.php',
         'Symfony\\Component\\Mime\\Part\\AbstractPart' => __DIR__ . '/..' . '/symfony/mime/Part/AbstractPart.php',
         'Symfony\\Component\\Mime\\Part\\DataPart' => __DIR__ . '/..' . '/symfony/mime/Part/DataPart.php',
@@ -3999,8 +4011,15 @@ class ComposerStaticInitc900fc00f43ea91c173322074c550ec0
         'Symfony\\Component\\Mime\\Part\\Multipart\\FormDataPart' => __DIR__ . '/..' . '/symfony/mime/Part/Multipart/FormDataPart.php',
         'Symfony\\Component\\Mime\\Part\\Multipart\\MixedPart' => __DIR__ . '/..' . '/symfony/mime/Part/Multipart/MixedPart.php',
         'Symfony\\Component\\Mime\\Part\\Multipart\\RelatedPart' => __DIR__ . '/..' . '/symfony/mime/Part/Multipart/RelatedPart.php',
+        'Symfony\\Component\\Mime\\Part\\SMimePart' => __DIR__ . '/..' . '/symfony/mime/Part/SMimePart.php',
         'Symfony\\Component\\Mime\\Part\\TextPart' => __DIR__ . '/..' . '/symfony/mime/Part/TextPart.php',
         'Symfony\\Component\\Mime\\RawMessage' => __DIR__ . '/..' . '/symfony/mime/RawMessage.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailAddressContains' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailAddressContains.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailAttachmentCount' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailAttachmentCount.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailHasHeader' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailHasHeader.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailHeaderSame' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailHeaderSame.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailHtmlBodyContains' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailHtmlBodyContains.php',
+        'Symfony\\Component\\Mime\\Test\\Constraint\\EmailTextBodyContains' => __DIR__ . '/..' . '/symfony/mime/Test/Constraint/EmailTextBodyContains.php',
         'Symfony\\Component\\Process\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/process/Exception/ExceptionInterface.php',
         'Symfony\\Component\\Process\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/symfony/process/Exception/InvalidArgumentException.php',
         'Symfony\\Component\\Process\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/process/Exception/LogicException.php',
