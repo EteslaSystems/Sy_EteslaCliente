@@ -19,11 +19,11 @@ class vendedorController extends Controller
 	{
 		if ($this->validarSesion() == 0) {
 			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/login');
+			return redirect('/');
 		}
 		if ($this->validarSesion() == 1) {
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('/');
+			return redirect('index');
 		}
 		return view('roles.seller.inicioS');
 	}
@@ -32,11 +32,11 @@ class vendedorController extends Controller
 	{
 		if ($this->validarSesion() == 0) {
 			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/login');
+			return redirect('/');
 		}
 		if ($this->validarSesion() == 1) {
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('/');
+			return redirect('index');
 		}
 		return view('roles.seller.cotizador.mediaTension');
 	}
@@ -45,11 +45,11 @@ class vendedorController extends Controller
 	{
 		if ($this->validarSesion() == 0) {
 			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/login');
+			return redirect('/');
 		}
 		if ($this->validarSesion() == 1) {
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('/');
+			return redirect('index');
 		}
 		return view('roles.seller.cotizador.bajaTension');
 	}
@@ -58,11 +58,11 @@ class vendedorController extends Controller
 	{
 		if ($this->validarSesion() == 0) {
 			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/login');
+			return redirect('/');
 		}
 		if ($this->validarSesion() == 1) {
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('/');
+			return redirect('index');
 		}
 
 		$dataUsuario = session('dataUsuario');
@@ -78,11 +78,11 @@ class vendedorController extends Controller
 	{
 		if ($this->validarSesion() == 0) {
 			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/login');
+			return redirect('/');
 		}
 		if ($this->validarSesion() == 1) {
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('/');
+			return redirect('index');
 		}
 
 		$dataUsuario = session('dataUsuario');
@@ -97,7 +97,7 @@ class vendedorController extends Controller
 	public function validarSesion()
 	{
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend') {
+			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
 				return 2;
 			}
 			return 1;
@@ -111,6 +111,6 @@ class vendedorController extends Controller
 			session()->forget('dataUsuario');
 		}
 		\Session::flash('message', 'Salió de la sesión.');
-		return redirect('/login');
+		return redirect('/');
 	}
 }

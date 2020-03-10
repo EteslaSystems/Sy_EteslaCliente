@@ -25,11 +25,11 @@ class clienteController extends Controller
 
         if ($registrarCliente->status == 200) {
             \Session::flash('message', $registrarCliente->message);
-            return redirect('mclients');
+            return redirect('registrarCliente');
         }
         else {
             \Session::flash('message', $registrarCliente->message);
-            return redirect('mclients');
+            return redirect('registrarCliente');
         }
     }
 }
