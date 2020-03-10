@@ -19,12 +19,25 @@ class usuarioController extends Controller
 	public function index()
 	{
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend') {
-				return redirect('s');
-			}
-			return redirect('/');
+			return redirect('index');
 		}
 		return view('authentication/login');
+	}
+
+	public function paginaPrincipal()
+	{
+		if (session()->has('dataUsuario')) {
+			return view('index');
+		}
+		return redirect('/');
+	}
+
+	public function mostrarRegistrarUsuario()
+	{
+		if (session()->has('dataUsuario')) {
+			return redirect('index');
+		}
+		return view('authentication/register');
 	}
 
 	public function registrarUsuario(Request $request)
@@ -41,11 +54,11 @@ class usuarioController extends Controller
 
 		if ($registrarUsuario->status == 200) {
 			\Session::flash('message', $registrarUsuario->message);
-			return redirect('login');
+			return redirect('/');
 		}
 		else {
 			\Session::flash('message', $registrarUsuario->message);
-			return redirect('register');
+			return redirect('registro');
 		}
 	}
 
@@ -56,19 +69,35 @@ class usuarioController extends Controller
 		if($validarUsuario->status == 500)
 		{
 			\Session::flash('message', $validarUsuario->message);
-			return redirect('login');
+			return redirect('/');
 		}
 
-		if (verificacionController::validarToken($validarUsuario->token) == false)
+		if (verificacionController::validarToken($validarUsuario->message) == false)
 		{
 			\Session::flash('message', 'Caducó su sesión.');
-			return redirect('login');
+			return redirect('/');
 		} else {
-			$data = verificacionController::validarToken($validarUsuario->token);
+			$data = verificacionController::validarToken($validarUsuario->message);
 			session(['dataUsuario' => $data]);
 		}
 
 		\Session::flash('message', 'Credenciales correctas.');
-		return redirect('s');
+		return redirect('index');
+	}
+
+	public function visualizarPerfil()
+	{
+		if (session()->has('dataUsuario')) {
+			return view('template/profileUser');
+		}
+		return redirect('/');
+	}
+
+	public function olvidoContrasenia()
+	{
+		if (session()->has('dataUsuario')) {
+			return redirect('index');
+		}
+		return view('authentication/forgotPasswd');
 	}
 }
