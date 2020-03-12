@@ -51,15 +51,12 @@ function agregarPeriodo(){
     };
 
     arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-    mostrarIndexador();
+    sumarNoAlIndexador();
     limpiarCampos();
-
-    arrayPeriodosGDMTH.forEach(function(elemento, indice, array){
-        console.log(elemento,indice);
-    });
 }
 
 function mostrarPeriodo(){
+    /*Se desplega el contenido del array en los campos*/ 
 
 }
 
@@ -67,11 +64,22 @@ function mostrarPeriodo(){
     
 }*/
 
-function mostrarIndexador(){
+/*function mostrarIndexador(){
     indexador = arrayPeriodosGDMTH.length;
     document.getElementById('lblIndexador').innerHTML = indexador;
     
     document.getElementById('lstPeriodos')
+}*/
+
+function sumarNoAlIndexador(){
+    indexador = arrayPeriodosGDMTH.length;
+
+    var lista = document.getElementById("lstPeriodos");    
+    var option = document.createElement("option");
+    option.text = indexador;
+    lista.add(option);
+    /*Cambiar el valor seleccionado en la lista*/
+    lista.selectedIndex = indexador.toString();
 }
 
 function limpiarCampos(){
