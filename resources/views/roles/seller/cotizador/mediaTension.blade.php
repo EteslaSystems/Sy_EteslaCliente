@@ -207,7 +207,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost1" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost2" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost3" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost4" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost5" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost6" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost7" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost8" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost9" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost10" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -307,7 +307,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost11" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -317,21 +317,34 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" id="inpCost" class="form-control">
+                                    <input type="number" id="inpCost12" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- GMDTH -->
             <div class="container-fluid" style="display:none;" id="divGDMTH">
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control" name="numPeriodos" id="lstPeriodos">
+                            <option disabled selected value="-1">0</option>
+                        </select>
+
+                        <label id="lblIndexador">0</label>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-success" onclick="agregarPeriodo();">Agregar</button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label>B(kWh)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);" required>
                                 </div>
                             </div>
                         </div>
@@ -339,7 +352,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label>I(kWh)&nbsp;&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -347,7 +360,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label>P(kWh)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -356,48 +369,41 @@
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">B(kw)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <label for="inpBkw">B(kw)&nbsp;&nbsp;</label>
+                                    <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">I(kw)&nbsp;&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <label for="inpIkw">I(kw)&nbsp;&nbsp;&nbsp;</label>
+                                    <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="">P(kw)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                    <label for="inpPkw">P(kw)&nbsp;&nbsp;</label>
+                                    <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Fin GDMTH -->
                 <br>
 
-                <span class="label-cotizador" style="color: green"><strong>Tarifas CFE</strong></span><br><br>
+                <span class="label-cotizador" style="color: green"><strong>Pago CFE</strong></span><br><br>
 
                 <div class="row">
                     <div class="col">
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="inPagoTransmision">Pago de transmisión&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="inPagoTransmision" onkeypress="return filterFloat(event,this);">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <div class="input-group mb-2">
                                     <label for="B(mxn/kWh)">B(mxn/kWh)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="B(mxn/kWh)" onkeypress="return filterFloat(event,this);">
+                                    <input id="B(mxn/kWh)" type="number" min="0"  class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -405,7 +411,15 @@
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label for="I(mxn/kWh)">I(mxn/kWh)&nbsp;&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="I(mxn/kWh)" onkeypress="return filterFloat(event,this);">
+                                    <input id="I(mxn/kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <div class="input-group mb-2">
+                                    <label for="P(mxn/kWh)">P(mxn/kWh)&nbsp;&nbsp;</label>
+                                    <input id="P(mxn/kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -414,8 +428,8 @@
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <label for="P(mxn/kWh)">P(mxn/kWh)&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="P(mxn/kWh)" onkeypress="return filterFloat(event,this);">
+                                    <label for="inpPagoTransmision">Pago de transmisión&nbsp;&nbsp;</label>
+                                    <input id="inpPagoTransmision" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -423,7 +437,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label for="C(mxn/kW)">C(mxn/kW) &nbsp;&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="C(mxn/kW)" onkeypress="return filterFloat(event,this);">
+                                    <input id="C(mxn/kW)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>
@@ -431,7 +445,7 @@
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
                                     <label for="D(mxn/kW)">D(mxn/kW)&nbsp;&nbsp;&nbsp;</label>
-                                    <input type="number" min="0" value="0" class="form-control" id="D(mxn/kW)" onkeypress="return filterFloat(event,this);">
+                                    <input id="D(mxn/kW)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                                 </div>
                             </div>
                         </div>

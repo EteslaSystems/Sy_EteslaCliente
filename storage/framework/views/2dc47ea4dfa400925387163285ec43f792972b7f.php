@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <br>
     <div class="d-flex">
-        <button class="btn btn-sm btn-success"><strong>Generar PDF</strong></button>
+        <button class="btn btn-sm btn-success"><strong>Calcular</strong></button>
         <div class="ml-auto">
             <div class="form-group row">
                 <div class="col-sm-12">
