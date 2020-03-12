@@ -84,7 +84,6 @@ function GDMTH(){
 }
 /*#endregion*/
 /*#endregion*/
-<<<<<<< HEAD
 
 /*#region Buscador - Jesús Daniel Carrera Falcón*/
 $("#inpSearchClient").keyup(function() {
@@ -119,6 +118,3 @@ $("#inpSearchClient").keyup(function() {
 	});
 })
 /*#endregion*/
-=======
-/*#endregion*/
->>>>>>> f7b9307bc4cb392ee7f1721a77bf2409cd748659

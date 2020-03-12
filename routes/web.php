@@ -57,14 +57,12 @@ Route::get('/cor',function() {
 Route::get('/head',function() {
     return view('template/head');
 });
-<<<<<<< HEAD
+
 /* --------------------------------------------------------------------------- */
 
 Route::get('/mediaT', function(){
     return view('roles/seller/cotizador/mediaTension');
 });
-=======
-<<<<<<< HEAD
 
 //Route::get('/mediaTension', function(){ return view('roles/seller/cotizador/mediaTension'); });
 
@@ -100,7 +98,4 @@ Route::get('configuracion', function(){
 });
 
 Route::post('enviarConfiguracion',['as'=>'enviarConfiguracion','uses'=>'ConfiguracionController@enviarConfiguracion']);
-=======
 /* --------------------------------------------------------------------------- */
->>>>>>> d9ae642df67b7249346d01ca3532353dd59ffdc9
->>>>>>> f7b9307bc4cb392ee7f1721a77bf2409cd748659
