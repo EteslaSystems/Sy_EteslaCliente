@@ -1,5 +1,4 @@
-@extends('roles/seller/cotizador/cotizador')
-@section('cotizadores')
+<?php $__env->startSection('cotizadores'); ?>
     <!-- Card - Panel/Inversor -->
     <div class="card">
         <div class="card-header"><img src="https://img.icons8.com/material-outlined/24/000000/lightning-bolt.png"><label class="label-cotizador"><strong>&nbsp;Cotizador de media tensión (Configuración)</strong></label></div>
@@ -492,4 +491,5 @@
         }
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('roles/seller/cotizador/cotizador', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/mediaTension.blade.php ENDPATH**/ ?>
