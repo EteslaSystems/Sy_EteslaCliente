@@ -1,32 +1,42 @@
 <?php $__env->startSection('cotizadores'); ?>
-    <!-- Card - Panel/Inversor -->
     <div class="card">
-        <div class="card-header"><img src="https://img.icons8.com/material-outlined/24/000000/lightning-bolt.png"><label class="label-cotizador"><strong>&nbsp;Cotizador de media tensión (Configuración)</strong></label></div>
+        <div class="card-header">
+            <img src="https://img.icons8.com/material-outlined/24/000000/lightning-bolt.png">
+            <label class="label-cotizador"><strong>&nbsp;Cotizador de media tensión (Configuración)</strong></label>
+        </div>
+
         <div class="card-body">
             <div class="row">
                 <div class="col">
                     <div class="form-group row justify-content-md-center">
                         <label class="col-sm-10 col-form-label">Seleccionar panel</label>
+
                         <div class="col-sm-10">
                             <div class="input-group mb-2">
                                 <select class="form-control" id="">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
+                                    <option disabled selected>Elige una opción:</option>
+
+                                    <?php $__currentLoopData = $vPaneles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($details->idPanel); ?>"><?php echo e($details->vNombreMaterialFot); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col">
                     <div class="form-group row justify-content-md-center">
-                        <label class="col-sm-10 col-form-label">Seleccionar marca del inversor</label>      
+                        <label class="col-sm-10 col-form-label">Seleccionar inversor</label>
+
                         <div class="col-sm-10">
                             <div class="input-group mb-2">
                                 <select class="form-control" id="">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
+                                    <option disabled selected>Elige una opción:</option>
+
+                                    <?php $__currentLoopData = $vInversores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($details->idInversor); ?>"><?php echo e($details->vNombreMaterialFot); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>              
                             </div>
                         </div>
@@ -34,32 +44,43 @@
                 </div>
             </div>
         </div>
-    </div><br>
-    <!-- Card - GDMTO/GDMTH -->
+    </div>
+
+    <br>
+
     <div class="card">
         <div class="card-header">
-            <label class="label-cotizador"><img src="https://img.icons8.com/ios-filled/24/000000/light-automation.png"><strong>&nbsp;Datos de Consumo</strong></label>
+            <label class="label-cotizador">
+                <img src="https://img.icons8.com/ios-filled/24/000000/light-automation.png">
+                <strong>&nbsp;Datos de Consumo</strong>
+            </label>
+
             <div class="btn-group btn-group-toggle pull-right">
                 <button type="button" class="btn btn-primary" onclick="GDMTO()">GDMTO</button>
                 <button type="button" class="btn btn-primary" onclick="GDMTH()">GDMTH</button>
             </div>
         </div>
+
         <div class="card-body" >
             <div class="container-fluid" id="divGDMTO">
                 <div class="row">
                     <div class="col-3 mx-auto">
                         <p align="center"><strong>Irradiación</strong></p>
+
                         <div class="form-group row">
                             <input type="number" class="form-control" id="inpIrradiacion" placeholder="Irradiacion" pattern="[^[0-9]+$]">
                         </div>
                     </div>
+
                     <div class="col-3 mx-auto">
                         <p align="center"><strong>Potencia</strong></p>
+
                         <div class="form-group-row">
                             <input type="number" class="form-control" id="inpPotencia" placeholder="Potencia">
                         </div>
                     </div>
                 </div>
+
                 <div class="row justify-content-md-center">
                     <div class="col">
                         <br>
