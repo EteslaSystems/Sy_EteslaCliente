@@ -11,7 +11,7 @@
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom">
             <a id="menu-toggle" class="navbar-brand">
-                <img src="img/eTesla_logo.png" width="100" height="40">
+                <img src="<?php echo e(asset('img/eTesla_logo.png')); ?>" width="100" height="40">
             </a>
             <!-- Responsive Toggle -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://img.icons8.com/cotton/35/000000/name.png"></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Editar perfil</a>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                            <a class="dropdown-item" href="/logout">Cerrar sesión</a>
                         </div>
                     </li>
                 </ul>

@@ -1,117 +1,51 @@
-@extends('template/materialFotovoltaico')
-@section('formgroup-1')
-    <div class="form-group row">
-        <label for="VMOCMaterialF" class="col-sm-6 col-form-label">VMOC</label>
-        <div class="col-sm-10">
-            <div class="input-group mb-2">
-                <input type="text" class="form-control" id="VMOCMaterialF" placeholder="VMOC">
+@extends('roles/admin')
+    @section('contenidoAdmin')
+        @include('roles.admin.forms.form-new-investor')  
+
+        <hr>
+
+        <div class="content">
+            <div class="table-responsive-sm">
+                <table class="table table-bordered table-hover table-sm text-center">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th style="width: 32.5%;">Nombre</th>
+                            <th style="width: 10%;">Marca</th>
+                            <th style="width: 7.5%;">Potencia</th>
+                            <th style="width: 5%;">ISC</th>
+                            <th style="width: 7.5%;">Precio</th>
+                            <th style="width: 12.5%;" colspan="2">VMAX / VMIN</th>
+                            <th style="width: 12.5%;" colspan="2">PMAX / PMIN</th>
+                            <th style="width: 12.5%;" colspan="2">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach($vInversores as $details)
+                            <tr>
+                                <td>{{ $details->vNombreMaterialFot }}</td>
+                                <td>{{ $details->vMarca }}</td>
+                                <td>{{ $details->fPotencia }}</td>
+                                <td>{{ $details->fISC }}</td>
+                                <td>{{ $details->fPrecio }}</td>
+                                <td>{{ $details->iVMAX }}</td>
+                                <td>{{ $details->iVMIN }}</td>
+                                <td>{{ $details->iPMAX }}</td>
+                                <td>{{ $details->iPMIN }}</td>
+                                <td>
+                                    <a href="{{ url('editar-inversor', [$details->idInversor]) }}" class="btn btn-sm btn-warning" title="Editar">
+                                        <img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('eliminar-inversor', [$details->idInversor]) }}" class="btn btn-sm btn-danger" title="Eliminar">
+                                        <img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png">
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
-@stop
-@section('formgroup-2')
-    <div class="form-group row">
-        <label for="PMINMaterialF" class="col-sm-6 col-form-label">PMIN</label>
-        <div class="col-sm-10">
-            <div class="input-group mb-2">
-                <input type="text" class="form-control" id="PMINMaterialF" placeholder="PMIN">
-            </div>
-        </div>
-    </div>
-@stop
-@section('formgroup-3')
-    <div class="form-group row">
-        <label for="VMINMaterialF" class="col-sm-6 col-form-label">VMIN</label>
-        <div class="col-sm-10">
-            <div class="input-group mb-2">
-                <input type="text" class="form-control" id="VMINMaterialF" placeholder="VMIN">
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="PMAXMaterialF" class="col-sm-6 col-form-label">PMAX</label>
-        <div class="col-sm-10">
-            <div class="input-group mb-2">
-                <input type="text" class="form-control" id="PMAXMaterialF" placeholder="PMAX">
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-success pull-right" title="guardar">Guardar</button>
-@stop
-@section('tablaMaterialFotovoltaico')
-    <div class="table-responsive-sm">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Marca</th>
-                    <th>Potencia</th>
-                    <th>ISC</th>
-                    <th>PRECIO</th>
-                    <th>VMIN</th>
-                    <th>VMAX</th>
-                    <th>PMIN</th>
-                    <th>PMAX</th>
-                    <th style="text-align:center;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Inversor Fronius IG V Plus 3.0-1 UNI</td>
-                    <td>Fronius</td>
-                    <td>3000</td>
-                    <td>14</td>
-                    <td>1157.86</td>
-                    <td>230</td>
-                    <td>600</td>
-                    <td>2500</td>
-                    <td>3450</td>
-                    <td>
-                        <button id="btnEdit" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>
-                    </td>
-                    <td>
-                        <button id="btnExc" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Inversor Fronius IG Plus V 3.8-1 UNI</td>
-                    <td>Fronius</td>
-                    <td>3800</td>
-                    <td>17.8</td>
-                    <td>1363.26</td>
-                    <td>230</td>
-                    <td>600</td>
-                    <td>3200</td>
-                    <td>4400</td>
-                    <td>
-                        <button class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>
-                    </td>
-                    <td>
-                        <button class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td>Inversor Fronius IG Plus V 5.0-1 UNI</td>
-                    <td>Fronius</td>
-                    <td>5000</td>
-                    <td>23.4</td>
-                    <td>1820.71</td>
-                    <td>230</td>
-                    <td>600</td>
-                    <td>4250</td>
-                    <td>5750</td>
-                    <td>
-                        <button id="btnEdit" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>
-                    </td>
-                    <td>
-                        <button id="btnExc" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-@endsection
+    @endsection
