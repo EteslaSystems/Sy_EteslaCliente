@@ -2,6 +2,7 @@
 
 namespace App\APIModels;
 
+// DEPENDENCIA HACIA LA LIBRERIA.
 use GuzzleHttp\Client;
 
 class GuzzleHttpRequest
@@ -17,13 +18,20 @@ class GuzzleHttpRequest
 	{
 		$response = $this->client->request('GET', $url);
 
-		return json_decode($response->getBody()->getContents());
+		return json_decode( $response->getBody()->getContents() );
+	}
+
+	protected function put($url, $request)
+	{
+		$response = $this->client->request('PUT', $url, $request);
+
+		return json_decode( $response->getBody()->getContents() );
 	}
 
 	protected function post($url, $request)
 	{
 		$response = $this->client->request('POST', $url, $request);
 
-		return json_decode($response->getBody()->getContents());
+		return json_decode( $response->getBody()->getContents() );
 	}
 }

@@ -1,0 +1,7 @@
+.myAlert{
+    position: fixed;
+    top: 12.5%; 
+    right: 5%;
+    width: 30%;
+    z-index: 999;
+}
