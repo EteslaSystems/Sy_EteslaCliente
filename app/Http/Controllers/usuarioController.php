@@ -58,7 +58,7 @@ class usuarioController extends Controller
 		}
 		else {
 			\Session::flash('message', $registrarUsuario->message);
-			return redirect('registro');
+			return redirect('register');
 		}
 	}
 
@@ -99,5 +99,14 @@ class usuarioController extends Controller
 			return redirect('index');
 		}
 		return view('authentication/forgotPasswd');
+	}
+
+	public function cerrarSesion()
+	{
+		if (session()->has('dataUsuario')) {
+			session()->forget('dataUsuario');
+		}
+		\Session::flash('message', 'Salió de la sesión.');
+		return redirect('/');
 	}
 }

@@ -26,4 +26,11 @@ class GuzzleHttpRequest
 
 		return json_decode($response->getBody()->getContents());
 	}
+
+	protected function put($url, $request)
+	{
+		$response = $this->client->request('PUT', $url, $request);
+
+		return json_decode($response->getBody()->getContents());
+	}
 }

@@ -1,12 +1,14 @@
 <?php
 
+//Route::get('/buscador',function() { return view('roles.seller.cotizador.mediaTension'); });
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');
 Route::post('/', 'usuarioController@validarUsuario');
-Route::get('/registro', 'usuarioController@mostrarRegistrarUsuario');
-Route::post('/registro', 'usuarioController@registrarUsuario');
+Route::get('/register', 'usuarioController@mostrarRegistrarUsuario');
+Route::post('/register', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
 Route::get('/olvidoPassword', 'usuarioController@olvidoContrasenia');
+Route::get('/logout', 'usuarioController@cerrarSesion');
 /* --------------------------------------- */
 
 /* --------------- Vendedor --------------- */
@@ -15,7 +17,7 @@ Route::get('/mediaTension', 'vendedorController@mediaTension');
 Route::get('/bajaTension', 'vendedorController@bajaTension');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
-Route::get('/logout', 'vendedorController@cerrarSesion');
+Route::get('/consultarClientes', 'vendedorController@consultarClientes');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
@@ -56,3 +58,7 @@ Route::get('/head',function() {
     return view('template/head');
 });
 /* --------------------------------------------------------------------------- */
+
+Route::get('/mediaT', function(){
+    return view('roles/seller/cotizador/mediaTension');
+});

@@ -6,6 +6,6 @@ class APIVendedor extends GuzzleHttpRequest
 {
 	public function listarPorUsuario($request)
 	{
-		return $this->post("listarClientePorUsuario", $request);
+		return $this->put("lista-clientes-usuario", $request);
 	}
 }
