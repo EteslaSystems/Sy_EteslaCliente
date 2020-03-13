@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 @if (session('status-success')) 
                     <div class="alert alert-success alert-dismissible fade show myAlert" role="alert">
-                        <strong>¡Correcto!</strong> {{ session('status-success') }}
+                        <strong>ï¿½Correcto!</strong> {{ session('status-success') }}
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
                     </div>
                 @elseif (session('status-fail'))
                     <div class="alert alert-danger alert-dismissible fade show myAlert" role="alert">
-                        <strong>¡Error!</strong> {{ session('status-fail') }}
+                        <strong>ï¿½Error!</strong> {{ session('status-fail') }}
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -40,6 +40,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="{{ asset('js/index.js') }}"></script>
 <script src="{{ asset('js/log.js') }}"></script>
+<script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
+<script src="{{ asset('js/cotizador/mediaTension/GDMTO.js') }}"></script>
 
 <script src="{{ asset('js/alert-bootstrap.js') }}" type="text/javascript"></script>
 <script type="text/javascript">

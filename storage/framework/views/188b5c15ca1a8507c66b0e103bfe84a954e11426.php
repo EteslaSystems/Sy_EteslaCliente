@@ -495,7 +495,7 @@
                 </div>
 
                 <br>
-
+                
                 <div class="sec-tittle">
                     <h2 class="linea">
                         <span>Pago CFE</span>
@@ -503,8 +503,6 @@
                 </div>
 
                 <br>
-                
-                <span class="label-cotizador" style="color: green"><strong>Pago CFE</strong></span><br><br>
 
                 <div class="row">
                     <div class="col">
