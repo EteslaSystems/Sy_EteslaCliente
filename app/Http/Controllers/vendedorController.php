@@ -40,7 +40,8 @@ class vendedorController extends Controller
 		}
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
-		return view('roles.seller.cotizador.mediaTension', compact('consultarClientes', 'consultarClientes'));
+		//return view('roles.seller.cotizador.mediaTension', compact('consultarClientes', 'consultarClientes'));
+		return view('roles.seller.cotizador.mediaTension');
 	}
 
 	public function bajaTension()
@@ -70,7 +71,8 @@ class vendedorController extends Controller
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "array") {
+		if (gettype($consultarClientes) == "object") {
+			$consultarClientes = $consultarClientes->message;
 			return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
 		}
 		return view('roles.seller.cotizador.misClientes');
@@ -90,7 +92,8 @@ class vendedorController extends Controller
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "array") {
+		if (gettype($consultarClientes) == "object") {
+			$consultarClientes = $consultarClientes->message;
 			return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
 		}
 		return view('template.clientes');

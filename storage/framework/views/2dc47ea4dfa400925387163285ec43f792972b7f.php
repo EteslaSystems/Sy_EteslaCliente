@@ -13,13 +13,9 @@
                         </button>
                         <input list="colores" type="search" class="form-control form-control-lg" name="inpSearchClient" id="inpSearchClient" placeholder="Busca un cliente">
                         <datalist id="colores">
-                            <option value="Azul"></option>
-                            <option value="Amarillo"></option>
-                            <option value="Burdeos"></option>
-                            <option value="Caoba"></option>
-                            <option value="Marrón"></option>
-                            <option value="Naranja"></option>
-                            <option value="Verde"></option>
+                            <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($cliente->vNombrePersona); ?>&nbsp;<?php echo e($cliente->vPrimerApellido); ?>&nbsp;<?php echo e($cliente->vSegundoApellido); ?>"></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </datalist>
                     </div>
                 </div>
@@ -29,7 +25,7 @@
 
     </br>
 
-    <div class="card">
+<div class="card">
        <div class="card-body">
             <div class="row">
                 <div class="col col-6">
@@ -38,7 +34,7 @@
                             <label for="B(mxn/kWh)" class="mn-1">Nombre completo</label>
                         </div>
 
-                        <div class="col col-8">
+                        <div class="col col-8" id="lblNombreCliente">
                             <input type="text" class="form-control" value="Esmeralda Giovana Valderrama Espiricueta" disabled readonly>
                         </div>
                     </div>

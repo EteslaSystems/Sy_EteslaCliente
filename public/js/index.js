@@ -134,7 +134,7 @@ $(document).ready(function()
     $("input[name=inpSearchClient]").change(function() {
         const mostrar = document.getElementById("lblNombreCliente");
         mostrar.innerHTML = '';
-        mostrar.innerHTML = '<h5 class="card-title">Nombre completo</h5> <label>' + $("input[name=inpSearchClient]").val() + '</label>';
+        mostrar.innerHTML = '<input type="text" class="form-control" value="' + $("input[name=inpSearchClient]").val() + '" disabled readonly>';
     });
 });
 /*#endregion*/

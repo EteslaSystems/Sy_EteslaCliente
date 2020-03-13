@@ -35,7 +35,7 @@
                             <label for="B(mxn/kWh)" class="mn-1">Nombre completo</label>
                         </div>
 
-                        <div class="col col-8">
+                        <div class="col col-8" id="lblNombreCliente">
                             <input type="text" class="form-control" value="Esmeralda Giovana Valderrama Espiricueta" disabled readonly>
                         </div>
                     </div>

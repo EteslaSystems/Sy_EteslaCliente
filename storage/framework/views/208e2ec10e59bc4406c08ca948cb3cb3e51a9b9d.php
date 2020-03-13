@@ -20,10 +20,10 @@
     <a href="#clientesSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light dropdown-toggle"><img src="https://img.icons8.com/dusk/30/000000/customer-insight.png"> Clientes</a>
     <ul class="collapse list-unstyled" id="clientesSubmenu">
         <li>
-            <a class="list-group-item list-group-item-action bg-ligth" href="/mclients">Mis clientes</a>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/registrarCliente">Mis clientes</a>
         </li>
         <li>
-            <a class="list-group-item list-group-item-action bg-ligth" href="/client">Todos los clientes</a>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/clientes">Todos los clientes</a>
         </li>
     </ul>
 <?php $__env->stopSection(); ?>

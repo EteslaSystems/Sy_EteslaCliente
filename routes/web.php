@@ -12,7 +12,8 @@ Route::get('/logout', 'usuarioController@cerrarSesion');
 
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
-Route::get('/mediaTension', 'vendedorController@mediaTension');
+Route::get('/mediaTension', 'MediaTensionController@index');
+//Route::get('/mediaTension', 'vendedorController@mediaTension');
 Route::get('/bajaTension', 'vendedorController@bajaTension');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
@@ -65,8 +66,6 @@ Route::get('/cor',function() {
 Route::get('/head',function() {
     return view('template/head');
 });
-
-Route::get('/mediaT', 'MediaTensionController@index');
 
 //Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
 
