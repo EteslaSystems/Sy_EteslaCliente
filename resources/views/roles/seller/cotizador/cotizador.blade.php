@@ -3,8 +3,6 @@
     <br>
 
     <div class="d-flex">
-        <button class="btn btn-sm btn-success"><strong>Calcular</strong></button>
-
         <div class="ml-auto">
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -39,16 +37,6 @@
                             <input type="text" class="form-control" value="Esmeralda Giovana Valderrama Espiricueta" disabled readonly>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Celular</label>
-                        </div>
-
-                        <div class="col col-8">
-                            <input type="text" class="form-control" value="+95 1234567890" disabled readonly>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col col-6">
@@ -61,41 +49,71 @@
                             <input type="text" class="form-control" value="Kuakini Hwy #803, Kailua-Kona, Estados Unidos" disabled readonly>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Correo Electrónico</label>
-                        </div>
-
-                        <div class="col col-8">
-                            <input type="text" class="form-control" value="valderrama_esmeralda@gmail.com" disabled readonly>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col col-6">
-                    <div class="form-group row">
-                        <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Teléfono</label>
-                        </div>
+            <div id="vmas" class="row">
+                <div class="col text-center" >
+                    <a class="btn btn-default btn-sm" id="vmasbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">Ver más</a>
+                </div>
+            </div>
 
-                        <div class="col col-8">
-                            <input type="text" class="form-control" value="(859) 1234567" disabled readonly>
+            <div class="collapse multi-collapse" id="info-cliente">
+                <div class="row">
+                    <div class="col col-6">
+                        <div class="form-group row">
+                            <div class="col col-4 fx-1">
+                                <label for="B(mxn/kWh)" class="mn-1">Celular</label>
+                            </div>
+
+                            <div class="col col-8">
+                                <input type="text" class="form-control" value="+95 1234567890" disabled readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-6">
+                        <div class="form-group row">
+                            <div class="col col-4 fx-1">
+                                <label for="B(mxn/kWh)" class="mn-1">Correo Electrónico</label>
+                            </div>
+
+                            <div class="col col-8">
+                                <input type="text" class="form-control" value="valderrama_esmeralda@gmail.com" disabled readonly>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col col-6">
-                    <div class="form-group row">
-                        <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Consumo</label>
-                        </div>
+                <div class="row">
+                    <div class="col col-6">
+                        <div class="form-group row">
+                            <div class="col col-4 fx-1">
+                                <label for="B(mxn/kWh)" class="mn-1">Teléfono</label>
+                            </div>
 
-                        <div class="col col-8">
-                            <input type="text" class="form-control" value="1000 Kw" disabled readonly>
+                            <div class="col col-8">
+                                <input type="text" class="form-control" value="(859) 1234567" disabled readonly>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="col col-6">
+                        <div class="form-group row">
+                            <div class="col col-4 fx-1">
+                                <label for="B(mxn/kWh)" class="mn-1">Consumo</label>
+                            </div>
+
+                            <div class="col col-8">
+                                <input type="text" class="form-control" value="1000 Kw" disabled readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <a class="btn btn-default btn-sm" id="vmenosbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">Ver menos</a>
                     </div>
                 </div>
             </div>

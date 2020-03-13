@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 <?php if(session('status-success')): ?> 
                     <div class="alert alert-success alert-dismissible fade show myAlert" role="alert">
-                        <strong>¡Correcto!</strong> <?php echo e(session('status-success')); ?>
+                        <strong>ï¿½Correcto!</strong> <?php echo e(session('status-success')); ?>
 
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -24,7 +24,7 @@
                     </div>
                 <?php elseif(session('status-fail')): ?>
                     <div class="alert alert-danger alert-dismissible fade show myAlert" role="alert">
-                        <strong>¡Error!</strong> <?php echo e(session('status-fail')); ?>
+                        <strong>ï¿½Error!</strong> <?php echo e(session('status-fail')); ?>
 
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -42,11 +42,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/index.js')); ?>"></script>
 <script src="<?php echo e(asset('js/log.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTO.js')); ?>"></script>
 
 <script src="<?php echo e(asset('js/alert-bootstrap.js')); ?>" type="text/javascript"></script>
 <script type="text/javascript">
     window.onload = function() {
         myAlert();
     };
+
+    $(document).ready(function(){
+        $("#vmasbtn").click(function(){
+            $("#vmas").hide();
+        });
+
+        $("#vmenosbtn").click(function(){
+            $("#vmas").show();
+        });
+    });
 </script>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/head.blade.php ENDPATH**/ ?>
