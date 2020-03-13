@@ -3,3 +3,4 @@ function myAlert(){
 		$(".myAlert").hide(); 
   	}, 3500);
 }
+
