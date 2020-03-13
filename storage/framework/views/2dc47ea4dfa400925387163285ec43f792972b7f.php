@@ -29,41 +29,81 @@
 
     </br>
 
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col col-4">
-                <div class="card border-light text-center" style="border: none;">
-                    <div class="card-body" style="background-color: #e9ecef;">
-                        <h5 class="card-title">Nombre completo</h5>
-    
-                        <p class="card-text">José María Morelos y Pavón.</p>
+    <div class="card">
+       <div class="card-body">
+            <div class="row">
+                <div class="col col-6">
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Nombre completo</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="Esmeralda Giovana Valderrama Espiricueta" disabled readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Celular</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="+95 1234567890" disabled readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-6">
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Dirección</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="Kuakini Hwy #803, Kailua-Kona, Estados Unidos" disabled readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Correo Electrónico</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="valderrama_esmeralda@gmail.com" disabled readonly>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col col-4">
-                <div class="card border-light text-center" style="border: none;">
-                    <div class="card-body" style="background-color: #e9ecef;">
-                        <h5 class="card-title">Dirección</h5>
-    
-                        <p class="card-text">5995 Kuakini Hwy #803, Kailua-Kona, HI 96740, Estados Unidos.</p>
+            <div class="row">
+                <div class="col col-6">
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Teléfono</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="(859) 1234567" disabled readonly>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col col-4">
-                <div class="card border-light text-center" style="border: none;">
-                    <div class="card-body" style="background-color: #e9ecef;">
-                        <h5 class="card-title">Teléfono</h5>
-    
-                        <p class="card-text">+45 1234567890.</p>
+                <div class="col col-6">
+                    <div class="form-group row">
+                        <div class="col col-4 fx-1">
+                            <label for="B(mxn/kWh)" class="mn-1">Consumo</label>
+                        </div>
+
+                        <div class="col col-8">
+                            <input type="text" class="form-control" value="1000 Kw" disabled readonly>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <hr class="my-4">
 
     <!-- Inicio modal -->
     <div class="modal fade" id="agregarClienteModal">
