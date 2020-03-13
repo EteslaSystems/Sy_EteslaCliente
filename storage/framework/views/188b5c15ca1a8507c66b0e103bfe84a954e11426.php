@@ -503,6 +503,8 @@
                 </div>
 
                 <br>
+                
+                <span class="label-cotizador" style="color: green"><strong>Pago CFE</strong></span><br><br>
 
                 <div class="row">
                     <div class="col">

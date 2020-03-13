@@ -19,9 +19,6 @@ var objPeriodosGDMTH = {};
 var indexador = 0;
 
 function agregarPeriodo(){
-    /*Validar campos vacios
-    validarFormularioDatosConsumoVacio();*/
-
     var BkWh = document.getElementById('inpBkWh').value;
     var IkWh = document.getElementById('inpIkWh').value;
     var PkWh = document.getElementById('inpPkWh').value;
@@ -35,24 +32,31 @@ function agregarPeriodo(){
     var Cmxn = document.getElementById('C(mxn/kW)').value;
     var Dmxn = document.getElementById('D(mxn/kW)').value;
 
-    objPeriodosGDMTH = {
-        bkwh: BkWh,
-        ikwh: IkWh,
-        pkwh: PkWh,
-        bkwh: BkW,
-        ikwh: IkW,
-        pkwh: PkW,
-        bmxn: Bmxn,
-        imxn: Imxn,
-        pmxn: Pmxn,
-        pagoTransmi: pagoTransmision,
-        cmxn: Cmxn,
-        dmxn: Dmxn
-    };
-
-    arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-    sumarNoAlIndexador();
-    limpiarCampos();
+    /*Validar campos vacios*/
+    if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn)){
+        alert('Todos los campos pertenecientes a los datos de consumo, deben de llenarse');
+    }else{
+        objPeriodosGDMTH = {
+            bkwh: BkWh,
+            ikwh: IkWh,
+            pkwh: PkWh,
+            bkw: BkW,
+            ikw: IkW,
+            pkw: PkW,
+            bmxn: Bmxn,
+            imxn: Imxn,
+            pmxn: Pmxn,
+            pagoTransmi: pagoTransmision,
+            cmxn: Cmxn,
+            dmxn: Dmxn
+        };
+    
+        arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+        sumarNoAlIndexador();
+        limpiarCampos();
+    
+        console.log(arrayPeriodosGDMTH);
+    }
 }
 
 function mostrarPeriodo(){
@@ -60,30 +64,25 @@ function mostrarPeriodo(){
 
 }
 
-/*function validarCamposVacios(){
-    
-}*/
+function validarCamposVacios(valor){
+    valor = valor.replace("&nbsp;", "");
+    valor = valor == undefined ? "" : valor;
 
-/*function mostrarIndexador(){
-    indexador = arrayPeriodosGDMTH.length;
-    document.getElementById('lblIndexador').innerHTML = indexador;
-    
-    document.getElementById('lstPeriodos')
-}*/
+    if (!valor || 0 === valor.trim().length){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 function sumarNoAlIndexador(){
     indexador = arrayPeriodosGDMTH.length;
-
     var lista = document.getElementById("lstPeriodos");    
     var option = document.createElement("option");
     option.text = indexador;
     lista.add(option);
-    /*Cambiar el valor seleccionado en la lista*/
     lista.selectedIndex = indexador.toString();
-}
-
-function limpiarCampos(){
-    $('input[type="number"]').val('');
 }
 
 function GDMTH(){
@@ -92,4 +91,7 @@ function GDMTH(){
 }
 /*#endregion*/
 /*#endregion*/
+function limpiarCampos(){
+    $('input[type="number"]').val('');
+}
 /*#endregion*/
