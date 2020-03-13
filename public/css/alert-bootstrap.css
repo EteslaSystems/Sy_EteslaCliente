@@ -34,11 +34,17 @@
 .fx-1 {
 	display: flex;
 }
-
 .mn-1 {
 	margin: auto auto auto 5px;
 }
-
+.mn-2 {
+  margin: auto 5px auto auto;
+}
 .space-1 {
 	margin-top: 15px;
+}
+.label-mn-1 {
+  display: flex;
+  font-size: 18px; 
+  color: white;
 }

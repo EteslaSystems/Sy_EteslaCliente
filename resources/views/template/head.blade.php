@@ -46,5 +46,15 @@
     window.onload = function() {
         myAlert();
     };
+
+    $(document).ready(function(){
+        $("#vmasbtn").click(function(){
+            $("#vmas").hide();
+        });
+
+        $("#vmenosbtn").click(function(){
+            $("#vmas").show();
+        });
+    });
 </script>
 </html>
