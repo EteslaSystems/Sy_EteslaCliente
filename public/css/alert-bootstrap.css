@@ -5,3 +5,40 @@
     width: 30%;
     z-index: 999;
 }
+.sec-tittle h2 {
+  font: 20px sans-serif;
+  text-align: center;
+  font-weight: bold;
+}
+.sec-tittle h2.linea {
+  position: relative;
+  z-index: 1;
+}
+.sec-tittle h2.linea:before {
+  border-top: 2px solid #50BC2E;
+  content: "";
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 95%;
+  z-index: -1;
+}
+.sec-tittle h2.linea span {
+  background: #F7F8F8;
+  padding: 0 20px;
+}
+
+.fx-1 {
+	display: flex;
+}
+
+.mn-1 {
+	margin: auto auto auto 5px;
+}
+
+.space-1 {
+	margin-top: 15px;
+}
