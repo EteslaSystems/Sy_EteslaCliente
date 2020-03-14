@@ -50,7 +50,9 @@
 
             <div id="vmas" class="row">
                 <div class="col text-center" >
-                    <a class="btn btn-default btn-sm" id="vmasbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">Ver más</a>
+                    <a class="btn btn-primary btn-sm" id="vmasbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABhklEQVRIidWVXy5DURDGv9NqX9QOsAA8sQMV3rQVsYimImyC2oLYQ7sNwUsroXgiLMBTK/rzcOfG0d6/PHWSk5M78803c+bOmSPNurgkI1CWVLe1LmnRTK+SbiV1JHWcc6PckYE94Jl0eQIaeYgLwLlH0AOOgFVg3taq6Xoerg0UsgQIyYdAM8kJKAItwwK0s5QlJN/MceqqF6QeByp7NW9mJff8D833EShFAQ68mhdjSACIsRWBvkH2Q71f37ATLpxzX3lPYD6X9jldJuDBoq/EkSSdwOxrBrmPMn6YsRJFGicT2AVTf4S6qBZMvN0pEvqOowK82b70y8OTJJ3Jsu3vUQGubd/+Q+ah7Nh+NWXx2rT/jza9m2xTH1AmGFwArbypE8wmgEHkRTNQw0BDoJqDfAsYAWNgNw3c9oIcxpXLsHOW+ch8TrNkU/CChP/k2C5RxdYacOLVfAyckWVce4HqBIMrTQZALY4n7cksSaopmC0b+nkyXyTdSOpK6jrnPjNnPnPyDR4iO/M7kECDAAAAAElFTkSuQmCC">
+                    </a>
                 </div>
             </div>
 
@@ -109,7 +111,9 @@
 
                 <div class="row">
                     <div class="col text-center">
-                        <a class="btn btn-default btn-sm" id="vmenosbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">Ver menos</a>
+                        <a class="btn btn-primary btn-sm" id="vmenosbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABlUlEQVRIidWVTU4CURCEeyCwEZcSTTyBstIDiBdQMMYrEIgKeghCPIbRuJWDuBBMVNSV3sANasLnYnpCC83MYNz4kpdAVXVXT78/kf8+gjgSyItIReeGiKwq9SYiNyLSFZHrIAg+53YG9oAXksczUJ0ncQY4MwlugWNgDVjQuQ40gZ7RdYBMGoMo+RCoxQVpMXXVAnTStCVKvjXHV5eNSWWWKG96XjN4HSg6+iJQN/8bGvsE5DyDA9PzzERQ35po8r5yDcWyBtv3DK6UPDLYklnIe2DFwZaNvqX4hWfwqOSa04qosv7E7+KEdl25B8/gXcmCw9mqpyo3ukXl3yMsed/OHt4tEGEj7wv+okWluBZdKtk02NSCegtv9KeKn3sG0Tbt8ftteqeYu03zhBcX/DxAaQ/aocYO8A6aiqoqGgJlV+THbQMfwAjYSRJ3jEkDyMZos1r5h8a001STMSZR/1uEh6igswScmJ6PgDZprmtjVCG8uJLGIK4tSU9mTkR2JXwyN2X8ZL7K+MnsBkHwlbryfze+AZO9KH5AFY+AAAAAAElFTkSuQmCC">
+                        </a>
                     </div>
                 </div>
             </div>

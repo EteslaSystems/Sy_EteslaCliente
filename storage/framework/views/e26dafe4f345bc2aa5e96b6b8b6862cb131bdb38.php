@@ -57,7 +57,9 @@
         });
 
         $("#vmenosbtn").click(function(){
-            $("#vmas").show();
+            setTimeout(function() {
+                $("#vmas").show();
+            }, 175);
         });
     });
 </script>
