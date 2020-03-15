@@ -8,4 +8,9 @@ class APICliente extends GuzzleHttpRequest
 	{
 		return $this->post("agregar-cliente", $request);
 	}
+
+	public function consultarClientePorId($request)
+	{
+		return $this->put("lista-clientes-id", $request);
+	}
 }

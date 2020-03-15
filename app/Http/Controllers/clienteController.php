@@ -32,4 +32,11 @@ class clienteController extends Controller
             return redirect('registrarCliente');
         }
     }
+
+    public function consultarClientePorId(Request $request)
+    {
+        $dataUsuario["id"] = $request->id;
+        $consultarClientePorId = $this->cliente->consultarClientePorId(['json' => $dataUsuario]);
+        return response()->json($consultarClientePorId);
+    }
 }

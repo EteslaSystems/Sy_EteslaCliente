@@ -109,11 +109,4 @@ class vendedorController extends Controller
 		}
 		return 0;
 	}
-
-	public function consultarClientes()
-	{
-		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
-		return response()->json($consultarClientes);
-	}
 }

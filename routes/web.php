@@ -21,6 +21,7 @@ Route::get('/clientes', 'vendedorController@todosClientes');
 
 /* --------------- Cliente --------------- */
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
+Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
 /* --------------------------------------- */
 
 /* --------------- Administrador --------------- */
