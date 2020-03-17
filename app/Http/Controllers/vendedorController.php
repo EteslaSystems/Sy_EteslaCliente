@@ -38,6 +38,9 @@ class vendedorController extends Controller
 			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
 			return redirect('index');
 		}
+		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
+		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
+		//return view('roles.seller.cotizador.mediaTension', compact('consultarClientes', 'consultarClientes'));
 		return view('roles.seller.cotizador.mediaTension');
 	}
 
@@ -65,10 +68,11 @@ class vendedorController extends Controller
 			return redirect('index');
 		}
 
-		$dataUsuario = session('dataUsuario');
+		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "array") {
+		if (gettype($consultarClientes) == "object") {
+			$consultarClientes = $consultarClientes->message;
 			return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
 		}
 		return view('roles.seller.cotizador.misClientes');
@@ -85,10 +89,11 @@ class vendedorController extends Controller
 			return redirect('index');
 		}
 
-		$dataUsuario = session('dataUsuario');
+		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "array") {
+		if (gettype($consultarClientes) == "object") {
+			$consultarClientes = $consultarClientes->message;
 			return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
 		}
 		return view('template.clientes');
@@ -103,14 +108,5 @@ class vendedorController extends Controller
 			return 1;
 		}
 		return 0;
-	}
-
-	public function cerrarSesion()
-	{
-		if (session()->has('dataUsuario')) {
-			session()->forget('dataUsuario');
-		}
-		\Session::flash('message', 'Salió de la sesión.');
-		return redirect('/');
 	}
 }

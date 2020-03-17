@@ -18,7 +18,7 @@ class administradorController extends Controller
 		return redirect('/');
 	}
 
-	public function paneles() //Seguir aquí :v
+	public function paneles()
 	{
 		if (session()->has('dataUsuario')) {
 			if (session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
