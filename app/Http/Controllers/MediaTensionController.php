@@ -11,14 +11,8 @@ use Illuminate\Http\Request;
 class MediaTensionController extends Controller
 {
     protected $paneles;
-    protected $inversores;
-
-	public function __construct(APIPaneles $paneles, APIInversores $inversores, APICliente $clientes)
-	{
-		$this->paneles = $paneles;
-		$this->inversores = $inversores;
-		$this->clientes = $clientes;
-
+	protected $inversores;
+	
 	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor)
 	{
 		$this->paneles = $paneles;
@@ -46,8 +40,8 @@ class MediaTensionController extends Controller
 		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
 	}
 
-		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores'));
-    }
+	/*	return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores'));
+    }*/
 
     public function create(Request $request)
     {

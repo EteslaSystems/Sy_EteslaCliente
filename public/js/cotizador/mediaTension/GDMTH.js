@@ -21,12 +21,17 @@ function agregarPeriodo(){
     var Cmxn = document.getElementById('C(mxn/kW)').value;
     var Dmxn = document.getElementById('D(mxn/kW)').value;
 
+    if(arrayPeriodosGDMTH.length <= 3)
+    {
+        arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+    }
+
     /*Validar campos vacios*/
     if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn))
     {
         alert('Todos los campos pertenecientes a los datos de consumo, deben de llenarse');
     }
-    else if(arrayPeriodosGDMTH.length <= 12)
+    else if(arrayPeriodosGDMTH.length <= 3)
     {
         objPeriodosGDMTH = {
             bkwh: BkWh,
@@ -42,22 +47,22 @@ function agregarPeriodo(){
             cmxn: Cmxn,
             dmxn: Dmxn
         };
-    
-        arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-        sumarNoAlIndexador();
+        
+        sumarAlIndexador();
         limpiarCampos();
     }
     else
     {
-        alert("Solo se pueden ingresar 12 periodos");
+        alert('Solo se pueden ingresar 12 periodos');
     }
+
+    console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
 }
 
 function mostrarPeriodo(){
+    /*Se desplega el contenido del array en los campos*/ 
     $("#lstPeriodosGDMTH").on("change", function(){
-        indexMostrar = document.getElementById("lstPeriodosGDMTH").value - 1;
-
-        /*Se desplega el contenido del array en los campos*/ 
+        indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
         document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar].bkwh.toString();
         document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar].ikwh.toString();
         document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar].pkwh.toString();
@@ -74,19 +79,13 @@ function mostrarPeriodo(){
     });
 }
 
-function sumarNoAlIndexador(){
+function sumarAlIndexador(){
     indexador = arrayPeriodosGDMTH.length;
     var lista = document.getElementById("lstPeriodosGDMTH");    
     var option = document.createElement("option");
     option.text = indexador + 1;
     lista.add(option);
     lista.selectedIndex = indexador.toString();
-    /*
-      Se valida el valor actual de la lista despegable con el valor de option,
-      para llevar acabo la logica de los controles correspondientes (bloquear 
-      o desbloquear)
-    */
-    console.log('indexador: '+indexador+' indexador + 1: '+(indexador+1)+' indexMostrar: '+indexMostrar);
 }
 
 /*
@@ -94,12 +93,6 @@ function editarPeriodo(){}
 function actualizarPeriodo(){}
 function eliminarPeriodo(){}
 */
-
-function logicaControles(){
-    /*if(indexMostrar == (indexador+1)){
-
-    }*/
-}
 
 function validarCamposVacios(valor){
     valor = valor.replace("&nbsp;", "");
