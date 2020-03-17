@@ -70,10 +70,6 @@ Route::get('/head',function() {
 
 //Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
 
-// Route::get('/mediaT', function(){
-//     return view('roles/seller/cotizador/mediaTension');
-// });
-
 // Route::get('/paneles', function(){
 //     return view('roles/admin/paneles');
 // });
