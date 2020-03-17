@@ -68,6 +68,9 @@ Route::get('/head',function() {
     return view('template/head');
 });
 
+Route::get('/mediaT', 'MediaTensionController@index');
+Route::post('/agregar-cliente', 'MediaTensionController@create');
+
 //Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
 
 // Route::get('/mediaT', function(){
