@@ -10,14 +10,24 @@ use Illuminate\Http\Request;
 
 class MediaTensionController extends Controller
 {
+<<<<<<< HEAD
     protected $paneles;
 	protected $inversores;
 	
 	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor)
+=======
+	protected $paneles;
+	protected $inversores;
+	protected $vendedor;
+	protected $clientes;
+
+	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes)
+>>>>>>> 5beac4277a17d5e9b58cd552387e34ea76d319a2
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
+		$this->clientes = $clientes;
 	}
 
 	public function index()
@@ -40,6 +50,7 @@ class MediaTensionController extends Controller
 		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
 	}
 
+<<<<<<< HEAD
 	/*	return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores'));
     }*/
 
@@ -48,17 +59,24 @@ class MediaTensionController extends Controller
         $request["idUsuario"] = session('dataUsuario')->idUsuario;
         $request["consumo"] = 0;
         $request["calle"] = $request->calle . '-' . $request->colonia;
+=======
+	public function create(Request $request)
+	{
+		$request["idUsuario"] = session('dataUsuario')->idUsuario;
+		$request["consumo"] = 0;
+		$request["calle"] = $request->calle . '-' . $request->colonia;
+>>>>>>> 5beac4277a17d5e9b58cd552387e34ea76d319a2
 
-        $vCliente = $this->clientes->insertarCliente(
-        	['json' => $request->all()]
-        );
+		$vCliente = $this->clientes->insertarCliente(
+			['json' => $request->all()]
+		);
 
-        if($vCliente->status != 200) {
-            return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
-        } else {
-            return redirect('/mediaT')->with('status-success', $vCliente->message);
-        }
-    }
+		if($vCliente->status != 200) {
+			return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
+		} else {
+			return redirect('/mediaT')->with('status-success', $vCliente->message);
+		}
+	}
 
 	public function validarSesion()
 	{
