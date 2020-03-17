@@ -35,7 +35,7 @@ $("input[name=inpSearchClient]").change(function()
             consumo.innerHTML = '';
 
             nombreCompleto = response.message[0].vNombrePersona + ' ' + response.message[0].vPrimerApellido + ' ' + response.message[0].vSegundoApellido;
-            direccionCompleta = response.message[0].vCalle + ',' + response.message[0].vMunicipio + ',' + response.message[0].vEstado;
+            direccionCompleta = response.message[0].vCalle + ', ' + response.message[0].vMunicipio + ', ' + response.message[0].vEstado;
             nombre.innerHTML = '<input type="text" class="form-control" value="' + nombreCompleto + '" disabled readonly>';
             direccion.innerHTML = '<input type="text" class="form-control" value="' + direccionCompleta + '" disabled readonly>';
             celular.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vCelular + '" disabled readonly>';
