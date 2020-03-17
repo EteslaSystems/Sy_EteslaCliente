@@ -28,22 +28,6 @@ class vendedorController extends Controller
 		return view('roles.seller.inicioS');
 	}
 
-	public function mediaTension()
-	{
-		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
-		}
-		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
-		}
-		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
-		//return view('roles.seller.cotizador.mediaTension', compact('consultarClientes', 'consultarClientes'));
-		return view('roles.seller.cotizador.mediaTension');
-	}
-
 	public function bajaTension()
 	{
 		if ($this->validarSesion() == 0) {

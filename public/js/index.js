@@ -8,6 +8,19 @@ $("#menu-toggle").click(function(e){
 /*#region Buscador - Jesús Daniel Carrera Falcón*/
 $("input[name=inpSearchClient]").change(function()
 {
+    var search = document.querySelector('#inpSearchClient');
+    var results = document.querySelector('#clientes');
+    var templateContent = document.querySelector('#listtemplate').content;
+
+    while (results.children.length) results.removeChild(results.firstChild);
+    var inputVal = new RegExp(search.value.trim(), 'i');
+    var set = Array.prototype.reduce.call(templateContent.cloneNode(true).children, function searchFilter(frag, item, i) {
+        if (inputVal.test(item.value) && frag.children.length < 3) frag.appendChild(item);
+        return frag;
+    },
+    document.createDocumentFragment());
+    results.appendChild(set);
+
     var value = $("input[name=inpSearchClient]").val();
     var id = $('#clientes [value="' + value + '"]').data('value')
     var nombre = document.getElementById("lblNombreCliente");
@@ -35,7 +48,7 @@ $("input[name=inpSearchClient]").change(function()
             consumo.innerHTML = '';
 
             nombreCompleto = response.message[0].vNombrePersona + ' ' + response.message[0].vPrimerApellido + ' ' + response.message[0].vSegundoApellido;
-            direccionCompleta = response.message[0].vCalle + ',' + response.message[0].vMunicipio + ',' + response.message[0].vEstado;
+            direccionCompleta = response.message[0].vCalle + ', ' + response.message[0].vMunicipio + ', ' + response.message[0].vEstado;
             nombre.innerHTML = '<input type="text" class="form-control" value="' + nombreCompleto + '" disabled readonly>';
             direccion.innerHTML = '<input type="text" class="form-control" value="' + direccionCompleta + '" disabled readonly>';
             celular.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vCelular + '" disabled readonly>';
