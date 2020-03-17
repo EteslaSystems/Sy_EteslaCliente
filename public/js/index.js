@@ -8,6 +8,19 @@ $("#menu-toggle").click(function(e){
 /*#region Buscador - Jesús Daniel Carrera Falcón*/
 $("input[name=inpSearchClient]").change(function()
 {
+    var search = document.querySelector('#inpSearchClient');
+    var results = document.querySelector('#clientes');
+    var templateContent = document.querySelector('#listtemplate').content;
+
+    while (results.children.length) results.removeChild(results.firstChild);
+    var inputVal = new RegExp(search.value.trim(), 'i');
+    var set = Array.prototype.reduce.call(templateContent.cloneNode(true).children, function searchFilter(frag, item, i) {
+        if (inputVal.test(item.value) && frag.children.length < 3) frag.appendChild(item);
+        return frag;
+    },
+    document.createDocumentFragment());
+    results.appendChild(set);
+
     var value = $("input[name=inpSearchClient]").val();
     var id = $('#clientes [value="' + value + '"]').data('value')
     var nombre = document.getElementById("lblNombreCliente");
