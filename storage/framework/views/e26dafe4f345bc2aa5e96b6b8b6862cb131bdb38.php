@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 <?php if(session('status-success')): ?> 
                     <div class="alert alert-success alert-dismissible fade show myAlert" role="alert">
-                        <strong>�Correcto!</strong> <?php echo e(session('status-success')); ?>
+                        <strong>¡Correcto!</strong> <?php echo e(session('status-success')); ?>
 
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -24,7 +24,7 @@
                     </div>
                 <?php elseif(session('status-fail')): ?>
                     <div class="alert alert-danger alert-dismissible fade show myAlert" role="alert">
-                        <strong>�Error!</strong> <?php echo e(session('status-fail')); ?>
+                        <strong>¡Error!</strong> <?php echo e(session('status-fail')); ?>
 
 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -63,4 +63,6 @@
         });
     });
 </script>
+
+<?php echo $__env->yieldContent('scripts'); ?>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/head.blade.php ENDPATH**/ ?>
