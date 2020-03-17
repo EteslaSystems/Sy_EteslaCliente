@@ -32,11 +32,11 @@
                 <div class="col col-6">
                     <div class="form-group row">
                         <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Nombre completo</label>
+                            <label for="default-name" class="mn-1">Nombre completo</label>
                         </div>
 
                         <div class="col col-8" id="lblNombreCliente">
-                            <input type="text" class="form-control" value="Esmeralda Giovana Valderrama Espiricueta" disabled readonly>
+                            <input type="text" class="form-control" name="default-name" @if (session('nombre'))  value="{{ session('nombre') }}" @endif disabled readonly>
                         </div>
                     </div>
                 </div>
@@ -44,11 +44,11 @@
                 <div class="col col-6">
                     <div class="form-group row">
                         <div class="col col-4 fx-1">
-                            <label for="B(mxn/kWh)" class="mn-1">Dirección</label>
+                            <label for="default-address" class="mn-1">Dirección</label>
                         </div>
 
                         <div class="col col-8" id="lblDireccion">
-                            <input type="text" class="form-control" value="Kuakini Hwy #803, Kailua-Kona, Estados Unidos" disabled readonly>
+                            <input type="text" class="form-control" name="default-address" @if (session('direccion'))  value="{{ session('direccion') }}" @endif disabled readonly>
                         </div>
                     </div>
                 </div>
@@ -67,11 +67,11 @@
                     <div class="col col-6">
                         <div class="form-group row">
                             <div class="col col-4 fx-1">
-                                <label for="B(mxn/kWh)" class="mn-1">Celular</label>
+                                <label for="default-cellphone" class="mn-1">Celular</label>
                             </div>
 
                             <div class="col col-8" id="lblCelular">
-                                <input type="text" class="form-control" value="+95 1234567890" disabled readonly>
+                                <input type="text" class="form-control" name="default-cellphone" @if (session('celular'))  value="{{ session('celular') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
@@ -79,11 +79,11 @@
                     <div class="col col-6">
                         <div class="form-group row">
                             <div class="col col-4 fx-1">
-                                <label for="B(mxn/kWh)" class="mn-1">Correo Electrónico</label>
+                                <label for="default-email" class="mn-1">Correo Electrónico</label>
                             </div>
 
                             <div class="col col-8" id="lblEmail">
-                                <input type="text" class="form-control" value="valderrama_esmeralda@gmail.com" disabled readonly>
+                                <input type="text" class="form-control" name="default-email" @if (session('correo'))  value="{{ session('correo') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
@@ -93,11 +93,11 @@
                     <div class="col col-6">
                         <div class="form-group row">
                             <div class="col col-4 fx-1">
-                                <label for="B(mxn/kWh)" class="mn-1">Teléfono</label>
+                                <label for="default-phone" class="mn-1">Teléfono</label>
                             </div>
 
                             <div class="col col-8" id="lblTelefono">
-                                <input type="text" class="form-control" value="(859) 1234567" disabled readonly>
+                                <input type="text" class="form-control" name="default-phone" @if (session('telefono'))  value="{{ session('telefono') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
@@ -105,11 +105,11 @@
                     <div class="col col-6">
                         <div class="form-group row">
                             <div class="col col-4 fx-1">
-                                <label for="B(mxn/kWh)" class="mn-1">Consumo</label>
+                                <label for="default-consume" class="mn-1">Consumo</label>
                             </div>
 
                             <div class="col col-8" id="lblConsumo">
-                                <input type="text" class="form-control" value="1000 Kw" disabled readonly>
+                                <input type="text" class="form-control" name="default-consume" @if (session('consumo'))  value="{{ session('consumo') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
