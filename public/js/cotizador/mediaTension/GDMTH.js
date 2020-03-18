@@ -21,6 +21,7 @@ function agregarPeriodo(){
     var Cmxn = document.getElementById('C(mxn/kW)').value;
     var Dmxn = document.getElementById('D(mxn/kW)').value;
 
+    /*Mientras la longitud del array este debajo o igual que 12, se sigan agregando elementos*/
     if(arrayPeriodosGDMTH.length <= 3)
     {
         arrayPeriodosGDMTH.push(objPeriodosGDMTH);
@@ -104,6 +105,10 @@ function validarCamposVacios(valor){
     else{
         return false;
     }
+}
+
+function bloquearCampos(){
+    $('input[type="number"]').attr("readOnly",true);
 }
 
 function limpiarCampos(){
