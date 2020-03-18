@@ -8,6 +8,7 @@
                         <strong>&nbsp; Datos de Consumo</strong>
                     </p>
                 </div>
+                
                 <div class="col fx-1">
                     <div class="btn-group btn-group-toggle mn-2">
                         <button type="button" class="btn btn-primary btn-sm" onclick="GDMTO()">GDMTO</button>
@@ -20,10 +21,9 @@
             <div class="container-fluid" id="divGDMTO">
             <!-- GDMTO -->
                 <div class="row">
-                    <div class="col col-8"></div>
-                    <div class="col col-4">
+                    <div class="col col-md-4 offset-md-8 col-sm-8 offset-sm-4">
                         <div class="row">
-                            <div class="col col-5 text-center" style="padding: unset;">
+                            <div class="col col-md-5 col-sm-5 col-xs-12 text-center" style="padding: 10px 0px;">
                                 <div class="form-inline">
                                     <label class="my-1 mr-2" for="lstPeriodos">Periodo(s)</label>
                                     <select class="custom-select my-1 mr-sm-2" name="numPeriodos" id="lstPeriodosGDMTO">
@@ -31,7 +31,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col col-7 text-center" style="padding: unset; display: flex;">
+
+                            <div class="col col-md-7 col-sm-7 col-xs-12 text-center" style="padding: 10px 0px; display: flex;">
                                 <div class="btn-group btn-group-lg" role="group" style="margin: auto auto;">
                                     <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
                                         <strong>
@@ -86,56 +87,69 @@
                         </div>
                     </div>
                 </div>
+
                 <br><br>
+
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-8 fx-1">
                                 <label for="inpIkWhGDMTO" class="mn-1">I (kWh)</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-4">
                                 <input id="inpIkWhGDMTO" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-12 fx-1">
                                 <label for="I(mxn/kWh)GDMTO" class="mn-1">I (mxn/kWh)</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-12">
                                 <input id="I(mxn/kWh)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-12 fx-1">
                                 <label for="inpPagoTransmisionGDMTO" class="mn-1">P. transmisión</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-12">
                                 <input id="inpPagoTransmisionGDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-12 fx-1">
                                 <label for="inpIkwGDMTO" class="mn-1">I (kw)</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-12">
                                 <input id="inpIkwGDMTO" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-12 fx-1">
                                 <label for="C(mxn/kW)GDMTO" class="mn-1">C (mxn/kW)</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-12">
                                 <input id="C(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col col-3 fx-1">
+                            <div class="col-md-3 col-sm-12 fx-1">
                                 <label for="D(mxn/kW)GDMTO" class="mn-1">D (mxn/kW)</label>
                             </div>
-                            <div class="col col-9">
+
+                            <div class="col-md-9 col-sm-12">
                                <input id="D(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
@@ -344,9 +358,10 @@
                 </div>
             </div>
         </div>
+
         <div class="card-body">
             <div class="row">
-                <div class="col">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group row justify-content-md-center">
                         <label class="col-sm-10 col-form-label">Seleccionar panel</label>
                         <div class="col-sm-10">
@@ -361,7 +376,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group row justify-content-md-center">
                         <label class="col-sm-10 col-form-label">Seleccionar inversor</label>
                         <div class="col-sm-10">
@@ -379,12 +395,15 @@
             </div>
         </div>
     </div>
+
     <br>
+
     <div class="row">
-        <div class="col text-right">
-            <button class="btn btn-lg btn-success"><strong>Calcular</strong></button>
+        <div class="col-md-12 col-sm-11 text-right">
+            <button class="btn btn-success"><strong>Calcular</strong></button>
         </div>
     </div>
+
     <br>
 <!--Scrip que valida que solo se ingresen valores numéricos en las cajas de texto, con un solo punto y máximo 2 decimales.-->
 <script type="text/javascript">

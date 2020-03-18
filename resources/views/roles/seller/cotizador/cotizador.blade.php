@@ -26,28 +26,28 @@
 
     </br>
 
-<div class="card">
+    <div class="card">
        <div class="card-body">
             <div class="row">
-                <div class="col col-6">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group row">
-                        <div class="col col-4 fx-1">
+                        <div class="col-md-4 col-sm-4 fx-1">
                             <label for="default-name" class="mn-1">Nombre completo</label>
                         </div>
 
-                        <div class="col col-8" id="lblNombreCliente">
+                        <div class="col-md-8 col-sm-8" id="lblNombreCliente">
                             <input type="text" class="form-control" name="default-name" @if (session('nombre'))  value="{{ session('nombre') }}" @endif disabled readonly>
                         </div>
                     </div>
                 </div>
 
-                <div class="col col-6">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group row">
-                        <div class="col col-4 fx-1">
+                        <div class="col-md-4 col-sm-4 fx-1">
                             <label for="default-address" class="mn-1">Dirección</label>
                         </div>
 
-                        <div class="col col-8" id="lblDireccion">
+                        <div class="col-md-8 col-sm-8" id="lblDireccion">
                             <input type="text" class="form-control" name="default-address" @if (session('direccion'))  value="{{ session('direccion') }}" @endif disabled readonly>
                         </div>
                     </div>
@@ -64,25 +64,25 @@
 
             <div class="collapse multi-collapse" id="info-cliente">
                 <div class="row">
-                    <div class="col col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-4 fx-1">
+                            <div class="col-md-4 col-sm-4 fx-1">
                                 <label for="default-cellphone" class="mn-1">Celular</label>
                             </div>
 
-                            <div class="col col-8" id="lblCelular">
+                            <div class="col-md-8 col-sm-8" id="lblCelular">
                                 <input type="text" class="form-control" name="default-cellphone" @if (session('celular'))  value="{{ session('celular') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-4 fx-1">
+                            <div class="col-md-4 col-sm-4 fx-1">
                                 <label for="default-email" class="mn-1">Correo Electrónico</label>
                             </div>
 
-                            <div class="col col-8" id="lblEmail">
+                            <div class="col-md-8 col-sm-8" id="lblEmail">
                                 <input type="text" class="form-control" name="default-email" @if (session('correo'))  value="{{ session('correo') }}" @endif disabled readonly>
                             </div>
                         </div>
@@ -90,25 +90,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="col col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-4 fx-1">
+                            <div class="col-md-4 col-sm-4 fx-1">
                                 <label for="default-phone" class="mn-1">Teléfono</label>
                             </div>
 
-                            <div class="col col-8" id="lblTelefono">
+                            <div class="col-md-8 col-sm-8" id="lblTelefono">
                                 <input type="text" class="form-control" name="default-phone" @if (session('telefono'))  value="{{ session('telefono') }}" @endif disabled readonly>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col col-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group row">
-                            <div class="col col-4 fx-1">
+                            <div class="col-md-4 col-sm-4 fx-1">
                                 <label for="default-consume" class="mn-1">Consumo</label>
                             </div>
 
-                            <div class="col col-8" id="lblConsumo">
+                            <div class="col-md-8 col-sm-8" id="lblConsumo">
                                 <input type="text" class="form-control" name="default-consume" @if (session('consumo'))  value="{{ session('consumo') }}" @endif disabled readonly>
                             </div>
                         </div>
