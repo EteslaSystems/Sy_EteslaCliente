@@ -1,7 +1,10 @@
-var arrayPeriodosGDMTH = [];
-var objPeriodosGDMTH = {};
+var lista;
+var option;
 var indexador = 0;
 var indexMostrar = 0;
+var banderaEditar = false;
+var arrayPeriodosGDMTH = [];
+var objPeriodosGDMTH = {};
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -21,19 +24,12 @@ function agregarPeriodo(){
     var Cmxn = document.getElementById('C(mxn/kW)').value;
     var Dmxn = document.getElementById('D(mxn/kW)').value;
 
-    /*Mientras la longitud del array este debajo o igual que 12, se sigan agregando elementos*/
-    if(arrayPeriodosGDMTH.length <= 3)
-    {
-        arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-    }
-
     /*Validar campos vacios*/
     if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn))
     {
         alert('Todos los campos pertenecientes a los datos de consumo, deben de llenarse');
     }
-    else if(arrayPeriodosGDMTH.length <= 3)
-    {
+    else{
         objPeriodosGDMTH = {
             bkwh: BkWh,
             ikwh: IkWh,
@@ -48,13 +44,17 @@ function agregarPeriodo(){
             cmxn: Cmxn,
             dmxn: Dmxn
         };
-        
-        sumarAlIndexador();
-        limpiarCampos();
-    }
-    else
-    {
-        alert('Solo se pueden ingresar 12 periodos');
+    
+        if(arrayPeriodosGDMTH.length < 12){
+            arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+            sumarAlIndexador();
+            limpiarCampos();
+        }
+        else
+        {
+            alert('Solo se pueden ingresar 12 periodos');
+            lista.remove(lista.selectedIndex);
+        }
     }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
@@ -64,36 +64,49 @@ function mostrarPeriodo(){
     /*Se desplega el contenido del array en los campos*/ 
     $("#lstPeriodosGDMTH").on("change", function(){
         indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
-        document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar].bkwh.toString();
-        document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar].ikwh.toString();
-        document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar].pkwh.toString();
-        document.getElementById('inpBkw').value = arrayPeriodosGDMTH[indexMostrar].bkw.toString();
-        document.getElementById('inpIkw').value = arrayPeriodosGDMTH[indexMostrar].ikw.toString();
-        document.getElementById('inpPkw').value = arrayPeriodosGDMTH[indexMostrar].pkw.toString();
-        document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar].bmxn.toString();
-        document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar].imxn.toString();
-        document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar].pmxn.toString();
-        document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[indexMostrar].pagoTransmi.toString();
-        document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar].cmxn.toString();
-        document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar].dmxn.toString();
+        document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar-1].bkwh.toString();
+        document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar-1].ikwh.toString();
+        document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar-1].pkwh.toString();
+        document.getElementById('inpBkw').value = arrayPeriodosGDMTH[indexMostrar-1].bkw.toString();
+        document.getElementById('inpIkw').value = arrayPeriodosGDMTH[indexMostrar-1].ikw.toString();
+        document.getElementById('inpPkw').value = arrayPeriodosGDMTH[indexMostrar-1].pkw.toString();
+        document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].bmxn.toString();
+        document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].imxn.toString();
+        document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].pmxn.toString();
+        document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi.toString();
+        document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].cmxn.toString();
+        document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].dmxn.toString();
 
+        if(indexMostrar < (indexador)){
+            /*El usuario estara navegando en los periodos ya guardados en memoria*/
+            bloquearCampos();
+            /*Y posiblemente quiera editar, por eso se cambia la bandera a true*/
+            banderaEditar = true;
+        }
+        else if(indexMostrar == (indexador)){
+            desbloquearCampos();
+            banderaEditar = false;
+        }
+
+        logicaBotones();
     });
 }
 
 function sumarAlIndexador(){
     indexador = arrayPeriodosGDMTH.length;
-    var lista = document.getElementById("lstPeriodosGDMTH");    
-    var option = document.createElement("option");
+    lista = document.getElementById("lstPeriodosGDMTH");    
+    option = document.createElement("option");
     option.text = indexador + 1;
     lista.add(option);
     lista.selectedIndex = indexador.toString();
 }
 
-/*
-function editarPeriodo(){}
 function actualizarPeriodo(){}
-function eliminarPeriodo(){}
-*/
+
+function eliminarPeriodo(){
+    arrayPeriodosGDMTH.splice(0,(indexMostrar-1));
+    console.log('Array con un elemento eliminado: '+JSON.stringify(arrayPeriodosGDMTH));
+}
 
 function validarCamposVacios(valor){
     valor = valor.replace("&nbsp;", "");
@@ -107,8 +120,45 @@ function validarCamposVacios(valor){
     }
 }
 
+function logicaBotones(){
+    if(banderaEditar == true){
+        $('#btnEditarPeriodo').prop("disabled",false);
+        $('#btnEliminarPeriodo').prop("disabled",false);
+        $('#btnAgregarPeriodo').prop("disabled",true);
+    }
+    else if(banderaEditar == false){
+        $('#btnEditarPeriodo').prop("disabled",true);
+        $('#btnEliminarPeriodo').prop("disabled",true);
+        if((indexador + 1) < 3){
+            $('#btnAgregarPeriodo').prop("disabled",true);
+        }
+    }
+
+    $('#btnEditarPeriodo').click(function(){
+        $('#btnActualizarPeriodo').prop("disabled",false);
+        $('#btnEditarPeriodo').prop("disabled",true);
+        $('#btnEliminarPeriodo').prop("disabled",true);
+        $('#btnAgregarPeriodo').prop("disabled",true);
+        $("#lstPeriodosGDMTH").prop("disabled",true);
+        desbloquearCampos();
+    });
+
+    $('#btnActualizarPeriodo').click(function(){
+        $('#btnEditarPeriodo').prop("disabled",false);
+        $('#btnEliminarPeriodo').prop("disabled",false);
+        $('#btnActualizarPeriodo').prop("disabled",true);
+        $('#btnAgregarPeriodo').prop("disabled",true);
+        $("#lstPeriodosGDMTH").prop("disabled",false);
+        bloquearCampos();
+    });
+}
+
 function bloquearCampos(){
     $('input[type="number"]').attr("readOnly",true);
+}
+
+function desbloquearCampos(){
+    $('input[type="number"]').attr("readOnly",false);
 }
 
 function limpiarCampos(){
