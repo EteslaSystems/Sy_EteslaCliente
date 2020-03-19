@@ -34,6 +34,9 @@
 .fx-1 {
 	display: flex;
 }
+.mn {
+  margin: auto auto;
+} 
 .mn-1 {
 	margin: auto auto auto 5px;
 }
@@ -47,4 +50,17 @@
   display: flex;
   font-size: 18px; 
   color: white;
+}
+.background-muted {
+  background-color: rgba(0, 0, 0, .05);
+}
+.pa-ma-1 {
+  padding: unset;
+  margin: 10px 0px;
+}
+.pa-ma-2 {
+  padding: unset;
+}
+.pa-ma-3 {
+  margin: 5px 0px;
 }
