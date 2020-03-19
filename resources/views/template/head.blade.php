@@ -51,6 +51,9 @@
     };
 
     $(document).ready(function(){
+        var height = $(window).height();
+        $('#full-screen').height(height);
+
         $("#vmasbtn").click(function(){
             $("#vmas").hide();
         });
