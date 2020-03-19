@@ -53,11 +53,35 @@ function agregarPeriodo(){
         else
         {
             alert('Solo se pueden ingresar 12 periodos');
-            lista.remove(lista.selectedIndex);
+            //lista.remove(lista.selectedIndex);
+            restarAlIndexador();
         }
     }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
+    console.log(arrayPeriodosGDMTH);
+    //arrayPeriodosGDMTH.forEach(element => console.log(element));
+}
+
+function eliminarPeriodo(){
+    arrayPeriodosGDMTH.splice(0,(indexMostrar-1));
+    /*Actualizar el indexador de la lista desplegable*/
+    restarAlIndexador();
+}
+
+function actualizarPeriodo(){
+    arrayPeriodosGDMTH[indexMostrar-1].bkwh = document.getElementById('inpBkWh').value;    ;
+    arrayPeriodosGDMTH[indexMostrar-1].ikwh = document.getElementById('inpIkWh').value;
+    arrayPeriodosGDMTH[indexMostrar-1].pkwh = document.getElementById('inpPkWh').value;
+    arrayPeriodosGDMTH[indexMostrar-1].bkw = document.getElementById('inpBkw').value;
+    arrayPeriodosGDMTH[indexMostrar-1].ikw = document.getElementById('inpIkw').value;
+    arrayPeriodosGDMTH[indexMostrar-1].pkw = document.getElementById('inpPkw').value;
+    arrayPeriodosGDMTH[indexMostrar-1].bmxn = document.getElementById('B(mxn/kWh)').value;
+    arrayPeriodosGDMTH[indexMostrar-1].imxn = document.getElementById('I(mxn/kWh)').value;
+    arrayPeriodosGDMTH[indexMostrar-1].pmxn = document.getElementById('P(mxn/kWh)').value;
+    arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi = document.getElementById('inpPagoTransmision').value;
+    arrayPeriodosGDMTH[indexMostrar-1].cmxn = document.getElementById('C(mxn/kW)').value;
+    arrayPeriodosGDMTH[indexMostrar-1].dmxn = document.getElementById('D(mxn/kW)').value;
 }
 
 function mostrarPeriodo(){
@@ -101,11 +125,16 @@ function sumarAlIndexador(){
     lista.selectedIndex = indexador.toString();
 }
 
-function actualizarPeriodo(){}
-
-function eliminarPeriodo(){
-    arrayPeriodosGDMTH.splice(0,(indexMostrar-1));
-    console.log('Array con un elemento eliminado: '+JSON.stringify(arrayPeriodosGDMTH));
+function restarAlIndexador(){
+    for(let i = arrayPeriodosGDMTH.length; i >= 0; i--){
+        lista.remove(i);
+    }
+    for(let j = 1; j < arrayPeriodosGDMTH.length; j++){
+        option = document.createElement("option");
+        this.option.text = j;
+        lista.add(option);
+    }
+    lista.selectedIndex = arrayPeriodosGDMTH.length.toString();
 }
 
 function validarCamposVacios(valor){
@@ -129,7 +158,7 @@ function logicaBotones(){
     else if(banderaEditar == false){
         $('#btnEditarPeriodo').prop("disabled",true);
         $('#btnEliminarPeriodo').prop("disabled",true);
-        if((indexador + 1) < 3){
+        if((indexador + 1) < 12){
             $('#btnAgregarPeriodo').prop("disabled",true);
         }
     }
@@ -151,6 +180,38 @@ function logicaBotones(){
         $("#lstPeriodosGDMTH").prop("disabled",false);
         bloquearCampos();
     });
+}
+
+function enviarPeriodos(){
+    if(arrayPeriodosGDMTH.length < 12){
+        msjConfirm = 'No se estan enviando los 12 periodos necesarios, se realizara un promedio de los datos faltantes ¿Desea enviar?';
+        if(modalConfirm(msjConfirm) == true){
+            /*
+            -Mandar el array al controlador PHP, pero con un indicativo (bandera), para
+            hacer más facil la identificación si los periodos van incompletos o no
+            -Igual mandar otro indicativo (bandera/char) que indique que la cotización es de
+            GDMTH
+            */
+            alert('Usted a enviado datos al servidor');
+            /*
+            -Se limpian campos
+            -Se vacia array y se procede a otra vista que muestre los resultados de los calculos
+            */ 
+        }
+        else{
+            alert('Ah cancelado el envio de periodos al server');
+        }
+    }
+}
+
+function modalConfirm(msjConfirm){
+    var confirmacion = confirm(msjConfirm);
+    if(confirmacion == true){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 function bloquearCampos(){

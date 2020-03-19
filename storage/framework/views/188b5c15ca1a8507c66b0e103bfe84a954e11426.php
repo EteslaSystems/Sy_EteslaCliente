@@ -34,7 +34,7 @@
 
                             <div class="col col-md-7 col-sm-7 col-xs-12 text-center" style="padding: 10px 0px; display: flex;">
                                 <div class="btn-group btn-group-lg" role="group" style="margin: auto auto;">
-                                    <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
+                                    <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="guardar periodo de consumo">
                                         <strong>
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
                                                 <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
@@ -209,7 +209,7 @@
                                             </svg>
                                         </strong>
                                     </button>
-                                    <button id="btnActualizarPeriodo" class="btn btn-primary" onclick="#" title="actualizar periodo de consumo" disabled>
+                                    <button id="btnActualizarPeriodo" class="btn btn-primary" onclick="actualizarPeriodo()" title="actualizar periodo de consumo" disabled>
                                         <strong>
                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
                                                 <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
@@ -400,7 +400,7 @@
 
     <div class="row">
         <div class="col-md-12 col-sm-11 text-right">
-            <button class="btn btn-success"><strong>Calcular</strong></button>
+            <button onclick="enviarPeriodos()" class="btn btn-success"><strong>Calcular</strong></button>
         </div>
     </div>
 
