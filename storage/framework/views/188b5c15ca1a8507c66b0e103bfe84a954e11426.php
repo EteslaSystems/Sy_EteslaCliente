@@ -454,7 +454,7 @@
 
     <div class="row">
         <div class="col-md-12 col-sm-11 text-right">
-            <button class="btn btn-success"><strong>Calcular</strong></button>
+            <button onclick="enviarPeriodos()" class="btn btn-success"><strong>Calcular</strong></button>
         </div>
     </div>
 
