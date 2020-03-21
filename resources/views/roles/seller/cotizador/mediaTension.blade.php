@@ -39,8 +39,12 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
 
                                 <div class="col-12 col-sm-7 col-md-5 fx-1 pa-ma-1">
+=======
+                                <div class="col-12 col-sm-7 col-md-7 fx-1 pa-ma-1">
+>>>>>>> 76c890071dbff4592db9ec61a126331899cb93a6
                                     <div class="btn-group btn-group-lg mn" role="group">
                                         <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
                                             <strong>
@@ -50,7 +54,6 @@
                                                         <g fill="#ffffff">
                                                             <path d="M43,14.33333c-7.88333,0 -14.33333,6.45 -14.33333,14.33333v114.66667c0,7.88333 6.45,14.33333 14.33333,14.33333h86c7.88333,0 14.33333,-6.45 14.33333,-14.33333v-86l-43,-43zM43,28.66667h51.39844l34.60156,34.60156v80.0651h-86zM78.83333,64.5v21.5h-21.5v14.33333h21.5v21.5h14.33333v-21.5h21.5v-14.33333h-21.5v-21.5z"></path>
                                                         </g>
-                                                    </g>
                                                 </svg>
                                             </strong>
                                         </button>
@@ -224,7 +227,7 @@
                                                         <g fill="#ffffff">
                                                             <path d="M71.66667,14.33333l-7.16667,7.16667h-35.83333v14.33333h7.16667v107.5c0,7.83362 6.49972,14.33333 14.33333,14.33333h57.33333v-14.33333h-57.33333v-107.5h71.66667v71.66667h14.33333v-71.66667h7.16667v-14.33333h-7.16667h-28.66667l-7.16667,-7.16667zM64.5,50.16667v78.83333h14.33333v-78.83333zM93.16667,50.16667v78.83333h14.33333v-78.83333zM128.13216,121.32943l-10.13411,10.13411l15.20117,15.20117l-15.20117,15.20117l10.13411,10.13411l15.20117,-15.20117l15.20117,15.20117l10.13411,-10.13411l-15.20117,-15.20117l15.20117,-15.20117l-10.13411,-10.13411l-15.20117,15.20117z"></path>
                                                         </g>
-                                                    </g>
+                                                    </g
                                                 </svg>
                                             </strong>
                                         </button>
@@ -455,7 +458,7 @@
 
     <div class="row">
         <div class="col-md-12 col-sm-11 text-right">
-            <button class="btn btn-success"><strong>Calcular</strong></button>
+            <button onclick="enviarPeriodos()" class="btn btn-success"><strong>Calcular</strong></button>
         </div>
     </div>
 
