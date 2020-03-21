@@ -25,8 +25,6 @@
                             <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
                                 <select class="form-control" id="tarifa-actual">
                                     <option disabled selected>Elige una opción:</option>
-                                    <optgroup label="Mensual" style="background: rgba(0, 0, 0, .45); color: #FFF; padding: 5px 15px;"></optgroup>
-                                    <hr>
                                     <option value="IC">Industrial a Comercial</option>
                                     <option value="1">01 (Doméstico 500 kWh/bim)</option>
                                     <option value="1a">1a (Doméstico 600 kWh/bim)</option>
@@ -36,12 +34,6 @@
                                     <option value="1e">1e (Doméstico 4,000 kWh/bim)</option>
                                     <option value="1f">1f (Doméstico 5,000 kWh/bim)</option>
                                     <option value="2">02 (Comercial hasta 25kwp)</option>
-                                    <optgroup label="Bimestral" style="background: rgba(0, 0, 0, .45); color: #FFF; padding: 5px 15px;"></optgroup>
-                                    <hr>
-                                    <option value="3">03 (Comercial más 25kwp)</option>
-                                    <option value="OM">OM (Con Transformador)</option>
-                                    <option value="HM">HM (Con Transformador horaria)</option>
-                                    <option value="9m">9M (Con Transformador Riego)</option>
                                 </select>
                             </div>
                         </div>
@@ -49,95 +41,10 @@
                 </div>    
             </div>
 
-            <div class="container-fluid">
+            <div class="container-fluid" id="form-group-inputs">
                 <div class="accordion">
                     <div class="card">
-                        <div id="fm-mensual" class="collapse" aria-labelledby="headingOne" data-parent="#tarifa-actual">
-                            <div class="card-body">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-6 offset-6 col-md-4 offset-md-8">
-                                            <div class="custom-control custom-switch text-center">
-                                                <input type="checkbox" class="custom-control-input" id="switch-1">
-                                                <label class="custom-control-label" for="switch-1">Generar promedio.</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <br>
-
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-6">
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-1" class="mn-1">Bimestre 1</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="bim-val-1" name="bim-1" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-2" class="mn-1">Bimestre 2</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="bim-val-2" name="bim-2" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-3" class="mn-1">Bimestre 3</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="bim-val-3" name="bim-3" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-6">
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-4" class="mn-1">Bimestre 4</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="bim-val-4" name="bim-4" type="number" min="0" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-5" class="mn-1">Bimestre 5</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="bim-val-5" name="bim-5" type="number" min="0" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="bim-val-6" class="mn-1">Bimestre 6</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                   <input id="bim-val-6" name="bim-6" type="number" min="0" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div id="fm-bimestral" class="collapse" aria-labelledby="headingTwo" data-parent="#tarifa-actual">
+                        <div id="fm-mensual" class="collapse" aria-labelledby="headingTwo" data-parent="#tarifa-actual">
                             <div class="card-body">
                                 <div class="container-fluid">
                                     <div class="row">
@@ -159,7 +66,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-1" name="men-1" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-1" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon1">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-1a" name="men-1a" type="number" min="0"  aria-describedby="basic-addon1a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon1a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -169,7 +96,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-2" name="men-2" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-2" name="men-2" type="number" min="0"  aria-describedby="basic-addon2">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon2">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-2a" name="men-2a" type="number" min="0"  aria-describedby="basic-addon2a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon2a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -179,7 +126,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-3" name="men-3" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-3" name="men-3" type="number" min="0"  aria-describedby="basic-addon3">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon3">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-3a" name="men-3a" type="number" min="0"  aria-describedby="basic-addon3a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon3a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -189,7 +156,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-4"  name="men-4" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-4" name="men-4" type="number" min="0"  aria-describedby="basic-addon4">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon4">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-4a" name="men-4a" type="number" min="0"  aria-describedby="basic-addon4a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon4a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -199,7 +186,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-5" name="men-5" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-5" name="men-5" type="number" min="0"  aria-describedby="basic-addon5">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon5">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-5a" name="men-5a" type="number" min="0"  aria-describedby="basic-addon5a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon5a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -209,7 +216,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-6" name="men-6" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-6" name="men-6" type="number" min="0"  aria-describedby="basic-addon6">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon6">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-6a" name="men-6a" type="number" min="0"  aria-describedby="basic-addon6a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon6a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -221,7 +248,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-7" name="men-7" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-7" name="men-7" type="number" min="0"  aria-describedby="basic-addon7">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon7">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-7a" name="men-7a" type="number" min="0"  aria-describedby="basic-addon7a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon7a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -231,7 +278,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-8" name="men-8" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-8" name="men-8" type="number" min="0"  aria-describedby="basic-addon8">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon8">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-8a" name="men-8a" type="number" min="0"  aria-describedby="basic-addon8a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon8a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -241,7 +308,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                   <input id="men-val-9" name="men-9" type="number" min="0" class="form-control">
+                                                   <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-9" name="men-9" type="number" min="0"  aria-describedby="basic-addon9">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon9">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-9a" name="men-9a" type="number" min="0"  aria-describedby="basic-addon9a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon9a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -251,7 +338,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-10" name="men-10" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-10" name="men-10" type="number" min="0"  aria-describedby="basic-addon10">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon10">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-10a" name="men-10a" type="number" min="0"  aria-describedby="basic-addon10a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon10a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -261,7 +368,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <input id="men-val-11" name="men-11" type="number" min="0" class="form-control">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-11" name="men-11" type="number" min="0"  aria-describedby="basic-addon11">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon11">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-11a" name="men-11a" type="number" min="0"  aria-describedby="basic-addon11a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon11a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -271,7 +398,27 @@
                                                 </div>
 
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                   <input id="men-val-12" name="men-12" type="number" min="0" class="form-control">
+                                                   <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-12" name="men-12" type="number" min="0"  aria-describedby="basic-addon12">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon12">kwh</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="input-group mb-3">
+                                                                <input type="number" class="form-control" id="men-val-12a" name="men-12a" type="number" min="0"  aria-describedby="basic-addon12a">
+                                                              
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="basic-addon12a">kwp</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

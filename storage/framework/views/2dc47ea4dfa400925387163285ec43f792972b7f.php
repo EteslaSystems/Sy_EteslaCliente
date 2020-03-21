@@ -386,6 +386,116 @@ unset($__errorArgs, $__bag); ?>
         <?php endif; ?>
 
         <script type="text/javascript">
+            // Función invocada en los inputs tipo number, no permite insertar datos que no sean numéricos.
+            $('#form-group-inputs input[type="number"]').keydown(function(event) {
+                if (event.shiftKey) {
+                    event.preventDefault();
+                }
+
+                if (event.keyCode != 46 && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
+                    if($(this).val().length >= 11) {
+                        event.preventDefault();
+                    }
+                }
+ 
+                if (event.keyCode < 48 || event.keyCode > 57) {
+                    if (event.keyCode < 96 || event.keyCode > 105) {
+                        if(event.keyCode != 46 && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
+                            event.preventDefault();
+                        }
+                    }
+                }
+            });
+
+            // Función invocada en los inputs, no permite pegar datos.
+            $('#form-group-inputs input[type="number"]').on('paste', function(e){
+                e.preventDefault();
+            });
+
+            // Función invocada en los inputs, no permite copiar datos.
+            $('#form-group-inputs input[type="number"]').on('copy', function(e){
+                e.preventDefault();
+            });
+
+            // Función invocada mediante el select, muestra/oculta secciones.
+            $("#tarifa-actual").change(function () {
+                $("#tarifa-actual option:selected").each(function () {
+                    $('#fm-mensual').collapse("show");
+                    
+                });
+            });
+
+            // Función invocada mediante el checkbox, modifica valores/propiedades de inputs.
+            $("#switch-1").change(function () {
+                if ($('#switch-1').prop('checked')) {
+
+                    for (var count = 2; count <= 6; count++) {
+                        $("#bim-val-" + count).attr("readonly", "readonly");
+
+                        var value = $("#bim-val-1").val();
+                        $("#bim-val-" + count).val(value);
+                    }
+                } else {
+                    for (var count = 2; count <= 6; count++) {
+                        $("#bim-val-" + count).removeAttr("readonly", "readonly");
+                    }
+                }
+            });
+
+            $("#switch-2").change(function () {
+                if ($('#switch-2').prop('checked')) {
+
+                    for (var count = 2; count <= 12; count++) {
+                        $("#men-val-" + count).attr("readonly", "readonly");
+                        $("#men-val-" + count + "a").attr("readonly", "readonly");
+
+                        var value1 = $("#men-val-1").val();
+                        var value2 = $("#men-val-1a").val();
+
+                        $("#men-val-" + count).val(value1);
+                        $("#men-val-" + count + "a").val(value2);
+                    }
+                } else {
+                    for (var count = 2; count <= 12; count++) {
+                        $("#men-val-" + count).removeAttr("readonly", "readonly");
+                        $("#men-val-" + count + "a").removeAttr("readonly", "readonly");
+                    }
+                }
+            });
+
+            // Función invocada por el input, agrega su valor a los demás.
+            $("#bim-val-1").keyup(function () {
+                if ($('#switch-1').prop('checked')) {
+                    for (var count = 2; count <= 6; count++) {
+                        var value = $(this).val();
+
+                        $("#bim-val-" + count).val(value);
+                    }
+                }
+            });
+
+            $("#men-val-1").keyup(function () {
+                if ($('#switch-2').prop('checked')) {
+                    for (var count = 2; count <= 12; count++) {
+                        var value = $(this).val();
+
+                        $("#men-val-" + count).val(value);
+                    }
+                }
+            });
+
+            $("#men-val-1a").keyup(function () {
+                if ($('#switch-2').prop('checked')) {
+                    for (var count = 2; count <= 12; count++) {
+                        var value = $(this).val();
+
+                        $("#men-val-" + count + "a").val(value);
+                    }
+                }
+            });
+        </script>
+
+        <script type="text/javascript">
             function filterFloat(evt,input){
                 // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
                 var key = window.Event ? evt.which : evt.keyCode;
@@ -419,55 +529,6 @@ unset($__errorArgs, $__bag); ?>
                     return false;
                 }
             }
-        </script>
-
-        <script type="text/javascript">
-            $("#tarifa-actual").change(function () {
-                $("#tarifa-actual option:selected").each(function () {
-                    var value = $(this).val();
-
-                    if (value == "3" || value == "OM" || value == "HM" || value == "9m") {
-                        $('#fm-bimestral').collapse("show");
-                        $('#fm-mensual').collapse("hide");
-
-                        $('#fm-mensual input[type="number"]').val('');
-                    } else {
-                        $('#fm-mensual').collapse("show");
-                        $('#fm-bimestral').collapse("hide");
-
-                        $('#fm-bimestral input[type="number"]').val('');
-                    }
-                });
-            });
-
-            $("#switch-1").change(function () {
-                if( $('#switch-1').prop('checked') ) {
-
-                    for (var count = 2; count <= 6; count++) {
-                        $("#bim-val-" + count).attr("readonly", "readonly");
-
-                        var value = $("#bim-val-1").val();
-                        $("#bim-val-" + count).val(value);
-                        //$('#fm-mensual input[type="number"]').val('');
-                    }
-                } else {
-                    for (var count = 2; count <= 6; count++) {
-                        $("#bim-val-" + count).removeAttr("readonly", "readonly");
-
-                        //$('#fm-mensual input[type="number"]').val('');
-                    }
-                }
-            });
-
-            $("#bim-val-1").keyup(function () {
-                if( $('#switch-1').prop('checked') ) {
-                    for (var count = 2; count <= 6; count++) {
-                        var value = $(this).val();
-
-                        $("#bim-val-" + count).val(value);
-                    }
-                }
-            });
         </script>
     <?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
