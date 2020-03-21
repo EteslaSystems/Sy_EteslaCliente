@@ -13,7 +13,7 @@ Route::get('/logout', 'usuarioController@cerrarSesion');
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
 Route::get('/mediaTension', 'MediaTensionController@index');
-Route::get('/bajaTension', 'vendedorController@bajaTension');
+Route::get('/bajaTension', 'BajaTensionController@index');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::get('/mediaT', 'MediaTensionController@index');
