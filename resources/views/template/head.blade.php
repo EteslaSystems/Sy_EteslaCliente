@@ -43,7 +43,6 @@
 <script src="{{ asset('js/log.js') }}"></script>
 <script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
 <script src="{{ asset('js/cotizador/mediaTension/GDMTO.js') }}"></script>
-
 <script src="{{ asset('js/alert-bootstrap.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     window.onload = function() {
