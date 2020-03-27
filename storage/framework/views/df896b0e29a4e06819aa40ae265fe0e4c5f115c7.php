@@ -1,5 +1,4 @@
-@extends('template/body')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row justify-content-center" id="full-screen" style="margin-top: -72.5px;">
             <div class="col-12 col-md-8 align-self-center" style="margin-top: 72.5px;">
@@ -77,4 +76,5 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template/body', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/profileUser.blade.php ENDPATH**/ ?>
