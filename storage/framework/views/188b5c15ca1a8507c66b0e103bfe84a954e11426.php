@@ -19,13 +19,13 @@
             </div>
         </div>
 
-        <div class="card-body" >
+        <div class="card-body">
             <div class="container-fluid" id="divGDMTO">
                 <div class="row">
-                    <div class="col-12 col-sm-12 offset-sm-3 col-md-6 offset-md-6">
+                    <div class="col-12 col-sm-12 offset-sm-3 col-md-5 offset-md-7">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 col-sm-5 col-md-5 pa-ma-1">
+                                <div class="col-12 col-sm-5 col-md-4 offset-md-3 pa-ma-1">
                                     <div class="row">
                                         <div class="col-4 offset-2 col-sm-5 offset-sm-2 col-md-6 offset-md-1 fx-1 pa-ma-2">
                                             <label class="mn-1">Periodo(s)</label>
@@ -38,7 +38,12 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+
+                                <div class="col-12 col-sm-7 col-md-5 fx-1 pa-ma-1">
+=======
                                 <div class="col-12 col-sm-7 col-md-7 fx-1 pa-ma-1">
+>>>>>>> 76c890071dbff4592db9ec61a126331899cb93a6
                                     <div class="btn-group btn-group-lg mn" role="group">
                                         <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
                                             <strong>
@@ -168,10 +173,10 @@
 
             <div class="container-fluid" id="divGDMTH" style="display:none;">
                 <div class="row">
-                    <div class="col-12 col-sm-9 offset-sm-3 col-md-6 offset-md-6">
+                    <div class="col-12 col-sm-12 offset-sm-3 col-md-5 offset-md-7">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 col-sm-5 col-md-5 pa-ma-1">
+                                <div class="col-12 col-sm-5 col-md-4 offset-md-3 pa-ma-1">
                                     <div class="row">
                                         <div id="divMunicipio" style="display: none">
                                             <label id="municipio"></label>
@@ -188,7 +193,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-sm-7 col-md-7 fx-1 pa-ma-3">
+                                <div class="col-12 col-sm-7 col-md-5 fx-1 pa-ma-1">
                                     <div class="btn-group btn-group-lg mn" role="group">
                                         <button id="btnAgregarPeriodo" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
                                             <strong>
@@ -460,41 +465,5 @@
     </div>
 
     <br>
-<!--Scrip que valida que solo se ingresen valores numéricos en las cajas de texto, con un solo punto y máximo 2 decimales.-->
-<script type="text/javascript">
-    function filterFloat(evt,input){
-        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
-        var key = window.Event ? evt.which : evt.keyCode;
-        var chark = String.fromCharCode(key);
-        var tempValue = input.value+chark;
-        if(key >= 48 && key <= 57) {
-            if(filter(tempValue)=== false) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            if(key == 8 || key == 13 || key == 0) {
-                return true;              
-            } else if(key == 46) {
-                if(filter(tempValue)=== false) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
-    function filter(__val__){
-        var preg = /^([0-9]+\.?[0-9]{0,2})$/;
-        if(preg.test(__val__) === true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('roles/seller/cotizador/cotizador', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/mediaTension.blade.php ENDPATH**/ ?>
