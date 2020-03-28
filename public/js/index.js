@@ -22,7 +22,7 @@ $("input[name=inpSearchClient]").change(function()
     results.appendChild(set);
 
     var value = $("input[name=inpSearchClient]").val();
-    var id = $('#clientes [value="' + value + '"]').data('value')
+    var id = $('#clientes [value="' + value + '"]').data('value');
     var nombre = document.getElementById("lblNombreCliente");
     var direccion = document.getElementById("lblDireccion");
     var celular = document.getElementById("lblCelular");

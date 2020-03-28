@@ -6,6 +6,7 @@ use App\APIModels\APIPaneles;
 use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
+use App\APIModels\APICotizacion;
 use Illuminate\Http\Request;
 
 class MediaTensionController extends Controller
@@ -13,14 +14,16 @@ class MediaTensionController extends Controller
     protected $paneles;
     protected $inversores;
     protected $vendedor;
-    protected $clientes;
+	protected $clientes;
+	protected $cotizacion;
 
-	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes)
+	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
+		$this->cotizacion = $cotizacion;
 	}
 
 	public function index()
@@ -64,13 +67,7 @@ class MediaTensionController extends Controller
             	->with('telefono', $request["telefono"])
             	->with('consumo', $request["consumo"]);
         }
-    }
-
-    public function mandarPeriodos(Request $request)
-    {
-    		$respuesta = $this->vendedor->enviarPeriodos(['json' => $request->municipio]);
-    		return response()->json($request);
-    }
+     }
 
 	public function validarSesion()
 	{
@@ -83,4 +80,12 @@ class MediaTensionController extends Controller
 		return 0;
 	}
 
+	public function sendPeriodsToServer(Request $request)
+	{
+		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$arrayCompleto["municipio"] = $request->municipio;
+		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
+
+		return response()->json($x);
+	}
 }

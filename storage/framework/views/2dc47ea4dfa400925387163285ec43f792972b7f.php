@@ -421,27 +421,10 @@ unset($__errorArgs, $__bag); ?>
             $("#tarifa-actual").change(function () {
                 $("#tarifa-actual option:selected").each(function () {
                     $('#fm-mensual').collapse("show");
-                    
                 });
             });
 
             // Función invocada mediante el checkbox, modifica valores/propiedades de inputs.
-            $("#switch-1").change(function () {
-                if ($('#switch-1').prop('checked')) {
-
-                    for (var count = 2; count <= 6; count++) {
-                        $("#bim-val-" + count).attr("readonly", "readonly");
-
-                        var value = $("#bim-val-1").val();
-                        $("#bim-val-" + count).val(value);
-                    }
-                } else {
-                    for (var count = 2; count <= 6; count++) {
-                        $("#bim-val-" + count).removeAttr("readonly", "readonly");
-                    }
-                }
-            });
-
             $("#switch-2").change(function () {
                 if ($('#switch-2').prop('checked')) {
 
@@ -464,16 +447,6 @@ unset($__errorArgs, $__bag); ?>
             });
 
             // Función invocada por el input, agrega su valor a los demás.
-            $("#bim-val-1").keyup(function () {
-                if ($('#switch-1').prop('checked')) {
-                    for (var count = 2; count <= 6; count++) {
-                        var value = $(this).val();
-
-                        $("#bim-val-" + count).val(value);
-                    }
-                }
-            });
-
             $("#men-val-1").keyup(function () {
                 if ($('#switch-2').prop('checked')) {
                     for (var count = 2; count <= 12; count++) {

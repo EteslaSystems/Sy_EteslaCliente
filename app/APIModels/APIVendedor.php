@@ -8,9 +8,4 @@ class APIVendedor extends GuzzleHttpRequest
 	{
 		return $this->put("lista-clientes-usuario", $request);
 	}
-
-	public function enviarPeriodos($request)
-	{
-		return $this->post("promedioArray", $request);
-	}
 }

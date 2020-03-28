@@ -38,12 +38,6 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-
-                                <div class="col-12 col-sm-7 col-md-5 fx-1 pa-ma-1">
-=======
-                                <div class="col-12 col-sm-7 col-md-7 fx-1 pa-ma-1">
->>>>>>> 76c890071dbff4592db9ec61a126331899cb93a6
                                     <div class="btn-group btn-group-lg mn" role="group">
                                         <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
                                             <strong>
@@ -460,7 +454,7 @@
 
     <div class="row">
         <div class="col-md-12 col-sm-11 text-right">
-            <button onclick="enviarPeriodos()" class="btn btn-success"><strong>Calcular</strong></button>
+            <button onclick="validarEnvioDePeriodo()" class="btn btn-success"><strong>Calcular</strong></button>
         </div>
     </div>
 
