@@ -198,7 +198,7 @@ function sendPeriodsToServer(){
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
-        url: 'enviarPeriodos',
+        url: '/enviarPeriodos',
         data: {
             "_token": $("meta[name='csrf-token']").attr('content'),
             'arrayPeriodosGDMTH': arrayPeriodosGDMTH
