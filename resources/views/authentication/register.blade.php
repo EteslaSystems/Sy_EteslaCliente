@@ -59,4 +59,22 @@
             </form>
         </div>
     </div>
+
+    @section('scripts')
+        <script type="text/javascript">
+            /*#region Register*/ 
+            //Validación de listas desplegables vacias
+            $(document).on('change','select',function(){
+                listaSucursal = document.getElementsByTagName('select')[0].value;
+                listaPuesto = document.getElementsByTagName('select')[1].value;
+
+                if(listaSucursal != -1){
+                    if(listaPuesto != -1){
+                        document.getElementById('btnRegistrar').disabled = false;
+                    }
+                }
+            });
+            /*#endregion*/
+        </script>
+    @endsection
 @endsection

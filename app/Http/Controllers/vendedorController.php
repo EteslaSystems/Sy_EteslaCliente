@@ -28,19 +28,6 @@ class vendedorController extends Controller
 		return view('roles.seller.inicioS');
 	}
 
-	public function bajaTension()
-	{
-		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
-		}
-		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
-		}
-		return view('roles.seller.cotizador.bajaTension');
-	}
-
 	public function misClientes()
 	{
 		if ($this->validarSesion() == 0) {
