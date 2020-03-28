@@ -29,6 +29,7 @@ $("input[name=inpSearchClient]").change(function()
     var email = document.getElementById("lblEmail");
     var telefono = document.getElementById("lblTelefono");
     var consumo = document.getElementById("lblConsumo");
+    var municipio = document.getElementById("divMunicipio");
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -55,6 +56,7 @@ $("input[name=inpSearchClient]").change(function()
             email.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vEmail + '" disabled readonly>';
             telefono.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vTelefono + '" disabled readonly>';
             consumo.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].fConsumo + '" disabled readonly>';
+            document.getElementById('municipio').value = response.message[0].vMunicipio.toString();
         }
     });
 });

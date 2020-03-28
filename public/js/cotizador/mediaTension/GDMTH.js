@@ -192,6 +192,23 @@ function enviarPeriodos(){
             -Igual mandar otro indicativo (bandera/char) que indique que la cotización es de
             GDMTH
             */
+            var municipio = document.getElementById('municipio').value;
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                type:'post',
+                url: 'mandarPeriodos',
+                data: {
+                    "_token": $("meta[name='csrf-token']").attr("content"),
+                    'periodos': arrayPeriodosGDMTH,
+                    'municipio': municipio,
+                    'tipo': 'GDMTH',
+                    'lleno': 'No'
+                },
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                }
+            });
             alert('Usted a enviado datos al servidor');
             /*
             -Se limpian campos

@@ -66,6 +66,12 @@ class MediaTensionController extends Controller
         }
     }
 
+    public function mandarPeriodos(Request $request)
+    {
+    		$respuesta = $this->vendedor->enviarPeriodos(['json' => $request->municipio]);
+    		return response()->json($request);
+    }
+
 	public function validarSesion()
 	{
 		if (session()->has('dataUsuario')) {

@@ -18,6 +18,7 @@ Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::get('/mediaT', 'MediaTensionController@index');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
+Route::post('/mandarPeriodos', 'MediaTensionController@mandarPeriodos');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
