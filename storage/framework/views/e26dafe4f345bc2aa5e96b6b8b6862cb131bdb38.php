@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo e(asset('css/index.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/alert-bootstrap.css')); ?>">
+    <script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=urakirabe"></script>
     <title>Etesla Paneles Solares - <?php $__env->startSection('title'); ?><?php echo $__env->yieldSection(); ?></title>
 </head>
 <body>

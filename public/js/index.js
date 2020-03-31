@@ -61,3 +61,101 @@ $("input[name=inpSearchClient]").change(function()
     });
 });
 /*#endregion*/
+
+/*#region Busqueda por Codigo Postal - Jesús Daniel Carrera Falcón*/
+var postalcodes;
+
+function getLocation(jData) {
+    if (jData == null) {
+        return;
+    }
+
+    postalcodes = jData.postalcodes;
+
+    if (postalcodes.length > 1) {
+            document.getElementById('suggestBoxElement').style.visibility = 'visible';
+            var suggestBoxHTML = '';
+
+            for (i=0; i<jData.postalcodes.length; i++) {
+                suggestBoxHTML += "<div class='suggestions' id=pcId"+ i +" onmousedown='suggestBoxMouseDown("+ i +")' onmouseover='suggestBoxMouseOver("+ i +")' onmouseout='suggestBoxMouseOut("+ i +")'> " + postalcodes[i].placeName +'</div>';
+            }
+            document.getElementById('suggestBoxElement').innerHTML = suggestBoxHTML;
+            var municipio = document.getElementById("inpMunicCliente");
+            var estado = document.getElementById("inpEstadoCliente");
+            municipio.value = postalcodes[0].adminName2;
+            estado.value = postalcodes[0].adminName1;
+    } else {
+        if (postalcodes.length == 1) {
+            var placeInput = document.getElementById("inpColoniaCliente");
+            var municipio = document.getElementById("inpMunicCliente");
+            var estado = document.getElementById("inpEstadoCliente");
+            placeInput.value = postalcodes[0].placeName;
+            municipio.value = postalcodes[0].adminName2;
+            estado.value = postalcodes[0].adminName1;
+        }
+        closeSuggestBox();
+    }
+}
+
+function closeSuggestBox() {
+    document.getElementById('suggestBoxElement').innerHTML = '';
+    document.getElementById('suggestBoxElement').style.visibility = 'hidden';
+}
+
+function suggestBoxMouseOut(obj) {
+    document.getElementById('pcId'+ obj).className = 'suggestions';
+}
+
+function suggestBoxMouseDown(obj) {
+    closeSuggestBox();
+    var placeInput = document.getElementById("inpColoniaCliente");
+    placeInput.value = postalcodes[obj].placeName;
+}
+
+function suggestBoxMouseOver(obj) {
+    document.getElementById('pcId'+ obj).className = 'suggestionMouseOver';
+}
+
+function postalCodeLookup() {
+    if (geonamesPostalCodeCountries.toString().search('MX') == -1) {
+        return;
+    }
+    
+    document.getElementById('suggestBoxElement').style.visibility = 'visible';
+    document.getElementById('suggestBoxElement').innerHTML = '<small><i>loading ...</i></small>';
+
+    var postalcode = document.getElementById("inpCPCliente").value;
+
+    request = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=' + postalcode  + '&country=MX&callback=getLocation&username=urakirabe';
+
+    aObj = new JSONscriptRequest(request);
+    aObj.buildScriptTag();
+    aObj.addScriptTag();
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
+function JSONscriptRequest(fullUrl) {
+    this.fullUrl = fullUrl; 
+    this.noCacheIE = '&noCacheIE=' + (new Date()).getTime();
+    this.headLoc = document.getElementsByTagName("head").item(0);
+    this.scriptId = 'YJscriptId' + JSONscriptRequest.scriptCounter++;
+}
+
+JSONscriptRequest.scriptCounter = 1;
+
+JSONscriptRequest.prototype.buildScriptTag = function () {
+    this.scriptObj = document.createElement("script");
+    this.scriptObj.setAttribute("type", "text/javascript");
+    this.scriptObj.setAttribute("src", this.fullUrl + this.noCacheIE);
+    this.scriptObj.setAttribute("id", this.scriptId);
+}
+
+JSONscriptRequest.prototype.removeScriptTag = function () {
+    this.headLoc.removeChild(this.scriptObj);  
+}
+
+JSONscriptRequest.prototype.addScriptTag = function () {
+    this.headLoc.appendChild(this.scriptObj);
+}
+/*#endregion*/
