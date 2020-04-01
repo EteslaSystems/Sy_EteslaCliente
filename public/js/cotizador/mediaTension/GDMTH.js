@@ -5,6 +5,7 @@ var indexMostrar = 0;
 var banderaEditar = false;
 var arrayPeriodosGDMTH = [];
 var objPeriodosGDMTH = {};
+var msjConfirm = false;
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -27,7 +28,8 @@ function agregarPeriodo(){
     /*Validar campos vacios*/
     if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn))
     {
-        alert('Todos los campos pertenecientes a los datos de consumo, deben de llenarse');
+        msj = 'Todos los campos pertenecientes a los datos de consumo, deben ser llenados';
+        modalMsj(msj,this.msjConfirm);
     }
     else{
         objPeriodosGDMTH = {
@@ -52,15 +54,15 @@ function agregarPeriodo(){
         }
         else
         {
-            alert('Solo se pueden ingresar 12 periodos');
-            //lista.remove(lista.selectedIndex);
-            restarAlIndexador();
+            msj = 'Solo se pueden ingresar 12 periodos';
+            modalMsj(msj,this.msjConfirm);
+            lista.remove(lista.selectedIndex);
+            //restarAlIndexador();
         }
     }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
     console.log(arrayPeriodosGDMTH);
-    //arrayPeriodosGDMTH.forEach(element => console.log(element));
 }
 
 function eliminarPeriodo(){
@@ -88,31 +90,41 @@ function mostrarPeriodo(){
     /*Se desplega el contenido del array en los campos*/ 
     $("#lstPeriodosGDMTH").on("change", function(){
         indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
-        document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar-1].bkwh.toString();
-        document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar-1].ikwh.toString();
-        document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar-1].pkwh.toString();
-        document.getElementById('inpBkw').value = arrayPeriodosGDMTH[indexMostrar-1].bkw.toString();
-        document.getElementById('inpIkw').value = arrayPeriodosGDMTH[indexMostrar-1].ikw.toString();
-        document.getElementById('inpPkw').value = arrayPeriodosGDMTH[indexMostrar-1].pkw.toString();
-        document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].bmxn.toString();
-        document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].imxn.toString();
-        document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].pmxn.toString();
-        document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi.toString();
-        document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].cmxn.toString();
-        document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].dmxn.toString();
-
-        if(indexMostrar < (indexador)){
-            /*El usuario estara navegando en los periodos ya guardados en memoria*/
-            bloquearCampos();
-            /*Y posiblemente quiera editar, por eso se cambia la bandera a true*/
-            banderaEditar = true;
-        }
-        else if(indexMostrar == (indexador)){
+        
+        if(indexMostrar > indexador){
+            limpiarCampos();
             desbloquearCampos();
             banderaEditar = false;
         }
+        else{
+            document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar-1].bkwh.toString();
+            document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar-1].ikwh.toString();
+            document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar-1].pkwh.toString();
+            document.getElementById('inpBkw').value = arrayPeriodosGDMTH[indexMostrar-1].bkw.toString();
+            document.getElementById('inpIkw').value = arrayPeriodosGDMTH[indexMostrar-1].ikw.toString();
+            document.getElementById('inpPkw').value = arrayPeriodosGDMTH[indexMostrar-1].pkw.toString();
+            document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].bmxn.toString();
+            document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].imxn.toString();
+            document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].pmxn.toString();
+            document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi.toString();
+            document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].cmxn.toString();
+            document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].dmxn.toString();
 
-        logicaBotones();
+            if(indexMostrar < indexador || indexMostrar == indexador){
+                /*El usuario estara navegando en los periodos ya guardados en memoria*/
+                bloquearCampos();
+                /*Y posiblemente quiera editar, por eso se cambia la bandera a true*/
+                banderaEditar = true;
+            }
+            /*else{
+                desbloquearCampos();
+                banderaEditar = false;
+            }*/
+
+            logicaBotones();
+        }
+        
+        console.log('indexMostrar: '+indexMostrar+' indexador: '+indexador);
     });
 }
 
@@ -182,35 +194,65 @@ function logicaBotones(){
     });
 }
 
-function enviarPeriodos(){
-    if(arrayPeriodosGDMTH.length < 12){
-        msjConfirm = 'No se estan enviando los 12 periodos necesarios, se realizara un promedio de los datos faltantes ¿Desea enviar?';
-        if(modalConfirm(msjConfirm) == true){
-            /*
-            -Mandar el array al controlador PHP, pero con un indicativo (bandera), para
-            hacer más facil la identificación si los periodos van incompletos o no
-            -Igual mandar otro indicativo (bandera/char) que indique que la cotización es de
-            GDMTH
-            */
-            alert('Usted a enviado datos al servidor');
-            /*
-            -Se limpian campos
-            -Se vacia array y se procede a otra vista que muestre los resultados de los calculos
-            */ 
+function sendPeriodsToServer(){
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        type: 'POST',
+        url: '/enviarPeriodos',
+        data: {
+            "_token": $("meta[name='csrf-token']").attr('content'),
+            'arrayPeriodosGDMTH': arrayPeriodosGDMTH
+        },
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+        },
+        error: function(e){
+            console.log('Error: '+e.message);
         }
-        else{
-            alert('Ah cancelado el envio de periodos al server');
-        }
-    }
+    });
 }
 
-function modalConfirm(msjConfirm){
-    var confirmacion = confirm(msjConfirm);
-    if(confirmacion == true){
-        return true;
+function validarEnvioDePeriodo(){
+    
+    if(arrayPeriodosGDMTH.length == 0 || arrayPeriodosGDMTH.length == 1){
+        msj = 'Ups! Número de periodos insuficientes para calcular';
+        modalMsj(msj,this.msjConfirm);
+    }
+    else if(arrayPeriodosGDMTH.length < 12){
+        this.msjConfirm = true;
+        msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
+        if(modalMsj(msj,msjConfirm) == true){
+            sendPeriodsToServer();
+            limpiarCampos();
+            this.arrayPeriodosGDMTH = [];
+            console.log(arrayPeriodosGDMTH);
+            /*
+                -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
+                el servidor realiza las operaciones necesarias
+            */
+        }
+    }
+    else if(arrayPeriodosGDMTH.length == 12){
+        sendPeriodsToServer();
+        limpiarCampos();
+        this.arrayPeriodosGDMTH = [];
+        console.log(arrayPeriodosGDMTH);
+        /*
+            -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
+             el servidor realiza las operaciones necesarias
+        */
+    } 
+}
+
+function modalMsj(msj,msjConfirm){
+    if(msjConfirm == true){
+        var confirmacion = confirm(msj);
+
+        return confirmacion ? true : false; 
     }
     else{
-        return false;
+        alert(msj);
     }
 }
 
