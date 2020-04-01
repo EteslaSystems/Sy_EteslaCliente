@@ -195,13 +195,15 @@ function logicaBotones(){
 }
 
 function sendPeriodsToServer(){
+    var municipio = document.getElementById('municipio').value;
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
         url: '/enviarPeriodos',
         data: {
             "_token": $("meta[name='csrf-token']").attr('content'),
-            'arrayPeriodosGDMTH': arrayPeriodosGDMTH
+            'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
+            'municipio': municipio
         },
         dataType: 'json',
         success: function(data){

@@ -67,7 +67,7 @@ class MediaTensionController extends Controller
             	->with('telefono', $request["telefono"])
             	->with('consumo', $request["consumo"]);
         }
-    }
+     }
 
 	public function validarSesion()
 	{
@@ -82,7 +82,9 @@ class MediaTensionController extends Controller
 
 	public function sendPeriodsToServer(Request $request)
 	{
-		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $request->arrayPeriodosGDMTH]);
+		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$arrayCompleto["municipio"] = $request->municipio;
+		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
 
 		return response()->json($x);
 	}

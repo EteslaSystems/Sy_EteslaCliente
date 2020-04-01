@@ -32,7 +32,7 @@
                             <label for="inpCPCliente" class="col-sm-4 col-form-label">C.P.</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="number" id="inpCalleCliente" class="form-control" placeholder="Código Postal">
+                                    <input type="number" id="inpCPCliente" onblur="postalCodeLookup();" class="form-control" placeholder="Código Postal">
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <label for="inpCalleCliente" class="col-sm-4 col-form-label">Calle y no.</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="" id="inpColoniaCliente" name="calle" class="form-control" placeholder="Calle y número">
+                                    <input type="" id="inpCalleCliente" name="calle" class="form-control" placeholder="Calle y número">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,8 @@
                             <label for="inpColoniaCliente" class="col-sm-4 col-form-label">Colonia</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="" id="inpColoniaCliente" name="colonia" class="form-control" placeholder="Colonia">
+                                    <input type="" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" class="form-control" placeholder="Colonia">
+                                    <span style="position: absolute; top: 20px; left: 0px; z-index:25;visibility: hidden;" id="suggestBoxElement"></span></span>
                                 </div>
                             </div>
                         </div>
