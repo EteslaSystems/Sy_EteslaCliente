@@ -8,6 +8,7 @@ Route::post('/registro', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
 Route::get('/olvidoPassword', 'usuarioController@olvidoContrasenia');
 Route::get('/logout', 'usuarioController@cerrarSesion');
+Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 /* --------------------------------------- */
 
 /* --------------- Vendedor --------------- */
