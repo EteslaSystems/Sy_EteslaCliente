@@ -27,11 +27,11 @@
                         <div class="row justify-content-center">
                             <label>¿No cuentas con una cuenta?</label>
                         </div>
-                        <a href="{{ ('/registro') }}" align="center"><p>Registrate</p></a>
+                        <a href="/registro" align="center"><p>Registrate</p></a>
                         <div class="row justify-content-center">
                             <label>¿Olvidaste tu contraseña?</label>
                         </div>
-                        <a href="/forgetPasswd" align="center"><p>Olvide mi contraseña</p></a>
+                        <a href="/olvidoPassword" align="center"><p>Olvide mi contraseña</p></a>
                     </div>
                 </form>
             </section>

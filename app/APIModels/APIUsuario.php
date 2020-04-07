@@ -13,4 +13,9 @@ class APIUsuario extends GuzzleHttpRequest
 	{
 		return $this->post("validar-usuario", $request);
 	}
+
+	public function verificacion($request)
+	{
+		return $this->post("verificar-email", $request);
+	}
 }

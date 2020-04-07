@@ -54,7 +54,7 @@
                     <input type="submit" id="btnRegistrar" value="Registrate" class="btn btn-success btn-lg btn-block btn-register">
                 </div>
                 <div class="row justify-content-center">
-                    <label>¿Ya tienes una cuenta?<a href="/login"> Iniciar sesión</a></label>
+                    <label>¿Ya tienes una cuenta?<a href="/"> Iniciar sesión</a></label>
                 </div>
             </form>
         </div>
