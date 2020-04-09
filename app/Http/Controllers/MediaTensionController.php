@@ -84,6 +84,8 @@ class MediaTensionController extends Controller
 	{
 		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 		$arrayCompleto["municipio"] = $request->municipio;
+		$arrayCompleto["idCliente"] = $request->idCliente;
+		$arrayCompleto["idUsuario"] = session('dataUsuario')->idUsuario;
 		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
 
 		return response()->json($x);
