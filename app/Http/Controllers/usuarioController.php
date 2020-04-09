@@ -102,6 +102,18 @@ class usuarioController extends Controller
 		return view('authentication/forgotPasswd');
 	}
 
+	public function recuperarContrasenia(Request $request)
+	{
+		$contrasenia = $this->usuario->recuperarContra(['json' => $request->all()]);
+
+		if($contrasenia->status != 200)
+		{
+			return redirect('/olvidoPassword')->with('status-fail', $contrasenia->message);
+		} else {
+			return redirect('/')->with('status-success', $contrasenia->message);
+		}
+	}
+
 	public function cerrarSesion()
 	{
 		if (session()->has('dataUsuario')) {

@@ -18,4 +18,9 @@ class APIUsuario extends GuzzleHttpRequest
 	{
 		return $this->post("verificar-email", $request);
 	}
+
+	public function recuperarContra($request)
+	{
+		return $this->post("recuperar-password", $request);
+	}
 }

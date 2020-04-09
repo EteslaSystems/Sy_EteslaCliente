@@ -1,13 +1,14 @@
-@extends('authentication/templateAuth')
-@section('titleAuth')
-    {{'Olvide mi contraseña'}}
-@stop
-@section('bodyLog')
+<?php $__env->startSection('titleAuth'); ?>
+    <?php echo e('Olvide mi contraseña'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('bodyLog'); ?>
 <br>
 <div class="container">
     <div class="row justify-content-md-center">
         <form method="post" class="form-container">
-            {{csrf_field()}}
+            <?php echo e(csrf_field()); ?>
+
             <img src="img/panel-etesla.jpg" class="cls rounded-circle mx-auto d-block" width="120" height="120">
             <div class="row justify-content-md-center">
                 <small><strong>ETESLA PANELES SOLARES</strong>&#174;</small>
@@ -34,4 +35,5 @@
         </form>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('authentication/templateAuth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/authentication/forgotPasswd.blade.php ENDPATH**/ ?>
