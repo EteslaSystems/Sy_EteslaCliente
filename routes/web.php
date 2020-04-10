@@ -7,6 +7,7 @@ Route::get('/registro', 'usuarioController@mostrarRegistrarUsuario');
 Route::post('/registro', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
 Route::get('/olvidoPassword', 'usuarioController@olvidoContrasenia');
+Route::post('/olvidoPassword', 'usuarioController@recuperarContrasenia');
 Route::get('/logout', 'usuarioController@cerrarSesion');
 Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 /* --------------------------------------- */

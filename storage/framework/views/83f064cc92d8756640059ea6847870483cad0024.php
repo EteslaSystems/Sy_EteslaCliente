@@ -32,7 +32,7 @@
                         <div class="row justify-content-center">
                             <label>¿Olvidaste tu contraseña?</label>
                         </div>
-                        <a href="/olvidoPassword" align="center"><p>Olvide mi contraseña</p></a>
+                        <a href="/olvidoPassword" align="center"><p>Recupérala</p></a>
                     </div>
                 </form>
             </section>

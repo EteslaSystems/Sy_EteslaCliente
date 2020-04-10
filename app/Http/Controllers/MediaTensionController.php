@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class MediaTensionController extends Controller
 {
-    protected $paneles;
-    protected $inversores;
-    protected $vendedor;
+	protected $paneles;
+	protected $inversores;
+	protected $vendedor;
 	protected $clientes;
 	protected $cotizacion;
 
@@ -46,28 +46,28 @@ class MediaTensionController extends Controller
 		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
 	}
 
-    public function create(Request $request)
-    {
-        $request["idUsuario"] = session('dataUsuario')->idUsuario;
-        $request["consumo"] = 0;
-        $request["calle"] = $request->calle . '-' . $request->colonia;
+	public function create(Request $request)
+	{
+		$request["idUsuario"] = session('dataUsuario')->idUsuario;
+		$request["consumo"] = 0;
+		$request["calle"] = $request->calle . '-' . $request->colonia;
 
-        $vCliente = $this->clientes->insertarCliente(
-        	['json' => $request->all()]
-        );
+		$vCliente = $this->clientes->insertarCliente(
+			['json' => $request->all()]
+		);
 
-        if($vCliente->status != 200) {
-            return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
-        } else {
-            return redirect('/mediaT')->with('status-success', $vCliente->message)
-            	->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
-            	->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
-            	->with('celular', $request["celular"])
-            	->with('correo', $request["email"])
-            	->with('telefono', $request["telefono"])
-            	->with('consumo', $request["consumo"]);
-        }
-     }
+		if($vCliente->status != 200) {
+			return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
+		} else {
+			return redirect('/mediaT')->with('status-success', $vCliente->message)
+			->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
+			->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
+			->with('celular', $request["celular"])
+			->with('correo', $request["email"])
+			->with('telefono', $request["telefono"])
+			->with('consumo', $request["consumo"]);
+		}
+	}
 
 	public function validarSesion()
 	{
@@ -83,9 +83,10 @@ class MediaTensionController extends Controller
 	public function sendPeriodsToServer(Request $request)
 	{
 		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
-		$arrayCompleto["municipio"] = $request->municipio;
 		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["idUsuario"] = session('dataUsuario')->idUsuario;
+		$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
+		$arrayCompleto["municipio"] = $request->municipio;
 		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
 
 		return response()->json($x);
