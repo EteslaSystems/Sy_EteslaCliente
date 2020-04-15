@@ -49,6 +49,12 @@ Route::get('/engineer', 'ingenieroController@index');
 Route::get('/levantamiento', 'ingenieroController@levantamiento');
 Route::get('/instalacion', 'ingenieroController@instalacion');
 Route::get('/configuracion', 'ingenieroController@configuracion');
+
+Route::get('/otros-materiales', 'OtrosMaterialesController@index');
+Route::post('/agregar-categoria', 'OtrosMaterialesController@create');
+Route::get('/eliminar-categoria/{idCategoria}', 'OtrosMaterialesController@destroy');
+Route::get('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@edit');
+Route::put('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@update');
 /* ----------------------------------------- */
 
 /* --------------- Operaciones --------------- */

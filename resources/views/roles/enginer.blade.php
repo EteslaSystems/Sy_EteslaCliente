@@ -13,7 +13,11 @@
     <a href="#" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/bubbles/40/000000/ticket.png"> Tickets</a>
 @stop
 @section('content')
-    <br>
-    @yield('enginerContent')
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+		    <br>
+		    @yield('enginerContent')
+		</div>
+	</div>
 @endsection
 

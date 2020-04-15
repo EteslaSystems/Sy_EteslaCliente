@@ -14,8 +14,12 @@
     <a href="#" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/bubbles/40/000000/ticket.png"> Tickets</a>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <br>
-    <?php echo $__env->yieldContent('enginerContent'); ?>
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+		    <br>
+		    <?php echo $__env->yieldContent('enginerContent'); ?>
+		</div>
+	</div>
 <?php $__env->stopSection(); ?>
 
 

@@ -1,6 +1,6 @@
 @extends('roles/admin')
     @section('contenidoAdmin')
-        @include('roles.admin.forms.form-new-investor')  
+        @include('roles.admin.forms.form-new-investor')
 
         <hr>
 

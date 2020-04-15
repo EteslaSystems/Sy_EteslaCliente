@@ -55,7 +55,7 @@ class InversoresController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $data["id"] = $id;
         $data["nombrematerial"] = $request->get('i_nombrematerial');
         $data["marca"] = $request->get('i_marca');
@@ -81,7 +81,7 @@ class InversoresController extends Controller
 
     public function create(Request $request)
     {
-        
+
         $data["nombrematerial"] = $request->get('i_nombrematerial');
         $data["marca"] = $request->get('i_marca');
         $data["precio"] = $request->get('i_precio');
