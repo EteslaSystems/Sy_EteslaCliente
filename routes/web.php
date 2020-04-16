@@ -55,6 +55,11 @@ Route::post('/agregar-categoria', 'OtrosMaterialesController@create');
 Route::get('/eliminar-categoria/{idCategoria}', 'OtrosMaterialesController@destroy');
 Route::get('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@edit');
 Route::put('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@update');
+
+Route::post('/agregar-materiales', 'OtrosMaterialesController@createMateriales');
+Route::get('/eliminar-materiales/{idMateriales}', 'OtrosMaterialesController@destroyMateriales');
+Route::get('/editar-materiales/{idMateriales}', 'OtrosMaterialesController@editMateriales');
+Route::put('/editar-materiales/{idMateriales}', 'OtrosMaterialesController@updateMateriales');
 /* ----------------------------------------- */
 
 /* --------------- Operaciones --------------- */
