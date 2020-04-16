@@ -38,6 +38,10 @@
             </table>
         </div>
 
+        <hr>
+
+        <?php echo $__env->make('roles.enginer.forms.form-new-materials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
         <br>
 
        <div class="row">
@@ -47,8 +51,8 @@
 	        			<option selected disabled>Selecciona una opción:</option>
 	        			<option value="0">TODOS</option>
 
-	        			<?php $__currentLoopData = $vCategorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorias): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-	        					<option value="<?php echo e($categorias->idCategOtrosMateriales); ?>"><?php echo e($categorias->vNombreCategoOtrosMats); ?></option>
+	        			<?php $__currentLoopData = $vCategorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+	        					<option value="<?php echo e($details->idCategOtrosMateriales); ?>"><?php echo e($details->vNombreCategoOtrosMats); ?></option>
 	        			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	        		</select>
 
@@ -72,21 +76,21 @@
                 </thead>
 
                 <tbody id="table-results">
-                	<?php $__currentLoopData = $vMateriales; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $materiales): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                		<tr id="<?php echo e($materiales->idCategOtrosMateriales); ?>">
-                            <td><?php echo e($materiales->vPartida); ?></td>
-                            <td><?php echo e($materiales->vNombreCategoOtrosMats); ?></td>
-                            <td><?php echo e($materiales->vUnidad); ?></td>
+                	<?php $__currentLoopData = $vMateriales; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                		<tr id="<?php echo e($details->idCategOtrosMateriales); ?>">
+                            <td><?php echo e($details->vPartida); ?></td>
+                            <td><?php echo e($details->vNombreCategoOtrosMats); ?></td>
+                            <td><?php echo e($details->vUnidad); ?></td>
                             <td>
-                            	<b>$ <?php echo e($materiales->fPrecioUnitario); ?></b>
+                            	<b>$ <?php echo e($details->fPrecioUnitario); ?></b>
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-warning" title="Editar">
+                                <a href="<?php echo e(url('editar-materiales', [$details->idOtrosMateriales])); ?>" class="btn btn-sm btn-warning" title="Editar">
                                     <img src="https://img.icons8.com/material-outlined/18/FFFFFF/multi-edit.png">
                                 </a>
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-danger" title="Eliminar">
+                                <a href="<?php echo e(url('eliminar-materiales', [$details->idOtrosMateriales])); ?>" class="btn btn-sm btn-danger" title="Eliminar">
                                     <img src="https://img.icons8.com/material-outlined/18/FFFFFF/delete-trash.png">
                                 </a>
                             </td>

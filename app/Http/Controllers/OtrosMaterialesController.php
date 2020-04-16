@@ -88,4 +88,76 @@ class OtrosMaterialesController extends Controller
             return redirect('/otros-materiales')->with('status-success', $vCategorias->message);
         }
     }
+
+    public function destroyMateriales($id)
+    {
+        $data["id"] = $id;
+
+        $vMateriales = $this->materiales->delete([
+            'json' => $data
+        ]);
+
+        if($vMateriales->status != 200) {
+            return redirect('/otros-materiales')->with('status-fail', $vMateriales->message);
+        } else {
+            return redirect('/otros-materiales')->with('status-success', $vMateriales->message);
+        }
+    }
+
+    public function editMateriales($id)
+    {
+        $data["id"] = $id;
+
+        $vMateriales = $this->materiales->search([
+            'json' => $data
+        ]);
+
+        if($vMateriales->status != 200) {
+            return redirect('/otros-materiales')->with('status-fail', $vMateriales->message);
+        } else {
+        	$vCategorias = $this->categorias->view();
+            $materiales = $vMateriales->message;
+
+            return view('roles/enginer/forms/form-edit-materials', compact('vCategorias', 'materiales'));
+        }
+    }
+
+    public function updateMateriales(Request $request, $id)
+    {
+
+        $data["id"] = $id;
+        $data["partida"] = $request->get('m_nombrematerialedit');
+        $data["id_CategOtrosMats"] = $request->get('m_agregarcategoriaedit');
+        $data["unidad"] = $request->get('m_unidadmaterialedit');
+        $data["precioUnitario"] = $request->get('m_preciounitarioedit');
+
+        $vMateriales = $this->materiales->edit([
+            'json' => $data
+        ]);
+
+        if($vMateriales->status != 200){
+            return redirect('/otros-materiales')->with('status-fail', $vMateriales->message);
+        } else {
+            return redirect('/otros-materiales')->with('status-success', $vMateriales->message);
+        }
+    }
+
+    public function createMateriales(Request $request)
+    {
+
+        $data["partida"] = $request->get('m_nombrematerial');
+        $data["id_CategOtrosMats"] = $request->get('m_agregarcategoria');
+        $data["unidad"] = $request->get('m_unidadmaterial');
+        $data["precioUnitario"] = $request->get('m_preciounitario');
+
+        $vMateriales = $this->materiales->add([
+            'json' => $data
+        ]);
+
+        if($vMateriales->status != 200){
+            return redirect('/otros-materiales')->with('status-fail', $vMateriales->message);
+        } else {
+            return redirect('/otros-materiales')->with('status-success', $vMateriales->message);
+        }
+    }
 }

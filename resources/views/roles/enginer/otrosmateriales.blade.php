@@ -39,6 +39,10 @@
             </table>
         </div>
 
+        <hr>
+
+        @include('roles.enginer.forms.form-new-materials')
+
         <br>
 
        <div class="row">
@@ -48,8 +52,8 @@
 	        			<option selected disabled>Selecciona una opción:</option>
 	        			<option value="0">TODOS</option>
 
-	        			@foreach($vCategorias as $categorias)
-	        					<option value="{{ $categorias->idCategOtrosMateriales }}">{{ $categorias->vNombreCategoOtrosMats }}</option>
+	        			@foreach($vCategorias as $details)
+	        					<option value="{{ $details->idCategOtrosMateriales }}">{{ $details->vNombreCategoOtrosMats }}</option>
 	        			@endforeach
 	        		</select>
 
@@ -73,21 +77,21 @@
                 </thead>
 
                 <tbody id="table-results">
-                	@foreach($vMateriales as $materiales)
-                		<tr id="{{ $materiales->idCategOtrosMateriales }}">
-                            <td>{{ $materiales->vPartida }}</td>
-                            <td>{{ $materiales->vNombreCategoOtrosMats }}</td>
-                            <td>{{ $materiales->vUnidad }}</td>
+                	@foreach($vMateriales as $details)
+                		<tr id="{{ $details->idCategOtrosMateriales }}">
+                            <td>{{ $details->vPartida }}</td>
+                            <td>{{ $details->vNombreCategoOtrosMats }}</td>
+                            <td>{{ $details->vUnidad }}</td>
                             <td>
-                            	<b>$ {{ $materiales->fPrecioUnitario }}</b>
+                            	<b>$ {{ $details->fPrecioUnitario }}</b>
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-warning" title="Editar">
+                                <a href="{{ url('editar-materiales', [$details->idOtrosMateriales]) }}" class="btn btn-sm btn-warning" title="Editar">
                                     <img src="https://img.icons8.com/material-outlined/18/FFFFFF/multi-edit.png">
                                 </a>
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-danger" title="Eliminar">
+                                <a href="{{ url('eliminar-materiales', [$details->idOtrosMateriales]) }}" class="btn btn-sm btn-danger" title="Eliminar">
                                     <img src="https://img.icons8.com/material-outlined/18/FFFFFF/delete-trash.png">
                                 </a>
                             </td>
