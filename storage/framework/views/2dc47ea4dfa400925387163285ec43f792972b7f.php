@@ -157,9 +157,9 @@
 
                                     <div class="col-sm-6 col-md-4">
                                         <div class="form-group">
-                                            <label for="postalCode">Código postal</label>
+                                            <label for="inpCPCliente">Código postal</label>
         
-                                            <input type="number" class="form-control border border-success" id="postalCode" placeholder="Ingrese un valor.">
+                                            <input type="number" class="form-control border border-success" id="inpCPCliente" onblur="postalCodeLookup();" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
                                 </div>
@@ -307,9 +307,10 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="suburbClient">Colonia</label>
+                                        <label for="inpColoniaCliente">Colonia</label>
     
-                                        <input type="text" class="form-control" id="suburbClient" name="colonia" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>">
+                                        <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>">
+                                        <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
                                         <?php $__errorArgs = ['colonia'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -326,9 +327,9 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="townClient">Municipio / Localidad</label>
+                                        <label for="inpMunicCliente">Municipio / Localidad</label>
     
-                                        <input type="text" class="form-control" id="townClient" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>">
+                                        <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>">
 
                                         <?php $__errorArgs = ['municipio'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -345,9 +346,9 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="stateClient">Estado</label>
+                                        <label for="inpEstadoCliente">Estado</label>
     
-                                        <input type="text" class="form-control" id="stateClient" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>">
+                                        <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>">
 
                                         <?php $__errorArgs = ['estado'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
