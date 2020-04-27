@@ -1,5 +1,4 @@
 <?php $__env->startSection('content'); ?>
-    <br>
 
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
@@ -377,10 +376,11 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
     <br>
+
     <?php echo $__env->yieldContent('cotizadores'); ?>
 
     <?php $__env->startSection('scripts'); ?>
-        <?php if(session('modal-fail')): ?> 
+        <?php if(session('modal-fail')): ?>
             <script type="text/javascript">
                 $("#modal-agregarcliente").modal("show");
             </script>
@@ -398,7 +398,7 @@ unset($__errorArgs, $__bag); ?>
                         event.preventDefault();
                     }
                 }
- 
+
                 if (event.keyCode < 48 || event.keyCode > 57) {
                     if (event.keyCode < 96 || event.keyCode > 105) {
                         if(event.keyCode != 46 && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
@@ -483,7 +483,7 @@ unset($__errorArgs, $__bag); ?>
                     }
                 } else {
                     if(key == 8 || key == 13 || key == 0) {
-                        return true;              
+                        return true;
                     } else if(key == 46) {
                         if(filter(tempValue)=== false) {
                             return false;
