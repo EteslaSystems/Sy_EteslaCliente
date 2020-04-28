@@ -6,6 +6,7 @@ Route::post('/', 'usuarioController@validarUsuario');
 Route::get('/registro', 'usuarioController@mostrarRegistrarUsuario');
 Route::post('/registro', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
+Route::post('/perfil', 'usuarioController@editarPerfil');
 Route::get('/olvidoPassword', 'usuarioController@olvidoContrasenia');
 Route::post('/olvidoPassword', 'usuarioController@recuperarContrasenia');
 Route::get('/logout', 'usuarioController@cerrarSesion');
@@ -22,6 +23,7 @@ Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::get('/mediaT', 'MediaTensionController@index');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
+Route::get('/resultados', 'ResultadosController@index');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */

@@ -9,34 +9,49 @@ class administradorController extends Controller
 {
 	public function index()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/admin');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+		}
+		return view('roles/admin');
 	}
 
 	public function paneles()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/admin/paneles');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+		}
+		return view('roles/admin/paneles');
+		
 	}
 
 	public function inversores()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/admin/inversores');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+		}
+		return view('roles/admin/inversores');
+	}
+
+	public function validarSesion()
+	{
+		if (session()->has('dataUsuario')) {
+			$rol = session('dataUsuario')->rol;
+			$tipo = session('dataUsuario')->tipoUsuario;
+			
+			if ($rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+				return 2;
+			}
+			return 1;
+		}
+		return 0;
 	}
 }

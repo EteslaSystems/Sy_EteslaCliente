@@ -1,5 +1,7 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
+    @include('roles.seller.cotizador.panel-cotizador')
+
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -10,7 +12,7 @@
                         <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
                     </p>
                 </div>
-                
+
                 <div class="col-6 fx-1">
                     <div class="btn-group mn-2">
                         <button type="button" class="btn btn-primary btn-sm" onclick="GDMTO()">GDMTO</button>
@@ -442,7 +444,7 @@
                                     @foreach($vInversores as $details)
                                         <option value="{{ $details->idInversor }}">{{ $details->vNombreMaterialFot }}</option>
                                     @endforeach
-                                </select>  
+                                </select>
                             </div>
                         </div>
                     </div>
