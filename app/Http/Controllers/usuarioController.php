@@ -122,7 +122,7 @@ class usuarioController extends Controller
 	public function editarPerfil(Request $request)
 	{
 		$request["idPersona"] = session('dataUsuario')->idPersona;
-		$editarUsuario = $this->usuario->insertar(['json' => $request->all()]);
+		$editarUsuario = $this->usuario->editarUsuario(['json' => $request->all()]);
 
 		if ($editarUsuario->status != 200) {
 			return redirect('perfil')->with('status-fail', $editarUsuario->message);
