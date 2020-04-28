@@ -26,6 +26,9 @@
                             </button>
                         </div><br><br><br>
                         <div class="col-9 text-center">
+                            <form method="post">
+                            <?php echo e(csrf_field()); ?>
+
                             <input type="submit" id="btn-save" value="Guardar información" class="btn btn-success btn-block" style="display: none;">
                         </div>
                     </div>
@@ -99,10 +102,15 @@
                                         </p><hr>
                                         <p class="card-text text-right">
                                             <small class="text-muted">
-                                                Última vez editado: <strong>&nbsp;Nunca</strong>
-                                                <?php if($usuario->updated_at != null): ?>
-                                                    Última vez editado: <strong>&nbsp;<?php echo e($usuario->updated_at); ?></strong>
-                                                <?php endif; ?>
+                                                Última vez editado: <strong>&nbsp;
+                                                    <?php if($usuario->updated_at != null): ?>
+                                                        <?php echo e($usuario->updated_at); ?>
+
+                                                    <?php else: ?>
+                                                        Nunca
+                                                    <?php endif; ?>
+                                                </strong>
+                                                
                                             </small>
                                         </p>
                                     </div>
@@ -117,36 +125,34 @@
                                     <p class="card-text">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form>
-                                                    <?php echo e(csrf_field()); ?>
 
                                                     <?php if(isset($usuario)): ?>
                                                         <div class="form-group row">
-                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Nombre(s)</label>
+                                                            <label for="nombrePersona" class="col-sm-4 col-form-label">Nombre(s)</label>
                                                             
                                                             <div class="col-sm-8">
-                                                                <input type="text" name="nombrePersona" class="form-control" id="staticEmail" value="<?php echo e($usuario->vNombrePersona); ?>">
+                                                                <input type="text" name="nombrePersona" class="form-control" id="nombrePersona" value="<?php echo e($usuario->vNombrePersona); ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row">
-                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Apellido Paterno</label>
+                                                            <label for="primerApellido" class="col-sm-4 col-form-label">Apellido Paterno</label>
                                                             
                                                             <div class="col-sm-8">
-                                                                <input type="text" name="primerApellido" class="form-control" id="staticEmail" value="<?php echo e($usuario->vPrimerApellido); ?>">
+                                                                <input type="text" name="primerApellido" class="form-control" id="primerApellido" value="<?php echo e($usuario->vPrimerApellido); ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row">
-                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Apellido Materno</label>
+                                                            <label for="segundoApellido" class="col-sm-4 col-form-label">Apellido Materno</label>
                                                             
                                                             <div class="col-sm-8">
-                                                                <input type="text" name="segundoApellido" class="form-control" id="staticEmail" value="<?php echo e($usuario->vSegundoApellido); ?>">
+                                                                <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" value="<?php echo e($usuario->vSegundoApellido); ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group row">
-                                                            <label for="staticEmail" class="col-sm-4 col-form-label">Sucursal actual</label>
+                                                            <label for="sucursal" class="col-sm-4 col-form-label">Sucursal actual</label>
                                                             
                                                             <div class="col-sm-8">
                                                                 <select class="form-control" name="oficina">
