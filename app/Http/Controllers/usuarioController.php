@@ -20,7 +20,21 @@ class usuarioController extends Controller
 	public function index()
 	{
 		if (session()->has('dataUsuario')) {
-			return redirect('index');
+			if ($this->redireccionarRol() == 1) {
+				return redirect('admin');
+			}
+			if ($this->redireccionarRol() == 2) {
+				return redirect('operations');
+			}
+			if ($this->redireccionarRol() == 3) {
+				return view('index');//Falta la vista de este tipo de usuario (Gerente de operaciones).
+			}
+			if ($this->redireccionarRol() == 4) {
+				return redirect('engineer');
+			}
+			if ($this->redireccionarRol() == 5) {
+				return redirect('vendedor');
+			}
 		}
 		return view('authentication/login');
 	}
@@ -28,15 +42,29 @@ class usuarioController extends Controller
 	public function paginaPrincipal()
 	{
 		if (session()->has('dataUsuario')) {
-			return view('index');
+			if ($this->redireccionarRol() == 1) {
+				return redirect('admin');
+			}
+			if ($this->redireccionarRol() == 2) {
+				return redirect('operations');
+			}
+			if ($this->redireccionarRol() == 3) {
+				return view('index');//Falta la vista de este tipo de usuario (Gerente de operaciones).
+				}
+			if ($this->redireccionarRol() == 4) {
+				return redirect('engineer');
+			}
+			if ($this->redireccionarRol() == 5) {
+				return redirect('vendedor');
+			}
 		}
-		return redirect('/vendedor');
+		return view('authentication/login');
 	}
 
 	public function mostrarRegistrarUsuario()
 	{
 		if (session()->has('dataUsuario')) {
-			return redirect('index');
+			$this->redireccionarRol(session('dataUsuario')->rol);
 		}
 		return view('authentication/register');
 	}
@@ -54,12 +82,10 @@ class usuarioController extends Controller
 		$registrarUsuario = $this->usuario->insertar(['json' => $request->all()]);
 
 		if ($registrarUsuario->status == 200) {
-			\Session::flash('message', $registrarUsuario->message);
-			return redirect('/');
+			return redirect('/')->with('status-success', $registrarUsuario->message);
 		}
 		else {
-			\Session::flash('message', $registrarUsuario->message);
-			return redirect('register');
+			return redirect('register')->with('status-fail', $registrarUsuario->message);
 		}
 	}
 
@@ -67,31 +93,47 @@ class usuarioController extends Controller
 	{
 		$validarUsuario = $this->usuario->validar(['json' => $request->all()]);
 
-		if($validarUsuario->status == 500)
-		{
-			\Session::flash('message', $validarUsuario->message);
-			return redirect('/');
+		if($validarUsuario->status == 500){
+			return redirect('/')->with('status-fail', $validarUsuario->message);
 		}
 
-		if (verificacionController::validarToken($validarUsuario->message) == false)
-		{
-			\Session::flash('message', 'Caducó su sesión.');
-			return redirect('/');
+		if (verificacionController::validarToken($validarUsuario->message) == false){
+			return redirect('/')->with('status-fail', 'Caducó su sesión.');
 		} else {
 			$data = verificacionController::validarToken($validarUsuario->message);
 			session(['dataUsuario' => $data]);
 		}
 
-		\Session::flash('message', 'Credenciales correctas.');
-		return redirect('index');
+		return redirect('index')->with('status-success', 'Credenciales correctas.');
 	}
 
 	public function visualizarPerfil()
 	{
 		if (session()->has('dataUsuario')) {
-			return view('template/profileUser');
+			$dataUsuario["id"] = session('dataUsuario')->idPersona;
+			$usuario = $this->usuario->consultarUsuario(['json' => $dataUsuario]);
+			$usuario = $usuario->message[0];
+
+			return view('template/profileUser', compact('usuario', 'usuario'));
 		}
-		return redirect('/');
+		return redirect('/')->with('status-fail', 'Debe iniciar sesión antes.');
+	}
+
+	public function editarPerfil(Request $request)
+	{
+		$request["idPersona"] = session('dataUsuario')->idPersona;
+		$editarUsuario = $this->usuario->insertar(['json' => $request->all()]);
+
+		if ($editarUsuario->status != 200) {
+			return redirect('perfil')->with('status-fail', $editarUsuario->message);
+		}
+		else {
+			$data = verificacionController::validarToken($editarUsuario->message);
+			session()->forget('dataUsuario');
+			session(['dataUsuario' => $data]);
+
+			return redirect('perfil')->with('status-success', 'Se modificaron correctamente sus datos.');
+		}
 	}
 
 	public function olvidoContrasenia()
@@ -119,8 +161,7 @@ class usuarioController extends Controller
 		if (session()->has('dataUsuario')) {
 			session()->forget('dataUsuario');
 		}
-		\Session::flash('message', 'Salió de la sesión.');
-		return redirect('/');
+		return redirect('/')->with('status-success', 'Salió de su sesión.');
 	}
 
 	public function verificarEmail($token)
@@ -135,17 +176,37 @@ class usuarioController extends Controller
 				$verificacion = $this->usuario->verificacion(['json' => $decode]);
 
 				if ($verificacion->status == 200) {
-						//Notificación indicando que se verificó correctamente el correo.
+					return redirect('/')->with('status-success', 'Se verificó correctamente su correo.');
 				} else {
-						//Notificación indicando que ocurrió un error al verificar el correo en la API.
+					return redirect('/')->with('status-fail', 'Ocurrió un error al verificar su correo.');
 				}
 			} catch (\Exception $e) {
-				//Notificación indicando que el token expiró u ocurrió un error al decodificarlo.
-				return redirect('/');
+				return redirect('/')->with('status-fail', 'El correo de verificación ha expirado.');
 			}
 		} else {
-			//Notificación indicando que el token está vácio o no se recibió ningún token.
+			return redirect('/')->with('status-fail', 'Correo de verificación no válido.');
 		}
-		return redirect('/');
+	}
+
+	public function redireccionarRol()
+	{
+		$rol = session('dataUsuario')->rol;
+
+		if ($rol == 0 || $rol == 1) {
+			return 1;
+		}
+		if ($rol == 2) {
+			return 2;
+		}
+		if ($rol == 3) {
+			return 3;
+		}
+		if ($rol == 4) {
+			return 4;
+		}
+		if ($rol == 5) {
+			return 5;
+		}
+		return 6;
 	}
 }

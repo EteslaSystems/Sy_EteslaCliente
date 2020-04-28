@@ -1,5 +1,5 @@
     <?php $__env->startSection('contenidoAdmin'); ?>
-        <?php echo $__env->make('roles.admin.forms.form-new-investor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>  
+        <?php echo $__env->make('roles.admin.forms.form-new-investor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <hr>
 

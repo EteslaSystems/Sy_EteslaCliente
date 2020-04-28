@@ -18,12 +18,10 @@ class vendedorController extends Controller
 	public function index()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
 		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
+			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
 		}
 		return view('roles.seller.inicioS');
 	}
@@ -31,12 +29,10 @@ class vendedorController extends Controller
 	public function misClientes()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
 		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
+			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
 		}
 
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
@@ -52,12 +48,10 @@ class vendedorController extends Controller
 	public function todosClientes()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
 		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
+			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
 		}
 
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
@@ -73,7 +67,10 @@ class vendedorController extends Controller
 	public function validarSesion()
 	{
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+			$rol = session('dataUsuario')->rol;
+			$tipo = session('dataUsuario')->tipoUsuario;
+			
+			if ($rol == 5 && $tipo == 'Vend' || $rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
 				return 2;
 			}
 			return 1;
