@@ -1,4 +1,4 @@
-@extends('template/body')
+@extends('roles/seller')
 @section('content')
     @section('agregarClientes')
     @show

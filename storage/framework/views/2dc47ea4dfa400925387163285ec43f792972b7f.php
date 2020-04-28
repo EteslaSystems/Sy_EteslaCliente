@@ -1,5 +1,4 @@
 <?php $__env->startSection('content'); ?>
-
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
             <div class="input-group">
@@ -376,7 +375,6 @@ unset($__errorArgs, $__bag); ?>
     </div>
 
     <br>
-
     <?php echo $__env->yieldContent('cotizadores'); ?>
 
     <?php $__env->startSection('scripts'); ?>
