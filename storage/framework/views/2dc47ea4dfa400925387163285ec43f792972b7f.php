@@ -248,7 +248,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="phoneClient">Teléfono</label>
     
-                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="<?php echo e(old('telefono')); ?>">
+                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="<?php echo e(old('telefono')); ?>" onkeypress="return filterFloat(event,this);">
 
                                         <?php $__errorArgs = ['telefono'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -269,7 +269,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="cellphoneClient">Teléfono celular</label>
 
-                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="<?php echo e(old('celular')); ?>">
+                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="<?php echo e(old('celular')); ?>" onkeypress="return filterFloat(event,this);">
 
                                         <?php $__errorArgs = ['celular'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -307,7 +307,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="inpColoniaCliente">Colonia</label>
     
-                                        <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>">
+                                        <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>" disabled="true">
                                         <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
                                         <?php $__errorArgs = ['colonia'];
@@ -327,7 +327,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="inpMunicCliente">Municipio / Localidad</label>
     
-                                        <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>">
+                                        <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>" disabled="true">
 
                                         <?php $__errorArgs = ['municipio'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -346,7 +346,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="inpEstadoCliente">Estado</label>
     
-                                        <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>">
+                                        <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>" disabled="true">
 
                                         <?php $__errorArgs = ['estado'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

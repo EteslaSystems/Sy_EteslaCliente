@@ -26,7 +26,7 @@ class administradorController extends Controller
 		if ($this->validarSesion() == 1) {
 			return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
 		}
-		return view('roles/admin/paneles');
+		return redirect('paneles');
 		
 	}
 
@@ -38,7 +38,7 @@ class administradorController extends Controller
 		if ($this->validarSesion() == 1) {
 			return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
 		}
-		return view('roles/admin/inversores');
+		return redirect('inversores');
 	}
 
 	public function validarSesion()
