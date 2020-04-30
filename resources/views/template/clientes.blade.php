@@ -27,10 +27,14 @@
                             <td>{{$cliente->vCelular}}</td>
                             <td>{{$cliente->vEmail}}</td>
                             <td>
-                                <button id="btnEdit" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>
+                                <a class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#modal-editarcliente">
+                                    <img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png">
+                                </a>
                             </td>
                             <td>
-                                <button id="btnExc" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>
+                                <a href="{{ url('eliminar-cliente', [$cliente->idPersona]) }}" class="btn btn-sm btn-danger" title="Eliminar">
+                                    <img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png">
+                                </a>
                             </td>
                         </tr>
                         @php($numeroLista = $numeroLista + 1)
