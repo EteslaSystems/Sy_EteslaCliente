@@ -24,12 +24,47 @@ class clienteController extends Controller
         $registrarCliente = $this->cliente->insertarCliente(['json' => $request->all()]);
 
         if ($registrarCliente->status == 200) {
-            \Session::flash('message', $registrarCliente->message);
-            return redirect('registrarCliente');
+            return redirect('registrarCliente')->with('status-success', $registrarCliente->message);
         }
         else {
-            \Session::flash('message', $registrarCliente->message);
-            return redirect('registrarCliente');
+            return redirect('registrarCliente')->with('status-fail', $registrarCliente->message);
+        }
+    }
+
+    public function eliminarCliente($id)
+    {
+        $data["id"] = $id;
+
+        $vClientes = $this->cliente->eliminarCliente(['json' => $data]);
+
+        if($vClientes->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $vClientes->message);
+        } else {
+            return redirect('registrarCliente')->with('status-success', $vClientes->message);
+        }
+    }
+
+    public function actualizarCliente(Request $request, $id)
+    {
+        
+        $data["id"] = $id;
+        $data["nombrematerial"] = $request->get('p_nombrematerial');
+        $data["marca"] = $request->get('p_marca');
+        $data["precio"] = $request->get('p_precio');
+        $data["potencia"] = $request->get('p_potencia');
+        $data["isc"] = $request->get('p_isc');
+        $data["moneda"] = $request->get('p_tipomoneda');
+        $data["voc"] = $request->get('p_voc');
+        $data["vmp"] = $request->get('p_vmp');
+
+        $vPaneles = $this->paneles->edit([
+            'json' => $data
+        ]);
+
+        if($vPaneles->status != 200){
+            return redirect('/paneles')->with('status-fail', $vPaneles->message);
+        } else {
+            return redirect('/paneles')->with('status-success', $vPaneles->message);
         }
     }
 

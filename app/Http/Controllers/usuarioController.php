@@ -76,16 +76,13 @@ class usuarioController extends Controller
 		if ($request->rol == 4) { $request["tipoUsuario"] = 'Ing'; }
 		if ($request->rol == 5) { $request["tipoUsuario"] = 'Vend'; }
 
-		$request["telefono"] = 'N/A';
-		$request["celular"] = 'N/A';
-
 		$registrarUsuario = $this->usuario->insertar(['json' => $request->all()]);
 
 		if ($registrarUsuario->status == 200) {
-			return redirect('/')->with('status-success', $registrarUsuario->message);
+			return redirect('/')->with('status-success', 'Verifique su dirección de correo electrónico para terminar el registro.');
 		}
 		else {
-			return redirect('register')->with('status-fail', $registrarUsuario->message);
+			return redirect('registro')->with('status-fail', $registrarUsuario->message);
 		}
 	}
 
