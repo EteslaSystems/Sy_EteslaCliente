@@ -40,7 +40,7 @@
                             <label for="inpMunicCliente" class="col-sm-7 col-form-label">Municipio/Localidad</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="text" id="inpMunicCliente" name="municipio" class="form-control" placeholder="Municipio/Localidad/Ciudad" tabindex="10" disabled="true">
+                                    <input type="text" id="inpMunicCliente" name="municipio" class="form-control" placeholder="Municipio/Localidad/Ciudad" tabindex="10" readonly>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <label for="inpEstadoCliente" class="col-sm-4 col-form-label">Estado</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="" id="inpEstadoCliente" name="estado" class="form-control" placeholder="Estado" tabindex="11" disabled="true">
+                                    <input type="" id="inpEstadoCliente" name="estado" class="form-control" placeholder="Estado" tabindex="11" readonly>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             <label for="inpColoniaCliente" class="col-sm-4 col-form-label">Colonia</label>
                             <div class="col-sm-10">
                                 <div class="input-group mb-2">
-                                    <input type="" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" class="form-control" placeholder="Colonia" tabindex="9" disabled="true">
+                                    <input type="" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" class="form-control" placeholder="Colonia" tabindex="9" readonly>
                                     <span style="position: absolute; top: 20px; left: 0px; z-index:25;visibility: hidden;" id="suggestBoxElement"></span></span>
                                 </div>
                             </div>

@@ -29,7 +29,8 @@ Route::get('/resultados', 'ResultadosController@index');
 /* --------------- Cliente --------------- */
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
-Route::put('/editar-cliente/{idCliente}', 'clienteController@actualizarCliente');
+Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
+Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
 Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
 /* --------------------------------------- */
 

@@ -34,7 +34,6 @@ class clienteController extends Controller
     public function eliminarCliente($id)
     {
         $data["id"] = $id;
-
         $vClientes = $this->cliente->eliminarCliente(['json' => $data]);
 
         if($vClientes->status != 200) {
@@ -44,27 +43,39 @@ class clienteController extends Controller
         }
     }
 
+    public function mostrarCliente($id)
+    {
+        $data["id"] = $id;
+        $cliente = $this->cliente->consultarClientePorId(['json' => $data]);
+
+        if($cliente->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $cliente->message);
+        } else {
+            $clienteInfo = $cliente->message;
+            return view('roles/seller/cotizador/form-edit-cliente', compact('clienteInfo'));
+        }
+    }
+
     public function actualizarCliente(Request $request, $id)
     {
-        
-        $data["id"] = $id;
-        $data["nombrematerial"] = $request->get('p_nombrematerial');
-        $data["marca"] = $request->get('p_marca');
-        $data["precio"] = $request->get('p_precio');
-        $data["potencia"] = $request->get('p_potencia');
-        $data["isc"] = $request->get('p_isc');
-        $data["moneda"] = $request->get('p_tipomoneda');
-        $data["voc"] = $request->get('p_voc');
-        $data["vmp"] = $request->get('p_vmp');
+        $data["idPersona"] = $id;
+        $data["consumo"] = $request->get('consumo');
+        $data["nombrePersona"] = $request->get('nombrePersona');
+        $data["primerApellido"] = $request->get('primerApellido');
+        $data["segundoApellido"] = $request->get('segundoApellido');
+        $data["telefono"] = $request->get('telefono');
+        $data["celular"] = $request->get('celular');
+        $data["email"] = $request->get('email');
+        $data["calle"] = $request->calle . '-' . $request->colonia;
+        $data["municipio"] = $request->get('municipio');
+        $data["estado"] = $request->get('estado');
 
-        $vPaneles = $this->paneles->edit([
-            'json' => $data
-        ]);
+        $vCliente = $this->cliente->actualizarCliente(['json' => $data]);
 
-        if($vPaneles->status != 200){
-            return redirect('/paneles')->with('status-fail', $vPaneles->message);
+        if($vCliente->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $vCliente->message);
         } else {
-            return redirect('/paneles')->with('status-success', $vPaneles->message);
+            return redirect('registrarCliente')->with('status-success', $vCliente->message);
         }
     }
 

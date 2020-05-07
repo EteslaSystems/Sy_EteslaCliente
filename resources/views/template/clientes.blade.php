@@ -27,7 +27,7 @@
                             <td>{{$cliente->vCelular}}</td>
                             <td>{{$cliente->vEmail}}</td>
                             <td>
-                                <a class="btn btn-sm btn-danger" title="Eliminar" data-toggle="modal" data-target="#modal-editarcliente">
+                                <a href="{{ url('editar-cliente', [$cliente->idPersona]) }}" class="btn btn-sm btn-warning" title="Editar">
                                     <img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png">
                                 </a>
                             </td>
