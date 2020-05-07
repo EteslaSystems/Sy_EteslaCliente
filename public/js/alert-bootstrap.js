@@ -1,6 +1,5 @@
 function myAlert(){
   	setTimeout(function(){
-		$(".myAlert").hide(); 
+		$(".myAlert").hide();
   	}, 3500);
 }
-
