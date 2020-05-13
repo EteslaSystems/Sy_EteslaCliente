@@ -1,5 +1,6 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
+<<<<<<< HEAD
 
     <div class="card">
         <div class="card-header">
@@ -11,47 +12,60 @@
                         <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
                     </p>
                 </div>
+=======
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6 fx-1">
+                <p class="label-mn-1 mn-1">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA0UlEQVRIie2TQQ6CMBBFR2NYeIaydW04hguiEa/ALTyIB+AALpQD4R1YPjfTOCFEkJYYE/9q+G3/n1+mIhEAZLyQxdD0wjmwAa7G4KpcHip+YhjFMsBjb+qbiDgRSUWkNvzBdrQDmhFdrXV/ArTKOaOTKtcCiU1w0S7mgW/vg/2VSXUHnHZfG74KMShGXOdxsoGeGT+mUwzM2eGHFmLwDiHvoBfAFjj3LURJ0NWJnqCL3zdYmfohIi7SJDW+sAlKuxAoXvqPxRyzbzH7P/jj+3gC21tbAVnmKgUAAAAASUVORK5CYII=">
+                    <strong class="d-none d-sm-block d-md-block d-xl-block">&nbsp; Datos de Consumo</strong>
+                    <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
+                </p>
+            </div>
+>>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
 
-                <div class="col-6 fx-1">
-                    <div class="btn-group mn-2">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="GDMTO()">GDMTO</button>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="GDMTH()">GDMTH</button>
-                    </div>
+            <div class="col-6 fx-1">
+                <div class="btn-group mn-2">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="GDMTO()">GDMTO</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="GDMTH()">GDMTH</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="card-body">
-            <div class="container-fluid" id="divGDMTO">
-                <div class="row">
-                    <div class="col-12 col-sm-12 offset-sm-3 col-md-5 offset-md-7">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12 col-sm-5 col-md-4 offset-md-3 pa-ma-1">
-                                    <div class="row">
-                                        <div class="col-4 offset-2 col-sm-5 offset-sm-2 col-md-6 offset-md-1 fx-1 pa-ma-2">
-                                            <label class="mn-1">Periodo(s)</label>
-                                        </div>
+    <div class="card-body">
+        <div class="container-fluid" id="divGDMTO">
+            <div class="row">
+                <div class="col-12 col-sm-12 offset-sm-3 col-md-5 offset-md-7">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-sm-5 col-md-4 offset-md-3 pa-ma-1">
+                                <div class="row">
+                                    <div class="col-4 offset-2 col-sm-5 offset-sm-2 col-md-6 offset-md-1 fx-1 pa-ma-2">
+                                        <label class="mn-1">Periodo(s)</label>
+                                    </div>
 
-                                        <div class="col-4 col-sm-4 col-md-4 fx-1 pa-ma-2" id="lblNombreCliente">
-                                            <select class="custom-select my-1 mn-1" name="numPeriodos" id="lstPeriodosGDMTO">
-                                                <option disabled selected value="-1">0</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-4 col-sm-4 col-md-4 fx-1 pa-ma-2" id="lblNombreCliente">
+                                        <select class="custom-select my-1 mn-1" name="numPeriodos" id="lstPeriodosGDMTO">
+                                            <option disabled selected value="-1">0</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="btn-group btn-group-lg mn" role="group">
-                                    <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
-                                        <strong>
-                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
-                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                                    <g fill="#ffffff">
-                                                        <path d="M43,14.33333c-7.88333,0 -14.33333,6.45 -14.33333,14.33333v114.66667c0,7.88333 6.45,14.33333 14.33333,14.33333h86c7.88333,0 14.33333,-6.45 14.33333,-14.33333v-86l-43,-43zM43,28.66667h51.39844l34.60156,34.60156v80.0651h-86zM78.83333,64.5v21.5h-21.5v14.33333h21.5v21.5h14.33333v-21.5h21.5v-14.33333h-21.5v-21.5z"></path>
-                                                    </g>
-                                            </svg>
-                                        </strong>
-                                    </button>
+                            </div>
+                            <div class="btn-group btn-group-lg mn" role="group">
+                                <button id="btnAgregarPeriodoGDMTO" class="btn btn-info" onclick="agregarPeriodo();" title="agregar periodo de consumo">
+                                    <strong>
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                <g fill="#ffffff">
+                                                    <path d="M43,14.33333c-7.88333,0 -14.33333,6.45 -14.33333,14.33333v114.66667c0,7.88333 6.45,14.33333 14.33333,14.33333h86c7.88333,0 14.33333,-6.45 14.33333,-14.33333v-86l-43,-43zM43,28.66667h51.39844l34.60156,34.60156v80.0651h-86zM78.83333,64.5v21.5h-21.5v14.33333h21.5v21.5h14.33333v-21.5h21.5v-14.33333h-21.5v-21.5z"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </strong>
+                                </button>
 
                                     <button id="btnEditarPeriodoGDMTO" class="btn btn-warning" onclick="#" title="editar periodo de consumo" disabled>
                                         <strong>
@@ -95,10 +109,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-
-
-                    <div class="row">
+                <div class="row">
                     <div class="col-12 col-sm-6 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-12 col-md-4 fx-1">
@@ -158,46 +171,14 @@
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                               <input id="D(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                <input id="D(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
                             </div>
                         </div>
                     </div>
                 </div>
-
-                </div>   
             </div>
 
-            <div>
-                <button id="button" aria-describedby="tooltip" class="btn btn-info">My button</button>
-
-                <div id="tooltip" role="tooltip">
-                    <div>
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                    <div id="arrow" data-popper-arrow></div>
-                </div>
-            </div>
-
-            <!-- <div class="container-fluid" id="divGDMTH" style="display:none;"> -->
-            <div class="container-fluid" id="divGDMTH">
+             <div class="container-fluid" id="divGDMTH" style="display:none;">
                 <div class="row">
                     <div class="col-12 col-sm-12 offset-sm-3 col-md-5 offset-md-7">
                         <div class="container-fluid">
@@ -255,100 +236,100 @@
                                                     <g fill="#ffffff">
                                                         <path d="M71.66667,14.33333l-7.16667,7.16667h-35.83333v14.33333h7.16667v107.5c0,7.83362 6.49972,14.33333 14.33333,14.33333h57.33333v-14.33333h-57.33333v-107.5h71.66667v71.66667h14.33333v-71.66667h7.16667v-14.33333h-7.16667h-28.66667l-7.16667,-7.16667zM64.5,50.16667v78.83333h14.33333v-78.83333zM93.16667,50.16667v78.83333h14.33333v-78.83333zM128.13216,121.32943l-10.13411,10.13411l15.20117,15.20117l-15.20117,15.20117l10.13411,10.13411l15.20117,-15.20117l15.20117,15.20117l10.13411,-10.13411l-15.20117,-15.20117l15.20117,-15.20117l-10.13411,-10.13411l-15.20117,15.20117z"></path>
                                                     </g>
-                                                </g
-                                            </svg>
-                                        </strong>
-                                    </button>
+                                                    </g
+                                                </svg>
+                                            </strong>
+                                        </button>
 
-                                    <button id="btnActualizarPeriodo" class="btn btn-primary" onclick="#" title="actualizar periodo de consumo" disabled>
-                                        <strong>
-                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
-                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                                    <g fill="#ffffff">
-                                                        <path d="M86,21.5c-19.61127,0 -37.15804,8.82697 -48.97689,22.68978l-15.52311,-15.52311v43h43l-17.25879,-17.25879c9.1948,-11.28751 23.09893,-18.57454 38.75879,-18.57454c27.65617,0 50.16667,22.50333 50.16667,50.16667h14.33333c0,-35.561 -28.93183,-64.5 -64.5,-64.5zM21.5,86c0,35.56817 28.93183,64.5 64.5,64.5c19.61127,0 37.15804,-8.82697 48.97689,-22.68978l15.52311,15.52311v-43h-43l17.25879,17.25879c-9.1948,11.28751 -23.09893,18.57455 -38.75879,18.57455c-27.65617,0 -50.16667,-22.5105 -50.16667,-50.16667z"></path>
+                                        <button id="btnActualizarPeriodo" class="btn btn-primary" onclick="#" title="actualizar periodo de consumo" disabled>
+                                            <strong>
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 172 172" style=" fill:#000000;">
+                                                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                                        <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                        <g fill="#ffffff">
+                                                            <path d="M86,21.5c-19.61127,0 -37.15804,8.82697 -48.97689,22.68978l-15.52311,-15.52311v43h43l-17.25879,-17.25879c9.1948,-11.28751 23.09893,-18.57454 38.75879,-18.57454c27.65617,0 50.16667,22.50333 50.16667,50.16667h14.33333c0,-35.561 -28.93183,-64.5 -64.5,-64.5zM21.5,86c0,35.56817 28.93183,64.5 64.5,64.5c19.61127,0 37.15804,-8.82697 48.97689,-22.68978l15.52311,15.52311v-43h-43l17.25879,17.25879c-9.1948,11.28751 -23.09893,18.57455 -38.75879,18.57455c-27.65617,0 -50.16667,-22.5105 -50.16667,-50.16667z"></path>
+                                                        </g>
                                                     </g>
-                                                </g>
-                                            </svg>
-                                        </strong>
-                                    </button>
+                                                </svg>
+                                            </strong>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <br><br>
+                    <br><br>
 
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6">
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpBkWh" class="mn-1">B (kWh)</label>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpBkWh" class="mn-1">B (kWh)</label>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                    <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);" required>
+                                </div>
                             </div>
 
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);" required>
-                            </div>
-                        </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpIkWh" class="mn-1">I (kWh)</label>
+                                </div>
 
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpIkWh" class="mn-1">I (kWh)</label>
-                            </div>
-
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpPkWh" class="mn-1">P (kWh)</label>
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                    <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
                             </div>
 
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                            </div>
-                        </div>
-                    </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpPkWh" class="mn-1">P (kWh)</label>
+                                </div>
 
-                    <div class="col-12 col-sm-6 col-md-6">
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpBkw" class="mn-1">B (kw)</label>
-                            </div>
-
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                    <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpIkw" class="mn-1">I (kw)</label>
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpBkw" class="mn-1">B (kw)</label>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                    <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
                             </div>
 
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpIkw" class="mn-1">I (kw)</label>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                    <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                <label for="inpPkw" class="mn-1">P (kw)</label>
-                            </div>
+                            <div class="form-group row">
+                                <div class="col-12 col-sm-12 col-md-4 fx-1">
+                                    <label for="inpPkw" class="mn-1">P (kw)</label>
+                                </div>
 
-                            <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                               <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
+                                 <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
-                <br>
+                 <br>
 
-                <div class="sec-tittle">
+                 <div class="sec-tittle">
                     <h2 class="linea">
                         <span>Pago CFE</span>
                     </h2>
@@ -453,7 +434,7 @@
                                 <select class="form-control">
                                     <option disabled selected>Elige una opción:</option>
                                     @foreach($vPaneles as $details)
-                                        <option value="{{ $details->idPanel }}">{{ $details->vNombreMaterialFot }}</option>
+                                    <option value="{{ $details->idPanel }}">{{ $details->vNombreMaterialFot }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -470,7 +451,7 @@
                                 <select class="form-control" id="">
                                     <option disabled selected>Elige una opción:</option>
                                     @foreach($vInversores as $details)
-                                        <option value="{{ $details->idInversor }}">{{ $details->vNombreMaterialFot }}</option>
+                                    <option value="{{ $details->idInversor }}">{{ $details->vNombreMaterialFot }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -490,55 +471,4 @@
     </div>
 
     <br>
-@endsection
-
-@section('scripts')
-    <script type="text/javascript">
-        const button = document.querySelector('#button');
-        const tooltip = document.querySelector('#tooltip');
-
-        let popperInstance = null;
-
-        function create() {
-            popperInstance = Popper.createPopper(button, tooltip, {
-                modifiers: [
-                    {
-                        name: 'offset',
-                        options: {
-                            offset: [0, 8],
-                        },
-                    },
-                ],
-            });
-        }
-
-        function destroy() {
-            if (popperInstance) {
-                popperInstance.destroy();
-                popperInstance = null;
-            }
-        }
-
-        function show() {
-            alert("Hola");
-            tooltip.setAttribute('data-show', '');
-            create();
-        }
-
-        function hide() {
-            tooltip.removeAttribute('data-show');
-            destroy();
-        }
-
-        const showEvents = ['mouseenter', 'focus'];
-        const hideEvents = ['mouseleave', 'blur'];
-
-        showEvents.forEach(event => {
-            button.addEventListener(event, show);
-        });
-
-        hideEvents.forEach(event => {
-            button.addEventListener(event, hide);
-        });
-    </script>
-@endsection
+    @endsection

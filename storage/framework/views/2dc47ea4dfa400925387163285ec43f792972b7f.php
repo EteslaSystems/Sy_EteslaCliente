@@ -148,7 +148,7 @@
                                     <div class="col-sm-6 col-md-4 offset-md-2">
                                         <div class="form-group">
                                             <label for="serviceCFE">No. servicio CFE</label>
-        
+
                                             <input type="number" class="form-control border border-success" id="serviceCFE" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                     <div class="col-sm-6 col-md-4">
                                         <div class="form-group">
                                             <label for="inpCPCliente">Código postal</label>
-        
+
                                             <input type="number" class="form-control border border-success" id="inpCPCliente" onblur="postalCodeLookup();" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="firstClient">Apellido Paterno</label>
-    
+
                                         <input type="text" class="form-control" id="firstClient" name="primerApellido" placeholder="Ingrese un valor." value="<?php echo e(old('primerApellido')); ?>">
 
                                         <?php $__errorArgs = ['primerApellido'];
@@ -209,7 +209,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="lastClient">Apellido Materno</label>
-    
+
                                         <input type="text" class="form-control" id="lastClient" name="segundoApellido" placeholder="Ingrese un valor." value="<?php echo e(old('segundoApellido')); ?>">
 
                                         <?php $__errorArgs = ['segundoApellido'];
@@ -228,7 +228,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="emailClient">Correo Electrónico</label>
-    
+
                                         <input type="text" class="form-control" id="emailClient" name="email" placeholder="Ingrese un valor." value="<?php echo e(old('email')); ?>">
 
                                         <?php $__errorArgs = ['email'];
@@ -247,7 +247,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="phoneClient">Teléfono</label>
-    
+
                                         <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="<?php echo e(old('telefono')); ?>" onkeypress="return filterFloat(event,this);">
 
                                         <?php $__errorArgs = ['telefono'];
@@ -287,7 +287,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="addressClient">Dirección</label>
-    
+
                                         <input type="text" class="form-control" id="addressClient" name="calle" placeholder="Ingrese un valor." value="<?php echo e(old('calle')); ?>">
 
                                         <?php $__errorArgs = ['calle'];
@@ -306,7 +306,11 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpColoniaCliente">Colonia</label>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>" readonly>
                                         <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
@@ -326,7 +330,11 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpMunicCliente">Municipio / Localidad</label>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>" readonly>
 
                                         <?php $__errorArgs = ['municipio'];
@@ -345,7 +353,11 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpEstadoCliente">Estado</label>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>" readonly>
 
                                         <?php $__errorArgs = ['estado'];

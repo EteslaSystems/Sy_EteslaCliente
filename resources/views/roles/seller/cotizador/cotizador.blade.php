@@ -149,7 +149,7 @@
                                     <div class="col-sm-6 col-md-4 offset-md-2">
                                         <div class="form-group">
                                             <label for="serviceCFE">No. servicio CFE</label>
-        
+
                                             <input type="number" class="form-control border border-success" id="serviceCFE" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                                     <div class="col-sm-6 col-md-4">
                                         <div class="form-group">
                                             <label for="inpCPCliente">Código postal</label>
-        
+
                                             <input type="number" class="form-control border border-success" id="inpCPCliente" onblur="postalCodeLookup();" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
@@ -184,7 +184,7 @@
 
                                     <div class="form-group">
                                         <label for="firstClient">Apellido Paterno</label>
-    
+
                                         <input type="text" class="form-control" id="firstClient" name="primerApellido" placeholder="Ingrese un valor." value="{{ old('primerApellido') }}">
 
                                         @error('primerApellido')
@@ -196,7 +196,7 @@
 
                                     <div class="form-group">
                                         <label for="lastClient">Apellido Materno</label>
-    
+
                                         <input type="text" class="form-control" id="lastClient" name="segundoApellido" placeholder="Ingrese un valor." value="{{ old('segundoApellido') }}">
 
                                         @error('segundoApellido')
@@ -208,7 +208,7 @@
 
                                     <div class="form-group">
                                         <label for="emailClient">Correo Electrónico</label>
-    
+
                                         <input type="text" class="form-control" id="emailClient" name="email" placeholder="Ingrese un valor." value="{{ old('email') }}">
 
                                         @error('email')
@@ -220,7 +220,7 @@
 
                                     <div class="form-group">
                                         <label for="phoneClient">Teléfono</label>
-    
+
                                         <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="{{ old('telefono') }}" onkeypress="return filterFloat(event,this);">
 
                                         @error('telefono')
@@ -246,7 +246,7 @@
 
                                     <div class="form-group">
                                         <label for="addressClient">Dirección</label>
-    
+
                                         <input type="text" class="form-control" id="addressClient" name="calle" placeholder="Ingrese un valor." value="{{ old('calle') }}">
 
                                         @error('calle')
@@ -258,7 +258,7 @@
 
                                     <div class="form-group">
                                         <label for="inpColoniaCliente">Colonia</label>
-    
+
                                         <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="{{ old('colonia') }}" readonly>
                                         <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
@@ -271,7 +271,7 @@
 
                                     <div class="form-group">
                                         <label for="inpMunicCliente">Municipio / Localidad</label>
-    
+
                                         <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="{{ old('municipio') }}" readonly>
 
                                         @error('municipio')
@@ -283,7 +283,7 @@
 
                                     <div class="form-group">
                                         <label for="inpEstadoCliente">Estado</label>
-    
+
                                         <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="{{ old('estado') }}" readonly>
 
                                         @error('estado')
