@@ -10,12 +10,57 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/alert-bootstrap.css')); ?>">
     <script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=urakirabe"></script>
     <title>Etesla Paneles Solares - <?php $__env->startSection('title'); ?><?php echo $__env->yieldSection(); ?></title>
+
+    <style>
+        #tooltip {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            padding: 4px 8px;
+            font-size: 13px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        #tooltip[data-show] {
+            display: block;
+        }
+
+        #arrow, #arrow::before {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            z-index: -1;
+        }
+
+        #arrow::before {
+            content: '';
+            transform: rotate(45deg);
+            background: #333;
+        }
+
+        #tooltip[data-popper-placement^='top'] > #arrow {
+            bottom: -4px;
+        }
+
+        #tooltip[data-popper-placement^='bottom'] > #arrow {
+            top: -4px;
+        }
+
+        #tooltip[data-popper-placement^='left'] > #arrow {
+            right: -4px;
+        }
+
+        #tooltip[data-popper-placement^='right'] > #arrow {
+            left: -4px;
+        }
+    </style>
 </head>
 <body>
     <div class="d-flex" id="wrapper">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <?php if(session('status-success')): ?> 
+                <?php if(session('status-success')): ?>
                     <div class="alert alert-success alert-dismissible fade show myAlert" role="alert">
                         <strong>¡Correcto!</strong> <?php echo e(session('status-success')); ?>
 
@@ -36,13 +81,13 @@
                 <?php endif; ?>
             </div>
         </div>
-        
+
         <?php echo $__env->yieldContent('body'); ?>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="<?php echo e(asset('js/index.js')); ?>"></script>
 <script src="<?php echo e(asset('js/log.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTO.js')); ?>"></script>
