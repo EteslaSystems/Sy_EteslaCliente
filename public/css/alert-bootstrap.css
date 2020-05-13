@@ -151,3 +151,22 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     margin-left: -5px;
     margin-top: -1px;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+.pop-div {
+    font-size: 13px;
+    margin-top: 100px;
+}
+.pop-title {
+    display: none;
+    color: blue;
+    font-size: 15px;
+}
+.pop-content {
+    display: none;
+    color: red;
+    font-size: 10px;
+}
