@@ -12,10 +12,15 @@
     <a href="/instalacion" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/dusk/30/000000/swiss-army-knife.png"> Instalaciones</a>
     <a href="configuracion" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"> Configuración</a>
     <a href="#" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/bubbles/40/000000/ticket.png"> Tickets</a>
+    <a href="/otros-materiales" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/cotton/40/000000/commodity.png"/> Materiales</a>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-    <br>
-    <?php echo $__env->yieldContent('enginerContent'); ?>
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+		    <br>
+		    <?php echo $__env->yieldContent('enginerContent'); ?>
+		</div>
+	</div>
 <?php $__env->stopSection(); ?>
 
 

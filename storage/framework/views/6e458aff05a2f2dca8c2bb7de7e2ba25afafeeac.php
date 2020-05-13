@@ -26,13 +26,18 @@
                             <td><?php echo e($cliente->vCelular); ?></td>
                             <td><?php echo e($cliente->vEmail); ?></td>
                             <td>
-                                <button id="btnEdit" class="btn btn-lg btn-warning" title="editar"><img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png"></button>
+                                <a href="<?php echo e(url('editar-cliente', [$cliente->idPersona])); ?>" class="btn btn-sm btn-warning" title="Editar">
+                                    <img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png">
+                                </a>
                             </td>
                             <td>
-                                <button id="btnExc" class="btn btn-lg btn-danger" title="eliminar"><img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png"></button>
+                                <a href="<?php echo e(url('eliminar-cliente', [$cliente->idPersona])); ?>" class="btn btn-sm btn-danger" title="Eliminar">
+                                    <img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png">
+                                </a>
                             </td>
                         </tr>
                         <?php ($numeroLista = $numeroLista + 1); ?>
+                        <?php echo $__env->make('template.modal_editarCliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
             </tbody>
@@ -40,4 +45,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('template/body', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/clientes.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('roles/seller', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/clientes.blade.php ENDPATH**/ ?>

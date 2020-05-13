@@ -1,6 +1,4 @@
 <?php $__env->startSection('content'); ?>
-    <br>
-
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
             <div class="input-group">
@@ -157,9 +155,9 @@
 
                                     <div class="col-sm-6 col-md-4">
                                         <div class="form-group">
-                                            <label for="postalCode">Código postal</label>
+                                            <label for="inpCPCliente">Código postal</label>
         
-                                            <input type="number" class="form-control border border-success" id="postalCode" placeholder="Ingrese un valor.">
+                                            <input type="number" class="form-control border border-success" id="inpCPCliente" onblur="postalCodeLookup();" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +248,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="phoneClient">Teléfono</label>
     
-                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="<?php echo e(old('telefono')); ?>">
+                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="<?php echo e(old('telefono')); ?>" onkeypress="return filterFloat(event,this);">
 
                                         <?php $__errorArgs = ['telefono'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -271,7 +269,7 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="form-group">
                                         <label for="cellphoneClient">Teléfono celular</label>
 
-                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="<?php echo e(old('celular')); ?>">
+                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="<?php echo e(old('celular')); ?>" onkeypress="return filterFloat(event,this);">
 
                                         <?php $__errorArgs = ['celular'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -307,9 +305,10 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="suburbClient">Colonia</label>
+                                        <label for="inpColoniaCliente">Colonia</label>
     
-                                        <input type="text" class="form-control" id="suburbClient" name="colonia" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>">
+                                        <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>" disabled="true">
+                                        <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
                                         <?php $__errorArgs = ['colonia'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -326,9 +325,9 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="townClient">Municipio / Localidad</label>
+                                        <label for="inpMunicCliente">Municipio / Localidad</label>
     
-                                        <input type="text" class="form-control" id="townClient" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>">
+                                        <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>" disabled="true">
 
                                         <?php $__errorArgs = ['municipio'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -345,9 +344,9 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="stateClient">Estado</label>
+                                        <label for="inpEstadoCliente">Estado</label>
     
-                                        <input type="text" class="form-control" id="stateClient" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>">
+                                        <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>" disabled="true">
 
                                         <?php $__errorArgs = ['estado'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -379,7 +378,7 @@ unset($__errorArgs, $__bag); ?>
     <?php echo $__env->yieldContent('cotizadores'); ?>
 
     <?php $__env->startSection('scripts'); ?>
-        <?php if(session('modal-fail')): ?> 
+        <?php if(session('modal-fail')): ?>
             <script type="text/javascript">
                 $("#modal-agregarcliente").modal("show");
             </script>
@@ -397,7 +396,7 @@ unset($__errorArgs, $__bag); ?>
                         event.preventDefault();
                     }
                 }
- 
+
                 if (event.keyCode < 48 || event.keyCode > 57) {
                     if (event.keyCode < 96 || event.keyCode > 105) {
                         if(event.keyCode != 46 && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
@@ -482,7 +481,7 @@ unset($__errorArgs, $__bag); ?>
                     }
                 } else {
                     if(key == 8 || key == 13 || key == 0) {
-                        return true;              
+                        return true;
                     } else if(key == 46) {
                         if(filter(tempValue)=== false) {
                             return false;

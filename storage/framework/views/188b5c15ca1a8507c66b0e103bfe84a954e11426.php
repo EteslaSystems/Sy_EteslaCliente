@@ -1,4 +1,6 @@
 <?php $__env->startSection('cotizadores'); ?>
+    <?php echo $__env->make('roles.seller.cotizador.panel-cotizador', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -9,7 +11,7 @@
                         <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
                     </p>
                 </div>
-                
+
                 <div class="col-6 fx-1">
                     <div class="btn-group mn-2">
                         <button type="button" class="btn btn-primary btn-sm" onclick="GDMTO()">GDMTO</button>
@@ -441,7 +443,7 @@
                                     <?php $__currentLoopData = $vInversores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($details->idInversor); ?>"><?php echo e($details->vNombreMaterialFot); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>  
+                                </select>
                             </div>
                         </div>
                     </div>

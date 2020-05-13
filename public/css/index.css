@@ -20,6 +20,13 @@ body {
   background-color:#F7F8F8;
 }
 
+.password-user{
+  background-color:#F7F8F8;
+  border-width: 0;
+  font-weight: bold;
+  color: black;
+}
+
 #navOption{
     color: EFF6EF;
 }

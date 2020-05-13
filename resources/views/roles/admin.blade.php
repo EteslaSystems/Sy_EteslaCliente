@@ -1,5 +1,4 @@
 @extends('template/body')
-@extends('template/body')
     @section('title')
         {{'Administrador'}}
     @stop

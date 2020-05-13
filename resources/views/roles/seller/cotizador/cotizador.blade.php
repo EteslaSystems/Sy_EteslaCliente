@@ -1,7 +1,5 @@
 @extends('roles/seller')
 @section('content')
-    <br>
-
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
             <div class="input-group">
@@ -158,9 +156,9 @@
 
                                     <div class="col-sm-6 col-md-4">
                                         <div class="form-group">
-                                            <label for="postalCode">Código postal</label>
+                                            <label for="inpCPCliente">Código postal</label>
         
-                                            <input type="number" class="form-control border border-success" id="postalCode" placeholder="Ingrese un valor.">
+                                            <input type="number" class="form-control border border-success" id="inpCPCliente" onblur="postalCodeLookup();" placeholder="Ingrese un valor.">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +221,7 @@
                                     <div class="form-group">
                                         <label for="phoneClient">Teléfono</label>
     
-                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="{{ old('telefono') }}">
+                                        <input type="number" class="form-control" id="phoneClient" name="telefono" placeholder="Ingrese un valor."value="{{ old('telefono') }}" onkeypress="return filterFloat(event,this);">
 
                                         @error('telefono')
                                             <span class="invalid-feedback" role="alert">
@@ -237,7 +235,7 @@
                                     <div class="form-group">
                                         <label for="cellphoneClient">Teléfono celular</label>
 
-                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="{{ old('celular') }}">
+                                        <input type="number" class="form-control" id=cellphoneClient" name="celular" placeholder="Ingrese un valor." value="{{ old('celular') }}" onkeypress="return filterFloat(event,this);">
 
                                         @error('celular')
                                             <span class="invalid-feedback" role="alert">
@@ -259,9 +257,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="suburbClient">Colonia</label>
+                                        <label for="inpColoniaCliente">Colonia</label>
     
-                                        <input type="text" class="form-control" id="suburbClient" name="colonia" placeholder="Ingrese un valor." value="{{ old('colonia') }}">
+                                        <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="{{ old('colonia') }}" readonly>
+                                        <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
                                         @error('colonia')
                                             <span class="invalid-feedback" role="alert">
@@ -271,9 +270,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="townClient">Municipio / Localidad</label>
+                                        <label for="inpMunicCliente">Municipio / Localidad</label>
     
-                                        <input type="text" class="form-control" id="townClient" name="municipio" placeholder="Ingrese un valor." value="{{ old('municipio') }}">
+                                        <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="{{ old('municipio') }}" readonly>
 
                                         @error('municipio')
                                             <span class="invalid-feedback" role="alert">
@@ -283,9 +282,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="stateClient">Estado</label>
+                                        <label for="inpEstadoCliente">Estado</label>
     
-                                        <input type="text" class="form-control" id="stateClient" name="estado" placeholder="Ingrese un valor." value="{{ old('estado') }}">
+                                        <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="{{ old('estado') }}" readonly>
 
                                         @error('estado')
                                             <span class="invalid-feedback" role="alert">
@@ -310,7 +309,7 @@
     @yield('cotizadores')
 
     @section('scripts')
-        @if (session('modal-fail')) 
+        @if (session('modal-fail'))
             <script type="text/javascript">
                 $("#modal-agregarcliente").modal("show");
             </script>
@@ -328,7 +327,7 @@
                         event.preventDefault();
                     }
                 }
- 
+
                 if (event.keyCode < 48 || event.keyCode > 57) {
                     if (event.keyCode < 96 || event.keyCode > 105) {
                         if(event.keyCode != 46 && event.keyCode != 8 && event.keyCode != 37 && event.keyCode != 39) {
@@ -413,7 +412,7 @@
                     }
                 } else {
                     if(key == 8 || key == 13 || key == 0) {
-                        return true;              
+                        return true;
                     } else if(key == 46) {
                         if(filter(tempValue)=== false) {
                             return false;

@@ -6,8 +6,11 @@ Route::post('/', 'usuarioController@validarUsuario');
 Route::get('/registro', 'usuarioController@mostrarRegistrarUsuario');
 Route::post('/registro', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
+Route::post('/perfil', 'usuarioController@editarPerfil');
 Route::get('/olvidoPassword', 'usuarioController@olvidoContrasenia');
+Route::post('/olvidoPassword', 'usuarioController@recuperarContrasenia');
 Route::get('/logout', 'usuarioController@cerrarSesion');
+Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 /* --------------------------------------- */
 
 /* --------------- Vendedor --------------- */
@@ -20,10 +23,14 @@ Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::get('/mediaT', 'MediaTensionController@index');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
+Route::get('/resultados', 'ResultadosController@index');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
+Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
+Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
+Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
 Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
 /* --------------------------------------- */
 
@@ -48,6 +55,17 @@ Route::get('/engineer', 'ingenieroController@index');
 Route::get('/levantamiento', 'ingenieroController@levantamiento');
 Route::get('/instalacion', 'ingenieroController@instalacion');
 Route::get('/configuracion', 'ingenieroController@configuracion');
+
+Route::get('/otros-materiales', 'OtrosMaterialesController@index');
+Route::post('/agregar-categoria', 'OtrosMaterialesController@create');
+Route::get('/eliminar-categoria/{idCategoria}', 'OtrosMaterialesController@destroy');
+Route::get('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@edit');
+Route::put('/editar-categoria/{idCategoria}', 'OtrosMaterialesController@update');
+
+Route::post('/agregar-materiales', 'OtrosMaterialesController@createMateriales');
+Route::get('/eliminar-materiales/{idMateriales}', 'OtrosMaterialesController@destroyMateriales');
+Route::get('/editar-materiales/{idMateriales}', 'OtrosMaterialesController@editMateriales');
+Route::put('/editar-materiales/{idMateriales}', 'OtrosMaterialesController@updateMateriales');
 /* ----------------------------------------- */
 
 /* --------------- Operaciones --------------- */
