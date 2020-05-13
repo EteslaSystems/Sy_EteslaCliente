@@ -1,18 +1,5 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-<<<<<<< HEAD
-
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-6 fx-1">
-                    <p class="label-mn-1 mn-1">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA0UlEQVRIie2TQQ6CMBBFR2NYeIaydW04hguiEa/ALTyIB+AALpQD4R1YPjfTOCFEkJYYE/9q+G3/n1+mIhEAZLyQxdD0wjmwAa7G4KpcHip+YhjFMsBjb+qbiDgRSUWkNvzBdrQDmhFdrXV/ArTKOaOTKtcCiU1w0S7mgW/vg/2VSXUHnHZfG74KMShGXOdxsoGeGT+mUwzM2eGHFmLwDiHvoBfAFjj3LURJ0NWJnqCL3zdYmfohIi7SJDW+sAlKuxAoXvqPxRyzbzH7P/jj+3gC21tbAVnmKgUAAAAASUVORK5CYII=">
-                        <strong class="d-none d-sm-block d-md-block d-xl-block">&nbsp; Datos de Consumo</strong>
-                        <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
-                    </p>
-                </div>
-=======
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -23,7 +10,6 @@
                     <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
                 </p>
             </div>
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
 
             <div class="col-6 fx-1">
                 <div class="btn-group mn-2">

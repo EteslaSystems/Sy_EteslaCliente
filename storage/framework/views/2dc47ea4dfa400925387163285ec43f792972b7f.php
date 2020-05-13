@@ -306,11 +306,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpColoniaCliente">Colonia</label>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="" class="form-control" id="inpColoniaCliente" name="colonia" onblur="closeSuggestBox();" placeholder="Ingrese un valor." value="<?php echo e(old('colonia')); ?>" readonly>
                                         <span style="position: absolute; top: 243px; left: 16px; z-index:50;visibility: hidden;" id="suggestBoxElement"></span></span>
 
@@ -330,11 +326,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpMunicCliente">Municipio / Localidad</label>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="text" class="form-control" id="inpMunicCliente" name="municipio" placeholder="Ingrese un valor." value="<?php echo e(old('municipio')); ?>" readonly>
 
                                         <?php $__errorArgs = ['municipio'];
@@ -353,11 +345,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="form-group">
                                         <label for="inpEstadoCliente">Estado</label>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                                         <input type="" class="form-control" id="inpEstadoCliente" name="estado" placeholder="Ingrese un valor." value="<?php echo e(old('estado')); ?>" readonly>
 
                                         <?php $__errorArgs = ['estado'];

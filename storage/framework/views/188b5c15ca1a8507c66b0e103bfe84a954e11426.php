@@ -1,6 +1,4 @@
 <?php $__env->startSection('cotizadores'); ?>
-<<<<<<< HEAD
-=======
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -11,7 +9,6 @@
                     <strong class="d-block d-sm-none d-md-none d-xl-none">&nbsp; Consumo</strong>
                 </p>
             </div>
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
 
             <div class="col-6 fx-1">
                 <div class="btn-group mn-2">
@@ -97,14 +94,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-<<<<<<< HEAD
-
-
-                    <div class="row">
-=======
                 <div class="row">
->>>>>>> a9c5c3f6f1b008f9abef9187f31e5d241b76e10a
                     <div class="col-12 col-sm-6 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-12 col-md-4 fx-1">
@@ -169,8 +161,6 @@
                         </div>
                     </div>
                 </div>
-
-                </div>   
             </div>
 
              <div class="container-fluid" id="divGDMTH" style="display:none;">
