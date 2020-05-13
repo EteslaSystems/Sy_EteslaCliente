@@ -1,3 +1,4 @@
+//Yael es gei
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
     <div class="card">
@@ -95,11 +96,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <br><br>
 
-                <div class="row">
+
+                    <div class="row">
                     <div class="col-12 col-sm-6 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-12 col-md-4 fx-1">
@@ -164,6 +164,8 @@
                         </div>
                     </div>
                 </div>
+
+                </div>   
             </div>
 
             <div class="container-fluid" id="divGDMTH" style="display:none;">
@@ -173,7 +175,7 @@
                             <div class="row">
                                 <div class="col-12 col-sm-5 col-md-4 offset-md-3 pa-ma-1">
                                     <div class="row">
-                                        <div id="divMunicipio" style="display: none">
+                                        <div id="divMunicipio" >
                                             <label id="municipio"></label>
                                         </div>
                                         <div class="col-4 offset-2 col-sm-5 offset-sm-2 col-md-6 offset-md-1 fx-1 pa-ma-2">
