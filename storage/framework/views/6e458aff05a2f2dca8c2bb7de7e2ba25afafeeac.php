@@ -37,7 +37,6 @@
                             </td>
                         </tr>
                         <?php ($numeroLista = $numeroLista + 1); ?>
-                        <?php echo $__env->make('template.modal_editarCliente', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
             </tbody>
