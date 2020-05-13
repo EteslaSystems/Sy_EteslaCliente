@@ -1,8 +1,5 @@
-//Yael es gei
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-    @include('roles.seller.cotizador.panel-cotizador')
-
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -167,7 +164,7 @@
                     </div>
                 </div>
 
-                </div>   
+                </div>
             </div>
 
             <div class="container-fluid" id="divGDMTH" style="display:none;">
