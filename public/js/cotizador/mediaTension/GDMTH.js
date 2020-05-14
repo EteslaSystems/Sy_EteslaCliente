@@ -50,7 +50,7 @@ function agregarPeriodo(){
         if(arrayPeriodosGDMTH.length < 12){
             arrayPeriodosGDMTH.push(objPeriodosGDMTH);
             sumarAlIndexador();
-            limpiarCampos();
+            //limpiarCampos();
         }
         else
         {
@@ -92,7 +92,7 @@ function mostrarPeriodo(){
         indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
         
         if(indexMostrar > indexador){
-            limpiarCampos();
+            //limpiarCampos();
             desbloquearCampos();
             banderaEditar = false;
         }
@@ -209,11 +209,11 @@ function sendPeriodsToServer(){
             'idCliente': idCliente
         },
         dataType: 'json',
-        success: function(data){
-            console.log(data);
+        success: function(respuesta){
+            console.log(respuesta);
         },
-        error: function(e){
-            console.log('Error: '+e.message);
+        error: function(){
+            console.log('Al parecer hubo un error con la peticion AJAX de la cotizacion');
         }
     });
 }
@@ -229,9 +229,9 @@ function validarEnvioDePeriodo(){
         msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
         if(modalMsj(msj,msjConfirm) == true){
             sendPeriodsToServer();
-            limpiarCampos();
-            this.arrayPeriodosGDMTH = [];
-            console.log(arrayPeriodosGDMTH);
+            //limpiarCampos();
+            //this.arrayPeriodosGDMTH = [];
+            //console.log(arrayPeriodosGDMTH);
             /*
                 -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
                 el servidor realiza las operaciones necesarias
@@ -240,7 +240,7 @@ function validarEnvioDePeriodo(){
     }
     else if(arrayPeriodosGDMTH.length == 12){
         sendPeriodsToServer();
-        limpiarCampos();
+        //limpiarCampos();
         this.arrayPeriodosGDMTH = [];
         console.log(arrayPeriodosGDMTH);
         /*
