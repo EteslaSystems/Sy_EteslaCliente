@@ -1,5 +1,83 @@
+:root{
+  --green:#52de97;
+  --green-2:#c0ffb3;
+  --green-3:#3c9d9b;
+  --blue:#394a6d;
+  --gray:#eef2f5;
+  --gray-2:#5f6769;
+}
+
 body {
     overflow-x: hidden;
+    font-family: 'Jost',sans-serif;
+    background-color: var(--gray);
+}
+
+label,
+h3,
+h4{
+  color:var(--gray-2);
+}
+
+h3,
+h4{
+  font-weight: 500;
+}
+
+hr{
+  border-top: 2px solid var(--green);
+}
+
+.btn-green{
+  background: var(--green-3);
+  border-color: var(--green-3);
+  color: white;
+  transition: background 0.5s;
+}
+
+.btn-green:hover{
+  background: var(--blue);
+  border-color: #FFF;
+  color: white;
+}
+
+.p-titulos{
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.menu-content{
+  display: none;
+  margin-top: 12px;
+  position: absolute;
+  left: 150px;
+  top: -20px;
+  background: var(--gray);
+  border-radius: 8px;
+  padding: 12px;
+  z-index: 1;
+  width: 300px;
+  transition: display 2s;
+}
+
+.menu-active{
+  display: block !important;
+}
+
+.btnMenuInfo{
+  position: relative;
+  display: inline-block;
+  color: white;
+  background: var(--blue);
+  cursor: pointer;
+}
+
+.btnMenuInfo:hover{
+  color: #FFF;
+}
+
+.iptPeriodos{
+  max-width: 100px !important;
 }
 
 .form-check-label{
@@ -13,7 +91,7 @@ body {
 }
 
 .card-header{
-  background-color:#50BC2E;
+  background-color:var(--green);
 }
 
 .card-body{
