@@ -46,9 +46,9 @@
                     <select class="form-control" name="rol">
                         <option disabled selected value="-1">Seleccionar puesto que desempeñas</option>
                         <option value="5">Ventas</option>
-                        <option value="2">Operaciones</option>
-                        <option value="4">Ingenieria</option>
-                        <option value="3">Gerente de ingenieria</option>
+                        <option value="2" disabled>Operaciones</option>
+                        <option value="4" disabled>Ingenieria</option>
+                        <option value="3" disabled>Gerente de ingenieria</option>
                     </select>
                 </div>
                 <div class="row justify-content-center">

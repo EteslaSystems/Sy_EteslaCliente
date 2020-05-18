@@ -1,5 +1,5 @@
 <?php $__env->startSection('cotizadores'); ?>
-    <?php echo $__env->make('roles.seller.cotizador.panel-cotizador', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 
     <div class="card">
         <div class="card-header">

@@ -1,6 +1,6 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-    @include('roles.seller.cotizador.panel-cotizador')
+    
 
     <div class="card">
         <div class="card-header">

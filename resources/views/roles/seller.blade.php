@@ -15,6 +15,9 @@
         <li>
             <a class="list-group-item list-group-item-action bg-ligth" href="/bajaTension">Baja tensión</a>
         </li>
+        <li>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/individual">Individual</a>
+        </li>
     </ul>
     <a href="#clientesSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light dropdown-toggle"><img src="https://img.icons8.com/dusk/30/000000/customer-insight.png"> Clientes</a>
     <ul class="collapse list-unstyled" id="clientesSubmenu">
