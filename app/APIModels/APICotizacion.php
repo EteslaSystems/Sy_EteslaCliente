@@ -9,6 +9,11 @@ class APICotizacion extends GuzzleHttpRequest
     {
         $this->post("sendPeriods",$request);
     }
-    /*#endregion GDMTH#*/
-
+    /*#endregion*/
+    /*#region cotizacion_individual*/
+    public function sendSingleQuotation($request)
+    {
+        $this->post("cotizacionIndividual",$request);
+    }
+    /*#endregion*/
 }

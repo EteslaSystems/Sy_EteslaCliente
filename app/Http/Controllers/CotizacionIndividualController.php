@@ -8,6 +8,7 @@ use App\APIModels\APIPaneles;
 use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
+use App\APIModels\APICotizacion;
 
 class CotizacionIndividualController extends Controller
 {
@@ -15,13 +16,15 @@ class CotizacionIndividualController extends Controller
 	protected $inversores;
 	protected $vendedor;
 	protected $clientes;
+	protected $cotizacion;
 
-    public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes)
+    public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
+		$this->cotizacion = $cotizacion;
 	}
     
     public function index()
@@ -41,7 +44,7 @@ class CotizacionIndividualController extends Controller
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
+		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'consultarClientes'));
 	}
 
 	public function create(Request $request)
@@ -55,9 +58,9 @@ class CotizacionIndividualController extends Controller
 		);
 
 		if($vCliente->status != 200) {
-			return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
+			return redirect('/individual')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
 		} else {
-			return redirect('/mediaT')->with('status-success', $vCliente->message)
+			return redirect('/individual')->with('status-success', $vCliente->message)
 			->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
 			->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
 			->with('celular', $request["celular"])
@@ -76,5 +79,20 @@ class CotizacionIndividualController extends Controller
 			return 1;
 		}
 		return 0;
+	}
+
+	public function sendSingleQuotation(Request $request){
+		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
+		$arrayCompleto["destino"] = "Orizaba, Veracruz";
+		$arrayCompleto["idPanel"] = $request->idPanel;
+		$arrayCompleto["idInversor"] = $request->idInversor;
+		$arrayCompleto["cantidadPaneles"] = $request->cantidadPaneles;
+		$arrayCompleto["cantidadInversores"] = $request->cantidadInversores;
+
+		$response = $this->cotizacion->sendSingleQuotation(['json' => $arrayCompleto]);
+
+		//$response = response()->json($response);
+
+		return Response()->json($response);
 	}
 }

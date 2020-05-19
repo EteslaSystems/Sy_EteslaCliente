@@ -25,9 +25,8 @@ Route::get('/mediaT', 'MediaTensionController@index');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
 Route::get('/resultados', 'ResultadosController@index');
 
-Route::get('/individual', function(){
-    return view('roles/seller/cotizador/individual');
-});
+Route::get('/individual', 'CotizacionIndividualController@index');
+Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */

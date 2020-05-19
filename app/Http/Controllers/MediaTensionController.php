@@ -19,8 +19,8 @@ class MediaTensionController extends Controller
 
 	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
 	{
-		$this->paneles = $paneles;
-		$this->inversores = $inversores;
+		//$this->paneles = $paneles;
+		//$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
 		$this->cotizacion = $cotizacion;
@@ -37,13 +37,13 @@ class MediaTensionController extends Controller
 			return redirect('index');
 		}
 
-		$vPaneles = $this->paneles->view();
-		$vInversores = $this->inversores->view();
+		//$vPaneles = $this->paneles->view();
+		//$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		return view('roles/seller/cotizador/mediaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
+		return view('roles/seller/cotizador/mediaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes'));
 	}
 
 	public function create(Request $request)
@@ -84,9 +84,10 @@ class MediaTensionController extends Controller
 	{
 		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 		$arrayCompleto["idCliente"] = $request->idCliente;
+		$arrayCompleto["municipio"] = $request->municipio;
 		$arrayCompleto["idUsuario"] = session('dataUsuario')->idUsuario;
 		$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
-		$arrayCompleto["municipio"] = $request->municipio;
+		
 		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
 
 		//$response_ = response()->json($x);

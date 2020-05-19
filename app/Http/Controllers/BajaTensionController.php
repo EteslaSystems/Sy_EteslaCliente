@@ -34,13 +34,13 @@ class BajaTensionController extends Controller
 			return redirect('index');
 		}
 
-		$vPaneles = $this->paneles->view();
-		$vInversores = $this->inversores->view();
+		//$vPaneles = $this->paneles->view();
+		//$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		return view('roles/seller/cotizador/bajaTension', compact('vPaneles', 'vInversores', 'consultarClientes'));
+		return view('roles/seller/cotizador/bajaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes'));
 	}
 
     public function create(Request $request)
