@@ -56,7 +56,7 @@ $("input[name=inpSearchClient]").change(function()
             email.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vEmail + '" disabled readonly>';
             telefono.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].vTelefono + '" disabled readonly>';
             consumo.innerHTML = '<input type="text" class="form-control" value="' + response.message[0].fConsumo + '" disabled readonly>';
-            document.getElementById('municipio').value = response.message[0].vMunicipio.toString();
+            document.getElementById('municipio').value = response.message[0].vMunicipio.toString() + '-' + response.message[0].vEstado.toString();
         }
     });
 });

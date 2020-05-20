@@ -195,9 +195,9 @@ function logicaBotones(){
 }
 
 function sendPeriodsToServer(){
-    var municipio = document.getElementById('municipio').value;
+    var direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-
+    
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
@@ -205,7 +205,7 @@ function sendPeriodsToServer(){
         data: {
             "_token": $("meta[name='csrf-token']").attr('content'),
             'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
-            'municipio': municipio,
+            'direccionCliente': direccionCliente,
             'idCliente': idCliente
         },
         dataType: 'json',
