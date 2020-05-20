@@ -56,17 +56,180 @@
 </div>
 
 
-<div class="card shadow mb-3">
+<div class="card shadow mb-3" style="display:none;" id="divResultCotIndv">
     <div class="card-body">
-        <div class="container">
+        <div class="container" id="containerCI1">
+            <div>
+                <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
+                <a> - </a>
+                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn">2</a>
+            </div>
             <div class="row text-center">
-                <div class="col-lg-12">
-                    <div class="form-row">
-                        Resultados
-                    </div>
+                <div class="col table-responsive">
+                    <h3>Paneles</h3>
+                    <table class="table table-sm table-striped" id="paneles">
+                        <thead>
+                            <th scope="col">Cantidad paneles</th>
+                            <th scope="col">Potencia panel</th>
+                            <th scope="col">Potencia real</th>
+                            <th scope="col">Precio por modulo</th>
+                            <th scope="col">Costo total paneles</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCantidadPanel"></td>
+                                <td id="tdPotenciaPanel"></td>
+                                <td id="tdPotenciaReal"></td>
+                                <td id="tdPrecioModulo"></td>
+                                <td id="tdCostoTotalPanels"></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col table-responsive">
+                    <h3>Inversores</h3>
+                    <table class="table table-sm table-striped" id="inversores">
+                        <thead>
+                            <th scope="col">Cantidad inversores</th>
+                            <th scope="col">Potencia inversor</th>
+                            <th scope="col">Potencia maxima</th>
+                            <th scope="col">Potencia nominal</th>
+                            <th scope="col">Porcentaje sobredimensionamiento</th>
+                            <th scope="col">Potencia pico</th>
+                            <th scope="col">Precio inversor</th>
+                            <th scope="col">Costo total inversores</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCantidadInversor"></td>
+                                <td id="tdPotenciaInversor"></td>
+                                <td id="tdPotenciaMaxima"></td>
+                                <td id="tdPotenciaNominal"></td>
+                                <td id="tdPorcentajeSD"></td>
+                                <td id="tdPotenciaPico"></td>
+                                <td id="tdPrecioInversor"></td>
+                                <td id="tdCostoTotalInv"></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>   
+            </div>
+            <div class="row text-center">
+                <div class="col table-responsive">
+                    <h3>Viaticos</h3>
+                    <table class="table table-sm table-striped" id="viaticos">
+                        <thead>
+                            <th scope="col">Costo de estructuras</th>
+                            <th scope="col">No. cuadrillas</th>
+                            <th scope="col">No. dias</th>
+                            <th scope="col">No. dias reales</th>
+                            <th scope="col">No. personas requeridas</th>
+                            <th scope="col">Pago pasaje</th>
+                            <th scope="col">Pago total comida</th>
+                            <th scope="col">Pago total hospedaje</th>
+                            <th scope="col">Pago total pasaje</th>
+                            <th scope="col">Total de los viaticos</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCostoEstructuras"></td>
+                                <td id="tdNoCuadrillas"></td>
+                                <td id="tdNoDias"></td>
+                                <td id="tdNoDiasReales"></td>
+                                <td id="tdNoPersonasReq"></td>
+                                <td id="tdPagoPasaje"></td>
+                                <td id="tdPagoTotalComida"></td>
+                                <td id="tdPagoTotalHospedaje"></td>
+                                <td id="tdPagoTotalPasaje"></td>
+                                <td id="tdTotalViaticos"></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+            <div class="row text-center">
+                `<div class="col table-responsive">
+                    <h3>Totales</h3>
+                    <table class="table table-sm table-striped" id="totales">
+                        <thead>
+                            <th scope="col">Costo por watt</th>
+                            <th scope="col">Costo total fletes</th>
+                            <th scope="col">Mano de obra</th>
+                            <th scope="col">Margen</th>
+                            <th scope="col">Total de otros</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Precio mas IVA</th>
+                            <th scope="col">Total paneles, inversores, estructuras</th>
+                            <th scope="col">Subtotal Otros, flete, pan. inv. est.</th>
+                            <th scope="col">Total de todo</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCostoWatt"></td>
+                                <td id="tdCostoTotalFletes"></td>
+                                <td id="tdManoObra"></td>
+                                <td id="tdMargen"></td>
+                                <td id="tdTotalOtros"></td>
+                                <td id="tdPrecio"></td>
+                                <td id="tdPrecioMasIVA"></td>
+                                <td id="tdTPIE"></td>
+                                <td id="tdSubtotalOFPIE"></td>
+                                <td id="tdTotalTodo"></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+        </div>
+        <div class="container" id="containerCI2" style="display:none;">
+            <div>
+                <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
+                <a> - </a>
+                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn">2</a>
+            </div>    
+            <div class="row text-center">
+                <div class="col table-responsive">
+                    <h3>Totales mxn</h3>
+                    <table class="table table-sm table-striped" id="totales">
+                        <thead>
+                            <th scope="col">Costo por watt</th>
+                            <th scope="col">Costo total fletes</th>
+                            <th scope="col">Mano de obra</th>
+                            <th scope="col">Margen</th>
+                            <th scope="col">Total de otros</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Precio mas IVA</th>
+                            <th scope="col">Total paneles, inversores, estructuras</th>
+                            <th scope="col">Subtotal Otros, flete, pan. inv. est.</th>
+                            <th scope="col">Total de todo</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                                <td id=""></td>
+                            </tr>
+                        </tbody>
+                    </table> 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="container" id="loader" style="display:none;">
+    <div class="row justify-content-center align-items-center minh-100">
+        <img src="img/loader.svg">
+    </div>
+</div>  
 @endsection

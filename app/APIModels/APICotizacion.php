@@ -13,7 +13,7 @@ class APICotizacion extends GuzzleHttpRequest
     /*#region cotizacion_individual*/
     public function sendSingleQuotation($request)
     {
-        $this->post("cotizacionIndividual",$request);
+        return $this->post("cotizacionIndividual",$request);
     }
     /*#endregion*/
 }

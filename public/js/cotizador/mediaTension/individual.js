@@ -1,13 +1,29 @@
 var idPanel;
 var idInversor;
 
+$(document).ready(function(){
+    var loader = $('#loader');
+
+    readyLoader(loader);
+});
+
+function readyLoader(loader){
+    $(document)
+    .ajaxStart(function(){
+        loader.fadeIn();
+    })
+    .ajaxStop(function(){
+        loader.fadeOut();
+        $('#divResultCotIndv').css("display","");
+    });
+}
+
 function getDropDownListValues(){
     idPanel = document.getElementById('optPaneles').value;
     idInversor = document.getElementById('optInversores').value;
 }
 
 function sendSingleQuotation(){
-    //var municipio = 'Orizaba, Veracruz'; /*document.getElementById('municipio').value*/ //Preguntarle a Chucho como se obtiene el valor y adjuntarle el Estado para concatenarlo despues del munic.
     var cantidadPaneles = document.getElementById('inpCantPaneles').value;
     var cantidadInversores = document.getElementById('inpCantInversores').value;
 
@@ -24,10 +40,64 @@ function sendSingleQuotation(){
         },
         dataType: 'json',
         success: function(respuesta){
+            respuesta = respuesta.message;
+
             console.log(respuesta);
+
+            /*Vaciar datos de la cotizacion_individual en la tabla*/
+            //Paneles
+            $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
+            $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
+            $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
+            $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
+            $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
+
+            //Inversores
+            $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
+            $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
+            $('#tdPotenciaMaxima').html(respuesta[0].inversores.potenciaMaximaInversor);
+            $('#tdPotenciaNominal').html(respuesta[0].inversores.potenciaNominalInversor);
+            $('#tdPorcentajeSD').html(respuesta[0].inversores.porcentajeSobreDimens + '%');
+            $('#tdPotenciaPico').html(respuesta[0].inversores.potenciaPicoPorInversor);
+            $('#tdPrecioInversor').html(respuesta[0].inversores.precioInversor + '$');
+            $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
+
+            //Viaticos
+            $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$');
+            $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
+            $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
+            $('#tdNoDiasReales').html(respuesta[0].viaticos_costos.noDiasReales);
+            $('#tdNoPersonasReq').html(respuesta[0].viaticos_costos.noPersonasRequeridas);
+            $('#tdPagoPasaje').html(respuesta[0].viaticos_costos.pagoPasaje + '$');
+            $('#tdPagoTotalComida').html(respuesta[0].viaticos_costos.pagoTotalComida + '$');
+            $('#tdPagoTotalHospedaje').html(respuesta[0].viaticos_costos.pagoTotalHospedaje + '$');
+            $('#tdPagoTotalPasaje').html(respuesta[0].viaticos_costos.pagoTotalPasaje + '$');
+            $('#tdTotalViaticos').html(respuesta[0].viaticos_costos.totalViaticosMT + '$');
+
+            //Totales
+            $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
+            $('#tdCostoTotalFletes').html(respuesta[0].totales.costoTotalFletes + '$');
+            $('#tdManoObra').html(respuesta[0].totales.manoDeObra + '$');
+            $('#tdMargen').html(respuesta[0].totales.margen);
+            $('#tdTotalOtros').html(respuesta[0].totales.otrosTotal + '$');
+            $('#tdPrecio').html(respuesta[0].totales.precio + '$');
+            $('#tdPrecioMasIVA').html(respuesta[0].totales.precioMasIVA + '$');
+            $('#tdTPIE').html(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
+            $('#tdSubtotalOFPIE').html(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
+            $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
         },
         error: function(){
             alert('Algo ha ido mal al intentar realizar una cotizacion_individual');
         }
     });
+}
+
+function coti_dollars(){
+    document.getElementById('containerCI1').style.display = '';
+    document.getElementById('containerCI2').style.display = 'none';
+}
+
+function coti_mxn(){
+    document.getElementById('containerCI2').style.display = '';
+    document.getElementById('containerCI1').style.display = 'none';
 }
