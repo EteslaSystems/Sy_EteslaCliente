@@ -109,6 +109,9 @@
 
         <!-- Empieza formulario de GDMTH -->
         <div class="container" id="divGDMTH" style="display:none;">
+            <div id="divMunicipio" style="display:none;">
+                <label id="municipio"></label>
+            </div>
             <div class="row mt-3">
                 <div class="col-md-4 col-sm-12 mb-3">
                     <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenu()">
