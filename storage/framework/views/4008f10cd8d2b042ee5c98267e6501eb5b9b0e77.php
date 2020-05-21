@@ -3,23 +3,35 @@
     <div class="card-header">
         <p class="d-block mn-1 p-titulos">
             <i class="fa fa-bolt" aria-hidden="true"></i>
-            Cotización individual
-        </p>        
+            Cotización individual 
+        </p>
     </div>
     <div class="card-body">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-12">
                     <div class="form-row">
+                        <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenu()" title="addItems">
+                            +
+                        </button>
+                        <div class="menu-content shadow" id="menuContent">
+                            <div class="checkbox">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="chbEstructuras">Estructuras
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="mn-1">Cantidad paneles:</label>
-                                <input class="form-control input-sm" type="number" id="inpCantPaneles">
+                                <input class="form-control input-sm" type="number" id="inpCantPaneles" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="mn-1">Seleccionar Panel:</label>
                                 <select class="form-control" id="optPaneles" onchange="getDropDownListValues()">
-                                    <option disabled selected>Elige una opción:</option>
+                                    <option selected value="-1">Elige una opción:</option>
                                         <?php $__currentLoopData = $vPaneles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($details->idPanel); ?>"><?php echo e($details->vNombreMaterialFot); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -29,12 +41,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="mn-1">Cantidad inversores:</label>
-                                <input class="form-control input-sm" type="number" id="inpCantInversores">
+                                <input class="form-control input-sm" type="number" id="inpCantInversores" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="mn-1">Seleccionar Inversor:</label>
                                 <select class="form-control" id="optInversores" onchange="getDropDownListValues()">
-                                    <option disabled selected>Elige una opción:</option>
+                                    <option selected value="-1">Elige una opción:</option>
                                         <?php $__currentLoopData = $vInversores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($details->idInversor); ?>" ><?php echo e($details->vNombreMaterialFot); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

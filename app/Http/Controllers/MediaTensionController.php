@@ -88,11 +88,10 @@ class MediaTensionController extends Controller
 		$arrayCompleto["idUsuario"] = session('dataUsuario')->idUsuario;
 		$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
 		
-		$x = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
+		$response = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
 
-		//$response_ = response()->json($x);
-		$response_ = json_decode($x->getBody(), true);
+		$response = response()->json($response);
 
-		return $response_;
+		return $response;
 	}
 }

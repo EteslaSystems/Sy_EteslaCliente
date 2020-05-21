@@ -197,7 +197,7 @@ function logicaBotones(){
 function sendPeriodsToServer(){
     var direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    
+
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
@@ -229,8 +229,8 @@ function validarEnvioDePeriodo(){
         msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
         if(modalMsj(msj,msjConfirm) == true){
             sendPeriodsToServer();
-            //limpiarCampos();
-            //this.arrayPeriodosGDMTH = [];
+            limpiarCampos();
+            this.arrayPeriodosGDMTH = [];
             //console.log(arrayPeriodosGDMTH);
             /*
                 -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
