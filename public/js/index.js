@@ -41,12 +41,12 @@ $("input[name=inpSearchClient]").change(function()
         },
         dataType: 'json',
         success: function (response) {
-            nombre.innerHTML = '';
-            direccion.innerHTML = '';
-            celular.innerHTML = '';
-            email.innerHTML = '';
-            telefono.innerHTML = '';
-            consumo.innerHTML = '';
+            nombre.innerHTML = '<input type="text" class="form-control" name="default-name" disabled readonly>';
+            direccion.innerHTML = '<input type="text" class="form-control" name="default-address" disabled readonly>';
+            celular.innerHTML = '<input type="text" class="form-control" name="default-cellphone" disabled readonly>';
+            email.innerHTML = '<input type="text" class="form-control" name="default-email" disabled readonly>';
+            telefono.innerHTML = '<input type="text" class="form-control" name="default-phone" disabled readonly>';
+            consumo.innerHTML = '<input type="text" class="form-control" name="default-consume" disabled readonly>';
 
             nombreCompleto = response.message[0].vNombrePersona + ' ' + response.message[0].vPrimerApellido + ' ' + response.message[0].vSegundoApellido;
             direccionCompleta = response.message[0].vCalle + ', ' + response.message[0].vMunicipio + ', ' + response.message[0].vEstado;

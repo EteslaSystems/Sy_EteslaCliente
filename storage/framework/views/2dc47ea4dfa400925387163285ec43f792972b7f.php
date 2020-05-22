@@ -124,6 +124,10 @@
                             </a>
                         </div>
                     </div>
+
+                    <div id="divMunicipio" style="display:none;">
+                        <label id="municipio"></label>
+                    </div>
                 </div>
             </div>
         </div>
