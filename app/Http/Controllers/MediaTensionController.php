@@ -29,21 +29,20 @@ class MediaTensionController extends Controller
 	public function index()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
-		}
+		// if ($this->validarSesion() == 1) {
+		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
+		// }
 
 		//$vPaneles = $this->paneles->view();
 		//$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
+		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/mediaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes'));
+		return view('roles/seller/cotizador/mediaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes', 'rol'));
 	}
 
 	public function create(Request $request)

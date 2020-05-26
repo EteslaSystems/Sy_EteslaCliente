@@ -12,13 +12,13 @@ use App\APIModels\APICotizacion;
 
 class CotizacionIndividualController extends Controller
 {
-    protected $paneles;
+	protected $paneles;
 	protected $inversores;
 	protected $vendedor;
 	protected $clientes;
 	protected $cotizacion;
 
-    public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
+	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
@@ -26,25 +26,24 @@ class CotizacionIndividualController extends Controller
 		$this->clientes = $clientes;
 		$this->cotizacion = $cotizacion;
 	}
-    
-    public function index()
+	
+	public function index()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
-		}
+		// if ($this->validarSesion() == 1) {
+		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
+		// }
 
 		$vPaneles = $this->paneles->view();
 		$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
+		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'consultarClientes'));
+		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'consultarClientes', 'rol'));
 	}
 
 	public function create(Request $request)

@@ -1,4 +1,11 @@
-@extends('roles/seller')
+@if($rol == 1) @php($layout = 'roles/admin') @endif
+@if($rol == 2) @php($layout = 'roles/operations') @endif
+@if($rol == 3) @php($layout = 'roles/enginer') @endif
+@if($rol == 4) @php($layout = 'roles/enginer') @endif
+@if($rol == 5) @php($layout = 'roles/seller') @endif
+
+@extends($layout)
+
 @section('content')
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
