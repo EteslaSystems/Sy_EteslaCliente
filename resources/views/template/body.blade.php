@@ -33,6 +33,26 @@
                 </ul>
             </div>
         </nav>
+        <!-- Alert modal - Cuadro de dialogo -->
+        <div class="modal fade" id="mdlCuadroDialogo" style="displaye:none;">
+            <!-- Modal content -->
+            <div class="modal-content" id="mdlCuadroDialogoContent">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="30px;" alt="30px;" id="mdlImage">
+                    </div>
+                    <div class="col-8">
+                        <span class="close">&times;</span>
+                        <p id="mdlMessage"></p>
+                    </div>
+                </div>
+                <div class="modal-footer" id="mdlCuadroDialogoFooter" style="displaye:none;">
+                    <button class="btn btn-default" type="button" id="btnModalConfirm">Confirmar</button>
+                    <button class="btn btn-default" type="button" id="btnModalCancel">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Contenido de la página-->
         <div class="container-fluid">
             @yield('content')

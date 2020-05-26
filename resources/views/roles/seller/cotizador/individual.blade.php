@@ -16,9 +16,10 @@
                             +
                         </button>
                         <div class="menu-content shadow" id="menuContent">
+                            <label><strong>Agregar</strong></label>
                             <div class="checkbox">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="chbEstructuras">Estructuras
+                                    <input type="checkbox" id="chbEstructuras" disabled>Estructuras
                                 </label>
                             </div>
                         </div>
@@ -55,7 +56,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 offset-md-8 text-right mb-3">
-                            <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow">
+                            <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow" id="btnCalcularIndividual">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                                 Calcular
                             </button>
