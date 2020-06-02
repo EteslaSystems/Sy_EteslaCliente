@@ -46,8 +46,8 @@
                     </div>
                 </div>
                 <div class="modal-footer" id="mdlCuadroDialogoFooter" style="displaye:none;">
-                    <button class="btn btn-default" type="button" id="btnModalConfirm">Confirmar</button>
-                    <button class="btn btn-default" type="button" id="btnModalCancel">Cancelar</button>
+                    <button class="btn btn-default" type="button" id="btnModalConfirm" style="displaye:none;">Confirmar</button>
+                    <button class="btn btn-default" type="button" id="btnModalCancel" style="displaye:none;">Cancelar</button>
                 </div>
             </div>
         </div>

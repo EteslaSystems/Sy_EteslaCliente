@@ -22,11 +22,11 @@
         <div class="container" id="divGDMTO">
             <div class="row mt-3">
                     <div class="col-md-4 col-sm-12 mb-3">
-                        <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenu()">
+                        <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTO()">
                             Más Info.
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </button>
-                        <div class="menu-content shadow" id="menuContent">
+                        <div class="menu-content shadow" id="menuContentGDMTO">
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col">
                                     <div class="form-group">
@@ -115,11 +115,11 @@
             </div>
             <div class="row mt-3">
                 <div class="col-md-4 col-sm-12 mb-3">
-                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenu()">
+                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()">
                         Más Info.
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
-                    <div class="menu-content shadow-sm" id="menuContent">
+                    <div class="menu-content shadow-sm" id="menuContentGDMTH">
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col">
                                 <div class="form-group">

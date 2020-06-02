@@ -45,6 +45,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/index.js')); ?>"></script> <!-- Este archivo es necesario para el CP y buscador -->
 <script src="<?php echo e(asset('js/log.js')); ?>"></script>
+<!--script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script-->
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTO.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/individual.js')); ?>"></script>

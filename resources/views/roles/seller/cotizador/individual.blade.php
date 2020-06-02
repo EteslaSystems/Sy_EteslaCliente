@@ -72,13 +72,13 @@
 <div class="card shadow mb-3" style="display:none;" id="divResultCotIndv">
     <div class="card-body">
         <div class="container" id="containerCI1">
-            <div>
+            <div id="divPaginado">
                 <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
                 <a> - </a>
-                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn">2</a>
+                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn" id="a2">2</a>
             </div>
             <div class="row text-center">
-                <div class="col table-responsive">
+                <div class="col table-responsive" id="dtabPanels">
                     <h3>Paneles</h3>
                     <table class="table table-sm table-striped" id="paneles">
                         <thead>
@@ -100,7 +100,7 @@
                     </table> 
                 </div>
             </div>
-            <div class="row text-center">
+            <div class="row text-center" id="dtabInversores">
                 <div class="col table-responsive">
                     <h3>Inversores</h3>
                     <table class="table table-sm table-striped" id="inversores">
@@ -129,7 +129,7 @@
                     </table> 
                 </div>   
             </div>
-            <div class="row text-center">
+            <div class="row text-center" id="dtabViatics">
                 <div class="col table-responsive">
                     <h3>Viaticos</h3>
                     <table class="table table-sm table-striped" id="viaticos">
@@ -162,7 +162,7 @@
                     </table> 
                 </div>
             </div>
-            <div class="row text-center">
+            <div class="row text-center" id="dtabTotales">
                 `<div class="col table-responsive">
                     <h3>Totales</h3>
                     <table class="table table-sm table-striped" id="totales">
@@ -200,7 +200,7 @@
             <div>
                 <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
                 <a> - </a>
-                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn">2</a>
+                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn"id="a2>2</a>
             </div>    
             <div class="row text-center">
                 <div class="col table-responsive">

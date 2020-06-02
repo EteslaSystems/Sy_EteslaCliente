@@ -161,7 +161,11 @@ JSONscriptRequest.prototype.addScriptTag = function () {
 /*#endregion*/
 
 //Aqui empieza el cuadro de dialogo que pidio el gordis
-function loadMenu(){
-    document.getElementById("menuContent").classList.toggle("menu-active");
+function loadMenuGDMTO(){
+    document.getElementById("menuContentGDMTO").classList.toggle("menu-active");
+}
+
+function loadMenuGDMTH(){
+    document.getElementById("menuContentGDMTH").classList.toggle("menu-active");
 }
 //Aqui termina el cuadrio de dialogo que pidio el gordis
