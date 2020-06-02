@@ -1,3 +1,11 @@
+<?php if($rol == 1): ?> <?php ($layout = 'roles/admin'); ?> <?php endif; ?>
+<?php if($rol == 2): ?> <?php ($layout = 'roles/operations'); ?> <?php endif; ?>
+<?php if($rol == 3): ?> <?php ($layout = 'roles/enginer'); ?> <?php endif; ?>
+<?php if($rol == 4): ?> <?php ($layout = 'roles/enginer'); ?> <?php endif; ?>
+<?php if($rol == 5): ?> <?php ($layout = 'roles/seller'); ?> <?php endif; ?>
+
+
+
 <?php $__env->startSection('content'); ?>
     <div class="container" style="padding: unset;">
         <div class="container-fluid" style="padding: unset;">
@@ -235,4 +243,4 @@
         </script>
     <?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('template/body', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/profileUser.blade.php ENDPATH**/ ?>
+<?php echo $__env->make($layout, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/template/profileUser.blade.php ENDPATH**/ ?>

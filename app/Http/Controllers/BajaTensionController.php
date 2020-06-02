@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class BajaTensionController extends Controller
 {
-    protected $paneles;
-    protected $inversores;
-    protected $vendedor;
-    protected $clientes;
+	protected $paneles;
+	protected $inversores;
+	protected $vendedor;
+	protected $clientes;
 
 	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes)
 	{
@@ -26,45 +26,44 @@ class BajaTensionController extends Controller
 	public function index()
 	{
 		if ($this->validarSesion() == 0) {
-			\Session::flash('message', 'Debe iniciar sesión para acceder al sistema.');
-			return redirect('/');
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		if ($this->validarSesion() == 1) {
-			\Session::flash('message', 'Solo los vendedores pueden acceder a esta vista.');
-			return redirect('index');
-		}
+		// if ($this->validarSesion() == 1) {
+		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
+		// }
 
 		//$vPaneles = $this->paneles->view();
 		//$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
+		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/bajaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes'));
+		return view('roles/seller/cotizador/bajaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes', 'rol'));
 	}
 
-    public function create(Request $request)
-    {
-        $request["idUsuario"] = session('dataUsuario')->idUsuario;
-        $request["consumo"] = 0;
-        $request["calle"] = $request->calle . '-' . $request->colonia;
+	public function create(Request $request)
+	{
+		$request["idUsuario"] = session('dataUsuario')->idUsuario;
+		$request["consumo"] = 0;
+		$request["calle"] = $request->calle . '-' . $request->colonia;
 
-        $vCliente = $this->clientes->insertarCliente(
-        	['json' => $request->all()]
-        );
+		$vCliente = $this->clientes->insertarCliente(
+			['json' => $request->all()]
+		);
 
-        if($vCliente->status != 200) {
-            return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
-        } else {
-            return redirect('/mediaT')->with('status-success', $vCliente->message)
-            	->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
-            	->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
-            	->with('celular', $request["celular"])
-            	->with('correo', $request["email"])
-            	->with('telefono', $request["telefono"])
-            	->with('consumo', $request["consumo"]);
-        }
-    }
+		if($vCliente->status != 200) {
+			return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
+		} else {
+			return redirect('/mediaT')->with('status-success', $vCliente->message)
+			->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
+			->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
+			->with('celular', $request["celular"])
+			->with('correo', $request["email"])
+			->with('telefono', $request["telefono"])
+			->with('consumo', $request["consumo"]);
+		}
+	}
 
 	public function validarSesion()
 	{
@@ -76,5 +75,4 @@ class BajaTensionController extends Controller
 		}
 		return 0;
 	}
-
 }

@@ -7,6 +7,18 @@
     {{'/e'}}
 @stop
 @section('sidebar')
+    <a href="#cotizadorSubmenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light dropdown-toggle"><img src="https://img.icons8.com/plasticine/30/000000/calculator.png"> Cotizador</a>
+        <ul class="collapse list-unstyled" id="cotizadorSubmenu1">
+        <li>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/mediaTension">Media tensión</a>
+        </li>
+        <li>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/bajaTension">Baja tensión</a>
+        </li>
+        <li>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/individual">Individual</a>
+        </li>
+    </ul>
     <a href="/levantamiento" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/cotton/25/000000/document-1.png"> Levantamiento</a>
     <a href="/instalacion" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/dusk/30/000000/swiss-army-knife.png"> Instalaciones</a>
     <a href="configuracion" aria-expanded="false" class="list-group-item list-group-item-action bg-light"><img src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"> Configuración</a>

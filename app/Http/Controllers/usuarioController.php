@@ -110,8 +110,9 @@ class usuarioController extends Controller
 			$dataUsuario["id"] = session('dataUsuario')->idPersona;
 			$usuario = $this->usuario->consultarUsuario(['json' => $dataUsuario]);
 			$usuario = $usuario->message[0];
+			$rol = session('dataUsuario')->rol;
 
-			return view('template/profileUser', compact('usuario', 'usuario'));
+			return view('template/profileUser', compact('usuario', 'usuario', 'rol'));
 		}
 		return redirect('/')->with('status-fail', 'Debe iniciar sesión antes.');
 	}

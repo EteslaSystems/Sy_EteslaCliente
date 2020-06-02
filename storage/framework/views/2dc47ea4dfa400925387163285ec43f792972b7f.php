@@ -1,3 +1,11 @@
+<?php if($rol == 1): ?> <?php ($layout = 'roles/admin'); ?> <?php endif; ?>
+<?php if($rol == 2): ?> <?php ($layout = 'roles/operations'); ?> <?php endif; ?>
+<?php if($rol == 3): ?> <?php ($layout = 'roles/enginer'); ?> <?php endif; ?>
+<?php if($rol == 4): ?> <?php ($layout = 'roles/enginer'); ?> <?php endif; ?>
+<?php if($rol == 5): ?> <?php ($layout = 'roles/seller'); ?> <?php endif; ?>
+
+
+
 <?php $__env->startSection('content'); ?>
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
@@ -123,6 +131,10 @@
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABlUlEQVRIidWVTU4CURCEeyCwEZcSTTyBstIDiBdQMMYrEIgKeghCPIbRuJWDuBBMVNSV3sANasLnYnpCC83MYNz4kpdAVXVXT78/kf8+gjgSyItIReeGiKwq9SYiNyLSFZHrIAg+53YG9oAXksczUJ0ncQY4MwlugWNgDVjQuQ40gZ7RdYBMGoMo+RCoxQVpMXXVAnTStCVKvjXHV5eNSWWWKG96XjN4HSg6+iJQN/8bGvsE5DyDA9PzzERQ35po8r5yDcWyBtv3DK6UPDLYklnIe2DFwZaNvqX4hWfwqOSa04qosv7E7+KEdl25B8/gXcmCw9mqpyo3ukXl3yMsed/OHt4tEGEj7wv+okWluBZdKtk02NSCegtv9KeKn3sG0Tbt8ftteqeYu03zhBcX/DxAaQ/aocYO8A6aiqoqGgJlV+THbQMfwAjYSRJ3jEkDyMZos1r5h8a001STMSZR/1uEh6igswScmJ6PgDZprmtjVCG8uJLGIK4tSU9mTkR2JXwyN2X8ZL7K+MnsBkHwlbryfze+AZO9KH5AFY+AAAAAAElFTkSuQmCC">
                             </a>
                         </div>
+                    </div>
+
+                    <div id="divMunicipio" style="display:none;">
+                        <label id="municipio"></label>
                     </div>
                 </div>
             </div>
@@ -504,4 +516,4 @@ unset($__errorArgs, $__bag); ?>
         </script>
     <?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('roles/seller', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/cotizador.blade.php ENDPATH**/ ?>
+<?php echo $__env->make($layout, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/cotizador.blade.php ENDPATH**/ ?>
