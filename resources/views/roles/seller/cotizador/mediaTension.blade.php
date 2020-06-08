@@ -1,6 +1,6 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-<div class="card shadow mb-3">
+<div class="card shadow mb-3" id="divCotizacionMediaTension">
     <div class="card-header p-3">
         <div class="row">
             <div class="col-md-6 col-sm-6 fx-1 align-middle">
@@ -234,6 +234,15 @@
             </div>
         </div>
         <!-- Termina formulario de GDMTO -->
+    </div>
+</div>
+<div class="card shadow mb-3" id="divResultCotizacion" style="display:none;">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-xs float-left" onclick="backToCotizacion()"><img src="https://img.icons8.com/windows/24/000000/long-arrow-left.png"/></button>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-lg" id="divResult"></div>
     </div>
 </div>
 <div class="col-md-4 offset-md-8 text-right mb-3">

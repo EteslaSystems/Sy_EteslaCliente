@@ -26,40 +26,41 @@ function agregarPeriodo(){
     var Dmxn = document.getElementById('D(mxn/kW)').value;
 
     /*Validar campos vacios*/
-    if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn))
-    {
-        msj = 'Todos los campos pertenecientes a los datos de consumo, deben ser llenados';
-        modalMsj(msj,this.msjConfirm);
-    }
-    else{
+    // if(validarCamposVacios(BkWh) || validarCamposVacios(IkWh) || validarCamposVacios(PkWh) || validarCamposVacios(BkW) || validarCamposVacios(IkW) || validarCamposVacios(PkW) || validarCamposVacios(Bmxn) || validarCamposVacios(Imxn) || validarCamposVacios(Pmxn) || validarCamposVacios(pagoTransmision) || validarCamposVacios(Cmxn) || validarCamposVacios(Dmxn))
+    // {
+    //     // msj = 'Todos los campos pertenecientes a los datos de consumo, deben ser llenados';
+    //     // modalMsj(msj,this.msjConfirm);
+    //     alert('Todos los campos pertenecientes a los datos de consumo, deben ser llenados');
+    // }
+    // else{
         objPeriodosGDMTH = {
-            bkwh: BkWh,
-            ikwh: IkWh,
-            pkwh: PkWh,
-            bkw: BkW,
-            ikw: IkW,
-            pkw: PkW,
-            bmxn: Bmxn,
-            imxn: Imxn,
-            pmxn: Pmxn,
-            pagoTransmi: pagoTransmision,
-            cmxn: Cmxn,
-            dmxn: Dmxn
+            bkwh: BkWh || null,
+            ikwh: IkWh || null,
+            pkwh: PkWh || null,
+            bkw: BkW || null,
+            ikw: IkW || null,
+            pkw: PkW || null,
+            bmxn: Bmxn || null,
+            imxn: Imxn || null,
+            pmxn: Pmxn || null,
+            pagoTransmi: pagoTransmision || null,
+            cmxn: Cmxn || null,
+            dmxn: Dmxn || null
         };
     
         if(arrayPeriodosGDMTH.length < 12){
             arrayPeriodosGDMTH.push(objPeriodosGDMTH);
             sumarAlIndexador();
-            //limpiarCampos();
+            limpiarCampos();
         }
         else
         {
-            msj = 'Solo se pueden ingresar 12 periodos';
-            modalMsj(msj,this.msjConfirm);
+            // msj = 'Solo se pueden ingresar 12 periodos';
+            // modalMsj(msj,this.msjConfirm);
             lista.remove(lista.selectedIndex);
             //restarAlIndexador();
         }
-    }
+    // }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
     console.log(arrayPeriodosGDMTH);
@@ -92,7 +93,7 @@ function mostrarPeriodo(){
         indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
         
         if(indexMostrar > indexador){
-            //limpiarCampos();
+            limpiarCampos();
             desbloquearCampos();
             banderaEditar = false;
         }
@@ -194,6 +195,12 @@ function logicaBotones(){
     });
 }
 
+function backToCotizacion(){
+    $("#divCotizacionMediaTension").css("display","");
+    $("#divBtnCalcularMT").css("display","");
+    $("#divResultCotizacion").css("display","none");
+}
+
 function sendPeriodsToServer(){
     var direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
@@ -208,13 +215,53 @@ function sendPeriodsToServer(){
             'direccionCliente': direccionCliente,
             'idCliente': idCliente
         },
-        dataType: 'json',
-        success: function(respuesta){
-            console.log(respuesta);
-        },
-        error: function(){
-            console.log('Al parecer hubo un error con la peticion AJAX de la cotizacion');
+        dataType: 'json'
+    })
+    .fail(function(){
+        alert('Al parecer hubo un error con la peticion AJAX de la cotizacion GDMTH');
+    })
+    .done(function(respuesta){
+        // respuesta = respuesta.message;
+
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'GET',
+            url: '/resultados'
+        })
+        .fail(function(){
+            alert('Hubo un error al tratar de enviar datos a la vista de -RESULTADOS-');
+        })
+        .done(function(data){
+            $('#divCotizacionMediaTension').css("display","none");
+            $('#divBtnCalcularMT').css("display","none");
+            $('#divResultCotizacion').css("display","");
+            
+            $('#divResult').html(data);
+        });
+
+        console.log(respuesta);
+        //Consumo
+        $('#consumoAnual').html(respuesta[0].consumo.consumoAnual);
+        $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria);
+        $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo);
+        
+        newResult = JSON.parse(respuesta);
+        if(Array.isArray(newResult)){
+            console.log('Haz parseado a un array');
         }
+        else{
+            console.log('No se a logrado nara');
+        }
+        //Paneles
+        // for(var i=1; i<)
+        // {
+
+        // }
+
+
+
+
+        $('#listPaneles');
     });
 }
 
@@ -240,7 +287,7 @@ function validarEnvioDePeriodo(){
     }
     else if(arrayPeriodosGDMTH.length == 12){
         sendPeriodsToServer();
-        //limpiarCampos();
+        limpiarCampos();
         this.arrayPeriodosGDMTH = [];
         console.log(arrayPeriodosGDMTH);
         /*

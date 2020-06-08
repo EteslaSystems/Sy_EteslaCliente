@@ -16,3 +16,6 @@ function limpiarCampos(){
     $('input[type="number"]').val('');
 }
 
+function logicaBtnsCRUDArray(){
+    
+}

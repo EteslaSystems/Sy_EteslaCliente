@@ -119,26 +119,10 @@ function sendSingleQuotation(){
             })
             .done(function(respuesta){
                 respuesta = respuesta.message;
-                
-                if(respuesta[0].panel.cantidadPaneles == 0 && respuesta[0].inversor.numeroDeInversores != 0)
-                {   
-                    console.log('entro');
-                    $('#dtabPanels').css("display","none");
-                    $('#dtabViatics').css("display","none");
-                    $('#dtabTotales').css("display","none");
-                    $('#divPaginado').css("display","none");
+                console.log(respuesta);
 
-                    //Inversores
-                    $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
-                    $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
-                    $('#tdPotenciaMaxima').html(respuesta[0].inversores.potenciaMaximaInversor);
-                    $('#tdPotenciaNominal').html(respuesta[0].inversores.potenciaNominalInversor);
-                    //$('#tdPorcentajeSD').html(respuesta[0].inversores.porcentajeSobreDimens + '%');
-                    //$('#tdPotenciaPico').html(respuesta[0].inversores.potenciaPicoPorInversor);
-                    $('#tdPrecioInversor').html(respuesta[0].inversores.precioInversor + '$');
-                    $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
-                }
-                else{
+                if(respuesta[0].paneles && respuesta[0].inversores)
+                {   
                     /*Vaciar datos de la cotizacion_individual en la tabla*/
                     //Paneles
                     $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
@@ -180,6 +164,26 @@ function sendSingleQuotation(){
                     $('#tdTPIE').html(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
                     $('#tdSubtotalOFPIE').html(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
                     $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
+                }
+                else{
+                    if(respuesta[0].panel.cantidadPaneles == 0 && respuesta[0].inversor.numeroDeInversores != 0)
+                    {
+                        console.log('entro');
+                        $('#dtabPanels').css("display","none");
+                        $('#dtabViatics').css("display","none");
+                        $('#dtabTotales').css("display","none");
+                        $('#divPaginado').css("display","none");
+
+                        //Inversores
+                        $('#tdCantidadInversor').html(respuesta[0].inversor.numeroDeInversores);
+                        $('#tdPotenciaInversor').html(respuesta[0].inversor.potenciaInversor);
+                        $('#tdPotenciaMaxima').html(respuesta[0].inversor.potenciaMaximaInversor);
+                        $('#tdPotenciaNominal').html(respuesta[0].inversor.potenciaNominalInversor);
+                        //$('#tdPorcentajeSD').html(respuesta[0].inversor.porcentajeSobreDimens + '%');
+                        //$('#tdPotenciaPico').html(respuesta[0].inversor.potenciaPicoPorInversor);
+                        $('#tdPrecioInversor').html(respuesta[0].inversor.precioInversor + '$');
+                        $('#tdCostoTotalInv').html(respuesta[0].inversor.costoTotalInversores + '$');
+                    }
                 }
             });
         }

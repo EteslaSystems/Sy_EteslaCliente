@@ -15,18 +15,20 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
-Route::get('/mediaTension', 'MediaTensionController@index');
-Route::post('/enviarPeriodos','MediaTensionController@sendPeriodsToServer');
 
 Route::get('/bajaTension', 'BajaTensionController@index');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
-Route::get('/mediaT', 'MediaTensionController@index');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
-Route::get('/resultados', 'ResultadosController@index');
 
+Route::get('/mediaTension', 'MediaTensionController@index');
+// Route::get('/mediaT', 'MediaTensionController@index');
+Route::post('/enviarPeriodos','MediaTensionController@sendPeriodsToServer');
 Route::get('/individual', 'CotizacionIndividualController@index');
 Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');
+
+Route::get('/resultados', 'ResultadosController@index');
+
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
