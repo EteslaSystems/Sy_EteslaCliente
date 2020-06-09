@@ -201,68 +201,146 @@ function backToCotizacion(){
     $("#divResultCotizacion").css("display","none");
 }
 
+function readyLoader(loader){
+    $(document)
+    .ajaxStart(function(){
+        loader.fadeIn();
+    })
+    .ajaxStop(function(){
+        loader.fadeOut();
+        $('#divResultCotIndv').css("display","");
+    });
+}
+
 function sendPeriodsToServer(){
     var direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
-    $.ajax({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        type: 'POST',
-        url: '/enviarPeriodos',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr('content'),
-            'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
-            'direccionCliente': direccionCliente,
-            'idCliente': idCliente
-        },
-        dataType: 'json'
-    })
-    .fail(function(){
-        alert('Al parecer hubo un error con la peticion AJAX de la cotizacion GDMTH');
-    })
-    .done(function(respuesta){
-        // respuesta = respuesta.message;
-
+    if(direccionCliente == '' || direccionCliente.length == 0){
+        alert('Informacion de cliente vacia');
+    }
+    else{
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'GET',
-            url: '/resultados'
+            type: 'POST',
+            url: '/enviarPeriodos',
+            data: {
+                "_token": $("meta[name='csrf-token']").attr('content'),
+                'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
+                'direccionCliente': direccionCliente,
+                'idCliente': idCliente
+            },
+            dataType: 'json'
         })
         .fail(function(){
-            alert('Hubo un error al tratar de enviar datos a la vista de -RESULTADOS-');
+            alert('Al parecer hubo un error con la peticion AJAX de la cotizacion GDMTH');
         })
-        .done(function(data){
-            $('#divCotizacionMediaTension').css("display","none");
-            $('#divBtnCalcularMT').css("display","none");
-            $('#divResultCotizacion').css("display","");
-            
-            $('#divResult').html(data);
+        .done(function(respuesta){
+            respuesta = respuesta.message;
+    
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                type: 'GET',
+                url: '/resultados'
+            })
+            .fail(function(){
+                alert('Hubo un error al tratar de enviar datos a la vista de -RESULTADOS-');
+            })
+            .done(function(data){
+                var _potenciaReal = 0;
+
+                $('#divCotizacionMediaTension').css("display","none");
+                $('#divBtnCalcularMT').css("display","none");
+                $('#divResultCotizacion').css("display","");
+                
+                $('#divResult').html(data);
+                console.log(respuesta);
+    
+                //Consumo
+                $('#consumoAnual').html(respuesta[0].consumo.consumoAnual);
+                $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria);
+                $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo);
+                
+                //Paneles
+                for(var i=1; i<respuesta.length; i++)
+                {
+                    $('#listPaneles').append(
+                        $('<option/>', {
+                            value: i,
+                            text: respuesta[i].panel.nombre
+                        })
+                    );
+                }
+    
+                $('#listPaneles').change(function(){
+                    var x = $('#listPaneles').val(); //Iteracion
+                    
+                    if(x === '-1'  || x === -1){
+                        $('#numeroModulos').html('');
+                        $('#potenciaModulo').html('');
+                        $('#potenciaReal').html('');
+                        $('#precioModulo').html('');
+                        $('#costoEstructuras').html('');
+                    }
+                    else{
+                        _potenciaReal = respuesta[x].panel.potenciaReal;
+
+                        $('#numeroModulos').html(respuesta[x].panel.noModulos);
+                        $('#potenciaModulo').html(respuesta[x].panel.potencia);
+                        $('#potenciaReal').html(_potenciaReal);
+                        $('#precioModulo').html(respuesta[x].panel.precioPanel);
+                        $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$');
+                    }
+                    
+                    console.log('DropDownList value: '+x);
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/inversores'
+                })
+                .fail(function(){
+                    alert('Hubo un error al intentar cargar el dropdownlist de Inversores');
+                }).
+                done(function(response){
+                    console.log(response);
+                    //Llenado de dropdownlist de Inversores
+                    for(var j=0; j<response.length; j++)
+                    {
+                        $('#listInversores').append(
+                            $('<option/>', {
+                                value: j,
+                                text: response[j].vNombreMaterialFot
+                            })
+                        );
+                    }
+
+                    $('#listInversores').change(function(){
+                        var x = $('#listPaneles').val(); //Iteracion
+                        var idInversor = response[x].idInversor;
+
+                        $.ajax({
+                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                            type: 'POST',
+                            url: '',
+                            data: {
+                                "_token": $("meta[name='csrf-token']").attr('content'),
+                                "idInversor": idInversor,
+                                "_potenciaReal": _potenciaReal
+                            },
+                            dataType: 'json'
+                        })
+                        .fail(function(){
+                            alert('Hubo un error al intentar calcular el numero de inversorse MediaTension');
+                        })
+                        .done(function(reply){
+                            console.log(reply);
+                        });
+                    });
+                });
+            });
         });
-
-        console.log(respuesta);
-        //Consumo
-        $('#consumoAnual').html(respuesta[0].consumo.consumoAnual);
-        $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria);
-        $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo);
-        
-        newResult = JSON.parse(respuesta);
-        if(Array.isArray(newResult)){
-            console.log('Haz parseado a un array');
-        }
-        else{
-            console.log('No se a logrado nara');
-        }
-        //Paneles
-        // for(var i=1; i<)
-        // {
-
-        // }
-
-
-
-
-        $('#listPaneles');
-    });
+    }
 }
 
 function validarEnvioDePeriodo(){
@@ -277,7 +355,6 @@ function validarEnvioDePeriodo(){
         if(modalMsj(msj,msjConfirm) == true){
             sendPeriodsToServer();
             limpiarCampos();
-            this.arrayPeriodosGDMTH = [];
             //console.log(arrayPeriodosGDMTH);
             /*
                 -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 

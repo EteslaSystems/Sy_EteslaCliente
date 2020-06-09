@@ -79,6 +79,7 @@ class MediaTensionController extends Controller
 		return 0;
 	}
 
+	//1er. Paso
 	public function sendPeriodsToServer(Request $request)
 	{
 		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
@@ -92,4 +93,7 @@ class MediaTensionController extends Controller
 		
 		return $response;
 	}
+
+	//2do. Paso
+	
 }

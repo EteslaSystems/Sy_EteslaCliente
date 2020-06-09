@@ -14,17 +14,25 @@ class InversoresController extends Controller
 		$this->inversores = $inversores;
 	}
 
-	public function index()
+	public function index(Request $request)
     {
-        if ($this->validarSesion() == 0) {
-            return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
+        if($request->ajax())
+        {
+            $vInversores = $this->inversores->view();
+            $vInversores = response()->json($vInversores);
+            return $vInversores;
         }
-        if ($this->validarSesion() == 1) {
-            return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+        else{
+            if ($this->validarSesion() == 0) {
+                return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
+            }
+            if ($this->validarSesion() == 1) {
+                return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+            }
+            $vInversores = $this->inversores->view();
+    
+            return view('roles/admin/inversores', compact('vInversores'));
         }
-        $vInversores = $this->inversores->view();
-
-		return view('roles/admin/inversores', compact('vInversores'));
     }
 
     public function destroy($id)

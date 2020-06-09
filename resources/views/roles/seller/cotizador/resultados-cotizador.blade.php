@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col form-group">
                                     <label>Inversor</label>
-                                    <select class="form-control">
+                                    <select class="form-control" id="listInversores">
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -66,136 +66,50 @@
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>
-                                <th scope="col" colspan="2">Resumen Economico</th>
+                                <th scope="col" colspan="2">Paneles</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <tr>
                                 <td>
-                                    <b>Precio con IVA (USD)</b>
+                                    <b>Número de modulos</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="numeroModulos"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Precio sin IVA (MXN)</b>
+                                    <b>Potencia del modulo</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaModulo"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Promedio de pago anterior</b>
+                                    <b>Potencia real</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaReal"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Promedio del nuevo pago</b>
+                                    <b>Precio modulo</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="precioModulo"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Ahorro mensual</b>
+                                    <b>Estructuras (cost)</b>
                                 </td>
-
-                                <td>@result</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Ahorro anual</b>
-                                </td>
-
-                                <td>@result</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Viaticos </b>
-                                </td>
-
-                                <td>@result</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>ROI bruto</b>
-                                </td>
-
-                                <td>@result</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>ROI con deducción</b>
-                                </td>
-
-                                <td>@result</td>
+                                <td id="costoEstructuras"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-                <div class="col-4">
-                    <table class="table table-hover table-sm table-striped">
-                        <thead class="thead-dark text-center">
-                            <tr>
-                                <th scope="col" colspan="2">Resumen General</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-1"></div>
-                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-2"></div>
-                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-3"></div>
-                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>
-                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;">
-                                        GUARDAR Y CREAR PDF
-                                    </button>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
-                                        MODIFICAR RESULTADOS
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
                 <div class="col-8">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>
-                                <th scope="col" colspan="2">Resumen Técnico</th>
+                                <th scope="col" colspan="2">Inversores</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <tr>
                                 <td>
@@ -256,15 +170,51 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="col-4">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>
-                                <th scope="col" colspan="2">Testeo php</th>
+                                <th scope="col" colspan="2">Viaticos</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Hospedaje</b>
+                                </td>
+                                <td>@result</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Comida</b>
+                                </td>
 
+                                <td>@result</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Pasaje</b>
+                                </td>
+
+                                <td>@result</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Otros viaticos</b>
+                                </td>
+
+                                <td>@result</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table table-hover table-sm table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Totales</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
                                 <td>
@@ -293,6 +243,55 @@
                                 </td>
 
                                 <td>@result</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table table-hover table-sm table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Resumen General</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="range-wrap">
+                                        <div class="range-value" id="rangeV-1"></div>
+                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="range-wrap">
+                                        <div class="range-value" id="rangeV-2"></div>
+                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="range-wrap">
+                                        <div class="range-value" id="rangeV-3"></div>
+                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="text-center">
+                                <td>
+                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;">
+                                        GUARDAR Y CREAR PDF
+                                    </button>
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
+                                        MODIFICAR RESULTADOS
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
