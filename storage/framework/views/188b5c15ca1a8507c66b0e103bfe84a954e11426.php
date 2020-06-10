@@ -244,7 +244,7 @@
         <div class="col-lg" id="divResult"></div>
     </div>
 </div>
-<div class="col-md-4 offset-md-8 text-right mb-3">
+<div class="col-md-4 offset-md-8 text-right mb-3" id="divBtnCalcularMT">
     <button onclick="validarEnvioDePeriodo()" class="btn btn-green text-uppercase shadow">
         <i class="fa fa-check" aria-hidden="true"></i>
         Calcular

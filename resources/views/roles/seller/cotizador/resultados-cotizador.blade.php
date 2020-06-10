@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col form-group">
                                     <label>Inversor</label>
-                                    <select class="form-control" id="listInversores">
+                                    <select class="form-control" id="listInversores" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -113,59 +113,45 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <b>Modelo de paneles</b>
+                                    <b>Cantidad</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="cantidadInversores"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Modelo de inversor</b>
+                                    <b>Potencia</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaInversor"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Series X paralelos</b>
+                                    <b>Potencia maxima</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaMaximaInv"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Irradiación</b>
+                                    <b>Potencia nominal</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaNominalInv"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Consumo mensual</b>
+                                    <b>Potencia pico</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="potenciaPicoInv"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Generación mensual</b>
+                                    <b>Porcentaje sobre dimensionamiento</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td di="porcentajeSobreDim"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Nuevo consumo mensual</b>
+                                    <b>Precio unitario</b>
                                 </td>
-
-                                <td>@result</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Porcentaje de generación</b>
-                                </td>
-
-                                <td>@result</td>
+                                <td id="precioInv"></td>
                             </tr>
                         </tbody>
                     </table>

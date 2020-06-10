@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col form-group">
                                     <label>Inversor</label>
-                                    <select class="form-control" id="listInversores">
+                                    <select class="form-control" id="listInversores" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>

@@ -23,7 +23,11 @@ Route::post('/agregar-cliente', 'MediaTensionController@create');
 
 Route::get('/mediaTension', 'MediaTensionController@index');
 // Route::get('/mediaT', 'MediaTensionController@index');
+//1er paso MT (MediaTension)
 Route::post('/enviarPeriodos','MediaTensionController@sendPeriodsToServer');
+//2do paso MT
+Route::post('/enviarInvSeleccionado','MediaTensionController@sendInversorSelected');
+
 Route::get('/individual', 'CotizacionIndividualController@index');
 Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');
 

@@ -212,11 +212,13 @@ function readyLoader(loader){
     });
 }
 
+var _potenciaReal = 0;
+
 function sendPeriodsToServer(){
     var direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
-    if(direccionCliente == '' || direccionCliente.length == 0){
+    if(direccionCliente === ''){
         alert('Informacion de cliente vacia');
     }
     else{
@@ -247,7 +249,6 @@ function sendPeriodsToServer(){
                 alert('Hubo un error al tratar de enviar datos a la vista de -RESULTADOS-');
             })
             .done(function(data){
-                var _potenciaReal = 0;
 
                 $('#divCotizacionMediaTension').css("display","none");
                 $('#divBtnCalcularMT').css("display","none");
@@ -281,10 +282,12 @@ function sendPeriodsToServer(){
                         $('#potenciaReal').html('');
                         $('#precioModulo').html('');
                         $('#costoEstructuras').html('');
+                        $('#listInversores').prop("disabled", true);
                     }
                     else{
                         _potenciaReal = respuesta[x].panel.potenciaReal;
 
+                        $('#listInversores').prop("disabled", false);
                         $('#numeroModulos').html(respuesta[x].panel.noModulos);
                         $('#potenciaModulo').html(respuesta[x].panel.potencia);
                         $('#potenciaReal').html(_potenciaReal);
@@ -316,26 +319,45 @@ function sendPeriodsToServer(){
                     }
 
                     $('#listInversores').change(function(){
-                        var x = $('#listPaneles').val(); //Iteracion
-                        var idInversor = response[x].idInversor;
+                        var xi = $('#listInversores').val(); //Iteracion
+                        var idInversor = response[xi].idInversor;
 
-                        $.ajax({
-                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                            type: 'POST',
-                            url: '',
-                            data: {
-                                "_token": $("meta[name='csrf-token']").attr('content'),
-                                "idInversor": idInversor,
-                                "_potenciaReal": _potenciaReal
-                            },
-                            dataType: 'json'
-                        })
-                        .fail(function(){
-                            alert('Hubo un error al intentar calcular el numero de inversorse MediaTension');
-                        })
-                        .done(function(reply){
-                            console.log(reply);
-                        });
+                        if(xi === '-1' || xi === -1){
+                            $('#cantidadInversores').html('');
+                            $('#potenciaInversor').html('');
+                            $('#potenciaMaximaInv').html('');
+                            $('#potenciaNominalInv').html('');
+                            $('#potenciaPicoInv').html('');
+                            $('#porcentajeSobreDim').html('');
+                            $('#precioInv').html('');
+                        }
+                        else{
+                            $.ajax({
+                                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                type: 'POST',
+                                url: '/enviarInvSeleccionado',
+                                data: {
+                                    "_token": $("meta[name='csrf-token']").attr('content'),
+                                    "idInversor": idInversor,
+                                    "_potenciaReal": _potenciaReal
+                                },
+                                dataType: 'json'
+                            })
+                            .fail(function(){
+                                alert('Hubo un error al intentar calcular el numero de inversorse MediaTension');
+                            })
+                            .done(function(reply){
+                                reply = reply.message;
+
+                                $('#cantidadInversores').html(reply[0].numeroDeInversores);
+                                $('#potenciaInversor').html(reply[0].potenciaInversor);
+                                $('#potenciaMaximaInv').html(reply[0].potenciaMaximaInversor);
+                                $('#potenciaNominalInv').html(reply[0].potenciaNominalInversor);
+                                $('#potenciaPicoInv').html(reply[0].potenciaPicoInversor);
+                                $('#porcentajeSobreDim').html(reply[0].porcentajeSobreDimens);
+                                $('#precioInv').html(reply[0].precioInversor); 
+                            }); 
+                        }
                     });
                 });
             });

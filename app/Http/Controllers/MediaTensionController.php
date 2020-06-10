@@ -82,18 +82,27 @@ class MediaTensionController extends Controller
 	//1er. Paso
 	public function sendPeriodsToServer(Request $request)
 	{
-		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
-		$arrayCompleto["idCliente"] = $request->idCliente;
-		$arrayCompleto["destino"] = $request->direccionCliente; //Municipo_Estado del Cliente
-		$arrayCompleto["idUsuario"] = session('dataUsuario')->idUsuario;
-		$arrayCompleto["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
+		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$array["idCliente"] = $request->idCliente;
+		$array["destino"] = $request->direccionCliente; //Municipo_Estado del Cliente
+		$array["idUsuario"] = session('dataUsuario')->idUsuario;
+		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
 		
-		$response = $this->cotizacion->sendPeriodsGDMTH(['json' => $arrayCompleto]);
+		$response = $this->cotizacion->sendPeriodsGDMTH(['json' => $array]);
 		$response = response()->json($response);
 		
 		return $response;
 	}
 
 	//2do. Paso
-	
+	public function sendInversorSelected(Request $request)
+	{
+		$array["idInversor"] = $request->idInversor;
+		$array["potenciaReal"] = $request->_potenciaReal;
+
+		$response = $this->cotizacion->sendInversorSeleccionado(['json' => $array]);
+		$response = response()->json($response);
+		
+		return $response;
+	}
 }
