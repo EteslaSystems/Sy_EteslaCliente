@@ -84,7 +84,7 @@ class MediaTensionController extends Controller
 	{
 		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 		$array["idCliente"] = $request->idCliente;
-		$array["destino"] = $request->direccionCliente; //Municipo_Estado del Cliente
+		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["idUsuario"] = session('dataUsuario')->idUsuario;
 		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
 		
@@ -101,6 +101,19 @@ class MediaTensionController extends Controller
 		$array["potenciaReal"] = $request->_potenciaReal;
 
 		$response = $this->cotizacion->sendInversorSeleccionado(['json' => $array]);
+		$response = response()->json($response);
+		
+		return $response;
+	}
+
+	//3er. Paso
+	public function calculateViaticsTotals(Request $request)
+	{
+		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
+		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
+
+		$response = $this->cotizacion->calcularViaticos_Totales(['json' => $array]);
 		$response = response()->json($response);
 		
 		return $response;

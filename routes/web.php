@@ -21,17 +21,22 @@ Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
 
-Route::get('/mediaTension', 'MediaTensionController@index');
+/*Cotizacion Media Tension*/
 // Route::get('/mediaT', 'MediaTensionController@index');
+Route::get('/mediaTension', 'MediaTensionController@index');
 //1er paso MT (MediaTension)
 Route::post('/enviarPeriodos','MediaTensionController@sendPeriodsToServer');
 //2do paso MT
 Route::post('/enviarInvSeleccionado','MediaTensionController@sendInversorSelected');
+//3er paso MT
+Route::post('/calcularVT','MediaTensionController@calculateViaticsTotals');//Calcular Viaticos y Totales
 
+//Resultados cotizacion MT
+Route::get('/resultados', 'ResultadosController@index');
+
+/*Cotizacion Individual*/
 Route::get('/individual', 'CotizacionIndividualController@index');
 Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');
-
-Route::get('/resultados', 'ResultadosController@index');
 
 /* ---------------------------------------- */
 

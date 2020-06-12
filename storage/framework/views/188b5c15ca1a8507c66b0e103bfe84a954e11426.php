@@ -29,20 +29,18 @@
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="input1">Input 1:</label>
-                                        <input class="form-control" type="text" id="input1">
+                                        <label for="input1">Eficiencia</label>
+                                        <input class="form-control" type="text" id="inpEficiencia">
                                     </div>
                                     <div class="form-group">
-                                        <label for="input2">Input 2:</label>
-                                        <input class="form-control" type="text" id="input2">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input3">Input 3:</label>
-                                        <input class="form-control" type="text" id="input3">
+                                        <label for="input2">Descuento</label>
+                                        <input class="form-control" type="text" id="inpDescuento">
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <button type="button" class="btn btn-green">Soy Boton</button>
+                                <div class="col checkbox">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chbAddItem">
+                                    </label>
                                 </div>
                             </div>
                         </div>

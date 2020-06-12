@@ -2,10 +2,13 @@ var lista;
 var option;
 var indexador = 0;
 var indexMostrar = 0;
+var direccionCliente = '';
 var banderaEditar = false;
 var arrayPeriodosGDMTH = [];
 var objPeriodosGDMTH = {};
 var msjConfirm = false;
+
+var _potenciaReal = 0;
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -201,21 +204,8 @@ function backToCotizacion(){
     $("#divResultCotizacion").css("display","none");
 }
 
-function readyLoader(loader){
-    $(document)
-    .ajaxStart(function(){
-        loader.fadeIn();
-    })
-    .ajaxStop(function(){
-        loader.fadeOut();
-        $('#divResultCotIndv').css("display","");
-    });
-}
-
-var _potenciaReal = 0;
-
 function sendPeriodsToServer(){
-    var direccionCliente = document.getElementById('municipio').value;
+    direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
     if(direccionCliente === ''){
@@ -229,7 +219,7 @@ function sendPeriodsToServer(){
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
                 'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
-                'direccionCliente': direccionCliente,
+                'direccionCliente': this.direccionCliente,
                 'idCliente': idCliente
             },
             dataType: 'json'
@@ -255,14 +245,13 @@ function sendPeriodsToServer(){
                 $('#divResultCotizacion').css("display","");
                 
                 $('#divResult').html(data);
-                console.log(respuesta);
     
                 //Consumo
-                $('#consumoAnual').html(respuesta[0].consumo.consumoAnual);
-                $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria);
-                $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo);
+                $('#consumoAnual').html(respuesta[0].consumo.consumoAnual + 'W');
+                $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria + 'W');
+                $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo + 'W');
                 
-                //Paneles
+                //DropDownList-Paneles
                 for(var i=1; i<respuesta.length; i++)
                 {
                     $('#listPaneles').append(
@@ -283,19 +272,19 @@ function sendPeriodsToServer(){
                         $('#precioModulo').html('');
                         $('#costoEstructuras').html('');
                         $('#listInversores').prop("disabled", true);
+                        $('#listInversores').val("-1");
                     }
                     else{
                         _potenciaReal = respuesta[x].panel.potenciaReal;
 
+                        //Paneles
                         $('#listInversores').prop("disabled", false);
-                        $('#numeroModulos').html(respuesta[x].panel.noModulos);
-                        $('#potenciaModulo').html(respuesta[x].panel.potencia);
-                        $('#potenciaReal').html(_potenciaReal);
-                        $('#precioModulo').html(respuesta[x].panel.precioPanel);
-                        $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$');
+                        $('#numeroModulos').html(respuesta[x].panel.noModulos).val(respuesta[x].panel.noModulos);
+                        $('#potenciaModulo').html(respuesta[x].panel.potencia + 'W').val(respuesta[x].panel.potencia);
+                        $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
+                        $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
+                        $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
                     }
-                    
-                    console.log('DropDownList value: '+x);
                 });
 
                 $.ajax({
@@ -306,8 +295,7 @@ function sendPeriodsToServer(){
                     alert('Hubo un error al intentar cargar el dropdownlist de Inversores');
                 }).
                 done(function(response){
-                    console.log(response);
-                    //Llenado de dropdownlist de Inversores
+                    //DropDownList-Inversores
                     for(var j=0; j<response.length; j++)
                     {
                         $('#listInversores').append(
@@ -349,13 +337,72 @@ function sendPeriodsToServer(){
                             .done(function(reply){
                                 reply = reply.message;
 
-                                $('#cantidadInversores').html(reply[0].numeroDeInversores);
-                                $('#potenciaInversor').html(reply[0].potenciaInversor);
-                                $('#potenciaMaximaInv').html(reply[0].potenciaMaximaInversor);
-                                $('#potenciaNominalInv').html(reply[0].potenciaNominalInversor);
-                                $('#potenciaPicoInv').html(reply[0].potenciaPicoInversor);
-                                $('#porcentajeSobreDim').html(reply[0].porcentajeSobreDimens);
-                                $('#precioInv').html(reply[0].precioInversor); 
+                                //Inversores
+                                $('#cantidadInversores').html(reply[0].numeroDeInversores).val(reply[0].numeroDeInversores);
+                                $('#potenciaInversor').html(reply[0].potenciaInversor + 'W').val(reply[0].potenciaInversor);
+                                $('#potenciaMaximaInv').html(reply[0].potenciaMaximaInversor + 'W').val(reply[0].potenciaMaximaInversor);
+                                $('#potenciaNominalInv').html(reply[0].potenciaNominalInversor + 'W').val(reply[0].potenciaNominalInversor);
+                                $('#potenciaPicoInv').html(reply[0].potenciaPicoInversor + 'W').val(reply[0].potenciaPicoInversor);
+                                $('#porcentajeSobreDim').html(reply[0].porcentajeSobreDimens + '%').val(reply[0].porcentajeSobreDimens);
+                                $('#precioInv').html(reply[0].precioInversor + '$').val(reply[0].precioInversor); 
+
+                                /*Viaticos y Totales*/
+                                /*#region Datos requeridos para poder calcular viaticos y totales*/
+                                ///Panel
+                                var potenciaPanel = $('#potenciaModulo').val();
+                                var cantidadPaneles = $('#numeroModulos').val();
+                                var potenciaReal = $('#potenciaReal').val();
+                                var precioPorWatt = $('#precioModulo').val();
+                                var costoDeEstructuras = $('#costoEstructuras').val();
+                                ///Inversor
+                                var potenciaInversor = $('#potenciaInversor').val();
+                                var potenciaNominalInversor = $('#potenciaNominalInv').val();
+                                var precioInversor = $('#precioInv').val();
+                                var potenciaMaximaInversor = $('#potenciaMaximaInv').val();
+                                var numeroDeInversores = $('#cantidadInversores').val();
+                                var potenciaPicoInversor = $('#potenciaPicoInv').val();
+                                var porcentajeSobreDimens = $('#porcentajeSobreDim').val();
+
+                                // arrayPeriodosGDMTH = [];
+                                objPeriodosGDMTH = {
+                                    panel: {
+                                        potenciaPanel: potenciaPanel,
+                                        cantidadPaneles: cantidadPaneles,
+                                        potenciaReal: potenciaReal,
+                                        precioPorWatt: precioPorWatt,
+                                        costoDeEstructuras: costoDeEstructuras
+                                    },
+                                    inversor: {
+                                        potenciaInversor: potenciaInversor,
+                                        potenciaNominalInversor: potenciaNominalInversor,
+                                        precioInversor: precioInversor,
+                                        potenciaMaximaInversor: potenciaMaximaInversor,
+                                        numeroDeInversores: numeroDeInversores,
+                                        potenciaPicoInversor: potenciaPicoInversor,
+                                        porcentajeSobreDimens: porcentajeSobreDimens
+                                    }
+                                };
+
+                                arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+
+                                $.ajax({
+                                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                    type: 'POST',
+                                    url: '/calcularVT',
+                                    data: {
+                                        "_token": $("meta[name='csrf-token']").attr('content'),
+                                        'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
+                                        'direccionCliente': direccionCliente
+                                    },
+                                    dataType: 'json'
+                                })
+                                .fail(function(){
+                                    alert('Hubo un error al intentar de obtener los viaticos y totales');
+                                })
+                                .done(function(answer){
+                                    console.log(answer);
+                                });
+                                /*#endregion*/
                             }); 
                         }
                     });
