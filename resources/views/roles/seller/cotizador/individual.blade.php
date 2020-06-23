@@ -12,7 +12,7 @@
             <div class="row text-center">
                 <div class="col-lg-12">
                     <div class="form-row">
-                        <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenu()" title="addItems">
+                        <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
                             +
                         </button>
                         <div class="menu-content shadow" id="menuContent">
@@ -129,12 +129,26 @@
                     </table> 
                 </div>   
             </div>
+            <div class="row text-center" id="dtabEsctructuras">
+                <div class="col table-responsive">
+                    <h3>Estructuras</h3>
+                    <table class="table table-sm table-striped" id="estructuras">
+                        <thead>
+                            <th scope="col">Costo de estructuras</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="tdCostoEstructuras"></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>   
+            </div>
             <div class="row text-center" id="dtabViatics">
                 <div class="col table-responsive">
                     <h3>Viaticos</h3>
                     <table class="table table-sm table-striped" id="viaticos">
                         <thead>
-                            <th scope="col">Costo de estructuras</th>
                             <th scope="col">No. cuadrillas</th>
                             <th scope="col">No. dias</th>
                             <th scope="col">No. dias reales</th>
@@ -147,7 +161,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td id="tdCostoEstructuras"></td>
                                 <td id="tdNoCuadrillas"></td>
                                 <td id="tdNoDias"></td>
                                 <td id="tdNoDiasReales"></td>

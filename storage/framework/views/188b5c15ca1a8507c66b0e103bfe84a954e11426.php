@@ -29,8 +29,8 @@
                             <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="input1">Eficiencia</label>
-                                        <input class="form-control" type="text" id="inpEficiencia">
+                                        <label for="input1">Perdida</label>
+                                        <input class="form-control" type="text" id="inpPerdida">
                                     </div>
                                     <div class="form-group">
                                         <label for="input2">Descuento</label>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col checkbox">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="chbAddItem">
+                                        <input type="checkbox" id="chbAddItemGDMTO">
                                     </label>
                                 </div>
                             </div>
@@ -109,28 +109,23 @@
         <div class="container" id="divGDMTH" style="display:none;">
             <div class="row mt-3">
                 <div class="col-md-4 col-sm-12 mb-3">
-                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()">
-                        Más Info.
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                    </button>
-                    <div class="menu-content shadow-sm" id="menuContentGDMTH">
+                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()">+</button>
+                    <div class="menu-content shadow" id="menuContentGDMTH">
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="input1">Input 1:</label>
-                                    <input class="form-control" type="text" id="input1">
+                                    <label for="inpEficienciaGDMTH">Eficiencia</label>
+                                    <input class="form-control" type="text" id="inpEficienciaGDMTH" value="18">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input2">Input 2:</label>
-                                    <input class="form-control" type="text" id="input2">
-                                </div>
-                                <div class="form-group">
-                                    <label for="input3">Input 3:</label>
-                                    <input class="form-control" type="text" id="input3">
+                                    <label for="inpDescuentoGDMTH">Descuento</label>
+                                    <input class="form-control" type="text" id="inpDescuentoGDMTH" value="0">
                                 </div>
                             </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-green">Soy Boton</button>
+                            <div class="col checkbox">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="chbAddItemGDMTH">
+                                </label>
                             </div>
                         </div>
                     </div>

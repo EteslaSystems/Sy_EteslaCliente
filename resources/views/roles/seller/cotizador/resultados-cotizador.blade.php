@@ -61,7 +61,23 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="col-4">
+                    <table class="table table-hover table-sm table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Esctructuras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Estructuras (cost)</b>
+                                </td>
+                                <td id="costoEstructuras"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="col-4">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
@@ -96,9 +112,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Estructuras (cost)</b>
+                                    <b>Costo total modulos</b>
                                 </td>
-                                <td id="costoEstructuras"></td>
+                                <td id="costoTotalModulos"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -152,6 +168,12 @@
                                     <b>Precio unitario</b>
                                 </td>
                                 <td id="precioInv"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Costo total inversores</b>
+                                </td>
+                                <td id="costoTotalInversores"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -226,7 +248,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-4">
+                <div class="col-4" id="divTotalesProject">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>

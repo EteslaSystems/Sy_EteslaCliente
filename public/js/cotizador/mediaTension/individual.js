@@ -6,15 +6,15 @@
 
 var idPanel;
 var idInversor;
+var direccionCliente = '';
 
 $(document).ready(function(){
     var loader = $('#loader');
 
-    readyLoader(loader);
-    getDropDownListValues();
+    /* readyLoader(loader); */
 });
 
-function readyLoader(loader){
+/* function readyLoader(loader){
     $(document)
     .ajaxStart(function(){
         loader.fadeIn();
@@ -23,6 +23,10 @@ function readyLoader(loader){
         loader.fadeOut();
         $('#divResultCotIndv').css("display","");
     });
+} */
+
+function loadMenuAddItem(){    
+    document.getElementById("menuContent").classList.toggle("menu-active");
 }
 
 function checkCheckBox(){
@@ -93,6 +97,7 @@ function validarCamposVacios()
 function sendSingleQuotation(){
     var cantidadPaneles = document.getElementById('inpCantPaneles').value;
     var cantidadInversores = document.getElementById('inpCantInversores').value;
+    direccionCliente = document.getElementById('municipio').value;
     bEstructuras = false;
 
     if(checkCheckBox() == true){
@@ -110,7 +115,8 @@ function sendSingleQuotation(){
                     "idInversor": idInversor,
                     "cantidadPaneles": cantidadPaneles,
                     "cantidadInversores": cantidadInversores,
-                    "bEstructuras": this.bEstructuras
+                    "bEstructuras": this.bEstructuras,
+                    "direccionCliente": direccionCliente
                 },
                 dataType: 'json',
                 error: function(){
@@ -121,8 +127,11 @@ function sendSingleQuotation(){
                 respuesta = respuesta.message;
                 console.log(respuesta);
 
-                if(respuesta[0].paneles && respuesta[0].inversores)
+                $('#divResultCotIndv').css("display","");
+
+                if(respuesta[0].paneles.cantidadPaneles != null || respuesta[0].paneles.cantidadPaneles > 0 && respuesta[0].inversores.numeroDeInversores > 0 || respuesta[0].inversor.numeroDeInversores != null)
                 {   
+                    console.log('Entro 1');
                     /*Vaciar datos de la cotizacion_individual en la tabla*/
                     //Paneles
                     $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
@@ -142,7 +151,8 @@ function sendSingleQuotation(){
                     $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
             
                     //Viaticos
-                    $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$');
+                    respuesta[0].viaticos_costos.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
+                    
                     $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
                     $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
                     $('#tdNoDiasReales').html(respuesta[0].viaticos_costos.noDiasReales);
@@ -166,23 +176,61 @@ function sendSingleQuotation(){
                     $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
                 }
                 else{
-                    if(respuesta[0].panel.cantidadPaneles == 0 && respuesta[0].inversor.numeroDeInversores != 0)
+                    if(respuesta[0].paneles.cantidadPaneles == 0 && respuesta[0].inversores.numeroDeInversores != 0)
                     {
-                        console.log('entro');
+                        console.log('Entro 2');
+
                         $('#dtabPanels').css("display","none");
                         $('#dtabViatics').css("display","none");
                         $('#dtabTotales').css("display","none");
                         $('#divPaginado').css("display","none");
 
                         //Inversores
-                        $('#tdCantidadInversor').html(respuesta[0].inversor.numeroDeInversores);
-                        $('#tdPotenciaInversor').html(respuesta[0].inversor.potenciaInversor);
-                        $('#tdPotenciaMaxima').html(respuesta[0].inversor.potenciaMaximaInversor);
-                        $('#tdPotenciaNominal').html(respuesta[0].inversor.potenciaNominalInversor);
-                        //$('#tdPorcentajeSD').html(respuesta[0].inversor.porcentajeSobreDimens + '%');
-                        //$('#tdPotenciaPico').html(respuesta[0].inversor.potenciaPicoPorInversor);
-                        $('#tdPrecioInversor').html(respuesta[0].inversor.precioInversor + '$');
-                        $('#tdCostoTotalInv').html(respuesta[0].inversor.costoTotalInversores + '$');
+                        $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
+                        $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
+                        $('#tdPotenciaMaxima').html(respuesta[0].inversores.potenciaMaximaInversor);
+                        $('#tdPotenciaNominal').html(respuesta[0].inversores.potenciaNominalInversor);
+                        //$('#tdPorcentajeSD').html(respuesta[0].inversores.porcentajeSobreDimens + '%');
+                        //$('#tdPotenciaPico').html(respuesta[0].inversores.potenciaPicoPorInversor);
+                        $('#tdPrecioInversor').html(respuesta[0].inversores.precioInversor + '$');
+                        $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
+                    }
+                    else{
+                        if(respuesta[0].inversores.costoTotalInversores == null)
+                        {
+                            console.log('Entro 3');
+
+                            //Paneles
+                            $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
+                            $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
+                            $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
+                            $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
+                            $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
+
+                            //Viaticos
+                            respuesta[0].viaticos_costos.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
+                            $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
+                            $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
+                            $('#tdNoDiasReales').html(respuesta[0].viaticos_costos.noDiasReales);
+                            $('#tdNoPersonasReq').html(respuesta[0].viaticos_costos.noPersonasRequeridas);
+                            $('#tdPagoPasaje').html(respuesta[0].viaticos_costos.pagoPasaje + '$');
+                            $('#tdPagoTotalComida').html(respuesta[0].viaticos_costos.pagoTotalComida + '$');
+                            $('#tdPagoTotalHospedaje').html(respuesta[0].viaticos_costos.pagoTotalHospedaje + '$');
+                            $('#tdPagoTotalPasaje').html(respuesta[0].viaticos_costos.pagoTotalPasaje + '$');
+                            $('#tdTotalViaticos').html(respuesta[0].totales.totalViaticosMT + '$');
+            
+                            //Totales
+                            $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
+                            $('#tdCostoTotalFletes').html(respuesta[0].totales.costoTotalFletes + '$');
+                            $('#tdManoObra').html(respuesta[0].totales.manoDeObra + '$');
+                            $('#tdMargen').html(respuesta[0].totales.margen);
+                            $('#tdTotalOtros').html(respuesta[0].totales.otrosTotal + '$');
+                            $('#tdPrecio').html(respuesta[0].totales.precio + '$');
+                            $('#tdPrecioMasIVA').html(respuesta[0].totales.precioMasIVA + '$');
+                            $('#tdTPIE').html(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
+                            $('#tdSubtotalOFPIE').html(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
+                            $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
+                        }
                     }
                 }
             });

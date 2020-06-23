@@ -9,6 +9,8 @@ var objPeriodosGDMTH = {};
 var msjConfirm = false;
 
 var _potenciaReal = 0;
+var porcentajePerdida = 0;
+var descuento = 0;
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -88,6 +90,25 @@ function actualizarPeriodo(){
     arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi = document.getElementById('inpPagoTransmision').value;
     arrayPeriodosGDMTH[indexMostrar-1].cmxn = document.getElementById('C(mxn/kW)').value;
     arrayPeriodosGDMTH[indexMostrar-1].dmxn = document.getElementById('D(mxn/kW)').value;
+}
+
+function checkAddItems(){
+    if($('#chbAddItemGDMTH').prop("checked") == true){
+        porcentajePerdida = $('#inpPerdidaGDMTH').val();
+        descuento = $('#inpDescuentoGDMTH').val();
+        return 1;
+    }
+    else if($('#chbAddItemGDMTH').prop("checked") == false){
+        confirmacion = confirm("Se tomaran como datos \n-Eficiencia: 18% \n-Descuento: 0");
+        if(confirmacion == true){
+            porcentajePerdida = 18;
+            descuento = 0;
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
 }
 
 function mostrarPeriodo(){
@@ -208,10 +229,10 @@ function sendPeriodsToServer(){
     direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
-    if(direccionCliente === ''){
-        alert('Informacion de cliente vacia');
-    }
-    else{
+    if(checkAddItems() != -1)
+    {
+        //Falta validar que la 'direccionCliente' no vaya vacio / Antes de hacer la peticion AJAX
+
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
@@ -228,8 +249,9 @@ function sendPeriodsToServer(){
             alert('Al parecer hubo un error con la peticion AJAX de la cotizacion GDMTH');
         })
         .done(function(respuesta){
-            respuesta = respuesta.message;
-    
+            respuesta = respuesta.message; //Energia requerida y Convinacion de paneles
+            console.log(respuesta);
+
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 type: 'GET',
@@ -284,6 +306,8 @@ function sendPeriodsToServer(){
                         $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
                         $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
                         $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
+                        $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
+                         
                     }
                 });
 
@@ -318,8 +342,14 @@ function sendPeriodsToServer(){
                             $('#potenciaPicoInv').html('');
                             $('#porcentajeSobreDim').html('');
                             $('#precioInv').html('');
+                            
+                            $('#divTotalesProject').css("display","");
                         }
                         else{
+                            console.log('porcentajePerdida: \n' +porcentajePerdida);
+                            console.log('arrayPeriodosGDMTH');
+                            console.log(arrayPeriodosGDMTH);
+
                             $.ajax({
                                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                                 type: 'POST',
@@ -327,7 +357,9 @@ function sendPeriodsToServer(){
                                 data: {
                                     "_token": $("meta[name='csrf-token']").attr('content'),
                                     "idInversor": idInversor,
-                                    "_potenciaReal": _potenciaReal
+                                    "_potenciaReal": _potenciaReal,
+                                    "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                                    "porcentajePerdida": porcentajePerdida
                                 },
                                 dataType: 'json'
                             })
@@ -336,6 +368,7 @@ function sendPeriodsToServer(){
                             })
                             .done(function(reply){
                                 reply = reply.message;
+                                console.log(reply);
 
                                 //Inversores
                                 $('#cantidadInversores').html(reply[0].numeroDeInversores).val(reply[0].numeroDeInversores);
@@ -345,6 +378,7 @@ function sendPeriodsToServer(){
                                 $('#potenciaPicoInv').html(reply[0].potenciaPicoInversor + 'W').val(reply[0].potenciaPicoInversor);
                                 $('#porcentajeSobreDim').html(reply[0].porcentajeSobreDimens + '%').val(reply[0].porcentajeSobreDimens);
                                 $('#precioInv').html(reply[0].precioInversor + '$').val(reply[0].precioInversor); 
+                                $('#costoTotalInversores').html(reply[0].precioTotalInversores + '$').val(reply[0].precioTotalInversores);
 
                                 /*Viaticos y Totales*/
                                 /*#region Datos requeridos para poder calcular viaticos y totales*/
@@ -363,7 +397,6 @@ function sendPeriodsToServer(){
                                 var potenciaPicoInversor = $('#potenciaPicoInv').val();
                                 var porcentajeSobreDimens = $('#porcentajeSobreDim').val();
 
-                                // arrayPeriodosGDMTH = [];
                                 objPeriodosGDMTH = {
                                     panel: {
                                         potenciaPanel: potenciaPanel,
@@ -400,7 +433,32 @@ function sendPeriodsToServer(){
                                     alert('Hubo un error al intentar de obtener los viaticos y totales');
                                 })
                                 .done(function(answer){
-                                    console.log(answer);
+                                    answer = answer.message;
+                                    
+                                    //Cuadrillas
+                                    $('#noCuadrillas').html(answer[0].viaticos_costos.noCuadrillas);
+                                    $('#noPersonasReq').html(answer[0].viaticos_costos.noPersonasRequeridas);
+                                    $('#noDias').html(answer[0].viaticos_costos.noDias);
+                                    $('#noDiasReales').html(answer[0].viaticos_costos.noDiasReales);
+
+                                    //Viaticos
+                                    $('#pagoPasaje').html(answer[0].viaticos_costos.pagoPasaje + '$');
+                                    $('#pagoTotalPasajes').html(answer[0].viaticos_costos.pagoTotalPasaje + '$');
+                                    $('#pagoTotalComida').html(answer[0].viaticos_costos.pagoTotalComida + '$');
+                                    $('#pagoTotalHosp').html(answer[0].viaticos_costos.pagoTotalHospedaje + '$');
+                                    $('#totalViaticsMT').html(answer[0].totales.totalViaticosMT);
+
+                                    //Costos_totales
+                                    $('#manoObra').html(answer[0].totales.manoDeObra);
+                                    $('#totalOtros').html(answer[0].totales.otrosTotal);
+                                    $('#totalFletes').html(answer[0].totales.costoTotalFletes);
+                                    $('#costTPIE').html(answer[0].totales.totalPanelesInversoresEstructuras);
+                                    $('#subtOFMPIE').html(answer[0].totales.subTotalOtrosFleteManoDeObraTPIE);
+                                    $('#margen').html(answer[0].totales.margen);
+                                    $('#totalTodo').html(answer[0].totales.totalDeTodo);
+                                    $('#precioDollars').html(answer[0].totales.precio);
+                                    $('#precioDollarsMasIVA').html(answer[0].totales.precioMasIVA);
+                                    $('#costWatt').html(answer[0].totales.costForWatt);
                                 });
                                 /*#endregion*/
                             }); 
@@ -434,8 +492,8 @@ function validarEnvioDePeriodo(){
     else if(arrayPeriodosGDMTH.length == 12){
         sendPeriodsToServer();
         limpiarCampos();
-        this.arrayPeriodosGDMTH = [];
-        console.log(arrayPeriodosGDMTH);
+        /* this.arrayPeriodosGDMTH = [];
+        console.log(arrayPeriodosGDMTH); */
         /*
             -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
              el servidor realiza las operaciones necesarias

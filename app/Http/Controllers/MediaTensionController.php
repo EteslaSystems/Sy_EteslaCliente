@@ -99,6 +99,8 @@ class MediaTensionController extends Controller
 	{
 		$array["idInversor"] = $request->idInversor;
 		$array["potenciaReal"] = $request->_potenciaReal;
+		$array["porcentajePerdida"] = $request->porcentajePerdida;
+		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 
 		$response = $this->cotizacion->sendInversorSeleccionado(['json' => $array]);
 		$response = response()->json($response);

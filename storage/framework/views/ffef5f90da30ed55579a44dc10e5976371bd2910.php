@@ -61,7 +61,23 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="col-4">
+                    <table class="table table-hover table-sm table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Esctructuras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Estructuras (cost)</b>
+                                </td>
+                                <td id="costoEstructuras"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="col-4">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
@@ -96,14 +112,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Estructuras (cost)</b>
+                                    <b>Costo total modulos</b>
                                 </td>
-                                <td id="costoEstructuras"></td>
+                                <td id="costoTotalModulos"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-8">
+                <div class="col-4">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>
@@ -153,6 +169,47 @@
                                 </td>
                                 <td id="precioInv"></td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <b>Costo total inversores</b>
+                                </td>
+                                <td id="costoTotalInversores"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table table-hover table-sm table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col" colspan="2">Cuadrillas (personal)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Numero de cuadrillas</b>
+                                </td>
+                                <td id="noCuadrillas"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Numero de personas requeridas</b>
+                                </td>
+                                <td id="noPersonasReq"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Numero de dias</b>
+                                </td>
+                                <td id="noDias"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Numero de dias reales</b>
+                                </td>
+                                <td id="noDiasReales"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -166,35 +223,32 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <b>Hospedaje</b>
+                                    <b>Pago pasaje</b>
                                 </td>
-                                <td>@result</td>
+                                <td id="pagoPasaje"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Comida</b>
+                                    <b>Pago total pasajes</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="pagoTotalPasajes"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Pasaje</b>
+                                    <b>Pago total comida</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="pagoTotalComida"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Otros viaticos</b>
+                                    <b>Pago total hospedaje</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="pagoTotalHosp"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-4">
+                <div class="col-4" id="divTotalesProject">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
                             <tr>
@@ -204,31 +258,69 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <b>Hospedaje</b>
+                                    <b>Mano de obra</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="manoObra"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Comida</b>
+                                    <b>Total de otros</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="totalOtros"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Pasaje</b>
+                                    <b>Total fletes</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="totalFletes"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Otros viaticos</b>
+                                    <b>Total de paneles, inversores y estructuras</b>
                                 </td>
-
-                                <td>@result</td>
+                                <td id="costTPIE"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Subtotal de otros, flete, mano de obra, paneles,</br>inversores, estrucutras</b>
+                                </td>
+                                <td id="subtOFMPIE"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Margen</b>
+                                </td>
+                                <td id="margen"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Total de todo</b>
+                                </td>
+                                <td id="totalTodo"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Precio</b>
+                                </td>
+                                <td id="precioDollars"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Precio mas IVA</b>
+                                </td>
+                                <td id="precioDollarsMasIVA"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Costo por Watt</b>
+                                </td>
+                                <td id="costWatt"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Total Viaticos - MediaTension</b>
+                                </td>
+                                <td id="totalViaticsMT"></td>
                             </tr>
                         </tbody>
                     </table>
