@@ -307,7 +307,28 @@ function sendPeriodsToServer(){
                         $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
                         $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
                         $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
-                         
+                        
+                        /*[Hoja: POWER]*/
+                        $.ajax({
+                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                            type: 'POST',
+                            url: '/firstStepPower',
+                            data: {
+                                "_token": $("meta[name='csrf-token']").attr('content'),
+                                "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                                "porcentajePerdida": porcentajePerdida,
+                                "potenciaReal": _potenciaReal
+                            },
+                            dataType: 'json'
+                        })
+                        .fail(function(){
+                            alert('Error al intentar generar calculos de [Hoja: POWER]');
+                        })
+                        .done(function(resp){
+                            resp = resp.message;
+                            
+                            console.log('[Hoja: POWER]\n'+resp);
+                        });
                     }
                 });
 
@@ -357,9 +378,7 @@ function sendPeriodsToServer(){
                                 data: {
                                     "_token": $("meta[name='csrf-token']").attr('content'),
                                     "idInversor": idInversor,
-                                    "_potenciaReal": _potenciaReal,
-                                    "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
-                                    "porcentajePerdida": porcentajePerdida
+                                    "_potenciaReal": _potenciaReal
                                 },
                                 dataType: 'json'
                             })
@@ -424,8 +443,8 @@ function sendPeriodsToServer(){
                                     url: '/calcularVT',
                                     data: {
                                         "_token": $("meta[name='csrf-token']").attr('content'),
-                                        'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
-                                        'direccionCliente': direccionCliente
+                                        "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                                        "direccionCliente": direccionCliente
                                     },
                                     dataType: 'json'
                                 })

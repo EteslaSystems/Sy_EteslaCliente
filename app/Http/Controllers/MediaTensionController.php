@@ -94,13 +94,24 @@ class MediaTensionController extends Controller
 		return $response;
 	}
 
+	//[Hoja_Excel: POWER]
+	public function firstStepPower(Request $request)
+	{
+		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$array["porcentajePerdida"] = $request->porcentajePerdida;
+		$array["potenciaReal"] = $request->potenciaReal;
+
+		$response = $this->cotizacion->firstStepPOWER(['json' => $array]);
+		/* $response = response()->json($response);
+		
+		return $response; */
+	}
+
 	//2do. Paso
 	public function sendInversorSelected(Request $request)
 	{
 		$array["idInversor"] = $request->idInversor;
 		$array["potenciaReal"] = $request->_potenciaReal;
-		$array["porcentajePerdida"] = $request->porcentajePerdida;
-		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 
 		$response = $this->cotizacion->sendInversorSeleccionado(['json' => $array]);
 		$response = response()->json($response);

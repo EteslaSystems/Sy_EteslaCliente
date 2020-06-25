@@ -26,6 +26,7 @@ Route::get('/mediaT', 'MediaTensionController@index');
 Route::get('/mediaTension', 'MediaTensionController@index');
 //1er paso MT (MediaTension)
 Route::post('/enviarPeriodos','MediaTensionController@sendPeriodsToServer');
+Route::post('/firstStepPower','MediaTensionController@firstStepPower'); //[Hoja_Excel: POWER]
 //2do paso MT
 Route::post('/enviarInvSeleccionado','MediaTensionController@sendInversorSelected');
 //3er paso MT
