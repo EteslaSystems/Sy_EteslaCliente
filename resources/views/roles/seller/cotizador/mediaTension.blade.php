@@ -115,8 +115,8 @@
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="inpEficienciaGDMTH">Eficiencia</label>
-                                    <input class="form-control" type="text" id="inpEficienciaGDMTH" value="18">
+                                    <label for="inpPerdidaGDMTH">Perdida</label>
+                                    <input class="form-control" type="text" id="inpPerdidaGDMTH" value="18">
                                 </div>
                                 <div class="form-group">
                                     <label for="inpDescuentoGDMTH">Descuento</label>
