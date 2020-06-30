@@ -138,8 +138,8 @@ function sendSingleQuotation(){
                     $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
                     $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
                     $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
+                    $('#tdCostoPorWatt').html(respuesta[0].totales.costForWatt + '$');
                     $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
-            
                     //Inversores
                     $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
                     $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
@@ -164,7 +164,7 @@ function sendSingleQuotation(){
                     $('#tdTotalViaticos').html(respuesta[0].totales.totalViaticosMT + '$');
             
                     //Totales
-                    $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
+                    // $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
                     $('#tdCostoTotalFletes').html(respuesta[0].totales.costoTotalFletes + '$');
                     $('#tdManoObra').html(respuesta[0].totales.manoDeObra + '$');
                     $('#tdMargen').html(respuesta[0].totales.margen);

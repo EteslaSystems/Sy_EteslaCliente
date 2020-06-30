@@ -304,31 +304,32 @@ function sendPeriodsToServer(){
                         $('#numeroModulos').html(respuesta[x].panel.noModulos).val(respuesta[x].panel.noModulos);
                         $('#potenciaModulo').html(respuesta[x].panel.potencia + 'W').val(respuesta[x].panel.potencia);
                         $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
-                        $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
+                        // $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
                         $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
+                        $('#costoPorWatt').html(respuesta[x].panel.costoPorWatt + '$').val(respuesta[x].panel.costoPorWatt);
                         $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
                         
                         /*[Hoja: POWER]*/
-                        $.ajax({
-                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                            type: 'POST',
-                            url: '/firstStepPower',
-                            data: {
-                                "_token": $("meta[name='csrf-token']").attr('content'),
-                                "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
-                                "porcentajePerdida": porcentajePerdida,
-                                "potenciaReal": _potenciaReal
-                            },
-                            dataType: 'json'
-                        })
-                        .fail(function(){
-                            alert('Error al intentar generar calculos de [Hoja: POWER]');
-                        })
-                        .done(function(resp){
-                            resp = resp.message;
+                        // $.ajax({
+                        //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        //     type: 'POST',
+                        //     url: '/firstStepPower',
+                        //     data: {
+                        //         "_token": $("meta[name='csrf-token']").attr('content'),
+                        //         "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                        //         "porcentajePerdida": porcentajePerdida,
+                        //         "potenciaReal": _potenciaReal
+                        //     },
+                        //     dataType: 'json'
+                        // })
+                        // .fail(function(){
+                        //     alert('Error al intentar generar calculos de [Hoja: POWER]');
+                        // })
+                        // .done(function(resp){
+                        //     resp = resp.message;
                             
-                            console.log('[Hoja: POWER]\n'+resp);
-                        });
+                        //     console.log('[Hoja: POWER]\n'+resp);
+                        // });
                     }
                 });
 
@@ -353,7 +354,6 @@ function sendPeriodsToServer(){
 
                     $('#listInversores').change(function(){
                         var xi = $('#listInversores').val(); //Iteracion
-                        var idInversor = response[xi].idInversor;
 
                         if(xi === '-1' || xi === -1){
                             $('#cantidadInversores').html('');
@@ -367,6 +367,8 @@ function sendPeriodsToServer(){
                             $('#divTotalesProject').css("display","");
                         }
                         else{
+                            var idInversor = response[xi].idInversor;
+
                             console.log('porcentajePerdida: \n' +porcentajePerdida);
                             console.log('arrayPeriodosGDMTH');
                             console.log(arrayPeriodosGDMTH);
@@ -405,7 +407,7 @@ function sendPeriodsToServer(){
                                 var potenciaPanel = $('#potenciaModulo').val();
                                 var cantidadPaneles = $('#numeroModulos').val();
                                 var potenciaReal = $('#potenciaReal').val();
-                                var precioPorWatt = $('#precioModulo').val();
+                                var precioPorWatt = $('#costoPorWatt').val();
                                 var costoDeEstructuras = $('#costoEstructuras').val();
                                 ///Inversor
                                 var potenciaInversor = $('#potenciaInversor').val();
@@ -435,6 +437,7 @@ function sendPeriodsToServer(){
                                     }
                                 };
 
+                                arrayPeriodosGDMTH = [];
                                 arrayPeriodosGDMTH.push(objPeriodosGDMTH);
 
                                 $.ajax({

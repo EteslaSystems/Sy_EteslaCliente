@@ -104,11 +104,17 @@
                                 </td>
                                 <td id="potenciaReal"></td>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <td>
                                     <b>Precio modulo</b>
                                 </td>
                                 <td id="precioModulo"></td>
+                            </tr-->
+                            <tr>
+                                <td>
+                                    <b>Costo Watt</b>
+                                </td>
+                                <td id="costoPorWatt"></td>
                             </tr>
                             <tr>
                                 <td>
@@ -310,12 +316,12 @@
                                 </td>
                                 <td id="precioDollarsMasIVA"></td>
                             </tr>
-                            <tr>
+                            <!--tr>
                                 <td>
                                     <b>Costo por Watt</b>
                                 </td>
                                 <td id="costWatt"></td>
-                            </tr>
+                            </tr-->
                             <tr>
                                 <td>
                                     <b>Total Viaticos - MediaTension</b>

@@ -85,6 +85,7 @@
                             <th scope="col">Potencia panel</th>
                             <th scope="col">Potencia real</th>
                             <th scope="col">Precio por modulo</th>
+                            <th scope="col">Costo total del watt</th>
                             <th scope="col">Costo total paneles</th>
                         </thead>
                         <tbody>
@@ -93,6 +94,7 @@
                                 <td id="tdPotenciaPanel"></td>
                                 <td id="tdPotenciaReal"></td>
                                 <td id="tdPrecioModulo"></td>
+                                <td id="tdCostoPorWatt"></td>
                                 <td id="tdCostoTotalPanels"></td>
                             </tr>
                         </tbody>
