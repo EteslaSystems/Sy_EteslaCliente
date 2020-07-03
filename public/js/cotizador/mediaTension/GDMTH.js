@@ -5,6 +5,7 @@ var indexMostrar = 0;
 var direccionCliente = '';
 var banderaEditar = false;
 var arrayPeriodosGDMTH = [];
+var _cotizaViaticos = [];
 var objPeriodosGDMTH = {};
 var msjConfirm = false;
 
@@ -240,7 +241,7 @@ function sendPeriodsToServer(){
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
                 'arrayPeriodosGDMTH': arrayPeriodosGDMTH,
-                'direccionCliente': this.direccionCliente,
+                'direccionCliente': direccionCliente,
                 'idCliente': idCliente
             },
             dataType: 'json'
@@ -306,7 +307,7 @@ function sendPeriodsToServer(){
                         $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
                         // $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
                         $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
-                        $('#costoPorWatt').html(respuesta[x].panel.costoPorWatt + '$').val(respuesta[x].panel.costoPorWatt);
+                        $('#costoPorWatt').html(respuesta[x].panel.precioPorWatt + '$').val(respuesta[x].panel.precioPorWatt);
                         $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
                         
                         /*[Hoja: POWER]*/
@@ -409,6 +410,7 @@ function sendPeriodsToServer(){
                                 var potenciaReal = $('#potenciaReal').val();
                                 var precioPorWatt = $('#costoPorWatt').val();
                                 var costoDeEstructuras = $('#costoEstructuras').val();
+                                var costoTotalPaneles = $('#costoTotalModulos').val();
                                 ///Inversor
                                 var potenciaInversor = $('#potenciaInversor').val();
                                 var potenciaNominalInversor = $('#potenciaNominalInv').val();
@@ -424,7 +426,8 @@ function sendPeriodsToServer(){
                                         cantidadPaneles: cantidadPaneles,
                                         potenciaReal: potenciaReal,
                                         precioPorWatt: precioPorWatt,
-                                        costoDeEstructuras: costoDeEstructuras
+                                        costoDeEstructuras: costoDeEstructuras,
+                                        costoTotalPaneles: costoTotalPaneles
                                     },
                                     inversor: {
                                         potenciaInversor: potenciaInversor,
@@ -437,8 +440,7 @@ function sendPeriodsToServer(){
                                     }
                                 };
 
-                                arrayPeriodosGDMTH = [];
-                                arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+                                _cotizaViaticos.push(objPeriodosGDMTH);
 
                                 $.ajax({
                                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -446,7 +448,7 @@ function sendPeriodsToServer(){
                                     url: '/calcularVT',
                                     data: {
                                         "_token": $("meta[name='csrf-token']").attr('content'),
-                                        "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                                        "arrayPeriodosGDMTH": _cotizaViaticos,
                                         "direccionCliente": direccionCliente
                                     },
                                     dataType: 'json'

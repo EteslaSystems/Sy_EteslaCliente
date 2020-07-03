@@ -137,8 +137,8 @@ function sendSingleQuotation(){
                     $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
                     $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
                     $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
-                    $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
-                    $('#tdCostoPorWatt').html(respuesta[0].totales.costForWatt + '$');
+                    // $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
+                    $('#tdCostoPorWatt').html(respuesta[0].paneles.precioPorWatt + '$');
                     $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
                     //Inversores
                     $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
@@ -151,7 +151,7 @@ function sendSingleQuotation(){
                     $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
             
                     //Viaticos
-                    respuesta[0].viaticos_costos.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
+                    respuesta[0].paneles.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].paneles.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
                     
                     $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
                     $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
