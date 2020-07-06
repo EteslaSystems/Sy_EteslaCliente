@@ -127,53 +127,26 @@ function sendSingleQuotation(){
                 respuesta = respuesta.message;
                 console.log(respuesta);
 
-                $('#divResultCotIndv').css("display","");
-
                 if(respuesta[0].paneles.cantidadPaneles != null || respuesta[0].paneles.cantidadPaneles > 0 && respuesta[0].inversores.numeroDeInversores > 0 || respuesta[0].inversor.numeroDeInversores != null)
                 {   
                     console.log('Entro 1');
                     /*Vaciar datos de la cotizacion_individual en la tabla*/
                     //Paneles
-                    $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
-                    $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
-                    $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
-                    // $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
-                    $('#tdCostoPorWatt').html(respuesta[0].paneles.precioPorWatt + '$');
-                    $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
+                    $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotalPaneles + '$');
+                    
+                    //Estructuras
+                    respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
+                    
                     //Inversores
-                    $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
-                    $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
-                    $('#tdPotenciaMaxima').html(respuesta[0].inversores.potenciaMaximaInversor);
-                    $('#tdPotenciaNominal').html(respuesta[0].inversores.potenciaNominalInversor);
-                    $('#tdPorcentajeSD').html(respuesta[0].inversores.porcentajeSobreDimens + '%');
-                    $('#tdPotenciaPico').html(respuesta[0].inversores.potenciaPicoPorInversor);
-                    $('#tdPrecioInversor').html(respuesta[0].inversores.precioInversor + '$');
-                    $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
+                    $('#inpCostTotalInversores').val(respuesta[0].inversores.costoTotalInversores + '$');
             
                     //Viaticos
-                    respuesta[0].paneles.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].paneles.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
-                    
-                    $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
-                    $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
-                    $('#tdNoDiasReales').html(respuesta[0].viaticos_costos.noDiasReales);
-                    $('#tdNoPersonasReq').html(respuesta[0].viaticos_costos.noPersonasRequeridas);
-                    $('#tdPagoPasaje').html(respuesta[0].viaticos_costos.pagoPasaje + '$');
-                    $('#tdPagoTotalComida').html(respuesta[0].viaticos_costos.pagoTotalComida + '$');
-                    $('#tdPagoTotalHospedaje').html(respuesta[0].viaticos_costos.pagoTotalHospedaje + '$');
-                    $('#tdPagoTotalPasaje').html(respuesta[0].viaticos_costos.pagoTotalPasaje + '$');
-                    $('#tdTotalViaticos').html(respuesta[0].totales.totalViaticosMT + '$');
+                    $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$');
             
                     //Totales
-                    // $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
-                    $('#tdCostoTotalFletes').html(respuesta[0].totales.costoTotalFletes + '$');
-                    $('#tdManoObra').html(respuesta[0].totales.manoDeObra + '$');
-                    $('#tdMargen').html(respuesta[0].totales.margen);
-                    $('#tdTotalOtros').html(respuesta[0].totales.otrosTotal + '$');
-                    $('#tdPrecio').html(respuesta[0].totales.precio + '$');
-                    $('#tdPrecioMasIVA').html(respuesta[0].totales.precioMasIVA + '$');
-                    $('#tdTPIE').html(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
-                    $('#tdSubtotalOFPIE').html(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
-                    $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
+                    $('#inpPrecio').val(respuesta[0].totales.precio + '$');
+                    $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA + '$');
+                    $('#precioMXN').val(respuesta[0].totales.precioTotalMXN + '$');
                 }
                 else{
                     if(respuesta[0].paneles.cantidadPaneles == 0 && respuesta[0].inversores.numeroDeInversores != 0)
@@ -186,14 +159,14 @@ function sendSingleQuotation(){
                         $('#divPaginado').css("display","none");
 
                         //Inversores
-                        $('#tdCantidadInversor').html(respuesta[0].inversores.numeroDeInversores);
-                        $('#tdPotenciaInversor').html(respuesta[0].inversores.potenciaInversor);
-                        $('#tdPotenciaMaxima').html(respuesta[0].inversores.potenciaMaximaInversor);
-                        $('#tdPotenciaNominal').html(respuesta[0].inversores.potenciaNominalInversor);
-                        //$('#tdPorcentajeSD').html(respuesta[0].inversores.porcentajeSobreDimens + '%');
-                        //$('#tdPotenciaPico').html(respuesta[0].inversores.potenciaPicoPorInversor);
-                        $('#tdPrecioInversor').html(respuesta[0].inversores.precioInversor + '$');
-                        $('#tdCostoTotalInv').html(respuesta[0].inversores.costoTotalInversores + '$');
+                        $('#tdCantidadInversor').val(respuesta[0].inversores.numeroDeInversores);
+                        $('#tdPotenciaInversor').val(respuesta[0].inversores.potenciaInversor);
+                        $('#tdPotenciaMaxima').val(respuesta[0].inversores.potenciaMaximaInversor);
+                        $('#tdPotenciaNominal').val(respuesta[0].inversores.potenciaNominalInversor);
+                        //$('#tdPorcentajeSD').val(respuesta[0].inversores.porcentajeSobreDimens + '%');
+                        //$('#tdPotenciaPico').val(respuesta[0].inversores.potenciaPicoPorInversor);
+                        $('#tdPrecioInversor').val(respuesta[0].inversores.precioInversor + '$');
+                        $('#tdCostoTotalInv').val(respuesta[0].inversores.costoTotalInversores + '$');
                     }
                     else{
                         if(respuesta[0].inversores.costoTotalInversores == null)
@@ -201,35 +174,35 @@ function sendSingleQuotation(){
                             console.log('Entro 3');
 
                             //Paneles
-                            $('#tdCantidadPanel').html(respuesta[0].paneles.cantidadPaneles);
-                            $('#tdPotenciaPanel').html(respuesta[0].paneles.potenciaPanel);
-                            $('#tdPotenciaReal').html(respuesta[0].paneles.potenciaReal);
-                            $('#tdPrecioModulo').html(respuesta[0].paneles.precioPorModulo + '$');
-                            $('#tdCostoTotalPanels').html(respuesta[0].paneles.costoTotalPaneles + '$');
+                            $('#tdCantidadPanel').val(respuesta[0].paneles.cantidadPaneles);
+                            $('#tdPotenciaPanel').val(respuesta[0].paneles.potenciaPanel);
+                            $('#tdPotenciaReal').val(respuesta[0].paneles.potenciaReal);
+                            $('#tdPrecioModulo').val(respuesta[0].paneles.precioPorModulo + '$');
+                            $('#tdCostoTotalPanels').val(respuesta[0].paneles.costoTotalPaneles + '$');
 
                             //Viaticos
-                            respuesta[0].viaticos_costos.costoDeEstructuras != null ? $('#tdCostoEstructuras').html(respuesta[0].viaticos_costos.costoDeEstructuras + '$') : $('#tdCostoEstructuras').html(0 + '$');
-                            $('#tdNoCuadrillas').html(respuesta[0].viaticos_costos.noCuadrillas);
-                            $('#tdNoDias').html(respuesta[0].viaticos_costos.noDias);
-                            $('#tdNoDiasReales').html(respuesta[0].viaticos_costos.noDiasReales);
-                            $('#tdNoPersonasReq').html(respuesta[0].viaticos_costos.noPersonasRequeridas);
-                            $('#tdPagoPasaje').html(respuesta[0].viaticos_costos.pagoPasaje + '$');
-                            $('#tdPagoTotalComida').html(respuesta[0].viaticos_costos.pagoTotalComida + '$');
-                            $('#tdPagoTotalHospedaje').html(respuesta[0].viaticos_costos.pagoTotalHospedaje + '$');
-                            $('#tdPagoTotalPasaje').html(respuesta[0].viaticos_costos.pagoTotalPasaje + '$');
-                            $('#tdTotalViaticos').html(respuesta[0].totales.totalViaticosMT + '$');
+                            respuesta[0].viaticos_costos.costoDeEstructuras != null ? $('#tdCostoEstructuras').val(respuesta[0].viaticos_costos.costoDeEstructuras + '$') : $('#tdCostoEstructuras').val(0 + '$');
+                            $('#tdNoCuadrillas').val(respuesta[0].viaticos_costos.noCuadrillas);
+                            $('#tdNoDias').val(respuesta[0].viaticos_costos.noDias);
+                            $('#tdNoDiasReales').val(respuesta[0].viaticos_costos.noDiasReales);
+                            $('#tdNoPersonasReq').val(respuesta[0].viaticos_costos.noPersonasRequeridas);
+                            $('#tdPagoPasaje').val(respuesta[0].viaticos_costos.pagoPasaje + '$');
+                            $('#tdPagoTotalComida').val(respuesta[0].viaticos_costos.pagoTotalComida + '$');
+                            $('#tdPagoTotalHospedaje').val(respuesta[0].viaticos_costos.pagoTotalHospedaje + '$');
+                            $('#tdPagoTotalPasaje').val(respuesta[0].viaticos_costos.pagoTotalPasaje + '$');
+                            $('#tdTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$');
             
                             //Totales
-                            $('#tdCostoWatt').html(respuesta[0].totales.costForWatt + '$');
-                            $('#tdCostoTotalFletes').html(respuesta[0].totales.costoTotalFletes + '$');
-                            $('#tdManoObra').html(respuesta[0].totales.manoDeObra + '$');
-                            $('#tdMargen').html(respuesta[0].totales.margen);
-                            $('#tdTotalOtros').html(respuesta[0].totales.otrosTotal + '$');
-                            $('#tdPrecio').html(respuesta[0].totales.precio + '$');
-                            $('#tdPrecioMasIVA').html(respuesta[0].totales.precioMasIVA + '$');
-                            $('#tdTPIE').html(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
-                            $('#tdSubtotalOFPIE').html(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
-                            $('#tdTotalTodo').html(respuesta[0].totales.totalDeTodo + '$');
+                            $('#tdCostoWatt').val(respuesta[0].totales.costForWatt + '$');
+                            $('#tdCostoTotalFletes').val(respuesta[0].totales.costoTotalFletes + '$');
+                            $('#tdManoObra').val(respuesta[0].totales.manoDeObra + '$');
+                            $('#tdMargen').val(respuesta[0].totales.margen);
+                            $('#tdTotalOtros').val(respuesta[0].totales.otrosTotal + '$');
+                            $('#tdPrecio').val(respuesta[0].totales.precio + '$');
+                            $('#tdPrecioMasIVA').val(respuesta[0].totales.precioMasIVA + '$');
+                            $('#tdTPIE').val(respuesta[0].totales.totalPanelesInversoresEstructuras + '$');
+                            $('#tdSubtotalOFPIE').val(respuesta[0].totales.subTotalOtrosFleteManoDeObraTPIE + '$');
+                            $('#tdTotalTodo').val(respuesta[0].totales.totalDeTodo + '$');
                         }
                     }
                 }

@@ -419,6 +419,7 @@ function sendPeriodsToServer(){
                                 var numeroDeInversores = $('#cantidadInversores').val();
                                 var potenciaPicoInversor = $('#potenciaPicoInv').val();
                                 var porcentajeSobreDimens = $('#porcentajeSobreDim').val();
+                                var costoTotalInversores = $('#costoTotalInversores').val();
 
                                 objPeriodosGDMTH = {
                                     panel: {
@@ -436,7 +437,8 @@ function sendPeriodsToServer(){
                                         potenciaMaximaInversor: potenciaMaximaInversor,
                                         numeroDeInversores: numeroDeInversores,
                                         potenciaPicoInversor: potenciaPicoInversor,
-                                        porcentajeSobreDimens: porcentajeSobreDimens
+                                        porcentajeSobreDimens: porcentajeSobreDimens,
+                                        costoTotalInversores: costoTotalInversores
                                     }
                                 };
 

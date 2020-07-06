@@ -1,17 +1,55 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-<div class="card shadow mb-3">
-    <div class="card-header">
-        <p class="d-block mn-1 p-titulos">
-            <i class="fa fa-bolt" aria-hidden="true"></i>
-            Cotización individual 
-        </p>
-    </div>
-    <div class="card-body">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-12">
-                    <div class="form-row">
+<div class="row">
+    <div class="col-6 col-md-4">
+        <div class="card shadow mb-3">
+            <div class="card-header">
+                <p class="d-block mn-1 p-titulos">
+                    <i class="fa fa-bolt" aria-hidden="true"></i>
+                    Cotización individual 
+                </p>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="form-row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="mn-1">Cantidad paneles:</label>
+                                    <input class="form-control input-sm" type="number" id="inpCantPaneles" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="mn-1">Seleccionar Panel:</label>
+                                    <select class="form-control" id="optPaneles" onchange="getDropDownListValues()">
+                                        <option selected value="-1">Elige una opción:</option>
+                                            @foreach($vPaneles as $details)
+                                                <option value="{{ $details->idPanel }}">{{ $details->vNombreMaterialFot }}</option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="mn-1">Cantidad inversores:</label>
+                                    <input class="form-control input-sm" type="number" id="inpCantInversores" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="mn-1">Seleccionar Inversor:</label>
+                                    <select class="form-control" id="optInversores" onchange="getDropDownListValues()">
+                                        <option selected value="-1">Elige una opción:</option>
+                                            @foreach($vInversores as $details)
+                                                <option value="{{ $details->idInversor }}" >{{ $details->vNombreMaterialFot }}</option>
+                                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
                             +
                         </button>
@@ -24,42 +62,53 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="mn-1">Cantidad paneles:</label>
-                                <input class="form-control input-sm" type="number" id="inpCantPaneles" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label class="mn-1">Seleccionar Panel:</label>
-                                <select class="form-control" id="optPaneles" onchange="getDropDownListValues()">
-                                    <option selected value="-1">Elige una opción:</option>
-                                        @foreach($vPaneles as $details)
-                                            <option value="{{ $details->idPanel }}">{{ $details->vNombreMaterialFot }}</option>
-                                        @endforeach
-                                </select>
-                            </div>
+                    <div class="col">
+                        <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow pull-right" id="btnCalcularIndividual">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Calcular
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card shadow mb-3">
+            <div class="card-header">
+                <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inpCostTotalPaneles">Costo total Paneles</label>
+                            <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="mn-1">Cantidad inversores:</label>
-                                <input class="form-control input-sm" type="number" id="inpCantInversores" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label class="mn-1">Seleccionar Inversor:</label>
-                                <select class="form-control" id="optInversores" onchange="getDropDownListValues()">
-                                    <option selected value="-1">Elige una opción:</option>
-                                        @foreach($vInversores as $details)
-                                            <option value="{{ $details->idInversor }}" >{{ $details->vNombreMaterialFot }}</option>
-                                        @endforeach
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="">Costo total Inversores</label>
+                            <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
                         </div>
-                        <div class="col-md-4 offset-md-8 text-right mb-3">
-                            <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow" id="btnCalcularIndividual">
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                Calcular
-                            </button>
+                        <div class="form-group">
+                            <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
+                            <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpCostoTotalViaticos">Costo total Viaticos</label>
+                            <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inpPrecio">Precio</label>
+                            <input id="inpPrecio" class="form-control inpAnsw" readOnly>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpPrecioIVA">Precio + IVA</label>
+                            <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
+                        </div>
+                        <div class="form-group">
+                            <label for="precioMXN">Precio MXN</label>
+                            <input id="precioMXN" class="form-control inpAnsw" readOnly>
                         </div>
                     </div>
                 </div>
@@ -68,194 +117,17 @@
     </div>
 </div>
 
-
-<div class="card shadow mb-3" style="display:none;" id="divResultCotIndv">
-    <div class="card-body">
-        <div class="container" id="containerCI1">
-            <div id="divPaginado">
-                <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
-                <a> - </a>
-                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn" id="a2">2</a>
-            </div>
-            <div class="row text-center">
-                <div class="col table-responsive" id="dtabPanels">
-                    <h3>Paneles</h3>
-                    <table class="table table-sm table-striped" id="paneles">
-                        <thead>
-                            <th scope="col">Cantidad paneles</th>
-                            <th scope="col">Potencia panel</th>
-                            <th scope="col">Potencia real</th>
-                            <th scope="col">Costo por watt</th>
-                            <th scope="col">Costo total paneles</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="tdCantidadPanel"></td>
-                                <td id="tdPotenciaPanel"></td>
-                                <td id="tdPotenciaReal"></td>
-                                <td id="tdCostoPorWatt"></td>
-                                <td id="tdCostoTotalPanels"></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
-            <div class="row text-center" id="dtabInversores">
-                <div class="col table-responsive">
-                    <h3>Inversores</h3>
-                    <table class="table table-sm table-striped" id="inversores">
-                        <thead>
-                            <th scope="col">Cantidad inversores</th>
-                            <th scope="col">Potencia inversor</th>
-                            <th scope="col">Potencia maxima</th>
-                            <th scope="col">Potencia nominal</th>
-                            <th scope="col">Porcentaje sobredimensionamiento</th>
-                            <th scope="col">Potencia pico</th>
-                            <th scope="col">Precio inversor</th>
-                            <th scope="col">Costo total inversores</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="tdCantidadInversor"></td>
-                                <td id="tdPotenciaInversor"></td>
-                                <td id="tdPotenciaMaxima"></td>
-                                <td id="tdPotenciaNominal"></td>
-                                <td id="tdPorcentajeSD"></td>
-                                <td id="tdPotenciaPico"></td>
-                                <td id="tdPrecioInversor"></td>
-                                <td id="tdCostoTotalInv"></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>   
-            </div>
-            <div class="row text-center" id="dtabEsctructuras">
-                <div class="col table-responsive">
-                    <h3>Estructuras</h3>
-                    <table class="table table-sm table-striped" id="estructuras">
-                        <thead>
-                            <th scope="col">Costo de estructuras</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="tdCostoEstructuras"></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>   
-            </div>
-            <div class="row text-center" id="dtabViatics">
-                <div class="col table-responsive">
-                    <h3>Viaticos</h3>
-                    <table class="table table-sm table-striped" id="viaticos">
-                        <thead>
-                            <th scope="col">No. cuadrillas</th>
-                            <th scope="col">No. dias</th>
-                            <th scope="col">No. dias reales</th>
-                            <th scope="col">No. personas requeridas</th>
-                            <th scope="col">Pago pasaje</th>
-                            <th scope="col">Pago total comida</th>
-                            <th scope="col">Pago total hospedaje</th>
-                            <th scope="col">Pago total pasaje</th>
-                            <th scope="col">Total de los viaticos</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="tdNoCuadrillas"></td>
-                                <td id="tdNoDias"></td>
-                                <td id="tdNoDiasReales"></td>
-                                <td id="tdNoPersonasReq"></td>
-                                <td id="tdPagoPasaje"></td>
-                                <td id="tdPagoTotalComida"></td>
-                                <td id="tdPagoTotalHospedaje"></td>
-                                <td id="tdPagoTotalPasaje"></td>
-                                <td id="tdTotalViaticos"></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
-            <div class="row text-center" id="dtabTotales">
-                `<div class="col table-responsive">
-                    <h3>Totales</h3>
-                    <table class="table table-sm table-striped" id="totales">
-                        <thead>
-                            <th scope="col">Costo por watt</th>
-                            <th scope="col">Costo total fletes</th>
-                            <th scope="col">Mano de obra</th>
-                            <th scope="col">Margen</th>
-                            <th scope="col">Total de otros</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Precio mas IVA</th>
-                            <th scope="col">Total paneles, inversores, estructuras</th>
-                            <th scope="col">Subtotal Otros, flete, pan. inv. est.</th>
-                            <th scope="col">Total de todo</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="tdCostoWatt"></td>
-                                <td id="tdCostoTotalFletes"></td>
-                                <td id="tdManoObra"></td>
-                                <td id="tdMargen"></td>
-                                <td id="tdTotalOtros"></td>
-                                <td id="tdPrecio"></td>
-                                <td id="tdPrecioMasIVA"></td>
-                                <td id="tdTPIE"></td>
-                                <td id="tdSubtotalOFPIE"></td>
-                                <td id="tdTotalTodo"></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
-        </div>
-        <div class="container" id="containerCI2" style="display:none;">
-            <div>
-                <a href="#" onclick="coti_dollars()" title="cotizacion_individual dolares">1</a>
-                <a> - </a>
-                <a href="#" onclick="coti_mxn()" title="cotizacion_individual pesos mxn"id="a2>2</a>
-            </div>    
-            <div class="row text-center">
-                <div class="col table-responsive">
-                    <h3>Totales mxn</h3>
-                    <table class="table table-sm table-striped" id="totales">
-                        <thead>
-                            <th scope="col">Costo por watt</th>
-                            <th scope="col">Costo total fletes</th>
-                            <th scope="col">Mano de obra</th>
-                            <th scope="col">Margen</th>
-                            <th scope="col">Total de otros</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Precio mas IVA</th>
-                            <th scope="col">Total paneles, inversores, estructuras</th>
-                            <th scope="col">Subtotal Otros, flete, pan. inv. est.</th>
-                            <th scope="col">Total de todo</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                                <td id=""></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="container" id="loader" style="display:none;">
     <div class="row justify-content-center align-items-center minh-100">
         <img src="img/loader.svg">
     </div>
 </div>  
+
+<style>   
+    .inpAnsw{
+        border:0; 
+        background: transparent !important; 
+        border-bottom: 1px solid #888 !important;
+    }
+</style>
 @endsection
