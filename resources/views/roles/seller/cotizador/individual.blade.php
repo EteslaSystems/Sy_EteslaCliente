@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-center">
                     <div class="col">
                         <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
                             +
@@ -103,11 +103,11 @@
                             <input id="inpPrecio" class="form-control inpAnsw" readOnly>
                         </div>
                         <div class="form-group">
-                            <label for="inpPrecioIVA">Precio + IVA</label>
+                            <label for="inpPrecioIVA">Precio del proyecto + IVA</label>
                             <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
                         </div>
                         <div class="form-group">
-                            <label for="precioMXN">Precio MXN</label>
+                            <label for="precioMXN">Precio del proyecto MXN</label>
                             <input id="precioMXN" class="form-control inpAnsw" readOnly>
                         </div>
                     </div>

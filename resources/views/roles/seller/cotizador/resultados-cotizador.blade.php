@@ -5,33 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-4">
-                    <div class="card">
-                        <h5 class="card-header">Equipos</h5>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col form-group">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <div class="card shadow mb-3">
+                    <div class="card-header">
+                    <p class="d-block mn-1 p-titulos">Equipos</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col form-group">
+                                <div class="form-row">
                                     <label>Panel</label>
                                     <select class="form-control" id="listPaneles">
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
-                                <div class="col form-group">
+                                <div class="form-row">
                                     <label>Inversor</label>
                                     <select class="form-control" id="listInversores" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
+                                <br>
+                                <div class="form-row" style="display:none;" id="tblAjusteCotiMT">
+                                    <table class="table table-hover table-sm table-striped">
+                                        <thead class="thead-dark text-center">
+                                            <tr>
+                                                <th scope="col" colspan="2">Resumen General</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="range-wrap">
+                                                        <div class="range-value" id="rangeV-1"></div>
+                                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="range-wrap">
+                                                        <div class="range-value" id="rangeV-2"></div>
+                                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="range-wrap">
+                                                        <div class="range-value" id="rangeV-3"></div>
+                                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="text-center">
+                                                <td>
+                                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;">
+                                                        GUARDAR Y CREAR PDF
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
+                                                        MODIFICAR RESULTADOS
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col">
+                <div class="card shadow mb-3">
+                    <div class="card-header">
+                        <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="power-tab" data-toggle="tab" href="#power" role="tab" aria-controls="power-tab" aria-selected="false"s>Power</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="container">
+                                        <div class="row text-center">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="inpCostTotalPaneles">Costo total Paneles</label>
+                                                    <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inpCostTotalInversores">Costo total Inversores</label>
+                                                    <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
+                                                    <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inpCostoTotalViaticos">Costo total Viaticos</label>
+                                                    <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="inpPrecio">Precio</label>
+                                                    <input id="inpPrecio" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inpPrecioIVA">Precio del proyecto + IVA</label>
+                                                    <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inpPrecioMXN">Precio del proyecto MXN</label>
+                                                    <input id="inpPrecioMXN" class="form-control inpAnsw" readOnly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="power" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="inpTotalSinSolar">Total sin solar</label>
+                                                    <input id="inpTotalSinSolar" class="form-control input-sm inpAnsw" readOnly>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="inpTotalConSolar">Total con solar</label>
+                                                    <input id="inpTotalConSolar" class="form-control input-sm inpAnsw" readOnly>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="inpAhorro">Ahorro</label>
+                                                    <input id="inpAhorro" class="form-control input-sm inpAnsw" readOnly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class=col>
+                                                <table class="table table-responsive-sm table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="text-align:center;">
+                                                                <select class="form-control" id="listPagosTotales">
+                                                                    <option value="optSinSolar">Sin solar</option>
+                                                                    <option value="optConSolar">Con solar</option>
+                                                                </select>
+                                                            </th>
+                                                            <th>Enero</th>
+                                                            <th>Febrero</th>
+                                                            <th>Marzo</th>
+                                                            <th>Abril</th>
+                                                            <th>Mayo</th>
+                                                            <th>Junio</th>
+                                                            <th>Julio</th>
+                                                            <th>Agosto</th>
+                                                            <th>Septiembre</th>
+                                                            <th>Octubre</th>
+                                                            <th>Noviembre</th>
+                                                            <th>Diciembre</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">Pagos a CFE</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Transmision</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Energia</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Capacidad</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Distribucion</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">IVA</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Total</th>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="card" style="display:none;">
+        <div class="card-body">
+            <div class="row">
                 <div class="col-4">
                     <table class="table table-hover table-sm table-striped">
                         <thead class="thead-dark text-center">
@@ -331,58 +529,18 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-4">
-                    <table class="table table-hover table-sm table-striped">
-                        <thead class="thead-dark text-center">
-                            <tr>
-                                <th scope="col" colspan="2">Resumen General</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-1"></div>
-                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-2"></div>
-                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div class="range-wrap">
-                                        <div class="range-value" id="rangeV-3"></div>
-                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>
-                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;">
-                                        GUARDAR Y CREAR PDF
-                                    </button>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
-                                        MODIFICAR RESULTADOS
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
+
+
+    <style>   
+    .inpAnsw{
+        border:0; 
+        background: transparent !important; 
+        border-bottom: 1px solid #888 !important;
+    }
+</style>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

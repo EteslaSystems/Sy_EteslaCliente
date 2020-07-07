@@ -269,7 +269,7 @@ function sendPeriodsToServer(){
                 
                 $('#divResult').html(data);
     
-                //Consumo
+                //Consumo - /Tabla_oculta\
                 $('#consumoAnual').html(respuesta[0].consumo.consumoAnual + 'W');
                 $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria + 'W');
                 $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo + 'W');
@@ -289,48 +289,57 @@ function sendPeriodsToServer(){
                     var x = $('#listPaneles').val(); //Iteracion
                     
                     if(x === '-1'  || x === -1){
+                        // /Tabla_oculta\
                         $('#numeroModulos').html('');
                         $('#potenciaModulo').html('');
                         $('#potenciaReal').html('');
                         $('#precioModulo').html('');
                         $('#costoEstructuras').html('');
+
+                        $('#inpCostTotalPaneles').val('');
                         $('#listInversores').prop("disabled", true);
                         $('#listInversores').val("-1");
                     }
                     else{
                         _potenciaReal = respuesta[x].panel.potenciaReal;
 
-                        //Paneles
-                        $('#listInversores').prop("disabled", false);
+                        //Paneles - /Tabla_oculta\
                         $('#numeroModulos').html(respuesta[x].panel.noModulos).val(respuesta[x].panel.noModulos);
                         $('#potenciaModulo').html(respuesta[x].panel.potencia + 'W').val(respuesta[x].panel.potencia);
                         $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
-                        // $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
+                        $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
                         $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
                         $('#costoPorWatt').html(respuesta[x].panel.precioPorWatt + '$').val(respuesta[x].panel.precioPorWatt);
                         $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
                         
+                        $('#listInversores').prop("disabled", false);
+                        $('#inpCostTotalPaneles').val(respuesta[x].panel.costoTotalPaneles + '$');
+                        $('#inpCostTotalEstructuras').val(respuesta[x].panel.costoDeEstructuras + '$');
+
                         /*[Hoja: POWER]*/
-                        // $.ajax({
-                        //     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                        //     type: 'POST',
-                        //     url: '/firstStepPower',
-                        //     data: {
-                        //         "_token": $("meta[name='csrf-token']").attr('content'),
-                        //         "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
-                        //         "porcentajePerdida": porcentajePerdida,
-                        //         "potenciaReal": _potenciaReal
-                        //     },
-                        //     dataType: 'json'
-                        // })
-                        // .fail(function(){
-                        //     alert('Error al intentar generar calculos de [Hoja: POWER]');
-                        // })
-                        // .done(function(resp){
-                        //     resp = resp.message;
+                        $.ajax({
+                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                            type: 'POST',
+                            url: '/firstStepPower',
+                            data: {
+                                "_token": $("meta[name='csrf-token']").attr('content'),
+                                "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
+                                "porcentajePerdida": porcentajePerdida,
+                                "potenciaReal": _potenciaReal
+                            },
+                            dataType: 'json'
+                        })
+                        .fail(function(){
+                            alert('Error al intentar generar calculos de [Hoja: POWER]');
+                        })
+                        .done(function(resp){
+                            resp = resp.message;
                             
-                        //     console.log('[Hoja: POWER]\n'+resp);
-                        // });
+                            console.log('[Hoja: POWER]');
+                            console.log(resp);
+
+                            
+                        });
                     }
                 });
 
@@ -357,6 +366,7 @@ function sendPeriodsToServer(){
                         var xi = $('#listInversores').val(); //Iteracion
 
                         if(xi === '-1' || xi === -1){
+                            // /Tabla_oculta\
                             $('#cantidadInversores').html('');
                             $('#potenciaInversor').html('');
                             $('#potenciaMaximaInv').html('');
@@ -364,8 +374,10 @@ function sendPeriodsToServer(){
                             $('#potenciaPicoInv').html('');
                             $('#porcentajeSobreDim').html('');
                             $('#precioInv').html('');
-                            
                             $('#divTotalesProject').css("display","");
+
+                            // /Interfaz_visible\
+                            $('#inpCostTotalInversores').val('');
                         }
                         else{
                             var idInversor = response[xi].idInversor;
@@ -392,7 +404,7 @@ function sendPeriodsToServer(){
                                 reply = reply.message;
                                 console.log(reply);
 
-                                //Inversores
+                                //Inversores  - /Tabla_oculta\
                                 $('#cantidadInversores').html(reply[0].numeroDeInversores).val(reply[0].numeroDeInversores);
                                 $('#potenciaInversor').html(reply[0].potenciaInversor + 'W').val(reply[0].potenciaInversor);
                                 $('#potenciaMaximaInv').html(reply[0].potenciaMaximaInversor + 'W').val(reply[0].potenciaMaximaInversor);
@@ -401,6 +413,9 @@ function sendPeriodsToServer(){
                                 $('#porcentajeSobreDim').html(reply[0].porcentajeSobreDimens + '%').val(reply[0].porcentajeSobreDimens);
                                 $('#precioInv').html(reply[0].precioInversor + '$').val(reply[0].precioInversor); 
                                 $('#costoTotalInversores').html(reply[0].precioTotalInversores + '$').val(reply[0].precioTotalInversores);
+
+                                // /Interfaz_visible\
+                                $('#inpCostTotalInversores').val(reply[0].precioTotalInversores + '$');
 
                                 /*Viaticos y Totales*/
                                 /*#region Datos requeridos para poder calcular viaticos y totales*/
@@ -461,7 +476,7 @@ function sendPeriodsToServer(){
                                 .done(function(answer){
                                     answer = answer.message;
                                     
-                                    //Cuadrillas
+                                    /* //Cuadrillas
                                     $('#noCuadrillas').html(answer[0].viaticos_costos.noCuadrillas);
                                     $('#noPersonasReq').html(answer[0].viaticos_costos.noPersonasRequeridas);
                                     $('#noDias').html(answer[0].viaticos_costos.noDias);
@@ -484,7 +499,13 @@ function sendPeriodsToServer(){
                                     $('#totalTodo').html(answer[0].totales.totalDeTodo);
                                     $('#precioDollars').html(answer[0].totales.precio);
                                     $('#precioDollarsMasIVA').html(answer[0].totales.precioMasIVA);
-                                    $('#costWatt').html(answer[0].totales.costForWatt);
+                                    $('#costWatt').html(answer[0].totales.costForWatt); */
+
+                                    // /Interfaz_visible\
+                                    $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$');
+                                    $('#inpPrecio').val(respuesta[0].totales.precio + '$');
+                                    $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA + '$');
+                                    $('#inpPrecioMXN').val(respuesta[0].totales.precioTotalMXN + '$');
                                 });
                                 /*#endregion*/
                             }); 
