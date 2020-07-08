@@ -187,31 +187,45 @@
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">Pagos a CFE</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpPagosCFE<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Transmision</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpTransmision<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Energia</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpEnergia<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Capacidad</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpCapacidad<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Distribucion</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpDistribucion<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">IVA</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpIVA<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">Total</th>
-                                                            <td></td>
+                                                            <?php for($i=0; $i<12; $i++): ?>
+                                                                <td id="inpTotal<?php echo e($i); ?>"></td>
+                                                            <?php endfor; ?>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -544,7 +558,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
 <?php $__env->startSection('scripts'); ?>
 <script type="text/javascript">

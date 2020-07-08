@@ -14,7 +14,7 @@ class APICotizacion extends GuzzleHttpRequest
     //[Hoja_excel: POWER]
     public function firstStepPOWER($request)
     {
-        /* return */$this->post("firstStepPower",$request);
+        return $this->post("firstStepPower",$request);
     }
 
     //2do. Paso - Inversores requeridos

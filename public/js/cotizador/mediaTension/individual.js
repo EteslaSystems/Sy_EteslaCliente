@@ -141,12 +141,12 @@ function sendSingleQuotation(){
                     respuesta[0].inversores.costoTotalInversores != null ? $('#inpCostTotalInversores').val(respuesta[0].inversores.costoTotalInversores + '$') : $('#inpCostTotalInversores').val(0 + '$');
             
                     //Viaticos  
-                    $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$');
+                    respuesta[0].totales.totalViaticosMT ? $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$') : $('#inpCostoTotalViaticos').val('0$');
             
                     //Totales
                     $('#inpPrecio').val(respuesta[0].totales.precio + '$');
                     $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA + '$');
-                    $('#precioMXN').val(respuesta[0].totales.precioTotalMXN + '$');
+                    $('#precioMXN').val('$'+respuesta[0].totales.precioTotalMXN);
                 }
                 else{
                     /*REVISAR ESTA PARTE PARA CORREGIRLA O ELIMINARLA*/

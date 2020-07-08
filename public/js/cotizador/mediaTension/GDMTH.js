@@ -338,7 +338,34 @@ function sendPeriodsToServer(){
                             console.log('[Hoja: POWER]');
                             console.log(resp);
 
-                            
+                            $('#inpTotalSinSolar').val();
+                            $('#inpTotalConSolar').val();
+                            $('#inpAhorro').val();
+
+                            $('#listPagosTotales').change(function(){
+                                valueListPagosTotales = $('#listPagosTotales').val();
+
+                                for(var i=0; i<resp.length; i++){
+                                    if(valueListPagosTotales == "optSinSolar"){
+                                        $('#inpPagosCFE'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpTransmision'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpEnergia'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpCapacidad'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpDistribucion'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpIVA'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpTotal'+i).text(resp[i].sinSolar.pagosCFE);
+                                    }
+                                    else if(valueListPagosTotales == "optConSolar"){
+                                        $('#inpPagosCFE'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpTransmision'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpEnergia'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpCapacidad'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpDistribucion'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpIVA'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpTotal'+i).text(resp[i].conSolar.pagosCFE);
+                                    }
+                                }
+                            });
                         });
                     }
                 });

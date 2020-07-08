@@ -102,9 +102,9 @@ class MediaTensionController extends Controller
 		$array["potenciaReal"] = $request->potenciaReal;
 
 		$response = $this->cotizacion->firstStepPOWER(['json' => $array]);
-		/* $response = response()->json($response);
+		$response = response()->json($response);
 		
-		return $response; */
+		return $response;
 	}
 
 	//2do. Paso
