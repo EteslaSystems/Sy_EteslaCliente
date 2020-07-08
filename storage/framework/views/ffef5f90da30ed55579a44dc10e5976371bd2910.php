@@ -83,152 +83,156 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-8">
                 <div class="card shadow mb-3">
                     <div class="card-header">
                         <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="power-tab" data-toggle="tab" href="#power" role="tab" aria-controls="power-tab" aria-selected="false"s>Power</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="container">
-                                        <div class="row text-center">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="inpCostTotalPaneles">Costo total Paneles</label>
-                                                    <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
+                            <div class="col">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
+                                    </li>
+                                    <li class="nav-item" style="display:none;" id="navPower">
+                                        <a class="nav-link" id="power-tab" data-toggle="tab" href="#power" role="tab" aria-controls="power-tab" aria-selected="false"s>Power</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="container">
+                                            <div class="row text-center">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="inpCostTotalPaneles">Costo total Paneles</label>
+                                                        <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpCostTotalInversores">Costo total Inversores</label>
+                                                        <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
+                                                        <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpCostoTotalViaticos">Costo total Viaticos</label>
+                                                        <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="inpCostTotalInversores">Costo total Inversores</label>
-                                                    <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
-                                                    <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inpCostoTotalViaticos">Costo total Viaticos</label>
-                                                    <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="inpPrecio">Precio</label>
-                                                    <input id="inpPrecio" class="form-control inpAnsw" readOnly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inpPrecioIVA">Precio del proyecto + IVA</label>
-                                                    <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="inpPrecioMXN">Precio del proyecto MXN</label>
-                                                    <input id="inpPrecioMXN" class="form-control inpAnsw" readOnly>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="inpPrecio">Precio</label>
+                                                        <input id="inpPrecio" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpPrecioIVA">Precio del proyecto + IVA</label>
+                                                        <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpPrecioMXN">Precio del proyecto MXN</label>
+                                                        <input id="inpPrecioMXN" class="form-control inpAnsw" readOnly>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="power" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="inpTotalSinSolar">Total sin solar</label>
-                                                    <input id="inpTotalSinSolar" class="form-control input-sm inpAnsw" readOnly>
+                                    <div class="tab-pane fade" id="power" role="tabpanel" aria-labelledby="profile-tab" style="display:none;">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col table-responsive-sm">
+                                                    <table class="table table-bordered" >
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th style="text-align:center;">Produccion anual kWh</th>
+                                                                <th style="text-align:center;">Produccion anual mWh</th>
+                                                                <th style="text-align:center;">Total sin solar</th>
+                                                                <th style="text-align:center;">Total con solar</th>
+                                                                <th style="text-align:center;">Ahorro</th>
+                                                                <th style="text-align:center;">Ahorro %</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td id="tdProduccionAnualKwh"></td>
+                                                                <td id="tdProduccionAnualMwh"></td>
+                                                                <td id="tdTotalSinSolar"></td>
+                                                                <td id="tdTotalConSolar"></td>
+                                                                <td id="tdAhorro"></td>
+                                                                <td id="tdAhorroPorcentaje"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="inpTotalConSolar">Total con solar</label>
-                                                    <input id="inpTotalConSolar" class="form-control input-sm inpAnsw" readOnly>
+                                            <br>
+                                            <div class="row" style="overflow-x: auto">
+                                                <div>
+                                                    <table class="table table-responsive-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="fixed-side" style="text-align:center;">
+                                                                    <select class="form-control" id="listPagosTotales">
+                                                                        <option value="-1" title="Elige una opcion" active>Elegir</option>
+                                                                        <option value="optSinSolar">Sin solar</option>
+                                                                        <option value="optConSolar">Con solar</option>
+                                                                    </select>
+                                                                </th>
+                                                                <th>Enero</th>
+                                                                <th>Febrero</th>
+                                                                <th>Marzo</th>
+                                                                <th>Abril</th>
+                                                                <th>Mayo</th>
+                                                                <th>Junio</th>
+                                                                <th>Julio</th>
+                                                                <th>Agosto</th>
+                                                                <th>Septiembre</th>
+                                                                <th>Octubre</th>
+                                                                <th>Noviembre</th>
+                                                                <th>Diciembre</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">Transmision</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpTransmision<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">Energia</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpEnergia<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">Capacidad</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpCapacidad<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">Distribucion</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpDistribucion<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">IVA</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpIVA<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="fixed-side" scope="row">Total</th>
+                                                                <?php for($i=0; $i<12; $i++): ?>
+                                                                    <td id="inpTotal<?php echo e($i); ?>"></td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="inpAhorro">Ahorro</label>
-                                                    <input id="inpAhorro" class="form-control input-sm inpAnsw" readOnly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class=col>
-                                                <table class="table table-responsive-sm table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align:center;">
-                                                                <select class="form-control" id="listPagosTotales">
-                                                                    <option value="optSinSolar">Sin solar</option>
-                                                                    <option value="optConSolar">Con solar</option>
-                                                                </select>
-                                                            </th>
-                                                            <th>Enero</th>
-                                                            <th>Febrero</th>
-                                                            <th>Marzo</th>
-                                                            <th>Abril</th>
-                                                            <th>Mayo</th>
-                                                            <th>Junio</th>
-                                                            <th>Julio</th>
-                                                            <th>Agosto</th>
-                                                            <th>Septiembre</th>
-                                                            <th>Octubre</th>
-                                                            <th>Noviembre</th>
-                                                            <th>Diciembre</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">Pagos a CFE</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpPagosCFE<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Transmision</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpTransmision<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Energia</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpEnergia<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Capacidad</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpCapacidad<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Distribucion</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpDistribucion<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">IVA</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpIVA<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Total</th>
-                                                            <?php for($i=0; $i<12; $i++): ?>
-                                                                <td id="inpTotal<?php echo e($i); ?>"></td>
-                                                            <?php endfor; ?>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
                                             </div>
                                         </div>
                                     </div>

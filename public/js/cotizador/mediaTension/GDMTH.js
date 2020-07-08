@@ -299,6 +299,10 @@ function sendPeriodsToServer(){
                         $('#inpCostTotalPaneles').val('');
                         $('#listInversores').prop("disabled", true);
                         $('#listInversores').val("-1");
+
+                        //Pestania de : POWER
+                        $('#navPower').css("display","");
+                        $('#power').css("display","");
                     }
                     else{
                         _potenciaReal = respuesta[x].panel.potenciaReal;
@@ -338,31 +342,42 @@ function sendPeriodsToServer(){
                             console.log('[Hoja: POWER]');
                             console.log(resp);
 
-                            $('#inpTotalSinSolar').val();
-                            $('#inpTotalConSolar').val();
-                            $('#inpAhorro').val();
+                            $('#navPower').css("display","");
+                            $('#power').css("display","");
+
+                            /* $('#tdProduccionAnualKwh').val();
+                            $('#tdProduccionAnualMwh').val(); */
+                            $('#tdTotalSinSolar').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalSinSolar);
+                            $('#tdTotalConSolar').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalConSolar);
+                            $('#tdAhorro').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroCifra);
+                            $('#tdAhorroPorcentaje').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroPorcentaje+'%');
 
                             $('#listPagosTotales').change(function(){
                                 valueListPagosTotales = $('#listPagosTotales').val();
 
                                 for(var i=0; i<resp.length; i++){
                                     if(valueListPagosTotales == "optSinSolar"){
-                                        $('#inpPagosCFE'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpTransmision'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpEnergia'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpCapacidad'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpDistribucion'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpIVA'+i).text(resp[i].sinSolar.pagosCFE);
-                                        $('#inpTotal'+i).text(resp[i].sinSolar.pagosCFE);
+                                        $('#inpEnergia'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.energia);
+                                        $('#inpCapacidad'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.capacidad);
+                                        $('#inpDistribucion'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.distribucion);
+                                        $('#inpIVA'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.iva);
+                                        $('#inpTotal'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.total);
                                     }
                                     else if(valueListPagosTotales == "optConSolar"){
-                                        $('#inpPagosCFE'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpTransmision'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpEnergia'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpCapacidad'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpDistribucion'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpIVA'+i).text(resp[i].conSolar.pagosCFE);
-                                        $('#inpTotal'+i).text(resp[i].conSolar.pagosCFE);
+                                        $('#inpTransmision'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.transmision);
+                                        $('#inpEnergia'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.energia);
+                                        $('#inpCapacidad'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.capacidad);
+                                        $('#inpDistribucion'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.distribucion);
+                                        $('#inpIVA'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.iva);
+                                        $('#inpTotal'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.total);
+                                    }
+                                    else{
+                                        $('#inpTransmision'+i).text('');
+                                        $('#inpEnergia'+i).text('');
+                                        $('#inpCapacidad'+i).text('');
+                                        $('#inpDistribucion'+i).text('');
+                                        $('#inpIVA'+i).text('');
+                                        $('#inpTotal'+i).text('');
                                     }
                                 }
                             });
