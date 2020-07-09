@@ -102,18 +102,18 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="container">
-                                            <div class="row text-center">
-                                                <div class="col">
+                                            <div class="row">
+                                                <div class="col" style="justify-content:center;">
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalPaneles">Costo total Paneles</label>
+                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
                                                         <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalInversores">Costo total Inversores</label>
+                                                        <label for="inpCostTotalInversores">Costo total Inversores <small title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
                                                         <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
+                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
                                                         <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
@@ -169,10 +169,10 @@
                                             <br>
                                             <div class="row" style="overflow-x: auto">
                                                 <div>
-                                                    <table class="table table-responsive-sm table-bordered">
+                                                    <table class="table table-responsive-md table-bordered">
                                                         <thead>
                                                             <tr>
-                                                                <th class="fixed-side" style="text-align:center;">
+                                                                <th style="text-align:center;">
                                                                     <select class="form-control" id="listPagosTotales">
                                                                         <option value="-1" title="Elige una opcion" active>Elegir</option>
                                                                         <option value="optSinSolar">Sin solar</option>
@@ -195,37 +195,37 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">Transmision</th>
+                                                                <th scope="row">Transmision</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpTransmision{{ $i }}"></td>
                                                                 @endfor
                                                             </tr>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">Energia</th>
+                                                                <th scope="row">Energia</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpEnergia{{ $i }}"></td>
                                                                 @endfor
                                                             </tr>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">Capacidad</th>
+                                                                <th scope="row">Capacidad</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpCapacidad{{ $i }}"></td>
                                                                 @endfor
                                                             </tr>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">Distribucion</th>
+                                                                <th scope="row">Distribucion</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpDistribucion{{ $i }}"></td>
                                                                 @endfor
                                                             </tr>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">IVA</th>
+                                                                <th scope="row">IVA</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpIVA{{ $i }}"></td>
                                                                 @endfor
                                                             </tr>
                                                             <tr>
-                                                                <th class="fixed-side" scope="row">Total</th>
+                                                                <th scope="row">Total</th>
                                                                 @for($i=0; $i<12; $i++)
                                                                     <td id="inpTotal{{ $i }}"></td>
                                                                 @endfor
@@ -550,15 +550,13 @@
             </div>
         </div>
     </div>
-
-
     <style>   
-    .inpAnsw{
-        border:0; 
-        background: transparent !important; 
-        border-bottom: 1px solid #888 !important;
-    }
-</style>
+        .inpAnsw{
+            border:0; 
+            background: transparent !important; 
+            border-bottom: 1px solid #888 !important;
+        }
+    </style>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

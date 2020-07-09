@@ -251,6 +251,7 @@ function sendPeriodsToServer(){
         })
         .done(function(respuesta){
             respuesta = respuesta.message; //Energia requerida y Convinacion de paneles
+            console.log('Energia y Panel requerido:');
             console.log(respuesta);
 
             $.ajax({
@@ -294,15 +295,19 @@ function sendPeriodsToServer(){
                         $('#potenciaModulo').html('');
                         $('#potenciaReal').html('');
                         $('#precioModulo').html('');
-                        $('#costoEstructuras').html('');
+                        $('#costoEstructuras').val('');
 
                         $('#inpCostTotalPaneles').val('');
                         $('#listInversores').prop("disabled", true);
                         $('#listInversores').val("-1");
 
-                        //Pestania de : POWER
-                        $('#navPower').css("display","");
-                        $('#power').css("display","");
+                        //Se esconde pestania de : POWER
+                        $('#navPower').css("display","none");
+                        $('#power').css("display","none");
+
+                        //Desaparece cantidad (numerito) de -Paneles y Estructuras-
+                        $('#txtCantidadPaneles').html('');
+                        $('#txtCantidadEstructuras').html('');
                     }
                     else{
                         _potenciaReal = respuesta[x].panel.potenciaReal;
@@ -316,6 +321,10 @@ function sendPeriodsToServer(){
                         $('#costoPorWatt').html(respuesta[x].panel.precioPorWatt + '$').val(respuesta[x].panel.precioPorWatt);
                         $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
                         
+                        //Aparece cantidad (numerito) de -Paneles y Estructuras-
+                        $('#txtCantidadPaneles').html('<strong> ('+respuesta[x].panel.noModulos+')</strong>');
+                        $('#txtCantidadEstructuras').html('<strong> ('+respuesta[x].panel.noModulos+')</strong>');
+
                         $('#listInversores').prop("disabled", false);
                         $('#inpCostTotalPaneles').val(respuesta[x].panel.costoTotalPaneles + '$');
                         $('#inpCostTotalEstructuras').val(respuesta[x].panel.costoDeEstructuras + '$');
@@ -345,17 +354,19 @@ function sendPeriodsToServer(){
                             $('#navPower').css("display","");
                             $('#power').css("display","");
 
-                            /* $('#tdProduccionAnualKwh').val();
-                            $('#tdProduccionAnualMwh').val(); */
-                            $('#tdTotalSinSolar').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalSinSolar);
-                            $('#tdTotalConSolar').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalConSolar);
-                            $('#tdAhorro').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroCifra);
-                            $('#tdAhorroPorcentaje').val(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroPorcentaje+'%');
+                            $('#tdProduccionAnualKwh').text(resp[0].arrayProduccionAnual[0].produccionAnualKwh);
+                            $('#tdProduccionAnualMwh').text(resp[0].arrayProduccionAnual[0].produccionAnualMwh);
+                            $('#tdTotalSinSolar').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalSinSolar);
+                            $('#tdTotalConSolar').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalConSolar);
+                            $('#tdAhorro').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroCifra);
+                            $('#tdAhorroPorcentaje').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroPorcentaje+'%');
+                            
+                            arrayResponse = resp[0].arrayPagosTotales[0].arrayPagosTotales;
 
                             $('#listPagosTotales').change(function(){
                                 valueListPagosTotales = $('#listPagosTotales').val();
 
-                                for(var i=0; i<resp.length; i++){
+                                for(var i=0; i<arrayResponse.length; i++){
                                     if(valueListPagosTotales == "optSinSolar"){
                                         $('#inpEnergia'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.energia);
                                         $('#inpCapacidad'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.capacidad);
@@ -419,9 +430,22 @@ function sendPeriodsToServer(){
                             $('#divTotalesProject').css("display","");
 
                             // /Interfaz_visible\
-                            $('#inpCostTotalInversores').val('');
+                            $('#inpCostTotalInversores').val('').text('');
+
+                            //Panel de ajuste de cotizacion - Desaparece
+                            $('#tblAjusteCotiMT').css("display","none");
+                            
+                            //Se desaparece numerito -Cantidad_Inversores-
+                            $('#txtCantidadPaneles').html('');
                         }
                         else{
+                            //Panel de ajuste de cotizacion - Aparece
+                            $('#tblAjusteCotiMT').css("display","");
+
+                            //Se agrega nmerito -Cantidad_Inversores-
+                            $('#txtCantidadPaneles').html('<strong> ('+reply[0].numeroDeInversores+')</strong>');
+                            
+
                             var idInversor = response[xi].idInversor;
 
                             console.log('porcentajePerdida: \n' +porcentajePerdida);
@@ -541,13 +565,13 @@ function sendPeriodsToServer(){
                                     $('#totalTodo').html(answer[0].totales.totalDeTodo);
                                     $('#precioDollars').html(answer[0].totales.precio);
                                     $('#precioDollarsMasIVA').html(answer[0].totales.precioMasIVA);
-                                    $('#costWatt').html(answer[0].totales.costForWatt); */
+                                    $('#costWatt').html(answer[0].totales.costForWatt); */  
 
                                     // /Interfaz_visible\
-                                    $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$');
-                                    $('#inpPrecio').val(respuesta[0].totales.precio + '$');
-                                    $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA + '$');
-                                    $('#inpPrecioMXN').val(respuesta[0].totales.precioTotalMXN + '$');
+                                    $('#inpCostoTotalViaticos').val(answer[0].totales.totalViaticosMT + '$');
+                                    $('#inpPrecio').val(answer[0].totales.precio + '$');
+                                    $('#inpPrecioIVA').val(answer[0].totales.precioMasIVA + '$');
+                                    $('#inpPrecioMXN').val(answer[0].totales.precioTotalMXN + '$');
                                 });
                                 /*#endregion*/
                             }); 
