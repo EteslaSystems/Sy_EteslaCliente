@@ -80,15 +80,15 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="inpCostTotalPaneles">Costo total Paneles</label>
+                            <label for="inpCostTotalPaneles">Costo total Paneles <small title="Cantidad de paneles" id="txtCantidadPanelesInd"></small></label>
                             <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
                         </div>
                         <div class="form-group">
-                            <label for="">Costo total Inversores</label>
+                            <label for="">Costo total Inversores <small title="Cantidad de inversores" id="txtCantidadInversoresInd"></small></label>
                             <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
                         </div>
                         <div class="form-group">
-                            <label for="inpCostTotalEstructuras">Costo total Estructuras</label>
+                            <label for="inpCostTotalEstructuras">Costo total Estructuras <small title="Cantidad de estructuras" id="txtCantidadEstructurasInd"></small></label>
                             <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
                         </div>
                         <div class="form-group">

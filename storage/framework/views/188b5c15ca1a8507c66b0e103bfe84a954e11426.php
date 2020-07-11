@@ -55,7 +55,7 @@
                             </select>
                         </div>
                         <div class="btn-group btn-group-lg" role="group">
-                            <button id="btnAgregarPeriodoGDMTO" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
+                            <button id="btnAgregarPeriodoGDMTO" class="btn btn-green" onclick="#" title="Agregar periodo de consumo">
                                 <i class="fa fa-file-text" aria-hidden="true"></i>
                             </button>
                             <button id="btnEditarPeriodoGDMTO" class="btn btn-green" onclick="#" title="Editar periodo de consumo" disabled>
@@ -136,20 +136,20 @@
                             <span class="input-group-text">Periodo(s)</span>
                         </div>
                         <select class="custom-select iptPeriodos" name="numPeriodos" id="lstPeriodosGDMTH">
-                            <option disabled selected value="-1">0</option>
+                            <option selected value="-1">1</option>
                         </select>
                     </div>
                     <div class="btn-group btn-group-lg" role="group">
                         <button id="btnAgregarPeriodo" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
                             <i class="fa fa-file-text" aria-hidden="true"></i>
                         </button>
-                        <button id="btnEditarPeriodo" class="btn btn-green" onclick="#" title="Editar periodo de consumo" disabled>
+                        <button id="btnEditarPeriodo" class="btn btn-green" onclick="editarPeriodo();" title="Editar periodo de consumo" disabled>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
-                        <button id="btnEliminarPeriodo" class="btn btn-green" onclick="#" title="Eliminar periodo de consumo" disabled>
+                        <button id="btnEliminarPeriodo" class="btn btn-green" onclick="restarAlIndexador();" title="Eliminar periodo de consumo" disabled>
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
-                        <button id="btnActualizarPeriodo" class="btn btn-green" onclick="#" title="Actualizar periodo de consumo" disabled>
+                        <button id="btnActualizarPeriodo" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>
                             <i class="fa fa-refresh" aria-hidden="true"></i>
                         </button>
                     </div>

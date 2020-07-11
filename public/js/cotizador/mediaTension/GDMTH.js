@@ -1,9 +1,5 @@
-var lista;
-var option;
-var indexador = 0;
-var indexMostrar = 0;
 var direccionCliente = '';
-var banderaEditar = false;
+var bandera;
 var arrayPeriodosGDMTH = [];
 var _cotizaViaticos = [];
 var objPeriodosGDMTH = {};
@@ -15,8 +11,9 @@ var descuento = 0;
 
 $(document).ready(function(){
     mostrarPeriodo();
-});
+}); 
 
+/*#region Controles*/
 function agregarPeriodo(){
     var BkWh = document.getElementById('inpBkWh').value;
     var IkWh = document.getElementById('inpIkWh').value;
@@ -54,18 +51,9 @@ function agregarPeriodo(){
             dmxn: Dmxn || null
         };
     
-        if(arrayPeriodosGDMTH.length < 12){
-            arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-            sumarAlIndexador();
-            limpiarCampos();
-        }
-        else
-        {
-            // msj = 'Solo se pueden ingresar 12 periodos';
-            // modalMsj(msj,this.msjConfirm);
-            lista.remove(lista.selectedIndex);
-            //restarAlIndexador();
-        }
+        arrayPeriodosGDMTH.push(objPeriodosGDMTH);
+        sumarAlIndexador();
+        limpiarCampos();
     // }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
@@ -73,26 +61,177 @@ function agregarPeriodo(){
 }
 
 function eliminarPeriodo(){
-    arrayPeriodosGDMTH.splice(0,(indexMostrar-1));
-    /*Actualizar el indexador de la lista desplegable*/
-    restarAlIndexador();
+    msj = '¿Deseas eliminar el periodo?';
+    msjConfirm = true;
+    bandera = 1;
+
+    if(modalMsj(msj,msjConfirm) == true){
+        logicaBotones(bandera);
+        arrayPeriodosGDMTH.splice(0,(seleccionado));
+        /*Actualizar el indexador de la lista desplegable*/
+        restarAlIndexador();
+    }
+}
+
+function editarPeriodo(){
+    bandera = 2;
+    logicaBotones(bandera);
 }
 
 function actualizarPeriodo(){
-    arrayPeriodosGDMTH[indexMostrar-1].bkwh = document.getElementById('inpBkWh').value;    ;
-    arrayPeriodosGDMTH[indexMostrar-1].ikwh = document.getElementById('inpIkWh').value;
-    arrayPeriodosGDMTH[indexMostrar-1].pkwh = document.getElementById('inpPkWh').value;
-    arrayPeriodosGDMTH[indexMostrar-1].bkw = document.getElementById('inpBkw').value;
-    arrayPeriodosGDMTH[indexMostrar-1].ikw = document.getElementById('inpIkw').value;
-    arrayPeriodosGDMTH[indexMostrar-1].pkw = document.getElementById('inpPkw').value;
-    arrayPeriodosGDMTH[indexMostrar-1].bmxn = document.getElementById('B(mxn/kWh)').value;
-    arrayPeriodosGDMTH[indexMostrar-1].imxn = document.getElementById('I(mxn/kWh)').value;
-    arrayPeriodosGDMTH[indexMostrar-1].pmxn = document.getElementById('P(mxn/kWh)').value;
-    arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi = document.getElementById('inpPagoTransmision').value;
-    arrayPeriodosGDMTH[indexMostrar-1].cmxn = document.getElementById('C(mxn/kW)').value;
-    arrayPeriodosGDMTH[indexMostrar-1].dmxn = document.getElementById('D(mxn/kW)').value;
+    seleccionado = parseInt(lista.selectedIndex);
+    bandera = 3;
+    logicaBotones(bandera);
+
+    arrayPeriodosGDMTH[seleccionado].bkwh = document.getElementById('inpBkWh').value;    ;
+    arrayPeriodosGDMTH[seleccionado].ikwh = document.getElementById('inpIkWh').value;
+    arrayPeriodosGDMTH[seleccionado].pkwh = document.getElementById('inpPkWh').value;
+    arrayPeriodosGDMTH[seleccionado].bkw = document.getElementById('inpBkw').value;
+    arrayPeriodosGDMTH[seleccionado].ikw = document.getElementById('inpIkw').value;
+    arrayPeriodosGDMTH[seleccionado].pkw = document.getElementById('inpPkw').value;
+    arrayPeriodosGDMTH[seleccionado].bmxn = document.getElementById('B(mxn/kWh)').value;
+    arrayPeriodosGDMTH[seleccionado].imxn = document.getElementById('I(mxn/kWh)').value;
+    arrayPeriodosGDMTH[seleccionado].pmxn = document.getElementById('P(mxn/kWh)').value;
+    arrayPeriodosGDMTH[seleccionado].pagoTransmi = document.getElementById('inpPagoTransmision').value;
+    arrayPeriodosGDMTH[seleccionado].cmxn = document.getElementById('C(mxn/kW)').value;
+    arrayPeriodosGDMTH[seleccionado].dmxn = document.getElementById('D(mxn/kW)').value;
 }
 
+function mostrarPeriodo(){
+    lista = $("#lstPeriodosGDMTH");
+
+    /*Se desplega el contenido del array en los campos*/ 
+    lista.change(function(){
+        seleccionado = parseInt(lista.selectedIndex);
+        index = lista.length;
+
+        console.log('Seleccionado: '+seleccionado+' Indexador:' +index);
+
+        if((seleccionado+1) === index){
+            /*Aqui hay un bug*/
+            bandera = 0;
+            logicaBotones(bandera);
+        }
+        else if(seleccionado < index){
+            bandera = 4;
+            logicaBotones(bandera);
+
+            document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[seleccionado].bkwh.toString();
+            document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[seleccionado].ikwh.toString();
+            document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[seleccionado].pkwh.toString();
+            document.getElementById('inpBkw').value = arrayPeriodosGDMTH[seleccionado].bkw.toString();
+            document.getElementById('inpIkw').value = arrayPeriodosGDMTH[seleccionado].ikw.toString();
+            document.getElementById('inpPkw').value = arrayPeriodosGDMTH[seleccionado].pkw.toString();
+            document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[seleccionado].bmxn.toString();
+            document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[seleccionado].imxn.toString();
+            document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[seleccionado].pmxn.toString();
+            document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[seleccionado].pagoTransmi.toString();
+            document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[seleccionado].cmxn.toString();
+            document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[seleccionado].dmxn.toString();
+        }
+    });
+}
+
+function sumarAlIndexador(){
+    lista = document.getElementById("lstPeriodosGDMTH");
+    indexador = lista.length;
+    option = document.createElement("option");
+    option.text = indexador + 1;
+    lista.add(option);
+    lista.selectedIndex = indexador.toString();
+    validarLimiteSumarPeriodos(indexador);
+}
+
+function restarAlIndexador(){
+    lista = document.getElementById("lstPeriodosGDMTH");
+    ultimoIndex = lista.length - 1;
+    lista.remove(ultimoIndex);
+    /*Cada vez que se elimine un elemento de la lista, este debera mostrar el elemento anterior al eliminado*/
+    newUltimoIndex = lista.length - 1;
+}
+
+function bloquearCampos(){
+    $('input[type="number"]').attr("readOnly",true);
+}
+
+function desbloquearCampos(){
+    $('input[type="number"]').attr("readOnly",false);
+}
+
+function limpiarCampos(){
+    $('input[type="number"]').val('');
+}
+
+function logicaBotones(bandera){
+    /*
+                    Estados de bandera -> Logica botones
+        *0 - Crear
+        *1 - Eliminar
+        *2 - Editar
+        *3 - Actualizar
+        *4 - Leer
+        *default - Bloquear todo
+    */
+
+    switch(bandera)
+    {
+        case 0:
+            //Crear
+            limpiarCampos();
+            desbloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",false);
+            $('#btnEliminarPeriodo').prop("disabled",true);
+            $('#btnEditarPeriodo').prop("disabled",true);
+            $('#btnActualizarPeriodo').prop("disabled",true);
+        break;
+        case 1:
+            //Eliminar
+            bloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",true);
+            $('#btnEliminarPeriodo').prop("disabled",true);
+            $('#btnEditarPeriodo').prop("disabled",false);
+            $('#btnActualizarPeriodo').prop("disabled",true);
+        break;
+        case 2:
+            //Editar
+            desbloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",true);
+            $('#btnEliminarPeriodo').prop("disabled",true);
+            $('#btnEditarPeriodo').prop("disabled",true);
+            $('#btnActualizarPeriodo').prop("disabled",false);
+        break;
+        case 3:
+            //Actualizar
+            bloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",true);
+            $('#btnEliminarPeriodo').prop("disabled",true);
+            $('#btnEditarPeriodo').prop("disabled",false);
+            $('#btnActualizarPeriodo').prop("disabled",true);
+        break;
+        case 4:
+            //Leer
+            bloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",true);
+            $('#btnEliminarPeriodo').prop("disabled",false);
+            $('#btnEditarPeriodo').prop("disabled",false);
+            $('#btnActualizarPeriodo').prop("disabled",true);
+        break;
+        default:
+            bloquearCampos();
+            $('#btnAgregarPeriodo').prop("disabled",true);
+            $('#btnEliminarPeriodo').prop("disabled",true);
+            $('#btnEditarPeriodo').prop("disabled",true);
+            $('#btnActualizarPeriodo').prop("disabled",true);
+        break;
+    }
+}
+
+function backToCotizacion(){
+    $("#divCotizacionMediaTension").css("display","");
+    $("#divBtnCalcularMT").css("display","");
+    $("#divResultCotizacion").css("display","none");
+}
+/*#region Validaciones_Controles*/
 function checkAddItems(){
     if($('#chbAddItemGDMTH').prop("checked") == true){
         porcentajePerdida = $('#inpPerdidaGDMTH').val();
@@ -112,69 +251,6 @@ function checkAddItems(){
     }
 }
 
-function mostrarPeriodo(){
-    /*Se desplega el contenido del array en los campos*/ 
-    $("#lstPeriodosGDMTH").on("change", function(){
-        indexMostrar = document.getElementById("lstPeriodosGDMTH").value;
-        
-        if(indexMostrar > indexador){
-            limpiarCampos();
-            desbloquearCampos();
-            banderaEditar = false;
-        }
-        else{
-            document.getElementById('inpBkWh').value = arrayPeriodosGDMTH[indexMostrar-1].bkwh.toString();
-            document.getElementById('inpIkWh').value = arrayPeriodosGDMTH[indexMostrar-1].ikwh.toString();
-            document.getElementById('inpPkWh').value = arrayPeriodosGDMTH[indexMostrar-1].pkwh.toString();
-            document.getElementById('inpBkw').value = arrayPeriodosGDMTH[indexMostrar-1].bkw.toString();
-            document.getElementById('inpIkw').value = arrayPeriodosGDMTH[indexMostrar-1].ikw.toString();
-            document.getElementById('inpPkw').value = arrayPeriodosGDMTH[indexMostrar-1].pkw.toString();
-            document.getElementById('B(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].bmxn.toString();
-            document.getElementById('I(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].imxn.toString();
-            document.getElementById('P(mxn/kWh)').value = arrayPeriodosGDMTH[indexMostrar-1].pmxn.toString();
-            document.getElementById('inpPagoTransmision').value = arrayPeriodosGDMTH[indexMostrar-1].pagoTransmi.toString();
-            document.getElementById('C(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].cmxn.toString();
-            document.getElementById('D(mxn/kW)').value = arrayPeriodosGDMTH[indexMostrar-1].dmxn.toString();
-
-            if(indexMostrar < indexador || indexMostrar == indexador){
-                /*El usuario estara navegando en los periodos ya guardados en memoria*/
-                bloquearCampos();
-                /*Y posiblemente quiera editar, por eso se cambia la bandera a true*/
-                banderaEditar = true;
-            }
-            /*else{
-                desbloquearCampos();
-                banderaEditar = false;
-            }*/
-
-            logicaBotones();
-        }
-        
-        console.log('indexMostrar: '+indexMostrar+' indexador: '+indexador);
-    });
-}
-
-function sumarAlIndexador(){
-    indexador = arrayPeriodosGDMTH.length;
-    lista = document.getElementById("lstPeriodosGDMTH");    
-    option = document.createElement("option");
-    option.text = indexador + 1;
-    lista.add(option);
-    lista.selectedIndex = indexador.toString();
-}
-
-function restarAlIndexador(){
-    for(let i = arrayPeriodosGDMTH.length; i >= 0; i--){
-        lista.remove(i);
-    }
-    for(let j = 1; j < arrayPeriodosGDMTH.length; j++){
-        option = document.createElement("option");
-        this.option.text = j;
-        lista.add(option);
-    }
-    lista.selectedIndex = arrayPeriodosGDMTH.length.toString();
-}
-
 function validarCamposVacios(valor){
     valor = valor.replace("&nbsp;", "");
     valor = valor == undefined ? "" : valor;
@@ -187,45 +263,50 @@ function validarCamposVacios(valor){
     }
 }
 
-function logicaBotones(){
-    if(banderaEditar == true){
-        $('#btnEditarPeriodo').prop("disabled",false);
-        $('#btnEliminarPeriodo').prop("disabled",false);
-        $('#btnAgregarPeriodo').prop("disabled",true);
+function validarLimiteSumarPeriodos(indexador){
+    if(indexador >= 12){
+        bandera = 'x';
+        logicaBotones(bandera);
     }
-    else if(banderaEditar == false){
-        $('#btnEditarPeriodo').prop("disabled",true);
-        $('#btnEliminarPeriodo').prop("disabled",true);
-        if((indexador + 1) < 12){
-            $('#btnAgregarPeriodo').prop("disabled",true);
+}
+
+function validarLimiteEliminarPeriodos(){
+
+}
+
+function validarEnvioDePeriodo(){
+    
+    if(arrayPeriodosGDMTH.length == 0 || arrayPeriodosGDMTH.length == 1){
+        msj = 'Ups! Número de periodos insuficientes para calcular';
+        modalMsj(msj,this.msjConfirm);
+    }
+    else if(arrayPeriodosGDMTH.length < 12){
+        this.msjConfirm = true;
+        msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
+        if(modalMsj(msj,msjConfirm) == true){
+            sendPeriodsToServer();
+            limpiarCampos();
+            //console.log(arrayPeriodosGDMTH);
+            /*
+                -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
+                el servidor realiza las operaciones necesarias
+            */
         }
     }
-
-    $('#btnEditarPeriodo').click(function(){
-        $('#btnActualizarPeriodo').prop("disabled",false);
-        $('#btnEditarPeriodo').prop("disabled",true);
-        $('#btnEliminarPeriodo').prop("disabled",true);
-        $('#btnAgregarPeriodo').prop("disabled",true);
-        $("#lstPeriodosGDMTH").prop("disabled",true);
-        desbloquearCampos();
-    });
-
-    $('#btnActualizarPeriodo').click(function(){
-        $('#btnEditarPeriodo').prop("disabled",false);
-        $('#btnEliminarPeriodo').prop("disabled",false);
-        $('#btnActualizarPeriodo').prop("disabled",true);
-        $('#btnAgregarPeriodo').prop("disabled",true);
-        $("#lstPeriodosGDMTH").prop("disabled",false);
-        bloquearCampos();
-    });
+    else if(arrayPeriodosGDMTH.length == 12){
+        sendPeriodsToServer();
+        limpiarCampos();
+        /* this.arrayPeriodosGDMTH = [];
+        console.log(arrayPeriodosGDMTH); */
+        /*
+            -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
+             el servidor realiza las operaciones necesarias
+        */
+    } 
 }
-
-function backToCotizacion(){
-    $("#divCotizacionMediaTension").css("display","");
-    $("#divBtnCalcularMT").css("display","");
-    $("#divResultCotizacion").css("display","none");
-}
-
+/*#endregion*/
+/*#endregion*/
+/*#region DataToServer*/
 function sendPeriodsToServer(){
     direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
@@ -582,37 +663,9 @@ function sendPeriodsToServer(){
         });
     }
 }
+/*#endregion*/
 
-function validarEnvioDePeriodo(){
-    
-    if(arrayPeriodosGDMTH.length == 0 || arrayPeriodosGDMTH.length == 1){
-        msj = 'Ups! Número de periodos insuficientes para calcular';
-        modalMsj(msj,this.msjConfirm);
-    }
-    else if(arrayPeriodosGDMTH.length < 12){
-        this.msjConfirm = true;
-        msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
-        if(modalMsj(msj,msjConfirm) == true){
-            sendPeriodsToServer();
-            limpiarCampos();
-            //console.log(arrayPeriodosGDMTH);
-            /*
-                -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
-                el servidor realiza las operaciones necesarias
-            */
-        }
-    }
-    else if(arrayPeriodosGDMTH.length == 12){
-        sendPeriodsToServer();
-        limpiarCampos();
-        /* this.arrayPeriodosGDMTH = [];
-        console.log(arrayPeriodosGDMTH); */
-        /*
-            -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
-             el servidor realiza las operaciones necesarias
-        */
-    } 
-}
+
 
 function modalMsj(msj,msjConfirm){
     if(msjConfirm == true){
@@ -623,18 +676,6 @@ function modalMsj(msj,msjConfirm){
     else{
         alert(msj);
     }
-}
-
-function bloquearCampos(){
-    $('input[type="number"]').attr("readOnly",true);
-}
-
-function desbloquearCampos(){
-    $('input[type="number"]').attr("readOnly",false);
-}
-
-function limpiarCampos(){
-    $('input[type="number"]').val('');
 }
 
 function GDMTH(){

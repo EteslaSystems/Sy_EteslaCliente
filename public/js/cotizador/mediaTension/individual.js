@@ -133,13 +133,16 @@ function sendSingleQuotation(){
                     /*Vaciar datos de la cotizacion_individual en la tabla*/
                     //Paneles
                     $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotalPaneles + '$');
-                    
+                    $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.cantidadPaneles+')');
+
                     //Estructuras
                     respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
-                    
+                    $('#txtCantidadEstructurasInd').html('('+respuesta[0].paneles.cantidadPaneles+')');
+
                     //Inversores
                     respuesta[0].inversores.costoTotalInversores != null ? $('#inpCostTotalInversores').val(respuesta[0].inversores.costoTotalInversores + '$') : $('#inpCostTotalInversores').val(0 + '$');
-            
+                    respuesta[0].inversores.numeroDeInversores != null ? $('#txtCantidadInversoresInd').html('('+respuesta[0].paneles.cantidadPaneles+')') : $('#txtCantidadInversoresInd').html('(0)');
+
                     //Viaticos  
                     respuesta[0].totales.totalViaticosMT ? $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT + '$') : $('#inpCostoTotalViaticos').val('0$');
             
