@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class MediaTensionController extends Controller
 {
+
 	protected $paneles;
 	protected $inversores;
 	protected $vendedor;
@@ -78,7 +79,7 @@ class MediaTensionController extends Controller
 		}
 		return 0;
 	}
-
+  
 	//1er. Paso
 	public function sendPeriodsToServer(Request $request)
 	{

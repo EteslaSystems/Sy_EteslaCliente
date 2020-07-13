@@ -5,9 +5,11 @@ var _cotizaViaticos = [];
 var objPeriodosGDMTH = {};
 var msjConfirm = false;
 
+
 var _potenciaReal = 0;
 var porcentajePerdida = 0;
 var descuento = 0;
+
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -51,6 +53,7 @@ function agregarPeriodo(){
             dmxn: Dmxn || null
         };
     
+
         arrayPeriodosGDMTH.push(objPeriodosGDMTH);
         sumarAlIndexador();
         limpiarCampos();
@@ -142,6 +145,7 @@ function mostrarPeriodo(){
             bandera = 'x';
             logicaBotones(bandera);
         }
+
     });
 }
 
@@ -288,6 +292,7 @@ function validarLimiteEliminarPeriodos(){
 
 }
 
+
 function validarEnvioDePeriodo(){
     
     if(arrayPeriodosGDMTH.length == 0 || arrayPeriodosGDMTH.length == 1){
@@ -300,6 +305,7 @@ function validarEnvioDePeriodo(){
         if(modalMsj(msj,msjConfirm) == true){
             sendPeriodsToServer();
             limpiarCampos();
+          
             //console.log(arrayPeriodosGDMTH);
             /*
                 -Desplegar un spinner que simule la carga/calculo de la cotización, en lo 
@@ -310,6 +316,7 @@ function validarEnvioDePeriodo(){
     else if(arrayPeriodosGDMTH.length == 12){
         sendPeriodsToServer();
         limpiarCampos();
+
         /* this.arrayPeriodosGDMTH = [];
         console.log(arrayPeriodosGDMTH); */
         /*
@@ -405,7 +412,9 @@ function sendPeriodsToServer(){
                         $('#txtCantidadEstructuras').html('');
                     }
                     else{
-                        _potenciaReal = respuesta[x].panel.potenciaReal;
+                        
+                      
+                      = respuesta[x].panel.potenciaReal;
 
                         //Paneles - /Tabla_oculta\
                         $('#numeroModulos').html(respuesta[x].panel.noModulos).val(respuesta[x].panel.noModulos);
