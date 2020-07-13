@@ -9,45 +9,60 @@ class ingenieroController extends Controller
 {
 	public function index()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 4 && session('dataUsuario')->tipoUsuario == 'Ing' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/enginer');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los ingenieros pueden acceder a esta vista.');
+		}
+		return view('roles/enginer');
 	}
 
 	public function levantamiento()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 4 && session('dataUsuario')->tipoUsuario == 'Ing' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/enginer/levantamiento');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los ingenieros pueden acceder a esta vista.');
+		}
+		return view('roles/enginer/levantamiento');
+
 	}
 
 	public function instalacion()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 4 && session('dataUsuario')->tipoUsuario == 'Ing' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/enginer/instalacion');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los ingenieros pueden acceder a esta vista.');
+		}
+		return view('roles/enginer/instalacion');
 	}
 
 	public function configuracion()
 	{
-		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 4 && session('dataUsuario')->tipoUsuario == 'Ing' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
-				return view('roles/enginer/configuracion');
-			}
-			return redirect('index');
+		if ($this->validarSesion() == 0) {
+			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
 		}
-		return redirect('/');
+		if ($this->validarSesion() == 1) {
+			return redirect('index')->with('status-fail', 'Solo los ingenieros pueden acceder a esta vista.');
+		}
+		return view('roles/enginer/configuracion');
+	}
+
+	public function validarSesion()
+	{
+		if (session()->has('dataUsuario')) {
+			$rol = session('dataUsuario')->rol;
+			$tipo = session('dataUsuario')->tipoUsuario;
+			
+			if ($rol == 4 && $tipo == 'Ing' || $rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+				return 2;
+			}
+			return 1;
+		}
+		return 0;
 	}
 }

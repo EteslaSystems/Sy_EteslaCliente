@@ -14,11 +14,25 @@ class InversoresController extends Controller
 		$this->inversores = $inversores;
 	}
 
-	public function index()
+	public function index(Request $request)
     {
-        $vInversores = $this->inversores->view();
-
-		return view('roles/admin/inversores', compact('vInversores'));
+        if($request->ajax())
+        {
+            $vInversores = $this->inversores->view();
+            $vInversores = response()->json($vInversores);
+            return $vInversores;
+        }
+        else{
+            if ($this->validarSesion() == 0) {
+                return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
+            }
+            if ($this->validarSesion() == 1) {
+                return redirect('index')->with('status-fail', 'Solo los administradores pueden acceder a esta vista.');
+            }
+            $vInversores = $this->inversores->view();
+    
+            return view('roles/admin/inversores', compact('vInversores'));
+        }
     }
 
     public function destroy($id)
@@ -55,7 +69,7 @@ class InversoresController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         $data["id"] = $id;
         $data["nombrematerial"] = $request->get('i_nombrematerial');
         $data["marca"] = $request->get('i_marca');
@@ -81,7 +95,7 @@ class InversoresController extends Controller
 
     public function create(Request $request)
     {
-        
+
         $data["nombrematerial"] = $request->get('i_nombrematerial');
         $data["marca"] = $request->get('i_marca');
         $data["precio"] = $request->get('i_precio');
@@ -102,5 +116,19 @@ class InversoresController extends Controller
         } else {
             return redirect('/inversores')->with('status-success', $vInversores->message);
         }
+    }
+
+    public function validarSesion()
+    {
+        if (session()->has('dataUsuario')) {
+            $rol = session('dataUsuario')->rol;
+            $tipo = session('dataUsuario')->tipoUsuario;
+            
+            if ($rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+                return 2;
+            }
+            return 1;
+        }
+        return 0;
     }
 }

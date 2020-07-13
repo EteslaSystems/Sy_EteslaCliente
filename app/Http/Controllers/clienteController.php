@@ -24,12 +24,58 @@ class clienteController extends Controller
         $registrarCliente = $this->cliente->insertarCliente(['json' => $request->all()]);
 
         if ($registrarCliente->status == 200) {
-            \Session::flash('message', $registrarCliente->message);
-            return redirect('registrarCliente');
+            return redirect('registrarCliente')->with('status-success', $registrarCliente->message);
         }
         else {
-            \Session::flash('message', $registrarCliente->message);
-            return redirect('registrarCliente');
+            return redirect('registrarCliente')->with('status-fail', $registrarCliente->message);
+        }
+    }
+
+    public function eliminarCliente($id)
+    {
+        $data["id"] = $id;
+        $vClientes = $this->cliente->eliminarCliente(['json' => $data]);
+
+        if($vClientes->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $vClientes->message);
+        } else {
+            return redirect('registrarCliente')->with('status-success', $vClientes->message);
+        }
+    }
+
+    public function mostrarCliente($id)
+    {
+        $data["id"] = $id;
+        $cliente = $this->cliente->consultarClientePorId(['json' => $data]);
+
+        if($cliente->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $cliente->message);
+        } else {
+            $clienteInfo = $cliente->message;
+            return view('roles/seller/cotizador/form-edit-cliente', compact('clienteInfo'));
+        }
+    }
+
+    public function actualizarCliente(Request $request, $id)
+    {
+        $data["idPersona"] = $id;
+        $data["consumo"] = $request->get('consumo');
+        $data["nombrePersona"] = $request->get('nombrePersona');
+        $data["primerApellido"] = $request->get('primerApellido');
+        $data["segundoApellido"] = $request->get('segundoApellido');
+        $data["telefono"] = $request->get('telefono');
+        $data["celular"] = $request->get('celular');
+        $data["email"] = $request->get('email');
+        $data["calle"] = $request->calle . '-' . $request->colonia;
+        $data["municipio"] = $request->get('municipio');
+        $data["estado"] = $request->get('estado');
+
+        $vCliente = $this->cliente->actualizarCliente(['json' => $data]);
+
+        if($vCliente->status != 200) {
+            return redirect('registrarCliente')->with('status-fail', $vCliente->message);
+        } else {
+            return redirect('registrarCliente')->with('status-success', $vCliente->message);
         }
     }
 

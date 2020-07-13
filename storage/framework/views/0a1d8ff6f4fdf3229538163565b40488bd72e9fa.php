@@ -46,8 +46,8 @@
                     <select class="form-control" name="rol">
                         <option disabled selected value="-1">Seleccionar puesto que desempeñas</option>
                         <option value="5">Ventas</option>
-                        <option value="2">Operaciones</option>
-                        <option value="4">Ingenieria</option>
+                        <option value="2" disabled>Operaciones</option>
+                        <option value="4" disabled>Ingenieria</option>
                         <option value="3">Gerente de ingenieria</option>
                     </select>
                 </div>
@@ -55,11 +55,29 @@
                     <input type="submit" id="btnRegistrar" value="Registrate" class="btn btn-success btn-lg btn-block btn-register">
                 </div>
                 <div class="row justify-content-center">
-                    <label>¿Ya tienes una cuenta?<a href="/login"> Iniciar sesión</a></label>
+                    <label>¿Ya tienes una cuenta?<a href="/"> Iniciar sesión</a></label>
                 </div>
             </form>
         </div>
     </div>
+
+    <?php $__env->startSection('scripts'); ?>
+        <script type="text/javascript">
+            /*#region Register*/ 
+            //Validación de listas desplegables vacias
+            $(document).on('change','select',function(){
+                listaSucursal = document.getElementsByTagName('select')[0].value;
+                listaPuesto = document.getElementsByTagName('select')[1].value;
+
+                if(listaSucursal != -1){
+                    if(listaPuesto != -1){
+                        document.getElementById('btnRegistrar').disabled = false;
+                    }
+                }
+            });
+            /*#endregion*/
+        </script>
+    <?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('authentication/templateAuth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/authentication/register.blade.php ENDPATH**/ ?>
