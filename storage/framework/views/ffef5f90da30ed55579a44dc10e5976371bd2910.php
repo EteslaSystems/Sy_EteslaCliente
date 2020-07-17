@@ -13,11 +13,11 @@
             <div class="col-6 col-md-4">
                 <div class="card shadow mb-3">
                     <div class="card-header">
-                    <p class="d-block mn-1 p-titulos">Equipos</p>
+                        <p class="d-block mn-1 p-titulos">Equipos</p>
                     </div>
                     <div class="card-body">
                         <div class="row text-center">
-                            <div class="col form-group">
+                            <div class="col form-group" id="divElegirEquipo">
                                 <div class="form-row">
                                     <label>Panel</label>
                                     <select class="form-control" id="listPaneles">

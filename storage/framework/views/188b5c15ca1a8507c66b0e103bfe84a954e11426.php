@@ -119,11 +119,9 @@
                                     <label for="inpPerdidaGDMTH">Perdida</label>
                                     <input class="form-control" type="text" id="inpPerdidaGDMTH" value="18">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="inpDescuentoGDMTH">Descuento</label>
                                     <input class="form-control" type="text" id="inpDescuentoGDMTH" value="0">
-
                                 </div>
                             </div>
                             <div class="col checkbox">
@@ -150,7 +148,7 @@
                         <button id="btnEditarPeriodo" class="btn btn-green" onclick="editarPeriodo();" title="Editar periodo de consumo" disabled>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
-                        <button id="btnEliminarPeriodo" class="btn btn-green" onclick="eliminarPeriodo();" title="Eliminar periodo de consumo" disabled>
+                        <button id="btnEliminarPeriodo" class="btn btn-green" title="Eliminar periodo de consumo" disabled style="display:none;">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                         <button id="btnActualizarPeriodo" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>

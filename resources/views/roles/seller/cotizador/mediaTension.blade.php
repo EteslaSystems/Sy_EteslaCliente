@@ -149,7 +149,7 @@
                         <button id="btnEditarPeriodo" class="btn btn-green" onclick="editarPeriodo();" title="Editar periodo de consumo" disabled>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
-                        <button id="btnEliminarPeriodo" class="btn btn-green" onclick="eliminarPeriodo();" title="Eliminar periodo de consumo" disabled>
+                        <button id="btnEliminarPeriodo" class="btn btn-green" title="Eliminar periodo de consumo" disabled style="display:none;">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                         <button id="btnActualizarPeriodo" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>
