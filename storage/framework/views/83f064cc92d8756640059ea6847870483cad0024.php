@@ -28,7 +28,7 @@
                         <div class="row justify-content-center">
                             <label>¿No cuentas con una cuenta?</label>
                         </div>
-                        <a href="/registro" align="center"><p>Registrate</p></a>
+                        <a href="<?php echo e(route('/registro')); ?>" align="center"><p>Registrate</p></a>
                         <div class="row justify-content-center">
                             <label>¿Olvidaste tu contraseña?</label>
                         </div>
