@@ -690,6 +690,10 @@ function sendPeriodsToServer(){
         }
     }
 }
+
+function guardarGenerarPDF(){
+    
+}
 /*#endregion*/
 
 

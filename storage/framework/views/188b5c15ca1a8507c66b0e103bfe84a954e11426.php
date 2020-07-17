@@ -119,11 +119,9 @@
                                     <label for="inpPerdidaGDMTH">Perdida</label>
                                     <input class="form-control" type="text" id="inpPerdidaGDMTH" value="18">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="inpDescuentoGDMTH">Descuento</label>
                                     <input class="form-control" type="text" id="inpDescuentoGDMTH" value="0">
-
                                 </div>
                             </div>
                             <div class="col checkbox">
