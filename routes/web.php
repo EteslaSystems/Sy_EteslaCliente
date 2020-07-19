@@ -3,7 +3,7 @@
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');
 Route::post('/', 'usuarioController@validarUsuario');
-Route::any('/registro', 'usuarioController@mostrarRegistrarUsuario')->name('registro');
+Route::get('/registro', 'usuarioController@mostrarRegistrarUsuario')->name('registro');
 Route::post('/registro', 'usuarioController@registrarUsuario');
 Route::get('/perfil', 'usuarioController@visualizarPerfil');
 Route::post('/perfil', 'usuarioController@editarPerfil');
