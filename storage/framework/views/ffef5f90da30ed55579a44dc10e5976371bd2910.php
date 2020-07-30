@@ -65,7 +65,7 @@
                                             </tr>
                                             <tr class="text-center">
                                                 <td>
-                                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;">
+                                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;" onclick="guardarGenerarPDF();">
                                                         GUARDAR Y CREAR PDF
                                                     </button>
                                                 </td>
