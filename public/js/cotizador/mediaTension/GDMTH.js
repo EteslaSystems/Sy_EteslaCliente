@@ -458,9 +458,6 @@ function sendPeriodsToServer(){
                                 console.log('[Hoja: POWER]');
                                 console.log(resp);
 
-                                $('#navPower').css("display","");
-                                $('#power').css("display","");
-
                                 $('#tdProduccionAnualKwh').text(resp[0].arrayProduccionAnual[0].produccionAnualKwh);
                                 $('#tdProduccionAnualMwh').text(resp[0].arrayProduccionAnual[0].produccionAnualMwh);
                                 $('#tdTotalSinSolar').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalSinSolar);
@@ -499,6 +496,9 @@ function sendPeriodsToServer(){
                                         }
                                     }
                                 });
+
+                                $('#navPower').css("display","");
+                                $('#power').css("display","");
                             });
                         }
                     });
@@ -550,7 +550,7 @@ function sendPeriodsToServer(){
                                 $('#tblAjusteCotiMT').css("display","");
 
                                 //Se agrega nmerito -Cantidad_Inversores-
-                                $('#txtCantidadPaneles').html('<strong> ('+reply[0].numeroDeInversores+')</strong>');
+                                $('#txtCantidadPaneles').html('<strong> ('+response[0].numeroDeInversores+')</strong>');
                                 
 
                                 var idInversor = response[xi].idInversor;
