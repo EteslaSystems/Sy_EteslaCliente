@@ -50,9 +50,9 @@
                 </div>
                 <div class="row text-center">
                     <div class="col">
-                        <button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
+                        <!--button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
                             +
-                        </button>
+                        </button-->
                         <div class="menu-content shadow" id="menuContent">
                             <label><strong>Agregar</strong></label>
                             <div class="checkbox">

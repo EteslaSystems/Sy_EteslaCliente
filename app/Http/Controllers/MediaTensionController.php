@@ -101,6 +101,7 @@ class MediaTensionController extends Controller
 		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
 		$array["porcentajePerdida"] = $request->porcentajePerdida;
 		$array["potenciaReal"] = $request->potenciaReal;
+		$array["tipoCotizacion"] = $request->tipoCotizacion;
 
 		$response = $this->cotizacion->firstStepPOWER(['json' => $array]);
 		$response = response()->json($response);

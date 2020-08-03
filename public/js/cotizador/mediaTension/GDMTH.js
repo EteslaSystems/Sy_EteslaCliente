@@ -8,6 +8,7 @@ var msjConfirm = false;
 var _potenciaReal = 0;
 var porcentajePerdida = 0;
 var descuento = 0;
+var tipoCotizacion = '';
 
 $(document).ready(function(){
     mostrarPeriodo();
@@ -445,7 +446,8 @@ function sendPeriodsToServer(){
                                     "_token": $("meta[name='csrf-token']").attr('content'),
                                     "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
                                     "porcentajePerdida": porcentajePerdida,
-                                    "potenciaReal": _potenciaReal
+                                    "potenciaReal": _potenciaReal,
+                                    "tipoCotizacion": tipoCotizacion
                                 },
                                 dataType: 'json'
                             })
@@ -550,7 +552,7 @@ function sendPeriodsToServer(){
                                 $('#tblAjusteCotiMT').css("display","");
 
                                 //Se agrega nmerito -Cantidad_Inversores-
-                                $('#txtCantidadPaneles').html('<strong> ('+response[0].numeroDeInversores+')</strong>');
+                                $('#txtCantidadInversores').html('<strong> ('+response[0].numeroDeInversores+')</strong>');
                                 
 
                                 var idInversor = response[xi].idInversor;
@@ -712,4 +714,11 @@ function modalMsj(msj,msjConfirm){
 function GDMTH(){
     document.getElementById('divGDMTO').style.display = 'none';
     document.getElementById('divGDMTH').style.display = '';
+    tipoCotizacion = 'GDMTH';
+}
+
+function GDMTO(){
+    document.getElementById('divGDMTO').style.display = '';
+    document.getElementById('divGDMTH').style.display = 'none';
+    tipoCotizacion = 'GDMTO';
 }
