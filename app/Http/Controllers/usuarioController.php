@@ -71,10 +71,10 @@ class usuarioController extends Controller
 
 	public function registrarUsuario(Request $request)
 	{
-		if ($request->rol == 2) { $request["tipoUsuario"] = 'Operac'; }
+		if ($request->rol == 2) { $request["tipoUsuario"] = 'Operaciones'; }
 		if ($request->rol == 3) { $request["tipoUsuario"] = 'GerenteIng'; }
-		if ($request->rol == 4) { $request["tipoUsuario"] = 'Ing'; }
-		if ($request->rol == 5) { $request["tipoUsuario"] = 'Vend'; }
+		if ($request->rol == 4) { $request["tipoUsuario"] = 'Ingeniero'; }
+		if ($request->rol == 5) { $request["tipoUsuario"] = 'Vendedor'; }
 
 		$registrarUsuario = $this->usuario->insertar(['json' => $request->all()]);
 
