@@ -4,7 +4,7 @@ namespace App\APIModels;
 
 class APICotizacion extends GuzzleHttpRequest
 {
-    /*#region Media_Tensino*/
+    /*#region Media_Tension*/
     /*#region GDMTH*/
     //1er. Paso - Energia requerida y paneles
     public function sendPeriodsGDMTH($request)
@@ -35,6 +35,14 @@ class APICotizacion extends GuzzleHttpRequest
     public function sendSingleQuotation($request)
     {
         return $this->post("cotizacionIndividual",$request);
+    }
+    /*#endregion*/
+
+    /*#region cotizacion_bajaTension*/
+    //1st. Step
+    public function sendPeriodsBT($request)
+    {
+        /* return  */$this->post("sendPeriodsBT",$request);
     }
     /*#endregion*/
 }

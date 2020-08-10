@@ -43,13 +43,15 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="<?php echo e(asset('js/alert-bootstrap.js')); ?>" type="text/javascript"></script>
 <script src="<?php echo e(asset('js/index.js')); ?>"></script> <!-- Este archivo es necesario para el CP y buscador -->
 <script src="<?php echo e(asset('js/log.js')); ?>"></script>
 <!--script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script-->
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTO.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/individual.js')); ?>"></script>
-<script src="<?php echo e(asset('js/alert-bootstrap.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('js/cotizador/bajaTension.js')); ?>"></script>
+
 <script type="text/javascript">
     window.onload = function() {
         myAlert();

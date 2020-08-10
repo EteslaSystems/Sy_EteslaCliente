@@ -1,7 +1,5 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
-    
-
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -66,23 +64,19 @@
                                                 <div class="col-12 col-sm-12 col-md-4 fx-1">
                                                     <label for="men-val-1" class="mn-1">Mensualidad 1</label>
                                                 </div>
-
                                                 <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="input-group mb-3">
                                                                 <input type="number" class="form-control" id="men-val-1" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
-
                                                                 <div class="input-group-append">
                                                                     <span class="input-group-text" id="inpIkWh1">kwh</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-md-6">
                                                             <div class="input-group mb-3">
                                                                 <input type="number" class="form-control" id="men-val-1a" name="men-1a" type="number" min="0"  aria-describedby="basic-addon1a">
-
                                                                 <div class="input-group-append">
                                                                     <span class="input-group-text" id="inpIkWp1">kwp</span>
                                                                 </div>
@@ -435,7 +429,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-6 text-center">
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" class="btn btn-success" onclick="sendCotizacionBajaTension();">Calcular</button>
                     </div>
                 </div>
             </div>
