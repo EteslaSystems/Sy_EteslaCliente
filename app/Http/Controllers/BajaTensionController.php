@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\APIModels\APIPaneles;
 use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
-use Illuminate\Http\Request;
 use App\APIModels\APICotizacion;
 
 class BajaTensionController extends Controller
@@ -78,15 +79,15 @@ class BajaTensionController extends Controller
 		return 0;
 	}
 
-	public function getCotizacion_BT(Request $request){
+	public function getCotizacionBT(Request $request){
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;
 		$arrayCompleto["tarifa"] = $request->tarifa;
 
 		$response = $this->cotizacion->sendPeriodsBT(['json' => $arrayCompleto]);
-		/* $response = response()->json($response);
-
+		$response = response()->json($response);
+/* 
 		return $response; */
 
 		

@@ -16,8 +16,6 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
 
-
-Route::get('/bajaTension', 'BajaTensionController@index');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
@@ -41,7 +39,8 @@ Route::get('/individual', 'CotizacionIndividualController@index');
 Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');
 
 /* --- Cotizacion Baja Tension --- */
-Route::post('/baja_tension', 'BajaTensionController@getCotizacion_BT');
+Route::get('/bajaTension', 'BajaTensionController@index');
+Route::post('/sendPeriodsBT', 'BajaTensionController@getCotizacionBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */

@@ -70,7 +70,7 @@ function sendCotizacionBajaTension(){
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
-            url: '/baja_tension',
+            url: '/sendPeriodsBT',
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
                 'idCliente': idCliente,

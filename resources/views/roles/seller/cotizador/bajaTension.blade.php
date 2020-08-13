@@ -424,12 +424,10 @@
                         </div>
                     </div>
                 </div>
-
                 <br>
-
                 <div class="row justify-content-center">
                     <div class="col-6 text-center">
-                        <button type="submit" class="btn btn-success" onclick="sendCotizacionBajaTension();">Calcular</button>
+                        <button class="btn btn-success" onclick="sendCotizacionBajaTension();">Calcular</button>
                     </div>
                 </div>
             </div>

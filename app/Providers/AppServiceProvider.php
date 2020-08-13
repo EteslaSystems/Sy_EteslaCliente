@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('GuzzleHttp\Client', function(){
             return new Client([
-                'base_uri' => 'https://etesla-api.herokuapp.com/'
+                'base_uri' => 'http://localhost:3000'
             ]);
         });
     }
