@@ -10,7 +10,8 @@ var porcentajePerdida = 0;
 var descuento = 0;
 var tipoCotizacion = '';
 
-$(document).ready(function(){
+$(document).ready(function(){   
+        
     mostrarPeriodo();
 }); 
 
@@ -244,6 +245,26 @@ function logicaBotones(bandera){
     }
 }
 
+function chooseSwitch(){
+    var valor = 0;
+    $('#switchConvEquip').on("click", function(){
+        if(valor === 0){
+            $('#lblConvEquip').text('Equipos');
+            $('#lblSwitchConvEquip').text("Elegir convinacion");
+            $('#divConvinaciones').css("display","none");
+            $('#divElegirEquipo').css("display","");
+            valor = 1;
+        }
+        else{
+            $('#lblConvEquip').text('Convinaciones');
+            $('#lblSwitchConvEquip').text("Elegir equipo");
+            $('#divConvinaciones').css("display","");
+            $('#divElegirEquipo').css("display","none");
+            valor = 0;
+        }
+    });
+}
+
 function backToCotizacion(){
     $("#divCotizacionMediaTension").css("display","");
     $("#divBtnCalcularMT").css("display","");
@@ -336,8 +357,8 @@ function validarUsuarioCargado(direccion_Cliente){
 /*#endregion*/
 /*#region DataToServer*/
 function sendPeriodsToServer(){
-    direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    direccionCliente = document.getElementById('municipio').value;
 
     if(checkAddItems() != -1){
         if(validarUsuarioCargado(direccionCliente) === true)

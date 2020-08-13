@@ -34,21 +34,21 @@
             </div>
         </nav>
         <!-- Alert modal - Cuadro de dialogo -->
-        <div class="modal fade" id="mdlCuadroDialogo" style="displaye:none;">
+        <div class="modal fade" id="mdlCuadroDialogo" style="display:none;">
             <!-- Modal content -->
             <div class="modal-content" id="mdlCuadroDialogoContent">
                 <div class="row">
                     <div class="col-4">
-                        <img src="30px;" alt="30px;" id="mdlImage">
+                        <img alt="30px;" id="mdlImage">
                     </div>
                     <div class="col-8">
                         <span class="close">&times;</span>
                         <p id="mdlMessage"></p>
                     </div>
                 </div>
-                <div class="modal-footer" id="mdlCuadroDialogoFooter" style="displaye:none;">
-                    <button class="btn btn-default" type="button" id="btnModalConfirm" style="displaye:none;">Confirmar</button>
-                    <button class="btn btn-default" type="button" id="btnModalCancel" style="displaye:none;">Cancelar</button>
+                <div class="modal-footer" id="mdlCuadroDialogoFooter" style="display:none;">
+                    <button class="btn btn-default" type="button" id="btnModalConfirm" style="display:none;">Confirmar</button>
+                    <button class="btn btn-default" type="button" id="btnModalCancel" style="display:none;">Cancelar</button>
                 </div>
             </div>
         </div>

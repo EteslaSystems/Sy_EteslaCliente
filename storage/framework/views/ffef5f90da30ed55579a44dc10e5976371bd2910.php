@@ -13,11 +13,34 @@
             <div class="col-6 col-md-4">
                 <div class="card shadow mb-3">
                     <div class="card-header">
-                        <p class="d-block mn-1 p-titulos">Equipos</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="d-block mn-1 p-titulos" id="lblConvEquip">Convinaciones</p>
+                                </div>
+                                <div class="col">
+                                    <div class="custom-control custom-switch text-center pull-right">
+                                        <input type="checkbox" class="custom-control-input" id="switchConvEquip">
+                                        <label class="custom-control-label" for="switchConvEquip" id="lblSwitchConvEquip">Elegir equipo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row text-center">
-                            <div class="col form-group" id="divElegirEquipo">
+                            <div class="col form-group" id="divConvinaciones">
+                                <div class="form-row">
+                                    <label>Convinación</label>
+                                    <select class="form-control" id="listConvinaciones">
+                                        <option selected value="-1">Elige una opción:</option>
+                                        <option value="optConvinacionOptima">Óptima</option>
+                                        <option value="optConvinacionMediana">Mediana</option>
+                                        <option value="optConvinacionEconomica">Económica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
                                     <select class="form-control" id="listPaneles">
@@ -560,6 +583,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
 
 <?php $__env->startSection('scripts'); ?>
 <script type="text/javascript">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\APIModels\APIVendedor;
+use Carbon\Carbon;
 
 class vendedorController extends Controller
 {
@@ -23,7 +24,10 @@ class vendedorController extends Controller
 		if ($this->validarSesion() == 1) {
 			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
 		}
-		return view('roles.seller.inicioS');
+
+		$precioDolar = $this->vendedor->precioDelDolar();
+		
+		return view('roles.seller.inicioS', compact('precioDolar'));
 	}
 
 	public function misClientes()
