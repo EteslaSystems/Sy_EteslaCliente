@@ -24,7 +24,7 @@ function catchConsumption(){
         }
         else{
             for(var i=0; i<12; i++)
-            {//FALTA TESTEAR
+            {
                 consumos = $('#men-val-'+i.toString()).val() || 0;
                 demandas = $('#men-val-'+i.toString()+'a').val() || 0;
 
