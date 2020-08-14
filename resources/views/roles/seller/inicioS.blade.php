@@ -21,7 +21,7 @@
                             </div>
                             <div class="form-group">
                                 <label><strong>Fuente web</strong></label><br>
-                                <a href="https://www.infodolar.com.mx/tipo-de-cambio-dof-diario-oficial-de-la-federacion.aspx">{{ $precioDolars -> fuente }}</a>
+                                <a href="{{ $precioDolars -> fuente }}">{{ $precioDolars -> fuente }}</a>
                             </div>
                         @endforeach
                     </div>  

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\APIModels\APIVendedor;
-use Carbon\Carbon;
 
 class vendedorController extends Controller
 {
@@ -26,7 +25,7 @@ class vendedorController extends Controller
 		}
 
 		$precioDolar = $this->vendedor->precioDelDolar();
-		
+
 		return view('roles.seller.inicioS', compact('precioDolar'));
 	}
 
