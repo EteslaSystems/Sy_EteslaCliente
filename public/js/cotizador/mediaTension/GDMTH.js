@@ -416,6 +416,7 @@ function sendPeriodsToServer(){
                     }
         
                     $('#listPaneles').change(function(){
+                        $('#listInversores').val(-1);
                         var x = $('#listPaneles').val(); //Iteracion
                         
                         if(x === '-1'  || x === -1){
