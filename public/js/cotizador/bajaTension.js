@@ -1,5 +1,8 @@
 var direccionCliente = '';
 var tarifaSelected = '';
+$(function(){
+    chooseSwitch();
+});
 
 /*#region Logica_controles*/
 function catchConsumption(){
@@ -49,6 +52,26 @@ function backToCotizacionBT(){
     $("#divBtnCalcularBT").css("display","");
     $("#divResultCotizacionBT").css("display","none");
 }
+
+function chooseSwitch(){
+    var valor = 0;
+    $('#switchConvEquip').on("click", function(){
+        if(valor === 0){
+            $('#lblConvEquip').text('Equipos');
+            $('#lblSwitchConvEquip').text("Elegir convinacion");
+            $('#divConvinaciones').css("display","none");
+            $('#divElegirEquipo').css("display","");
+            valor = 1;
+        }
+        else{
+            $('#lblConvEquip').text('Convinaciones');
+            $('#lblSwitchConvEquip').text("Elegir equipo");
+            $('#divConvinaciones').css("display","");
+            $('#divElegirEquipo').css("display","none");
+            valor = 0;
+        }
+    });
+}
 /*#endregion*/
 /*#region Validaciones*/
 function validarInputsVacios(){
@@ -96,17 +119,18 @@ function sendCotizacionBajaTension(){
             getResultsView(respuesta);
             
             //Se carga dropDownList -Inversores-
-            fullDropDownListInversores();
+            // fullDropDownListInversores();
         });
     }
 }
 
 function getResultsView(_respuesta){
+    var _respuesta = _respuesta.message;
+
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'GET',
-        url: '/resultados',
-        dataType: 'json'
+        url: '/resultados'
     })
     .fail(function(){
         alert('Al parecer hubo un error al intentar cargar vista de resultados');
@@ -115,21 +139,24 @@ function getResultsView(_respuesta){
         $('#divCotizacionBajaTension').css("display","none");
         $('#divBtnCalcularBT').css("display","none");
         $('#divResultCotizacionBT').css("display","");
-        $('#divResult_bt').html(data);
+        $('#divResult_bt').html(resultView);
+
+        console.log('_respuesta says: ');
+        console.log(_respuesta);
 
         //Se pintan resultados de -Energia/Paneles_Requeridos-
         //Consumo - /Tabla_oculta\
-        $('#consumoAnual').html(respuesta[0].consumo.consumoAnual + 'W');
-        $('#potenciaNecesaria').html(respuesta[0].consumo.potenciaNecesaria + 'W');
-        $('#promedioConsumo').html(respuesta[0].consumo.promedioConsumo + 'W');
+        $('#consumoAnual').html(_respuesta[0].consumo.consumoAnual + 'W');
+        $('#potenciaNecesaria').html(_respuesta[0].consumo.potenciaNecesaria + 'W');
+        $('#promedioConsumo').html(_respuesta[0].consumo.promedioConsumo + 'W');
         
         //DropDownList-Paneles
-        for(var i=1; i<respuesta.length; i++)
+        for(var i=1; i<_respuesta.length; i++)
         {
             $('#listPaneles').append(
                 $('<option/>', {
                     value: i,
-                    text: respuesta[i].panel.nombre
+                    text: _respuesta[i].panel.nombre
                 })
             );
         }
@@ -159,26 +186,26 @@ function getResultsView(_respuesta){
                 $('#txtCantidadEstructuras').html('');
             }
             else{
-                _potenciaReal = respuesta[x].panel.potenciaReal;
+                _potenciaReal = _respuesta[x].panel.potenciaReal;
 
                 //Paneles - /Tabla_oculta\
-                $('#numeroModulos').html(respuesta[x].panel.noModulos).val(respuesta[x].panel.noModulos);
-                $('#potenciaModulo').html(respuesta[x].panel.potencia + 'W').val(respuesta[x].panel.potencia);
+                $('#numeroModulos').html(_respuesta[x].panel.noModulos).val(_respuesta[x].panel.noModulos);
+                $('#potenciaModulo').html(_respuesta[x].panel.potencia + 'W').val(_respuesta[x].panel.potencia);
                 $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
-                $('#precioModulo').html(respuesta[x].panel.precioPanel + '$').val(respuesta[x].panel.precioPanel);
-                $('#costoEstructuras').html(respuesta[x].panel.costoDeEstructuras + '$').val(respuesta[x].panel.costoDeEstructuras);
-                $('#costoPorWatt').html(respuesta[x].panel.precioPorWatt + '$').val(respuesta[x].panel.precioPorWatt);
-                $('#costoTotalModulos').html(respuesta[x].panel.costoTotalPaneles + '$').val(respuesta[x].panel.costoTotalPaneles);
+                $('#precioModulo').html(_respuesta[x].panel.precioPanel + '$').val(_respuesta[x].panel.precioPanel);
+                $('#costoEstructuras').html(_respuesta[x].panel.costoDeEstructuras + '$').val(_respuesta[x].panel.costoDeEstructuras);
+                $('#costoPorWatt').html(_respuesta[x].panel.precioPorWatt + '$').val(_respuesta[x].panel.precioPorWatt);
+                $('#costoTotalModulos').html(_respuesta[x].panel.costoTotalPaneles + '$').val(_respuesta[x].panel.costoTotalPaneles);
                 
                 //Aparece cantidad (numerito) de -Paneles y Estructuras-
-                $('#txtCantidadPaneles').html('<strong> ('+respuesta[x].panel.noModulos+')</strong>');
-                $('#txtCantidadEstructuras').html('<strong> ('+respuesta[x].panel.noModulos+')</strong>');
+                $('#txtCantidadPaneles').html('<strong> ('+_respuesta[x].panel.noModulos+')</strong>');
+                $('#txtCantidadEstructuras').html('<strong> ('+_respuesta[x].panel.noModulos+')</strong>');
 
                 $('#listInversores').prop("disabled", false);
-                $('#inpCostTotalPaneles').val(respuesta[x].panel.costoTotalPaneles + '$');
-                $('#inpCostTotalEstructuras').val(respuesta[x].panel.costoDeEstructuras + '$');
+                $('#inpCostTotalPaneles').val(_respuesta[x].panel.costoTotalPaneles + '$');
+                $('#inpCostTotalEstructuras').val(_respuesta[x].panel.costoDeEstructuras + '$');
 
-                cargarPowerPage();
+                // cargarPowerPage();
             }
         });
     });

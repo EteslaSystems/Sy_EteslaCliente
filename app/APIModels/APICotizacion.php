@@ -42,7 +42,7 @@ class APICotizacion extends GuzzleHttpRequest
     //1st. Step
     public function sendPeriodsBT($request)
     {
-        /* return  */$this->post("sendPeriodsBT",$request);
+        return $this->post("sendPeriodsBT",$request);
     }
     /*#endregion*/
 }

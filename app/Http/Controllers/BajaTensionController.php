@@ -87,9 +87,7 @@ class BajaTensionController extends Controller
 
 		$response = $this->cotizacion->sendPeriodsBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);
-/* 
-		return $response; */
 
-		
+		return $response;
 	}
 }
