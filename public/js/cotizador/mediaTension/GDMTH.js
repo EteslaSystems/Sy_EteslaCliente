@@ -528,13 +528,20 @@ function sendPeriodsToServer(){
                     });
 
                     $.ajax({
-                        type: 'GET',
-                        url: '/inversores'
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        type: 'POST',
+                        url: '/inversoresSelectos',
+                        data: {
+                            "_token": $("meta[name='csrf-token']").attr('content'),
+                            "potenciaReal": _potenciaReal
+                        },
+                        dataType: 'json'
                     })
                     .fail(function(){
                         alert('Hubo un error al intentar cargar el dropdownlist de Inversores');
                     }).
                     done(function(response){
+                        var response = response.message;
                         //DropDownList-Inversores
                         for(var j=0; j<response.length; j++)
                         {

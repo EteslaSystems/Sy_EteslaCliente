@@ -44,5 +44,16 @@ class APICotizacion extends GuzzleHttpRequest
     {
         return $this->post("sendPeriodsBT",$request);
     }
+
+    public function calcularViaticosBT($request)
+    {
+        return $this->post("calcularViaticosBTI",$request);
+    }
+    /*#endregion*/
+    /*#region Busqueda_Inteligente*/
+    public function busquedaInteligente($request)
+    {
+        /* return  */$this->post("busqueda-inteligente",$request);
+    }
     /*#endregion*/
 }

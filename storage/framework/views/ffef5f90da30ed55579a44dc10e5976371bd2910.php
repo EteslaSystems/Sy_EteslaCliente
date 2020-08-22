@@ -16,7 +16,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <p class="d-block mn-1 p-titulos" id="lblConvEquip">Convinaciones</p>
+                                    <p class="d-block mn-1 p-titulos" id="lblConvEquip">Combinaciones</p>
                                 </div>
                                 <div class="col">
                                     <div class="custom-control custom-switch text-center pull-right">
@@ -31,7 +31,7 @@
                         <div class="row text-center">
                             <div class="col form-group" id="divConvinaciones">
                                 <div class="form-row">
-                                    <label>Convinación</label>
+                                    <label>Combinacion</label>
                                     <select class="form-control" id="listConvinaciones">
                                         <option selected value="-1">Elige una opción:</option>
                                         <option value="optConvinacionOptima">Óptima</option>
@@ -114,6 +114,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
+                                <div class="pull-right">
+                                    <div class="form-check" id="checkSalvarCombinacion">
+                                        <input type="checkbox" class="form-check-input" id="salvarCombinacion">
+                                        <label for="salvarCombinacion">Salvar</label>
+                                    </div>
+                                </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
@@ -126,6 +132,16 @@
                                     <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="container">
                                             <div class="row">
+                                                <div class="col" id="divPlusEquipos">
+                                                    <div class="form-group">
+                                                        <label for="inpPanelS">Panel</label>
+                                                        <input id="inpPanelS" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpInversorS">Inversor</label>
+                                                        <input id="inpInversorS" class="form-control inpAnsw" readOnly>
+                                                    </div>
+                                                </div>
                                                 <div class="col" style="justify-content:center;">
                                                     <div class="form-group">
                                                         <label for="inpCostTotalPaneles">Costo total Paneles<small title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
@@ -144,7 +160,7 @@
                                                         <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col">
                                                     <div class="form-group">
                                                         <label for="inpPrecio">Precio</label>
                                                         <input id="inpPrecio" class="form-control inpAnsw" readOnly>
@@ -581,7 +597,7 @@
         }
     </style>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/bajaTension.js')); ?>"></script>

@@ -41,6 +41,9 @@ Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotat
 /* --- Cotizacion Baja Tension --- */
 Route::get('/bajaTension', 'BajaTensionController@index');
 Route::post('/sendPeriodsBT', 'BajaTensionController@getCotizacionBT');
+Route::post('/calcularViaticosBTI', 'BajaTensionController@calculaViaticos_BT');
+//Busqueda_inteligente
+Route::post('/askCombinations', 'BajaTensionController@askCombination');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
@@ -60,7 +63,7 @@ Route::get('/eliminar-panel/{idPanel}', 'PanelesController@destroy');
 Route::get('/editar-panel/{idPanel}', 'PanelesController@edit');
 Route::put('/editar-panel/{idPanel}', 'PanelesController@update');
 
-Route::get('/inversores', 'InversoresController@index');
+Route::post('/inversoresSelectos', 'InversoresController@getInversoresSelectos');
 Route::post('/agregar-inversor', 'InversoresController@create');
 Route::get('/eliminar-inversor/{idInversor}', 'InversoresController@destroy');
 Route::get('/editar-inversor/{idInversor}', 'InversoresController@edit');
