@@ -112,8 +112,8 @@ class BajaTensionController extends Controller
 		$arrayCompleto["tipoCotizacion"] = "bajaTension";
 
 		$response = $this->cotizacion->busquedaInteligente(['json' => $arrayCompleto]);
-		/* $response = response()->json($response);
+		$response = response()->json($response);
 
-		return $response; */
+		return $response;
 	}
 }

@@ -50,7 +50,7 @@ hr{
   display: none;
   margin-top: 12px;
   position: absolute;
-  left: 150px;
+  left: 300px;
   top: -20px;
   background: var(--gray);
   border-radius: 8px;
@@ -62,18 +62,6 @@ hr{
 
 .menu-active{
   display: block !important;
-}
-
-.btnMenuInfo{
-  position: relative;
-  display: inline-block;
-  color: white;
-  background: var(--blue);
-  cursor: pointer;
-}
-
-.btnMenuInfo:hover{
-  color: #FFF;
 }
 
 .iptPeriodos{

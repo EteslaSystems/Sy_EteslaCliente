@@ -684,13 +684,17 @@ function modalMsj(msj,msjConfirm){
 }
 
 function GDMTH(){
-    document.getElementById('divGDMTO').style.display = 'none';
-    document.getElementById('divGDMTH').style.display = '';
+    $('#divGDMTO').css("display","none");
+    $('#divGDMTH').css("display","");
+    $('#btnGDMTH').css("display","");
+    $('#btnGDMTO').css("display","none");
     tipoCotizacion = 'GDMTH';
 }
 
 function GDMTO(){
-    document.getElementById('divGDMTO').style.display = '';
-    document.getElementById('divGDMTH').style.display = 'none';
+    $('#divGDMTO').css("display","");
+    $('#divGDMTH').css("display","none");
+    $('#btnGDMTH').css("display","none");
+    $('#btnGDMTO').css("display","");
     tipoCotizacion = 'GDMTO';
 }

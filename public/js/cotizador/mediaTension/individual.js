@@ -98,7 +98,7 @@ function sendSingleQuotation(){
     var cantidadPaneles = document.getElementById('inpCantPaneles').value;
     var cantidadInversores = document.getElementById('inpCantInversores').value;
     direccionCliente = document.getElementById('municipio').value;
-    bEstructuras = true;
+    bEstructuras = false;
 
     if(checkCheckBox() == true){
         bEstructuras = true;

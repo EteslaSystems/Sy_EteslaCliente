@@ -1,4 +1,10 @@
 <?php
+//PDF
+Route::get('/pdf-template',function(){
+    return view('pdf-template');
+});
+
+
 
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');

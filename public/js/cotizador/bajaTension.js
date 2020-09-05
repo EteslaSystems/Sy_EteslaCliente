@@ -460,13 +460,87 @@ function askCombination(){
         dataType: 'json'
     })
     .fail(function(){
-        alert('Hubo un error al intentar solicitar la convinacion '+ixu.toString());
+        alert('Hubo un error al intentar solicitar la combinacion '+ixu.toString());
     })
     .done(function(rspt){
+        $('#listConvinaciones').prop("disabled", false);
+
         var rspt = rspt.message;
+        rspt = rspt[0]; //Array de combinaciones
 
         console.log("Combinaciones says: ");
         console.log(rspt);
+
+        $('#listConvinaciones').change(function(){
+            var valueOfListCombinaciones = $('#listConvinaciones').val();
+
+            switch(valueOfListCombinaciones)
+            {
+                /* case 'optConvinacionOptima'://Optima
+                    
+                break; */
+                case 'optConvinacionMediana'://Mediana
+                    //Paneles
+                    $('#inpPanelS').html(rspt.combinacionMediana[0].paneles.nombrePanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
+                    $('#inpMarcaPanelS').html(rspt.combinacionMediana[0].paneles.marcaPanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
+                    $('#inpCostTotalPaneles').html(rspt.combinacionMediana[0].paneles.costoTotalPaneles).val(rspt.combinacionMediana[0].paneles.costoTotalPaneles);
+                    //$('#txtCantidadPaneles').html(rspt.combinacionMediana[0].paneles.cantidadPaneles);
+                    //Estructuras
+                    $('#inpCostTotalEstructuras').html(rspt.combinacionMediana[0].paneles.costoDeEstructuras).val(rspt.combinacionMediana[0].paneles.costoDeEstructuras);
+                    $('#txtCantidadEstructuras').html(rspt.combinacionMediana[0].paneles.cantidadPaneles);
+                    //Inversores
+                    $('#inpInversorS').html(rspt.combinacionMediana[0].inversores.nombreInversor).val(rspt.combinacionMediana[0].inversores.nombreInversor);
+                    $('#inpMarcaInversorS').html(rspt.combinacionMediana[0].inversores.marcaInversor).val(rspt.combinacionMediana[0].inversores.marcaInversor);
+                    $('#inpCostTotalInversores').html(rspt.combinacionMediana[0].inversores.costoTotalInversores).val(rspt.combinacionMediana[0].inversores.costoTotalInversores);
+
+                    //Viaticos
+                    $('#inpCostoTotalViaticos').html(rspt.combinacionMediana[0].totales.totalViaticosMT).val(rspt.combinacionMediana[0].totales.totalViaticosMT);
+                    //Totales
+                    $('#inpPrecio').html(rspt.combinacionMediana[0].totales.precio).val(rspt.combinacionMediana[0].totales.precio);
+                    $('#inpPrecioIVA').html(rspt.combinacionMediana[0].totales.precioMasIVA).val(rspt.combinacionMediana[0].totales.precioMasIVA);
+                    $('#inpPrecioMXN').html(rspt.combinacionMediana[0].totales.precioTotalMXN).val(rspt.combinacionMediana[0].totales.precioTotalMXN);
+                break;
+                case 'optConvinacionEconomica'://Economica
+                    //Paneles
+                    $('#inpPanelS').html(rspt.combinacionEconomica[0].paneles.nombrePanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
+                    $('#inpMarcaPanelS').html(rspt.combinacionEconomica[0].paneles.marcaPanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
+                    $('#inpCostTotalPaneles').html(rspt.combinacionEconomica[0].paneles.costoTotalPaneles).val(rspt.combinacionEconomica[0].paneles.costoTotalPaneles);
+                    //Estructuras
+                    $('#inpCostTotalEstructuras').html(rspt.combinacionEconomica[0].paneles.costoDeEstructuras).val(rspt.combinacionEconomica[0].paneles.costoDeEstructuras);
+                    //Inversores
+                    $('#inpInversorS').html(rspt.combinacionEconomica[0].inversores.nombreInversor).val(rspt.combinacionEconomica[0].inversores.nombreInversor);
+                    $('#inpMarcaInversorS').html(rspt.combinacionEconomica[0].inversores.marcaInversor).val(rspt.combinacionEconomica[0].inversores.marcaInversor);
+                    $('#inpCostTotalInversores').html(rspt.combinacionEconomica[0].inversores.costoTotalInversores).val(rspt.combinacionEconomica[0].inversores.costoTotalInversores);
+                    //Viaticos
+                    $('#inpCostoTotalViaticos').html(rspt.combinacionEconomica[0].totales.totalViaticosMT).val(rspt.combinacionEconomica[0].totales.totalViaticosMT);
+                    //Totales
+                    $('#inpPrecio').html(rspt.combinacionEconomica[0].totales.precio).val(rspt.combinacionEconomica[0].totales.precio);
+                    $('#inpPrecioIVA').html(rspt.combinacionEconomica[0].totales.precioMasIVA).val(rspt.combinacionEconomica[0].totales.precioMasIVA);
+                    $('#inpPrecioMXN').html(rspt.combinacionEconomica[0].totales.precioTotalMXN).val(rspt.combinacionEconomica[0].totales.precioTotalMXN);
+                break;
+                default:
+                    //Paneles
+                    $('#inpPanelS').html('').val('');
+                    $('#inpMarcaPanelS').html('').val('');
+                    $('#inpCostTotalPaneles').html('').val('');
+                    //Estructuras
+                    $('#inpCostTotalEstructuras').html('').val('');
+                    //Inversores
+                    $('#inpInversorS').html('').val('');
+                    $('#inpMarcaInversorS').html('').val('');
+                    $('#inpCostTotalInversores').html('').val('');
+                    //Viaticos
+                    $('#inpCostoTotalViaticos').html('').val('');
+                    //Totales
+                    $('#inpPrecio').html('').val('');
+                    $('#inpPrecioIVA').html('').val('');
+                    $('#inpPrecioMXN').html('').val('');
+                    //Desaparece cantidad (numerito) de -Paneles y Estructuras-
+                    // $('#txtCantidadPaneles').html('');
+                    // $('#txtCantidadEstructuras').html('');
+                break;
+            }
+        });
     });
 
 

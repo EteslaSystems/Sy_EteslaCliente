@@ -53,7 +53,7 @@ class APICotizacion extends GuzzleHttpRequest
     /*#region Busqueda_Inteligente*/
     public function busquedaInteligente($request)
     {
-        /* return  */$this->post("busqueda-inteligente",$request);
+        return $this->post("busqueda-inteligente",$request);
     }
     /*#endregion*/
 }
