@@ -442,7 +442,7 @@ function calcularViaticosBT(){
         $('#inpPrecioMXN').val(answ[0].totales.precioTotalMXN + '$');
     });
 }
-/*#region Convinaciones (busqueda_inteligente)*/
+/*#region Combinaciones (busqueda_inteligente)*/
 function askCombination(){
     var _consumos = catchConsumption();
     direccionCliente = document.getElementById('municipio').value;
@@ -463,7 +463,8 @@ function askCombination(){
         alert('Hubo un error al intentar solicitar la combinacion '+ixu.toString());
     })
     .done(function(rspt){
-        $('#listConvinaciones').prop("disabled", false);
+        $('#listConvinaciones').prop("disabled", false); //Se desbloque DropDownList-Combinaciones
+        $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
 
         var rspt = rspt.message;
         rspt = rspt[0]; //Array de combinaciones
@@ -471,6 +472,61 @@ function askCombination(){
         console.log("Combinaciones says: ");
         console.log(rspt);
 
+        /* Se pintan las combinaciones en el div_combinaciones */
+        if(rspt.combinacionEconomica){
+            //Combinacion Economica
+            /* Se cargan imagenes de logos && equipos */
+            /* __logos__ */
+            $('#imgLogoPanel0').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor0').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
+            /* __equipos__ */
+            $('#imgPanel0').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor0').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
+            /* Se llenan labels_pills de data */
+            $('#combinacionTitle0').text('Combinacion economica');
+            $('#plCostoTotalPaneles0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].paneles.costoTotalPaneles) + '$');
+            $('#plCostoTotalInversores0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].inversores.costoTotalInversores) + '$');
+            $('#plCostoTotalEstructuras0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].paneles.costoDeEstructuras) + '$');
+            $('#plCostoTotalViaticos0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.totalViaticosMT) + '$');
+            $('#plPrecioProj0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.precio) + '$');
+            $('#plPrecioIVAProj0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.precioMasIVA) + '$');
+            $('#plCostoTotalMXNProj0').text('$' + new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.precioTotalMXN));
+
+            //Combinacion Mediana
+            /* Se cargan imagenes de logos && equipos */
+            /* __logos__ */
+            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
+            /* __equipos__ */
+            $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
+            /* Se llenan labels_pills de data */
+            $('#combinacionTitle1').text('Combinacion mediana');
+            $('#plCostoTotalPaneles1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].paneles.costoTotalPaneles) + '$');
+            $('#plCostoTotalInversores1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].inversores.costoTotalInversores) + '$');
+            $('#plCostoTotalEstructuras1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].paneles.costoDeEstructuras) + '$');
+            $('#plCostoTotalViaticos1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].totales.totalViaticosMT) + '$');
+            $('#plPrecioProj1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].totales.precio) + '$');
+            $('#plPrecioIVAProj1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].totales.precioMasIVA) + '$');
+            $('#plCostoTotalMXNProj1').text('$' + new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].totales.precioTotalMXN));
+
+            //Combinacion Plus
+            /* Se cargan imagenes de logos &&  equipos */
+
+            /*  */
+            /* $('#plCostoTotalPaneles').text(rspt.combinacion);
+            $('#plCostoTotalInversores').text(rspt.combinacion);
+            $('#plCostoTotalEstructuras').text(rspt.combinacion);
+            $('#plCostoTotalViaticos').text(rspt.combinacion);
+            $('#plPrecioProj').text(rspt.combinacion);
+            $('#plPrecioIVAProj').text(rspt.combinacion);
+            $('#plCostoTotalMXNProj').text(rspt.combinacion); */
+        }
+        else{
+            alert('Error al intentar dotar los DIV de combinaciones');
+        }
+
+        //DropDownList de combinaciones
         $('#listConvinaciones').change(function(){
             var valueOfListCombinaciones = $('#listConvinaciones').val();
 

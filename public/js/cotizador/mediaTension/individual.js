@@ -236,3 +236,13 @@ function coti_mxn(){
     document.getElementById('containerCI2').style.display = '';
     document.getElementById('containerCI1').style.display = 'none';
 }
+
+//Logica botones
+function openPopover(){
+    $('#btnMenuInfo').popover({
+        html: true,
+        content: function(){
+            return $("#divPopover").html();
+        }
+    });
+}

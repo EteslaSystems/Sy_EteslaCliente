@@ -114,63 +114,58 @@
                                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                             </div>
                             <div class="col">
-                                <button class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
+                                <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
                             </div>
                         </div>
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
                                     <div class="modal-body row">
-                                        <div class="col" id="divCombinacion">
-                                            <h5>Combinacion economica</h5>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <img height="35" weight="100" id="imgLogoPanel" src="https://img1.freepng.es/20180529/wj/kisspng-canadian-solar-solar-panels-solar-power-solar-ener-solar-energy-logo-5b0cf5eb064114.2822038615275760430256.jpg">
-                                                    <img height="100" weight="80" id="imgPanel" src="data:image/jpeg;base64,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">
+                                        @for($i=0; $i<3; $i++)
+                                            <div class="col" id="divCombinacion{{ $i }}">
+                                                <h5 id="combinacionTitle{{ $i }}"></h5>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img id="imgLogoPanel{{ $i }}" height="35" weight="100">
+                                                        <img id="imgPanel{{ $i }}" height="100" weight="80">
+                                                    </div> 
+                                                    <div class="col">
+                                                        <img id="imgLogoInversor{{ $i }}" height="35" weight="100">
+                                                        <img id="imgInversor{{ $i }}" height="100" weight="80">
+                                                    </div>
                                                 </div>
-                                                <div class="col">
-                                                    <img height="35" weight="100" id="imgLogoInversor" src="data:image/png;base64,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">
-                                                    <img height="100" weight="80" id="imgInversor" src="data:image/jpeg;base64,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">
-                                                </div>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total paneles
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total inversores
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalInversores{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total estructuras
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total viaticos
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Precio
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioProj{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Precio + IVA
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioIVAProj{{ $i }}"></span>
+                                                    </li>
+                                                    <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                                        Costo total MXN
+                                                        <span class="badge badge-warning badge-pill" id="plCostoTotalMXNProj{{ $i }}"></span>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <ul class="list-group">
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Costo total paneles
-                                                    <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles">14$</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Costo total inversores
-                                                    <span class="badge badge-primary badge-pill" id="plCostoTotalInversores">2$</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Costo total estructuras
-                                                    <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras">1$</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Costo total viaticos
-                                                    <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos">14$</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Precio
-                                                    <span class="badge badge-primary badge-pill" id="plPrecioProj">2$</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Precio + IVA
-                                                    <span class="badge badge-primary badge-pill" id="plPrecioIVAProj">1$</span>
-                                                </li>
-                                                <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
-                                                    Costo total MXN
-                                                    <span class="badge badge-warning badge-pill" id="plCostoTotalMXNProj">$1234</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col" id="divCombinacionMediana">hello world2</div>
-                                        <div class="col" id="divCombinacionEconomica">hello world3</div>
+                                        @endfor
                                     </div>
                                 </div>
                             </div>

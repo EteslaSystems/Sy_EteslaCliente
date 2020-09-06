@@ -12,7 +12,11 @@
                         </p>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" id="btnMenuInfo" class="pull-right" title="addItems" style="padding: 4px;"><img src="https://img.icons8.com/flat_round/32/000000/plus.png"/></button>
+                        <a id="btnMenuInfo" href="#" class="btn pull-right" title="addItems" onclick="openPopover()"><img src="https://img.icons8.com/material/16/000000/gearbox-selector.png"/></a>
+                        <!-- Popover -->
+                        <div class="col d-none" id="divPopover">
+                            <h1>Some Text of title</h1>
+                        </div>
                     </div>
                 </div>
             </div>
