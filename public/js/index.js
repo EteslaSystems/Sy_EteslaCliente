@@ -161,12 +161,24 @@ JSONscriptRequest.prototype.addScriptTag = function () {
 }
 /*#endregion*/
 
-//Aqui empieza el cuadro de dialogo que pidio el gordis
-function loadMenuGDMTO(){
-    document.getElementById("menuContentGDMTO").classList.toggle("menu-active");
-}
+/*#region PopOvers*/
+// function showPopover(){ 
+//     var buttonPopOver = $('[data-toggle="popover"]');
+//     var containerPopOver = $('.popover-content');
+//     /* $('[data-toggle="popover"]').popover({
+//         container: 'body',
+//         html: true,
+//         placement: 'right',
+//         content: '<h3 class="popover-header">Config</h3><div class="popover-body"><form class="form-inline" role="form"><button>uwu</button></form></div>'
+//     }); */
+//     containerPopOver.hide();
 
-function loadMenuGDMTH(){
-    document.getElementById("menuContentGDMTH").classList.toggle("menu-active");
-}
-//Aqui termina el cuadrio de dialogo que pidio el gordis
+//     buttonPopOver.click(function(){
+//         containerPopOver.show();
+
+//         var popperControl = new Popper(ref, popup, {
+//             placement: 'right'
+//         });
+//     });
+// }
+/*#endregion*/

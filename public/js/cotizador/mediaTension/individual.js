@@ -7,11 +7,13 @@
 var idPanel;
 var idInversor;
 var direccionCliente = '';
+var bInstalacion = false;
 
 $(document).ready(function(){
     var loader = $('#loader');
 
     /* readyLoader(loader); */
+    configurationItems_modal();
 });
 
 /* function readyLoader(loader){
@@ -97,12 +99,14 @@ function validarCamposVacios()
 function sendSingleQuotation(){
     var cantidadPaneles = document.getElementById('inpCantPaneles').value;
     var cantidadInversores = document.getElementById('inpCantInversores').value;
+    var cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
     direccionCliente = document.getElementById('municipio').value;
-    bEstructuras = false;
+    //bEstructuras = false;
 
-    if(checkCheckBox() == true){
+    changeValue_bInstalacion();
+    /* if(checkCheckBox() == true){
         bEstructuras = true;
-    }
+    } */
     if(validarUsuarioCargado(direccionCliente) === true){
         if(validarValoresDropDownLists(idPanel, idInversor) == true ){
             if(validarCamposVacios() == true){
@@ -116,8 +120,9 @@ function sendSingleQuotation(){
                         "idInversor": idInversor,
                         "cantidadPaneles": cantidadPaneles,
                         "cantidadInversores": cantidadInversores,
-                        "bEstructuras": this.bEstructuras,
-                        "direccionCliente": direccionCliente
+                        "cantidadEstructuras": cantidadEstructuras,
+                        "direccionCliente": direccionCliente,
+                        "bInstalacion": bInstalacion
                     },
                     dataType: 'json',
                     error: function(){
@@ -138,7 +143,7 @@ function sendSingleQuotation(){
     
                         //Estructuras
                         respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
-                        //$('#txtCantidadEstructurasInd').html('('+respuesta[0].paneles.cantidadPaneles+')');
+                        $('#txtCantidadEstructurasInd').html('('+respuesta[0].paneles.cantidadEstructuras+')');
     
                         //Inversores
                         respuesta[0].inversores.costoTotalInversores != null ? $('#inpCostTotalInversores').val(respuesta[0].inversores.costoTotalInversores + '$') : $('#inpCostTotalInversores').val(0 + '$');
@@ -237,12 +242,31 @@ function coti_mxn(){
     document.getElementById('containerCI1').style.display = 'none';
 }
 
-//Logica botones
-function openPopover(){
-    $('#btnMenuInfo').popover({
-        html: true,
-        content: function(){
-            return $("#divPopover").html();
-        }
+//Logica_botones
+function configurationItems_modal(){
+    $('#btnModalConfig').on("click",function(){
+        var cantidadPaneles = $('#inpCantPaneles').val();
+        var cantidadEstructuras = $('#inpCantidadEstruct'); 
+
+        $('#chbEstructuras').on("click",function(){
+            if(cantidadEstructuras.prop("disabled")){
+                cantidadEstructuras.val(cantidadPaneles);
+                cantidadEstructuras.attr("disabled", false);
+            }
+            else{
+                cantidadEstructuras.attr("disabled", true);
+                cantidadEstructuras.val(0);
+            } 
+        });
     });
+}
+
+//Validations
+function changeValue_bInstalacion(){
+    if($('#chbInstalacion').is(":checked")){
+        bInstalacion = true;
+    }
+    else{
+        bInstalacion = false;
+    }
 }

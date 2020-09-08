@@ -117,6 +117,7 @@
                                 <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
                             </div>
                         </div>
+                        <!-- Modal_combinaciones -->
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -170,6 +171,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- End-Modal_Combinaciones -->
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -206,15 +208,15 @@
                                                 </div>
                                                 <div class="col" style="justify-content:center;">
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
+                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small class="smallIndicator" title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
                                                         <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalInversores">Costo total Inversores <small title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
+                                                        <label for="inpCostTotalInversores">Costo total Inversores <small class="smallIndicator" title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
                                                         <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
+                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small class="smallIndicator" title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
                                                         <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">

@@ -56,6 +56,11 @@ function backToCotizacionBT(){
 function chooseSwitch(){
     var valor = 0;
     $('#switchConvEquip').on("click", function(){
+        $('#listConvinaciones').val(-1);
+        $('#listPaneles').val(-1);
+        $('#listInversores').val(-1);
+        limpiarCampos();
+
         if(valor === 0){
             $('#lblConvEquip').text('Equipos');
             $('#lblSwitchConvEquip').text("Elegir convinacion");
@@ -190,8 +195,8 @@ function getResultsView(_respuesta){
                 $('#costoTotalModulos').html(_respuesta[x].panel.costoTotalPaneles + '$').val(_respuesta[x].panel.costoTotalPaneles);
                 
                 //Aparece cantidad (numerito) de -Paneles y Estructuras-
-                $('#txtCantidadPaneles').html('<strong> ('+_respuesta[x].panel.noModulos+')</strong>');
-                $('#txtCantidadEstructuras').html('<strong> ('+_respuesta[x].panel.noModulos+')</strong>');
+                $('#txtCantidadPaneles').html('('+_respuesta[x].panel.noModulos+')');
+                $('#txtCantidadEstructuras').html('('+_respuesta[x].panel.noModulos+')');
 
                 $('#listInversores').prop("disabled", false);
                 $('#inpCostTotalPaneles').val(_respuesta[x].panel.costoTotalPaneles + '$');
@@ -346,7 +351,7 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#tblAjusteCotiMT').css("display","");
 
                 //Se agrega nmerito -Cantidad_Inversores-
-                $('#txtCantidadInversores').html('<strong> ('+response[xi].numeroDeInversores+')</strong>');
+                $('#txtCantidadInversores').html('('+response[xi].numeroDeInversores+')');
 
                 //Se cargan los inputs de la vista
                 $('#inpCostTotalInversores').val(response[xi].precioTotalInversores);
@@ -638,3 +643,8 @@ function askCombination(){
 }
 /*#endregion*/
 /*#endregion*/
+//Logic
+function limpiarCampos(){
+    $('.inpAnsw').val('');
+    $('.smallIndicator').val('');
+}
