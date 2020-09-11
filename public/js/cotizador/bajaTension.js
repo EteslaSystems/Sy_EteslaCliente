@@ -2,6 +2,7 @@ var direccionCliente = '';
 var tarifaSelected = '';
 $(function(){
     chooseSwitch();
+    salvarCombinacion();
 });
 
 /*#region Logica_controles*/
@@ -63,16 +64,26 @@ function chooseSwitch(){
 
         if(valor === 0){
             $('#lblConvEquip').text('Equipos');
-            $('#lblSwitchConvEquip').text("Elegir convinacion");
+            $('#lblSwitchConvEquip').text("Elegir combinacion");
             $('#divConvinaciones').css("display","none");
             $('#divElegirEquipo').css("display","");
+
+            //
+            $('#checkSalvarCombinacion').css("display","none");
+            $('#btnDivCombinaciones').css("display","none");
+            
             valor = 1;
         }
         else{
-            $('#lblConvEquip').text('Convinaciones');
+            $('#lblConvEquip').text('Combinaciones');
             $('#lblSwitchConvEquip').text("Elegir equipo");
             $('#divConvinaciones').css("display","");
             $('#divElegirEquipo').css("display","none");
+
+            //
+            $('#checkSalvarCombinacion').css("display","");
+            $('#btnDivCombinaciones').css("display","");
+
             valor = 0;
         }
     });
@@ -479,7 +490,7 @@ function askCombination(){
 
         /* Se pintan las combinaciones en el div_combinaciones */
         if(rspt.combinacionEconomica){
-            //Combinacion Economica
+            /*             --Combinacion Economica--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
             $('#imgLogoPanel0').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
@@ -488,7 +499,7 @@ function askCombination(){
             $('#imgPanel0').attr("src", "img/paneles/equipo/panel.png");
             $('#imgInversor0').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
             /* Se llenan labels_pills de data */
-            $('#combinacionTitle0').text('Combinacion economica');
+            $('#combinacionTitle0').text("Combinacion economica");
             $('#plCostoTotalPaneles0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].paneles.costoTotalPaneles) + '$');
             $('#plCostoTotalInversores0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].inversores.costoTotalInversores) + '$');
             $('#plCostoTotalEstructuras0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].paneles.costoDeEstructuras) + '$');
@@ -497,7 +508,7 @@ function askCombination(){
             $('#plPrecioIVAProj0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.precioMasIVA) + '$');
             $('#plCostoTotalMXNProj0').text('$' + new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].totales.precioTotalMXN));
 
-            //Combinacion Mediana
+            /*             --Combinacion Mediana--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
             $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
@@ -541,6 +552,8 @@ function askCombination(){
                     
                 break; */
                 case 'optConvinacionMediana'://Mediana
+                    //tipo_combinacion
+                    $('#inpTipoCombinacion').val("mediana");//Input oculto - combinacion_mediana
                     //Paneles
                     $('#inpPanelS').html(rspt.combinacionMediana[0].paneles.nombrePanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
                     $('#inpMarcaPanelS').html(rspt.combinacionMediana[0].paneles.marcaPanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
@@ -560,8 +573,12 @@ function askCombination(){
                     $('#inpPrecio').html(rspt.combinacionMediana[0].totales.precio).val(rspt.combinacionMediana[0].totales.precio);
                     $('#inpPrecioIVA').html(rspt.combinacionMediana[0].totales.precioMasIVA).val(rspt.combinacionMediana[0].totales.precioMasIVA);
                     $('#inpPrecioMXN').html(rspt.combinacionMediana[0].totales.precioTotalMXN).val(rspt.combinacionMediana[0].totales.precioTotalMXN);
+                    //Boton_salvar
+                    $('#salvarCombinacion').css("display", "");
                 break;
                 case 'optConvinacionEconomica'://Economica
+                    //tipo_combinacion
+                    $('#inpTipoCombinacion').val("economica");//Input oculto - combinacion_economica
                     //Paneles
                     $('#inpPanelS').html(rspt.combinacionEconomica[0].paneles.nombrePanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
                     $('#inpMarcaPanelS').html(rspt.combinacionEconomica[0].paneles.marcaPanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
@@ -578,6 +595,8 @@ function askCombination(){
                     $('#inpPrecio').html(rspt.combinacionEconomica[0].totales.precio).val(rspt.combinacionEconomica[0].totales.precio);
                     $('#inpPrecioIVA').html(rspt.combinacionEconomica[0].totales.precioMasIVA).val(rspt.combinacionEconomica[0].totales.precioMasIVA);
                     $('#inpPrecioMXN').html(rspt.combinacionEconomica[0].totales.precioTotalMXN).val(rspt.combinacionEconomica[0].totales.precioTotalMXN);
+                    //Boton_salvar
+                    $('#salvarCombinacion').css("display", "");
                 break;
                 default:
                     //Paneles
@@ -596,6 +615,8 @@ function askCombination(){
                     $('#inpPrecio').html('').val('');
                     $('#inpPrecioIVA').html('').val('');
                     $('#inpPrecioMXN').html('').val('');
+                    //Boton_salvar
+                    $('#salvarCombinacion').css("display", "none");
                     //Desaparece cantidad (numerito) de -Paneles y Estructuras-
                     // $('#txtCantidadPaneles').html('');
                     // $('#txtCantidadEstructuras').html('');
@@ -603,43 +624,6 @@ function askCombination(){
             }
         });
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* var listaConvinaciones = $('#listConvinaciones');
-
-    listaConvinaciones.change(function(){
-        var ixu = listaConvinaciones.val();
-        
-        if(ixu === '-1' || ixu === -1){
-            //Se oculta el DIV extra que muestra inf. de Panel/Inversor
-            $('#divPlusEquipos').css("display","none");
-            //Se oculta check para salvar busqueda_inteligente
-            $('#checkSalvarCombinacion').css("display","none");
-        }
-        else{
-            $('#divPlusEquipos').css("display","");
-            $('#checkSalvarCombinacion').css("display","");
-
-            //Send to server
-            
-        }
-    }); */
 }
 /*#endregion*/
 /*#endregion*/
@@ -647,4 +631,21 @@ function askCombination(){
 function limpiarCampos(){
     $('.inpAnsw').val('');
     $('.smallIndicator').val('');
+}
+
+function salvarCombinacion(){
+    var valueLogic = 0;
+    
+    $('#salvarCombinacion').click(function(){
+        if(valueLogic === 0){
+            $('#listConvinaciones').attr("disabled", true);
+
+            valueLogic = 1;
+        }
+        else{
+            $('#listConvinaciones').attr("disabled", false);
+
+            valueLogic = 0;
+        }
+    });
 }

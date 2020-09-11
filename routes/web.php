@@ -69,6 +69,7 @@ Route::get('/eliminar-panel/{idPanel}', 'PanelesController@destroy');
 Route::get('/editar-panel/{idPanel}', 'PanelesController@edit');
 Route::put('/editar-panel/{idPanel}', 'PanelesController@update');
 
+Route::get('/inversores', 'InversoresController@index');
 Route::post('/inversoresSelectos', 'InversoresController@getInversoresSelectos');
 Route::post('/agregar-inversor', 'InversoresController@create');
 Route::get('/eliminar-inversor/{idInversor}', 'InversoresController@destroy');

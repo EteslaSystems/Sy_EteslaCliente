@@ -124,7 +124,8 @@
                                     <div class="modal-body row">
                                         @for($i=0; $i<3; $i++)
                                             <div class="col" id="divCombinacion{{ $i }}">
-                                                <h5 id="combinacionTitle{{ $i }}"></h5>
+                                                <input id="inpTipoCombinacion" class="d-none">
+                                                <h5 id="combinacionTitle{{ $i }}" class="title-combination" ></h5>
                                                 <div class="row">
                                                     <div class="col">
                                                         <img id="imgLogoPanel{{ $i }}" height="35" weight="100">

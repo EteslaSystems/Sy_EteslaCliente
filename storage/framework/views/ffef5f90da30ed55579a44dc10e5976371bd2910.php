@@ -124,7 +124,8 @@
                                     <div class="modal-body row">
                                         <?php for($i=0; $i<3; $i++): ?>
                                             <div class="col" id="divCombinacion<?php echo e($i); ?>">
-                                                <h5 id="combinacionTitle<?php echo e($i); ?>"></h5>
+                                                <input id="inpTipoCombinacion" class="d-none">
+                                                <h5 id="combinacionTitle<?php echo e($i); ?>" class="title-combination" ></h5>
                                                 <div class="row">
                                                     <div class="col">
                                                         <img id="imgLogoPanel<?php echo e($i); ?>" height="35" weight="100">

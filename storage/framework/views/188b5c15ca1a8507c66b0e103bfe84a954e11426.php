@@ -239,7 +239,11 @@
     </div>
 </div>
 <div class="col-md-4 offset-md-8 text-right mb-3" id="divBtnCalcularMT">
-    <button onclick="validarEnvioDePeriodo()" class="btn btn-green text-uppercase shadow">
+    <button onclick="validarEnvioDePeriodoGDMTO()" class="btn btn-green text-uppercase shadow" id="btnGDMTO">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Calcular
+    </button>
+    <button style="display:none;" onclick="validarEnvioDePeriodoGDMTH()" class="btn btn-green text-uppercase shadow" id="btnGDMTH">
         <i class="fa fa-check" aria-hidden="true"></i>
         Calcular
     </button>
