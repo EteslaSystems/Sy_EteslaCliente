@@ -511,11 +511,11 @@ function askCombination(){
             /*             --Combinacion Mediana--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
-            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionMediana[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".png");
             /* __equipos__ */
             $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle1').text('Combinacion mediana');
             $('#plCostoTotalPaneles1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].paneles.costoTotalPaneles) + '$');
@@ -528,15 +528,21 @@ function askCombination(){
 
             //Combinacion Plus
             /* Se cargan imagenes de logos &&  equipos */
-
-            /*  */
-            /* $('#plCostoTotalPaneles').text(rspt.combinacion);
-            $('#plCostoTotalInversores').text(rspt.combinacion);
-            $('#plCostoTotalEstructuras').text(rspt.combinacion);
-            $('#plCostoTotalViaticos').text(rspt.combinacion);
-            $('#plPrecioProj').text(rspt.combinacion);
-            $('#plPrecioIVAProj').text(rspt.combinacion);
-            $('#plCostoTotalMXNProj').text(rspt.combinacion); */
+            /* __logos__ */
+            $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+rspt.combinacionOptima[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".png");
+            /* __equipos__ */
+            $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor2').attr("src", "img/inversores/equipo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".jpg");
+            /* Se llenan labels_pills de data */
+            $('#combinacionTitle2').text('Combinacion optima');
+            $('#plCostoTotalPaneles2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].paneles.costoTotalPaneles) + '$');
+            $('#plCostoTotalInversores2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].inversores.costoTotalInversores) + '$');
+            $('#plCostoTotalEstructuras2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].paneles.costoDeEstructuras) + '$');
+            $('#plCostoTotalViaticos2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].totales.totalViaticosMT) + '$');
+            $('#plPrecioProj2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].totales.precio) + '$');
+            $('#plPrecioIVAProj2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].totales.precioMasIVA) + '$');
+            $('#plCostoTotalMXNProj2').text('$' + new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].totales.precioTotalMXN));
         }
         else{
             alert('Error al intentar dotar los DIV de combinaciones');
@@ -548,9 +554,31 @@ function askCombination(){
 
             switch(valueOfListCombinaciones)
             {
-                /* case 'optConvinacionOptima'://Optima
-                    
-                break; */
+                case 'optConvinacionOptima'://Optima
+                    //tipo_combinacion
+                    $('#inpTipoCombinacion').val("optima");//Input oculto - combinacion_mediana
+                    //Paneles
+                    $('#inpPanelS').html(rspt.combinacionOptima[0].paneles.nombrePanel).val(rspt.combinacionOptima[0].paneles.nombrePanel);
+                    $('#inpMarcaPanelS').html(rspt.combinacionOptima[0].paneles.marcaPanel).val(rspt.combinacionOptima[0].paneles.nombrePanel);
+                    $('#inpCostTotalPaneles').html(rspt.combinacionOptima[0].paneles.costoTotalPaneles).val(rspt.combinacionOptima[0].paneles.costoTotalPaneles);
+                    //$('#txtCantidadPaneles').html(rspt.combinacionMediana[0].paneles.cantidadPaneles);
+                    //Estructuras
+                    $('#inpCostTotalEstructuras').html(rspt.combinacionOptima[0].paneles.costoDeEstructuras).val(rspt.combinacionOptima[0].paneles.costoDeEstructuras);
+                    $('#txtCantidadEstructuras').html(rspt.combinacionOptima[0].paneles.cantidadPaneles);
+                    //Inversores
+                    $('#inpInversorS').html(rspt.combinacionOptima[0].inversores.nombreInversor).val(rspt.combinacionOptima[0].inversores.nombreInversor);
+                    $('#inpMarcaInversorS').html(rspt.combinacionOptima[0].inversores.marcaInversor).val(rspt.combinacionOptima[0].inversores.marcaInversor);
+                    $('#inpCostTotalInversores').html(rspt.combinacionOptima[0].inversores.costoTotalInversores).val(rspt.combinacionOptima[0].inversores.costoTotalInversores);
+
+                    //Viaticos
+                    $('#inpCostoTotalViaticos').html(rspt.combinacionOptima[0].totales.totalViaticosMT).val(rspt.combinacionOptima[0].totales.totalViaticosMT);
+                    //Totales
+                    $('#inpPrecio').html(rspt.combinacionOptima[0].totales.precio).val(rspt.combinacionOptima[0].totales.precio);
+                    $('#inpPrecioIVA').html(rspt.combinacionOptima[0].totales.precioMasIVA).val(rspt.combinacionOptima[0].totales.precioMasIVA);
+                    $('#inpPrecioMXN').html(rspt.combinacionOptima[0].totales.precioTotalMXN).val(rspt.combinacionOptima[0].totales.precioTotalMXN);
+                    //Boton_salvar
+                    $('#salvarCombinacion').css("display", "");
+                break;
                 case 'optConvinacionMediana'://Mediana
                     //tipo_combinacion
                     $('#inpTipoCombinacion').val("mediana");//Input oculto - combinacion_mediana

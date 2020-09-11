@@ -34,7 +34,7 @@
                                     <label>Combinacion</label>
                                     <select class="form-control" id="listConvinaciones" disabled>
                                         <option selected value="-1">Elige una opción:</option>
-                                        <option value="optConvinacionOptima" style="display:none;">Óptima</option>
+                                        <option value="optConvinacionOptima">Óptima</option>
                                         <option value="optConvinacionMediana">Mediana</option>
                                         <option value="optConvinacionEconomica">Económica</option>
                                     </select>
@@ -121,6 +121,16 @@
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
+                                    <div class="modal-header row">
+                                        <div class="col">
+                                            <button class="btn btn-primary btn-xs">Detalle</button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div class="modal-body row">
                                         <?php for($i=0; $i<3; $i++): ?>
                                             <div class="col" id="divCombinacion<?php echo e($i); ?>">
