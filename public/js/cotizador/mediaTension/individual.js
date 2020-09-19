@@ -14,6 +14,7 @@ $(document).ready(function(){
 
     /* readyLoader(loader); */
     configurationItems_modal();
+    panelAjustesCotizacion();   
 });
 
 /* function readyLoader(loader){
@@ -269,4 +270,9 @@ function changeValue_bInstalacion(){
     else{
         bInstalacion = false;
     }
+}
+
+//Cotizador - Resultados (Crear un archivo JS y pasar el sig. bloque a ese archivo)
+function panelAjustesCotizacion(){
+    //$('#tblAjusteCotiMT');
 }

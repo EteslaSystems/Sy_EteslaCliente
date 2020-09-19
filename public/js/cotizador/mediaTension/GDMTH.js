@@ -74,7 +74,7 @@ function eliminarPeriodo(){
     // arrayPeriodosGDMTH.splice(0,(seleccionado));
     console.log('periodo antes de eliminar:');
     console.log(arrayPeriodosGDMTH);
-    delete(arrayPeriodosGDMTH[seleccionado]);
+    //delete(arrayPeriodosGDMTH[seleccionado]);
     console.log('periodo despues de eliminar:');
     console.log(arrayPeriodosGDMTH);
     /*Actualizar el indexador de la lista desplegable*/
@@ -360,7 +360,7 @@ function sendPeriodsToServer(){
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     direccionCliente = document.getElementById('municipio').value;
 
-    if(checkAddItems() != -1){
+    //if(checkAddItems() != -1){
         if(validarUsuarioCargado(direccionCliente) === true)
         {
             $.ajax({
@@ -571,14 +571,14 @@ function sendPeriodsToServer(){
                                 $('#inpCostTotalInversores').val('').text('');
 
                                 //Panel de ajuste de cotizacion - Desaparece
-                                $('#tblAjusteCotiMT').css("display","none");
+                                $('#btnModalAjustePropuesta').attr("disabled",true);
                                 
                                 //Se desaparece numerito -Cantidad_Inversores-
                                 $('#txtCantidadPaneles').html('');
                             }
                             else{
                                 //Panel de ajuste de cotizacion - Aparece
-                                $('#tblAjusteCotiMT').css("display","");
+                                $('#btnModalAjustePropuesta').css("display",false);
 
                                 //Se agrega nmerito -Cantidad_Inversores-
                                 $('#txtCantidadInversores').html('<strong> ('+response[0].numeroDeInversores+')</strong>');
@@ -719,7 +719,7 @@ function sendPeriodsToServer(){
                 });
             });
         }
-    }
+    //}
 }
 
 function guardarGenerarPDF(){

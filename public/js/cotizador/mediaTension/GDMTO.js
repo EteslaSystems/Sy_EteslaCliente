@@ -11,11 +11,11 @@ var descuento = 0;
 var tipoCotizacion = "";
 
 $(document).ready(function(){
-    mostrarPeriodo();
+    mostrarPeriodoGDMTO();
 }); 
 
 /*#region Controles*/
-function agregarPeriodo(){
+function agregarPeriodoGDMTO(){
     var IkWh = document.getElementById('inpIkWhGDMTO').value;
     var IkW = document.getElementById('inpIkwGDMTO').value;
     var Imxn = document.getElementById('I(mxn/kWh)GDMTO').value;
@@ -42,7 +42,7 @@ function agregarPeriodo(){
         };
     
         arrayPeriodosGDMTO.push(objPeriodosGDMTO);
-        sumarAlIndexador();
+        sumarAlIndexadorGDMTO();
         limpiarCampos();
     }
 
@@ -72,12 +72,12 @@ function agregarPeriodo(){
 //     } */
 // }
 
-function editarPeriodo(){
+function editarPeriodoGDMTO(){
     bandera = 2;
     logicaBotones(bandera);
 }
 
-function actualizarPeriodo(){
+function actualizarPeriodoGDMTO(){
     lista = $("#lstPeriodosGDMTO");
     seleccionado = parseInt(lista.selectedIndex);
     bandera = 3;
@@ -91,7 +91,7 @@ function actualizarPeriodo(){
     arrayPeriodosGDMTO[seleccionado].dmxn = document.getElementById('D(mxn/kW)GDMTO').value || null;
 }
 
-function mostrarPeriodo(){
+function mostrarPeriodoGDMTO(){
     lista = $("#lstPeriodosGDMTO");
 
     /*Se desplega el contenido del array en los campos*/ 
@@ -124,7 +124,7 @@ function mostrarPeriodo(){
     });
 }
 
-function sumarAlIndexador(){
+function sumarAlIndexadorGDMTO(){
     lista = document.getElementById("lstPeriodosGDMTO");
     indexador = lista.length;
     option = document.createElement("option");
@@ -134,7 +134,7 @@ function sumarAlIndexador(){
     validarLimiteSumarPeriodos(indexador);
 }
 
-function restarAlIndexador(){
+function restarAlIndexadorGDMTO(){
     lista = document.getElementById("lstPeriodosGDMTO");
     ultimoIndex = lista.length - 1;
     lista.remove(ultimoIndex);
@@ -274,7 +274,7 @@ function validarEnvioDePeriodo(){
         this.msjConfirm = true;
         msj = 'No se estan obteniendo los 12 periodos esperados, se realizara un promedio de los datos faltantes ¿Desea enviar?';
         if(modalMsj(msj,msjConfirm) == true){
-            sendPeriodsToServer();
+            sendPeriodsToServerGDMTO();
             limpiarCampos();
             //console.log(arrayPeriodosGDMTO);
             /*
@@ -284,7 +284,7 @@ function validarEnvioDePeriodo(){
         }
     }
     else if(arrayPeriodosGDMTO.length == 12){
-        sendPeriodsToServer();
+        sendPeriodsToServerGDMTO();
         limpiarCampos();
         /* this.arrayPeriodosGDMTO = [];
         console.log(arrayPeriodosGDMTO); */
@@ -307,7 +307,7 @@ function validarUsuarioCargado(direccion_Cliente){
 /*#endregion*/
 /*#endregion*/
 /*#region DataToServer*/
-function sendPeriodsToServer(){
+function sendPeriodsToServerGDMTO(){
     direccionCliente = document.getElementById('municipio').value;
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
@@ -514,14 +514,14 @@ function sendPeriodsToServer(){
                                 $('#inpCostTotalInversores').val('').text('');
 
                                 //Panel de ajuste de cotizacion - Desaparece
-                                $('#tblAjusteCotiMT').css("display","none");
+                                $('#btnModalAjustePropuesta').attr("disabled",true);
                                 
                                 //Se desaparece numerito -Cantidad_Inversores-
                                 $('#txtCantidadPaneles').html('');
                             }
                             else{
                                 //Panel de ajuste de cotizacion - Aparece
-                                $('#tblAjusteCotiMT').css("display","");
+                                $('#btnModalAjustePropuesta').attr("disabled",false);
 
                                 //Se agrega nmerito -Cantidad_Inversores-
                                 $('#txtCantidadInversores').html('<strong> ('+response[0].numeroDeInversores+')</strong>');

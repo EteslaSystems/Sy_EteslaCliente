@@ -182,3 +182,8 @@ JSONscriptRequest.prototype.addScriptTag = function () {
 //     });
 // }
 /*#endregion*/
+
+//Button - Details
+function buttonDetails(){
+    alert('hellow');
+}

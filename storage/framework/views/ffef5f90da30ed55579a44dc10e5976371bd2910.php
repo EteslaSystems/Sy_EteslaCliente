@@ -39,6 +39,17 @@
                                         <option value="optConvinacionEconomica">Económica</option>
                                     </select>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button id="btnModalAjustePropuesta" class="btn btn-xs float-left" data-toggle="modal" data-target=".bd-modal-ej" style="display:none;"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check pull-right" id="checkSalvarCombinacion" style="display:none;">
+                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion">
+                                            <label for="salvarCombinacion">Salvar</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
@@ -53,54 +64,6 @@
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
-                                <br>
-                                <div class="form-row" style="display:none;" id="tblAjusteCotiMT">
-                                    <table class="table table-hover table-sm table-striped">
-                                        <thead class="thead-dark text-center">
-                                            <tr>
-                                                <th scope="col" colspan="2">Resumen General</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-1"></div>
-                                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-2"></div>
-                                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-3"></div>
-                                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="text-center">
-                                                <td>
-                                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;" onclick="guardarGenerarPDF();">
-                                                        GUARDAR Y CREAR PDF
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
-                                                        MODIFICAR RESULTADOS
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,16 +77,53 @@
                                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                             </div>
                             <div class="col">
-                                <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
+                                <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
                             </div>
                         </div>
+                        <!-- #ModalsZone -->
+                        <!-- Modal_AjustePropuesta -->
+                        <div class="modal fade bd-modal-ej" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="text-center">Ajuste propuesta</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Panel de ajuste de cotizacion -->
+                                        <div class="slidecontainer">
+                                            <div class="form-group">
+                                                <label>Propuesta </label>
+                                                <input id="inpSliderPropuesta" type="range" min="0" max="100" class="slider" onchange="rangeValuePropuesta.value=value">
+                                                <output id="rangeValuePropuesta"></output>%
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Potencia </label>
+                                                <input id="inpSliderPotencia" type="range" min="0" max="100" class="slider" onchange="rangeValuePotencia.value=value">
+                                                <output id="rangeValuePotencia"></output>%
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Descuento </label>
+                                                <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" onchange="rangeValueDescuento.value=value">
+                                                <output id="rangeValueDescuento"></output>%
+                                            </div>
+                                        </div>
+                                        <!-- Fin  del Panel de ajuste de cotizacion -->
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" disabled><strong>Modificar</strong></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #End - Modal_combinaciones -->
                         <!-- Modal_combinaciones -->
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header row">
                                         <div class="col">
-                                            <button class="btn btn-primary btn-xs">Detalle</button>
+                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails()"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
                                         </div>
                                         <div class="col">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -134,7 +134,7 @@
                                     <div class="modal-body row">
                                         <?php for($i=0; $i<3; $i++): ?>
                                             <div class="col" id="divCombinacion<?php echo e($i); ?>">
-                                                <input id="inpTipoCombinacion" class="d-none">
+                                                <input id="inpTipoCombinacion<?php echo e($i); ?>" class="d-none">
                                                 <h5 id="combinacionTitle<?php echo e($i); ?>" class="title-combination" ></h5>
                                                 <div class="row">
                                                     <div class="col">
@@ -183,15 +183,13 @@
                             </div>
                         </div>
                         <!-- End-Modal_Combinaciones -->
+                        <!-- #End - ModalsZone -->
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <div class="pull-right">
-                                    <div class="form-check" id="checkSalvarCombinacion">
-                                        <input type="checkbox" class="form-check-input" id="salvarCombinacion">
-                                        <label for="salvarCombinacion">Salvar</label>
-                                    </div>
+                                <div class="btn-group pull-right">
+                                    <button id="btnDetails" class="btn btn-xs details-propuesta" title="details" onclick="buttonDetails()" style="display:none;"><img src="https://img.icons8.com/fluent-systems-regular/24/000000/details.png"/></button>
                                 </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">

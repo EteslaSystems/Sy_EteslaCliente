@@ -66,6 +66,7 @@ function chooseSwitch(){
             $('#lblConvEquip').text('Equipos');
             $('#lblSwitchConvEquip').text("Elegir combinacion");
             $('#divConvinaciones').css("display","none");
+            $('#divPlusEquipos').css("display","none");
             $('#divElegirEquipo').css("display","");
 
             //
@@ -78,6 +79,7 @@ function chooseSwitch(){
             $('#lblConvEquip').text('Combinaciones');
             $('#lblSwitchConvEquip').text("Elegir equipo");
             $('#divConvinaciones').css("display","");
+            $('#divPlusEquipos').css("display","");
             $('#divElegirEquipo').css("display","none");
 
             //
@@ -352,14 +354,14 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#inpCostTotalInversores').val('').text('');
 
                 //Panel de ajuste de cotizacion - Desaparece
-                $('#tblAjusteCotiMT').css("display","none");
+                $('#btnModalAjustePropuesta').attr("disabled",true);
                 
                 //Se desaparece numerito -Cantidad_Inversores-
                 $('#txtCantidadPaneles').html('');
             }
             else{
                 //Panel de ajuste de cotizacion - Aparece
-                $('#tblAjusteCotiMT').css("display","");
+                $('#btnModalAjustePropuesta').attr("disabled",false);
 
                 //Se agrega nmerito -Cantidad_Inversores-
                 $('#txtCantidadInversores').html('('+response[xi].numeroDeInversores+')');
@@ -556,7 +558,7 @@ function askCombination(){
             {
                 case 'optConvinacionOptima'://Optima
                     //tipo_combinacion
-                    $('#inpTipoCombinacion').val("optima");//Input oculto - combinacion_mediana
+                    $('#inpTipoCombinacion0').val("optima");//Input oculto - combinacion_mediana
                     //Paneles
                     $('#inpPanelS').html(rspt.combinacionOptima[0].paneles.nombrePanel).val(rspt.combinacionOptima[0].paneles.nombrePanel);
                     $('#inpMarcaPanelS').html(rspt.combinacionOptima[0].paneles.marcaPanel).val(rspt.combinacionOptima[0].paneles.nombrePanel);
@@ -577,11 +579,15 @@ function askCombination(){
                     $('#inpPrecioIVA').html(rspt.combinacionOptima[0].totales.precioMasIVA).val(rspt.combinacionOptima[0].totales.precioMasIVA);
                     $('#inpPrecioMXN').html(rspt.combinacionOptima[0].totales.precioTotalMXN).val(rspt.combinacionOptima[0].totales.precioTotalMXN);
                     //Boton_salvar
-                    $('#salvarCombinacion').css("display", "");
+                    $('#checkSalvarCombinacion').css("display", "");
+                    //Boton_details
+                    $('#btnDetails').css("display", "");
+                    //Boton_ajustePropuesta
+                    $('#btnModalAjustePropuesta').css("display", "");
                 break;
                 case 'optConvinacionMediana'://Mediana
                     //tipo_combinacion
-                    $('#inpTipoCombinacion').val("mediana");//Input oculto - combinacion_mediana
+                    $('#inpTipoCombinacion1').val("mediana");//Input oculto - combinacion_mediana
                     //Paneles
                     $('#inpPanelS').html(rspt.combinacionMediana[0].paneles.nombrePanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
                     $('#inpMarcaPanelS').html(rspt.combinacionMediana[0].paneles.marcaPanel).val(rspt.combinacionMediana[0].paneles.nombrePanel);
@@ -602,11 +608,15 @@ function askCombination(){
                     $('#inpPrecioIVA').html(rspt.combinacionMediana[0].totales.precioMasIVA).val(rspt.combinacionMediana[0].totales.precioMasIVA);
                     $('#inpPrecioMXN').html(rspt.combinacionMediana[0].totales.precioTotalMXN).val(rspt.combinacionMediana[0].totales.precioTotalMXN);
                     //Boton_salvar
-                    $('#salvarCombinacion').css("display", "");
+                    $('#checkSalvarCombinacion').css("display", "");
+                    //Boton_details
+                    $('#btnDetails').css("display", "");
+                    //Boton_ajustePropuesta
+                    $('#btnModalAjustePropuesta').css("display", "");
                 break;
                 case 'optConvinacionEconomica'://Economica
                     //tipo_combinacion
-                    $('#inpTipoCombinacion').val("economica");//Input oculto - combinacion_economica
+                    $('#inpTipoCombinacion2').val("economica");//Input oculto - combinacion_economica
                     //Paneles
                     $('#inpPanelS').html(rspt.combinacionEconomica[0].paneles.nombrePanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
                     $('#inpMarcaPanelS').html(rspt.combinacionEconomica[0].paneles.marcaPanel).val(rspt.combinacionEconomica[0].paneles.nombrePanel);
@@ -624,7 +634,11 @@ function askCombination(){
                     $('#inpPrecioIVA').html(rspt.combinacionEconomica[0].totales.precioMasIVA).val(rspt.combinacionEconomica[0].totales.precioMasIVA);
                     $('#inpPrecioMXN').html(rspt.combinacionEconomica[0].totales.precioTotalMXN).val(rspt.combinacionEconomica[0].totales.precioTotalMXN);
                     //Boton_salvar
-                    $('#salvarCombinacion').css("display", "");
+                    $('#checkSalvarCombinacion').css("display", "");
+                    //Boton_details
+                    $('#btnDetails').css("display", "");
+                    //Boton_ajustePropuesta
+                    $('#btnModalAjustePropuesta').css("display", "");
                 break;
                 default:
                     //Paneles
@@ -644,7 +658,11 @@ function askCombination(){
                     $('#inpPrecioIVA').html('').val('');
                     $('#inpPrecioMXN').html('').val('');
                     //Boton_salvar
-                    $('#salvarCombinacion').css("display", "none");
+                    $('#checkSalvarCombinacion').css("display", "none");
+                    //Boton_details
+                    $('#btnDetails').css("display", "none");
+                    //Boton_ajustePropuesta
+                    $('#btnModalAjustePropuesta').css("display", "none");
                     //Desaparece cantidad (numerito) de -Paneles y Estructuras-
                     // $('#txtCantidadPaneles').html('');
                     // $('#txtCantidadEstructuras').html('');
