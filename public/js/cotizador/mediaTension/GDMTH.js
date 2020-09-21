@@ -74,7 +74,7 @@ function eliminarPeriodo(){
     // arrayPeriodosGDMTH.splice(0,(seleccionado));
     console.log('periodo antes de eliminar:');
     console.log(arrayPeriodosGDMTH);
-    delete(arrayPeriodosGDMTH[seleccionado]);
+    //delete(arrayPeriodosGDMTH[seleccionado]);
     console.log('periodo despues de eliminar:');
     console.log(arrayPeriodosGDMTH);
     /*Actualizar el indexador de la lista desplegable*/
@@ -313,7 +313,7 @@ function validarLimiteEliminarPeriodos(){
 
 }
 
-function validarEnvioDePeriodo(){
+function validarEnvioDePeriodoGDMTH(){
     
     if(arrayPeriodosGDMTH.length == 0 || arrayPeriodosGDMTH.length == 1){
         msj = 'Ups! Número de periodos insuficientes para calcular';
@@ -360,7 +360,7 @@ function sendPeriodsToServer(){
     var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     direccionCliente = document.getElementById('municipio').value;
 
-    if(checkAddItems() != -1){
+    //if(checkAddItems() != -1){
         if(validarUsuarioCargado(direccionCliente) === true)
         {
             $.ajax({
@@ -416,6 +416,7 @@ function sendPeriodsToServer(){
                     }
         
                     $('#listPaneles').change(function(){
+                        $('#listInversores').val(-1);
                         var x = $('#listPaneles').val(); //Iteracion
                         
                         if(x === '-1'  || x === -1){
@@ -527,13 +528,20 @@ function sendPeriodsToServer(){
                     });
 
                     $.ajax({
-                        type: 'GET',
-                        url: '/inversores'
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        type: 'POST',
+                        url: '/inversoresSelectos',
+                        data: {
+                            "_token": $("meta[name='csrf-token']").attr('content'),
+                            "potenciaReal": _potenciaReal
+                        },
+                        dataType: 'json'
                     })
                     .fail(function(){
                         alert('Hubo un error al intentar cargar el dropdownlist de Inversores');
                     }).
                     done(function(response){
+                        var response = response.message;
                         //DropDownList-Inversores
                         for(var j=0; j<response.length; j++)
                         {
@@ -563,14 +571,14 @@ function sendPeriodsToServer(){
                                 $('#inpCostTotalInversores').val('').text('');
 
                                 //Panel de ajuste de cotizacion - Desaparece
-                                $('#tblAjusteCotiMT').css("display","none");
+                                $('#btnModalAjustePropuesta').attr("disabled",true);
                                 
                                 //Se desaparece numerito -Cantidad_Inversores-
                                 $('#txtCantidadPaneles').html('');
                             }
                             else{
                                 //Panel de ajuste de cotizacion - Aparece
-                                $('#tblAjusteCotiMT').css("display","");
+                                $('#btnModalAjustePropuesta').css("display",false);
 
                                 //Se agrega nmerito -Cantidad_Inversores-
                                 $('#txtCantidadInversores').html('<strong> ('+response[0].numeroDeInversores+')</strong>');
@@ -711,7 +719,7 @@ function sendPeriodsToServer(){
                 });
             });
         }
-    }
+    //}
 }
 
 function guardarGenerarPDF(){
@@ -733,13 +741,17 @@ function modalMsj(msj,msjConfirm){
 }
 
 function GDMTH(){
-    document.getElementById('divGDMTO').style.display = 'none';
-    document.getElementById('divGDMTH').style.display = '';
+    $('#divGDMTO').css("display","none");
+    $('#divGDMTH').css("display","");
+    $('#btnGDMTH').css("display","");
+    $('#btnGDMTO').css("display","none");
     tipoCotizacion = 'GDMTH';
 }
 
 function GDMTO(){
-    document.getElementById('divGDMTO').style.display = '';
-    document.getElementById('divGDMTH').style.display = 'none';
+    $('#divGDMTO').css("display","");
+    $('#divGDMTH').css("display","none");
+    $('#btnGDMTH').css("display","none");
+    $('#btnGDMTO').css("display","");
     tipoCotizacion = 'GDMTO';
 }

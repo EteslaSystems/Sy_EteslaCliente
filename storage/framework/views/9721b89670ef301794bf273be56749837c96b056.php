@@ -1,5 +1,5 @@
 <?php $__env->startSection('cotizadores'); ?>
-    <div class="card">
+    <div class="card" id="divCotizacionBajaTension">
         <div class="card-header">
             <div class="row">
                 <div class="col-12 fx-1">
@@ -11,7 +11,6 @@
                 </div>
             </div>
         </div>
-
         <div class="card-body">
             <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -424,14 +423,24 @@
                     </div>
                 </div>
                 <br>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center" id="divBtnCalcularBT">
                     <div class="col-6 text-center">
                         <button class="btn btn-success" onclick="sendCotizacionBajaTension();">Calcular</button>
                     </div>
                 </div>
+                <!--Termina formulario bajaTension -->
             </div>
         </div>
     </div>
+    <div class="card shadow mb-3" id="divResultCotizacionBT" style="display:none;">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-xs float-left" onclick="backToCotizacionBT()"><img src="https://img.icons8.com/windows/24/000000/long-arrow-left.png"/></button>
+            </div>
+        <div class="w-100"></div>
+        <div class="col-lg" id="divResult_bt"></div>
+    </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('roles/seller/cotizador/cotizador', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/bajaTension.blade.php ENDPATH**/ ?>

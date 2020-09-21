@@ -28,4 +28,9 @@ class APIInversores extends GuzzleHttpRequest
 	{
 		return $this->post("agregar-inversor", $request);
 	}
+
+	public function inversores_selectos($request)
+	{
+		return $this->post("inversores-selectos", $request);
+	}
 }

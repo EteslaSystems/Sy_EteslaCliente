@@ -42,7 +42,18 @@ class APICotizacion extends GuzzleHttpRequest
     //1st. Step
     public function sendPeriodsBT($request)
     {
-        /* return  */$this->post("sendPeriodsBT",$request);
+        return $this->post("sendPeriodsBT",$request);
+    }
+
+    public function calcularViaticosBT($request)
+    {
+        return $this->post("calcularViaticosBTI",$request);
+    }
+    /*#endregion*/
+    /*#region Busqueda_Inteligente*/
+    public function busquedaInteligente($request)
+    {
+        return $this->post("busqueda-inteligente",$request);
     }
     /*#endregion*/
 }

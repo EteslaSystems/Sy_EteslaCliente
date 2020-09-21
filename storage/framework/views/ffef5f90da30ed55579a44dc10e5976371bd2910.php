@@ -16,7 +16,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <p class="d-block mn-1 p-titulos" id="lblConvEquip">Convinaciones</p>
+                                    <p class="d-block mn-1 p-titulos" id="lblConvEquip">Combinaciones</p>
                                 </div>
                                 <div class="col">
                                     <div class="custom-control custom-switch text-center pull-right">
@@ -31,13 +31,24 @@
                         <div class="row text-center">
                             <div class="col form-group" id="divConvinaciones">
                                 <div class="form-row">
-                                    <label>Convinación</label>
-                                    <select class="form-control" id="listConvinaciones">
+                                    <label>Combinacion</label>
+                                    <select class="form-control" id="listConvinaciones" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                         <option value="optConvinacionOptima">Óptima</option>
                                         <option value="optConvinacionMediana">Mediana</option>
                                         <option value="optConvinacionEconomica">Económica</option>
                                     </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button id="btnModalAjustePropuesta" class="btn btn-xs float-left" data-toggle="modal" data-target=".bd-modal-ej" style="display:none;"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check pull-right" id="checkSalvarCombinacion" style="display:none;">
+                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion">
+                                            <label for="salvarCombinacion">Salvar</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
@@ -53,54 +64,6 @@
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
-                                <br>
-                                <div class="form-row" style="display:none;" id="tblAjusteCotiMT">
-                                    <table class="table table-hover table-sm table-striped">
-                                        <thead class="thead-dark text-center">
-                                            <tr>
-                                                <th scope="col" colspan="2">Resumen General</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-1"></div>
-                                                        <input id="range-1" type="range" min="0" max="200" value="100" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-2"></div>
-                                                        <input id="range-2" type="range" min="0" max="200" value="100" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="range-wrap">
-                                                        <div class="range-value" id="rangeV-3"></div>
-                                                        <input id="range-3" type="range" min="-30" max="50" value="0" step="1">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="text-center">
-                                                <td>
-                                                    <button class="btn btn-sm btn-success" style="margin-top: 10px; margin-bottom: 10px;" onclick="guardarGenerarPDF();">
-                                                        GUARDAR Y CREAR PDF
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-info" style="margin-top: 10px; margin-bottom: 10px;">
-                                                        MODIFICAR RESULTADOS
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,11 +72,125 @@
             <div class="col-md-8">
                 <div class="card shadow mb-3">
                     <div class="card-header">
-                        <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
+                        <div class="row">
+                            <div class="col">
+                                <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
+                            </div>
+                            <div class="col">
+                                <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
+                            </div>
+                        </div>
+                        <!-- #ModalsZone -->
+                        <!-- Modal_AjustePropuesta -->
+                        <div class="modal fade bd-modal-ej" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="text-center">Ajuste propuesta</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Panel de ajuste de cotizacion -->
+                                        <div class="slidecontainer">
+                                            <div class="form-group">
+                                                <label>Propuesta </label>
+                                                <input id="inpSliderPropuesta" type="range" min="0" max="100" class="slider" onchange="rangeValuePropuesta.value=value">
+                                                <output id="rangeValuePropuesta"></output>%
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Potencia </label>
+                                                <input id="inpSliderPotencia" type="range" min="0" max="100" class="slider" onchange="rangeValuePotencia.value=value">
+                                                <output id="rangeValuePotencia"></output>%
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Descuento </label>
+                                                <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" onchange="rangeValueDescuento.value=value">
+                                                <output id="rangeValueDescuento"></output>%
+                                            </div>
+                                        </div>
+                                        <!-- Fin  del Panel de ajuste de cotizacion -->
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" disabled><strong>Modificar</strong></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #End - Modal_combinaciones -->
+                        <!-- Modal_combinaciones -->
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header row">
+                                        <div class="col">
+                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails()"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <?php for($i=0; $i<3; $i++): ?>
+                                            <div class="col" id="divCombinacion<?php echo e($i); ?>">
+                                                <input id="inpTipoCombinacion<?php echo e($i); ?>" class="d-none">
+                                                <h5 id="combinacionTitle<?php echo e($i); ?>" class="title-combination" ></h5>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img id="imgLogoPanel<?php echo e($i); ?>" height="35" weight="100">
+                                                        <img id="imgPanel<?php echo e($i); ?>" height="100" weight="80">
+                                                    </div> 
+                                                    <div class="col">
+                                                        <img id="imgLogoInversor<?php echo e($i); ?>" height="35" weight="100">
+                                                        <img id="imgInversor<?php echo e($i); ?>" height="100" weight="80">
+                                                    </div>
+                                                </div>
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total paneles
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total inversores
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalInversores<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total estructuras
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Costo total viaticos
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Precio
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Precio + IVA
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioIVAProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                                                        Costo total MXN
+                                                        <span class="badge badge-warning badge-pill" id="plCostoTotalMXNProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        <?php endfor; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End-Modal_Combinaciones -->
+                        <!-- #End - ModalsZone -->
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
+                                <div class="btn-group pull-right">
+                                    <button id="btnDetails" class="btn btn-xs details-propuesta" title="details" onclick="buttonDetails()" style="display:none;"><img src="https://img.icons8.com/fluent-systems-regular/24/000000/details.png"/></button>
+                                </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
@@ -126,17 +203,29 @@
                                     <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="container">
                                             <div class="row">
+                                                <div class="col" id="divPlusEquipos">
+                                                    <div class="form-group">
+                                                        <label for="inpPanelS">Panel</label>
+                                                        <input id="inpPanelS" class="form-control inpAnsw" readOnly>
+                                                        <input id="inpMarcaPanelS" class="form-control inpAnsw" style="display:none;">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inpInversorS">Inversor</label>
+                                                        <input id="inpInversorS" class="form-control inpAnsw" readOnly>
+                                                        <input id="inpMarcaInversorS" class="form-control inpAnsw" style="display:none;">
+                                                    </div>
+                                                </div>
                                                 <div class="col" style="justify-content:center;">
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
+                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small class="smallIndicator" title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
                                                         <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalInversores">Costo total Inversores <small title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
+                                                        <label for="inpCostTotalInversores">Costo total Inversores <small class="smallIndicator" title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
                                                         <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
+                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small class="smallIndicator" title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
                                                         <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                     <div class="form-group">
@@ -144,7 +233,7 @@
                                                         <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col">
                                                     <div class="form-group">
                                                         <label for="inpPrecio">Precio</label>
                                                         <input id="inpPrecio" class="form-control inpAnsw" readOnly>
@@ -581,9 +670,10 @@
         }
     </style>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/bajaTension.js')); ?>"></script>
 
 <?php $__env->startSection('scripts'); ?>
 <script type="text/javascript">

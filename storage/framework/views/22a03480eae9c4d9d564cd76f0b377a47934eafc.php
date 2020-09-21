@@ -20,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <label><strong>Fuente web</strong></label><br>
-                                <a href="https://www.infodolar.com.mx/tipo-de-cambio-dof-diario-oficial-de-la-federacion.aspx"><?php echo e($precioDolars -> fuente); ?></a>
+                                <a href="<?php echo e($precioDolars -> fuente); ?>"><?php echo e($precioDolars -> fuente); ?></a>
                             </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>  

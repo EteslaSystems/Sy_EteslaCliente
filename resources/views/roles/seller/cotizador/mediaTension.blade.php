@@ -22,7 +22,7 @@
         <div class="container" id="divGDMTO">
             <div class="row mt-3">
                     <div class="col-md-4 col-sm-12 mb-3">
-                        <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTO()">
+                        <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTO()" style="display:none;">
                             +
                         </button>
                         <div class="menu-content shadow" id="menuContentGDMTO">
@@ -56,16 +56,16 @@
                             </select>
                         </div>
                         <div class="btn-group btn-group-lg" role="group">
-                            <button id="btnAgregarPeriodoGDMTO" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
+                            <button id="btnAgregarPeriodoGDMTO" class="btn btn-green" onclick="agregarPeriodoGDMTO();" title="Agregar periodo de consumo">
                                 <i class="fa fa-file-text" aria-hidden="true"></i>
                             </button>
-                            <button id="btnEditarPeriodoGDMTO" class="btn btn-green" onclick="editarPeriodo();" title="Editar periodo de consumo" disabled>
+                            <button id="btnEditarPeriodoGDMTO" class="btn btn-green" onclick="editarPeriodoGDMTO();" title="Editar periodo de consumo" disabled>
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                             <!--button id="btnEliminarPeriodoGDMTO" class="btn btn-green" onclick="#" title="Eliminar periodo de consumo" disabled>
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button-->
-                            <button id="btnActualizarPeriodoGDMTO" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>
+                            <button id="btnActualizarPeriodoGDMTO" class="btn btn-green" onclick="actualizarPeriodoGDMTO();" title="Actualizar periodo de consumo" disabled>
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -110,7 +110,7 @@
         <div class="container" id="divGDMTH" style="display:none;">
             <div class="row mt-3">
                 <div class="col-md-4 col-sm-12 mb-3">
-                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()">+</button>
+                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()" style="display:none;">+</button>
                     <div class="menu-content shadow" id="menuContentGDMTH">
                         <div class="row d-flex justify-content-center align-items-center">
                             <div class="col">
@@ -233,14 +233,17 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-xs float-left" onclick="backToCotizacion()"><img src="https://img.icons8.com/windows/24/000000/long-arrow-left.png"/></button>
-
         </div>
         <div class="w-100"></div>
         <div class="col-lg" id="divResult"></div>
     </div>
 </div>
 <div class="col-md-4 offset-md-8 text-right mb-3" id="divBtnCalcularMT">
-    <button onclick="validarEnvioDePeriodo()" class="btn btn-green text-uppercase shadow">
+    <button onclick="validarEnvioDePeriodo()" class="btn btn-green text-uppercase shadow" id="btnGDMTO">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Calcular
+    </button>
+    <button style="display:none;" onclick="validarEnvioDePeriodoGDMTH()" class="btn btn-green text-uppercase shadow" id="btnGDMTH">
         <i class="fa fa-check" aria-hidden="true"></i>
         Calcular
     </button>

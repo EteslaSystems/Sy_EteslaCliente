@@ -4,20 +4,59 @@
     <div class="col-6 col-md-4">
         <div class="card shadow mb-3">
             <div class="card-header">
-                <p class="d-block mn-1 p-titulos">
-                    <i class="fa fa-bolt" aria-hidden="true"></i>
-                    Cotización individual 
-                </p>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="d-block mn-1 p-titulos">
+                            <i class="fa fa-bolt" aria-hidden="true"></i>
+                            Cotización individual 
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="btnModalConfig" class="btn pull-right" data-toggle="modal" data-target=".bd-example-modal-xs"><img src="https://img.icons8.com/material/16/000000/gearbox-selector.png"/></button>
+                        <div class="modal fade bd-example-modal-xs" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-xs" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body container-mt3 justify-content-center align-items-center">
+                                        <div class="d-inline-flex p-3">
+                                            <div class="p-2">
+                                                <div class="checkbox">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="chbEstructuras"><span class="badge badge-warning">Estructuras</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-2">
+                                                <input id="inpCantidadEstruct" type="number" class="form-control" placeholder="Cantidad de estructuras" value="0" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="d-inline-flex p-3">
+                                            <div class="p-2">
+                                                <div class="checkbox">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="chbInstalacion" checked><span class="badge badge-warning">Instalacion</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-2">
+                                                <div class="checkbox">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="chbMonitoreo"><span class="badge badge-warning">Monitoreo</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row text-center">
                     <div class="col">
                         <div class="form-row">
                             <div class="col-sm">
-                                <div class="form-group">
-                                    <label class="mn-1">Cantidad paneles:</label>
-                                    <input class="form-control input-sm" type="number" id="inpCantPaneles" disabled>
-                                </div>
                                 <div class="form-group">
                                     <label class="mn-1">Seleccionar Panel:</label>
                                     <select class="form-control" id="optPaneles" onchange="getDropDownListValues()">
@@ -27,14 +66,14 @@
                                             @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label class="mn-1">Cantidad paneles:</label>
+                                    <input class="form-control input-sm" type="number" id="inpCantPaneles" disabled>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-sm">
-                                <div class="form-group">
-                                    <label class="mn-1">Cantidad inversores:</label>
-                                    <input class="form-control input-sm" type="number" id="inpCantInversores" disabled>
-                                </div>
                                 <div class="form-group">
                                     <label class="mn-1">Seleccionar Inversor:</label>
                                     <select class="form-control" id="optInversores" onchange="getDropDownListValues()">
@@ -44,24 +83,50 @@
                                             @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label class="mn-1">Cantidad inversores:</label>
+                                    <input class="form-control input-sm" type="number" id="inpCantInversores" disabled>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col">
-                        <!--button type="button" class="btn btn-xs btnMenuInfo" id="btnMenuInfo" onClick="loadMenuAddItem()" title="addItems">
-                            +
-                        </button-->
+                    <!-- <div class="col">
                         <div class="menu-content shadow" id="menuContent">
-                            <label><strong>Agregar</strong></label>
-                            <div class="checkbox">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="chbEstructuras" disabled>Estructuras
-                                </label>
+                            <div class="form-group row justify-content-center align-items-center">
+                            <label for="inpCantidadEstructuras" class="col-xs-3 col-form-label mr-2">No. de estructuras</label>
+                                <div class="col-xs-9">
+                                    <input class="form-control" type="number" id="inpCantidadEstructuras">
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-center align-items-center">
+                                <label class="col-xs-3 col-form-label mr-2"><strong>Cobrar instalacion</strong></label>
+                                <div class="col-xs-9">
+                                    <div class="checkbox">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="chbEstructuras" disabled>Estructuras
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inpCantidadEstructuras" class="col-xs-3 col-form-label mr-2">No. de estructuras</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control" type="number" id="inpCantidadEstructuras">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Agregar</strong></label>
+                                <div class="checkbox">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="chbEstructuras" disabled>Estructuras
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col">
                         <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow pull-right" id="btnCalcularIndividual">
                             <i class="fa fa-check" aria-hidden="true"></i>

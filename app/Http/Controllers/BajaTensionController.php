@@ -87,9 +87,33 @@ class BajaTensionController extends Controller
 
 		$response = $this->cotizacion->sendPeriodsBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);
-/* 
-		return $response; */
 
-		
+		return $response;
+	}
+
+	public function calculaViaticos_BT(Request $request)
+	{
+		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
+		$arrayCompleto["destino"] = $request->direccionCliente;
+		$arrayCompleto["arrayBTI"] = $request->arrayBTI;
+
+		$response = $this->cotizacion->calcularViaticosBT(['json' => $arrayCompleto]);
+		$response = response()->json($response);
+
+		return $response;
+	}
+
+	public function askCombination(Request $request)
+	{
+		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
+		$arrayCompleto["destino"] = $request->direccionCliente;
+		$arrayCompleto["consumos"] = $request->consumos;
+		$arrayCompleto["tarifa"] = $request->tarifa;
+		$arrayCompleto["tipoCotizacion"] = "bajaTension";
+
+		$response = $this->cotizacion->busquedaInteligente(['json' => $arrayCompleto]);
+		$response = response()->json($response);
+
+		return $response;
 	}
 }
