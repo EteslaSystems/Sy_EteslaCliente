@@ -167,6 +167,8 @@ class usuarioController extends Controller
 		$key = 'eTeslaSecret';
 		$encrypt = ['HS256'];
 
+		dd($token);
+
 		if(!empty($token))
 		{
 			try {

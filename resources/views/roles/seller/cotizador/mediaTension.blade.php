@@ -233,7 +233,6 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-xs float-left" onclick="backToCotizacion()"><img src="https://img.icons8.com/windows/24/000000/long-arrow-left.png"/></button>
-
         </div>
         <div class="w-100"></div>
         <div class="col-lg" id="divResult"></div>
