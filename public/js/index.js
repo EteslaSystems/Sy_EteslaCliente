@@ -1,7 +1,11 @@
 /*#region index(general)*/
 $("#menu-toggle").click(function(e){
-    e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+    e.preventDefault();
+});
+
+$(function(){
+    eliminarAgregado();
 });
 /*#endregion*/
 
@@ -186,4 +190,80 @@ JSONscriptRequest.prototype.addScriptTag = function () {
 //Button - Details
 function buttonDetails(){
     alert('hellow');
+}
+
+/* mediaTension - NOTA: Cuando se le de mantenimiento al codigo y mediaTension 
+tenga su archivo JS en el 'public' del ClienteWeb, pasar la siguiente funcionalidad
+a dicho archivo. */
+/*                  Agregados_CRUD                  */
+var objAgregado = {};
+var _agregado = [];
+var contadorDeAgregados = 0;
+
+function readAgregado(){
+    
+}
+
+function addAgregado(){
+    var nombreAgregado = $('#inpAgregado').val();
+    var cantidadAgregado = $('#inpCantidadAg').val();
+    var precioAgregado = $('#inpPrecioAg').val();
+
+    if(validarInputsVaciosAg(nombreAgregado) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
+        objAgregado = {
+            nombreAgregado: nombreAgregado, 
+            cantidadAgregado: cantidadAgregado, 
+            precioAgregado: precioAgregado
+        };
+    
+        //Guardo de 'Agregado' en Array
+        _agregado.push(objAgregado);
+    
+        //Pintar 'Agregado' en tabla
+        var tableBody = $('#tblAgregados > tbody');
+        var filaNueva = tableBody.append('<tr><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+        
+        contadorDeAgregados++;
+        limpiarInputsAgregado();
+
+        ///
+        console.log(_agregado);
+        console.log('Contador de agregados, despues de agregar item: '+contadorDeAgregados);
+    }
+}
+
+function eliminarAgregado(){
+    $(document).on('click','.deleteAg',function(event){
+        //Se borra el *obj* logicamente del array
+        var posicionAgregado = event.target.id;
+        _agregado.splice(posicionAgregado, 1);
+        
+        //Se elimina visualmente de la tabla
+        event.preventDefault();
+        $(this).closest('tr').remove();
+
+        contadorDeAgregados--;
+        console.log('Obj despues de la eliminada');
+        console.log(_agregado);
+        console.log('Contador de agregados despues de la eliminada: '+contadorDeAgregados);
+    });
+}
+
+//Validaciones y eventos - *Agregados*
+function limpiarInputsAgregado(){
+    $('.inpAg').val('');
+    $('#inpCantidadAg').focus();
+}
+
+function validarInputsVaciosAg(valor){
+    valor = valor == undefined ? "" : valor;    
+    valor = valor.replace("&nbsp;", "");
+
+    if (!valor || 0 === valor.trim().length){
+        alert('Campos pertenecientes a *Agregado*, vacios. Favor de llenar!');
+        return false;
+    }
+    else{
+        return true;
+    }
 }

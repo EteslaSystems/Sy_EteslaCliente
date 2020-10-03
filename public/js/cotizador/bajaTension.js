@@ -639,6 +639,8 @@ function askCombination(){
                     $('#btnDetails').css("display", "");
                     //Boton_ajustePropuesta
                     $('#btnModalAjustePropuesta').css("display", "");
+                    //Boton details - propuesta
+                    $('#').css("display","");
                 break;
                 default:
                     //Paneles

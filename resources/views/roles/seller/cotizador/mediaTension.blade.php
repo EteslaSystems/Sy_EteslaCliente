@@ -8,6 +8,63 @@
                     <i class="fa fa-list-alt" aria-hidden="true"></i> 
                     Datos de Consumo
                 </p>
+                <button class="btn btn-xs btn-light" data-toggle="modal" data-target=".modl-agregados-modal-lg" title="Agregados"><img src="https://img.icons8.com/carbon-copy/24/000000/file.png"/></button>
+                <!-- Inicio - Modal_Agregados -->
+                <div class="modal fade modl-agregados-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center">Agregados</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>    
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Controles_CRUD_Agregadoss -->
+                                    <div class="col">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label for="inpCantidadAg">Cantidad</label>
+                                                <input id="inpCantidadAg" type="number" class="form-control inpAg" style="width: 85px;">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inpAgregado">Agregado</label>
+                                                <input id="inpAgregado" type="text" class="form-control inpAg">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inpPrecioAg">Precio</label>
+                                                <input id="inpPrecioAg" type="number" min=".50" step="any" class="form-control inpAg" >
+                                            </div>
+                                            <button id="btnAddAg" type="button" class="btn btn-primary" onclick="addAgregado();">+</button>
+                                        </form>
+                                    </div>
+                                    <!-- Final_Controles_CRUD_Agregados -->
+                                </div>
+                                <div class="row">
+                                    <!-- Tabla_Agregados -->
+                                    <div class="col-xl table-responsive-xl">
+                                        <table class="table table-sm" id="tblAgregados">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="text-align:center;">#</th>
+                                                    <th scope="col" style="text-align:center;">Agregado</th>
+                                                    <th scope="col" style="text-align:center;">Cantidad</th>
+                                                    <th scope="col" style="text-align:center;">Precio</th>
+                                                    <th scope="col" style="text-align:center;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    <!-- Final_Tabla_Agregados -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin - Modal_Agregados -->
             </div>
             <div class="col-md-6 col-sm-6 fx-1"> 
                 <div class="btn-group mn-2">
@@ -161,29 +218,29 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpBkWh" class="mn-1">B (kWh):</label>
-                            <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);" required>
+                            <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpIkWh" class="mn-1">I (kWh):</label>
-                            <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpPkWh" class="mn-1">P (kWh):</label>
-                            <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpBkw" class="mn-1">B (kw):</label>
-                            <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpIkw" class="mn-1">I (kw):</label>
-                            <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpPkw" class="mn-1">P (kw):</label>
-                            <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                 </div>

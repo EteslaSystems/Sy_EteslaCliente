@@ -41,9 +41,6 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <button id="btnModalAjustePropuesta" class="btn btn-xs float-left" data-toggle="modal" data-target=".bd-modal-ej" style="display:none;"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-check pull-right" id="checkSalvarCombinacion" style="display:none;">
                                             <input type="checkbox" class="form-check-input" id="salvarCombinacion">
                                             <label for="salvarCombinacion">Salvar</label>
@@ -64,6 +61,7 @@
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
+                                <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
                             </div>
                         </div>
                     </div>

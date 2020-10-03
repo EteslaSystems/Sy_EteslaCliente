@@ -55,8 +55,8 @@ function agregarPeriodo(){
         };
     
         arrayPeriodosGDMTH.push(objPeriodosGDMTH);
-        sumarAlIndexador();
         limpiarCampos();
+        sumarAlIndexador();
     }
 
     console.log('Longitud de array: '+arrayPeriodosGDMTH.length);
@@ -175,7 +175,8 @@ function desbloquearCampos(){
 }
 
 function limpiarCampos(){
-    $('input[type="number"]').val('');
+    $('.inpgdmth').val('');
+    $('#inpBkWh').focus();
 }
 
 function logicaBotones(bandera){
