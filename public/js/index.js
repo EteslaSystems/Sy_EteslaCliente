@@ -188,8 +188,61 @@ JSONscriptRequest.prototype.addScriptTag = function () {
 /*#endregion*/
 
 //Button - Details
-function buttonDetails(){
-    alert('hellow');
+var banderaLogic = 1;
+
+function buttonDetails(element){
+    var idElement = element.id.toString();
+    var tagModalResultSection;
+    var iteracion = 0;
+
+    ////pageResult1
+    ////lstCombinacionResult1 /*modal*/
+
+    if(idElement === 'btnDetails'){
+        $('#pageResult'+banderaLogic).fadeOut("slow");
+        $('#pageResult'+(banderaLogic+1)).fadeIn("slow");
+        banderaLogic++;
+    }
+    else{
+        do{
+            banderaLogic = banderaLogic > 3 ? 1 : banderaLogic;
+
+            switch(banderaLogic)
+            {
+                case 1:
+                    tagModalResultSection = "modalResultPageX";
+                break;
+                case 2:
+                    tagModalResultSection = "modalResultPageY";
+                break;
+                case 3:
+                    tagModalResultSection = "modalResultPageZ";
+                break;
+            }
+
+            if(iteracion == 0){
+                $('#'+tagModalResultSection+1).fadeOut("slow");
+                $('#'+tagModalResultSection+2).fadeOut("slow");
+                $('#'+tagModalResultSection+3).fadeOut("slow");
+
+                banderaLogic++;
+            }
+            else{
+                $('#'+tagModalResultSection+1).fadeIn("slow");
+                $('#'+tagModalResultSection+2).fadeIn("slow");
+                $('#'+tagModalResultSection+3).fadeIn("slow");
+            }
+
+            iteracion++;
+
+            console.log("Iteracion: "+iteracion+" banderaLogic: "+banderaLogic);
+        }
+        while(iteracion < 2);
+
+        iteracion = 0;
+    }
+
+    console.log('banderaLogic says: '+banderaLogic);
 }
 
 /* mediaTension - NOTA: Cuando se le de mantenimiento al codigo y mediaTension 
@@ -199,10 +252,6 @@ a dicho archivo. */
 var objAgregado = {};
 var _agregado = [];
 var contadorDeAgregados = 0;
-
-function readAgregado(){
-    
-}
 
 function addAgregado(){
     var nombreAgregado = $('#inpAgregado').val();

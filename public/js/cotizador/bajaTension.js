@@ -63,6 +63,7 @@ function chooseSwitch(){
         limpiarCampos();
 
         if(valor === 0){
+            /* div_ElegirEquipo */
             $('#lblConvEquip').text('Equipos');
             $('#lblSwitchConvEquip').text("Elegir combinacion");
             $('#divConvinaciones').css("display","none");
@@ -72,10 +73,14 @@ function chooseSwitch(){
             //
             $('#checkSalvarCombinacion').css("display","none");
             $('#btnDivCombinaciones').css("display","none");
-            
+
+            //Resetean dropdownlist
+            $('#listConvinaciones').val(-1);
+
             valor = 1;
         }
         else{
+            /* div_Combinaciones */
             $('#lblConvEquip').text('Combinaciones');
             $('#lblSwitchConvEquip').text("Elegir equipo");
             $('#divConvinaciones').css("display","");
@@ -86,15 +91,19 @@ function chooseSwitch(){
             $('#checkSalvarCombinacion').css("display","");
             $('#btnDivCombinaciones').css("display","");
 
+            //Resetean dropdownlist
+            $('#listPaneles').val(-1);
+            $('#listInversores').val(-1).attr("disabled",true);
+
             valor = 0;
         }
     });
 }
 /*#endregion*/
 /*#region Validaciones*/
-function validarInputsVacios(){
+/* function validarInputsVacios(){
 
-}
+} */
 
 function validarUsuarioCargado(direccion_Cliente){
     if(direccion_Cliente){
@@ -194,6 +203,9 @@ function getResultsView(_respuesta){
                 //Desaparece cantidad (numerito) de -Paneles y Estructuras-
                 $('#txtCantidadPaneles').html('');
                 $('#txtCantidadEstructuras').html('');
+
+                //Se limpian results de result_paneles
+                limpiarResultados(0);
             }
             else{
                 _potenciaReal = _respuesta[x].panel.potenciaReal;
@@ -350,8 +362,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#precioInv').html('');
                 $('#divTotalesProject').css("display","");
 
-                // /Interfaz_visible\
-                $('#inpCostTotalInversores').val('').text('');
+                //Se limpian inputs de resultados
+                limpiarResultados(1);
 
                 //Panel de ajuste de cotizacion - Desaparece
                 $('#btnModalAjustePropuesta').attr("disabled",true);
@@ -495,11 +507,11 @@ function askCombination(){
             /*             --Combinacion Economica--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
-            $('#imgLogoPanel0').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor0').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
             /* __equipos__ */
-            $('#imgPanel0').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor0').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle0').text("Combinacion economica");
             $('#plCostoTotalPaneles0').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionEconomica[0].paneles.costoTotalPaneles) + '$');
@@ -513,11 +525,11 @@ function askCombination(){
             /*             --Combinacion Mediana--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
-            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionMediana[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+rspt.combinacionMediana[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".png");
             /* __equipos__ */
-            $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor2').attr("src", "img/inversores/equipo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle1').text('Combinacion mediana');
             $('#plCostoTotalPaneles1').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionMediana[0].paneles.costoTotalPaneles) + '$');
@@ -531,11 +543,11 @@ function askCombination(){
             //Combinacion Plus
             /* Se cargan imagenes de logos &&  equipos */
             /* __logos__ */
-            $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+rspt.combinacionOptima[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel3').attr("src", "img/paneles/logo/"+rspt.combinacionOptima[0].paneles.marcaPanel.toString()+".png");
+            $('#imgLogoInversor3').attr("src", "img/inversores/logo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".png");
             /* __equipos__ */
-            $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor2').attr("src", "img/inversores/equipo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgPanel3').attr("src", "img/paneles/equipo/panel.png");
+            $('#imgInversor3').attr("src", "img/inversores/equipo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle2').text('Combinacion optima');
             $('#plCostoTotalPaneles2').text(new Intl.NumberFormat("en-IN").format(rspt.combinacionOptima[0].paneles.costoTotalPaneles) + '$');
@@ -676,9 +688,35 @@ function askCombination(){
 /*#endregion*/
 /*#endregion*/
 //Logic
-function limpiarCampos(){
+function logicBtns_GP_CPDF(){ /* GP=>GuardarPropuesta, CPDF=>CrearPDF */
+
+}
+
+function limpiarResultados(limpiaResult){
+    /* 0 - paneles
+    1 - inversores */
+
+    if(limpiaResult == 0){
+        /*Limpiar panel_result*/
+        $('#inpCostTotalPaneles').val('').text('');
+        /*Limpiar estructuras_result*/
+        $('#inpCostTotalEstructuras').val('').text('');
+    }
+    else{
+        /*Limpiar inversor_result*/
+        $('#inpCostTotalInversores').val('').text('');
+        /*Limpiar viaticos_result*/
+        $('#inpCostoTotalViaticos').val('').text('');
+        /*Limpiar totales_result*/
+        $('#inpPrecio').val('').text('');
+        $('#inpPrecioIVA').val('').text('');
+        $('#inpPrecioMXN').val('').text('');
+    }
+}
+
+function limpiarCampos(){ /* Combinaciones_Section */
     $('.inpAnsw').val('');
-    $('.smallIndicator').val('');
+    $('.smallIndicator').text('').val('');
 }
 
 function salvarCombinacion(){

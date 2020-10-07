@@ -29,6 +29,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row text-center">
+                            <!-- Sección combinaciones -->
                             <div class="col form-group" id="divConvinaciones">
                                 <div class="form-row">
                                     <label>Combinacion</label>
@@ -48,6 +49,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Fin Sección combinaciones -->
+                            <!-- Seccion "Elegir un equipo" -->
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
@@ -63,7 +66,14 @@
                                 </div>
                                 <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
                             </div>
+                            <!--Fin Seccion "Elegir un equipo" -->
                         </div>
+                        <!-- Botones GuardaPropuesta_GenerarPDF -->
+                        <div class="btn-group btn-group-sm pull-right" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary" title="guardar propuesta">GUARDAR</button>
+                            <button type="button" class="btn btn-secondary" title="generar pdf">GENERAR</button>
+                        </div>
+                        <!-- Fin Botones GuardaPropuesta_GenerarPDF -->
                     </div>
                 </div>
             </div>
@@ -74,8 +84,11 @@
                             <div class="col">
                                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                             </div>
-                            <div class="col">
-                                <button id="btnDivCombinaciones" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
+                            <div class="col-8 d-flex justify-content-center">
+                                <button id="btnDivCombinaciones" class="btn btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" title="comparativa combinaciones" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
+                            </div>
+                            <div class="col-xs">
+                                <button id="btnDetails" type="button" class="btn btn-xs pull-rigth" style="padding: 4px;" onclick="buttonDetails(this)"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
                             </div>
                         </div>
                         <!-- #ModalsZone -->
@@ -121,7 +134,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header row">
                                         <div class="col">
-                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails()"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
+                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails(this)" title="Detalles propuesta"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
                                         </div>
                                         <div class="col">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -130,7 +143,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-body row">
-                                        <?php for($i=0; $i<3; $i++): ?>
+                                        <?php for($i=1; $i<=3; $i++): ?>
                                             <div class="col" id="divCombinacion<?php echo e($i); ?>">
                                                 <input id="inpTipoCombinacion<?php echo e($i); ?>" class="d-none">
                                                 <h5 id="combinacionTitle<?php echo e($i); ?>" class="title-combination" ></h5>
@@ -144,34 +157,82 @@
                                                         <img id="imgInversor<?php echo e($i); ?>" height="100" weight="80">
                                                     </div>
                                                 </div>
-                                                <ul class="list-group">
+                                                <ul id="modalResultPageX<?php echo e($i); ?>" class="list-group">
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo total paneles
+                                                        Potencia
                                                         <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles<?php echo e($i); ?>"></span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo total inversores
+                                                        Cantidad paneles
                                                         <span class="badge badge-primary badge-pill" id="plCostoTotalInversores<?php echo e($i); ?>"></span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo total estructuras
+                                                        Cantidad inversores 
                                                         <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras<?php echo e($i); ?>"></span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo total viaticos
+                                                        Costo proyectos s/IVA
                                                         <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos<?php echo e($i); ?>"></span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Precio
+                                                        Costo proyectos c/IVA
                                                         <span class="badge badge-primary badge-pill" id="plPrecioProj<?php echo e($i); ?>"></span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Precio + IVA
+                                                        Costo por watt
                                                         <span class="badge badge-primary badge-pill" id="plPrecioIVAProj<?php echo e($i); ?>"></span>
                                                     </li>
-                                                    <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
-                                                        Costo total MXN
-                                                        <span class="badge badge-warning badge-pill" id="plCostoTotalMXNProj<?php echo e($i); ?>"></span>
+                                                </ul>
+                                                <ul id="modalResultPageY<?php echo e($i); ?>" class="list-group" style="display:none;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Modelo panel
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Modelo inversor
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalInversores<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Consumo mensual
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Generacion mensual
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Nuevo consumo mensual
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        % de generación
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioIVAProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                </ul>
+                                                <ul id="modalResultPageZ<?php echo e($i); ?>" class="list-group" style="display:none;">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Pago promedio(anterior)
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalPaneles<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Pago promedio(nuevo)
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalInversores<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Ahorro mensual
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalEstructuras<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Ahorro anual
+                                                        <span class="badge badge-primary badge-pill" id="plCostoTotalViaticos<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        ROI Bruto
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioProj<?php echo e($i); ?>"></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        ROI con deducción
+                                                        <span class="badge badge-primary badge-pill" id="plPrecioIVAProj<?php echo e($i); ?>"></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -186,9 +247,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <div class="btn-group pull-right">
-                                    <button id="btnDetails" class="btn btn-xs details-propuesta" title="details" onclick="buttonDetails()" style="display:none;"><img src="https://img.icons8.com/fluent-systems-regular/24/000000/details.png"/></button>
-                                </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
@@ -200,52 +258,144 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="container">
-                                            <div class="row">
-                                                <div class="col" id="divPlusEquipos">
-                                                    <div class="form-group">
-                                                        <label for="inpPanelS">Panel</label>
-                                                        <input id="inpPanelS" class="form-control inpAnsw" readOnly>
-                                                        <input id="inpMarcaPanelS" class="form-control inpAnsw" style="display:none;">
+                                            <form class="form-inline">
+                                                <!--oculto-->
+                                                <input id="inpMarcaPanelS" class="form-control inpAnsw" style="display:none;">
+                                                <input id="inpMarcaInversorS" class="form-control inpAnsw" style="display:none;">
+                                                <!--fin_oculto-->
+                                                <!-- Page1 -->
+                                                <div id="pageResult1" class="row">
+                                                    <div class="col">
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Potencia</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Cantidad paneles</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Cantidad inversores</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div>     
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="inpInversorS">Inversor</label>
-                                                        <input id="inpInversorS" class="form-control inpAnsw" readOnly>
-                                                        <input id="inpMarcaInversorS" class="form-control inpAnsw" style="display:none;">
+                                                    <div class="col">
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-lg-4 col-form-label">Costo proyecto s/IVA</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Costo proyecto c/IVA</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Costo por watt</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="1.4kw">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col" style="justify-content:center;">
-                                                    <div class="form-group">
-                                                        <label for="inpCostTotalPaneles">Costo total Paneles<small class="smallIndicator" title="Cantidad de paneles" id="txtCantidadPaneles"></small></label>
-                                                        <input id="inpCostTotalPaneles" class="form-control inpAnsw" readOnly>
+                                                <!-- End_Page1 -->
+                                                <!-- Page2 -->
+                                                <div id="pageResult2" class="row" style="display:none;">
+                                                    <div class="col">
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Modelo panel</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Modelo inversor</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Consumo mensual</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div>     
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="inpCostTotalInversores">Costo total Inversores <small class="smallIndicator" title="Cantidad de inversores" id="txtCantidadInversores"></small></label>
-                                                        <input id="inpCostTotalInversores" class="form-control inpAnsw" readOnly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inpCostTotalEstructuras">Costo total Estructuras <small class="smallIndicator" title="Cantidad de estructuras" id="txtCantidadEstructuras"></small></label>
-                                                        <input id="inpCostTotalEstructuras" class="form-control inpAnsw" readOnly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inpCostoTotalViaticos">Costo total Viaticos</label>
-                                                        <input id="inpCostoTotalViaticos" class="form-control inpAnsw" readOnly>
+                                                    <div class="col">
+                                                    <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Generación mensual</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Nuevo consumo mensual</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">% de generación</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                 </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="inpPrecio">Precio</label>
-                                                        <input id="inpPrecio" class="form-control inpAnsw" readOnly>
+                                                <!-- End_Page2 -->
+                                                <!-- Page3 -->
+                                                <div id="pageResult3" class="row" style="display:none;">
+                                                    <div class="col">
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Pago anterior(promedio)</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Pago nuevo(promedio)</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Ahorro mensual</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div>    
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="inpPrecioIVA">Precio del proyecto + IVA</label>
-                                                        <input id="inpPrecioIVA" class="form-control inpAnsw" readOnly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inpPrecioMXN">Precio del proyecto MXN</label>
-                                                        <input id="inpPrecioMXN" class="form-control inpAnsw" readOnly>
+                                                    <div class="col">
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">Ahorro anual</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">ROI bruto</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group row">
+                                                            <label for="staticEmail1" class="col-sm-4 col-form-label">ROI con deducción</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="123@example.com">
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <!-- End_Page3 -->
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="power" role="tabpanel" aria-labelledby="profile-tab" style="display:none;">
