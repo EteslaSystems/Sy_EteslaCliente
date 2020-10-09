@@ -57,360 +57,80 @@
                                     <br>
 
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-md-6">
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-1" class="mn-1">Mensualidad 1</label>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-1" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh1">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-1a" name="men-1a" type="number" min="0"  aria-describedby="basic-addon1a">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp1">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-2" class="mn-1">Mensualidad 2</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-2" name="men-2" type="number" min="0"  aria-describedby="basic-addon2">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh2">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-2a" name="men-2a" type="number" min="0"  aria-describedby="basic-addon2a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp2">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-3" class="mn-1">Mensualidad 3</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-3" name="men-3" type="number" min="0"  aria-describedby="basic-addon3">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh3">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-3a" name="men-3a" type="number" min="0"  aria-describedby="basic-addon3a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp3">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-4" class="mn-1">Mensualidad 4</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-4" name="men-4" type="number" min="0"  aria-describedby="basic-addon4">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh4">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-4a" name="men-4a" type="number" min="0"  aria-describedby="basic-addon4a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp4">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-5" class="mn-1">Mensualidad 5</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-5" name="men-5" type="number" min="0"  aria-describedby="basic-addon5">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh5">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-5a" name="men-5a" type="number" min="0"  aria-describedby="basic-addon5a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp5">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-6" class="mn-1">Mensualidad 6</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-6" name="men-6" type="number" min="0"  aria-describedby="basic-addon6">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh6">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-6a" name="men-6a" type="number" min="0"  aria-describedby="basic-addon6a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp6">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-1" class="col-sm-4 col-form-label">Bimestre 1</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-1" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh1">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-12 col-sm-6 col-md-6">
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-7" class="mn-1">Mensualidad 7</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-7" name="men-7" type="number" min="0"  aria-describedby="basic-addon7">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh7">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-7a" name="men-7a" type="number" min="0"  aria-describedby="basic-addon7a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp7">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-2" class="col-sm-4 col-form-label">Bimestre 2</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-2" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh2">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-8" class="mn-1">Mensualidad 8</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-8" name="men-8" type="number" min="0"  aria-describedby="basic-addon8">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh8">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-8a" name="men-8a" type="number" min="0"  aria-describedby="basic-addon8a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp8">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-3" class="col-sm-4 col-form-label">Bimestre 3</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-3" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh3">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div class="w-100"></div>
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-9" class="mn-1">Mensualidad 9</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                   <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-9" name="men-9" type="number" min="0"  aria-describedby="basic-addon9">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh9">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-9a" name="men-9a" type="number" min="0"  aria-describedby="basic-addon9a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp9">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-4" class="col-sm-4 col-form-label">Bimestre 4</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-4" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh4">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-10" class="mn-1">Mensualidad 10</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-10" name="men-10" type="number" min="0"  aria-describedby="basic-addon10">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh10">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-10a" name="men-10a" type="number" min="0"  aria-describedby="basic-addon10a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp10">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-5" class="col-sm-4 col-form-label">Bimestre 5</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-5" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh5">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div class="col">
                                             <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-11" class="mn-1">Mensualidad 11</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-11" name="men-11" type="number" min="0"  aria-describedby="basic-addon11">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh11">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-11a" name="men-11a" type="number" min="0"  aria-describedby="basic-addon11a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp11">kwp</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-12 col-sm-12 col-md-4 fx-1">
-                                                    <label for="men-val-12" class="mn-1">Mensualidad 12</label>
-                                                </div>
-
-                                                <div class="col-12 col-sm-12 col-md-8 pa-ma-3">
-                                                   <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-12" name="men-12" type="number" min="0"  aria-describedby="basic-addon12">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWh12">kwh</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="input-group mb-3">
-                                                                <input type="number" class="form-control" id="men-val-12a" name="men-12a" type="number" min="0"  aria-describedby="basic-addon12a">
-
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="inpIkWp12">kwp</span>
-                                                                </div>
-                                                            </div>
+                                                <label for="men-val-6" class="col-sm-4 col-form-label">Bimestre 6</label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" class="form-control" id="men-val-6" name="men-1" type="number" min="0"  aria-describedby="basic-addon1">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="inpIkWh6">kwh</span>
                                                         </div>
                                                     </div>
                                                 </div>

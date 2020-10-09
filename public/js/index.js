@@ -194,12 +194,13 @@ function buttonDetails(element){
     var idElement = element.id.toString();
     var tagModalResultSection;
     var iteracion = 0;
-
+    
     ////pageResult1
     ////lstCombinacionResult1 /*modal*/
 
     if(idElement === 'btnDetails'){
         $('#pageResult'+banderaLogic).fadeOut("slow");
+        banderaLogic = banderaLogic >= 3 ? 0 : banderaLogic;
         $('#pageResult'+(banderaLogic+1)).fadeIn("slow");
         banderaLogic++;
     }
