@@ -116,4 +116,98 @@ class BajaTensionController extends Controller
 
 		return $response;
 	}
+
+	public function saveProposal(Request $request)
+	{
+		$data = [
+			"tipoCotizacion" => "bajaTension",
+			"asesorId" => session('dataUsuario')->id,
+			"cliente" => [
+				"id" => $request->cliente->id,
+				"consumo" => [
+					"consumoMensual" => $request->cliente->consumo->consumoMensual,
+					"consumoAnual" => $request->cliente->consumo->consumoAnual,
+					"energiaNecesaria" => $request->cliente->consumo->energiaNecesaria,
+				]
+			],
+			"proyecto" => [
+				"panel" => [
+					"nombre" => $request->proyecto->panel->nombre,
+					"marca" => $request->proyecto->panel->marca,
+					"cantidad" => $request->proyecto->panel->cantidad
+				],
+				"inversor" => [
+					"nombre" => $request->proyecto->inversor->nombre,
+					"marca" => $request->proyecto->inversor->marca,
+					"cantidad" => $request->proyecto->inversor->cantidad
+				],
+				"power" => [
+					"consumosAnteriores" => $request->proyecto->power->consumosAnteriores,
+					"consumosNuevos" => $request->proyecto->power->consumosNuevos,
+					"porcentajeAhorro" => $request->proyecto->power->porcentajeAhorro
+				],
+				"totales" => [
+					"costoTotalSinIVA" => $request->proyecto->totales->costoTotalSinIVA,
+					"costoTotalConIVA" => $request->proyecto->totales->costoTotalConIVA
+				]
+			]
+		];
+
+		dd($data);
+
+		// $response = $this->cotizacion->(['json' => $data]);
+		/* $response = response()->json($response);
+
+		return $response; */
+	}
+
+	public function generateItem(Request $request) //Generar entregable
+	{
+		/* $data = [
+			"tipoCotizacion" => $request->tipoCotizacion,
+			"asesor" => [
+				"id" => session('dataUsuario')->id,
+				"nombre" => $request->asesor->nombre,
+				"sucursal" => $request->asesor->sucursal
+			],
+			"cliente" => [
+				"id" => $request->cliente->id,
+				"nombre" => $request->cliente->nombre,
+				"direccion" => $request->cliente->direccion,
+				"consumo" => [
+					"consumoMensual" => $request->cliente->consumo->consumoMensual,
+					"consumoAnual" => $request->cliente->consumo->consumoAnual,
+					"energiaNecesaria" => $request->cliente->consumo->energiaNecesaria,
+				]
+			],
+			"proyecto" => [
+				"panel" => [
+					"nombre" => $request->proyecto->panel->nombre,
+					"marca" => $request->proyecto->panel->marca,
+					"cantidad" => $request->proyecto->panel->cantidad
+				],
+				"inversor" => [
+					"nombre" => $request->proyecto->inversor->nombre,
+					"marca" => $request->proyecto->inversor->marca,
+					"cantidad" => $request->proyecto->inversor->cantidad
+				],
+				"power" => [
+					"consumosAnteriores" => $request->proyecto->power->consumosAnteriores,
+					"consumosNuevos" => $request->proyecto->power->consumosNuevos,
+					"porcentajeAhorro" => $request->proyecto->power->porcentajeAhorro
+				],
+				"totales" => [
+					"costoTotalSinIVA" => $request->proyecto->totales->costoTotalSinIVA,
+					"costoTotalConIVA" => $request->proyecto->totales->costoTotalConIVA
+				]
+			]
+		]; */
+
+		dd($data);
+
+		// $response = $this->cotizacion->(['json' => $data]);
+		/* $response = response()->json($response);
+
+		return $response; */
+	}
 }

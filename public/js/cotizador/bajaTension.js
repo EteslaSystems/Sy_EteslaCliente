@@ -3,6 +3,7 @@ var tarifaSelected = '';
 $(function(){
     chooseSwitch();
     salvarCombinacion();
+    logicBtns_GP_GE();
 });
 
 /*#region Logica_controles*/
@@ -96,7 +97,7 @@ function validarUsuarioCargado(direccion_Cliente){
 /*#endregion*/
 /*#region Server*/
 function sendCotizacionBajaTension(){
-    var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    
     var direccionCliente = document.getElementById('municipio').value;
 
     if(validarUsuarioCargado(direccionCliente) === true){
@@ -111,7 +112,6 @@ function sendCotizacionBajaTension(){
             url: '/sendPeriodsBT',
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
-                'idCliente': idCliente,
                 'consumos': _consumos,
                 'direccionCliente': direccionCliente,
                 'tarifa': tarifaSelected
@@ -731,9 +731,91 @@ function askCombination(){
 }
 /*#endregion*/
 /*#endregion*/
-//Logic
-function logicBtns_GP_CPDF(){ /* GP=>GuardarPropuesta, CPDF=>CrearPDF */
 
+function generarEntregable(data){
+
+}
+
+function guardarPropuesta(data){
+
+}
+
+//Logic - Resultados_propuesta
+function logicBtns_GP_GE(){ /* GP=>GuardarPropuesta, GE=>GenerarEntregable */
+    var data = {};
+
+    /*#region Cliente */
+    idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    /*#region Consumo */
+    consumoMensual;
+    consumoAnual;
+    energiaNecesaria;
+    /*#endregion Consumo */
+    /*#endregion Cliente */
+    /*#region Proyecto */
+    /*#region Panel */
+    nombrePanel;
+    marcaPanel;
+    cantidadPanel;
+    /*#endregion Panel */
+    /*#region Inversor */
+    nombreInversor;
+    marcaInversor;
+    cantidadInversor;
+    /*#endregion Inversor */
+    /*#region Power */
+    consumosAnteriore;
+    consumosNuevo;
+    porcentajeAhorr;
+    /*#endregion Power */
+    /*#region Totales */
+    costoTotalSinIVA;
+    costoTotalConIVA;
+    /*#endregion Totales */
+    /*#endregion Proyecto */
+
+    data = {
+        cliente: {
+            id: idCliente,
+            consumo: {
+                consumoMensual: consumoMensual,
+                consumoAnual: consumoAnual,
+                energiaNecesaria: energiaNecesaria
+            }
+        },
+        proyecto: {
+            panel: {
+                nombre: nombrePanel,
+                marca: marcaPanel,
+                cantidad: cantidadPanel
+            },
+            inversor: {
+                nombre: nombreInversorInversor,
+                marca: marcaInversor,
+                cantidad: cantidadInversor
+            },
+            power: {
+                consumosAnteriores: consumosAnteriores,
+                consumosNuevos: consumosNuevos,
+                porcentajeAhorro: porcentajeAhorro,
+
+            },
+            totales: {
+                costoTotalSinIVA: costoTotalSinIVA,
+                costoTotalConIVA: costoTotalConIVA
+            }
+        }
+    };
+
+    $('#btnGuardarPropuesta').click(function(){
+        console.log(data);
+        // generarEntregable(data);
+    });
+
+    $('#btnGenerarEntregable').click(function(){
+        console.log(data);
+        // generarEntregable(data);
+    });
 }
 
 function limpiarResultados(limpiaResult){
@@ -769,11 +851,15 @@ function salvarCombinacion(){
     $('#salvarCombinacion').click(function(){
         if(valueLogic === 0){
             $('#listConvinaciones').attr("disabled", true);
+            $('#btnGuardarPropuesta').prop("disabled", false);
+            $('#btnGenerarEntregable').prop("disabled", false);
 
             valueLogic = 1;
         }
         else{
             $('#listConvinaciones').attr("disabled", false);
+            $('#btnGuardarPropuesta').prop("disabled", true);
+            $('#btnGenerarEntregable').prop("disabled", true);
 
             valueLogic = 0;
         }

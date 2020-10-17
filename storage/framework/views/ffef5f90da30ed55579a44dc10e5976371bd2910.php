@@ -70,8 +70,8 @@
                         </div>
                         <!-- Botones GuardaPropuesta_GenerarPDF -->
                         <div class="btn-group btn-group-sm pull-right" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary" title="guardar propuesta">GUARDAR</button>
-                            <button type="button" class="btn btn-secondary" title="generar pdf">GENERAR</button>
+                            <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" title="guardar propuesta" disabled>GUARDAR</button>
+                            <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" title="generar pdf" disabled>GENERAR</button>
                         </div>
                         <!-- Fin Botones GuardaPropuesta_GenerarPDF -->
                     </div>
