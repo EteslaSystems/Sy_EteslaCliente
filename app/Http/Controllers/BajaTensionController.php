@@ -141,11 +141,11 @@ class BajaTensionController extends Controller
 					"marca" => $request->proyecto->inversor->marca,
 					"cantidad" => $request->proyecto->inversor->cantidad
 				],
-				"power" => [
+				/* "power" => [
 					"consumosAnteriores" => $request->proyecto->power->consumosAnteriores,
 					"consumosNuevos" => $request->proyecto->power->consumosNuevos,
 					"porcentajeAhorro" => $request->proyecto->power->porcentajeAhorro
-				],
+				], */
 				"totales" => [
 					"costoTotalSinIVA" => $request->proyecto->totales->costoTotalSinIVA,
 					"costoTotalConIVA" => $request->proyecto->totales->costoTotalConIVA

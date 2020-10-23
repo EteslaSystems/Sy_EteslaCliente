@@ -269,19 +269,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpPotencia" class="col-sm-4 col-form-label">Potencia</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpPotencia">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPotencia">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpCantidadPaneles" class="col-sm-4 col-form-label">Cantidad paneles</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpCantidadPaneles">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadPaneles">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpCantidadInvers" class="col-sm-4 col-form-label">Cantidad inversores</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpCantidadInvers">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadInvers">
                                                             </div>
                                                         </div>     
                                                     </div>
@@ -289,19 +289,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpCostProyectoSIVA" class="col-lg-4 col-form-label">Costo proyecto s/IVA</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpCostProyectoSIVA">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoSIVA">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpCostProyectoCIVA" class="col-sm-4 col-form-label">Costo proyecto c/IVA</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpCostProyectoCIVA">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoCIVA">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpCostPorWatt" class="col-sm-4 col-form-label">Costo por watt</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpCostPorWatt">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostPorWatt">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -313,19 +313,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpModeloPanel" class="col-sm-4 col-form-label">Modelo panel</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpModeloPanel">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloPanel">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpModeloInversor" class="col-sm-4 col-form-label">Modelo inversor</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpModeloInversor">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloInversor">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpConsumoMensual" class="col-sm-4 col-form-label">Consumo mensual</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpConsumoMensual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpConsumoMensual">
                                                             </div>
                                                         </div>     
                                                     </div>
@@ -333,19 +333,19 @@
                                                     <div class="form-group row">
                                                             <label for="inpGeneracionMensual" class="col-sm-4 col-form-label">Generación mensual</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpGeneracionMensual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpGeneracionMensual">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpNuevoConsumoMensual" class="col-sm-4 col-form-label">Nuevo consumo mensual</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpNuevoConsumoMensual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpNuevoConsumoMensual">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpPorcentGeneracion" class="col-sm-4 col-form-label">% de generación</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpPorcentGeneracion">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPorcentGeneracion">
                                                             </div>
                                                         </div> 
                                                     </div>
@@ -357,19 +357,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpPagoAnteriorProm" class="col-sm-4 col-form-label">Pago anterior(promedio)</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpPagoAnteriorProm">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoAnteriorProm">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpPagoNuevoProm" class="col-sm-4 col-form-label">Pago nuevo(promedio)</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpPagoNuevoProm">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoNuevoProm">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpAhorroMensual" class="col-sm-4 col-form-label">Ahorro mensual</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpAhorroMensual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroMensual">
                                                             </div>
                                                         </div>    
                                                     </div>
@@ -377,19 +377,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpAhorroAnual" class="col-sm-4 col-form-label">Ahorro anual</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpAhorroAnual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroAnual">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpROIBruto" class="col-sm-4 col-form-label">ROI bruto</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpROIBruto">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpROIBruto">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpROIDeduccion" class="col-sm-4 col-form-label">ROI con deducción</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext" id="inpROIDeduccion">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpROIDeduccion">
                                                             </div>
                                                         </div> 
                                                     </div>
@@ -568,7 +568,7 @@
                                 </td>
                                 <td id="numeroModulos"></td>
                             </tr>
-                            <tr>
+                            <tr>    
                                 <td>
                                     <b>Potencia del modulo</b>
                                 </td>

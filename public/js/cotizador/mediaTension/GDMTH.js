@@ -461,6 +461,9 @@ function sendPeriodsToServer(){
                             $('#inpCostTotalEstructuras').val(respuesta[x].panel.costoDeEstructuras + '$');
 
                             /*[Hoja: POWER]*/
+                            console.log('Michael Jackson says: ');
+                            console.log(arrayPeriodosGDMTH);
+
                             $.ajax({
                                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                                 type: 'POST',
