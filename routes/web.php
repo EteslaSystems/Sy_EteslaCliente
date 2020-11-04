@@ -50,6 +50,8 @@ Route::post('/sendPeriodsBT', 'BajaTensionController@getCotizacionBT');
 Route::post('/calcularViaticosBTI', 'BajaTensionController@calculaViaticos_BT');
 //Busqueda_inteligente
 Route::post('/askCombinations', 'BajaTensionController@askCombination');
+//[ Hoja:POWER ]
+Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */

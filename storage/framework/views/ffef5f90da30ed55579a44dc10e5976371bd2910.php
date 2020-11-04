@@ -283,7 +283,13 @@
                                                             <div class="col-lg-6">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadInvers">
                                                             </div>
-                                                        </div>     
+                                                        </div>  
+                                                        <div class="form-group row">
+                                                            <label for="inpCostPorWatt" class="col-sm-4 col-form-label">Costo por watt</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostPorWatt">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group row">
@@ -299,9 +305,9 @@
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
-                                                            <label for="inpCostPorWatt" class="col-sm-4 col-form-label">Costo por watt</label>
+                                                            <label for="inpCostProyectoMXN" class="col-sm-4 col-form-label">Costo proyecto MXN</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostPorWatt">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoMXN">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -815,6 +821,7 @@
             border:0; 
             background: transparent !important; 
             border-bottom: 1px solid #888 !important;
+            text-align: center;
         }
     </style>
 </body>

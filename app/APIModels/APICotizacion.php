@@ -31,13 +31,6 @@ class APICotizacion extends GuzzleHttpRequest
     /*#endregion*/
     /*#endregion*/
     
-    /*#region cotizacion_individual*/
-    public function sendSingleQuotation($request)
-    {
-        return $this->post("cotizacionIndividual",$request);
-    }
-    /*#endregion*/
-
     /*#region cotizacion_bajaTension*/
     //1st. Step
     public function sendPeriodsBT($request)
@@ -49,6 +42,12 @@ class APICotizacion extends GuzzleHttpRequest
     {
         return $this->post("calcularViaticosBTI",$request);
     }
+
+    //[ Hoja: POWER ]
+    public function obtenerPowerBT($request)
+    {
+        return $this->post("obtenerPowerBT",$request);
+    }
     /*#endregion*/
     /*#region Busqueda_Inteligente*/
     public function busquedaInteligente($request)
@@ -56,4 +55,12 @@ class APICotizacion extends GuzzleHttpRequest
         return $this->post("busqueda-inteligente",$request);
     }
     /*#endregion*/
+
+    /*#region cotizacion_individual*/
+    public function sendSingleQuotation($request)
+    {
+        return $this->post("cotizacionIndividual",$request);
+    }
+    /*#endregion*/
+
 }

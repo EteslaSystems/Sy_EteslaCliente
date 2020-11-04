@@ -117,6 +117,19 @@ class BajaTensionController extends Controller
 		return $response;
 	}
 
+	public function getPowerBT(Request $request)
+	{
+		$arrayCompleto["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$arrayCompleto["porcentajePerdida"] = $request->porcentajePerdida;
+		$arrayCompleto["potenciaReal"] = $request->potenciaReal;
+		$arrayCompleto["tipoCotizacion"] = "bajaTension";
+
+		$response = $this->cotizacion->obtenerPowerBT(['json' => $arrayCompleto]);
+		$response = response()->json($response);
+
+		return $response;
+	}
+
 	public function saveProposal(Request $request)
 	{
 		$data = [
