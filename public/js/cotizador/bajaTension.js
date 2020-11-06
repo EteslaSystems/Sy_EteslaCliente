@@ -432,6 +432,7 @@ function calcularViaticosBT(){
     /*#endregion*/
 
     var consumptions = catchConsumption();
+    var tarifa = $('#tarifa-actual').val(); 
 
     objPeriodosGDMTH = {
         panel: {
@@ -464,7 +465,8 @@ function calcularViaticosBT(){
             "_token": $("meta[name='csrf-token']").attr('content'),
             "arrayBTI": _cotizaViaticos,
             "direccionCliente": direccionCliente,
-            "consumos": consumptions
+            "consumos": consumptions,
+            "tarifa": tarifa
         },
         dataType: 'json'
     })
@@ -648,15 +650,15 @@ function askCombination(){
                     $('#inpCostProyectoMXN').val(rspt.combinacionOptima[0].totales.precioTotalMXN  + '$');
 
                     //Page2_Result
-                    promedioConsumoMensual = rspt._arrayConsumos.consumo.promedioConsumo;
+                    promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                     generacionMensual = rspt.combinacionOptima[0].power.generacion[0];
                     nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionOptima[0].paneles.nombrePanel);
                     $('#inpModeloInversor').val(rspt.combinacionOptima[0].inversores.nombreInversor);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim');
-                    $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim');
+                    $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
+                    $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
+                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
@@ -686,15 +688,15 @@ function askCombination(){
                     $('#inpCostProyectoMXN').val(rspt.combinacionMediana[0].totales.precioTotalMXN+ '$');
 
                     //Page2_Result
-                    promedioConsumoMensual = rspt._arrayConsumos.consumo.promedioConsumo;
+                    promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                     generacionMensual = rspt.combinacionMediana[0].power.generacion[0];
                     nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionMediana[0].paneles.nombrePanel);
                     $('#inpModeloInversor').val(rspt.combinacionMediana[0].inversores.nombreInversor);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim');
-                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim');
+                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
+                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
+                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
@@ -725,15 +727,15 @@ function askCombination(){
                     $('#inpCostProyectoMXN').val(rspt.combinacionEconomica[0].totales.precioTotalMXN+ '$');
 
                     //Page2_Result
-                    promedioConsumoMensual = rspt._arrayConsumos.consumo.promedioConsumo;
+                    promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                     generacionMensual = rspt.combinacionEconomica[0].power.generacion[0];
                     nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionEconomica[0].paneles.nombrePanel);
                     $('#inpModeloInversor').val(rspt.combinacionEconomica[0].inversores.nombreInversor);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim');
-                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim');
+                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
+                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
+                    $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
