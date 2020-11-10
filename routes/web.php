@@ -1,11 +1,4 @@
 <?php
-//PDF
-Route::get('/pdf-template',function(){
-    return view('pdf-template');
-});
-
-
-
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');
 Route::post('/', 'usuarioController@validarUsuario');
@@ -25,6 +18,9 @@ Route::get('/vendedor', 'vendedorController@index');
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@todosClientes');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
+
+//////COTIZACION
+Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
 
 /* --- Cotizacion Media Tension --- */
 Route::get('/mediaT', 'MediaTensionController@index');

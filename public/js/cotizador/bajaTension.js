@@ -1,6 +1,3 @@
-var direccionCliente = '';
-var tarifaSelected = '';
-var tipoCotizacion = 'bajaTension';
 var dataCatchResults = [];
 
 $(function(){
@@ -100,8 +97,8 @@ function validarUsuarioCargado(direccion_Cliente){
 /*#endregion*/
 /*#region Server*/
 function sendCotizacionBajaTension(){
-    
     var direccionCliente = document.getElementById('municipio').value;
+    tarifaSelected = document.getElementById('tarifa-actual').value;
 
     if(validarUsuarioCargado(direccionCliente) === true){
         var _consumos = catchConsumption();
@@ -161,6 +158,9 @@ function getResultsView(_respuesta){
 
         //Se carga dropDownList -Paneles-
         fullDropDownListPaneles(_respuesta);
+
+        /////////SaveInSessionStorage
+        sessionStorage.setItem("ssObjConsumos", JSON.stringify(_respuesta));
 
         //Se pintan resultados de -Energia/Paneles_Requeridos-
         //Consumo - /Tabla_oculta\
@@ -397,6 +397,7 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#precioInv').html(response[0].precioInversor + '$').val(response[0].precioInversor); 
                 $('#costoTotalInversores').html(response[0].precioTotalInversores + '$').val(response[0].precioTotalInversores);
 
+
                 ///Pintada de resultados - Inversor
                 $('#inpCantidadInvers').val(response[xi].numeroDeInversores);
                 $('#inpModeloInversor').val(response[xi].nombreInversor);
@@ -409,7 +410,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
 }
 
 function calcularViaticosBT(){
-    direccionCliente = document.getElementById('municipio').value;
+    var tarifaSelected = document.getElementById('tarifa-actual').value;
+    var direccionCliente = document.getElementById('municipio').value;
     /*#region Se cargan las variables que se enviaran por la solicitud, a traves de la extraccion del val() del control/input que lo contiene*/
     /*Viaticos y Totales*/
     /*#region Datos requeridos para poder calcular viaticos y totales*/
@@ -432,7 +434,7 @@ function calcularViaticosBT(){
     /*#endregion*/
 
     var consumptions = catchConsumption();
-    var tarifa = $('#tarifa-actual').val(); 
+    
 
     objPeriodosGDMTH = {
         panel: {
@@ -466,25 +468,39 @@ function calcularViaticosBT(){
             "arrayBTI": _cotizaViaticos,
             "direccionCliente": direccionCliente,
             "consumos": consumptions,
-            "tarifa": tarifa
+            "tarifa": tarifaSelected
         },
         dataType: 'json'
     })
-    .fail(function(){
+    .fail(function(){ 
         alert('Hubo un error al intentar de obtener los viaticos y totales');
     })
     .done(function(answ){
         var answ = answ.message;
-        
+        var objResp = sessionStorage.getItem("ssObjConsumos");
+        objResp = JSON.parse(objResp);
+
         console.log('Viaticos: ');
         console.log(answ);
 
         //Se pintan los resultados del calculo de viaticos
         // /Interfaz_visible\
+        promedioConsumoMensual = objResp[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
+        generacionMensual = answ[0].power.generacion[0];
+        nuevoConsumoMensual = answ[0].power.nuevosConsumos[0];
+
+        $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
+        $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
+        $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+        $('#inpPorcentGeneracion').val(answ[0].power.porcentajePotencia + '%');
+
         $('#inpCostProyectoSIVA').val(answ[0].totales.precio + '$');
         $('#inpCostProyectoCIVA').val(answ[0].totales.precioMasIVA + '$');
         $('#inpCostPorWatt').val(answ[0].totales.precio_watt + '$');
         $('#inpCostProyectoMXN').val('$' +answ[0].totales.precioTotalMXN);
+    })
+    .always(function(){
+        sessionStorage.removeItem("ssObjConsumos")
     });
 }
 /*#region Combinaciones (busqueda_inteligente)*/
@@ -493,7 +509,8 @@ function askCombination(){
     var generacionMensual = 0;
     var nuevoConsumoMensual = 0;
     var _consumos = catchConsumption();
-    direccionCliente = document.getElementById('municipio').value;
+    var direccionCliente = document.getElementById('municipio').value;
+    var tarifaSelected = document.getElementById('tarifa-actual').value;
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -501,9 +518,9 @@ function askCombination(){
         url: '/askCombinations',
         data: {
             "_token": $("meta[name='csrf-token']").attr('content'),
-            'consumos': _consumos,
-            'direccionCliente': direccionCliente,
-            'tarifa': tarifaSelected
+            "consumos": _consumos,
+            "direccionCliente": direccionCliente,
+            "tarifa": tarifaSelected
         },
         dataType: 'json'
     })
@@ -517,8 +534,16 @@ function askCombination(){
         var rspt = rspt.message;
         rspt = rspt[0]; //Array de combinaciones
 
+        sessionStorage.setItem("arrayCombinaciones", JSON.stringify(rspt));
+
         console.log("Combinaciones says: ");
         console.log(rspt);
+
+        //////EXPERIMENTAL
+        $('#txArGuardaAr1').val(rspt);
+        /////EXPERIMENTAL
+
+        var promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
 
         /* Se pintan las combinaciones en el div_combinaciones */
         if(rspt.combinacionEconomica){
@@ -542,12 +567,15 @@ function askCombination(){
             $('#plCostoWatt1').text(rspt.combinacionEconomica[0].totales.precio_watt + '$');
 
             //Page2_Result
+            var generacionMensual = rspt.combinacionEconomica[0].power.generacion[0];
+            var nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
+
             $('#plModeloPanel1').text(rspt.combinacionEconomica[0].paneles.nombrePanel);
             $('#plModeloInversor1').text(rspt.combinacionEconomica[0].inversores.nombreInversor);
-            //$('#plConsumoMensual1').text(rspt.combinacionEconomica[0].);
-            //$('#plGeneracionMensual1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plNuevoConsumoMensual1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plPorcentajeGeneracion1').text(rspt.combinacionEconomica[0]. + '$');
+            $('#plConsumoMensual1').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
+            $('#plGeneracionMensual1').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual1').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plPorcentajeGeneracion1').text(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
             //Page3_Result
             //$('#plPagoPromedioAnterior1').text(rspt.combinacionEconomica[0]. + '$');
@@ -576,12 +604,15 @@ function askCombination(){
             $('#plCostoWatt2').text(rspt.combinacionMediana[0].totales.precio_watt + '$');
 
             //Page2_Result
+            var generacionMensual = rspt.combinacionMediana[0].power.generacion[0];
+            var nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
+
             $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombrePanel);
             $('#plModeloInversor2').text(rspt.combinacionMediana[0].inversores.nombreInversor);
-            // $('#plConsumoMensual2').text(rspt.combinacionMediana[0].);
-            // $('#plGeneracionMensual2').text(rspt.combinacionMediana[0].);
-            // $('#plNuevoConsumoMensual2').text(rspt.combinacionMediana[0].);
-            // $('#plPorcentajeGeneracion2').text(rspt.combinacionMediana[0].);
+            $('#plConsumoMensual2').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
+            $('#plGeneracionMensual2').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual2').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plPorcentajeGeneracion2').text(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
             // $('#plPagoPromedioAnterior2').text(rspt.combinacionMediana[0].);
@@ -610,12 +641,16 @@ function askCombination(){
             $('#plCostoWatt3').text(rspt.combinacionOptima[0].totales.precio_watt + '$');
 
             //Page2_Result
+            var generacionMensual = rspt.combinacionOptima[0].power.generacion[0];
+            var nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
+
             $('#plModeloPanel3').text(rspt.combinacionOptima[0].paneles.nombrePanel);
             $('#plModeloInversor3').text(rspt.combinacionOptima[0].inversores.nombreInversor);
-            // $('#plConsumoMensual3').text(rspt.combinacionOptima[0].);
-            // $('#plGeneracionMensual3').text(rspt.combinacionOptima[0].);
-            // $('#plNuevoConsumoMensual3').text(rspt.combinacionOptima[0].);
-            // $('#plPorcentajeGeneracion3').text(rspt.combinacionOptima[0].);
+
+            $('#plConsumoMensual3').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
+            $('#plGeneracionMensual3').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual3').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plPorcentajeGeneracion3').text(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
             // $('#plPagoPromedioAnterior3').text(rspt.combinacionOptima[0].);
@@ -697,7 +732,7 @@ function askCombination(){
                     $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
                     $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
                     $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
-                    $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
+                    $('#inpPorcentGeneracion').val(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
                     //$('#inpPagoAnteriorProm').val(rspt.combinacionMediana[0]. + '$');
@@ -736,7 +771,7 @@ function askCombination(){
                     $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
                     $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
                     $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
-                    $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
+                    $('#inpPorcentGeneracion').val(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
                     //$('#inpPagoAnteriorProm').val(rspt.combinacionEconomica[0]. + '$');
@@ -814,74 +849,107 @@ function catchDataResults(){
     ///Falta implementar una validacion (esta debe de ser general, ya que esta funcion se implementara para las 3 posibles tipoCotizacion)
     var data = {};
 
-    /*#region Cliente */
-    idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    /*#region Consumo */
-    /* consumoMensual;
-    consumoAnual;
-    energiaNecesaria; */
-    /*#endregion Consumo */
-    /*#endregion Cliente */
-    /*#region Proyecto */
-    /*#region Panel */
-    nombrePanel = $('#inpModeloPanel').val();
-    marcaPanel = $('#inpMarcaPanelS').val();
-    cantidadPanel = $('#inpCantidadPaneles').val();
-    /*#endregion Panel */
-    /*#region Inversor */
-    nombreInversor = $('#inpModeloInversor').val();
-    marcaInversor = $('#inpMarcaInversorS').val();
-    cantidadInversor = $('#inpCantidadInvers').val();
-    /*#endregion Inversor */
-    /*#region Power */
-    /* consumosAnterior = $('#').val();
-    consumosNuevo = $('#').val();
-    porcentajeAhorr = $('#').val(); */
-    /*#endregion Power */
-    /*#region Totales */
-    costoTotalSinIVA = $('#inpCostProyectoSIVA').val();
-    costoTotalConIVA = $('#inpCostProyectoCIVA').val();
-    /*#endregion Totales */
-    /*#endregion Proyecto */
+    if($('#salvarCombinacion').prop('checked')){
+        idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+        combSeleccionada = $('#listConvinaciones').val();
+        dataCombinaciones = sessionStorage.getItem("arrayCombinaciones");
 
-    data = {
-        cliente: {
-            id: idCliente/* ,
-            consumo: {
-                consumoMensual: consumoMensual,
-                consumoAnual: consumoAnual,
-                energiaNecesaria: energiaNecesaria
-            } */
-        },
-        proyecto: {
-            panel: {
-                nombre: nombrePanel,
-                marca: marcaPanel,
-                cantidad: cantidadPanel
-            },
-            inversor: {
-                nombre: nombreInversor,
-                marca: marcaInversor,
-                cantidad: cantidadInversor
-            },
-            /* power: {
-                consumosAnteriores: consumosAnteriores,
-                consumosNuevos: consumosNuevos,
-                porcentajeAhorro: porcentajeAhorro,
+        data = {
+            _token: $("meta[name='csrf-token']").attr('content'),
+            idCliente: idCliente,
+            dataCombinaciones: dataCombinaciones,
+            combSeleccionada: combSeleccionada,
+            combinacionesPropuesta: true
+        };
 
-            }, */
-            totales: {
-                costoTotalSinIVA: costoTotalSinIVA,
-                costoTotalConIVA: costoTotalConIVA
-            }/* ,
-            financiamiento: {
+        
+    }   
+    else{
+        // /*#region Cliente */
+        // idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+        // /*#region Consumo */
+        // consumoMensual;
+        // consumoAnual;
+        // energiaNecesaria;
+        // /*#endregion Consumo */
+        // /*#endregion Cliente */
+        // /*#region Proyecto */
+        // /*#region Panel */
+        // nombrePanel = $('#inpModeloPanel').val();
+        // marcaPanel = $('#inpMarcaPanelS').val();
+        // cantidadPanel = $('#inpCantidadPaneles').val();
+        // /*#endregion Panel */
+        // /*#region Inversor */
+        // nombreInversor = $('#inpModeloInversor').val();
+        // marcaInversor = $('#inpMarcaInversorS').val();
+        // cantidadInversor = $('#inpCantidadInvers').val();
+        // /*#endregion Inversor */
+        // /*#region Power */
+        // consumosAnterior = $('#').val();
+        // consumosNuevo = $('#').val();
+        // porcentajeAhorr = $('#').val();
+        // /*#endregion Power */
+        // /*#region Totales */
+        // costoTotalSinIVA = $('#inpCostProyectoSIVA').val();
+        // costoTotalConIVA = $('#inpCostProyectoCIVA').val();
+        // /*#endregion Totales */
+        // /*#endregion Proyecto */
 
-            } */
-        }
-    };
+        // data = {
+        //     _token: $("meta[name='csrf-token']").attr('content'),
+        //     cliente: {
+        //         id: idCliente/* ,
+        //         consumo: {
+        //             consumoMensual: consumoMensual,
+        //             consumoAnual: consumoAnual,
+        //             energiaNecesaria: energiaNecesaria
+        //         } */
+        //     },
+        //     proyecto: {
+        //         panel: {
+        //             nombre: nombrePanel,
+        //             marca: marcaPanel,
+        //             cantidad: cantidadPanel
+        //         },
+        //         inversor: {
+        //             nombre: nombreInversor,
+        //             marca: marcaInversor,
+        //             cantidad: cantidadInversor
+        //         },
+        //         /* power: {
+        //             consumosAnteriores: consumosAnteriores,
+        //             consumosNuevos: consumosNuevos,
+        //             porcentajeAhorro: porcentajeAhorro,
 
-    console.log('catchDataResults() says: ');
-    console.log(data);
+        //         }, */
+        //         totales: {
+        //             costoTotalSinIVA: costoTotalSinIVA,
+        //             costoTotalConIVA: costoTotalConIVA
+        //         }/* ,
+        //         financiamiento: {
+
+        //         }, */
+        //         combinacionesPropuesta: false
+        //     }
+        // };
+    }
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        type: 'POST',
+        url: '/PDFgenerate',
+        data: data,
+        dataType: 'json'
+    })
+    .fail(function(){
+        alert('Error al querer intentar datos del PDF al servidor');
+    })
+    .done(function(){
+
+    })
+    .always(function(){
+        sessionStorage.removeItem("arrayCombinaciones");
+    });
 }
 
 function limpiarResultados(limpiaResult){

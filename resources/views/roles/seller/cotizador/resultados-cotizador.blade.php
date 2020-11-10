@@ -111,11 +111,6 @@
                                                 <output id="rangeValuePropuesta"></output>%
                                             </div>
                                             <div class="form-group">
-                                                <label>Potencia </label>
-                                                <input id="inpSliderPotencia" type="range" min="0" max="100" class="slider" onchange="rangeValuePotencia.value=value">
-                                                <output id="rangeValuePotencia"></output>%
-                                            </div>
-                                            <div class="form-group">
                                                 <label>Descuento </label>
                                                 <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" onchange="rangeValueDescuento.value=value">
                                                 <output id="rangeValueDescuento"></output>%
@@ -816,6 +811,7 @@
             </div>
         </div>
     </div>
+
     <style>   
         .inpAnsw{
             border:0; 

@@ -110,8 +110,8 @@ class BajaTensionController extends Controller
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;
-		$arrayCompleto["tarifa"] = $request->tarifa;
 		$arrayCompleto["tipoCotizacion"] = "bajaTension";
+		$arrayCompleto["tarifa"] = $request->tarifa;
 
 		$response = $this->cotizacion->busquedaInteligente(['json' => $arrayCompleto]);
 		$response = response()->json($response);
