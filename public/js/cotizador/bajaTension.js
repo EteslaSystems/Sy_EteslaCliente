@@ -500,7 +500,7 @@ function calcularViaticosBT(){
         $('#inpCostProyectoMXN').val('$' +answ[0].totales.precioTotalMXN);
     })
     .always(function(){
-        sessionStorage.removeItem("ssObjConsumos")
+        //sessionStorage.removeItem("ssObjConsumos")
     });
 }
 /*#region Combinaciones (busqueda_inteligente)*/
@@ -948,7 +948,7 @@ function catchDataResults(){
 
     })
     .always(function(){
-        sessionStorage.removeItem("arrayCombinaciones");
+        //sessionStorage.removeItem("arrayCombinaciones");
     });
 }
 
