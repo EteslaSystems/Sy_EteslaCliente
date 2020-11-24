@@ -57,6 +57,9 @@ function chooseSwitch(){
             //Resetean dropdownlist
             $('#listConvinaciones').val(-1);
 
+            //Resetea boton/check "salvar_combinacion"
+            $('#salvarCombinacion').prop("checked", false);
+
             valor = 1;
         }
         else{
@@ -477,6 +480,9 @@ function calcularViaticosBT(){
     })
     .done(function(answ){
         var answ = answ.message;
+
+        sessionStorage.setItem("answPropuesta", JSON.stringify(answ));
+
         var objResp = sessionStorage.getItem("ssObjConsumos");
         objResp = JSON.parse(objResp);
 
@@ -861,77 +867,54 @@ function catchDataResults(){
             combSeleccionada: combSeleccionada,
             combinacionesPropuesta: true
         };
-
-        
     }   
     else{
-        // /*#region Cliente */
-        // idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-        // /*#region Consumo */
-        // consumoMensual;
-        // consumoAnual;
-        // energiaNecesaria;
-        // /*#endregion Consumo */
-        // /*#endregion Cliente */
-        // /*#region Proyecto */
-        // /*#region Panel */
-        // nombrePanel = $('#inpModeloPanel').val();
-        // marcaPanel = $('#inpMarcaPanelS').val();
-        // cantidadPanel = $('#inpCantidadPaneles').val();
-        // /*#endregion Panel */
-        // /*#region Inversor */
-        // nombreInversor = $('#inpModeloInversor').val();
-        // marcaInversor = $('#inpMarcaInversorS').val();
-        // cantidadInversor = $('#inpCantidadInvers').val();
-        // /*#endregion Inversor */
-        // /*#region Power */
-        // consumosAnterior = $('#').val();
-        // consumosNuevo = $('#').val();
-        // porcentajeAhorr = $('#').val();
-        // /*#endregion Power */
-        // /*#region Totales */
-        // costoTotalSinIVA = $('#inpCostProyectoSIVA').val();
-        // costoTotalConIVA = $('#inpCostProyectoCIVA').val();
-        // /*#endregion Totales */
-        // /*#endregion Proyecto */
+        var valListInvers = $('#listInversores').val();
 
-        // data = {
-        //     _token: $("meta[name='csrf-token']").attr('content'),
-        //     cliente: {
-        //         id: idCliente/* ,
-        //         consumo: {
-        //             consumoMensual: consumoMensual,
-        //             consumoAnual: consumoAnual,
-        //             energiaNecesaria: energiaNecesaria
-        //         } */
-        //     },
-        //     proyecto: {
-        //         panel: {
-        //             nombre: nombrePanel,
-        //             marca: marcaPanel,
-        //             cantidad: cantidadPanel
-        //         },
-        //         inversor: {
-        //             nombre: nombreInversor,
-        //             marca: marcaInversor,
-        //             cantidad: cantidadInversor
-        //         },
-        //         /* power: {
-        //             consumosAnteriores: consumosAnteriores,
-        //             consumosNuevos: consumosNuevos,
-        //             porcentajeAhorro: porcentajeAhorro,
+        if(valListInvers != -1){
+            var ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
+            
+            /*#region Cliente */
+            idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+            /*#region Consumo */
+            _consummo = sessionStorage.getItem("ssObjConsumos");
+            /*#endregion Consumo */
+            /*#endregion Cliente */
+            /*#region Proyecto */
+            /*#region Panel */
+            nombrePanel = $('#inpModeloPanel').val();
+            marcaPanel = $('#inpMarcaPanelS').val();
+            cantidadPanel = $('#inpCantidadPaneles').val();
+            /*#endregion Panel */
+            // /*#region Inversor */
+            // nombreInversor = $('#inpModeloInversor').val();
+            // marcaInversor = $('#inpMarcaInversorS').val();
+            // cantidadInversor = $('#inpCantidadInvers').val();
+            // /*#endregion Inversor */
+            // /*#region Power */
+            // // consumosAnterior = $('#').val();
+            // // consumosNuevo = $('#').val();
+            // /*#endregion Power */
+            // /*#region Totales */
+            // costoTotalSinIVA = $('#inpCostProyectoSIVA').val();
+            // costoTotalConIVA = $('#inpCostProyectoCIVA').val();
+            // /*#endregion Totales */
+            // /*#endregion Proyecto */
+        }
 
-        //         }, */
-        //         totales: {
-        //             costoTotalSinIVA: costoTotalSinIVA,
-        //             costoTotalConIVA: costoTotalConIVA
-        //         }/* ,
-        //         financiamiento: {
-
-        //         }, */
-        //         combinacionesPropuesta: false
-        //     }
-        // };
+        data = {
+            _token: $("meta[name='csrf-token']").attr('content'),
+            idCliente: idCliente,
+            proyecto: {
+                panel: {
+                    nombre: nombrePanel,
+                    marca: marcaPanel,
+                    cantidad: cantidadPanel
+                },
+                propuesta: ssObjPropuestaEquipoSeleccionado
+            },
+            combinacionesPropuesta: false
+        };
     }
 
     $.ajax({

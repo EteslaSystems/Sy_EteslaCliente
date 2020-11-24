@@ -178,6 +178,39 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row row-cols-2">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="i_garantia">{{ __('Garantia:') }}</label>
+
+                                <small class="note-form darkred">* Campo requerido</small>
+
+                                <input id="i_garantia" type="text" step="any" class="form-control" autofocus>
+
+                                @error('i_garantia')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="i_origen">{{ __('Origen:') }}</label>
+
+                                <small class="note-form darkred">* Campo requerido</small>
+
+                                <input id="i_origen" type="text" step="any" class="form-control" autofocus>
+
+                                @error('i_origen')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col text-center">

@@ -17,13 +17,22 @@ class CotizacionController extends Controller
     
     public function generatePDF(Request $request)
     {
-        $arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
-        $arrayCompleto["oficina"] = session('dataUsuario')->oficina;
-		$arrayCompleto["idCliente"] = $request->idCliente;
-		$arrayCompleto["dataCombinaciones"] = $request->dataCombinaciones;
-		$arrayCompleto["combSeleccionada"] = $request->combSeleccionada;
-		$arrayCompleto["combinacionesPropuesta"] = $request->combinacionesPropuesta;
-
+		if($request->combinacionesPropuesta === true){
+			$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
+			$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
+			$arrayCompleto["idCliente"] = $request->idCliente;
+			$arrayCompleto["dataCombinaciones"] = $request->dataCombinaciones;
+			$arrayCompleto["combSeleccionada"] = $request->combSeleccionada;
+			$arrayCompleto["combinacionesPropuesta"] = $request->combinacionesPropuesta;
+		}
+		else{
+			$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
+			$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
+			$arrayCompleto["idCliente"] = $request->idCliente;
+			$arrayCompleto["objProyecto"] = $request->proyecto;
+			$arrayCompleto["combinacionesPropuesta"] = $request->combinacionesPropuesta;
+		}
+		
 		$response = $this->cotizacion->generarPDF(['json' => $arrayCompleto]);
 		$response = response()->json($response);
 

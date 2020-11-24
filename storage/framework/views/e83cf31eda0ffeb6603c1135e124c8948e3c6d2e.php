@@ -200,7 +200,7 @@ unset($__errorArgs, $__bag); ?>
 			                        </div>
 			                    </div>
 
-			                    <div class="row row-cols-2">
+			                    <div class="row row-cols-3">
 			                        <div class="col">
 			                            <div class="form-group">
 			                                <label for="p_voc"><?php echo e(__('Voltaje en circuito abierto:')); ?></label>
@@ -229,24 +229,23 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 			                            </div>
-			                        </div>
-
-			                        <div class="col">
+									</div>
+									<div class="col">
 			                            <div class="form-group">
-			                                <label for="p_vmp"><?php echo e(__('Voltaje en máxima potencia:')); ?></label>
+			                                <label for="p_voc"><?php echo e(__('Garantia:')); ?></label>
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_vmp" type="number" step="any" class="form-control <?php $__errorArgs = ['p_vmp'];
+			                                <input id="p_voc" type="number" step="any" class="form-control <?php $__errorArgs = ['p_voc'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="p_vmp" value="<?php echo e($details->fVMP); ?>" autofocus>
+unset($__errorArgs, $__bag); ?>" name="p_voc" value="<?php echo e($details->vGarantia); ?>" autofocus>
 
-			                                <?php $__errorArgs = ['p_vmp'];
+			                                <?php $__errorArgs = ['p_voc'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -259,8 +258,69 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 			                            </div>
+									</div>
+									<div class="col">
+			                            <div class="form-group">
+			                                <label for="p_voc"><?php echo e(__('Origen:')); ?></label>
+
+			                                <small class="note-form darkred">* Campo requerido</small>
+
+			                                <input id="p_voc" type="number" step="any" class="form-control <?php $__errorArgs = ['p_voc'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="p_voc" value="<?php echo e($details->vOrigen); ?>" autofocus>
+
+			                                <?php $__errorArgs = ['p_voc'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+			                                <span class="invalid-feedback" role="alert">
+			                                    <strong><?php echo e($message); ?></strong>
+			                                </span>
+			                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+			                            </div>
+									</div>
+								</div>
+								
+								<div class="row row-cols-2">
+									<div class="col">
+										<div class="form-group">
+											<label for="p_vmp"><?php echo e(__('Voltaje en máxima potencia:')); ?></label>
+
+											<small class="note-form darkred">* Campo requerido</small>
+
+											<input id="p_vmp" type="number" step="any" class="form-control <?php $__errorArgs = ['p_vmp'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="p_vmp" value="<?php echo e($details->fVMP); ?>" autofocus>
+
+											<?php $__errorArgs = ['p_vmp'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+											<span class="invalid-feedback" role="alert">
+												<strong><?php echo e($message); ?></strong>
+											</span>
+											<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+										</div>
 			                        </div>
-			                    </div>
+								</div>
 
 			                    <div class="row">
 			                        <div class="col text-center">

@@ -69,6 +69,8 @@ class PanelesController extends Controller
         $data["potencia"] = $request->get('p_potencia');
         $data["isc"] = $request->get('p_isc');
         $data["moneda"] = $request->get('p_tipomoneda');
+        $data["garantia"] = $request->get('p_garantia');
+        $data["origen"] = $request->get('p_origen');
         $data["voc"] = $request->get('p_voc');
         $data["vmp"] = $request->get('p_vmp');
 
@@ -92,6 +94,8 @@ class PanelesController extends Controller
         $data["potencia"] = $request->get('p_potencia');
         $data["isc"] = $request->get('p_isc');
         $data["moneda"] = $request->get('p_tipomoneda');
+        $data["garantia"] = $request->get('p_garantia');
+        $data["origen"] = $request->get('p_origen');
         $data["voc"] = $request->get('p_voc');
         $data["vmp"] = $request->get('p_vmp');
 

@@ -117,7 +117,7 @@
 			                        </div>
 			                    </div>
 
-			                    <div class="row row-cols-2">
+			                    <div class="row row-cols-3">
 			                        <div class="col">
 			                            <div class="form-group">
 			                                <label for="p_voc">{{ __('Voltaje en circuito abierto:') }}</label>
@@ -132,24 +132,56 @@
 			                                </span>
 			                                @enderror
 			                            </div>
-			                        </div>
-
-			                        <div class="col">
+									</div>
+									<div class="col">
 			                            <div class="form-group">
-			                                <label for="p_vmp">{{ __('Voltaje en máxima potencia:') }}</label>
+			                                <label for="p_garantia">{{ __('Garantia:') }}</label>
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_vmp" type="number" step="any" class="form-control @error('p_vmp') is-invalid @enderror" name="p_vmp" value="{{ $details->fVMP }}" autofocus>
+			                                <input id="p_garantia" type="number" step="any" class="form-control @error('p_voc') is-invalid @enderror" name="p_voc" value="{{ $details->vGarantia }}" autofocus>
 
-			                                @error('p_vmp')
+			                                @error('p_garantia')
 			                                <span class="invalid-feedback" role="alert">
 			                                    <strong>{{ $message }}</strong>
 			                                </span>
 			                                @enderror
 			                            </div>
+									</div>
+									<div class="col">
+			                            <div class="form-group">
+			                                <label for="p_origen">{{ __('Origen:') }}</label>
+
+			                                <small class="note-form darkred">* Campo requerido</small>
+
+			                                <input id="p_origen" type="number" step="any" class="form-control @error('p_voc') is-invalid @enderror" name="p_voc" value="{{ $details->vOrigen }}" autofocus>
+
+			                                @error('p_origen')
+			                                <span class="invalid-feedback" role="alert">
+			                                    <strong>{{ $message }}</strong>
+			                                </span>
+			                                @enderror
+			                            </div>
+									</div>
+								</div>
+								
+								<div class="row row-cols-2">
+									<div class="col">
+										<div class="form-group">
+											<label for="p_vmp">{{ __('Voltaje en máxima potencia:') }}</label>
+
+											<small class="note-form darkred">* Campo requerido</small>
+
+											<input id="p_vmp" type="number" step="any" class="form-control @error('p_vmp') is-invalid @enderror" name="p_vmp" value="{{ $details->fVMP }}" autofocus>
+
+											@error('p_vmp')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+											@enderror
+										</div>
 			                        </div>
-			                    </div>
+								</div>
 
 			                    <div class="row">
 			                        <div class="col text-center">

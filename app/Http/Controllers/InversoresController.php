@@ -69,6 +69,8 @@ class InversoresController extends Controller
         $data["potencia"] = $request->get('i_potencia');
         $data["isc"] = $request->get('i_isc');
         $data["moneda"] = $request->get('i_tipomoneda');
+        $data["garantia"] = $request->get('p_garantia');
+        $data["origen"] = $request->get('p_origen');
         $data["ivmin"] = $request->get('i_vmin');
         $data["ivmax"] = $request->get('i_vmax');
         $data["ipmin"] = $request->get('i_pmin');
@@ -94,6 +96,8 @@ class InversoresController extends Controller
         $data["potencia"] = $request->get('i_potencia');
         $data["isc"] = $request->get('i_isc');
         $data["moneda"] = $request->get('i_tipomoneda');
+        $data["garantia"] = $request->get('i_garantia');
+        $data["origen"] = $request->get('i_origen');
         $data["ivmin"] = $request->get('i_vmin');
         $data["ivmax"] = $request->get('i_vmax');
         $data["ipmin"] = $request->get('i_pmin');
