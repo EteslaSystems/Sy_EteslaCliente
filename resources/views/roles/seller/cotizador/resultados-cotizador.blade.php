@@ -64,7 +64,7 @@
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
-                                <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
+                                <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej" disabled><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
                             </div>
                             <!--Fin Seccion "Elegir un equipo" -->
                         </div>
@@ -107,7 +107,7 @@
                                         <div class="slidecontainer">
                                             <div class="form-group">
                                                 <label>Propuesta </label>
-                                                <input id="inpSliderPropuesta" type="range" min="0" max="100" class="slider" onchange="rangeValuePropuesta.value=value">
+                                                <input id="inpSliderPropuesta" type="range" min="0" max="200" class="slider" onchange="rangeValuePropuesta.value=value">
                                                 <output id="rangeValuePropuesta"></output>%
                                             </div>
                                             <div class="form-group">

@@ -84,6 +84,7 @@ class BajaTensionController extends Controller
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;
 		$arrayCompleto["tarifa"] = $request->tarifa;
+		$arrayCompleto["tipoCotizacion"] = "bajaTension";
 
 		$response = $this->cotizacion->sendPeriodsBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);

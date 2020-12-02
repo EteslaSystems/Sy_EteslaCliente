@@ -1,3 +1,4 @@
+var tarifaSelected = '';
 var dataCatchResults = [];
 
 $(function(){
@@ -11,7 +12,7 @@ function catchConsumption(){
     const dictionaryTarifas = {"1":1, "1a":1, "1b":1, "1c":1, "1d":1, "1e":1, "1f":1, "2":1, "IC":1};
     var consumos = 0;
     var _consumosBimestres = [];
-    tarifaSelected = $('#tarifa-actual').val().toString();
+    tarifaSelected = document.getElementById('tarifa-actual').value;
 
     if(dictionaryTarifas.hasOwnProperty(tarifaSelected) === true){
         for(var i=1; i<=6; i++)
@@ -354,13 +355,13 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
 
             if(xi === '-1' || xi === -1){
                 // /Tabla_oculta\
-                $('#cantidadInversores').html('');
-                $('#potenciaInversor').html('');
-                $('#potenciaMaximaInv').html('');
-                $('#potenciaNominalInv').html('');
-                $('#potenciaPicoInv').html('');
-                $('#porcentajeSobreDim').html('');
-                $('#precioInv').html('');
+                $('#cantidadInversores').html('').val('');
+                $('#potenciaInversor').html('').val('');
+                $('#potenciaMaximaInv').html('').val('');
+                $('#potenciaNominalInv').html('').val('');
+                $('#potenciaPicoInv').html('').val('');
+                $('#porcentajeSobreDim').html('').val('');
+                $('#precioInv').html('').val('');
                 $('#divTotalesProject').css("display","");
 
                 //Se bloquean botones de GenerarPDF y GuardarPropuesta
@@ -377,6 +378,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#txtCantidadPaneles').html('');
             }
             else{
+                //Se desbloquea boton de -PanelAjustePropuesta-
+                $('#listInversores').prop("disabled", false);
                 //Se desbloquean botones de GenerarPDF y GuardarPropuesta
                 $('#btnGuardarPropuesta').prop("disabled", false);
                 $('#btnGenerarEntregable').prop("disabled", false);
@@ -391,14 +394,14 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#inpCostTotalInversores').val(response[xi].precioTotalInversores);
 
                 //Inversores  - /Tabla_oculta\
-                $('#cantidadInversores').html(response[0].numeroDeInversores).val(response[0].numeroDeInversores);
-                $('#potenciaInversor').html(response[0].potenciaInversor + 'W').val(response[0].potenciaInversor);
-                $('#potenciaMaximaInv').html(response[0].potenciaMaximaInversor + 'W').val(response[0].potenciaMaximaInversor);
-                $('#potenciaNominalInv').html(response[0].potenciaNominalInversor + 'W').val(response[0].potenciaNominalInversor);
-                $('#potenciaPicoInv').html(response[0].potenciaPicoInversor + 'W').val(response[0].potenciaPicoInversor);
-                $('#porcentajeSobreDim').html(response[0].porcentajeSobreDimens + '%').val(response[0].porcentajeSobreDimens);
-                $('#precioInv').html(response[0].precioInversor + '$').val(response[0].precioInversor); 
-                $('#costoTotalInversores').html(response[0].precioTotalInversores + '$').val(response[0].precioTotalInversores);
+                $('#cantidadInversores').html(response[xi].numeroDeInversores).val(response[xi].numeroDeInversores);
+                $('#potenciaInversor').html(response[xi].potenciaInversor + 'W').val(response[xi].potenciaInversor);
+                $('#potenciaMaximaInv').html(response[xi].potenciaMaximaInversor + 'W').val(response[xi].potenciaMaximaInversor);
+                $('#potenciaNominalInv').html(response[xi].potenciaNominalInversor + 'W').val(response[xi].potenciaNominalInversor);
+                $('#potenciaPicoInv').html(response[xi].potenciaPicoInversor + 'W').val(response[xi].potenciaPicoInversor);
+                $('#porcentajeSobreDim').html(response[xi].porcentajeSobreDimens + '%').val(response[xi].porcentajeSobreDimens);
+                $('#precioInv').html(response[xi].precioInversor + '$').val(response[xi].precioInversor); 
+                $('#costoTotalInversores').html(response[xi].precioTotalInversores + '$').val(response[xi].precioTotalInversores);
 
 
                 ///Pintada de resultados - Inversor
@@ -413,7 +416,7 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
 }
 
 function calcularViaticosBT(){
-    var tarifaSelected = document.getElementById('tarifa-actual').value;
+    tarifaSelected = document.getElementById('tarifa-actual').value;
     var direccionCliente = document.getElementById('municipio').value;
     /*#region Se cargan las variables que se enviaran por la solicitud, a traves de la extraccion del val() del control/input que lo contiene*/
     /*Viaticos y Totales*/
@@ -427,7 +430,7 @@ function calcularViaticosBT(){
     var costoTotalPaneles = $('#costoTotalModulos').val();
     ///Inversor
     var potenciaInversor = $('#potenciaInversor').val();
-    var potenciaNominalInversor = $('#potenciaNominalInv').val();
+    var potenciaNominalInversor = $('#potenciaNominalInv').val();0
     var precioInversor = $('#precioInv').val();
     var potenciaMaximaInversor = $('#potenciaMaximaInv').val();
     var numeroDeInversores = $('#cantidadInversores').val();
@@ -504,6 +507,9 @@ function calcularViaticosBT(){
         $('#inpCostProyectoCIVA').val(answ[0].totales.precioMasIVA + '$');
         $('#inpCostPorWatt').val(answ[0].totales.precio_watt + '$');
         $('#inpCostProyectoMXN').val('$' +answ[0].totales.precioTotalMXN);
+        
+        ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
+        $('#rangeValuePropuesta').val(answ[0].power.porcentajePotencia);
     })
     .always(function(){
         //sessionStorage.removeItem("ssObjConsumos")
@@ -516,7 +522,7 @@ function askCombination(){
     var nuevoConsumoMensual = 0;
     var _consumos = catchConsumption();
     var direccionCliente = document.getElementById('municipio').value;
-    var tarifaSelected = document.getElementById('tarifa-actual').value;
+    tarifaSelected = document.getElementById('tarifa-actual').value;
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -941,19 +947,45 @@ function limpiarResultados(limpiaResult){
 
     if(limpiaResult == 0){
         /*Limpiar panel_result*/
-        $('#inpCostTotalPaneles').val('').text('');
+        $('#inpCostTotalPaneles').val('');
+        $('#potenciaModulo').val('');
+        $('#numeroModulos').val('');
+        $('#potenciaReal').val('');
+        $('#costoPorWatt').val('');
+        $('#costoEstructuras').val('');
+        $('#costoTotalModulos').val('');
+
         /*Limpiar estructuras_result*/
         $('#inpCostTotalEstructuras').val('').text('');
     }
     else{
         /*Limpiar inversor_result*/
-        $('#inpCostTotalInversores').val('').text('');
-        /*Limpiar viaticos_result*/
-        $('#inpCostoTotalViaticos').val('').text('');
-        /*Limpiar totales_result*/
-        $('#inpPrecio').val('').text('');
-        $('#inpPrecioIVA').val('').text('');
-        $('#inpPrecioMXN').val('').text('');
+        $('#inpCostTotalInversores').val('');
+        $('#potenciaInversor').val('');
+        $('#potenciaNominalInv').val('');
+        $('#precioInv').val('');
+        $('#potenciaMaximaInv').val('');
+        $('#cantidadInversores').val('');
+        $('#potenciaPicoInv').val('');
+        $('#porcentajeSobreDim').val('');
+        $('#costoTotalInversores').val('');
+        
+        /*Limpiar inputs de viaticos - totales*/
+        $('#inpCostoTotalViaticos').val('');
+
+        $('#inpPrecio').val('');
+        $('#inpPrecioIVA').val('');
+        $('#inpPrecioMXN').val('');
+
+        $('#inpConsumoMensual').val('');
+        $('#inpGeneracionMensual').val('');
+        $('#inpNuevoConsumoMensual').val('');
+        $('#inpPorcentGeneracion').val('');
+
+        $('#inpCostProyectoSIVA').val('');
+        $('#inpCostProyectoCIVA').val('');
+        $('#inpCostPorWatt').val('');
+        $('#inpCostProyectoMXN').val('');
     }
 }
 
