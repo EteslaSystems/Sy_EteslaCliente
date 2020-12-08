@@ -117,7 +117,7 @@
                                             </div>
                                         </div>
                                         <!-- Fin  del Panel de ajuste de cotizacion -->
-                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" disabled><strong>Modificar</strong></button>
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" onclick="regenerarPropuesta();" disabled><strong>Modificar</strong></button>
                                     </div>
                                 </div>
                             </div>

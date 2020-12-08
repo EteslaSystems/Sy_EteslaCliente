@@ -67,7 +67,7 @@ class APICotizacion extends GuzzleHttpRequest
     /*#region GENERAR_PDF*/
     public function generarPDF($request)
     {
-        /*return */ $this->post("pdf",$request);
+        return $this->post("pdf",$request);
     }
     /*#endregion*/
 }

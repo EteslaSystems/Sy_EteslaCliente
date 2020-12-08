@@ -495,7 +495,7 @@ function calcularViaticosBT(){
         //Se pintan los resultados del calculo de viaticos
         // /Interfaz_visible\
         promedioConsumoMensual = objResp[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
-        generacionMensual = answ[0].power.generacion[0];
+        generacionMensual = answ[0].power.generacion.promedioDeGeneracion;
         nuevoConsumoMensual = answ[0].power.nuevosConsumos[0];
 
         $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
@@ -510,9 +510,6 @@ function calcularViaticosBT(){
         
         ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
         $('#rangeValuePropuesta').val(answ[0].power.porcentajePotencia);
-    })
-    .always(function(){
-        //sessionStorage.removeItem("ssObjConsumos")
     });
 }
 /*#region Combinaciones (busqueda_inteligente)*/
@@ -579,7 +576,7 @@ function askCombination(){
             $('#plCostoWatt1').text(rspt.combinacionEconomica[0].totales.precio_watt + '$');
 
             //Page2_Result
-            var generacionMensual = rspt.combinacionEconomica[0].power.generacion[0];
+            var generacionMensual = rspt.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
 
             $('#plModeloPanel1').text(rspt.combinacionEconomica[0].paneles.nombrePanel);
@@ -616,7 +613,7 @@ function askCombination(){
             $('#plCostoWatt2').text(rspt.combinacionMediana[0].totales.precio_watt + '$');
 
             //Page2_Result
-            var generacionMensual = rspt.combinacionMediana[0].power.generacion[0];
+            var generacionMensual = rspt.combinacionMediana[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
 
             $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombrePanel);
@@ -653,7 +650,7 @@ function askCombination(){
             $('#plCostoWatt3').text(rspt.combinacionOptima[0].totales.precio_watt + '$');
 
             //Page2_Result
-            var generacionMensual = rspt.combinacionOptima[0].power.generacion[0];
+            var generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
 
             $('#plModeloPanel3').text(rspt.combinacionOptima[0].paneles.nombrePanel);
@@ -698,7 +695,7 @@ function askCombination(){
 
                     //Page2_Result
                     promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = rspt.combinacionOptima[0].power.generacion[0];
+                    generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
                     nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionOptima[0].paneles.nombrePanel);
@@ -736,7 +733,7 @@ function askCombination(){
 
                     //Page2_Result
                     promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = rspt.combinacionMediana[0].power.generacion[0];
+                    generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
                     nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionMediana[0].paneles.nombrePanel);
@@ -775,7 +772,7 @@ function askCombination(){
 
                     //Page2_Result
                     promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = rspt.combinacionEconomica[0].power.generacion[0];
+                    generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
                     nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionEconomica[0].paneles.nombrePanel);
@@ -862,6 +859,7 @@ function catchDataResults(){
     var data = {};
 
     if($('#salvarCombinacion').prop('checked')){
+        console.log('checked');
         idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
         combSeleccionada = $('#listConvinaciones').val();
         dataCombinaciones = sessionStorage.getItem("arrayCombinaciones");
@@ -875,6 +873,7 @@ function catchDataResults(){
         };
     }   
     else{
+        console.log('not checked');
         var valListInvers = $('#listInversores').val();
 
         if(valListInvers != -1){
@@ -927,17 +926,30 @@ function catchDataResults(){
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
         url: '/PDFgenerate',
-        data: data,
-        dataType: 'json'
+        dataType: 'json',
+        data: data
     })
-    .fail(function(){
+    .fail(function(err){
+        console.log('Error: '+JSON.stringify(err));
         alert('Error al querer intentar datos del PDF al servidor');
     })
-    .done(function(){
+    .done(function(pdfBase64){
+        /*#region Formating JSON to base64*/
+        pdfBase64 = pdfBase64.message;
+        pdfBase64 = JSON.stringify(pdfBase64); //String
+        pdfBase64 = btoa(pdfBase64); //base64
+        /*#endregion*/
 
-    })
-    .always(function(){
-        //sessionStorage.removeItem("arrayCombinaciones");
+        //Decode base64
+        // bin = atob(pdfBase64);
+
+        console.log('Generando pdf. . .');
+
+        //Show into new browserWindow
+        // let pdfWindow = window.open("");
+        // pdfWindow.document.write(
+        //     "<iframe width='100%' height='100%' src='data:application/pdf;base64, " +pdfBase64+ "'></iframe>"
+        // );
     });
 }
 
@@ -1013,4 +1025,8 @@ function salvarCombinacion(){
             valueLogic = 0;
         }
     });
+}
+
+function regenerarPropuesta(){
+    alert('regenerar propuesta');
 }
