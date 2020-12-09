@@ -937,7 +937,14 @@ function catchDataResults(){
         /*#region Formating JSON to base64*/
         pdfBase64 = pdfBase64.message;
         pdfBase64 = JSON.stringify(pdfBase64); //String
-        pdfBase64 = btoa(pdfBase64); //base64
+
+        console.log('pdfBase64 String: \n'+pdfBase64);
+
+        pdfBase64 = btoa(encodeURI(pdfBase64).replace(/%([0-9A-F]{2})/g, function (match, p1){
+            return String.fromCharCode('0x' + p1);
+        })); //base64
+
+        console.log('pdfBase64 Base64: \n'+pdfBase64);
         /*#endregion*/
 
         //Decode base64
@@ -946,10 +953,16 @@ function catchDataResults(){
         console.log('Generando pdf. . .');
 
         //Show into new browserWindow
-        // let pdfWindow = window.open("");
-        // pdfWindow.document.write(
-        //     "<iframe width='100%' height='100%' src='data:application/pdf;base64, " +pdfBase64+ "'></iframe>"
-        // );
+        var obj = document.createElement('object'); 
+        obj.style.width = '100%';
+        obj.style.height = '842pt';
+        obj.type = 'application/pdf';
+        obj.data = 'data:application/pdf;base64,' + [pdfBase64];
+        document.body.appendChild(obj);
+        /* let pdfWindow = window.open("");
+        pdfWindow.document.write(
+            "<iframe width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "'></iframe>"
+        ); */
     });
 }
 
