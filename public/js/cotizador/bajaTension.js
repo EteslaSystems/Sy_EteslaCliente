@@ -934,35 +934,35 @@ function catchDataResults(){
         alert('Error al querer intentar datos del PDF al servidor');
     })
     .done(function(pdfBase64){
-        /*#region Formating JSON to base64*/
         pdfBase64 = pdfBase64.message;
-        pdfBase64 = JSON.stringify(pdfBase64); //String
+        nombreArchivoPDF = pdfBase64.fileName;
+        pdfBase64 = pdfBase64.pdfBase64;
+        // pdfFile = atob(pdfBase64);
 
-        console.log('pdfBase64 String: \n'+pdfBase64);
-
-        pdfBase64 = btoa(encodeURI(pdfBase64).replace(/%([0-9A-F]{2})/g, function (match, p1){
-            return String.fromCharCode('0x' + p1);
-        })); //base64
-
-        console.log('pdfBase64 Base64: \n'+pdfBase64);
-        /*#endregion*/
-
-        //Decode base64
-        // bin = atob(pdfBase64);
-
+        console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
         console.log('Generando pdf. . .');
 
         //Show into new browserWindow
-        var obj = document.createElement('object'); 
-        obj.style.width = '100%';
-        obj.style.height = '842pt';
-        obj.type = 'application/pdf';
-        obj.data = 'data:application/pdf;base64,' + [pdfBase64];
-        document.body.appendChild(obj);
-        /* let pdfWindow = window.open("");
+        // var iFrameBlock = $("<iframe>").attr({
+        //     "id": "iframeShowPDF",
+        //     "src": pdfBase64,
+        //     "width": "100%",     
+        //     "height": "100%",
+        //     "frameborder": "0"
+        // });
+
+        // var aTag = $("<a>Download</a>").attr({
+        //     "href": pdfBase64,
+        //     "download": nombreArchivoPDF
+        // });
+
+        // $("#previewPDF").html(iFrameBlock);
+        // aTag.insertAfter($("#iframeShowPDF"));
+
+        let pdfWindow = window.open("");
         pdfWindow.document.write(
-            "<iframe width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "'></iframe>"
-        ); */
+            "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
+        );
     });
 }
 
