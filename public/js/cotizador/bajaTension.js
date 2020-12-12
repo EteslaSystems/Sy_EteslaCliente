@@ -128,8 +128,13 @@ function sendCotizacionBajaTension(){
         .done(function(respuesta){
             console.log(respuesta);
 
-            //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
-            getResultsView(respuesta);
+            if(respuesta.status == '500'){
+                alert('Error al intentar ejecutar su propuesta!');
+            }
+            else{
+                //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
+                getResultsView(respuesta);
+            }
         });
     }
 }
@@ -937,27 +942,9 @@ function catchDataResults(){
         pdfBase64 = pdfBase64.message;
         nombreArchivoPDF = pdfBase64.fileName;
         pdfBase64 = pdfBase64.pdfBase64;
-        // pdfFile = atob(pdfBase64);
 
         console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
         console.log('Generando pdf. . .');
-
-        //Show into new browserWindow
-        // var iFrameBlock = $("<iframe>").attr({
-        //     "id": "iframeShowPDF",
-        //     "src": pdfBase64,
-        //     "width": "100%",     
-        //     "height": "100%",
-        //     "frameborder": "0"
-        // });
-
-        // var aTag = $("<a>Download</a>").attr({
-        //     "href": pdfBase64,
-        //     "download": nombreArchivoPDF
-        // });
-
-        // $("#previewPDF").html(iFrameBlock);
-        // aTag.insertAfter($("#iframeShowPDF"));
 
         let pdfWindow = window.open("");
         pdfWindow.document.write(
