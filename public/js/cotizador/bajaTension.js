@@ -126,12 +126,16 @@ function sendCotizacionBajaTension(){
             alert('Al parecer hubo un error con la peticion AJAX de la cotizacion BajaTension');
         })
         .done(function(respuesta){
+            console.log('Paneles array says:\n');
             console.log(respuesta);
 
             if(respuesta.status == '500'){
                 alert('Error al intentar ejecutar su propuesta!');
             }
             else{
+                respuesta = respuesta.message;
+                //Se genera un sessionStorage que contendra un object sobre la Energia requerida y los consumos ya procesados
+                sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
                 //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
                 getResultsView(respuesta);
             }
@@ -142,11 +146,6 @@ function sendCotizacionBajaTension(){
 var _respuesta;
 
 function getResultsView(_respuesta){
-    _respuesta = _respuesta.message;
-
-    console.log('_respuesta says: ');
-    console.log(_respuesta);
-
     //Se trae la vista de *RESULTADOS* a la vista de *BAJA_TENSION*
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -444,8 +443,9 @@ function calcularViaticosBT(){
     var costoTotalInversores = $('#costoTotalInversores').val();
     /*#endregion*/
 
-    var consumptions = catchConsumption();
-    
+    var consumptions = sessionStorage.getItem("_consumsFormated");
+    console.log("_consumsFormated says:");
+    console.log(consumptions);
 
     objPeriodosGDMTH = {
         panel: {
@@ -519,9 +519,6 @@ function calcularViaticosBT(){
 }
 /*#region Combinaciones (busqueda_inteligente)*/
 function askCombination(){
-    var promedioConsumoMensual = 0;
-    var generacionMensual = 0;
-    var nuevoConsumoMensual = 0;
     var _consumos = catchConsumption();
     var direccionCliente = document.getElementById('municipio').value;
     tarifaSelected = document.getElementById('tarifa-actual').value;
