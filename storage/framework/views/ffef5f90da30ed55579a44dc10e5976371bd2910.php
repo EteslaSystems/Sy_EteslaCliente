@@ -107,17 +107,17 @@
                                         <div class="slidecontainer">
                                             <div class="form-group">
                                                 <label>Propuesta </label>
-                                                <input id="inpSliderPropuesta" type="range" min="0" max="200" class="slider" onchange="rangeValuePropuesta.value=value">
+                                                <input id="inpSliderPropuesta" type="range" min="0" max="200" class="slider" oninput="rangeValuePropuesta.value=inpSliderPropuesta.value" onchange="sliderModificarPropuesta();">
                                                 <output id="rangeValuePropuesta"></output>%
                                             </div>
                                             <div class="form-group">
                                                 <label>Descuento </label>
-                                                <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" onchange="rangeValueDescuento.value=value">
+                                                <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" value="0" oninput="rangeValueDescuento.value=inpSliderDescuento.value" onchange="sliderModificarPropuesta();">
                                                 <output id="rangeValueDescuento"></output>%
                                             </div>
                                         </div>
                                         <!-- Fin  del Panel de ajuste de cotizacion -->
-                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" onclick="regenerarPropuesta();" disabled><strong>Modificar</strong></button>
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" onclick="modificarPropuesta();" data-dismiss="modal" disabled><strong>Modificar</strong></button>
                                     </div>
                                 </div>
                             </div>

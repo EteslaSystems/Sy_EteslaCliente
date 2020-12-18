@@ -1,4 +1,3 @@
-var tarifaSelected = '';
 var dataCatchResults = [];
 
 $(function(){
@@ -100,50 +99,69 @@ function validarUsuarioCargado(direccion_Cliente){
 }
 /*#endregion*/
 /*#region Server*/
-function sendCotizacionBajaTension(){
+function sendCotizacionBajaTension(dataEdited){
     var direccionCliente = document.getElementById('municipio').value;
+    dataEdited = dataEdited || null;
     tarifaSelected = document.getElementById('tarifa-actual').value;
+    _consumos = catchConsumption();
+    newCotizacion = true; //Bandera para saber si la cotizacion que se esta ejecutando es nueva o es un "modificarPropuesta"
 
-    if(validarUsuarioCargado(direccionCliente) === true){
-        var _consumos = catchConsumption();
+    console.log('catchConsumpion() says: ');
+    console.log(_consumos);
 
-        console.log('catchConsumpion() says: ');
-        console.log(_consumos);
-
-        $.ajax({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'POST',
-            url: '/sendPeriodsBT',
-            data: {
-                "_token": $("meta[name='csrf-token']").attr('content'),
+    if(dataEdited === null){
+        if(validarUsuarioCargado(direccionCliente) === true){
+            data = { 
+                '_token': $("meta[name='csrf-token']").attr('content'),
                 'consumos': _consumos,
                 'direccionCliente': direccionCliente,
                 'tarifa': tarifaSelected
-            },
-            dataType: 'json'
-        })
-        .fail(function(){
-            alert('Al parecer hubo un error con la peticion AJAX de la cotizacion BajaTension');
-        })
-        .done(function(respuesta){
-            console.log('Paneles array says:\n');
-            console.log(respuesta);
-
-            if(respuesta.status == '500'){
-                alert('Error al intentar ejecutar su propuesta!');
-            }
-            else{
-                respuesta = respuesta.message;
-                //Se genera un sessionStorage que contendra un object sobre la Energia requerida y los consumos ya procesados
-                sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
-                //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
-                getResultsView(respuesta);
-            }
-        });
+            }; 
+        }
     }
-}
+    else{
+        data = {
+            '_token': $("meta[name='csrf-token']").attr('content'),
+            'consumos': _consumos,
+            'direccionCliente': direccionCliente,
+            'tarifa': tarifaSelected,
+            'porcentajePropuesta': dataEdited.porcentajePropuesta,
+            'porcentajeDescuento': dataEdited.porcentajeDescuento
+        };
 
-var _respuesta;
+        newCotizacion = 0;
+    }
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        type: 'POST',
+        url: '/sendPeriodsBT',
+        data: data,
+        dataType: 'json'
+    })
+    .fail(function(){
+        alert('Al parecer hubo un error con la peticion AJAX de la cotizacion BajaTension');
+    })
+    .done(function(respuesta){
+        console.log('Paneles array says:\n');
+        console.log(respuesta);
+
+        if(respuesta.status == '500'){
+            alert('Error al intentar ejecutar su propuesta!');
+        }
+        else{
+            if(newCotizacion === 0){
+                backToCotizacionBT();
+            }
+            
+            respuesta = respuesta.message;
+            //Se genera un sessionStorage que contendra un object sobre la Energia requerida y los consumos ya procesados
+            sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
+            //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
+            getResultsView(respuesta);
+        }
+    });
+}
 
 function getResultsView(_respuesta){
     //Se trae la vista de *RESULTADOS* a la vista de *BAJA_TENSION*
@@ -1024,6 +1042,23 @@ function salvarCombinacion(){
     });
 }
 
-function regenerarPropuesta(){
-    alert('regenerar propuesta');
+/*#region RegenerarPropuesta*/
+function sliderModificarPropuesta(){
+    if($('#btnModificarPropuesta').is(":disabled")){ //El boton de "modificar_propuesta" se encuentra inhabilitado
+        $('#btnModificarPropuesta').attr("disabled",false); //Se habilita el boton de "modificar_propuesta"
+    }
 }
+
+function modificarPropuesta(){
+    
+    porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
+    porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+
+    dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+
+    console.log('modificarPropuesta says: ');
+    console.log(dataPorcentajes);
+   
+    sendCotizacionBajaTension(dataPorcentajes);
+}
+/*#endregion*/
