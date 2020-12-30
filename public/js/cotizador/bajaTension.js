@@ -104,10 +104,6 @@ function sendCotizacionBajaTension(dataEdited){
     dataEdited = dataEdited || null;
     tarifaSelected = document.getElementById('tarifa-actual').value;
     _consumos = catchConsumption();
-    newCotizacion = true; //Bandera para saber si la cotizacion que se esta ejecutando es nueva o es un "modificarPropuesta"
-
-    console.log('catchConsumpion() says: ');
-    console.log(_consumos);
 
     if(dataEdited === null){
         if(validarUsuarioCargado(direccionCliente) === true){
@@ -128,8 +124,6 @@ function sendCotizacionBajaTension(dataEdited){
             'porcentajePropuesta': dataEdited.porcentajePropuesta,
             'porcentajeDescuento': dataEdited.porcentajeDescuento
         };
-
-        newCotizacion = 0;
     }
 
     $.ajax({
@@ -150,20 +144,29 @@ function sendCotizacionBajaTension(dataEdited){
             alert('Error al intentar ejecutar su propuesta!');
         }
         else{
-            if(newCotizacion === 0){
-                backToCotizacionBT();
+            console.log("un paso antes de mostrar la vista de resultados, says: ");
+            console.log(respuesta);
+
+            if(dataEdited === null){ //Propuesta nueva
+                respuesta = { respuesta: respuesta.message, nwdata: data };
+
+                //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
+                getResultsView(respuesta);
             }
-            
-            respuesta = respuesta.message;
-            //Se genera un sessionStorage que contendra un object sobre la Energia requerida y los consumos ya procesados
-            sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
-            //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
-            getResultsView(respuesta);
+            else{ //Propuesta editada
+                getVistaDeResultadosPropuestaModificada(respuesta);
+            }
         }
     });
 }
 
 function getResultsView(_respuesta){
+    nwdata = _respuesta.nwdata;
+    _respuesta = _respuesta.respuesta;
+
+    //Se genera un sessionStorage que contendra un object sobre la Energia requerida y los consumos ya procesados
+    sessionStorage.setItem("_consumsFormated",JSON.stringify(_respuesta[0]));
+
     //Se trae la vista de *RESULTADOS* a la vista de *BAJA_TENSION*
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -179,160 +182,96 @@ function getResultsView(_respuesta){
         $('#divResultCotizacionBT').css("display","");
         $('#divResult_bt').html(resultView);
 
-        //Main() - Combinaciones_SmartSearch
-        askCombination();
-
-        //Se carga dropDownList -Paneles-
-        fullDropDownListPaneles(_respuesta);
+        //Combinaciones_Propuesta
+        askCombination(nwdata);
 
         /////////SaveInSessionStorage
         sessionStorage.setItem("ssObjConsumos", JSON.stringify(_respuesta));
 
-        //Se pintan resultados de -Energia/Paneles_Requeridos-
-        //Consumo - /Tabla_oculta\
-        /* $('#consumoAnual').html(_respuesta[0].consumo.consumoAnual + 'W');
-        $('#potenciaNecesaria').html(_respuesta[0].consumo.potenciaNecesaria + 'W');
-        $('#promedioConsumo').html(_respuesta[0].consumo.promedioConsumo + 'W'); */
-
-        $('#listPaneles').change(function(){
-            $('#listInversores').val(-1);
-            var x = parseInt($('#listPaneles').val()); //Iteracion
-                        
-            if(x === '-1'  || x === -1){
-                // /Tabla_oculta\
-                $('#numeroModulos').html('');
-                $('#potenciaModulo').html('');
-                $('#potenciaReal').html('');
-                $('#precioModulo').html('');
-                $('#costoEstructuras').val('');
-
-                $('#inpCostTotalPaneles').val('');
-                $('#listInversores').prop("disabled", true);
-                $('#listInversores').val("-1");
-
-                //Se esconde pestania de : POWER
-                $('#navPower').css("display","none");
-                $('#power').css("display","none");
-
-                //Desaparece cantidad (numerito) de -Paneles y Estructuras-
-                $('#txtCantidadPaneles').html('');
-                $('#txtCantidadEstructuras').html('');
-
-                //Se limpian results de result_paneles
-                limpiarResultados(0);
-            }
-            else{
-                _potenciaReal = _respuesta[x].panel.potenciaReal;
-
-                // /Tabla_oculta\
-                $('#inpMarcaPanelS').val(_respuesta[x].panel.marca);
-
-                //Consumos
-                var promedioConsumoMensual = _respuesta[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
-                $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
-                //Paneles 
-                $('#inpModeloPanel').val(_respuesta[x].panel.nombre)
-                $('#numeroModulos').html(_respuesta[x].panel.noModulos).val(_respuesta[x].panel.noModulos);
-                $('#potenciaModulo').html(_respuesta[x].panel.potencia + 'W').val(_respuesta[x].panel.potencia);
-                $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
-                //$('#precioModulo').html(_respuesta[x].panel.precioPanel + '$').val(_respuesta[x].panel.precioPanel);
-                $('#costoEstructuras').html(_respuesta[x].panel.costoDeEstructuras + '$').val(_respuesta[x].panel.costoDeEstructuras);
-                $('#costoPorWatt').html(_respuesta[x].panel.costoPorWatt + '$').val(_respuesta[x].panel.costoPorWatt);
-                $('#costoTotalModulos').html(_respuesta[x].panel.costoTotalPaneles + '$').val(_respuesta[x].panel.costoTotalPaneles);
-                
-                //Pintada de resultados - Paneles
-                $('#inpCantidadPaneles').val(_respuesta[x].panel.noModulos);
-                $('#inpModeloPanel').val(_respuesta[x].panel.nombre);
-                $('#inpPotencia').val(_respuesta[x].panel.potenciaReal + 'Kw');
-
-                //Aparece cantidad (numerito) de -Paneles y Estructuras-
-                $('#txtCantidadPaneles').html('('+_respuesta[x].panel.noModulos+')');
-                $('#txtCantidadEstructuras').html('('+_respuesta[x].panel.noModulos+')');
-
-                $('#listInversores').prop("disabled", false);
-
-                //Se carga dropDownList -Inversores-
-                fullDropDownListInversoresSelectos(_potenciaReal);
-
-                //cargarPowerPageBT();
-                
-            }
-        });
+        //Se llenan los controles relacionados con la primera respuesta de la propuesta
+        llenarControlesConRespuesta_Paneles(_respuesta);
     });
 }
 
-function cargarPowerPageBT(){
-    /*[Hoja: POWER]*/
-    $.ajax({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        type: 'POST',
-        url: '/powerBT',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr('content'),
-            "arrayPeriodosGDMTH": arrayPeriodosGDMTH,
-            "porcentajePerdida": porcentajePerdida,
-            "potenciaReal": _potenciaReal
-        },
-        dataType: 'json'
-    })
-    .fail(function(){
-        alert('Error al intentar generar calculos de [Hoja: POWER]');
-    })
-    .done(function(resp){
-        resp = resp.message;
-        
-        console.log('[Hoja: POWER]');
-        console.log(resp);
+function llenarControlesConRespuesta_Paneles(_respuest){
+    var banderaLog = 0; //Sirve para saber si el dropDownListPaneles a sido llenado anteriormente [Correccion del bug: Se llenaba el dropDownListInversores, 2 veces y aparecian equipos de inversores, repetidos]
 
-        /* $('#tdProduccionAnualKwh').text(resp[0].arrayProduccionAnual[0].produccionAnualKwh);
-        $('#tdProduccionAnualMwh').text(resp[0].arrayProduccionAnual[0].produccionAnualMwh);
-        $('#tdTotalSinSolar').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalSinSolar);
-        $('#tdTotalConSolar').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].totalConSolar);
-        $('#tdAhorro').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroCifra);
-        $('#tdAhorroPorcentaje').text(resp[0].arrayPagosTotales[0].arrayTotalesAhorro[0].ahorroPorcentaje+'%');
-        
-        arrayResponse = resp[0].arrayPagosTotales[0].arrayPagosTotales;
+    //Se carga dropDownList -Paneles-
+    fullDropDownListPaneles(_respuest);
 
-        $('#listPagosTotales').change(function(){
-            valueListPagosTotales = $('#listPagosTotales').val();
+    $('#listPaneles').change(function(){
+        $('#listInversores').val(-1);
+        var x = parseInt($('#listPaneles').val()); //Iteracion
+                    
+        if(x === '-1'  || x === -1){
+            // /Tabla_oculta\
+            $('#numeroModulos').html('');
+            $('#potenciaModulo').html('');
+            $('#potenciaReal').html('');
+            $('#precioModulo').html('');
+            $('#costoEstructuras').val('');
 
-            for(var i=0; i<arrayResponse.length; i++){
-                if(valueListPagosTotales == "optSinSolar"){
-                    $('#inpEnergia'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.energia);
-                    $('#inpCapacidad'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.capacidad);
-                    $('#inpDistribucion'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.distribucion);
-                    $('#inpIVA'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.iva);
-                    $('#inpTotal'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].sinSolar.total);
-                }
-                else if(valueListPagosTotales == "optConSolar"){
-                    $('#inpTransmision'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.transmision);
-                    $('#inpEnergia'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.energia);
-                    $('#inpCapacidad'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.capacidad);
-                    $('#inpDistribucion'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.distribucion);
-                    $('#inpIVA'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.iva);
-                    $('#inpTotal'+i).text(resp[0].arrayPagosTotales[0].arrayPagosTotales[i].conSolar.total);
-                }
-                else{
-                    $('#inpTransmision'+i).text('');
-                    $('#inpEnergia'+i).text('');
-                    $('#inpCapacidad'+i).text('');
-                    $('#inpDistribucion'+i).text('');
-                    $('#inpIVA'+i).text('');
-                    $('#inpTotal'+i).text('');
-                }
-            }
-        }); */
+            $('#inpCostTotalPaneles').val('');
+            $('#listInversores').prop("disabled", true);
+            $('#listInversores').val("-1");
 
-        $('#navPower').css("display","");
-        $('#power').css("display","");
+            //Se esconde pestania de : POWER
+            $('#navPower').css("display","none");
+            $('#power').css("display","none");
+
+            //Desaparece cantidad (numerito) de -Paneles y Estructuras-
+            $('#txtCantidadPaneles').html('');
+            $('#txtCantidadEstructuras').html('');
+
+            //Se limpian results de result_paneles
+            limpiarResultados(0);
+        }
+        else{
+            _potenciaReal = _respuest[x].panel.potenciaReal;
+
+            // /Tabla_oculta\
+            $('#inpMarcaPanelS').val(_respuest[x].panel.marca);
+
+            //Consumos
+            var promedioConsumoMensual = _respuest[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
+            $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
+            //Paneles 
+            $('#inpModeloPanel').val(_respuest[x].panel.nombre)
+            $('#numeroModulos').html(_respuest[x].panel.noModulos).val(_respuest[x].panel.noModulos);
+            $('#potenciaModulo').html(_respuest[x].panel.potencia + 'W').val(_respuest[x].panel.potencia);
+            $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
+            //$('#precioModulo').html(_respuesta[x].panel.precioPanel + '$').val(_respuesta[x].panel.precioPanel);
+            $('#costoEstructuras').html(_respuest[x].panel.costoDeEstructuras + '$').val(_respuest[x].panel.costoDeEstructuras);
+            $('#costoPorWatt').html(_respuest[x].panel.costoPorWatt + '$').val(_respuest[x].panel.costoPorWatt);
+            $('#costoTotalModulos').html(_respuest[x].panel.costoTotalPaneles + '$').val(_respuest[x].panel.costoTotalPaneles);
+            
+            //Pintada de resultados - Paneles
+            $('#inpCantidadPaneles').val(_respuest[x].panel.noModulos);
+            $('#inpModeloPanel').val(_respuest[x].panel.nombre);
+            $('#inpPotencia').val(_respuest[x].panel.potenciaReal + 'Kw');
+
+            //Aparece cantidad (numerito) de -Paneles y Estructuras-
+            $('#txtCantidadPaneles').html('('+_respuest[x].panel.noModulos+')');
+            $('#txtCantidadEstructuras').html('('+_respuest[x].panel.noModulos+')');
+
+            $('#listInversores').prop("disabled", false);
+
+            //Se carga dropDownList -Inversores-
+            fullDropDownListInversoresSelectos(_potenciaReal);
+        }
     });
 }
 
 function fullDropDownListPaneles(_respuesta){
+    var dropDownListPaneles = $('#listPaneles');
+
+    //Se limpia dropDownListPaneles
+    dropDownListPaneles.empty();
+
     //DropDownList-Paneles
     for(var i=1; i<_respuesta.length; i++)
     {
-        $('#listPaneles').append(
+        dropDownListPaneles.append(
             $('<option/>', {
                 value: i,
                 text: _respuesta[i].panel.nombre
@@ -461,9 +400,11 @@ function calcularViaticosBT(){
     var costoTotalInversores = $('#costoTotalInversores').val();
     /*#endregion*/
 
-    var consumptions = sessionStorage.getItem("_consumsFormated");
-    console.log("_consumsFormated says:");
-    console.log(consumptions);
+    var consumptions = sessionStorage.getItem("_consumsFormated"); ///Formateado de consumos -> promedioMensual,Bimestral,Anual,etc
+    var descuento = sessionStorage.getItem("descuentoPropuesta") || 0;
+
+    console.log("calcular viaticos-descuentoPropuesta says:");
+    console.log(descuento);
 
     objPeriodosGDMTH = {
         panel: {
@@ -497,7 +438,8 @@ function calcularViaticosBT(){
             "arrayBTI": _cotizaViaticos,
             "direccionCliente": direccionCliente,
             "consumos": consumptions,
-            "tarifa": tarifaSelected
+            "tarifa": tarifaSelected,
+            "descuentoPropuesta": descuento
         },
         dataType: 'json'
     })
@@ -533,44 +475,34 @@ function calcularViaticosBT(){
         
         ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
         $('#rangeValuePropuesta').val(answ[0].power.porcentajePotencia);
+        //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
+        $('#rangeValueDescuento').val(answ[0].descuento);
     });
+    /*#endregion*/
 }
 /*#region Combinaciones (busqueda_inteligente)*/
-function askCombination(){
-    var _consumos = catchConsumption();
-    var direccionCliente = document.getElementById('municipio').value;
-    tarifaSelected = document.getElementById('tarifa-actual').value;
-
+function askCombination(nwData){
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
         url: '/askCombinations',
-        data: {
-            "_token": $("meta[name='csrf-token']").attr('content'),
-            "consumos": _consumos,
-            "direccionCliente": direccionCliente,
-            "tarifa": tarifaSelected
-        },
+        data: nwData,
         dataType: 'json'
     })
     .fail(function(){
         alert('Hubo un error al intentar solicitar la combinacion '+ixu.toString());
     })
     .done(function(rspt){
-        $('#listConvinaciones').prop("disabled", false); //Se desbloque DropDownList-Combinaciones
-        $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
-
         var rspt = rspt.message;
         rspt = rspt[0]; //Array de combinaciones
 
-        sessionStorage.setItem("arrayCombinaciones", JSON.stringify(rspt));
+        $('#listConvinaciones').prop("disabled", false); //Se desbloque DropDownList-Combinaciones
+        $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
+
+        // sessionStorage.setItem("arrayCombinaciones", JSON.stringify(rspt));
 
         console.log("Combinaciones says: ");
         console.log(rspt);
-
-        //////EXPERIMENTAL
-        $('#txArGuardaAr1').val(rspt);
-        /////EXPERIMENTAL
 
         var promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
 
@@ -849,7 +781,7 @@ function askCombination(){
     });
 }
 /*#endregion*/
-/*#endregion*/
+
 
 function generarEntregable(data){
 
@@ -954,9 +886,28 @@ function catchDataResults(){
         alert('Error al querer intentar datos del PDF al servidor');
     })
     .done(function(pdfBase64){
+        //Se activan los botones que generan el //QR || PDF//
+        $('#btnGenerarQrCode').prop("disabled",false);
+        $('#btnGenerarPdfFileViewer').prop("disabled",false);
+
+        //Se formatea la respuesta del ArchivoPDF_base64
         pdfBase64 = pdfBase64.message;
         nombreArchivoPDF = pdfBase64.fileName;
         pdfBase64 = pdfBase64.pdfBase64;
+
+        /*
+            1.-Abrir un modal en donde te extienda las opciones de -QR Code- y -PdfFileView
+            
+            Nota: Si se selecciona el PDF Viewer, bloquear el boton una vez clickeado
+                  y cuando se cierre el modal, este boton regrese a la normalidad.
+        */        
+
+        $('#btnGenerarQrCode').on('click', function(){
+            var codigoQr = new QRCode("codigoQr");
+
+            codigoQr.makeCode();
+        });        
+
 
         console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
         console.log('Generando pdf. . .');
@@ -1050,15 +1001,29 @@ function sliderModificarPropuesta(){
 }
 
 function modificarPropuesta(){
-    
+    //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+    $("#listInversores").val('-1');
+    limpiarCampos();
+
+    //Cachar los valores de los porcentajes / panel de ajuste
     porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
     porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
 
+    //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
+    sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
+    //Se arma la data para editar la propuesta
     dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
-    console.log('modificarPropuesta says: ');
-    console.log(dataPorcentajes);
-   
+    //Se realiza nuevamente la propuesta
     sendCotizacionBajaTension(dataPorcentajes);
+}
+
+function getVistaDeResultadosPropuestaModificada(dataResp){
+    dataResp = dataResp.message; //Propuesta editada
+
+    console.log("getVistaDeResultadosPropuestaModificada says:");
+    console.log(dataResp);
+
+    llenarControlesConRespuesta_Paneles(dataResp);
 }
 /*#endregion*/

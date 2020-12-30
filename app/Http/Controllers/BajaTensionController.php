@@ -101,6 +101,7 @@ class BajaTensionController extends Controller
 		$arrayCompleto["arrayBTI"] = $request->arrayBTI;
 		$arrayCompleto["consumos"] = $request->consumos;
 		$arrayCompleto["tarifa"] = $request->tarifa;
+		$arrayCompleto["descuento"] = $request->descuentoPropuesta;
 
 		$response = $this->cotizacion->calcularViaticosBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);
