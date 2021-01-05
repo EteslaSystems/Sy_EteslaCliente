@@ -240,7 +240,6 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             $('#numeroModulos').html(_respuest[x].panel.noModulos).val(_respuest[x].panel.noModulos);
             $('#potenciaModulo').html(_respuest[x].panel.potencia + 'W').val(_respuest[x].panel.potencia);
             $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
-            //$('#precioModulo').html(_respuesta[x].panel.precioPanel + '$').val(_respuesta[x].panel.precioPanel);
             $('#costoEstructuras').html(_respuest[x].panel.costoDeEstructuras + '$').val(_respuest[x].panel.costoDeEstructuras);
             $('#costoPorWatt').html(_respuest[x].panel.costoPorWatt + '$').val(_respuest[x].panel.costoPorWatt);
             $('#costoTotalModulos').html(_respuest[x].panel.costoTotalPaneles + '$').val(_respuest[x].panel.costoTotalPaneles);
@@ -367,7 +366,7 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
 
                 ///Pintada de resultados - Inversor
                 $('#inpCantidadInvers').val(response[xi].numeroDeInversores);
-                $('#inpModeloInversor').val(response[xi].nombreInversor);
+                $('#inpModeloInversor').val(response[xi].vNombreMaterialFot);
 
                 //Se calculan viaticos
                 calcularViaticosBT();
@@ -499,7 +498,7 @@ function askCombination(nwData){
         $('#listConvinaciones').prop("disabled", false); //Se desbloque DropDownList-Combinaciones
         $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
 
-        // sessionStorage.setItem("arrayCombinaciones", JSON.stringify(rspt));
+        sessionStorage.setItem("arrayCombinaciones", JSON.stringify(rspt));
 
         console.log("Combinaciones says: ");
         console.log(rspt);
@@ -512,16 +511,17 @@ function askCombination(nwData){
             /*             --Combinacion Economica--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
-            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+rspt.combinacionEconomica[0].paneles.marca.toString()+".png");
+            $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+rspt.combinacionEconomica[0].inversores.vMarca.toString()+".png");
             /* __equipos__ */
             $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgInversor1').attr("src", "img/inversores/equipo/"+rspt.combinacionEconomica[0].inversores.vMarca.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle1').text("Combinacion economica");
             
             //Page1_Result
-            $('#plCantidadPaneles1').text(rspt.combinacionEconomica[0].paneles.cantidadPaneles);
+            $('#plPotenciaNecesaria1').text(rspt.combinacionEconomica[0].paneles.potenciaReal+'kw');
+            $('#plCantidadPaneles1').text(rspt.combinacionEconomica[0].paneles.noModulos);
             $('#plCantidadInversores1').text(rspt.combinacionEconomica[0].inversores.numeroDeInversores);
             $('#plCostoProyectoSIVA1').text(rspt.combinacionEconomica[0].totales.precio + '$');
             $('#plCostoProyectoCIVA1').text(rspt.combinacionEconomica[0].totales.precioMasIVA + '$');
@@ -531,34 +531,35 @@ function askCombination(nwData){
             var generacionMensual = rspt.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
 
-            $('#plModeloPanel1').text(rspt.combinacionEconomica[0].paneles.nombrePanel);
-            $('#plModeloInversor1').text(rspt.combinacionEconomica[0].inversores.nombreInversor);
+            $('#plModeloPanel1').text(rspt.combinacionEconomica[0].paneles.nombre);
+            $('#plModeloInversor1').text(rspt.combinacionEconomica[0].inversores.vNombreMaterialFot);
             $('#plConsumoMensual1').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual1').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
             $('#plNuevoConsumoMensual1').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
             $('#plPorcentajeGeneracion1').text(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
             //Page3_Result
-            //$('#plPagoPromedioAnterior1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plPagoPromedioNuevo1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plAhorroMensual1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plAhorroAnual1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plROIBruto1').text(rspt.combinacionEconomica[0]. + '$');
-            //$('#plROIDeduccion1').text(rspt.combinacionEconomica[0]. + '$');
+            $('#plPagoPromedioAnterior1').text('$'+rspt.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
+            $('#plPagoPromedioNuevo1').text('$'+rspt.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
+            $('#plAhorroMensual1').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
+            $('#plAhorroAnual1').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
+            //$('#plROIBruto1').text(rspt.combinacionEconomica[0].roi. + 'años');
+            //$('#plROIDeduccion1').text(rspt.combinacionEconomica[0].roi. + 'años');
 
             /*             --Combinacion Mediana--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
-            $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+rspt.combinacionMediana[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+rspt.combinacionMediana[0].paneles.marca.toString()+".png");
+            $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+rspt.combinacionMediana[0].inversores.vMarca.toString()+".png");
             /* __equipos__ */
             $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor2').attr("src", "img/inversores/equipo/"+rspt.combinacionMediana[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgInversor2').attr("src", "img/inversores/equipo/"+rspt.combinacionMediana[0].inversores.vMarca.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle2').text('Combinacion mediana');
             
             //Page1_Result
-            $('#plCantidadPaneles2').text(rspt.combinacionMediana[0].paneles.cantidadPaneles);
+            $('#plPotenciaNecesaria2').text(rspt.combinacionMediana[0].paneles.potenciaReal+'kw');
+            $('#plCantidadPaneles2').text(rspt.combinacionMediana[0].paneles.noModulos);
             $('#plCantidadInversores2').text(rspt.combinacionMediana[0].inversores.numeroDeInversores);
             $('#plCostoProyectoSIVA2').text(rspt.combinacionMediana[0].totales.precio + '$');
             $('#plCostoProyectoCIVA2').text(rspt.combinacionMediana[0].totales.precioMasIVA + '$');
@@ -568,34 +569,35 @@ function askCombination(nwData){
             var generacionMensual = rspt.combinacionMediana[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
 
-            $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombrePanel);
-            $('#plModeloInversor2').text(rspt.combinacionMediana[0].inversores.nombreInversor);
+            $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombre);
+            $('#plModeloInversor2').text(rspt.combinacionMediana[0].inversores.vNombreMaterialFot);
             $('#plConsumoMensual2').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual2').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
             $('#plNuevoConsumoMensual2').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
             $('#plPorcentajeGeneracion2').text(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
-            // $('#plPagoPromedioAnterior2').text(rspt.combinacionMediana[0].);
-            // $('#plPagoPromedioNuevo2').text(rspt.combinacionMediana[0].);
-            // $('#plAhorroMensual2').text(rspt.combinacionMediana[0].);
-            // $('#plAhorroAnual2').text(rspt.combinacionMediana[0].);
-            // $('#plROIBruto2').text(rspt.combinacionMediana[0].);
-            // $('#plROIDeduccion2').text(rspt.combinacionMediana[0].);
+            $('#plPagoPromedioAnterior2').text('$'+rspt.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
+            $('#plPagoPromedioNuevo2').text('$'+rspt.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
+            $('#plAhorroMensual2').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
+            $('#plAhorroAnual2').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
+            //$('#plROIBruto2').text(rspt.combinacionMediana[0].roi. + 'años');
+            //$('#plROIDeduccion2').text(rspt.combinacionMediana[0].roi. + 'años');
 
             /*             --Combinacion Optima--             */
             /* Se cargan imagenes de logos &&  equipos */
             /* __logos__ */
-            $('#imgLogoPanel3').attr("src", "img/paneles/logo/"+rspt.combinacionOptima[0].paneles.marcaPanel.toString()+".png");
-            $('#imgLogoInversor3').attr("src", "img/inversores/logo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".png");
+            $('#imgLogoPanel3').attr("src", "img/paneles/logo/"+rspt.combinacionOptima[0].paneles.marca.toString()+".png");
+            $('#imgLogoInversor3').attr("src", "img/inversores/logo/"+rspt.combinacionOptima[0].inversores.vMarca.toString()+".png");
             /* __equipos__ */
             $('#imgPanel3').attr("src", "img/paneles/equipo/panel.png");
-            $('#imgInversor3').attr("src", "img/inversores/equipo/"+rspt.combinacionOptima[0].inversores.marcaInversor.toString()+".jpg");
+            $('#imgInversor3').attr("src", "img/inversores/equipo/"+rspt.combinacionOptima[0].inversores.vMarca.toString()+".jpg");
             /* Se llenan labels_pills de data */
             $('#combinacionTitle3').text('Combinacion optima');
 
             //Page1_Result
-            $('#plCantidadPaneles3').text(rspt.combinacionOptima[0].paneles.cantidadPaneles);
+            $('#plPotenciaNecesaria3').text(rspt.combinacionOptima[0].paneles.potenciaReal+'kw');
+            $('#plCantidadPaneles3').text(rspt.combinacionOptima[0].paneles.noModulos);
             $('#plCantidadInversores3').text(rspt.combinacionOptima[0].inversores.numeroDeInversores);
             $('#plCostoProyectoSIVA3').text(rspt.combinacionOptima[0].totales.precio + '$');
             $('#plCostoProyectoCIVA3').text(rspt.combinacionOptima[0].totales.precioMasIVA + '$');
@@ -605,8 +607,8 @@ function askCombination(nwData){
             var generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
             var nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
 
-            $('#plModeloPanel3').text(rspt.combinacionOptima[0].paneles.nombrePanel);
-            $('#plModeloInversor3').text(rspt.combinacionOptima[0].inversores.nombreInversor);
+            $('#plModeloPanel3').text(rspt.combinacionOptima[0].paneles.nombre);
+            $('#plModeloInversor3').text(rspt.combinacionOptima[0].inversores.vNombreMaterialFot);
 
             $('#plConsumoMensual3').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual3').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
@@ -614,12 +616,12 @@ function askCombination(nwData){
             $('#plPorcentajeGeneracion3').text(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
-            // $('#plPagoPromedioAnterior3').text(rspt.combinacionOptima[0].);
-            // $('#plPagoPromedioNuevo3').text(rspt.combinacionOptima[0].);
-            // $('#plAhorroMensual3').text(rspt.combinacionOptima[0].);
-            // $('#plAhorroAnual3').text(rspt.combinacionOptima[0].);
-            // $('#plROIBruto3').text(rspt.combinacionOptima[0].);
-            // $('#plROIDeduccion3').text(rspt.combinacionOptima[0].);
+            $('#plPagoPromedioAnterior3').text('$'+rspt.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
+            $('#plPagoPromedioNuevo3').text('$'+rspt.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
+            $('#plAhorroMensual3').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
+            $('#plAhorroAnual3').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
+            //$('#plROIBruto3').text(rspt.combinacionOptima[0].roi. + 'años');
+            //$('#plROIDeduccion3').text(rspt.combinacionOptima[0].roi. + 'años');
         }
         else{
             alert('Error al intentar dotar los DIV de combinaciones');
@@ -636,9 +638,9 @@ function askCombination(nwData){
                     $('#inpTipoCombinacion0').val("optima");//Input oculto - combinacion_mediana
                     //Page1_Result
                     $('#inpPotencia').val(rspt.combinacionOptima[0].paneles.potenciaReal + 'kW');
-                    $('#inpMarcaPanelS').val(rspt.combinacionOptima[0].paneles.marcaPanel);
-                    $('#inpMarcaInversorS').val(rspt.combinacionOptima[0].inversores.marcaInversor);
-                    $('#inpCantidadPaneles').val(rspt.combinacionOptima[0].paneles.cantidadPaneles);
+                    $('#inpMarcaPanelS').val(rspt.combinacionOptima[0].paneles.marca);
+                    $('#inpMarcaInversorS').val(rspt.combinacionOptima[0].inversores.vMarca);
+                    $('#inpCantidadPaneles').val(rspt.combinacionOptima[0].paneles.noModulos);
                     $('#inpCantidadInvers').val(rspt.combinacionOptima[0].inversores.numeroDeInversores);
                     $('#inpCostProyectoSIVA').val(rspt.combinacionOptima[0].totales.precio  + '$');
                     $('#inpCostProyectoCIVA').val(rspt.combinacionOptima[0].totales.precioMasIVA  + '$');
@@ -650,20 +652,21 @@ function askCombination(nwData){
                     generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
                     nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
 
-                    $('#inpModeloPanel').val(rspt.combinacionOptima[0].paneles.nombrePanel);
-                    $('#inpModeloInversor').val(rspt.combinacionOptima[0].inversores.nombreInversor);
+                    $('#inpModeloPanel').val(rspt.combinacionOptima[0].paneles.nombre);
+                    $('#inpModeloInversor').val(rspt.combinacionOptima[0].inversores.vNombreMaterialFot);
                     $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
                     $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
                     $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    //$('#inpPagoAnteriorProm').val(rspt.combinacionOptima[0]. + '$');
-                    //$('#inpPagoNuevoProm').val(rspt.combinacionOptima[0]. + '$');
-                    //$('#inpAhorroMensual').val(rspt.combinacionOptima[0]. + '$');
-                    //$('#inpAhorroAnual').val(rspt.combinacionOptima[0]. + '$');
-                    //$('#inpROIBruto').val(rspt.combinacionOptima[0]. + 'años');
-                    //$('#inpROIDeduccion').val(rspt.combinacionOptima[0]. + 'años');
+                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').text(rspt.combinacionOptima[0].roi. + 'años');
+                    //$('#plROIDeduccion1').text(rspt.combinacionOptima[0].roi. + 'años');
+
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
                     //Boton_details
@@ -676,7 +679,7 @@ function askCombination(nwData){
                     $('#inpTipoCombinacion1').val("mediana");//Input oculto - combinacion_mediana
                     //Page1_Result
                     $('#inpPotencia').val(rspt.combinacionMediana[0].paneles.potenciaReal + 'kW');
-                    $('#inpCantidadPaneles').val(rspt.combinacionMediana[0].paneles.cantidadPaneles);
+                    $('#inpCantidadPaneles').val(rspt.combinacionMediana[0].paneles.noModulos);
                     $('#inpCantidadInvers').val(rspt.combinacionMediana[0].inversores.numeroDeInversores);
                     $('#inpCostProyectoSIVA').val(rspt.combinacionMediana[0].totales.precio + '$');
                     $('#inpCostProyectoCIVA').val(rspt.combinacionMediana[0].totales.precioMasIVA + '$');
@@ -688,20 +691,21 @@ function askCombination(nwData){
                     generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
                     nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
 
-                    $('#inpModeloPanel').val(rspt.combinacionMediana[0].paneles.nombrePanel);
-                    $('#inpModeloInversor').val(rspt.combinacionMediana[0].inversores.nombreInversor);
+                    $('#inpModeloPanel').val(rspt.combinacionMediana[0].paneles.nombre);
+                    $('#inpModeloInversor').val(rspt.combinacionMediana[0].inversores.vNombreMaterialFot);
                     $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
                     $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
                     $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    //$('#inpPagoAnteriorProm').val(rspt.combinacionMediana[0]. + '$');
-                    //$('#inpPagoNuevoProm').val(rspt.combinacionMediana[0]. + '$');
-                    //$('#inpAhorroMensual').val(rspt.combinacionMediana[0]. + '$');
-                    //$('#inpAhorroAnual').val(rspt.combinacionMediana[0]. + '$');
-                    //$('#inpROIBruto').val(rspt.combinacionMediana[0]. + 'años');
-                    //$('#inpROIDeduccion').val(rspt.combinacionMediana[0]. + 'años');
+                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').text(rspt.combinacionMediana[0].roi. + 'años');
+                    //$('#plROIDeduccion1').text(rspt.combinacionMediana[0].roi. + 'años');
+
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
                     //Boton_details
@@ -715,7 +719,7 @@ function askCombination(nwData){
                     
                     //Page1_Result
                     $('#inpPotencia').val(rspt.combinacionEconomica[0].paneles.potenciaReal + 'kW');
-                    $('#inpCantidadPaneles').val(rspt.combinacionEconomica[0].paneles.cantidadPaneles).val(rspt.combinacionEconomica[0].paneles.cantidadPaneles);
+                    $('#inpCantidadPaneles').val(rspt.combinacionEconomica[0].paneles.noModulos).val(rspt.combinacionEconomica[0].paneles.noModulos);
                     $('#inpCantidadInvers').val(rspt.combinacionEconomica[0].inversores.numeroDeInversores);
                     $('#inpCostProyectoSIVA').val(rspt.combinacionEconomica[0].totales.precio + '$');
                     $('#inpCostProyectoCIVA').val(rspt.combinacionEconomica[0].totales.precioMasIVA + '$');
@@ -728,19 +732,20 @@ function askCombination(nwData){
                     nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
 
                     $('#inpModeloPanel').val(rspt.combinacionEconomica[0].paneles.nombrePanel);
-                    $('#inpModeloInversor').val(rspt.combinacionEconomica[0].inversores.nombreInversor);
+                    $('#inpModeloInversor').val(rspt.combinacionEconomica[0].inversores.vNombreMaterialFot);
                     $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
                     $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
                     $('#inpNuevoConsumoMensual').val(nuevoConsumoMensual + 'kw(' + nuevoConsumoMensual * 2 + '/bim)');
                     $('#inpPorcentGeneracion').val(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    //$('#inpPagoAnteriorProm').val(rspt.combinacionEconomica[0]. + '$');
-                    //$('#inpPagoNuevoProm').val(rspt.combinacionEconomica[0]. + '$');
-                    //$('#inpAhorroMensual').val(rspt.combinacionEconomica[0]. + '$');
-                    //$('#inpAhorroAnual').val(rspt.combinacionEconomica[0]. + '$');
-                    //$('#inpROIBruto').val(rspt.combinacionEconomica[0]. + 'años');
-                    //$('#inpROIDeduccion').val(rspt.combinacionEconomica[0]. + 'años');
+                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').text(rspt.combinacionEconomica[0].roi. + 'años');
+                    //$('#plROIDeduccion1').text(rspt.combinacionEconomica[0].roi. + 'años');
+
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
                     //Boton_details
@@ -891,10 +896,10 @@ function catchDataResults(){
         $('#btnGenerarPdfFileViewer').prop("disabled",false);
 
         //Se formatea la respuesta del ArchivoPDF_base64
-        pdfBase64 = pdfBase64.message;
+        pdfBase64 = pdfBase64.message; //Respuesta de la API - JSON
         nombreArchivoPDF = pdfBase64.fileName;
-        pdfBase64 = pdfBase64.pdfBase64;
-
+        pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
+        archivoPDF = atob(pdfBase64); //Se convierte el base64 a archivo PDF
         /*
             1.-Abrir un modal en donde te extienda las opciones de -QR Code- y -PdfFileView
             
@@ -902,20 +907,23 @@ function catchDataResults(){
                   y cuando se cierre el modal, este boton regrese a la normalidad.
         */        
 
-        $('#btnGenerarQrCode').on('click', function(){
-            var codigoQr = new QRCode("codigoQr");
+        $('#btnGenerarQrCode').on('click', function(){ //Boton QR-Code
+            var codigoQr = new QRCode(document.getElementById("divQrCodeViewer"));
+            codigoQr.clear();
+            codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
 
-            codigoQr.makeCode();
-        });        
+            console.log('Generando codigo QR');
+        });         
 
+        $('#btnGenerarPdfFileViewer').on('click', function(){
+            let pdfWindow = window.open("");
+            pdfWindow.document.write(
+                "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
+            );
 
-        console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
-        console.log('Generando pdf. . .');
-
-        let pdfWindow = window.open("");
-        pdfWindow.document.write(
-            "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
-        );
+            console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
+            console.log('Generando pdf. . .');
+        });
     });
 }
 

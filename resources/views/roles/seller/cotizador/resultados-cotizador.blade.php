@@ -84,6 +84,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body row text-center">
+                                        <!-- Botones generan entregable -->
                                         <div class="col">
                                             <button id="btnGenerarQrCode" type="button" class="btn" data-toggle="modal" data-target="#modalQRCode" title="qr code generate" disabled><img src="https://img.icons8.com/cotton/48/000000/qr-code--v2.png"/></button>
                                             <p><strong>Codigo QR</strong></p>
@@ -92,6 +93,7 @@
                                             <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" disabled><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
                                             <p><strong>Archivo PDF</strong></p>
                                         </div>
+                                        <!-- Fin Botones generan entregable -->
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +101,7 @@
                         <!-- Fin Modal Opciones de generar propuesta -->
                         <!-- Modal Codigo Qr - Generado -->
                         <div id="modalQRCode" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                            <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -108,7 +110,7 @@
                                     </div>
                                     <div class="modal-body row text-center">
                                         <div id="divQrCodeViewer" class="col">
-
+                                            <!-- Aqui se visualiza el codigo QR -->
                                         </div>
                                         <div id="divLeyendaIndicacionesCodigoQr" class="col">
                                             <p>Para poder descargar el archivo PDF de tu propuesta, deberas leer el iguiente <strong>Código QR</strong>, con un escaner/lector. Este lo puedes encontrar integrado en la camara de tu smarthphone o en dado caso de no contar con uno, descargarlo de la galeria de aplicaciones de tu convenencia.</p>
@@ -867,7 +869,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
 <script src="{{ asset('js/cotizador/bajaTension.js') }}"></script>
 

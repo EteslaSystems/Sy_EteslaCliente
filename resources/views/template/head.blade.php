@@ -50,6 +50,8 @@
 <script src="{{ asset('js/cotizador/mediaTension/individual.js') }}"></script>
 <script src="{{ asset('js/cotizador/bajaTension.js') }}"></script>
 
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
 <script type="text/javascript">
     window.onload = function() {
         myAlert();
