@@ -17,7 +17,7 @@ class CotizacionController extends Controller
     
 	public function generatePDF(Request $request)
     {
-		if($request->combinacionesPropuesta = true){
+		if($request->combinacionesPropuesta == "true"){
 			$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
 			$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
 			$arrayCompleto["idCliente"] = $request->idCliente;

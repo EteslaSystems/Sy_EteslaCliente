@@ -359,19 +359,19 @@
                                                     <div class="col">
                                                         <div class="form-group row">
                                                             <label for="inpModeloPanel" class="col-sm-4 col-form-label">Modelo panel</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloPanel">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpModeloInversor" class="col-sm-4 col-form-label">Modelo inversor</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloInversor">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpConsumoMensual" class="col-sm-4 col-form-label">Consumo mensual</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpConsumoMensual">
                                                             </div>
                                                         </div>     
@@ -379,13 +379,13 @@
                                                     <div class="col">
                                                     <div class="form-group row">
                                                             <label for="inpGeneracionMensual" class="col-sm-4 col-form-label">Generación mensual</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpGeneracionMensual">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpNuevoConsumoMensual" class="col-sm-4 col-form-label">Nuevo consumo mensual</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpNuevoConsumoMensual">
                                                             </div>
                                                         </div> 

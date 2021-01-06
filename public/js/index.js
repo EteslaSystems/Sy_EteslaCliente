@@ -222,16 +222,16 @@ function buttonDetails(element){
             }
 
             if(iteracion == 0){
-                $('#'+tagModalResultSection+1).fadeOut("slow");
-                $('#'+tagModalResultSection+2).fadeOut("slow");
-                $('#'+tagModalResultSection+3).fadeOut("slow");
+                $('#'+tagModalResultSection+1).fadeOut();
+                $('#'+tagModalResultSection+2).fadeOut();
+                $('#'+tagModalResultSection+3).fadeOut();
 
                 banderaLogic++;
             }
             else{
-                $('#'+tagModalResultSection+1).fadeIn("slow");
-                $('#'+tagModalResultSection+2).fadeIn("slow");
-                $('#'+tagModalResultSection+3).fadeIn("slow");
+                $('#'+tagModalResultSection+1).fadeIn();
+                $('#'+tagModalResultSection+2).fadeIn();
+                $('#'+tagModalResultSection+3).fadeIn();
             }
 
             iteracion++;

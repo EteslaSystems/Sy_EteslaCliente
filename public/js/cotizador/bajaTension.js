@@ -241,8 +241,8 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             $('#potenciaModulo').html(_respuest[x].panel.potencia + 'W').val(_respuest[x].panel.potencia);
             $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
             $('#costoEstructuras').html(_respuest[x].panel.costoDeEstructuras + '$').val(_respuest[x].panel.costoDeEstructuras);
-            $('#costoPorWatt').html(_respuest[x].panel.costoPorWatt + '$').val(_respuest[x].panel.costoPorWatt);
-            $('#costoTotalModulos').html(_respuest[x].panel.costoTotalPaneles + '$').val(_respuest[x].panel.costoTotalPaneles);
+            $('#costoPorWatt').html(_respuest[x].panel.precioPorPanel + '$').val(_respuest[x].panel.precioPorPanel);
+            $('#costoTotalModulos').html(_respuest[x].panel.costoTotal + '$').val(_respuest[x].panel.costoTotal);
             
             //Pintada de resultados - Paneles
             $('#inpCantidadPaneles').val(_respuest[x].panel.noModulos);
@@ -265,7 +265,7 @@ function fullDropDownListPaneles(_respuesta){
     var dropDownListPaneles = $('#listPaneles');
 
     //Se limpia dropDownListPaneles
-    dropDownListPaneles.empty();
+    // dropDownListPaneles.empty();
 
     //DropDownList-Paneles
     for(var i=1; i<_respuesta.length; i++)
@@ -305,7 +305,7 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
             $('#listInversores').append(
                 $('<option/>', {
                     value: j,
-                    text: response[j].nombreInversor
+                    text: response[j].vNombreMaterialFot
                 })
             );
         }
@@ -351,17 +351,17 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#txtCantidadInversores').html('('+response[xi].numeroDeInversores+')');
 
                 //Se cargan los inputs de la vista
-                $('#inpCostTotalInversores').val(response[xi].precioTotalInversores);
+                $('#inpCostTotalInversores').val(response[xi].precioTotal);
 
                 //Inversores  - /Tabla_oculta\
                 $('#cantidadInversores').html(response[xi].numeroDeInversores).val(response[xi].numeroDeInversores);
-                $('#potenciaInversor').html(response[xi].potenciaInversor + 'W').val(response[xi].potenciaInversor);
-                $('#potenciaMaximaInv').html(response[xi].potenciaMaximaInversor + 'W').val(response[xi].potenciaMaximaInversor);
-                $('#potenciaNominalInv').html(response[xi].potenciaNominalInversor + 'W').val(response[xi].potenciaNominalInversor);
-                $('#potenciaPicoInv').html(response[xi].potenciaPicoInversor + 'W').val(response[xi].potenciaPicoInversor);
+                $('#potenciaInversor').html(response[xi].fPotencia + 'W').val(response[xi].fPotencia);
+                $('#potenciaMaximaInv').html(response[xi].iPMAX + 'W').val(response[xi].iPMAX);
+                $('#potenciaNominalInv').html(response[xi].potenciaNominal + 'W').val(response[xi].potenciaNominal);
+                $('#potenciaPicoInv').html(response[xi].potenciaPico + 'W').val(response[xi].potenciaPico);
                 $('#porcentajeSobreDim').html(response[xi].porcentajeSobreDimens + '%').val(response[xi].porcentajeSobreDimens);
-                $('#precioInv').html(response[xi].precioInversor + '$').val(response[xi].precioInversor); 
-                $('#costoTotalInversores').html(response[xi].precioTotalInversores + '$').val(response[xi].precioTotalInversores);
+                $('#precioInv').html(response[xi].fPrecio + '$').val(response[xi].fPrecio); 
+                $('#costoTotalInversores').html(response[xi].precioTotal + '$').val(response[xi].precioTotal);
 
 
                 ///Pintada de resultados - Inversor
@@ -378,8 +378,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
 function calcularViaticosBT(){
     tarifaSelected = document.getElementById('tarifa-actual').value;
     var direccionCliente = document.getElementById('municipio').value;
+
     /*#region Se cargan las variables que se enviaran por la solicitud, a traves de la extraccion del val() del control/input que lo contiene*/
-    /*Viaticos y Totales*/
     /*#region Datos requeridos para poder calcular viaticos y totales*/
     ///Panel
     var potenciaPanel = $('#potenciaModulo').val();
@@ -402,27 +402,24 @@ function calcularViaticosBT(){
     var consumptions = sessionStorage.getItem("_consumsFormated"); ///Formateado de consumos -> promedioMensual,Bimestral,Anual,etc
     var descuento = sessionStorage.getItem("descuentoPropuesta") || 0;
 
-    console.log("calcular viaticos-descuentoPropuesta says:");
-    console.log(descuento);
-
     objPeriodosGDMTH = {
         panel: {
-            potenciaPanel: potenciaPanel,
-            cantidadPaneles: cantidadPaneles,
+            potencia: potenciaPanel,
+            noModulos: cantidadPaneles,
             potenciaReal: potenciaReal,
             precioPorWatt: precioPorWatt,
             costoDeEstructuras: costoDeEstructuras,
-            costoTotalPaneles: costoTotalPaneles
+            costoTotal: costoTotalPaneles
         },
         inversor: {
-            potenciaInversor: potenciaInversor,
-            potenciaNominalInversor: potenciaNominalInversor,
-            precioInversor: precioInversor,
-            potenciaMaximaInversor: potenciaMaximaInversor,
+            fPotencia: potenciaInversor,
+            potenciaNominal: potenciaNominalInversor,
+            fPrecio: precioInversor,
+            iPMAX: potenciaMaximaInversor,
             numeroDeInversores: numeroDeInversores,
-            potenciaPicoInversor: potenciaPicoInversor,
+            potenciaPico: potenciaPicoInversor,
             porcentajeSobreDimens: porcentajeSobreDimens,
-            costoTotalInversores: costoTotalInversores
+            precioTotal: costoTotalInversores
         }
     }
 
@@ -457,7 +454,6 @@ function calcularViaticosBT(){
         console.log(answ);
 
         //Se pintan los resultados del calculo de viaticos
-        // /Interfaz_visible\
         promedioConsumoMensual = objResp[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
         generacionMensual = answ[0].power.generacion.promedioDeGeneracion;
         nuevoConsumoMensual = answ[0].power.nuevosConsumos[0];
@@ -472,6 +468,14 @@ function calcularViaticosBT(){
         $('#inpCostPorWatt').val(answ[0].totales.precio_watt + '$');
         $('#inpCostProyectoMXN').val('$' +answ[0].totales.precioTotalMXN);
         
+        //Se pintan los resultados del roi
+        $('#inpPagoAnteriorProm').val('$'+answ[0].roi.consumo.consumoBimestralPesosMXN);
+        $('#inpPagoNuevoProm').val('$'+answ[0].roi.generacion.nuevoPagoBimestral);
+        $('#inpAhorroMensual').val('$'+answ[0].roi.ahorro.ahorroMensualEnPesosMXN);
+        $('#inpAhorroAnual').val('$'+answ[0].roi.ahorro.ahorroAnualEnPesosMXN);
+        // $('#').val();
+        // $('#').val();
+        
         ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
         $('#rangeValuePropuesta').val(answ[0].power.porcentajePotencia);
         //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
@@ -479,6 +483,7 @@ function calcularViaticosBT(){
     });
     /*#endregion*/
 }
+
 /*#region Combinaciones (busqueda_inteligente)*/
 function askCombination(nwData){
     $.ajax({
@@ -507,7 +512,7 @@ function askCombination(nwData){
 
         /* Se pintan las combinaciones en el div_combinaciones */
         if(rspt.combinacionEconomica){
-
+            /* Pildoras_Modal */
             /*             --Combinacion Economica--             */
             /* Se cargan imagenes de logos && equipos */
             /* __logos__ */
@@ -660,12 +665,12 @@ function askCombination(nwData){
                     $('#inpPorcentGeneracion').val(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroMensual').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
-                    $('#inpAhorroAnual').text('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    //$('#plROIBruto1').text(rspt.combinacionOptima[0].roi. + 'años');
-                    //$('#plROIDeduccion1').text(rspt.combinacionOptima[0].roi. + 'años');
+                    $('#inpPagoAnteriorProm').val('$'+rspt.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').val('$'+rspt.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').val('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').val('$'+rspt.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').val(rspt.combinacionOptima[0].roi. + 'años');
+                    //$('#plROIDeduccion1').val(rspt.combinacionOptima[0].roi. + 'años');
 
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
@@ -699,12 +704,12 @@ function askCombination(nwData){
                     $('#inpPorcentGeneracion').val(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroMensual').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
-                    $('#inpAhorroAnual').text('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    //$('#plROIBruto1').text(rspt.combinacionMediana[0].roi. + 'años');
-                    //$('#plROIDeduccion1').text(rspt.combinacionMediana[0].roi. + 'años');
+                    $('#inpPagoAnteriorProm').val('$'+rspt.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').val('$'+rspt.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').val('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').val('$'+rspt.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').val(rspt.combinacionMediana[0].roi. + 'años');
+                    //$('#plROIDeduccion1').val(rspt.combinacionMediana[0].roi. + 'años');
 
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
@@ -739,12 +744,12 @@ function askCombination(nwData){
                     $('#inpPorcentGeneracion').val(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
                     //Page3_Result
-                    $('#inpPagoAnteriorProm').text('$'+rspt.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoProm').text('$'+rspt.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroMensual').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
-                    $('#inpAhorroAnual').text('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    //$('#plROIBruto1').text(rspt.combinacionEconomica[0].roi. + 'años');
-                    //$('#plROIDeduccion1').text(rspt.combinacionEconomica[0].roi. + 'años');
+                    $('#inpPagoAnteriorProm').val('$'+rspt.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
+                    $('#inpPagoNuevoProm').val('$'+rspt.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
+                    $('#inpAhorroMensual').val('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                    $('#inpAhorroAnual').val('$'+rspt.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
+                    //$('#plROIBruto1').val(rspt.combinacionEconomica[0].roi. + 'años');
+                    //$('#plROIDeduccion1').val(rspt.combinacionEconomica[0].roi. + 'años');
 
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "");
@@ -756,24 +761,8 @@ function askCombination(nwData){
                     $('#btnDetails').css("display","");
                 break;
                 default:
-                    //Paneles
-                    $('#inpPotencia').html('').val('');
-                    $('#inpPanelS').html('').val('');
-                    $('#inpMarcaPanelS').html('').val('');
-                    $('#inpCostTotalPaneles').html('').val('');
-                    $('#inpCostProyectoMXN').html('').val('');
-                    //Estructuras
-                    $('#inpCostTotalEstructuras').html('').val('');
-                    //Inversores
-                    $('#inpInversorS').html('').val('');
-                    $('#inpMarcaInversorS').html('').val('');
-                    $('#inpCostTotalInversores').html('').val('');
-                    //Viaticos
-                    $('#inpCostoTotalViaticos').html('').val('');
-                    //Totales
-                    $('#inpPrecio').html('').val('');
-                    $('#inpPrecioIVA').html('').val('');
-                    $('#inpPrecioMXN').html('').val('');
+                    //Limpiar campos de -resultado-
+                    limpiarCampos();
                     //Boton_salvar
                     $('#checkSalvarCombinacion').css("display", "none");
                     //Boton_details
@@ -833,35 +822,14 @@ function catchDataResults(){
         console.log('not checked');
         var valListInvers = $('#listInversores').val();
 
+        //Se valida que la dropDownListInversores no este vacia
         if(valListInvers != -1){
             var ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
-            
-            /*#region Cliente */
             idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-            /*#region Consumo */
-            _consummo = sessionStorage.getItem("ssObjConsumos");
-            /*#endregion Consumo */
-            /*#endregion Cliente */
-            /*#region Proyecto */
-            /*#region Panel */
+            // _consummo = sessionStorage.getItem("ssObjConsumos");
             nombrePanel = $('#inpModeloPanel').val();
             marcaPanel = $('#inpMarcaPanelS').val();
             cantidadPanel = $('#inpCantidadPaneles').val();
-            /*#endregion Panel */
-            // /*#region Inversor */
-            // nombreInversor = $('#inpModeloInversor').val();
-            // marcaInversor = $('#inpMarcaInversorS').val();
-            // cantidadInversor = $('#inpCantidadInvers').val();
-            // /*#endregion Inversor */
-            // /*#region Power */
-            // // consumosAnterior = $('#').val();
-            // // consumosNuevo = $('#').val();
-            // /*#endregion Power */
-            // /*#region Totales */
-            // costoTotalSinIVA = $('#inpCostProyectoSIVA').val();
-            // costoTotalConIVA = $('#inpCostProyectoCIVA').val();
-            // /*#endregion Totales */
-            // /*#endregion Proyecto */
         }
 
         data = {
@@ -899,7 +867,6 @@ function catchDataResults(){
         pdfBase64 = pdfBase64.message; //Respuesta de la API - JSON
         nombreArchivoPDF = pdfBase64.fileName;
         pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
-        archivoPDF = atob(pdfBase64); //Se convierte el base64 a archivo PDF
         /*
             1.-Abrir un modal en donde te extienda las opciones de -QR Code- y -PdfFileView
             
@@ -908,11 +875,11 @@ function catchDataResults(){
         */        
 
         $('#btnGenerarQrCode').on('click', function(){ //Boton QR-Code
-            var codigoQr = new QRCode(document.getElementById("divQrCodeViewer"));
-            codigoQr.clear();
-            codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
+            // var codigoQr = new QRCode(document.getElementById("divQrCodeViewer"));
+            // codigoQr.clear();
+            // codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
 
-            console.log('Generando codigo QR');
+            // console.log('Generando codigo QR');
         });         
 
         $('#btnGenerarPdfFileViewer').on('click', function(){
