@@ -360,8 +360,7 @@
                                                         <div class="form-group row">
                                                             <label for="inpModeloPanel" class="col-sm-4 col-form-label">Modelo panel</label>
                                                             <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloPanel">
-                                                            </div>
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloPanel">                                                            </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpModeloInversor" class="col-sm-4 col-form-label">Modelo inversor</label>

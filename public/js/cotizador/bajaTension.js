@@ -194,7 +194,7 @@ function getResultsView(_respuesta){
 }
 
 function llenarControlesConRespuesta_Paneles(_respuest){
-    var banderaLog = 0; //Sirve para saber si el dropDownListPaneles a sido llenado anteriormente [Correccion del bug: Se llenaba el dropDownListInversores, 2 veces y aparecian equipos de inversores, repetidos]
+    //var banderaLog = 0; //Sirve para saber si el dropDownListPaneles a sido llenado anteriormente [Correccion del bug: Se llenaba el dropDownListInversores, 2 veces y aparecian equipos de inversores, repetidos]
 
     //Se carga dropDownList -Paneles-
     fullDropDownListPaneles(_respuest);
@@ -236,7 +236,6 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             var promedioConsumoMensual = _respuest[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
             $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
             //Paneles 
-            $('#inpModeloPanel').val(_respuest[x].panel.nombre)
             $('#numeroModulos').html(_respuest[x].panel.noModulos).val(_respuest[x].panel.noModulos);
             $('#potenciaModulo').html(_respuest[x].panel.potencia + 'W').val(_respuest[x].panel.potencia);
             $('#potenciaReal').html(_potenciaReal + 'W').val(_potenciaReal);
@@ -247,6 +246,7 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             //Pintada de resultados - Paneles
             $('#inpCantidadPaneles').val(_respuest[x].panel.noModulos);
             $('#inpModeloPanel').val(_respuest[x].panel.nombre);
+            $('#inpMarcaPanel').val(_respuest[x].panel.marca);
             $('#inpPotencia').val(_respuest[x].panel.potenciaReal + 'Kw');
 
             //Aparece cantidad (numerito) de -Paneles y Estructuras-
@@ -254,6 +254,9 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             $('#txtCantidadEstructuras').html('('+_respuest[x].panel.noModulos+')');
 
             $('#listInversores').prop("disabled", false);
+
+            //Equipo seleccionado - Panel seleccionado
+            sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_respuest[x].panel));
 
             //Se carga dropDownList -Inversores-
             fullDropDownListInversoresSelectos(_potenciaReal);
@@ -368,6 +371,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 $('#inpCantidadInvers').val(response[xi].numeroDeInversores);
                 $('#inpModeloInversor').val(response[xi].vNombreMaterialFot);
 
+                //Equipo seleccionado - Inversor seleccionado
+                sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(response[xi]));
                 //Se calculan viaticos
                 calcularViaticosBT();
             }
@@ -379,48 +384,18 @@ function calcularViaticosBT(){
     tarifaSelected = document.getElementById('tarifa-actual').value;
     var direccionCliente = document.getElementById('municipio').value;
 
-    /*#region Se cargan las variables que se enviaran por la solicitud, a traves de la extraccion del val() del control/input que lo contiene*/
-    /*#region Datos requeridos para poder calcular viaticos y totales*/
-    ///Panel
-    var potenciaPanel = $('#potenciaModulo').val();
-    var cantidadPaneles = $('#numeroModulos').val();
-    var potenciaReal = $('#potenciaReal').val();
-    var precioPorWatt = $('#costoPorWatt').val();
-    var costoDeEstructuras = $('#costoEstructuras').val();
-    var costoTotalPaneles = $('#costoTotalModulos').val();
-    ///Inversor
-    var potenciaInversor = $('#potenciaInversor').val();
-    var potenciaNominalInversor = $('#potenciaNominalInv').val();0
-    var precioInversor = $('#precioInv').val();
-    var potenciaMaximaInversor = $('#potenciaMaximaInv').val();
-    var numeroDeInversores = $('#cantidadInversores').val();
-    var potenciaPicoInversor = $('#potenciaPicoInv').val();
-    var porcentajeSobreDimens = $('#porcentajeSobreDim').val();
-    var costoTotalInversores = $('#costoTotalInversores').val();
-    /*#endregion*/
+    //Equipos seleccionados
+    var sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
+    var ssinversor = sessionStorage.getItem('__ssInversorSeleccionado');
 
-    var consumptions = sessionStorage.getItem("_consumsFormated"); ///Formateado de consumos -> promedioMensual,Bimestral,Anual,etc
+    var consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
+    consumptions = JSON.parse(consumptions);
+    consumptions = consumptions.consumo;
     var descuento = sessionStorage.getItem("descuentoPropuesta") || 0;
 
     objPeriodosGDMTH = {
-        panel: {
-            potencia: potenciaPanel,
-            noModulos: cantidadPaneles,
-            potenciaReal: potenciaReal,
-            precioPorWatt: precioPorWatt,
-            costoDeEstructuras: costoDeEstructuras,
-            costoTotal: costoTotalPaneles
-        },
-        inversor: {
-            fPotencia: potenciaInversor,
-            potenciaNominal: potenciaNominalInversor,
-            fPrecio: precioInversor,
-            iPMAX: potenciaMaximaInversor,
-            numeroDeInversores: numeroDeInversores,
-            potenciaPico: potenciaPicoInversor,
-            porcentajeSobreDimens: porcentajeSobreDimens,
-            precioTotal: costoTotalInversores
-        }
+        panel: sspanel,
+        inversor: ssinversor
     }
 
     _cotizaViaticos.push(objPeriodosGDMTH);
@@ -481,7 +456,6 @@ function calcularViaticosBT(){
         //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
         $('#rangeValueDescuento').val(answ[0].descuento);
     });
-    /*#endregion*/
 }
 
 /*#region Combinaciones (busqueda_inteligente)*/
@@ -804,7 +778,7 @@ function catchDataResults(){
     ///Falta implementar una validacion (esta debe de ser general, ya que esta funcion se implementara para las 3 posibles tipoCotizacion)
     var data = {};
 
-    if($('#salvarCombinacion').prop('checked')){
+    if($('#salvarCombinacion').prop('checked')){///Combinaciones
         console.log('checked');
         idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
         combSeleccionada = $('#listConvinaciones').val();
@@ -818,7 +792,7 @@ function catchDataResults(){
             combinacionesPropuesta: true
         };
     }   
-    else{
+    else{///Equipo seleccionado
         console.log('not checked');
         var valListInvers = $('#listInversores').val();
 
@@ -826,25 +800,16 @@ function catchDataResults(){
         if(valListInvers != -1){
             var ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
             idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-            // _consummo = sessionStorage.getItem("ssObjConsumos");
-            nombrePanel = $('#inpModeloPanel').val();
-            marcaPanel = $('#inpMarcaPanelS').val();
-            cantidadPanel = $('#inpCantidadPaneles').val();
-        }
+            _consummo = sessionStorage.getItem("ssObjConsumos");
 
-        data = {
-            _token: $("meta[name='csrf-token']").attr('content'),
-            idCliente: idCliente,
-            proyecto: {
-                panel: {
-                    nombre: nombrePanel,
-                    marca: marcaPanel,
-                    cantidad: cantidadPanel
-                },
-                propuesta: ssObjPropuestaEquipoSeleccionado
-            },
-            combinacionesPropuesta: false
-        };
+            data = {
+                _token: $("meta[name='csrf-token']").attr('content'),
+                idCliente: idCliente,
+                consumos: _consummo,
+                propuesta: ssObjPropuestaEquipoSeleccionado,
+                combinacionesPropuesta: false
+            };
+        }
     }
 
     $.ajax({

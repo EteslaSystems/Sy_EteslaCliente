@@ -17,7 +17,7 @@ class CotizacionController extends Controller
     
 	public function generatePDF(Request $request)
     {
-		if($request->combinacionesPropuesta == "true"){
+		if($request->combinacionesPropuesta == "true"){ ///Combinacinoes
 			$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
 			$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
 			$arrayCompleto["idCliente"] = $request->idCliente;
@@ -25,11 +25,12 @@ class CotizacionController extends Controller
 			$arrayCompleto["combSeleccionada"] = $request->combSeleccionada;
 			$arrayCompleto["combinacionesPropuesta"] = $request->combinacionesPropuesta;
 		}
-		else{
+		else{///Equipo seleccionado
 			$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
 			$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
 			$arrayCompleto["idCliente"] = $request->idCliente;
-			$arrayCompleto["objProyecto"] = $request->proyecto;
+			$arrayCompleto["consumos"] = $request->consumos;
+			$arrayCompleto["propuesta"] = $request->propuesta;
 			$arrayCompleto["combinacionesPropuesta"] = $request->combinacionesPropuesta;
 		}
 		
