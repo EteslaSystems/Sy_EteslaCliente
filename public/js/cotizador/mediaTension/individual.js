@@ -131,23 +131,25 @@ function sendSingleQuotation(){
                     }
                 })
                 .done(function(respuesta){
+                    //Cotizacion individual
                     respuesta = respuesta.message;
                     console.log(respuesta);
     
-                    if(respuesta[0].paneles.cantidadPaneles != null || respuesta[0].paneles.cantidadPaneles > 0 && respuesta[0].inversores.numeroDeInversores > 0 || respuesta[0].inversor.numeroDeInversores != null)
+                    //respuesta[0].paneles.noModulos != null || respuesta[0].paneles.noModulos > 0 && respuesta[0].inversores.numeroDeInversores > 0 || respuesta[0].inversor.numeroDeInversores != null
+                    if(respuesta[0].paneles != null || respuesta[0].inversores != null)
                     {   
                         console.log('Entro 1');
                         /*Vaciar datos de la cotizacion_individual en la tabla*/
                         //Paneles
-                        $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotalPaneles + '$');
-                        $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.cantidadPaneles+')');
+                        $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotal + '$');
+                        $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.noModulos+')');
     
                         //Estructuras
                         respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
-                        $('#txtCantidadEstructurasInd').html('('+respuesta[0].paneles.cantidadEstructuras+')');
+                        // $('#txtCantidadEstructurasInd').html('('+respuesta[0].paneles.cantidadEstructuras+')');
     
                         //Inversores
-                        respuesta[0].inversores.costoTotalInversores != null ? $('#inpCostTotalInversores').val(respuesta[0].inversores.costoTotalInversores + '$') : $('#inpCostTotalInversores').val(0 + '$');
+                        respuesta[0].inversores.precioTotal != null ? $('#inpCostTotalInversores').val(respuesta[0].inversores.precioTotal + '$') : $('#inpCostTotalInversores').val(0 + '$');
                         respuesta[0].inversores.numeroDeInversores != null ? $('#txtCantidadInversoresInd').html('('+respuesta[0].inversores.numeroDeInversores+')') : $('#txtCantidadInversoresInd').html('(0)');
     
                         //Viaticos  

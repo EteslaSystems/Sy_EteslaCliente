@@ -130,7 +130,7 @@ class InversoresController extends Controller
 
     public function getInversoresSelectos(Request $request)
     {
-        $array["potenciaReal"] = $request->potenciaReal;
+        $array["objPanelSelect"] = $request->objPanelSelect;
         $vInversores = $this->inversores->inversores_selectos(['json' => $array]);
         $vInversores = response()->json($vInversores);
 

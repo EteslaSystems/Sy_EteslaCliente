@@ -259,7 +259,7 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_respuest[x].panel));
 
             //Se carga dropDownList -Inversores-
-            fullDropDownListInversoresSelectos(_potenciaReal);
+            fullDropDownListInversoresSelectos(_respuest[x].panel);
         }
     });
 }
@@ -282,14 +282,18 @@ function fullDropDownListPaneles(_respuesta){
     }
 }
 
-function fullDropDownListInversoresSelectos(_potenciaReal){
+function fullDropDownListInversoresSelectos(panelSeleccionao){
+    //Limpiar el dropdownlistinversores
+    $("#listInversores").empty();
+
+    //Mandar peticion con el inversor seleccionado
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         type: 'POST',
         url: '/inversoresSelectos',
         data: {
             "_token": $("meta[name='csrf-token']").attr('content'),
-            "potenciaReal": _potenciaReal
+            "objPanelSelect": panelSeleccionao
         },
         dataType: 'json'
     })
@@ -315,6 +319,8 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
         
         $('#listInversores').change(function(){
             var xi = $('#listInversores').val(); //Iteracion
+
+            limpiarResultados(1);
 
             if(xi === '-1' || xi === -1){
                 // /Tabla_oculta\
@@ -377,6 +383,17 @@ function fullDropDownListInversoresSelectos(_potenciaReal){
                 calcularViaticosBT();
             }
         });
+    });
+}
+
+function borrarDropDownListInversores(){
+    var ddlInversores = $('#listInversores');
+
+    ddlInversores.val(-1);
+    ddlInversores.each(function(index, valor){
+        if(index >= 1){
+            $(this).remove();
+        }
     });
 }
 
@@ -750,27 +767,16 @@ function askCombination(nwData){
 }
 /*#endregion*/
 
-
-function generarEntregable(data){
-
-}
-
-function guardarPropuesta(data){
-
-}
-
 //Logic - Resultados_propuesta
 function logicBtns_GP_GE(){ /* GP=>GuardarPropuesta, GE=>GenerarEntregable */
     $('#btnGuardarPropuesta').click(function(){
         catchDataResults();
-        // console.log(data);
-        // generarEntregable(data);
+        // console.log(data);|
     });
 
     $('#btnGenerarEntregable').click(function(){
         catchDataResults();
-        // console.log(data);
-        // generarEntregable(data);
+        // console.log(data);|
     });
 }
 
