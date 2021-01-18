@@ -135,6 +135,14 @@ function sendSingleQuotation(){
                     respuesta = respuesta.message;
                     console.log(respuesta);
 
+                    //Se guarda la *propuesta_calculada* en un SessionStorage
+                    sessionStorage.setItem('ssPropuestaIndividual', JSON.stringify(respuesta))
+
+                    /*#region Se desbloquean botones de "Guardar propuesta" y "Generar_PDF" */
+                    $('#btnGuardarPIndiv').attr("disabled",false);
+                    $('#btnGenerarPIndiv').attr("disabled",false);
+                    /*#endregion*/
+
                     if(respuesta[0].paneles != null){
                         //Paneles
                         $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotal + '$');
@@ -178,16 +186,6 @@ function validarUsuarioCargado(direccion_Cliente){
     }
 }
 
-function coti_dollars(){
-    document.getElementById('containerCI1').style.display = '';
-    document.getElementById('containerCI2').style.display = 'none';
-}
-
-function coti_mxn(){
-    document.getElementById('containerCI2').style.display = '';
-    document.getElementById('containerCI1').style.display = 'none';
-}
-
 //Logica_botones
 function configurationItems_modal(){
     $('#btnModalConfig').on("click",function(){
@@ -217,7 +215,27 @@ function changeValue_bInstalacion(){
     }
 }
 
-//Cotizador - Resultados (Crear un archivo JS y pasar el sig. bloque a ese archivo)
-function panelAjustesCotizacion(){
-    //$('#tblAjusteCotiMT');
+/*#region Generar entregable_propuesta (PDF)*/
+//"catchDataResult()->"
+function generarEntregable(){   
+    idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
+
+    data = { idCliente, ssPropuestaIndividual };
+
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        type: 'POST',
+        url: '/PDFgenerate',
+        dataType: 'json',
+        data: data
+    })
+    .fail(function(err){
+        console.log('Error: '+JSON.stringify(err));
+        alert('Error al querer intentar datos del PDF al servidor');
+    })
+    .done(function(pdfBase64){
+
+    });
 }
+/*#endregion*/

@@ -761,19 +761,7 @@ function askCombination(nwData){
 }
 /*#endregion*/
 
-//Logic - Resultados_propuesta
-function logicBtns_GP_GE(){ /* GP=>GuardarPropuesta, GE=>GenerarEntregable */
-    $('#btnGuardarPropuesta').click(function(){
-        catchDataResults();
-        // console.log(data);|
-    });
-
-    $('#btnGenerarEntregable').click(function(){
-        catchDataResults();
-        // console.log(data);|
-    });
-}
-
+//Generar PDF or QR-Code
 function catchDataResults(){
     ///Falta implementar una validacion (esta debe de ser general, ya que esta funcion se implementara para las 3 posibles tipoCotizacion)
     var data = {};
@@ -824,22 +812,19 @@ function catchDataResults(){
         alert('Error al querer intentar datos del PDF al servidor');
     })
     .done(function(pdfBase64){
+        //Se formatea la respuesta del pdfBase64
+        pdfBase64 = pdfBase64.message; //Respuesta de la API - JSON
+        nombreArchivoPDF = pdfBase64.fileName;
+        pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
+
         //Se activan los botones que generan el //QR || PDF//
         $('#btnGenerarQrCode').prop("disabled",false);
         $('#btnGenerarPdfFileViewer').prop("disabled",false);
 
-        //Se formatea la respuesta del ArchivoPDF_base64
-        pdfBase64 = pdfBase64.message; //Respuesta de la API - JSON
-        nombreArchivoPDF = pdfBase64.fileName;
-        pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
-        /*
-            1.-Abrir un modal en donde te extienda las opciones de -QR Code- y -PdfFileView
-            
-            Nota: Si se selecciona el PDF Viewer, bloquear el boton una vez clickeado
-                  y cuando se cierre el modal, este boton regrese a la normalidad.
-        */        
+        $('#btnGenerarQrCode').on('click', function(){ 
+            //Mostrar un QR-Code el cual redireccione a la descarga/visualizacion del pdfBase64 en pdfFile
 
-        $('#btnGenerarQrCode').on('click', function(){ //Boton QR-Code
+
             // var codigoQr = new QRCode(document.getElementById("divQrCodeViewer"));
             // codigoQr.clear();
             // codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
@@ -848,6 +833,7 @@ function catchDataResults(){
         });         
 
         $('#btnGenerarPdfFileViewer').on('click', function(){
+            //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
             let pdfWindow = window.open("");
             pdfWindow.document.write(
                 "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
