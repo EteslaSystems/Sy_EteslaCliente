@@ -44,7 +44,9 @@ class vendedorController extends Controller
 
 		if (gettype($consultarClientes) == "object") {
 			$consultarClientes = $consultarClientes->message;
-			return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
+
+			dd($consultarClientes);
+			// return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
 		}
 		return view('roles.seller.cotizador.misClientes');
 	}

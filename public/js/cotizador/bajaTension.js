@@ -3,7 +3,6 @@ var dataCatchResults = [];
 $(function(){
     chooseSwitch();
     salvarCombinacion();
-    logicBtns_GP_GE();
 });
 
 /*#region Logica_controles*/
@@ -519,13 +518,13 @@ function askCombination(nwData){
 
             //Page2_Result
             var generacionMensual = rspt.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
-            var nuevoConsumoMensual = rspt.combinacionEconomica[0].power.nuevosConsumos[0];
+            var nuevoConsumoBimestral = rspt.combinacionEconomica[0].power.nuevosConsumos.promedioConsumoBimestral;
 
             $('#plModeloPanel1').text(rspt.combinacionEconomica[0].paneles.nombre);
             $('#plModeloInversor1').text(rspt.combinacionEconomica[0].inversores.vNombreMaterialFot);
             $('#plConsumoMensual1').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual1').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-            $('#plNuevoConsumoMensual1').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual1').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
             $('#plPorcentajeGeneracion1').text(rspt.combinacionEconomica[0].power.porcentajePotencia + '%');
 
             //Page3_Result
@@ -557,13 +556,13 @@ function askCombination(nwData){
 
             //Page2_Result
             var generacionMensual = rspt.combinacionMediana[0].power.generacion.promedioDeGeneracion;
-            var nuevoConsumoMensual = rspt.combinacionMediana[0].power.nuevosConsumos[0];
+            var nuevoConsumoBimestral = rspt.combinacionMediana[0].nuevosConsumos.promedioConsumoBimestral;
 
             $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombre);
             $('#plModeloInversor2').text(rspt.combinacionMediana[0].inversores.vNombreMaterialFot);
             $('#plConsumoMensual2').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual2').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-            $('#plNuevoConsumoMensual2').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual2').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
             $('#plPorcentajeGeneracion2').text(rspt.combinacionMediana[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
@@ -595,14 +594,14 @@ function askCombination(nwData){
 
             //Page2_Result
             var generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-            var nuevoConsumoMensual = rspt.combinacionOptima[0].power.nuevosConsumos[0];
+            var nuevoConsumoBimestral = rspt.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
 
             $('#plModeloPanel3').text(rspt.combinacionOptima[0].paneles.nombre);
             $('#plModeloInversor3').text(rspt.combinacionOptima[0].inversores.vNombreMaterialFot);
 
             $('#plConsumoMensual3').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
             $('#plGeneracionMensual3').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-            $('#plNuevoConsumoMensual3').text(nuevoConsumoMensual + ' kw(' + nuevoConsumoMensual * 2 + '/bim)');
+            $('#plNuevoConsumoMensual3').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
             $('#plPorcentajeGeneracion3').text(rspt.combinacionOptima[0].power.porcentajePotencia + '%');
 
             // //Page3_Result
@@ -719,7 +718,7 @@ function askCombination(nwData){
                     //Page2_Result
                     promedioConsumoMensual = rspt._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                     generacionMensual = rspt.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                    nuevoConsumoBimestral = answ[0].power.nuevosConsumos.promedioConsumoBimestral;
+                    nuevoConsumoBimestral = rspt.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
 
                     $('#inpModeloPanel').val(rspt.combinacionEconomica[0].paneles.nombrePanel);
                     $('#inpModeloInversor').val(rspt.combinacionEconomica[0].inversores.vNombreMaterialFot);
@@ -821,7 +820,7 @@ function catchDataResults(){
         $('#btnGenerarQrCode').prop("disabled",false);
         $('#btnGenerarPdfFileViewer').prop("disabled",false);
 
-        $('#btnGenerarQrCode').on('click', function(){ 
+        // $('#btnGenerarQrCode').on('click', function(){ 
             //Mostrar un QR-Code el cual redireccione a la descarga/visualizacion del pdfBase64 en pdfFile
 
 
@@ -830,7 +829,7 @@ function catchDataResults(){
             // codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
 
             // console.log('Generando codigo QR');
-        });         
+        // });         
 
         $('#btnGenerarPdfFileViewer').on('click', function(){
             //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
