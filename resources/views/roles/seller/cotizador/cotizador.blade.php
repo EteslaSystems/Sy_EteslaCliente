@@ -27,9 +27,11 @@
                 <input type="search" class="form-control form-control-lg" id="inpSearchClient" name="inpSearchClient" list="clientes" placeholder="Busca a tu cliente.">
                 <datalist id="clientes"></datalist>
                 <template id="listtemplate">
+                @if(isset($consultarClientes))
                     @foreach($consultarClientes as $cliente)
                         <option value="{{$cliente->vNombrePersona}}&nbsp;{{$cliente->vPrimerApellido}}&nbsp;{{$cliente->vSegundoApellido}}" data-value="{{$cliente->idPersona}}"></option>
                     @endforeach
+                @endif
                 </template>
             </div>
         </div>

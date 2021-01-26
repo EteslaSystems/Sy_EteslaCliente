@@ -139,7 +139,7 @@
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_garantia" type="number" step="any" class="form-control @error('p_voc') is-invalid @enderror" name="p_voc" value="{{ $details->vGarantia }}" autofocus>
+			                                <input id="p_garantia" type="number" step="any" class="form-control @error('p_garantia') is-invalid @enderror" name="p_garantia" value="{{ $details->vGarantia }}" autofocus>
 
 			                                @error('p_garantia')
 			                                <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_origen" type="number" step="any" class="form-control @error('p_voc') is-invalid @enderror" name="p_voc" value="{{ $details->vOrigen }}" autofocus>
+			                                <input id="p_origen" type="text" step="any" class="form-control @error('p_origen') is-invalid @enderror" name="p_origen" value="{{ $details->vOrigen }}" autofocus>
 
 			                                @error('p_origen')
 			                                <span class="invalid-feedback" role="alert">

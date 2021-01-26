@@ -143,9 +143,6 @@ function sendCotizacionBajaTension(dataEdited){
             alert('Error al intentar ejecutar su propuesta!');
         }
         else{
-            console.log("un paso antes de mostrar la vista de resultados, says: ");
-            console.log(respuesta);
-
             if(dataEdited === null){ //Propuesta nueva
                 respuesta = { respuesta: respuesta.message, nwdata: data };
 
@@ -246,9 +243,6 @@ function llenarControlesConRespuesta_Paneles(_respuest){
 function fullDropDownListPaneles(_respuesta){
     var dropDownListPaneles = $('#listPaneles');
 
-    ////Limpiar dropdownlistPaneles
-    limpiarDropDownListPaneles();
-
     //DropDownList-Paneles
     for(var i=1; i<_respuesta.length; i++)
     {
@@ -263,20 +257,17 @@ function fullDropDownListPaneles(_respuesta){
 
 function limpiarDropDownListPaneles(){
     //Se borran los options
-    $('#listPaneles').children('option:not(:first)').remove();
+    $('#listPaneles').children('option:not(:first)').remove().end();
 
-    $('#listPaneles option').each(function(){
-        if($(this).val() != "-1"){
-            $(this).val('');
-        }
-    });
+    // $('#listPaneles option').each(function(){
+    //     if($(this).val() != "-1"){
+    //         $(this).val('');
+    //     }
+    // });
 }
 
 function fullDropDownListInversoresSelectos(panelSeleccionao){
     var ddlInversores = $('#listInversores');
-
-    //Limpiar el dropdownlistinversore
-    ddlInversores.children('option:not(:first)').remove();
 
     //Mandar peticion con el inversor seleccionado
     $.ajax({
@@ -293,6 +284,9 @@ function fullDropDownListInversoresSelectos(panelSeleccionao){
         alert('Hubo un error al intentar cargar el dropdownlist de Inversores-Selectos');
     })
     .done(function(response){
+        console.log('fullDropDownListInversores() [before] says:');
+        console.log(response);
+        
         var response = response.message;
 
         console.log('fullDropDownListInversores() says:');
@@ -379,13 +373,20 @@ function fullDropDownListInversoresSelectos(panelSeleccionao){
 }
 
 function limpiarDropDownListInversores(){
-    //Se borran los options
-    $('#listInversores').children('option:not(:first)').remove();
+    $('#listInversores')
+    .find('option')
+    .remove()
+    .end()
+    .append('<option value="-1">Hello world</option>')
+    .val('-1');
 
     //Se borran los values de los options
     // $('#listInversores option').each(function(){
     //     if($(this).val() != "-1"){
-    //         $(this).val('');
+    //         console.log('options of select: '+$(this).val());
+    //         $(this).val('').text('');
+
+    //         console.log('options of select[new_value]: '+$(this).val());
     //     }
     // });
 }
@@ -478,7 +479,7 @@ function askCombination(nwData){
         dataType: 'json'
     })
     .fail(function(){
-        alert('Hubo un error al intentar solicitar la combinacion '+ixu.toString());
+        alert('Hubo un error al intentar solicitar la combinacion ');
     })
     .done(function(rspt){
         var rspt = rspt.message;
@@ -556,7 +557,7 @@ function askCombination(nwData){
 
             //Page2_Result
             var generacionMensual = rspt.combinacionMediana[0].power.generacion.promedioDeGeneracion;
-            var nuevoConsumoBimestral = rspt.combinacionMediana[0].nuevosConsumos.promedioConsumoBimestral;
+            var nuevoConsumoBimestral = rspt.combinacionMediana[0].power.nuevosConsumos.promedioConsumoBimestral;
 
             $('#plModeloPanel2').text(rspt.combinacionMediana[0].paneles.nombre);
             $('#plModeloInversor2').text(rspt.combinacionMediana[0].inversores.vNombreMaterialFot);
@@ -923,6 +924,13 @@ function sliderModificarPropuesta(){
 
 function modificarPropuesta(){
     //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+    $('listInversores').val('-1');
+
+    //Se limpian los dropDownList de Paneles e Inversores
+    limpiarDropDownListPaneles();
+    limpiarDropDownListInversores();
+
+    //Se limpian inputs de -result- anterior
     limpiarCampos();
 
     //Cachar los valores de los porcentajes / panel de ajuste

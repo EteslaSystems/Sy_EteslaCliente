@@ -232,20 +232,20 @@ unset($__errorArgs, $__bag); ?>
 									</div>
 									<div class="col">
 			                            <div class="form-group">
-			                                <label for="p_voc"><?php echo e(__('Garantia:')); ?></label>
+			                                <label for="p_garantia"><?php echo e(__('Garantia:')); ?></label>
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_voc" type="number" step="any" class="form-control <?php $__errorArgs = ['p_voc'];
+			                                <input id="p_garantia" type="number" step="any" class="form-control <?php $__errorArgs = ['p_garantia'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="p_voc" value="<?php echo e($details->vGarantia); ?>" autofocus>
+unset($__errorArgs, $__bag); ?>" name="p_garantia" value="<?php echo e($details->vGarantia); ?>" autofocus>
 
-			                                <?php $__errorArgs = ['p_voc'];
+			                                <?php $__errorArgs = ['p_garantia'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -261,20 +261,20 @@ unset($__errorArgs, $__bag); ?>
 									</div>
 									<div class="col">
 			                            <div class="form-group">
-			                                <label for="p_voc"><?php echo e(__('Origen:')); ?></label>
+			                                <label for="p_origen"><?php echo e(__('Origen:')); ?></label>
 
 			                                <small class="note-form darkred">* Campo requerido</small>
 
-			                                <input id="p_voc" type="number" step="any" class="form-control <?php $__errorArgs = ['p_voc'];
+			                                <input id="p_origen" type="text" step="any" class="form-control <?php $__errorArgs = ['p_origen'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="p_voc" value="<?php echo e($details->vOrigen); ?>" autofocus>
+unset($__errorArgs, $__bag); ?>" name="p_origen" value="<?php echo e($details->vOrigen); ?>" autofocus>
 
-			                                <?php $__errorArgs = ['p_voc'];
+			                                <?php $__errorArgs = ['p_origen'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

@@ -27,9 +27,11 @@
                 <input type="search" class="form-control form-control-lg" id="inpSearchClient" name="inpSearchClient" list="clientes" placeholder="Busca a tu cliente.">
                 <datalist id="clientes"></datalist>
                 <template id="listtemplate">
+                <?php if(isset($consultarClientes)): ?>
                     <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($cliente->vNombrePersona); ?>&nbsp;<?php echo e($cliente->vPrimerApellido); ?>&nbsp;<?php echo e($cliente->vSegundoApellido); ?>" data-value="<?php echo e($cliente->idPersona); ?>"></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
                 </template>
             </div>
         </div>
