@@ -54,7 +54,7 @@
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
-                                    <select class="form-control" id="listPaneles">
+                                    <select class="form-control" id="listPaneles" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
