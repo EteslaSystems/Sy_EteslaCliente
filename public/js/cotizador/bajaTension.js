@@ -125,31 +125,34 @@ function sendCotizacionBajaTension(dataEdited){
         };
     }
 
-    $.ajax({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        type: 'POST',
-        url: '/sendPeriodsBT',
-        data: data,
-        dataType: 'json'
-    })
-    .fail(function(){
-        alert('Al parecer hubo un error con la peticion AJAX de la cotizacion BajaTension');
-    })
-    .done(function(respuesta){
-        if(respuesta.status == '500'){
-            alert('Error al intentar ejecutar su propuesta!');
-        }
-        else{
-            if(dataEdited === null){ //Propuesta nueva
-                respuesta = { respuesta: respuesta.message, nwdata: data };
-
-                //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
-                getResultsView(respuesta);
+    new Promise(function(resolve, reject){
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/sendPeriodsBT',
+            data: data,
+            dataType: 'json',
+            success: function(respuesta){
+                if(respuesta.status == '500'){
+                    alert('Error al intentar ejecutar su propuesta!');
+                }
+                else{
+                    if(dataEdited === null){ //Propuesta nueva
+                        respuesta = { respuesta: respuesta.message, nwdata: data };
+        
+                        //Se pinta vista de -resultados- y llena DropDownList de -Paneles-
+                        getResultsView(respuesta);
+                    }
+                    else{ //Propuesta editada
+        
+                        getVistaDeResultadosPropuestaModificada(respuesta);
+                    }
+                }
+            },
+            error: function(){
+                alert('Al parecer hubo un error con la peticion AJAX de la cotizacion BajaTension');
             }
-            else{ //Propuesta editada
-                getVistaDeResultadosPropuestaModificada(respuesta);
-            }
-        }
+        });
     });
 }
 
@@ -200,9 +203,8 @@ function llenarControlesConRespuesta_Paneles(_respuest){
             contador++;
             console.log('lista de paneles a cambiado '+contador);
     
-    
-            var x = parseInt($('#listPaneles').val()); //Iteracion
-    
+            var x = parseInt(ddlPaneles.val()); //Iteracion
+
             limpiarCampos();
                         
             if(x === '-1'  || x === -1){
@@ -210,9 +212,10 @@ function llenarControlesConRespuesta_Paneles(_respuest){
                 $('#listInversores').prop("disabled", true);
             }
             else{
+                $('listInversores').val(-1);
+
                 _potenciaReal = _respuest[x].panel.potenciaReal;
-    
-                // /Tabla_oculta\
+
                 $('#inpMarcaPanelS').val(_respuest[x].panel.marca);
     
                 //Consumos
@@ -246,6 +249,9 @@ function llenarControlesConRespuesta_Paneles(_respuest){
 function fullDropDownListPaneles(_respuesta){
     var dropDownListPaneles = $('#listPaneles');
 
+    //limpiar dropdownlist
+    limpiarDropDownListPaneles();
+
     //DropDownList-Paneles
     for(var i=1; i<_respuesta.length; i++)
     {
@@ -261,25 +267,20 @@ function fullDropDownListPaneles(_respuesta){
 
 function limpiarDropDownListPaneles(){
     //Se borran los options
-    $('#listPaneles').children('option:not(:first)').remove().end();
-
-    // $('#listPaneles option').each(function(){
-    //     if($(this).val() != "-1"){
-    //         $(this).val('');
-    //     }
-    // });
+    $('#listPaneles option').each(function(){
+        if($(this).val() != "-1"){
+            $(this).val('');
+            $(this).text('');
+            $(this).remove();
+        }
+    });
 }
 
 function fullDropDownListInversoresSelectos(panelSeleccionao){
-    // console.log('lo que llega a fullDropDownListInversoresSelectos: [before]');
-    // console.log(panelSeleccionao);
-
+    var ddlInversores = $('#listInversores');
     panelSeleccionao = panelSeleccionao[0];
 
-    // console.log('lo que llega a fullDropDownListInversoresSelectos: [after]');
-    // console.log(panelSeleccionao);
-
-    var ddlInversores = $('#listInversores');
+    limpiarDropDownListInversores();
 
     //Mandar peticion con el inversor seleccionado
     $.ajax({
@@ -372,9 +373,11 @@ function fullDropDownListInversoresSelectos(panelSeleccionao){
 }
 
 function limpiarDropDownListInversores(){
-    //Se borran los values de los options
+    //Se borran los options
     $('#listInversores option').each(function(){
         if($(this).val() != "-1"){
+            $(this).val('');
+            $(this).text('');
             $(this).remove();
         }
     });
@@ -419,6 +422,9 @@ function calcularViaticosBT(){
     })
     .done(function(answ){
         var answ = answ.message;
+
+        console.log('calcular viaticos, says: ');
+        console.log(answ);
 
         sessionStorage.setItem("answPropuesta", JSON.stringify(answ));
 
@@ -913,8 +919,8 @@ function modificarPropuesta(){
     $('listInversores').val('-1');
 
     //Se limpian los dropDownList de Paneles e Inversores
-    limpiarDropDownListPaneles();
-    limpiarDropDownListInversores();
+    // limpiarDropDownListPaneles();
+    // limpiarDropDownListInversores();
 
     //Se limpian inputs de -result- anterior
     limpiarCampos();
