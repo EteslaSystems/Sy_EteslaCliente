@@ -20,9 +20,8 @@
                             <div class="col-12 col-sm-12 col-md-3 fx-1">
                                 <label for="tarifa-actual" class="mn-1">Tarifa actual</label>
                             </div>
-
                             <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
-                                <select class="form-control" id="tarifa-actual">
+                                <select class="form-control" id="tarifa-actual" onchange="document.getElementById('btnCalcularPropuesta').disabled = false">
                                     <option disabled selected>Elige una opción:</option>
                                     <option value="IC">Industrial a Comercial</option>
                                     <option value="1">01 (Doméstico 500 kWh/bim)</option>
@@ -146,7 +145,7 @@
                 <br>
                 <div class="row justify-content-center" id="divBtnCalcularBT">
                     <div class="col-6 text-center">
-                        <button class="btn btn-success" onclick="sendCotizacionBajaTension();">Calcular</button>
+                        <button id="btnCalcularPropuesta" class="btn btn-success" onclick="calcularPropuestaBT(event);" disabled>Calcular</button>
                     </div>
                 </div>
                 <!--Termina formulario bajaTension -->

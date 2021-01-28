@@ -42,15 +42,22 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="{{ asset('js/alert-bootstrap.js') }}" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
 <script src="{{ asset('js/index.js') }}"></script> <!-- Este archivo es necesario para el CP y buscador -->
 <script src="{{ asset('js/log.js') }}"></script>
 <!--script src="{{ asset('js/cotizador/mediaTension/mediaTension.js') }}"></script-->
 <script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
 <script src="{{ asset('js/cotizador/mediaTension/GDMTO.js') }}"></script>
-<script src="{{ asset('js/cotizador/mediaTension/individual.js') }}"></script>
-<script src="{{ asset('js/cotizador/bajaTension.js') }}"></script>
+<script src="{{ asset('js/cotizador/individual/individual.js') }}"></script>
 
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<!-- En mantenimiento -->
+<script src="{{ asset('js/cotizador/bajaTension/bajaTension.js') }}"></script>
+<script src="{{ asset('js/cotizador/bajaTension/controles-bajatension.js') }}"></script>
+<!-- En mantenimiento -->
+
+
 
 <script type="text/javascript">
     window.onload = function() {

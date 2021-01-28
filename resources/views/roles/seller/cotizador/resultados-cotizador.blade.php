@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="custom-control custom-switch text-center pull-right">
-                                        <input type="checkbox" class="custom-control-input" id="switchConvEquip">
+                                        <input id="switchConvEquip" type="checkbox" class="custom-control-input" value="0" onclick="cambiarModalidad(this);">
                                         <label class="custom-control-label" for="switchConvEquip" id="lblSwitchConvEquip">Elegir equipo</label>
                                     </div>
                                 </div>
@@ -54,13 +54,13 @@
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
-                                    <select class="form-control" id="listPaneles" disabled>
+                                    <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado();" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
                                 <div class="form-row">
                                     <label>Inversor</label>
-                                    <select class="form-control" id="listInversores" disabled>
+                                    <select class="form-control" id="listInversores" onchange="mostrarInversorSeleccionado();"  disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -866,10 +866,12 @@
         }
     </style>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<!--
+script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
-<script src="{{ asset('js/cotizador/bajaTension.js') }}"></script>
+<script src="{{ asset('js/cotizador/bajaTension/bajaTension.js') }}"></script
+-->
 
 @section('scripts')
 <script type="text/javascript">
