@@ -16,10 +16,6 @@ async function calcularPropuestaBT(e, dataEdited){ ///Main()
         }
     }
 
-    //Se valida si la data a enviar al servidor no esta vacia
-    // if(data != null){
-        
-    // }
     if(dataEdited === null){ //Cotizacion nueva
         /* Enviar Propuesta - Manipular resultado */
         await pintarVistaDeResultados();
@@ -46,6 +42,7 @@ async function calcularPropuestaBT(e, dataEdited){ ///Main()
         await vaciarRespuestaPaneles(_cotizacionAjustada);
     }
 }
+
 /*#region Solicitudes al Servidor*/
 function enviarCotizacion(data){ //Paneles
     return new Promise((resolve, reject) => {
@@ -180,6 +177,26 @@ function calcularViaticosBT(){
         });
     });
 }
+
+function generarPDF(data){
+    return new Promise((resolve, reject)=>{
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/PDFgenerate',
+            dataType: 'json',
+            data: data,
+            success: function(pdfBase64){
+                pdfBase64 = pdfBase64.message; //Formating
+
+                resolve(pdfBase64);
+            },
+            error: function(error){
+                reject('Hubo un error al intentar generar el PDF: '+error);
+            }
+        });
+    });
+}
 /*#endregion*/
 /*#endregion*/
 /*#region Logica*/
@@ -234,7 +251,64 @@ function cacharDatosPropuesta(){
     return undefined;
 }
 
+async function catchDataResults(){
+    ///Falta implementar una validacion (esta debe de ser general, ya que esta funcion se implementara para las 3 posibles tipoCotizacion)
+    var data = {};
 
+    if($('#salvarCombinacion').prop('checked')){///Combinaciones
+        console.log('checked');
+        idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+        combSeleccionada = $('#listConvinaciones').val();
+        dataCombinaciones = sessionStorage.getItem("arrayCombinaciones");
+
+        data = {
+            _token: $("meta[name='csrf-token']").attr('content'),
+            idCliente: idCliente,
+            dataCombinaciones: dataCombinaciones,
+            combSeleccionada: combSeleccionada,
+            combinacionesPropuesta: true
+        };
+    }   
+    else{///Equipo seleccionado
+        console.log('not checked');
+        var valListInvers = $('#listInversores').val();
+
+        //Se valida que la dropDownListInversores no este vacia
+        if(valListInvers != -1){
+            var ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
+            idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+            _consummo = sessionStorage.getItem("_consumsFormated");
+
+            data = {
+                _token: $("meta[name='csrf-token']").attr('content'),
+                idCliente: idCliente,
+                consumos: _consummo,
+                propuesta: ssObjPropuestaEquipoSeleccionado,
+                combinacionesPropuesta: false
+            };
+        }
+    }
+
+    pdfBase64 = await generarPDF(data);
+    nombreArchivoPDF = pdfBase64.fileName;
+    pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
+
+    //Se activan los botones que generan el //QR || PDF//
+    // $('#btnGenerarQrCode').prop("disabled",false);
+    $('#btnGenerarPdfFileViewer').prop("disabled",false);
+
+    $('#btnGenerarPdfFileViewer').on('click',function(){
+        console.log('Generando pdf. . .');
+        //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
+        let pdfWindow = window.open("");
+        pdfWindow.document.write(
+            "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
+        );
+
+        console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
+        
+    });
+}
 
 
 
@@ -464,6 +538,7 @@ async function mostrarInversorSeleccionado(){
 
         //Equipo seleccionado - Inversor seleccionado
         sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(_inversores[ddlInversoresValue]));
+        
         //Se calculan viaticos
         _viaticos = await calcularViaticosBT();
         mostrarRespuestaViaticos(_viaticos);
@@ -883,5 +958,10 @@ function modificarPropuesta(){
 
     //Se realiza nuevamente la propuesta
     calcularPropuestaBT(null, dataPorcentajes);
+}
+
+function deshabilitarBotonesPDF(){
+    $('#btnGenerarQrCode').prop("disabled",true);
+    $('#btnGenerarPdfFileViewer').prop("disabled",true);
 }
 /*#endregion*/
