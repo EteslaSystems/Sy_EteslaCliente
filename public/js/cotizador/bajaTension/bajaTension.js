@@ -163,9 +163,10 @@ function calcularViaticosBT(){
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
                 "arrayBTI": _cotizarViaticos,
+                "direccionCliente": datosPropuesta.direccionCliente,
                 "consumos": consumptions,
-                "data": datosPropuesta,
-                "descuentoPropuesta": descuento
+                "tarifa": dataPropuesta.tarifa,
+                "descuentoPropuesta": dataPropuesta.porcentajeDescuento
             },
             dataType: 'json',
             success: function(resultViaticos){
