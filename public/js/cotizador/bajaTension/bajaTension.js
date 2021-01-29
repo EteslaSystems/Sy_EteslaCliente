@@ -155,6 +155,9 @@ function calcularViaticosBT(){
     objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor };
     _cotizarViaticos[0] = objEquiposSeleccionados;
 
+    //Se limpia el storage
+    sessionStorage.removeItem('answPropuesta');
+
     return new Promise((resolve, reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -170,6 +173,7 @@ function calcularViaticosBT(){
             },
             dataType: 'json',
             success: function(resultViaticos){
+                sessionStorage.setItem('answPropuesta',JSON.stringify(resultViaticos));
                 resolve(resultViaticos);
             },
             error: function(error){
