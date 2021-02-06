@@ -426,7 +426,7 @@ async function vaciarRespuestaInversores(resultInversores){
     limpiarDropDownListInversores();
 
     //DropDownList-Paneles
-    for(var i=1; i<resultInversores.length; i++)
+    for(var i=0; i<resultInversores.length; i++)
     {
         dropDownListInversores.append(
             $('<option/>', {
@@ -527,7 +527,14 @@ async function mostrarInversorSeleccionado(){
         $('#inpCostTotalInversores').val(_inversores[ddlInversoresValue].precioTotal);
 
         //Inversores  - /Tabla_oculta\
-        $('#cantidadInversores').html(_inversores[ddlInversoresValue].numeroDeInversores).val(_inversores[ddlInversoresValue].numeroDeInversores);
+        if(_inversores[ddlInversoresValue].combinacion === true){
+            $('#cantidadInversores').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+            $('#inpCantidadInvers').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+        }
+        else{
+            $('#cantidadInversores').html(_inversores[ddlInversoresValue].numeroDeInversores).val(_inversores[ddlInversoresValue].numeroDeInversores);
+            $('#inpCantidadInvers').val(_inversores[ddlInversoresValue].numeroDeInversores);
+        }
         $('#potenciaInversor').html(_inversores[ddlInversoresValue].fPotencia + 'W').val(_inversores[ddlInversoresValue].fPotencia);
         $('#potenciaMaximaInv').html(_inversores[ddlInversoresValue].iPMAX + 'W').val(_inversores[ddlInversoresValue].iPMAX);
         $('#potenciaNominalInv').html(_inversores[ddlInversoresValue].potenciaNominal + 'W').val(_inversores[ddlInversoresValue].potenciaNominal);
@@ -538,7 +545,6 @@ async function mostrarInversorSeleccionado(){
 
 
         ///Pintada de resultados - Inversor
-        $('#inpCantidadInvers').val(_inversores[ddlInversoresValue].numeroDeInversores);
         $('#inpModeloInversor').val(_inversores[ddlInversoresValue].vNombreMaterialFot);
 
         //Equipo seleccionado - Inversor seleccionado
@@ -636,6 +642,14 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpMarcaPanelS').val(combinaciones.combinacionOptima[0].paneles.marca);
                 $('#inpMarcaInversorS').val(combinaciones.combinacionOptima[0].inversores.vMarca);
                 $('#inpCantidadPaneles').val(combinaciones.combinacionOptima[0].paneles.noModulos);
+
+                if(combinaciones.combinacionOptima[0].inversores.combinacion === true){
+                    $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMen);
+                }
+                else{
+                    $('#inpCantidadInvers').val(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
+                }
+
                 $('#inpCantidadInvers').val(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionOptima[0].totales.precio  + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionOptima[0].totales.precioMasIVA  + '$');
@@ -675,7 +689,14 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 //Page1_Result
                 $('#inpPotencia').val(combinaciones.combinacionMediana[0].paneles.potenciaReal + 'kW');
                 $('#inpCantidadPaneles').val(combinaciones.combinacionMediana[0].paneles.noModulos);
-                $('#inpCantidadInvers').val(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
+
+                if(cantidadInversores.combinacion === true){
+                    $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMen);
+                }
+                else{
+                    $('#inpCantidadInvers').val(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
+                }
+                
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionMediana[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
@@ -715,7 +736,14 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 //Page1_Result
                 $('#inpPotencia').val(combinaciones.combinacionEconomica[0].paneles.potenciaReal + 'kW');
                 $('#inpCantidadPaneles').val(combinaciones.combinacionEconomica[0].paneles.noModulos).val(combinaciones.combinacionEconomica[0].paneles.noModulos);
-                $('#inpCantidadInvers').val(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
+
+                if(combinaciones.combinacionEconomica[0].inversores.combinacion === true){
+                    $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMen);
+                }
+                else{
+                    $('#inpCantidadInvers').val(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
+                }
+
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionEconomica[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
@@ -782,7 +810,14 @@ function vaciarCombinacionesEnModal(combinaciones){
     //Page1_Result
     $('#plPotenciaNecesaria1').text(combinaciones.combinacionEconomica[0].paneles.potenciaReal+'kw');
     $('#plCantidadPaneles1').text(combinaciones.combinacionEconomica[0].paneles.noModulos);
-    $('#plCantidadInversores1').text(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
+
+    if(combinaciones.combinacionEconomica[0].inversores.combinacion === true){
+        $('#plCantidadInversores1').text('QS1: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMen);
+    }
+    else{
+        $('#plCantidadInversores1').text(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
+    }
+
     $('#plCostoProyectoSIVA1').text(combinaciones.combinacionEconomica[0].totales.precio + '$');
     $('#plCostoProyectoCIVA1').text(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
     $('#plCostoWatt1').text(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
@@ -820,7 +855,14 @@ function vaciarCombinacionesEnModal(combinaciones){
     //Page1_Result
     $('#plPotenciaNecesaria2').text(combinaciones.combinacionMediana[0].paneles.potenciaReal+'kw');
     $('#plCantidadPaneles2').text(combinaciones.combinacionMediana[0].paneles.noModulos);
-    $('#plCantidadInversores2').text(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
+
+    if(combinaciones.combinacionMediana[0].inversores.combinacion === true){
+        $('#plCantidadInversores2').text('QS1: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMen);
+    }
+    else{
+        $('#plCantidadInversores2').text(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
+    }
+
     $('#plCostoProyectoSIVA2').text(combinaciones.combinacionMediana[0].totales.precio + '$');
     $('#plCostoProyectoCIVA2').text(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
     $('#plCostoWatt2').text(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
@@ -858,7 +900,14 @@ function vaciarCombinacionesEnModal(combinaciones){
     //Page1_Result
     $('#plPotenciaNecesaria3').text(combinaciones.combinacionOptima[0].paneles.potenciaReal+'kw');
     $('#plCantidadPaneles3').text(combinaciones.combinacionOptima[0].paneles.noModulos);
-    $('#plCantidadInversores3').text(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
+
+    if(combinaciones.combinacionOptima[0].inversores.combinacion === true){
+        $('#plCantidadInversores3').text('QS1: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMen);
+    }
+    else{
+        $('#plCantidadInversores3').text(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
+    }
+
     $('#plCostoProyectoSIVA3').text(combinaciones.combinacionOptima[0].totales.precio + '$');
     $('#plCostoProyectoCIVA3').text(combinaciones.combinacionOptima[0].totales.precioMasIVA + '$');
     $('#plCostoWatt3').text(combinaciones.combinacionOptima[0].totales.precio_watt + '$');
