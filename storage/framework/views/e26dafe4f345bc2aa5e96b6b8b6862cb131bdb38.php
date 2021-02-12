@@ -48,15 +48,12 @@
 
 <script src="<?php echo e(asset('js/index.js')); ?>"></script> <!-- Este archivo es necesario para el CP y buscador -->
 <script src="<?php echo e(asset('js/log.js')); ?>"></script>
-<!--script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script-->
-<script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTH.js')); ?>"></script>
-<script src="<?php echo e(asset('js/cotizador/mediaTension/GDMTO.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/bajaTension/bajaTension.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/individual/individual.js')); ?>"></script>
 
 
 <!-- En mantenimiento -->
-<script src="<?php echo e(asset('js/cotizador/bajaTension/bajaTension.js')); ?>"></script>
-<script src="<?php echo e(asset('js/cotizador/bajaTension/controles-bajatension.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script>
 <!-- En mantenimiento -->
 
 

@@ -68,8 +68,8 @@
             </div>
             <div class="col-md-6 col-sm-6 fx-1"> 
                 <div class="btn-group mn-2">
-                    <button type="button" class="btn btn-primary btn-sm btn-green" onclick="GDMTO()">GDMTO</button>
-                    <button type="button" class="btn btn-primary btn-sm btn-green" onclick="GDMTH()">GDMTH</button>
+                    <button id="btnTarifGDMTO" type="button" class="btn btn-primary btn-sm btn-green" onclick="tarifaSelected(this)">GDMTO</button>
+                    <button id="btnTarifGDMTH" type="button" class="btn btn-primary btn-sm btn-green" onclick="tarifaSelected(this)">GDMTH</button>
                 </div>
             </div>
         </div>
@@ -132,30 +132,30 @@
                 <div class="col-lg-12">
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inpIkWhGDMTO" class="mn-1">I (kWh):</label>
-                            <input id="inpIkWhGDMTO" name="I(kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="inpIkWh" class="mn-1">I (kWh):</label>
+                            <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="I(mxn/kWh)GDMTO" class="mn-1">I (mxn/kWh):</label>
-                            <input id="I(mxn/kWh)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="I(mxn/kWh)" class="mn-1">I (mxn/kWh):</label>
+                            <input id="I(mxn/kWh)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inpPagoTransmisionGDMTO" class="mn-1">P. Transmisión:</label>
-                            <input id="inpPagoTransmisionGDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="inpPagoTransmision" class="mn-1">P. Transmisión:</label>
+                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="inpIkwGDMTO" class="mn-1">I (kw):</label>
-                            <input id="inpIkwGDMTO" name="I(kw)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="inpIkw" class="mn-1">I (kw):</label>
+                            <input id="inpI(kw)" name="I(kw)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="C(mxn/kW)GDMTO" class="mn-1">C (mxn/kW):</label>
-                            <input id="C(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="C(mxn/kW)" class="mn-1">C (mxn/kW):</label>
+                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="D(mxn/kW)GDMTO" class="mn-1">D (mxn/kW):</label>
-                            <input id="D(mxn/kW)GDMTO" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <label for="D(mxn/kW)" class="mn-1">D (mxn/kW):</label>
+                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                  </div>
@@ -193,15 +193,15 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Periodo(s)</span>
                         </div>
-                        <select class="custom-select iptPeriodos" name="numPeriodos" id="lstPeriodosGDMTH">
-                            <option selected value="-1">1</option>
+                        <select id="lstPeriodosGDMTH" class="custom-select iptPeriodos" name="numPeriodos" onchange="visualizarPeriodos(this)">
+                            <option selected value="1">1</option>
                         </select>
                     </div>
                     <div class="btn-group btn-group-lg" role="group">
                         <button id="btnAgregarPeriodo" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
                             <i class="fa fa-file-text" aria-hidden="true"></i>
                         </button>
-                        <button id="btnEditarPeriodo" class="btn btn-green" onclick="editarPeriodo();" title="Editar periodo de consumo" disabled>
+                        <button id="btnEditarPeriodo" class="btn btn-green" onclick="crudState(1);" title="Editar periodo de consumo" disabled>
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
                         <button id="btnEliminarPeriodo" class="btn btn-green" title="Eliminar periodo de consumo" disabled style="display:none;">
@@ -218,29 +218,29 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpBkWh" class="mn-1">B (kWh):</label>
-                            <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);" required>
+                            <input id="inpBkWh" name="B(kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpIkWh" class="mn-1">I (kWh):</label>
-                            <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
+                            <input id="inpI(kWh)" name="I(kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpPkWh" class="mn-1">P (kWh):</label>
-                            <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
+                            <input id="inpPkWh" name="P(kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpBkw" class="mn-1">B (kw):</label>
-                            <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
+                            <input id="inpBkw" name="B(kw)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpIkw" class="mn-1">I (kw):</label>
-                            <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
+                            <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpPkw" class="mn-1">P (kw):</label>
-                            <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control inpgdmth" onkeypress="return filterFloat(event,this);">
+                            <input id="inpPkw" name="P(kw)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                 </div>
@@ -255,29 +255,29 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="B(mxn/kWh)" class="mn-1">B (mxn/kWh):</label>
-                            <input id="B(mxn/kWh)" type="number" min="0"  class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpB(mxn/kWh)" type="number" min="0"  class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="I(mxn/kWh)" class="mn-1">I (mxn/kWh):</label>
-                            <input id="I(mxn/kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpI(mxn/kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="P(mxn/kWh)" class="mn-1">P (mxn/kWh):</label>
-                            <input id="P(mxn/kWh)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpP(mxn/kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpPagoTransmision" class="mn-1">P. Transmisión:</label>
-                            <input id="inpPagoTransmision" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpPagoTransmision" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="C(mxn/kW)" class="mn-1">C (mxn/kW):</label>
-                            <input id="C(mxn/kW)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpC(mxn/kW)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="D(mxn/kW)" class="mn-1">D (mxn/kW):</label>
-                            <input id="D(mxn/kW)" type="number" min="0" class="form-control" onkeypress="return filterFloat(event,this);">
+                            <input id="inpD(mxn/kW)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                 </div>
@@ -296,11 +296,7 @@
     </div>
 </div>
 <div class="col-md-4 offset-md-8 text-right mb-3" id="divBtnCalcularMT">
-    <button onclick="validarEnvioDePeriodo()" class="btn btn-green text-uppercase shadow" id="btnGDMTO">
-        <i class="fa fa-check" aria-hidden="true"></i>
-        Calcular
-    </button>
-    <button style="display:none;" onclick="validarEnvioDePeriodoGDMTH()" class="btn btn-green text-uppercase shadow" id="btnGDMTH">
+    <button id="btnCalcularMT" class="btn btn-green text-uppercase shadow" onclick="calcularPropuestaMT()">
         <i class="fa fa-check" aria-hidden="true"></i>
         Calcular
     </button>
