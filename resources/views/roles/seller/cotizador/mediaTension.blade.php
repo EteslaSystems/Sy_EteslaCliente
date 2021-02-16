@@ -222,7 +222,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpIkWh" class="mn-1">I (kWh):</label>
-                            <input id="inpI(kWh)" name="I(kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inpPkWh" class="mn-1">P (kWh):</label>
@@ -255,15 +255,15 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="B(mxn/kWh)" class="mn-1">B (mxn/kWh):</label>
-                            <input id="inpB(mxn/kWh)" type="number" min="0"  class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpB_mxnkWh" type="number" min="0"  class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="I(mxn/kWh)" class="mn-1">I (mxn/kWh):</label>
-                            <input id="inpI(mxn/kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpI_mxnkWh" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="P(mxn/kWh)" class="mn-1">P (mxn/kWh):</label>
-                            <input id="inpP(mxn/kWh)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpP_mxnkWh" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
@@ -273,11 +273,11 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="C(mxn/kW)" class="mn-1">C (mxn/kW):</label>
-                            <input id="inpC(mxn/kW)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpC_mxnkW" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="D(mxn/kW)" class="mn-1">D (mxn/kW):</label>
-                            <input id="inpD(mxn/kW)" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inpD_mxnkW" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                 </div>

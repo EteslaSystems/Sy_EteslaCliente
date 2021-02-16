@@ -83,7 +83,7 @@ class MediaTensionController extends Controller
 	//1er. Paso
 	public function sendPeriodsToServer(Request $request)
 	{
-		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
+		$array["arrayPeriodos"] = $request->arrayPeriodos;
 		$array["idCliente"] = $request->idCliente;
 		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["idUsuario"] = session('dataUsuario')->idUsuario;

@@ -4,7 +4,39 @@ var _periodos = [];
 /*#region Solicitudes Servidor*/
 function calcularPropuestaMT(){
     //Validar que el cliente este cargado
-    //Vaciar respuesta en AJAX
+    var clienteCargado = validarClienteCargado();
+
+    if(clienteCargado != false){
+        if(validarPeriodosVacios() === true){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    type: 'POST',
+                    url: '/enviarPeriodos',
+                    data: {
+                        "_token": $("meta[name='csrf-token']").attr('content'),
+                        "arrayPeriodos": _periodos,
+                        "direccionCliente": clienteCargado.direccion,
+                        "idCliente": clienteCargado.id
+                    },
+                    dataType: 'json',
+                    success: function(respuesta){
+                        if(respuesta.status == '500'){
+                            alert('Error al intentar ejecutar su propuesta!');
+                        }
+                        else{
+                            console.log(respuesta);
+
+                            // resolve(respuesta);
+                        }
+                    },
+                    error: function(){
+                        alert('Al parecer hubo un error con la peticion AJAX de la cotizacion MediaTension');
+                    }
+                });
+            });
+        }
+    }   
 }
 /*#endregion*/
 
@@ -23,7 +55,7 @@ function agregarPeriodo(){
             idInput = input.id;
             //Se formatea el "id" para obtener el *nombre* de la nueva-propiedad del objeto que sera un *PERIODO*
             idInput = idInput.slice(3);
-            //Crear propiedad del objeto y asignarle valor a la misma
+            //Crear propiedad/nombre_propiedad del objeto y asignarle valor a la misma
             periodo[idInput] = input.value;
         });
 
@@ -155,5 +187,29 @@ function validarCamposVacios(){
     }
     
     return respuesta;
+}
+
+function validarClienteCargado(){
+    var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    var direccionCliente = $('#municipio').val();
+
+    if(idCliente != "" && direccionCliente != ""){
+        objResult = { id: idCliente, direccion: direccionCliente };
+        return objResult;
+    }
+    else{
+        alert('Falta cargar un cliente!!');
+        return false;
+    }
+}
+
+function validarPeriodosVacios(){
+    if(_periodos.length === 0){
+        alert('Periodos insuficientes para calcular');
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 /*#endregion*/
