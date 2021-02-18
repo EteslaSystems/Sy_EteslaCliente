@@ -54,7 +54,7 @@
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
-                                    <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado();" disabled>
+                                    <select id="listPaneles" class="form-control" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -71,7 +71,7 @@
                         <!-- Botones GuardaPropuesta_GenerarPDF -->
                         <div class="btn-group btn-group-sm pull-right" role="group" aria-label="Basic example">
                             <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" title="guardar propuesta" disabled>GUARDAR</button>
-                            <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" onclick="catchDataResults();" disabled>GENERAR</button>
+                            <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" disabled>GENERAR</button>
                         </div>
                         <!-- Fin Botones GuardaPropuesta_GenerarPDF -->
                         <!-- Modal Opciones de generar propuesta -->
@@ -163,7 +163,7 @@
                                             </div>
                                         </div>
                                         <!-- Fin  del Panel de ajuste de cotizacion -->
-                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" onclick="modificarPropuesta();" data-dismiss="modal" disabled><strong>Modificar</strong></button>
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" data-dismiss="modal" disabled><strong>Modificar</strong></button>
                                     </div>
                                 </div>
                             </div>
@@ -866,12 +866,6 @@
         }
     </style>
 </body>
-<!--
-script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="{{ asset('js/cotizador/mediaTension/GDMTH.js') }}"></script>
-<script src="{{ asset('js/cotizador/bajaTension/bajaTension.js') }}"></script
--->
 
 @section('scripts')
 <script type="text/javascript">

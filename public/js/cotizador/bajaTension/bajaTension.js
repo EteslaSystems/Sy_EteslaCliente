@@ -24,10 +24,11 @@ async function calcularPropuestaBT(e, dataEdited){ ///Main()
         await vaciarCombinaciones(_combinaciones);
         
         _cotizacion = await enviarCotizacion(data); //Se obtienen paneles
-        console.log('cotizacion nueva');
-        console.log(_cotizacion);
-        await vaciarRespuestaPaneles(_cotizacion);
+        vaciarRespuestaPaneles(_cotizacion);
         
+        ///EXPERIMENTAL
+        mostrarPanelSeleccionado();
+        ///EXPERIMENTAL
     }
     else{ //Cotizacion ajustada
         dataPropuesta = cacharDatosPropuesta();
@@ -85,8 +86,6 @@ function obtenerInversoresParaPanelSeleccionado(panelSeleccionado){ //Inversores
             },
             dataType: 'json',
             success: function(_inversores){
-                sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
-
                 resolve(_inversores);
             },
             error: function(){
@@ -229,11 +228,12 @@ function cacharDatosPropuesta(){
     var direccionCliente = () => {
         direc = $('#municipio').val() || null;
 
-        if(validarClienteCargado(direc) === true){
+        if(direc.length>0){
             return direc;
         }
         else{
             banderaDelError = 1;
+            alert('Falta cargar un cliente!');
         }
     };
 
@@ -326,7 +326,7 @@ function backToCotizacionBT(){
 }
 
 function limpiarCampos(){
-    $('.inpAnsw').val('');
+    $('.inpAnsw').text('').val('');
     $('.smallIndicator').text('').val('');
 }
 
@@ -375,14 +375,6 @@ function limpiarResultados(limpiaResult){
 }
 /*#endregion*/
 /*#region Validaciones*/
-function validarClienteCargado(direccionCliente){
-    if(direccionCliente != null){
-        return true;
-    }
-    else{
-        alert('Falta cargar un cliente');
-    }
-}
 function validarPeriodoVacio(periodo){
     if(periodo != null){
         return true;
@@ -394,7 +386,7 @@ function validarPeriodoVacio(periodo){
 /*#endregion*/
 /*#region Controles*/
 /*#region Equipos seleccionados*/
-async function vaciarRespuestaPaneles(resultPaneles){
+function vaciarRespuestaPaneles(resultPaneles){
     var dropDownListPaneles = $('#listPaneles');
 
     //Habilita lista de paneles
@@ -415,7 +407,7 @@ async function vaciarRespuestaPaneles(resultPaneles){
     }
 }
 
-async function vaciarRespuestaInversores(resultInversores){
+function vaciarRespuestaInversores(resultInversores){
     var dropDownListInversores = $('#listInversores');
     var resultInversores = resultInversores.message; //Formating
 
@@ -437,45 +429,52 @@ async function vaciarRespuestaInversores(resultInversores){
     }
 }
 
-async function mostrarPanelSeleccionado(){
+function mostrarPanelSeleccionado(){
     var ddlPaneles = $('#listPaneles');
-    var ddlPanelesValue = parseInt(ddlPaneles.val());
 
-    limpiarCampos();
+    $('#listPaneles').change(async function(){
+        var ddlPanelesValue = parseInt(ddlPaneles.val());
+        limpiarCampos();
 
-    if(ddlPanelesValue === '-1'  || ddlPanelesValue === -1 || typeof ddlPanelesValue === "undefined" ){
-        //Se limpian results de result_paneles
-        $('#listInversores').prop("disabled", true);
-    }
-    else{
-        /*#region Formating _respuestaPaneles*/
-        _paneles = sessionStorage.getItem('_respPaneles');
-        _paneles = JSON.parse(_paneles);
-        /*#end region*/
+        if(ddlPanelesValue === '-1'  || ddlPanelesValue === -1 || typeof ddlPanelesValue === "undefined" ){
+            //Se limpian results de result_paneles
+            $('#listInversores').prop("disabled", true);
+        }
+        else{
+            /*#region Formating _respuestaPaneles*/
+            _paneles = sessionStorage.getItem('_respPaneles');
+            _paneles = JSON.parse(_paneles);
+            /*#endregion*/
+    
+            _potenciaReal = _paneles[ddlPanelesValue].panel.potenciaReal;
+    
+            $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.marca);
+    
+            //Consumos
+            var promedioConsumoMensual = _paneles[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
+            $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
+            
+            //Pintada de resultados - Paneles
+            $('#inpCantidadPaneles').val(_paneles[ddlPanelesValue].panel.noModulos);
+            $('#inpModeloPanel').val(_paneles[ddlPanelesValue].panel.nombre);
+            $('#inpMarcaPanel').val(_paneles[ddlPanelesValue].panel.marca);
+            $('#inpPotencia').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
+    
+            //Equipo seleccionado - Panel seleccionado
+            sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
+    
+            // _panelSeleccionado[0] = _respuest[x].panel;
+    
+            //Se carga dropDownList -Inversores-
+            _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
+            sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
+            await vaciarRespuestaInversores(_inversores);
 
-        _potenciaReal = _paneles[ddlPanelesValue].panel.potenciaReal;
-
-        $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.marca);
-
-        //Consumos
-        var promedioConsumoMensual = _paneles[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
-        $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
-        
-        //Pintada de resultados - Paneles
-        $('#inpCantidadPaneles').val(_paneles[ddlPanelesValue].panel.noModulos);
-        $('#inpModeloPanel').val(_paneles[ddlPanelesValue].panel.nombre);
-        $('#inpMarcaPanel').val(_paneles[ddlPanelesValue].panel.marca);
-        $('#inpPotencia').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
-
-        //Equipo seleccionado - Panel seleccionado
-        sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
-
-        // _panelSeleccionado[0] = _respuest[x].panel;
-
-        //Se carga dropDownList -Inversores-
-        _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
-        await vaciarRespuestaInversores(_inversores);
-    }
+            ///EXPERIMENTAL
+            mostrarInversorSeleccionado();
+            ///EXPERIMENTAL
+        }
+    });
 }
 
 function limpiarDropDownListPaneles(){
@@ -489,71 +488,74 @@ function limpiarDropDownListPaneles(){
     });
 }
 
-async function mostrarInversorSeleccionado(){
+function mostrarInversorSeleccionado(){
     var ddlInversores = $('#listInversores');
-    var ddlInversoresValue = parseInt(ddlInversores.val());
 
-    limpiarResultados(1);
+    ddlInversores.on("change", async function(){
+        var ddlInversoresValue = parseInt(ddlInversores.val());
 
-    if(ddlInversoresValue === '-1' || ddlInversoresValue === -1){
-        $('#divTotalesProject').css("display",""); //???
-
-        //Se bloquean botones de GenerarPDF y GuardarPropuesta
-        $('#btnGuardarPropuesta').prop("disabled", true);
-        $('#btnGenerarEntregable').prop("disabled", true);
-
-        //Panel de ajuste de cotizacion - Desaparece
-        $('#btnModalAjustePropuesta').attr("disabled",true);
-    }
-    else{
-        /*#region Formating _respuestaPaneles*/
-        _inversores = sessionStorage.getItem('_respInversores');
-        _inversores = JSON.parse(_inversores);
-        _inversores = _inversores.message;
-        /*#end region*/
-
-        //Se desbloquea boton de -PanelAjustePropuesta-
-        $('#listInversores').prop("disabled", false);
-        //Se desbloquean botones de GenerarPDF y GuardarPropuesta
-        $('#btnGuardarPropuesta').prop("disabled", false);
-        $('#btnGenerarEntregable').prop("disabled", false);
-
-        //Panel de ajuste de cotizacion - Aparece
-        $('#btnModalAjustePropuesta').attr("disabled",false);
-
-        //Se agrega nmerito -Cantidad_Inversores-
-
-        //Se cargan los inputs de la vista
-        $('#inpCostTotalInversores').val(_inversores[ddlInversoresValue].precioTotal);
-
-        //Inversores  - /Tabla_oculta\
-        if(_inversores[ddlInversoresValue].combinacion === true){
-            $('#cantidadInversores').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
-            $('#inpCantidadInvers').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+        limpiarResultados(1);
+    
+        if(ddlInversoresValue === '-1' || ddlInversoresValue === -1){
+            $('#divTotalesProject').css("display",""); //???
+    
+            //Se bloquean botones de GenerarPDF y GuardarPropuesta
+            $('#btnGuardarPropuesta').prop("disabled", true);
+            $('#btnGenerarEntregable').prop("disabled", true);
+    
+            //Panel de ajuste de cotizacion - Desaparece
+            $('#btnModalAjustePropuesta').attr("disabled",true);
         }
         else{
-            $('#cantidadInversores').html(_inversores[ddlInversoresValue].numeroDeInversores).val(_inversores[ddlInversoresValue].numeroDeInversores);
-            $('#inpCantidadInvers').val(_inversores[ddlInversoresValue].numeroDeInversores);
+            /*#region Formating _respuestaPaneles*/
+            _inversores = sessionStorage.getItem('_respInversores');
+            _inversores = JSON.parse(_inversores);
+            _inversores = _inversores.message;
+            /*#endregion*/
+    
+            //Se desbloquea boton de -PanelAjustePropuesta-
+            $('#listInversores').prop("disabled", false);
+            //Se desbloquean botones de GenerarPDF y GuardarPropuesta
+            $('#btnGuardarPropuesta').prop("disabled", false);
+            $('#btnGenerarEntregable').prop("disabled", false);
+    
+            //Panel de ajuste de cotizacion - Aparece
+            $('#btnModalAjustePropuesta').attr("disabled",false);
+    
+            //Se agrega nmerito -Cantidad_Inversores-
+    
+            //Se cargan los inputs de la vista
+            $('#inpCostTotalInversores').val(_inversores[ddlInversoresValue].precioTotal);
+    
+            //Inversores  - /Tabla_oculta\
+            if(_inversores[ddlInversoresValue].combinacion === true){
+                $('#cantidadInversores').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+                $('#inpCantidadInvers').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+            }
+            else{
+                $('#cantidadInversores').html(_inversores[ddlInversoresValue].numeroDeInversores).val(_inversores[ddlInversoresValue].numeroDeInversores);
+                $('#inpCantidadInvers').val(_inversores[ddlInversoresValue].numeroDeInversores);
+            }
+            $('#potenciaInversor').html(_inversores[ddlInversoresValue].fPotencia + 'W').val(_inversores[ddlInversoresValue].fPotencia);
+            $('#potenciaMaximaInv').html(_inversores[ddlInversoresValue].iPMAX + 'W').val(_inversores[ddlInversoresValue].iPMAX);
+            $('#potenciaNominalInv').html(_inversores[ddlInversoresValue].potenciaNominal + 'W').val(_inversores[ddlInversoresValue].potenciaNominal);
+            $('#potenciaPicoInv').html(_inversores[ddlInversoresValue].potenciaPico + 'W').val(_inversores[ddlInversoresValue].potenciaPico);
+            $('#porcentajeSobreDim').html(_inversores[ddlInversoresValue].porcentajeSobreDimens + '%').val(_inversores[ddlInversoresValue].porcentajeSobreDimens);
+            $('#precioInv').html(_inversores[ddlInversoresValue].fPrecio + '$').val(_inversores[ddlInversoresValue].fPrecio); 
+            $('#costoTotalInversores').html(_inversores[ddlInversoresValue].precioTotal + '$').val(_inversores[ddlInversoresValue].precioTotal);
+    
+    
+            ///Pintada de resultados - Inversor
+            $('#inpModeloInversor').val(_inversores[ddlInversoresValue].vNombreMaterialFot);
+    
+            //Equipo seleccionado - Inversor seleccionado
+            sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(_inversores[ddlInversoresValue]));
+            
+            //Se calculan viaticos
+            _viaticos = await calcularViaticosBT();
+            mostrarRespuestaViaticos(_viaticos);
         }
-        $('#potenciaInversor').html(_inversores[ddlInversoresValue].fPotencia + 'W').val(_inversores[ddlInversoresValue].fPotencia);
-        $('#potenciaMaximaInv').html(_inversores[ddlInversoresValue].iPMAX + 'W').val(_inversores[ddlInversoresValue].iPMAX);
-        $('#potenciaNominalInv').html(_inversores[ddlInversoresValue].potenciaNominal + 'W').val(_inversores[ddlInversoresValue].potenciaNominal);
-        $('#potenciaPicoInv').html(_inversores[ddlInversoresValue].potenciaPico + 'W').val(_inversores[ddlInversoresValue].potenciaPico);
-        $('#porcentajeSobreDim').html(_inversores[ddlInversoresValue].porcentajeSobreDimens + '%').val(_inversores[ddlInversoresValue].porcentajeSobreDimens);
-        $('#precioInv').html(_inversores[ddlInversoresValue].fPrecio + '$').val(_inversores[ddlInversoresValue].fPrecio); 
-        $('#costoTotalInversores').html(_inversores[ddlInversoresValue].precioTotal + '$').val(_inversores[ddlInversoresValue].precioTotal);
-
-
-        ///Pintada de resultados - Inversor
-        $('#inpModeloInversor').val(_inversores[ddlInversoresValue].vNombreMaterialFot);
-
-        //Equipo seleccionado - Inversor seleccionado
-        sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(_inversores[ddlInversoresValue]));
-        
-        //Se calculan viaticos
-        _viaticos = await calcularViaticosBT();
-        mostrarRespuestaViaticos(_viaticos);
-    }
+    });
 }
 
 function limpiarDropDownListInversores(){
@@ -604,6 +606,13 @@ function mostrarRespuestaViaticos(_viaticos){
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
     //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
     $('#rangeValueDescuento').val(_viaticos[0].descuento);
+
+
+
+
+    ///EXPERIMENTAL
+    modificarPropuesta();
+    ///EXPERIMENTAL
 }
 /*#endregion*/
 /*#region Combinaciones*/
@@ -989,29 +998,34 @@ function sliderModificarPropuesta(){
 }
 
 function modificarPropuesta(){
-    //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+    $('#btnModificarPropuesta').click(function(){
+        alert('hola modificar');
+    });
+
+
+    // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
     // $('listPaneles').val('-1');
-    $('listInversores').val('-1');
+    // $('listInversores').val('-1');
 
-    //Se limpian los dropDownList de Paneles e Inversores
-    // limpiarDropDownListPaneles();
-    // limpiarDropDownListInversores();
+    // //Se limpian los dropDownList de Paneles e Inversores
+    // // limpiarDropDownListPaneles();
+    // // limpiarDropDownListInversores();
 
-    //Se limpian inputs de -result- anterior
-    limpiarCampos();
+    // //Se limpian inputs de -result- anterior
+    // limpiarCampos();
 
-    //Cachar los valores de los porcentajes / panel de ajuste
-    porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
-    porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+    // //Cachar los valores de los porcentajes / panel de ajuste
+    // porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
+    // porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
 
-    //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
-    sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
+    // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
+    // sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
 
-    //Se arma la data para editar la propuesta
-    dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+    // //Se arma la data para editar la propuesta
+    // dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
-    //Se realiza nuevamente la propuesta
-    calcularPropuestaBT(null, dataPorcentajes);
+    // //Se realiza nuevamente la propuesta
+    // await calcularPropuestaBT(null, dataPorcentajes);
 }
 
 function deshabilitarBotonesPDF(){
