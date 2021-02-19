@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="form-row">
                                     <label>Inversor</label>
-                                    <select class="form-control" id="listInversores" onchange="mostrarInversorSeleccionado();"  disabled>
+                                    <select class="form-control" id="listInversores" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -321,7 +321,7 @@
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpCantidadInvers" class="col-sm-4 col-form-label">Cantidad inversores</label>
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-8">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadInvers">
                                                             </div>
                                                         </div>  

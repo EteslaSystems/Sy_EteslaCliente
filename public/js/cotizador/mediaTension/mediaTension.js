@@ -42,8 +42,10 @@ async function calcularPropuestaMT(){
             .then(resultPaneles => {
                 //Se guarda la respuesta paneles para su futura implementacion
                 sessionStorage.setItem('_respPanelesMT',JSON.stringify(resultPaneles));
+                
                 //Llenar dropDownList de paneles
                 vaciarRespuestaPaneles(resultPaneles);
+                
                 //Dotar de funcionalidad al DropDownListPaneles
                 mostrarPanelSelected();
             });
@@ -73,6 +75,36 @@ function getVistaResultados(){
         })
         .catch(error => {
             alert(error);
+        });
+    });
+}
+
+function calcularViaticosMT(){
+    let periodos = sessionStorage.getItem("_respPanelesMT");
+    let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
+    let inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
+    let direccion = $('#municipio').val();
+
+    let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
+
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/calcularVT',
+            data: {
+                "_token": $("meta[name='csrf-token']").attr('content'), 
+                "propuesta": objPropuesta,
+                "direccionCliente": direccion
+            },
+            dataType: 'json',
+            success: function(resultViaticos){
+                sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
+                resolve(resultViaticos);
+            },
+            error: function(error){
+                reject('Se produjo un error al intentar calcular viaticos: '+error);
+            }
         });
     });
 }
@@ -225,7 +257,7 @@ function mostrarPanelSelected(){
         }
         else{
             /*#region Formating _respuestaPaneles*/
-            _paneles = sessionStorage.getItem('_respPanelesMT');
+            let _paneles = sessionStorage.getItem('_respPanelesMT');
             _paneles = JSON.parse(_paneles);
             /*#endregion*/
     
@@ -321,7 +353,8 @@ function mostrarInversorSelected(){
             sessionStorage.setItem('__ssInversorSeleccionadoMT',JSON.stringify(inversores__[ddlInversoresValue]));
             
             //Se calculan viaticos
-            
+            let objResultViaticos = await calcularViaticosMT();
+            mostrarRespuestaViaticos(objResultViaticos);
         }
     });
 }
