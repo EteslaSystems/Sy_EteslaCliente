@@ -126,7 +126,7 @@ class MediaTensionController extends Controller
 		$array["propuesta"] = $request->propuesta;
 		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
-		$array["tipoCotizacion"] = "mediaTension";
+		$array["tarifa"] = $request->tarifa; //tarifaMT
 
 		$response = $this->cotizacion->calcularViaticos_Totales(['json' => $array]);
 		$response = response()->json($response);

@@ -80,7 +80,7 @@ function getVistaResultados(){
 }
 
 function calcularViaticosMT(){
-    let periodos = sessionStorage.getItem("_respPanelesMT");
+    let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
     let inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
     let direccion = $('#municipio').val();
@@ -95,7 +95,8 @@ function calcularViaticosMT(){
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'), 
                 "propuesta": objPropuesta,
-                "direccionCliente": direccion
+                "direccionCliente": direccion,
+                "tarifa": tarifaMT
             },
             dataType: 'json',
             success: function(resultViaticos){

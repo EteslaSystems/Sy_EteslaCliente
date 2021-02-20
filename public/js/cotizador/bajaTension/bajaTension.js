@@ -40,7 +40,7 @@ async function calcularPropuestaBT(e, dataEdited){ ///Main()
         _cotizacionAjustada = await enviarCotizacion(data);
         console.log('cotizacion editada');
         console.log(_cotizacionAjustada);
-        await vaciarRespuestaPaneles(_cotizacionAjustada);
+        vaciarRespuestaPaneles(_cotizacionAjustada);
     }
 }
 
