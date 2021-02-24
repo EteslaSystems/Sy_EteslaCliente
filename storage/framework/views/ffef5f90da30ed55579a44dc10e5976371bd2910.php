@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="row text-center">
                             <!-- Sección combinaciones -->
-                            <div class="col form-group" id="divConvinaciones">
+                            <div class="col form-group" id="divConvinaciones" style="display:none;">
                                 <div class="form-row">
                                     <label>Combinacion</label>
                                     <select class="form-control" id="listConvinaciones" disabled>
@@ -51,7 +51,7 @@
                             </div>
                             <!-- Fin Sección combinaciones -->
                             <!-- Seccion "Elegir un equipo" -->
-                            <div class="col form-group" id="divElegirEquipo" style="display:none;">
+                            <div class="col form-group" id="divElegirEquipo">
                                 <div class="form-row">
                                     <label>Panel</label>
                                     <select id="listPaneles" class="form-control" disabled>
@@ -59,8 +59,17 @@
                                     </select>
                                 </div>
                                 <div class="form-row">
-                                    <label>Inversor</label>
+                                    <div class="form-group form-check">
+                                        <input id="chckModelosInversor" type="checkbox" class="form-check-input" title="modelos inversor" onclick="mostrarListModelosInversores();" disabled>
+                                        <label class="form-check-label" for="chckModelosInversor">Inversor (marca)</label>
+                                    </div>
                                     <select class="form-control" id="listInversores" disabled>
+                                        <option selected value="-1">Elige una opción:</option>
+                                    </select>
+                                </div>
+                                <div id="divDropDownListInversorModelo" class="form-row" style="display:none;">
+                                    <label>Inversor (modelo)</label>
+                                    <select class="form-control" id="listModelosInversor" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>

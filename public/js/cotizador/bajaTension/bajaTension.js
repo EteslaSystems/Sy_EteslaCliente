@@ -326,8 +326,7 @@ function backToCotizacionBT(){
 }
 
 function limpiarCampos(){
-    $('.inpAnsw').text('').val('');
-    $('.smallIndicator').text('').val('');
+    $('.inpAnsw').text("").val("");
 }
 
 function limpiarResultados(limpiaResult){
@@ -408,29 +407,56 @@ function vaciarRespuestaPaneles(resultPaneles){
 }
 
 function vaciarRespuestaInversores(resultInversores){
-    var dropDownListInversores = $('#listInversores');
-    var resultInversores = resultInversores.message; //Formating
+    let dropDownListInversores = $('#listInversores');
+    let resultaInversores = resultInversores.message; //Lista de inversores
 
-    //Habilita lista de paneles
-    dropDownListInversores.attr("disabled", false);
+    let InversoresGroupByMerch = (_inversores) => { //Retorna un objeto
+        let invGroupByMerche = [];
+        
+        invGroupByMerche = _inversores.reduce((objMarca, objInversor) => {
+            objMarca[objInversor.vMarca] = (objMarca[objInversor.vMarca] || []).concat(objInversor);
+            return objMarca;
+        },{});
+
+        return invGroupByMerche;
+    };
+
+    //Se obtiene las marcas de los inversores
+    InversoresGroupByMerch = InversoresGroupByMerch(resultaInversores);
+    ///Lo guardamos en un sessionStorage para futura implementacion
+    sessionStorage.setItem('InversoresGroupByMerch', JSON.stringify(InversoresGroupByMerch));
 
     //Limpiar dropdownlist
     limpiarDropDownListInversores();
 
+    //Activar lista de inversores
+    dropDownListInversores.attr("disabled", false);
+
     //DropDownList-Paneles
-    for(var i=0; i<resultInversores.length; i++)
+    for(let marca in InversoresGroupByMerch)
     {
         dropDownListInversores.append(
             $('<option/>', {
-                value: i,
-                text: resultInversores[i].vNombreMaterialFot
+                value: marca.toString(),
+                text: marca.toString()
             })
         );
     }
 }
 
+function vaciarModelosInversores(modelosInversores){
+    let listModelosInversores = $('#listModelosInversor');
+
+    listModelosInversores.append(
+        $('<option/>', {
+            value: modelosInversores.vNombreMaterialFot,
+            text: modelosInversores.vNombreMaterialFot
+        })
+    );
+}
+
 function mostrarPanelSeleccionado(){
-    var ddlPaneles = $('#listPaneles');
+    let ddlPaneles = $('#listPaneles');
 
     $('#listPaneles').change(async function(){
         var ddlPanelesValue = parseInt(ddlPaneles.val());
@@ -468,7 +494,7 @@ function mostrarPanelSeleccionado(){
             //Se carga dropDownList -Inversores-
             _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
-            await vaciarRespuestaInversores(_inversores);
+            vaciarRespuestaInversores(_inversores);
 
             ///EXPERIMENTAL
             mostrarInversorSeleccionado();
@@ -489,10 +515,10 @@ function limpiarDropDownListPaneles(){
 }
 
 function mostrarInversorSeleccionado(){
-    var ddlInversores = $('#listInversores');
+    let ddlInversores = $('#listInversores');
 
     ddlInversores.on("change", async function(){
-        var ddlInversoresValue = parseInt(ddlInversores.val());
+        let ddlInversoresValue = ddlInversores.val(); //Marca del Inversor
 
         limpiarResultados(1);
     
@@ -505,13 +531,61 @@ function mostrarInversorSeleccionado(){
     
             //Panel de ajuste de cotizacion - Desaparece
             $('#btnModalAjustePropuesta').attr("disabled",true);
+
+            //Check Inversor-Modelos
+            $('#chckModelosInversor').attr("disabled",true);
         }
         else{
-            /*#region Formating _respuestaPaneles*/
-            _inversores = sessionStorage.getItem('_respInversores');
+            /*#region Formating _respuestaInversores*/
+            let _inversores = sessionStorage.getItem('_respInversores');
             _inversores = JSON.parse(_inversores);
             _inversores = _inversores.message;
             /*#endregion*/
+            /*#region Formating objInversoresGroupByMarca*/
+            let InversoresPorMarca = sessionStorage.getItem('InversoresGroupByMerch');
+            InversoresPorMarca = JSON.parse(_inversores);
+            InversoresPorMarca = _inversores.message;
+            /*#endregion*/
+
+            let getInversorCostoBeneficio = (InversoresPorMarc, marca) => {
+                let arrayMarca = []; ///Un array de todos los inversores de la marca seleccionada
+                let oldPrice = 0;
+                let newPrice = 0;
+
+                for(let inversor in InversoresPorMarc)
+                {   
+                    ///Guardar todos los modelos que pertenecen a la marca seleccionada
+                    if(inversor.vMarca === marca){
+                        arrayMarca.push(inversor[vMarca]);
+                    }
+                }
+
+                for(let x=0; x<arrayMarca.length; x++) ///Se neceista saber cual tiene mayor potencia
+                {
+                    newPrice = arrayMarca[x].fPrecio;
+
+                    if(x==0){
+                        oldPrice = arrayMarca[x].fPrecio;
+                    }
+                    else if(oldPrice >= newPrice){ ///Menor precio
+
+                    }
+                }
+            };
+
+            /*#region Llenado de */
+            _inversores.filter((objInversor) => {
+                if(objInversor.vMarca === ddlInversoresValue){
+                    vaciarModelosInversores(objInversor);
+                }
+            });
+            /*#endregion*/
+
+            ///Seleccionar El mejor inversor de esa marca seleccionada
+
+            ///Mostrar los resultados 
+
+            ///Calcular viaticos
     
             //Se desbloquea boton de -PanelAjustePropuesta-
             $('#listInversores').prop("disabled", false);
@@ -522,7 +596,8 @@ function mostrarInversorSeleccionado(){
             //Panel de ajuste de cotizacion - Aparece
             $('#btnModalAjustePropuesta').attr("disabled",false);
     
-            //Se agrega nmerito -Cantidad_Inversores-
+            //Check Inversor-Modelos
+            $('#chckModelosInversor').attr("disabled",false);
     
             //Se cargan los inputs de la vista
             $('#inpCostTotalInversores').val(_inversores[ddlInversoresValue].precioTotal);
@@ -988,6 +1063,26 @@ function cambiarModalidad(control){
         $('#listInversores').val(-1).attr("disabled",true);
 
         $('#switchConvEquip').val("0");
+    }
+}
+
+function mostrarListModelosInversores(){
+    let divDDLInversoresModelo = $('#divDropDownListInversorModelo');
+    let ddlInversoresModelo = $('#listModelosInversor');
+    let banderaShow = 0;
+
+    if(banderaShow = 0){
+        divDDLInversoresModelo.hide();
+        ddlInversoresModelo.attr("disabled",false);
+
+        banderaShow = 1;
+    }
+    else{
+        divDDLInversoresModelo.show();
+        ddlInversoresModelo.val(-1);
+        ddlInversoresModelo.attr("disabled",true);
+
+        banderaShow = 0;
     }
 }
 

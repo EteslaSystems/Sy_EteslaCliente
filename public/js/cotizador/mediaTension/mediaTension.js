@@ -80,10 +80,12 @@ function getVistaResultados(){
 }
 
 function calcularViaticosMT(){
-    let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
     let inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
     let direccion = $('#municipio').val();
+    let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
+    periodos = JSON.parse(periodos);
+    periodos = periodos[0];
 
     let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
 
@@ -100,8 +102,11 @@ function calcularViaticosMT(){
             },
             dataType: 'json',
             success: function(resultViaticos){
-                sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
-                resolve(resultViaticos);
+                console.log('Viatiocs MT: ');
+                console.log(resultViaticos);
+
+                // sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
+                // resolve(resultViaticos);
             },
             error: function(error){
                 reject('Se produjo un error al intentar calcular viaticos: '+error);
@@ -240,10 +245,6 @@ function sumarIndexador(){
         $('#lstPeriodosGDMTH option').prop('selected',true);
     }
 }
-
-function limpiarCampos(){
-    $('.inp'+tarifaMT).val('');
-} 
 
 function mostrarPanelSelected(){
     var ddlPaneles = $('#listPaneles');

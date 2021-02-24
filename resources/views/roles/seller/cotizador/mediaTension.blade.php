@@ -140,7 +140,7 @@
                             <input id="I(mxn/kWh)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inpPagoTransmision" class="mn-1">P. Transmisión:</label>
+                            <label for="inppagoTransmision" class="mn-1">P. Transmisión:</label>
                             <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpPagoTransmision" class="mn-1">P. Transmisión:</label>
-                            <input id="inpPagoTransmision" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
+                            <input id="inppagoTransmision" type="number" min="0" class="form-control inpGDMTH" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="C(mxn/kW)" class="mn-1">C (mxn/kW):</label>
