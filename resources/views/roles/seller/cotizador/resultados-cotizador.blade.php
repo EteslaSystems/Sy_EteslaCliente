@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group form-check">
-                                        <input id="chckModelosInversor" type="checkbox" class="form-check-input" title="modelos inversor" onclick="mostrarListModelosInversores();" disabled>
+                                        <input id="chckModelosInversor" type="checkbox" class="form-check-input" title="modelos inversor" onclick="mostrarListModelosInversores();">
                                         <label class="form-check-label" for="chckModelosInversor">Inversor (marca)</label>
                                     </div>
                                     <select class="form-control" id="listInversores" disabled>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div id="divDropDownListInversorModelo" class="form-row" style="display:none;">
                                     <label>Inversor (modelo)</label>
-                                    <select class="form-control" id="listModelosInversor" disabled>
+                                    <select class="form-control" id="listModelosInversor">
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>

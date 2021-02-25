@@ -139,17 +139,24 @@ function obtenerCombinaciones(data){
     });
 }
 
-function calcularViaticosBT(){
-    var _cotizarViaticos = [];
+function calcularViaticosBT(objInversor){
+    let _cotizarViaticos = [];
     //Datos de la propuesta (consumos, direccion, tarifa)
     var datosPropuesta = cacharDatosPropuesta();
     //Equipos seleccionados
-    var sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
-    var ssinversor = sessionStorage.getItem('__ssInversorSeleccionado');
-    var descuento = sessionStorage.getItem('descuentoPropuesta');
-    var consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
+    let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
+    let ssinversor = '';
+    let descuento = sessionStorage.getItem('descuentoPropuesta');
+    let consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
     consumptions = JSON.parse(consumptions);
     consumptions = consumptions.consumo;
+
+    if(objInversor == null){
+        ssinversor = sessionStorage.getItem('__ssInversorSeleccionado');
+    }
+    else{
+        ssinversor = objInversor;
+    }
 
     objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor };
     _cotizarViaticos[0] = objEquiposSeleccionados;
@@ -329,6 +336,46 @@ function limpiarCampos(){
     $('.inpAnsw').text("").val("");
 }
 
+function activarDesactivarBotones(equipo,habilidad){
+    /*1er - N
+     * 0 - Paneles
+     * 1 - Inversores
+     * /*2do - N
+     ******* 0 - Desactivado
+     ******* 1 - Activado
+    */
+
+    if(equipo = 1){
+        if(habilidad = 0){
+            $('#divTotalesProject').css("display",""); //???
+    
+            //Se bloquean botones de GenerarPDF y GuardarPropuesta
+            $('#btnGuardarPropuesta').prop("disabled", true);
+            $('#btnGenerarEntregable').prop("disabled", true);
+         
+            //Panel de ajuste de cotizacion - Desaparece
+            $('#btnModalAjustePropuesta').attr("disabled",true);
+         
+            //Check Inversor-Modelos
+            $('#chckModelosInversor').attr("disabled",true);
+        }
+        else{
+            //Se desbloquea boton de -PanelAjustePropuesta-
+            $('#listInversores').prop("disabled", false);
+            
+            //Se desbloquean botones de GenerarPDF y GuardarPropuesta
+            $('#btnGuardarPropuesta').prop("disabled", false);
+            $('#btnGenerarEntregable').prop("disabled", false);
+
+            //Panel de ajuste de cotizacion - Aparece
+            $('#btnModalAjustePropuesta').attr("disabled",false);
+
+            //Check Inversor-Modelos
+            $('#chckModelosInversor').attr("disabled",false);
+        }
+    }
+}
+
 function limpiarResultados(limpiaResult){
     /* 0 - paneles
     1 - inversores */
@@ -384,6 +431,7 @@ function validarPeriodoVacio(periodo){
 }
 /*#endregion*/
 /*#region Controles*/
+
 /*#region Equipos seleccionados*/
 function vaciarRespuestaPaneles(resultPaneles){
     var dropDownListPaneles = $('#listPaneles');
@@ -406,9 +454,8 @@ function vaciarRespuestaPaneles(resultPaneles){
     }
 }
 
-function vaciarRespuestaInversores(resultInversores){
+function vaciarRespuestaInversores(resultInversores){ ///Se vacian MARCAS
     let dropDownListInversores = $('#listInversores');
-    let resultaInversores = resultInversores.message; //Lista de inversores
 
     let InversoresGroupByMerch = (_inversores) => { //Retorna un objeto
         let invGroupByMerche = [];
@@ -422,7 +469,7 @@ function vaciarRespuestaInversores(resultInversores){
     };
 
     //Se obtiene las marcas de los inversores
-    InversoresGroupByMerch = InversoresGroupByMerch(resultaInversores);
+    InversoresGroupByMerch = InversoresGroupByMerch(resultInversores);
     ///Lo guardamos en un sessionStorage para futura implementacion
     sessionStorage.setItem('InversoresGroupByMerch', JSON.stringify(InversoresGroupByMerch));
 
@@ -444,15 +491,28 @@ function vaciarRespuestaInversores(resultInversores){
     }
 }
 
-function vaciarModelosInversores(modelosInversores){
+function vaciarModelosInversores(){
     let listModelosInversores = $('#listModelosInversor');
+    let marcaSeleccionada = $('#listInversores').val();
 
-    listModelosInversores.append(
-        $('<option/>', {
-            value: modelosInversores.vNombreMaterialFot,
-            text: modelosInversores.vNombreMaterialFot
-        })
-    );
+    /*#region Formating _respuestaInversores*/
+    let _inversores = sessionStorage.getItem('_respInversores');
+    _inversores = JSON.parse(_inversores);
+    /*#endregion*/
+
+    limpiarDropDownListModelosInversores();
+
+    for(let i=0; i<_inversores.length; i++)
+    {
+        if(_inversores[i].vMarca === marcaSeleccionada){
+            listModelosInversores.append(
+                $('<option/>', {
+                    value: _inversores[i].vNombreMaterialFot,
+                    text: _inversores[i].vNombreMaterialFot
+                })
+            );
+        }
+    }
 }
 
 function mostrarPanelSeleccionado(){
@@ -492,12 +552,25 @@ function mostrarPanelSeleccionado(){
             // _panelSeleccionado[0] = _respuest[x].panel;
     
             //Se carga dropDownList -Inversores-
-            _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
+            let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
+            _inversores = _inversores.message; //Formating
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
-            vaciarRespuestaInversores(_inversores);
-
+            
             ///EXPERIMENTAL
             mostrarInversorSeleccionado();
+
+            vaciarRespuestaInversores(_inversores); //:void() = Se pintan las marcas de los inversores
+            let objInversorCB = getInversorCostoBeneficio(0); //Se obtiene la mejor opcion 'Costo-Beneficio'
+            
+            //Se selecciona MARCA en el dropDownListInversoresMarca
+            $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
+            
+            vaciarModelosInversores(); //:void() = Se pitan los modelos de la marca seleccionada
+
+            //Se selecciona MODELO en el dropDownListInversoresModelos
+            $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
+            let _viaticos = await calcularViaticosBT(objInversorCB);
+            mostrarRespuestaViaticos(_viaticos); //:void() =
             ///EXPERIMENTAL
         }
     });
@@ -521,116 +594,71 @@ function mostrarInversorSeleccionado(){
         let ddlInversoresValue = ddlInversores.val(); //Marca del Inversor
 
         limpiarResultados(1);
+        limpiarDropDownListModelosInversores();
     
         if(ddlInversoresValue === '-1' || ddlInversoresValue === -1){
-            $('#divTotalesProject').css("display",""); //???
-    
-            //Se bloquean botones de GenerarPDF y GuardarPropuesta
-            $('#btnGuardarPropuesta').prop("disabled", true);
-            $('#btnGenerarEntregable').prop("disabled", true);
-    
-            //Panel de ajuste de cotizacion - Desaparece
-            $('#btnModalAjustePropuesta').attr("disabled",true);
-
-            //Check Inversor-Modelos
-            $('#chckModelosInversor').attr("disabled",true);
+            activarDesactivarBotones(1,0); //Se desactivan controles
         }
         else{
-            /*#region Formating _respuestaInversores*/
-            let _inversores = sessionStorage.getItem('_respInversores');
-            _inversores = JSON.parse(_inversores);
-            _inversores = _inversores.message;
-            /*#endregion*/
-            /*#region Formating objInversoresGroupByMarca*/
-            let InversoresPorMarca = sessionStorage.getItem('InversoresGroupByMerch');
-            InversoresPorMarca = JSON.parse(_inversores);
-            InversoresPorMarca = _inversores.message;
-            /*#endregion*/
-
-            let getInversorCostoBeneficio = (InversoresPorMarc, marca) => {
-                let arrayMarca = []; ///Un array de todos los inversores de la marca seleccionada
-                let oldPrice = 0;
-                let newPrice = 0;
-
-                for(let inversor in InversoresPorMarc)
-                {   
-                    ///Guardar todos los modelos que pertenecen a la marca seleccionada
-                    if(inversor.vMarca === marca){
-                        arrayMarca.push(inversor[vMarca]);
-                    }
-                }
-
-                for(let x=0; x<arrayMarca.length; x++) ///Se neceista saber cual tiene mayor potencia
-                {
-                    newPrice = arrayMarca[x].fPrecio;
-
-                    if(x==0){
-                        oldPrice = arrayMarca[x].fPrecio;
-                    }
-                    else if(oldPrice >= newPrice){ ///Menor precio
-
-                    }
-                }
-            };
-
-            /*#region Llenado de */
-            _inversores.filter((objInversor) => {
-                if(objInversor.vMarca === ddlInversoresValue){
-                    vaciarModelosInversores(objInversor);
-                }
-            });
-            /*#endregion*/
-
-            ///Seleccionar El mejor inversor de esa marca seleccionada
-
-            ///Mostrar los resultados 
-
-            ///Calcular viaticos
+            activarDesactivarBotones(1,1); //Se activan controles
     
-            //Se desbloquea boton de -PanelAjustePropuesta-
-            $('#listInversores').prop("disabled", false);
-            //Se desbloquean botones de GenerarPDF y GuardarPropuesta
-            $('#btnGuardarPropuesta').prop("disabled", false);
-            $('#btnGenerarEntregable').prop("disabled", false);
-    
-            //Panel de ajuste de cotizacion - Aparece
-            $('#btnModalAjustePropuesta').attr("disabled",false);
-    
-            //Check Inversor-Modelos
-            $('#chckModelosInversor').attr("disabled",false);
-    
-            //Se cargan los inputs de la vista
-            $('#inpCostTotalInversores').val(_inversores[ddlInversoresValue].precioTotal);
-    
-            //Inversores  - /Tabla_oculta\
-            if(_inversores[ddlInversoresValue].combinacion === true){
-                $('#cantidadInversores').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
-                $('#inpCantidadInvers').val('QS1: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
-            }
-            else{
-                $('#cantidadInversores').html(_inversores[ddlInversoresValue].numeroDeInversores).val(_inversores[ddlInversoresValue].numeroDeInversores);
-                $('#inpCantidadInvers').val(_inversores[ddlInversoresValue].numeroDeInversores);
-            }
-            $('#potenciaInversor').html(_inversores[ddlInversoresValue].fPotencia + 'W').val(_inversores[ddlInversoresValue].fPotencia);
-            $('#potenciaMaximaInv').html(_inversores[ddlInversoresValue].iPMAX + 'W').val(_inversores[ddlInversoresValue].iPMAX);
-            $('#potenciaNominalInv').html(_inversores[ddlInversoresValue].potenciaNominal + 'W').val(_inversores[ddlInversoresValue].potenciaNominal);
-            $('#potenciaPicoInv').html(_inversores[ddlInversoresValue].potenciaPico + 'W').val(_inversores[ddlInversoresValue].potenciaPico);
-            $('#porcentajeSobreDim').html(_inversores[ddlInversoresValue].porcentajeSobreDimens + '%').val(_inversores[ddlInversoresValue].porcentajeSobreDimens);
-            $('#precioInv').html(_inversores[ddlInversoresValue].fPrecio + '$').val(_inversores[ddlInversoresValue].fPrecio); 
-            $('#costoTotalInversores').html(_inversores[ddlInversoresValue].precioTotal + '$').val(_inversores[ddlInversoresValue].precioTotal);
-    
-    
-            ///Pintada de resultados - Inversor
-            $('#inpModeloInversor').val(_inversores[ddlInversoresValue].vNombreMaterialFot);
-    
+            let objInversorCB = getInversorCostoBeneficio(1);
+            $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
+            vaciarModelosInversores();
+            $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
+            let _viaticos = await calcularViaticosBT(objInversorCB);
+            mostrarRespuestaViaticos(_viaticos); //:void() =
+
+
+
+
             //Equipo seleccionado - Inversor seleccionado
             sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(_inversores[ddlInversoresValue]));
             
             //Se calculan viaticos
-            _viaticos = await calcularViaticosBT();
-            mostrarRespuestaViaticos(_viaticos);
+            let _viaticS = await calcularViaticosBT();
+            mostrarRespuestaViaticos(_viaticS);
         }
     });
+}
+
+function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
+    let oldPrice=0, newPrice=0;
+    let oldPower=0, newPower=0;
+    let Respuesta = {};
+    let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
+
+    if(banderaMarcaSelected == 1){ ///La marca fue seleccionada por el usuario
+        let marcaSeleccionada = $('#listInversores').val();
+        let newInversoresFiltered = [];
+
+        $.each(_inversors, function(i, inversor){
+            if(inversor.vMarca == marcaSeleccionada){
+                newInversoresFiltered.push(inversor);
+            }
+        });
+        
+        _inversors = newInversoresFiltered;
+    }
+
+    //Se requiere el inversor con menor precio y mayor potencia
+    for(let i=0; i<_inversors.length; i++)
+    {
+        newPrice = _inversors[i].fPrecio;
+        newPower = _inversors[i].fPotencia;
+
+        if(i==0){
+            oldPrice = _inversors[i].fPrecio;
+            oldPower = _inversors[i].fPotencia;
+        }
+
+        //Se obtiene el MENOR *precio* y el que tenga MAYOR *potencia*
+        if(oldPrice >= newPrice && oldPower <= newPower){
+            Respuesta = _inversors[i];
+        }
+    }
+
+    return Respuesta;
 }
 
 function limpiarDropDownListInversores(){
@@ -644,8 +672,19 @@ function limpiarDropDownListInversores(){
     });
 }
 
-function mostrarRespuestaViaticos(_viaticos){
-    var _viaticos = _viaticos.message;
+function limpiarDropDownListModelosInversores(){
+    //Se borran los options
+    $('#listModelosInversor option').each(function(){
+        if($(this).val() != "-1"){
+            $(this).val('');
+            $(this).text('');
+            $(this).remove();
+        }
+    });
+}
+
+function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores, totales, power, viaticos, etc
+    let _viaticos = _viatics.message;
 
     sessionStorage.setItem("ssViaticos", JSON.stringify(_viaticos));
     
@@ -653,6 +692,32 @@ function mostrarRespuestaViaticos(_viaticos){
     var objResp = sessionStorage.getItem("_consumsFormated");
     objResp = JSON.parse(objResp);
     /*#endregion*/
+
+    //Se pintan resultados de inversores
+    //Se cargan los inputs de la vista
+    $('#inpCostTotalInversores').val(_viaticos[0].inversores.precioTotal);
+
+    //Inversores  - /Tabla_oculta\
+    if(_viaticos[0].inversores.combinacion === true){
+        $('#cantidadInversores').val('QS1: '+__viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+        $('#inpCantidadInvers').val('QS1: '+__viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+    }
+    else{
+        $('#cantidadInversores').val(_viaticos[0].inversores.numeroDeInversores);
+        $('#inpCantidadInvers').val(_viaticos[0].inversores.numeroDeInversores);
+    }
+
+    $('#potenciaInversor').val(_viaticos[0].inversores.fPotencia);
+    $('#potenciaMaximaInv').val(_viaticos[0].inversores.iPMAX);
+    $('#potenciaNominalInv').val(_viaticos[0].inversores.potenciaNominal);
+    $('#potenciaPicoInv').val(_viaticos[0].inversores.potenciaPico);
+    $('#porcentajeSobreDim').val(_viaticos[0].inversores.porcentajeSobreDimens);
+    $('#precioInv').val(_viaticos[0].inversores.fPrecio); 
+    $('#costoTotalInversores').val(_viaticos[0].inversores.precioTotal);
+        
+        
+    ///Pintada de resultados - Inversor
+    $('#inpModeloInversor').val(_viaticos[0].inversores.vNombreMaterialFot);
 
     //Se pintan los resultados del calculo de viaticos
     promedioConsumoMensual = objResp.consumo._promCons.consumoMensual.promedioConsumoMensual;
@@ -674,8 +739,6 @@ function mostrarRespuestaViaticos(_viaticos){
     $('#inpPagoNuevoProm').val('$'+_viaticos[0].roi.generacion.nuevoPagoBimestral);
     $('#inpAhorroMensual').val('$'+_viaticos[0].roi.ahorro.ahorroMensualEnPesosMXN);
     $('#inpAhorroAnual').val('$'+_viaticos[0].roi.ahorro.ahorroAnualEnPesosMXN);
-    // $('#').val();
-    // $('#').val();
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
@@ -1069,20 +1132,13 @@ function cambiarModalidad(control){
 function mostrarListModelosInversores(){
     let divDDLInversoresModelo = $('#divDropDownListInversorModelo');
     let ddlInversoresModelo = $('#listModelosInversor');
-    let banderaShow = 0;
 
-    if(banderaShow = 0){
-        divDDLInversoresModelo.hide();
-        ddlInversoresModelo.attr("disabled",false);
-
-        banderaShow = 1;
+    if($('#chckModelosInversor').is(":checked")){
+        divDDLInversoresModelo.show();
     }
     else{
-        divDDLInversoresModelo.show();
-        ddlInversoresModelo.val(-1);
-        ddlInversoresModelo.attr("disabled",true);
-
-        banderaShow = 0;
+        divDDLInversoresModelo.hide();
+        ddlInversoresModelo.attr("disabled",false);
     }
 }
 
