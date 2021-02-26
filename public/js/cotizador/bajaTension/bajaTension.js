@@ -1,12 +1,12 @@
 /*#region Datos*/
 async function calcularPropuestaBT(e, dataEdited){ ///Main()
-    var dataEdited = dataEdited || null;
-    var data = null; //DATA de la propuesta a calcular
+    dataEdited = dataEdited || null;
+    let data = null; //DATA de la propuesta a calcular
 
     //Se valida si la propuesta a realizar es una NUEVA o AJUSTADA(modificada)
     if(dataEdited === null){
         //Se obtienen los datos de la propuesta
-        dataPropuesta = cacharDatosPropuesta();
+        let dataPropuesta = cacharDatosPropuesta();
 
         if(typeof dataPropuesta != "undefined"){
             data = dataPropuesta;
@@ -142,7 +142,7 @@ function obtenerCombinaciones(data){
 function calcularViaticosBT(objInversor){
     let _cotizarViaticos = [];
     //Datos de la propuesta (consumos, direccion, tarifa)
-    var datosPropuesta = cacharDatosPropuesta();
+    let datosPropuesta = cacharDatosPropuesta();
     //Equipos seleccionados
     let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
     let ssinversor = '';
@@ -174,8 +174,8 @@ function calcularViaticosBT(objInversor){
                 "arrayBTI": _cotizarViaticos,
                 "direccionCliente": datosPropuesta.direccionCliente,
                 "consumos": consumptions,
-                "tarifa": dataPropuesta.tarifa,
-                "descuentoPropuesta": dataPropuesta.porcentajeDescuento
+                "tarifa": datosPropuesta.tarifa,
+                "descuentoPropuesta": 0
             },
             dataType: 'json',
             success: function(resultViaticos){
@@ -214,7 +214,7 @@ function generarPDF(data){
 function cacharDatosPropuesta(){
     banderaDelError = 0; //Bandera para validar si en algun proceso hubo un error
 
-    var _consumosBimestres = () => {
+    let _consumosBimestres = () => {
         __consumosBimestres = [];
 
         for(var i=0; i<6; i++)
@@ -232,7 +232,7 @@ function cacharDatosPropuesta(){
 
         return __consumosBimestres;
     };
-    var direccionCliente = () => {
+    let direccionCliente = () => {
         direc = $('#municipio').val() || null;
 
         if(direc.length>0){
@@ -549,8 +549,6 @@ function mostrarPanelSeleccionado(){
             //Equipo seleccionado - Panel seleccionado
             sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
     
-            // _panelSeleccionado[0] = _respuest[x].panel;
-    
             //Se carga dropDownList -Inversores-
             let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
             _inversores = _inversores.message; //Formating
@@ -558,6 +556,7 @@ function mostrarPanelSeleccionado(){
             
             ///EXPERIMENTAL
             mostrarInversorSeleccionado();
+            mostrarInversorModeloSeleccionado();
 
             vaciarRespuestaInversores(_inversores); //:void() = Se pintan las marcas de los inversores
             let objInversorCB = getInversorCostoBeneficio(0); //Se obtiene la mejor opcion 'Costo-Beneficio'
@@ -608,22 +607,41 @@ function mostrarInversorSeleccionado(){
             $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
             let _viaticos = await calcularViaticosBT(objInversorCB);
             mostrarRespuestaViaticos(_viaticos); //:void() =
-
-
-
-
-            //Equipo seleccionado - Inversor seleccionado
-            sessionStorage.setItem('__ssInversorSeleccionado',JSON.stringify(_inversores[ddlInversoresValue]));
-            
-            //Se calculan viaticos
-            let _viaticS = await calcularViaticosBT();
-            mostrarRespuestaViaticos(_viaticS);
         }
     });
 }
 
+function mostrarInversorModeloSeleccionado(){
+    let ddlModelosInversor = $('#listModelosInversor');
+
+    ddlModelosInversor.on('change', async function(){
+        let valueListModlsInv = ddlModelosInversor.val(); //Nombre - Modelo de inversor
+        let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
+        
+        limpiarResultados(1);
+
+        if(valueListModlsInv != '-1' || valueListModlsInv != -1){
+            let inversorFiltrado = searchInversor(_inversors,valueListModlsInv);
+            let _viatico = await calcularViaticosBT(inversorFiltrado);
+            mostrarRespuestaViaticos(_viatico);
+        }
+    });
+}
+
+function searchInversor(_inversor,marcaInv){
+    let Result = {};
+    
+    for(let i=0; i<_inversor.length; i++)
+    {
+        if(_inversor[i].vNombreMaterialFot == marcaInv){
+            Result = _inversor[i];
+        }
+    }
+
+    return Result;
+}
+
 function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
-    let oldPrice=0, newPrice=0;
     let oldPower=0, newPower=0;
     let Respuesta = {};
     let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
@@ -641,19 +659,17 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
         _inversors = newInversoresFiltered;
     }
 
-    //Se requiere el inversor con menor precio y mayor potencia
+    //Se requiere el inversor con mayor potencia
     for(let i=0; i<_inversors.length; i++)
     {
-        newPrice = _inversors[i].fPrecio;
         newPower = _inversors[i].fPotencia;
 
         if(i==0){
             oldPrice = _inversors[i].fPrecio;
-            oldPower = _inversors[i].fPotencia;
         }
 
         //Se obtiene el MENOR *precio* y el que tenga MAYOR *potencia*
-        if(oldPrice >= newPrice && oldPower <= newPower){
+        if(oldPower <= newPower){
             Respuesta = _inversors[i];
         }
     }
@@ -698,9 +714,9 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpCostTotalInversores').val(_viaticos[0].inversores.precioTotal);
 
     //Inversores  - /Tabla_oculta\
-    if(_viaticos[0].inversores.combinacion === true){
-        $('#cantidadInversores').val('QS1: '+__viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
-        $('#inpCantidadInvers').val('QS1: '+__viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_inversores[ddlInversoresValue].numeroDeInversores.invSoportMen);
+    if(_viaticos[0].inversores.combinacion === "true" || _viaticos[0].inversores.combinacion === true){
+        $('#cantidadInversores').val('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
+        $('#inpCantidadInvers').val('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
     }
     else{
         $('#cantidadInversores').val(_viaticos[0].inversores.numeroDeInversores);
@@ -720,9 +736,20 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpModeloInversor').val(_viaticos[0].inversores.vNombreMaterialFot);
 
     //Se pintan los resultados del calculo de viaticos
-    promedioConsumoMensual = objResp.consumo._promCons.consumoMensual.promedioConsumoMensual;
-    generacionMensual = _viaticos[0].power.generacion.promedioDeGeneracion;
-    nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioConsumoBimestral;
+    let generacionMensual = '';
+    let nuevoConsumoBimestral = '';
+    let promedioConsumoMensual = objResp.consumo._promCons.consumoMensual.promedioConsumoMensual;
+
+    if(_viaticos[0].power.generacion.promedioDeGeneracion){
+        generacionMensual = _viaticos[0].power.generacion.promedioDeGeneracion;
+
+        if(_viaticos[0].power.nuevosConsumos.promedioConsumoBimestral){
+            nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioConsumoBimestral;
+        }
+    }
+    else{
+        generacionMensual = _viaticos[0].power.generacion.promedioGeneracionMensual;
+    }
 
     $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
     $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
@@ -1149,34 +1176,31 @@ function sliderModificarPropuesta(){
 }
 
 function modificarPropuesta(){
-    $('#btnModificarPropuesta').click(function(){
-        alert('hola modificar');
+    $('#btnModificarPropuesta').click(async function(){
+        // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+        $('listPaneles').val('-1');
+        $('listInversores').val('-1');
+
+        // //Se limpian los dropDownList de Paneles e Inversores
+        // limpiarDropDownListPaneles();
+        // limpiarDropDownListInversores();
+
+        // //Se limpian inputs de -result- anterior
+        limpiarCampos();
+
+        // //Cachar los valores de los porcentajes / panel de ajuste
+        porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
+        porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+
+        // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
+        sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
+
+        // //Se arma la data para editar la propuesta
+        dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+
+        // //Se realiza nuevamente la propuesta
+        await calcularPropuestaBT(null, dataPorcentajes);
     });
-
-
-    // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
-    // $('listPaneles').val('-1');
-    // $('listInversores').val('-1');
-
-    // //Se limpian los dropDownList de Paneles e Inversores
-    // // limpiarDropDownListPaneles();
-    // // limpiarDropDownListInversores();
-
-    // //Se limpian inputs de -result- anterior
-    // limpiarCampos();
-
-    // //Cachar los valores de los porcentajes / panel de ajuste
-    // porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
-    // porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
-
-    // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
-    // sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
-
-    // //Se arma la data para editar la propuesta
-    // dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
-
-    // //Se realiza nuevamente la propuesta
-    // await calcularPropuestaBT(null, dataPorcentajes);
 }
 
 function deshabilitarBotonesPDF(){

@@ -79,13 +79,20 @@ function getVistaResultados(){
     });
 }
 
-function calcularViaticosMT(){
+function calcularViaticosMT(obInversor){
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
-    let inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
+    let inversor = '';
     let direccion = $('#municipio').val();
     let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
     periodos = JSON.parse(periodos);
     periodos = periodos[0];
+
+    if(obInversor == null){
+        inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
+    }
+    else{
+        inversor = obInversor
+    }
 
     let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
 
@@ -102,11 +109,8 @@ function calcularViaticosMT(){
             },
             dataType: 'json',
             success: function(resultViaticos){
-                console.log('Viatiocs MT: ');
-                console.log(resultViaticos);
-
-                // sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
-                // resolve(resultViaticos);
+                sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
+                resolve(resultViaticos);
             },
             error: function(error){
                 reject('Se produjo un error al intentar calcular viaticos: '+error);
@@ -200,7 +204,7 @@ function crudState(opcion){
             $('#btnAgregarPeriodo').attr("disabled",false);
             $('#btnEditarPeriodo').attr("disabled",true);
             $('#btnActualizarPeriodo').attr("disabled",true);
-            limpiarCampos();
+            limpiarCamposPeriodo();
         break;
         case 1: //Editar
             $('#btnAgregarPeriodo').attr("disabled",true);
@@ -281,13 +285,27 @@ function mostrarPanelSelected(){
             sessionStorage.setItem('__ssPanelSeleccionadoMT',JSON.stringify(_paneles[ddlPanelesValue].panel));
     
             //Se carga dropDownList -Inversores-
-            ___inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
-            sessionStorage.setItem("_respInversoresMT",JSON.stringify(___inversores));
-            vaciarRespuestaInversores(___inversores);
+            let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
+            _inversores = _inversores.message;
+            sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
+            
+            ///EXPERIMENTAL
+            mostrarInversorSeleccionado();
+            mostrarInversorModeloSeleccionado();
 
-            //EXPERIMENTAL
-            mostrarInversorSelected();
-            //EXPERIMENTAL
+            vaciarRespuestaInversores(_inversores); //:void() = Se pintan las marcas de los inversores
+            let objInversorCB = getInversorCostoBeneficio(0); //Se obtiene la mejor opcion 'Costo-Beneficio'
+            
+            //Se selecciona MARCA en el dropDownListInversoresMarca
+            $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
+            
+            vaciarModelosInversores(); //:void() = Se pitan los modelos de la marca seleccionada
+
+            //Se selecciona MODELO en el dropDownListInversoresModelos
+            $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
+            let _viaticos = await calcularViaticosMT(objInversorCB);
+            mostrarRespuestaViaticos(_viaticos); //:void() =
+            ///EXPERIMENTAL
         }
     });
 }
@@ -299,6 +317,7 @@ function mostrarInversorSelected(){
         var ddlInversoresValue = parseInt(ddlInversores.val());
 
         limpiarResultados(1);
+        limpiarDropDownListModelosInversores();
     
         if(ddlInversoresValue === '-1' || ddlInversoresValue === -1){
             $('#divTotalesProject').css("display",""); //???
@@ -312,9 +331,8 @@ function mostrarInversorSelected(){
         }
         else{
             /*#region Formating _respuestaPaneles*/
-            let inversores__ = sessionStorage.getItem('_respInversoresMT');
+            let inversores__ = sessionStorage.getItem('_respInversores');
             inversores__ = JSON.parse(inversores__);
-            inversores__ = inversores__.message;
             /*#endregion*/
     
             //Se desbloquea boton de -PanelAjustePropuesta-
@@ -351,12 +369,12 @@ function mostrarInversorSelected(){
             ///Pintada de resultados - Inversor
             $('#inpModeloInversor').val(inversores__[ddlInversoresValue].vNombreMaterialFot);
     
-            //Equipo seleccionado - Inversor seleccionado
-            sessionStorage.setItem('__ssInversorSeleccionadoMT',JSON.stringify(inversores__[ddlInversoresValue]));
-            
-            //Se calculan viaticos
-            let objResultViaticos = await calcularViaticosMT();
-            mostrarRespuestaViaticos(objResultViaticos);
+            let objInversorCB = getInversorCostoBeneficio(1);
+            $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
+            vaciarModelosInversores();
+            $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
+            let _viaticos = await calcularViaticosMT(objInversorCB);
+            mostrarRespuestaViaticos(_viaticos); //:void() =
         }
     });
 }
@@ -371,6 +389,10 @@ function limpiarDropDownListPaneles(){
         }
     });
 }
+
+function limpiarCamposPeriodo(){
+    $('.inp'+tarifaMT).val('');
+} 
 
 function backToCotizacion(){
     $("#divCotizacionMediaTension").css("display","");
