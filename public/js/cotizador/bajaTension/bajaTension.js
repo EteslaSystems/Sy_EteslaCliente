@@ -1,6 +1,7 @@
 /*#region Datos*/
-async function calcularPropuestaBT(e, dataEdited){ ///Main()
-    dataEdited = dataEdited || null;
+async function calcularPropuestaBT(e, dataEdite){ ///Main()
+    var tarifaMT = null;
+    let dataEdited = dataEdite || null;
     let data = null; //DATA de la propuesta a calcular
 
     //Se valida si la propuesta a realizar es una NUEVA o AJUSTADA(modificada)
@@ -1199,7 +1200,12 @@ function modificarPropuesta(){
         dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
         // //Se realiza nuevamente la propuesta
-        await calcularPropuestaBT(null, dataPorcentajes);
+        if(tarifaMT === null){
+            await calcularPropuestaBT(null, dataPorcentajes);
+        }
+        else{
+            await calcularPropuestaMT(dataPorcentajes);
+        }
     });
 }
 

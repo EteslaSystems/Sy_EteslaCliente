@@ -88,6 +88,8 @@ class MediaTensionController extends Controller
 		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["idUsuario"] = session('dataUsuario')->idUsuario;
 		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
+		$arrayCompleto["tipoCotizacion"] = "mediaTension";
+		$arrayCompleto["porcentajePropuesta"] = $request->porcentajePropuesta;
 		
 		$response = $this->cotizacion->sendPeriodsGDMTH(['json' => $array]);
 		$response = response()->json($response);
