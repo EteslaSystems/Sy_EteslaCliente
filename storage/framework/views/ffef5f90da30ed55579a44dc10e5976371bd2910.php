@@ -73,7 +73,7 @@
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
-                                <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej" disabled><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
+                                <button id="btnModalAjustePropuesta" class="btn btn-xs pull-right" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
                             </div>
                             <!--Fin Seccion "Elegir un equipo" -->
                         </div>
@@ -172,7 +172,7 @@
                                             </div>
                                         </div>
                                         <!-- Fin  del Panel de ajuste de cotizacion -->
-                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" data-dismiss="modal" disabled><strong>Modificar</strong></button>
+                                        <button id="btnModificarPropuesta" class="btn btn-sm btn-warning pull-right" data-dismiss="modal" onclick="modificarPropuesta();" disabled><strong>Modificar</strong></button>
                                     </div>
                                 </div>
                             </div>

@@ -39,8 +39,6 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
 
         ///Enviar propuesta AJUSTADA
         _cotizacionAjustada = await enviarCotizacion(data);
-        console.log('cotizacion editada');
-        console.log(_cotizacionAjustada);
         vaciarRespuestaPaneles(_cotizacionAjustada);
     }
 }
@@ -367,9 +365,6 @@ function activarDesactivarBotones(equipo,habilidad){
             //Se desbloquean botones de GenerarPDF y GuardarPropuesta
             $('#btnGuardarPropuesta').prop("disabled", false);
             $('#btnGenerarEntregable').prop("disabled", false);
-
-            //Panel de ajuste de cotizacion - Aparece
-            $('#btnModalAjustePropuesta').attr("disabled",false);
 
             //Check Inversor-Modelos
             $('#chckModelosInversor').attr("disabled",false);
@@ -771,14 +766,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
     //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
-    $('#rangeValueDescuento').val(_viaticos[0].descuento);
-
-
-
-
-    ///EXPERIMENTAL
-    modificarPropuesta();
-    ///EXPERIMENTAL
+    $('#rangeValueDescuento').val(_viaticos[0].descuento)
 }
 /*#endregion*/
 /*#region Combinaciones*/
@@ -1176,37 +1164,35 @@ function sliderModificarPropuesta(){
     }
 }
 
-function modificarPropuesta(){
-    $('#btnModificarPropuesta').click(async function(){
-        // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
-        $('listPaneles').val('-1');
-        $('listInversores').val('-1');
+async function modificarPropuesta(){
+    // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+    $('listPaneles').val('-1');
+    $('listInversores').val('-1');
 
-        // //Se limpian los dropDownList de Paneles e Inversores
-        // limpiarDropDownListPaneles();
-        // limpiarDropDownListInversores();
+    // //Se limpian los dropDownList de Paneles e Inversores
+    // limpiarDropDownListPaneles();
+    // limpiarDropDownListInversores();
 
-        // //Se limpian inputs de -result- anterior
-        limpiarCampos();
+    // //Se limpian inputs de -result- anterior
+    limpiarCampos();
 
-        // //Cachar los valores de los porcentajes / panel de ajuste
-        porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
-        porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+    // //Cachar los valores de los porcentajes / panel de ajuste
+    porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
+    porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
 
-        // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
-        sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
+    // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
+    sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
 
-        // //Se arma la data para editar la propuesta
-        dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+    // //Se arma la data para editar la propuesta
+    dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
-        // //Se realiza nuevamente la propuesta
-        if(tarifaMT === null){
-            await calcularPropuestaBT(null, dataPorcentajes);
-        }
-        else{
-            await calcularPropuestaMT(dataPorcentajes);
-        }
-    });
+    // //Se realiza nuevamente la propuesta
+    if(tarifaMT === null){
+        await calcularPropuestaBT(null, dataPorcentajes);
+    }
+    else{
+        await calcularPropuestaMT(dataPorcentajes);
+    }
 }
 
 function deshabilitarBotonesPDF(){

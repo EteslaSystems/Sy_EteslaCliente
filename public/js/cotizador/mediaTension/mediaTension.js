@@ -13,14 +13,16 @@ async function calcularPropuestaMT(dataEditada){
     dataSent.direccionCliente = clienteCargado.direccion;
     dataSent.idCliente = clienteCargado.id;
 
-    if(dataEditada != null){
+    if(dataEdited != null){
         dataSent.porcentajePropuesta = dataEdited.porcentajePropuesta;
     }
 
     if(clienteCargado != false){
         if(validarPeriodosVacios() === true){
-            //Pintar vista de resultados
-            await getVistaResultados();
+            if(dataEdited === null){ ///COTIZACION_NUEVA
+                //Pintar vista de resultados
+                await getVistaResultados();
+            }
 
             new Promise((resolve, reject) => {
                 $.ajax({
@@ -178,8 +180,8 @@ function actualizarPeriodo(){
 
 /*#region Logica*/
 function visualizarPeriodos(option){
-    var iterador = option.value;
-    var indexador = () => { 
+    let iterador = option.value;
+    let indexador = () => { 
         $('#lstPeriodosGDMTH option').each(function(){
             valueOption = parseInt($(this).text());
         })
@@ -191,7 +193,7 @@ function visualizarPeriodos(option){
     if(iterador != indexador){//Leer || Visualizar periodo
         crudState(3);
         //Se obtiene el nombre de las propiedades del objeto que se encuentra guardado en la posicion señalada dentro del array _periodos
-        for(var key in _periodos[iterador-1])
+        for(let key in _periodos[iterador-1])
         {
             //Vaciado/Visualizado de los periodos *grabados* en los inputs
             document.getElementById('inp'+key).value = _periodos[iterador-1][key];
@@ -241,7 +243,7 @@ function tarifaSelected(botonTarifa){
 }
 
 function sumarIndexador(){
-    var indexador = () => { 
+    let indexador = () => { 
         $('#lstPeriodosGDMTH option').each(function(){
             valueOption = parseInt($(this).text());
         })
