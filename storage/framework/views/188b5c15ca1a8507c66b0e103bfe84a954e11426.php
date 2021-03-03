@@ -35,7 +35,7 @@
                                                 <label for="inpPrecioAg">Precio</label>
                                                 <input id="inpPrecioAg" type="number" min=".50" step="any" class="form-control inpAg" >
                                             </div>
-                                            <button id="btnAddAg" type="button" class="btn btn-primary" onclick="addAgregado();">+</button>
+                                            <button id="btnAddAg" type="button" class="btn btn-primary" value="0" onclick="addAgregado(this);">+</button>
                                         </form>
                                     </div>
                                     <!-- Final_Controles_CRUD_Agregados -->
@@ -74,58 +74,84 @@
         </div>
     </div>
     <div class="card-body bg-white">
+        <!-- Inicio_ControlesCRUD-Periodos -->
+        <div class="row mt-3">
+            <div class="col-md-4 col-sm-12 mb-3">
+                <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()" style="display:none;">+</button>
+                <div class="menu-content shadow" id="menuContentGDMTH">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="inpPerdidaGDMTH">Perdida</label>
+                                <input class="form-control" type="text" id="inpPerdidaGDMTH" value="18">
+                            </div>
+                            <div class="form-group">
+                                <label for="inpDescuentoGDMTH">Descuento</label>
+                                <input class="form-control" type="text" id="inpDescuentoGDMTH" value="0">
+                            </div>
+                        </div>
+                        <div class="col checkbox">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="chbAddItemGDMTH">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12 mb-3 d-flex justify-content-end">
+                <div class="input-group w-auto px-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Periodo(s)</span>
+                    </div>
+                    <select id="lstPeriodosGDMTH" class="custom-select iptPeriodos" name="numPeriodos" onchange="visualizarPeriodos(this)">
+                        <option selected value="1">1</option>
+                    </select>
+                </div>
+                <div class="btn-group btn-group-lg" role="group">
+                    <button id="btnAgregarPeriodo" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                    </button>
+                    <button id="btnEditarPeriodo" class="btn btn-green" onclick="crudState(1);" title="Editar periodo de consumo" disabled>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button id="btnEliminarPeriodo" class="btn btn-green" title="Eliminar periodo de consumo" disabled style="display:none;">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <button id="btnActualizarPeriodo" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Fin_ControlesCRUD-Periodos -->
         <!-- Empieza formulario de GDMTO -->
         <div class="container" id="divGDMTO">
             <div class="row mt-3">
-                    <div class="col-md-4 col-sm-12 mb-3">
-                        <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTO()" style="display:none;">
-                            +
-                        </button>
-                        <div class="menu-content shadow" id="menuContentGDMTO">
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="input1">Perdida</label>
-                                        <input class="form-control" type="text" id="inpPerdidaGDMTO">
-                                    </div>
+            <div class="col-md-4 col-sm-12 mb-3">
+                <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTO()" style="display:none;">
+                    +
+                </button>
+                <div class="menu-content shadow" id="menuContentGDMTO">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="input1">Perdida</label>
+                                <input class="form-control" type="text" id="inpPerdidaGDMTO">
+                            </div>
 
-                                    <div class="form-group">
-                                        <label for="input2">Descuento</label>
-                                        <input class="form-control" type="text" id="inpDescuentoGDMTO">
-                                    </div>
-                                </div>
-                                <div class="col checkbox">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="chbAddItemGDMTO">
-                                    </label>
-                                </div>
+                            <div class="form-group">
+                                <label for="input2">Descuento</label>
+                                <input class="form-control" type="text" id="inpDescuentoGDMTO">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-8 col-sm-12 mb-3 d-flex justify-content-end">
-                        <div class="input-group w-auto px-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Periodo(s)</span>
-                            </div>
-                            <select class="custom-select iptPeriodos" name="numPeriodos" id="lstPeriodosGDMTO">
-                                <option selected value="-1">1</option>
-                            </select>
-                        </div>
-                        <div class="btn-group btn-group-lg" role="group">
-                            <button id="btnAgregarPeriodoGDMTO" class="btn btn-green" onclick="agregarPeriodoGDMTO();" title="Agregar periodo de consumo">
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                            </button>
-                            <button id="btnEditarPeriodoGDMTO" class="btn btn-green" onclick="editarPeriodoGDMTO();" title="Editar periodo de consumo" disabled>
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-                            <!--button id="btnEliminarPeriodoGDMTO" class="btn btn-green" onclick="#" title="Eliminar periodo de consumo" disabled>
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button-->
-                            <button id="btnActualizarPeriodoGDMTO" class="btn btn-green" onclick="actualizarPeriodoGDMTO();" title="Actualizar periodo de consumo" disabled>
-                                <i class="fa fa-refresh" aria-hidden="true"></i>
-                            </button>
+                        <div class="col checkbox">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="chbAddItemGDMTO">
+                            </label>
                         </div>
                     </div>
+                </div>
+            </div>
             </div>
             <div class="row mt-3">
                 <div class="col-lg-12">
@@ -135,26 +161,26 @@
                             <input id="inpIkWh" name="I(kWh)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="I(mxn/kWh)" class="mn-1">I (mxn/kWh):</label>
-                            <input id="I(mxn/kWh)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
+                            <label for="inpI_mxnkWh" class="mn-1">I (mxn/kWh):</label>
+                            <input id="inpI_mxnkWh" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inppagoTransmision" class="mn-1">P. Transmisión:</label>
-                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
+                            <input id="inppagoTransmision" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inpIkw" class="mn-1">I (kw):</label>
-                            <input id="inpI(kw)" name="I(kw)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
+                            <input id="inpIkw" name="I(kw)" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="C(mxn/kW)" class="mn-1">C (mxn/kW):</label>
-                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
+                            <label for="inpC_mxnkW" class="mn-1">C (mxn/kW):</label>
+                            <input id="inpC_mxnkW" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="D(mxn/kW)" class="mn-1">D (mxn/kW):</label>
-                            <input type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
+                            <label for="inpD_mxnkW" class="mn-1">D (mxn/kW):</label>
+                            <input id="inpD_mxnkW" type="number" min="0" class="form-control inpGDMTO" onkeypress="return filterFloat(event,this);">
                         </div>
                     </div>
                  </div>
@@ -164,54 +190,6 @@
 
         <!-- Empieza formulario de GDMTH -->
         <div class="container" id="divGDMTH" style="display:none;">
-            <div class="row mt-3">
-                <div class="col-md-4 col-sm-12 mb-3">
-                    <button type="button" class="btn btnMenuInfo" id="btnMenuInfo" onClick="loadMenuGDMTH()" style="display:none;">+</button>
-                    <div class="menu-content shadow" id="menuContentGDMTH">
-                        <div class="row d-flex justify-content-center align-items-center">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="inpPerdidaGDMTH">Perdida</label>
-                                    <input class="form-control" type="text" id="inpPerdidaGDMTH" value="18">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inpDescuentoGDMTH">Descuento</label>
-                                    <input class="form-control" type="text" id="inpDescuentoGDMTH" value="0">
-                                </div>
-                            </div>
-                            <div class="col checkbox">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="chbAddItemGDMTH">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-12 mb-3 d-flex justify-content-end">
-                    <div class="input-group w-auto px-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Periodo(s)</span>
-                        </div>
-                        <select id="lstPeriodosGDMTH" class="custom-select iptPeriodos" name="numPeriodos" onchange="visualizarPeriodos(this)">
-                            <option selected value="1">1</option>
-                        </select>
-                    </div>
-                    <div class="btn-group btn-group-lg" role="group">
-                        <button id="btnAgregarPeriodo" class="btn btn-green" onclick="agregarPeriodo();" title="Agregar periodo de consumo">
-                            <i class="fa fa-file-text" aria-hidden="true"></i>
-                        </button>
-                        <button id="btnEditarPeriodo" class="btn btn-green" onclick="crudState(1);" title="Editar periodo de consumo" disabled>
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </button>
-                        <button id="btnEliminarPeriodo" class="btn btn-green" title="Eliminar periodo de consumo" disabled style="display:none;">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                        <button id="btnActualizarPeriodo" class="btn btn-green" onclick="actualizarPeriodo();" title="Actualizar periodo de consumo" disabled>
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="row mt-3">
                 <div class="col-lg-12">
                     <div class="form-row">

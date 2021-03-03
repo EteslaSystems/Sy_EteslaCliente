@@ -1,4 +1,4 @@
-var tarifaMT = '';
+var tarifaMT = 'GDMTO'; ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 var _periodos = [];
 
 /*#region Solicitudes Servidor*/
@@ -94,6 +94,9 @@ function calcularViaticosMT(obInversor){
     let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
     periodos = JSON.parse(periodos);
     periodos = periodos[0];
+    
+    _agregado = _agregado; ///Arreglo de objAgregados *
+    _agregado = _agregado.length > 0 ? _agregado : null;///Comprobacion de que no venga vacio
 
     if(obInversor == null){
         inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
@@ -109,11 +112,11 @@ function calcularViaticosMT(obInversor){
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
             url: '/calcularVT',
-            data: {
-                "_token": $("meta[name='csrf-token']").attr('content'), 
+            data: { 
                 "propuesta": objPropuesta,
                 "direccionCliente": direccion,
-                "tarifa": tarifaMT
+                "tarifa": tarifaMT,
+                "_agregados": _agregado
             },
             dataType: 'json',
             success: function(resultViaticos){
@@ -240,6 +243,21 @@ function tarifaSelected(botonTarifa){
     tarifaOff = tarifaMT == "GDMTH" ? "GDMTO" : "GDMTH";
     $('#div'+tarifaOff).hide();
     $('#div'+tarifaMT).show();
+
+    _periodos = []; //Se reinicia/formatea el array de periodos-mediatension
+    limpiarlistPeriodos(); //Se limpia el dropdownlist que va contabilisando los periodos
+    limpiarCamposPeriodo(); //Se limpian los campos pertenecientes al periodo
+}
+
+function limpiarlistPeriodos(){
+    //Se borran los options
+    $('#lstPeriodosGDMTH option').each(function(){
+        if($(this).val() != "1"){
+            $(this).val('');
+            $(this).text('');
+            $(this).remove();
+        }
+    });
 }
 
 function sumarIndexador(){
@@ -384,8 +402,8 @@ function backToCotizacion(){
 
 /*#region Validaciones*/
 function validarCamposVacios(){
-    var respuesta = '';
-    $(".inpGDMTH").each(function(){
+    let respuesta = '';
+    $(".inp"+tarifaMT).each(function(){
         respuesta = $(this).val() === "" ? false : true;
     });
 

@@ -97,19 +97,6 @@ class MediaTensionController extends Controller
 		return $response;
 	}
 
-	//[Hoja_Excel: POWER]
-	public function firstStepPower(Request $request)
-	{
-		$array["arrayPeriodosGDMTH"] = $request->arrayPeriodosGDMTH;
-		$array["porcentajePerdida"] = $request->porcentajePerdida;
-		$array["potenciaReal"] = $request->potenciaReal;
-
-		$response = $this->cotizacion->firstStepPOWER(['json' => $array]);
-		$response = response()->json($response);
-		
-		return $response;
-	}
-
 	//2do. Paso
 	public function sendInversorSelected(Request $request)
 	{
@@ -129,6 +116,7 @@ class MediaTensionController extends Controller
 		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
 		$array["tarifa"] = $request->tarifa; //tarifaMT
+		$array["_agregados"] = $request->_agregados; //Agregados
 
 		$response = $this->cotizacion->calcularViaticos_Totales(['json' => $array]);
 		$response = response()->json($response);

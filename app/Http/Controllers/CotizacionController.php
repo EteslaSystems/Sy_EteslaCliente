@@ -40,4 +40,13 @@ class CotizacionController extends Controller
 
 		return $response;
     }
+
+	public function guardarPropuesta(Request $request){
+		$propuesta[""] = $request->x;
+
+		$response = $this->cotizacion->generarPDF(['json' => $propuesta]);
+		$response = response()->json($response);
+
+		return $response;
+	}
 }

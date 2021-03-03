@@ -21,6 +21,7 @@ Route::post('/agregar-cliente', 'MediaTensionController@create');
 
 //////COTIZACION
 Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
+Route::post('/GuardarPropuesta','CotizacionController@guardarPropuesta');
 
 /* --- Cotizacion Media Tension --- */
 Route::get('/mediaT', 'MediaTensionController@index');

@@ -1177,14 +1177,14 @@ async function modificarPropuesta(){
     limpiarCampos();
 
     // //Cachar los valores de los porcentajes / panel de ajuste
-    porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
-    porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+    let porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
+    let porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
 
     // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
     sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
 
     // //Se arma la data para editar la propuesta
-    dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+    let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
     // //Se realiza nuevamente la propuesta
     if(tarifaMT === null){

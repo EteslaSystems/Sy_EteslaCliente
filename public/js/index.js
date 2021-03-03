@@ -250,14 +250,14 @@ function buttonDetails(element){
 tenga su archivo JS en el 'public' del ClienteWeb, pasar la siguiente funcionalidad
 a dicho archivo. */
 /*                  Agregados_CRUD                  */
-var objAgregado = {};
 var _agregado = [];
-var contadorDeAgregados = 0;
 
-function addAgregado(){
-    var nombreAgregado = $('#inpAgregado').val();
-    var cantidadAgregado = $('#inpCantidadAg').val();
-    var precioAgregado = $('#inpPrecioAg').val();
+function addAgregado(element){
+    let nombreAgregado = $('#inpAgregado').val();
+    let cantidadAgregado = $('#inpCantidadAg').val();
+    let precioAgregado = $('#inpPrecioAg').val();
+    let contadorDeAgregados = parseInt(element.value);
+    let objAgregado = {};
 
     if(validarInputsVaciosAg(nombreAgregado) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
         objAgregado = {
@@ -270,22 +270,19 @@ function addAgregado(){
         _agregado.push(objAgregado);
     
         //Pintar 'Agregado' en tabla
-        var tableBody = $('#tblAgregados > tbody');
-        var filaNueva = tableBody.append('<tr><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+        let tableBody = $('#tblAgregados > tbody');
+        tableBody.append('<tr><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
         
         contadorDeAgregados++;
+        $('#'+element.id).val(contadorDeAgregados);
         limpiarInputsAgregado();
-
-        ///
-        console.log(_agregado);
-        console.log('Contador de agregados, despues de agregar item: '+contadorDeAgregados);
     }
 }
 
 function eliminarAgregado(){
     $(document).on('click','.deleteAg',function(event){
         //Se borra el *obj* logicamente del array
-        var posicionAgregado = event.target.id;
+        let posicionAgregado = event.target.id;
         _agregado.splice(posicionAgregado, 1);
         
         //Se elimina visualmente de la tabla
@@ -305,8 +302,8 @@ function limpiarInputsAgregado(){
     $('#inpCantidadAg').focus();
 }
 
-function validarInputsVaciosAg(valor){
-    valor = valor == undefined ? "" : valor;    
+function validarInputsVaciosAg(val){
+    let valor = val == undefined ? "" : val;    
     valor = valor.replace("&nbsp;", "");
 
     if (!valor || 0 === valor.trim().length){
