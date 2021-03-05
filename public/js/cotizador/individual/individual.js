@@ -64,7 +64,7 @@ function validarValoresDropDownLists(idPanel, idInversor){
     }
 }
 
-function validarCamposVacios()
+function validarCamposVaciosInd()
 {
     if($('#inpCantPaneles').prop("disabled") == true && $('#inpCantInversores').prop("disabled") == true)
     {
@@ -109,7 +109,7 @@ function sendSingleQuotation(){
     } */
     if(validarUsuarioCargado(direccionCliente) === true){
         if(validarValoresDropDownLists(idPanel, idInversor) == true ){
-            if(validarCamposVacios() == true){
+            if(validarCamposVaciosInd() == true){
                 $.ajax({
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     type: 'POST',
@@ -171,7 +171,7 @@ function sendSingleQuotation(){
                     //Totales
                     $('#inpPrecio').val(respuesta[0].totales.precio+'$');
                     $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA+'$');
-                    $('#precioMXN').val('$'+respuesta[0].totales.precioTotalMXN);
+                    $('#precioMXN').val('$'+respuesta[0].totales.precioMasIVAMXN);
                 });
             }
         }

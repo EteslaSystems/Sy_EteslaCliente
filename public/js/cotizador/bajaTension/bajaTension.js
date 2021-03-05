@@ -264,7 +264,7 @@ function cacharDatosPropuesta(){
 
 async function catchDataResults(){
     ///Falta implementar una validacion (esta debe de ser general, ya que esta funcion se implementara para las 3 posibles tipoCotizacion)
-    var data = {};
+    let data = {};
 
     if($('#salvarCombinacion').prop('checked')){///Combinaciones
         console.log('checked');
@@ -281,12 +281,11 @@ async function catchDataResults(){
         };
     }   
     else{///Equipo seleccionado
-        console.log('not checked');
-        var valListInvers = $('#listInversores').val();
+        let valListInvers = $('#listInversores').val();
 
         //Se valida que la dropDownListInversores no este vacia
         if(valListInvers != -1){
-            var ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
+            let ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
             idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
             _consummo = sessionStorage.getItem("_consumsFormated");
 
@@ -701,7 +700,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     sessionStorage.setItem("ssViaticos", JSON.stringify(_viaticos));
     
     /*#region Formating*/
-    var objResp = sessionStorage.getItem("_consumsFormated");
+    let objResp = sessionStorage.getItem("_consumsFormated");
     objResp = JSON.parse(objResp);
     /*#endregion*/
 
@@ -770,8 +769,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
 }
 /*#endregion*/
 /*#region Combinaciones*/
-async function vaciarCombinaciones(resultCombinaciones){
-    var resultCombinaciones = resultCombinaciones.message; //Formating
+async function vaciarCombinaciones(resultCombinacione){
+    let resultCombinaciones = resultCombinacione.message; //Formating
     resultCombinaciones = resultCombinaciones[0]; //ArrayCombinaciones
 
     //Guardar en un SessionStorage el ArrayCombinaciones
@@ -786,7 +785,7 @@ async function vaciarCombinaciones(resultCombinaciones){
 }
 
 function llenarListaDesplegableCombinaciones(combinaciones){
-    var ddlCombinaciones = $('#listConvinaciones');
+    let ddlCombinaciones = $('#listConvinaciones');
 
     $('#listConvinaciones').prop("disabled", false); //Se desbloquea DropDownList-Combinaciones
     $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
@@ -956,7 +955,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
 }
 
 function vaciarCombinacionesEnModal(combinaciones){
-    var promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
+    let promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
 
     /* Pildoras_Modal */
     /*             --Combinacion Economica--             */

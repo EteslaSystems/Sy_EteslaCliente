@@ -4,7 +4,7 @@ var _periodos = [];
 /*#region Solicitudes Servidor*/
 async function calcularPropuestaMT(dataEditada){
     let dataEdited = dataEditada || null; //Propuesta nueva o editada
-    let dataSent = {arrayPeriodos:'', direccionCliente:'', idCliente:'',porcentajePropuesta:0, porcentajeDescuento:0};
+    let dataSent = {arrayPeriodos:'', direccionCliente:'', idCliente:'', tarifa:'', porcentajePropuesta:0, porcentajeDescuento:0};
 
     //Validar que el cliente este cargado
     let clienteCargado = validarClienteCargado();
@@ -12,6 +12,7 @@ async function calcularPropuestaMT(dataEditada){
     dataSent.arrayPeriodos = _periodos;
     dataSent.direccionCliente = clienteCargado.direccion;
     dataSent.idCliente = clienteCargado.id;
+    dataSent.tarifa = tarifaMT;
 
     if(dataEdited != null){
         dataSent.porcentajePropuesta = dataEdited.porcentajePropuesta;
@@ -48,6 +49,8 @@ async function calcularPropuestaMT(dataEditada){
                 });
             })
             .then(resultPaneles => {
+                //Se guarda la respuesta de los periodos-procesados
+                sessionStorage.setItem('_consumsFormated',JSON.stringify(resultPaneles[0]));
                 //Se guarda la respuesta paneles para su futura implementacion
                 sessionStorage.setItem('_respPanelesMT',JSON.stringify(resultPaneles));
                 
@@ -96,7 +99,7 @@ function calcularViaticosMT(obInversor){
     periodos = periodos[0];
     
     _agregado = _agregado; ///Arreglo de objAgregados *
-    _agregado = _agregado.length > 0 ? _agregado : null;///Comprobacion de que no venga vacio
+    _agregado = _agregado == null || _agregado.length == 0 ? null : _agregado;///Comprobacion de que no venga vacio
 
     if(obInversor == null){
         inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");

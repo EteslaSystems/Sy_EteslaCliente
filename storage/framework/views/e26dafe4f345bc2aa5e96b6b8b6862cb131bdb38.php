@@ -54,6 +54,7 @@
 
 <!-- En mantenimiento -->
 <script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script>
+<script src="<?php echo e(asset('js/cotizador/cotizador.js')); ?>"></script>
 <!-- En mantenimiento -->
 
 
