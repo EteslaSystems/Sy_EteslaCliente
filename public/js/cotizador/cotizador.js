@@ -1,4 +1,74 @@
-/*#region Agregados*/
+/*#region Logica*/
+/* Generar - PDF */
+async function generarEntregable(){
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    let _consummo = null;
+    let data = {};
+    let tipoCotizacion = '';
+    
+    if(tarifaMT === null || typeof tarifaMT === 'undefined'){ //Cotizacion BajaTension
+        tipoCotizacion = "bajaTension";
+        
+        if($('#salvarCombinacion').prop('checked')){///Combinaciones
+            let combSeleccionada = $('#listConvinaciones').val();
+            let dataCombinaciones = sessionStorage.getItem("arrayCombinaciones");
+    
+            data = {
+                idCliente: idCliente,
+                dataCombinaciones: dataCombinaciones,
+                combSeleccionada: combSeleccionada,
+                tipoPropuesta: tipoCotizacion,
+                combinacionesPropuesta: true
+            };
+        }   
+        else{///Equipo seleccionado
+            let valListInvers = $('#listInversores').val();
+    
+            //Se valida que la dropDownListInversores no este vacia
+            if(valListInvers != -1){
+                let ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
+                _consummo = sessionStorage.getItem("_consumsFormated");
+    
+                data = {
+                    idCliente: idCliente,
+                    consumos: _consummo,
+                    propuesta: ssObjPropuestaEquipoSeleccionado,
+                    tipoPropuesta: tipoCotizacion,
+                    combinacionesPropuesta: false
+                };
+            }
+        }
+    }
+    else{ //Cotizacion MediaTension
+        let ssObjPropuestaMT = sessionStorage.getItem("propuestaMT");
+        _consummo = sessionStorage.getItem("_consumsFormated");
+
+        data = {
+            idCliente: idCliente,
+            consumos: _consummo,
+            propuesta: ssObjPropuestaMT,
+            tipoPropuesta: "mediaTension",
+            combinacionesPropuesta: false
+        }
+    }
+
+    pdfBase64 = await generarPDF(data);
+    nombreArchivoPDF = pdfBase64.fileName;
+    pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
+
+    //Se activan los botones que generan el //QR || PDF//
+    // $('#btnGenerarQrCode').prop("disabled",false);
+
+    $('#btnGenerarPdfFileViewer').prop("disabled",false);
+    $('#btnGenerarPdfFileViewer').on('click',function(){
+        console.log('Generando pdf. . .');
+        //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
+        let pdfWindow = window.open("");
+        pdfWindow.document.write(
+            "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
+        );
+    });
+}
 /*                  Agregados_CRUD                  */
 var _agregado = [];
 
@@ -60,8 +130,40 @@ function validarInputsVaciosAg(val){
     }
 }
 /*#endregion*/
-/*#region Botones-GenerarPDF*/
-function btnsGenerarEntregablePropuesta(){
-    
+/*#region Botones*/
+async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar Propuesta
+    let idButton = control.id;
+
+    if(idButton === "btnGenerarEntregable"){ ///GENERAR PDF
+        await generarEntregable(); //:void
+    }
+    else{ ///GUARDAR RESULTADOS DE PROPUESTA  
+        guardarPropuesta();
+    }
+}
+/*#endregion*/
+/*#region Solicitud-Servidor*/
+function generarPDF(data){
+    return new Promise((resolve, reject)=>{
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/PDFgenerate',
+            dataType: 'json',
+            data: data,
+            success: function(pdfBase64){
+                pdfBase64 = pdfBase64.message; //Formating
+
+                resolve(pdfBase64);
+            },
+            error: function(error){
+                reject('Hubo un error al intentar generar el PDF: '+error);
+            }
+        });
+    });
+}
+
+function guardarPropuesta(){
+    alert('guardarPropuesta says: =nothing=');
 }
 /*#endregion*/

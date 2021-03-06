@@ -223,7 +223,7 @@ function generarEntregable(){
     idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
 
-    data = { idCliente, ssPropuestaIndividual };
+    data = { idCliente, ssPropuestaIndividual, tipoPropuesta: "individual" };
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

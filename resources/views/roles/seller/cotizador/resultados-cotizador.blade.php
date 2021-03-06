@@ -79,8 +79,8 @@
                         </div>
                         <!-- Botones GuardaPropuesta_GenerarPDF -->
                         <div class="btn-group btn-group-sm pull-right" role="group" aria-label="Basic example">
-                            <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" title="guardar propuesta" disabled>GUARDAR</button>
-                            <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" disabled>GENERAR</button>
+                            <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" title="guardar propuesta" onclick="btnsGenerarEntregablePropuesta(this);" disabled>GUARDAR</button>
+                            <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" onclick="btnsGenerarEntregablePropuesta(this);" disabled>GENERAR</button>
                         </div>
                         <!-- Fin Botones GuardaPropuesta_GenerarPDF -->
                         <!-- Modal Opciones de generar propuesta -->

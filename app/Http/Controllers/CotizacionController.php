@@ -20,6 +20,7 @@ class CotizacionController extends Controller
 		$arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;
 		$arrayCompleto["oficina"] = session('dataUsuario')->oficina;
 		$arrayCompleto["idCliente"] = $request->idCliente;
+		$arrayCompleto["tipoPropuesta"] = $request->tipoPropuesta;
 
 		if($request->combinacionesPropuesta == "true"){ ///Combinacinoes (BajaTension)
 			$arrayCompleto["dataCombinaciones"] = $request->dataCombinaciones;

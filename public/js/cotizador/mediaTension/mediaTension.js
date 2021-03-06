@@ -1,3 +1,5 @@
+const { result } = require("lodash");
+
 var tarifaMT = 'GDMTO'; ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 var _periodos = [];
 
@@ -105,10 +107,12 @@ function calcularViaticosMT(obInversor){
         inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
     }
     else{
-        inversor = obInversor
+        inversor = obInversor;
     }
 
     let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
+
+    sessionStorage.removeItem("propuestaMT");
 
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -123,8 +127,14 @@ function calcularViaticosMT(obInversor){
             },
             dataType: 'json',
             success: function(resultViaticos){
-                sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos));
-                resolve(resultViaticos);
+                if(resultViaticos.status === "200" || resultViaticos.status === 200){
+                    sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos.message));
+                    resolve(resultViaticos);
+                }
+                else{
+                    console.log('Error, calcular viaticos: '+resultViaticos.message);
+                    alert('Error, calcular viaticos: '+resultViaticos.message);
+                }
             },
             error: function(error){
                 reject('Se produjo un error al intentar calcular viaticos: '+error);
