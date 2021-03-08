@@ -1,6 +1,6 @@
 /*#region Datos*/
 async function calcularPropuestaBT(e, dataEdite){ ///Main()
-    var tarifaMT = null;
+    this.tarifaMT = null;
     let dataEdited = dataEdite || null;
     let data = null; //DATA de la propuesta a calcular
 

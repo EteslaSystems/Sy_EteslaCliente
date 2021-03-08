@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="row text-center">
                             <!-- Sección combinaciones -->
-                            <div class="col form-group" id="divConvinaciones" style="display:none;">
+                            <div class="col form-group" id="divConvinaciones">
                                 <div class="form-row">
                                     <label>Combinacion</label>
                                     <select class="form-control" id="listConvinaciones" disabled>
@@ -51,7 +51,7 @@
                             </div>
                             <!-- Fin Sección combinaciones -->
                             <!-- Seccion "Elegir un equipo" -->
-                            <div class="col form-group" id="divElegirEquipo">
+                            <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="form-row">
                                     <label>Panel</label>
                                     <select id="listPaneles" class="form-control" disabled>

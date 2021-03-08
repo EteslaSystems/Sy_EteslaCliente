@@ -1,5 +1,3 @@
-const { result } = require("lodash");
-
 var tarifaMT = 'GDMTO'; ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 var _periodos = [];
 
@@ -252,7 +250,7 @@ function crudState(opcion){
 }
 
 function tarifaSelected(botonTarifa){
-    tarifaMT = botonTarifa.id == "btnTarifGDMTH" ? "GDMTH" : "GDMTO";
+    this.tarifaMT = botonTarifa.id == "btnTarifGDMTH" ? "GDMTH" : "GDMTO";
     tarifaOff = tarifaMT == "GDMTH" ? "GDMTO" : "GDMTH";
     $('#div'+tarifaOff).hide();
     $('#div'+tarifaMT).show();
