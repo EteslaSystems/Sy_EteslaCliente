@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/alert-bootstrap.css') }}">
     <script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=urakirabe"></script>
+
+    <!-- DataTables plugin js -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+
     <title>Etesla Paneles Solares - @section('title')@show</title>
 </head>
 <body>
@@ -49,6 +53,8 @@
 <script src="{{ asset('js/cotizador/bajaTension/bajaTension.js') }}"></script>
 <script src="{{ asset('js/cotizador/individual/individual.js') }}"></script>
 
+<!-- DataTable plugin -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
 <!-- En mantenimiento -->
 <script src="{{ asset('js/cotizador/mediaTension/mediaTension.js') }}"></script>
