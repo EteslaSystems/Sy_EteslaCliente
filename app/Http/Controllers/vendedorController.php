@@ -27,6 +27,8 @@ class vendedorController extends Controller
 		$precioDolar = $this->vendedor->precioDelDolar();
 		$precioDolar = json_decode($precioDolar->message);
 
+		// dd($precioDolar);
+
 		return view('roles.seller.inicioS', compact('precioDolar'));
 	}
 

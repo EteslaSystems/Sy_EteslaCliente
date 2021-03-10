@@ -9,20 +9,18 @@
                     </div>
                     <div class="hr-vertical"></div>
                     <div class="col">
-                        <?php $__currentLoopData = $precioDolar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $precioDolars): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <div class="form-group">
-                                <label><strong>Precio dolar</strong></label>
-                                <p>$<?php echo e($precioDolars -> precioDolar); ?> MXN</p>
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Ultima actualizacion</strong></label>
-                                <p><?php echo e($precioDolars -> fechaUpdate); ?></p>
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Fuente web</strong></label><br>
-                                <a href="<?php echo e($precioDolars -> fuente); ?>"><?php echo e($precioDolars -> fuente); ?></a>
-                            </div>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <div class="form-group">
+                            <label><strong>Precio dolar</strong></label>
+                            <p>$<?php echo e($precioDolar -> precioDolar); ?> MXN</p>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Ultima actualizacion</strong></label>
+                            <p><?php echo e($precioDolar -> fechaUpdate); ?></p>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Fuente web</strong></label><br>
+                            <a href="<?php echo e($precioDolar -> fuente); ?>"><?php echo e($precioDolar -> fuente); ?></a>
+                        </div>
                     </div>  
                 </div>
             </div>
