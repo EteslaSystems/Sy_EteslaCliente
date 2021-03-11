@@ -220,10 +220,11 @@ function changeValue_bInstalacion(){
 /*#region Generar entregable_propuesta (PDF)*/
 //"catchDataResult()->"
 function generarEntregable(){   
-    idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
+    this.tarifaMT = 'individual';
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    let ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
 
-    data = { idCliente, ssPropuestaIndividual, tipoPropuesta: "individual" };
+    let data = { idCliente, ssPropuestaIndividual, tipoPropuesta: "individual" };
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

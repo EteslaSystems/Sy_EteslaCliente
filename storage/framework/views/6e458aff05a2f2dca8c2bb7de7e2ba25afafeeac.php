@@ -5,26 +5,6 @@
         body {
             font-family: Helvetica;
         }
-        .hr-sect {
-            display: flex;
-            flex-basis: 100%;
-            align-items: center;
-            color: rgba(0, 0, 0, 0.5);
-            font-weight: bold;
-            font-size: 15px;
-            margin: 8px 0px;
-            padding: 25px 0px;
-        }
-        .hr-sect::before,
-        .hr-sect::after {
-            content: "";
-            flex-grow: 1;
-            background: rgba(0, 0, 0, 0.35);
-            height: 1px;
-            font-size: 0px;
-            line-height: 0px;
-            margin: 0px 16px;
-        }
         button[aria-expanded=true] .fa-plus {
             display: none;
         }
@@ -86,16 +66,12 @@
         }
     </style>
 
-    <br>
-
-    <div class="hr-sect"> MIS CLIENTES </div>
-
     <div class="table-responsive-sm">
         <table class="table table-image">
             <thead>
                 <tr>
-                    <th class="text-center">Total</th>
-                    <th class="text-left">Nombre del cliente</th>
+                    <th class="text-left">Propuestas</th>
+                    <th class="text-center">Nombre del cliente</th>
                     <th class="text-center">Opciones</th>
                 </tr>
             </thead>

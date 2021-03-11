@@ -164,6 +164,34 @@ function generarPDF(data){
 }
 
 function guardarPropuesta(){
-    alert('guardarPropuesta says: =nothing=');
+    let dataToSent = { idCliente: null, propuesta: null };
+    dataToSent.idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+
+    if(tarifaMT === null || typeof tarifaMT === 'undefined'){ //BajaTension
+        dataToSent.propuesta = sessionStorage.getItem("answPropuesta");
+    }
+    else if(tarifaMT == "indifidual"){ //Individual
+        dataToSent.propuesta = sessionStorage.getItem("ssPropuestaIndividual");
+    }
+    else{ //Mediatension
+        dataToSent.propuesta = sessionStorage.getItem("propuestaMT");
+    }
+
+    new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/GuardarPropuesta',
+            dataType: 'json',
+            data: dataToSent,
+            success: function(respuesta){
+                console.log('respuesta guardar propuesta');
+                console.log(respuesta);
+            },
+            error: function(error){
+                reject('Hubo un error al intentar generar el PDF: '+error);
+            }
+        });
+    });
 }
 /*#endregion*/

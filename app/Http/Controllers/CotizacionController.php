@@ -43,9 +43,11 @@ class CotizacionController extends Controller
     }
 
 	public function guardarPropuesta(Request $request){
-		$propuesta[""] = $request->x;
+		$propuesta["idVendedor"] = session('dataUsuario')->idPersona;
+		$propuesta["idCliente"] = $request->idCliente;
+		$propuesta["propuesta"] = $request->propuesta;
 
-		$response = $this->cotizacion->generarPDF(['json' => $propuesta]);
+		$response = $this->cotizacion->guardarPropuesta(['json' => $propuesta]);
 		$response = response()->json($response);
 
 		return $response;
