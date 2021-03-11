@@ -1,4 +1,8 @@
 <?php
+Route::get('misclientes', function(){
+    return view('roles.seller.cotizador.misClientes');
+});
+
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');
 Route::post('/', 'usuarioController@validarUsuario');
@@ -116,10 +120,6 @@ Route::get('/head',function() {
 });
 
 //Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
-
-// Route::get('/paneles', function(){
-//     return view('roles/admin/paneles');
-// });
 
 // Route::get('/inversores', function(){
 //     return view('roles/admin/inversores');

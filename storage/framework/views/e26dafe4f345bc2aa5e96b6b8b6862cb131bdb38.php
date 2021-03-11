@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/index.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/alert-bootstrap.css')); ?>">
     <script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=urakirabe"></script>
+
+    <!-- DataTables plugin js -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+
     <title>Etesla Paneles Solares - <?php $__env->startSection('title'); ?><?php echo $__env->yieldSection(); ?></title>
 </head>
 <body>
@@ -51,6 +55,8 @@
 <script src="<?php echo e(asset('js/cotizador/bajaTension/bajaTension.js')); ?>"></script>
 <script src="<?php echo e(asset('js/cotizador/individual/individual.js')); ?>"></script>
 
+<!-- DataTable plugin -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
 
 <!-- En mantenimiento -->
 <script src="<?php echo e(asset('js/cotizador/mediaTension/mediaTension.js')); ?>"></script>

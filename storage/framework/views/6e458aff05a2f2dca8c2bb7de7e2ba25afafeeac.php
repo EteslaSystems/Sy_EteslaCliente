@@ -1,44 +1,192 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startSection('agregarClientes'); ?>
     <?php echo $__env->yieldSection(); ?>
+    <style>
+        body {
+            font-family: Helvetica;
+        }
+        .hr-sect {
+            display: flex;
+            flex-basis: 100%;
+            align-items: center;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            font-size: 15px;
+            margin: 8px 0px;
+            padding: 25px 0px;
+        }
+        .hr-sect::before,
+        .hr-sect::after {
+            content: "";
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.35);
+            height: 1px;
+            font-size: 0px;
+            line-height: 0px;
+            margin: 0px 16px;
+        }
+        button[aria-expanded=true] .fa-plus {
+            display: none;
+        }
+        button[aria-expanded=false] .fa-minus {
+            display: none;
+        }
+        .btn-link {
+            text-decoration : none !important;
+            color: #FFF;
+        }
+        .btn-link:hover {
+            text-decoration : none !important;
+            color: #DDD;
+        }
+        .card-header {
+            background: rgba(0, 0, 0, 0.35);
+        }
+        thead {
+            background: rgba(0, 0, 0, 0.20);
+        }
+        tbody .th-1 {
+            width: 5%;
+        }
+        tbody .th-2 {
+            width: 40%;
+        }
+        tbody .td-1 {
+            width: 55%;
+            text-align: left;
+        }
+        tbody .td-2 {
+            width: 10%;
+            background: rgba(0, 0, 0, 0.20);
+        }
+        tbody .td-3 {
+            width: 60%;
+        }
+        tbody .td-4 {
+            width: 30%;
+        }
+        .centered {
+            display: flex;
+        }
+        .centered div {
+            margin: auto auto;
+        }
+        .centered table {
+            margin: auto auto;
+        }
+        .centered small {
+            font-size: 10px;
+        }
+        .transform {
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .table-image td, th {
+                vertical-align: middle;
+        }
+    </style>
+
+    <br>
+
+    <div class="hr-sect"> MIS CLIENTES </div>
+
     <div class="table-responsive-sm">
-        <table class="table table-striped table-sm">
+        <table class="table table-image">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Dirección</th>
-                    <th>Telefono</th>
-                    <th>Celular</th>
-                    <th>Email</th>
-                    <th style="text-align:center;">Actions</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-left">Nombre del cliente</th>
+                    <th class="text-center">Opciones</th>
                 </tr>
             </thead>
+
             <tbody>
-                <?php if(isset($consultarClientes)): ?>
-                    <?php ($numeroLista = 1); ?>
-                    <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <th><?php echo e($numeroLista); ?></th>
-                            <td><?php echo e($cliente->vNombrePersona); ?>&nbsp;<?php echo e($cliente->vPrimerApellido); ?>&nbsp;<?php echo e($cliente->vSegundoApellido); ?></td>
-                            <td><?php echo e($cliente->vCalle); ?>,&nbsp;<?php echo e($cliente->vMunicipio); ?>,&nbsp;<?php echo e($cliente->vEstado); ?></td>
-                            <td><?php echo e($cliente->vTelefono); ?></td>
-                            <td><?php echo e($cliente->vCelular); ?></td>
-                            <td><?php echo e($cliente->vEmail); ?></td>
-                            <td>
-                                <a href="<?php echo e(url('editar-cliente', [$cliente->idPersona])); ?>" class="btn btn-sm btn-warning" title="Editar">
-                                    <img src="https://img.icons8.com/material-outlined/18/000000/multi-edit.png">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="<?php echo e(url('eliminar-cliente', [$cliente->idPersona])); ?>" class="btn btn-sm btn-danger" title="Eliminar">
-                                    <img src="https://img.icons8.com/material-outlined/18/000000/delete-trash.png">
-                                </a>
-                            </td>
-                        </tr>
-                        <?php ($numeroLista = $numeroLista + 1); ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
+                <tr>
+                    <td class="td-2 text-center">
+                        <button type="button" class="btn btn-info btn-sm">
+                             &nbsp; <span class="badge badge-light">10</span> &nbsp;
+                        </button>
+                    </td>
+                    
+                    <td class="td-3 text-left">
+                        <i class="fa fa-user-o"></i> &nbsp; Pedro Pablo Pedroza Perez
+                    </td>
+
+                    <td class="td-4 text-center">
+                        <button type="button" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
+                            <small>Editar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
+                            <small>Borrar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success btn-sm">
+                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
+                            <small>Detalles</small>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td-2 text-center">
+                        <button type="button" class="btn btn-info btn-sm">
+                             &nbsp; <span class="badge badge-light">5</span> &nbsp;
+                        </button>
+                    </td>
+                    
+                    <td class="td-3 text-left">
+                        <i class="fa fa-user-o"></i> &nbsp; Miriam Lopez Montosa
+                    </td>
+
+                    <td class="td-4 text-center">
+                        <button type="button" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
+                            <small>Editar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
+                            <small>Borrar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success btn-sm">
+                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
+                            <small>Detalles</small>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td-2 text-center">
+                        <button type="button" class="btn btn-info btn-sm">
+                             &nbsp; <span class="badge badge-light">24</span> &nbsp;
+                        </button>
+                    </td>
+                    
+                    <td class="td-3 text-left">
+                        <i class="fa fa-user-o"></i> &nbsp; Arnulfo Cerón Gutierrez
+                    </td>
+
+                    <td class="td-4 text-center">
+                        <button type="button" class="btn btn-outline-info btn-sm">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
+                            <small>Editar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
+                            <small>Borrar</small>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-success btn-sm">
+                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
+                            <small>Detalles</small>
+                        </button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

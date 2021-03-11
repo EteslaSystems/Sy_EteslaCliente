@@ -34,40 +34,40 @@ class vendedorController extends Controller
 
 	public function misClientes()
 	{
-		if ($this->validarSesion() == 0) {
-			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
-		}
-		if ($this->validarSesion() == 1) {
-			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
-		}
+		// if ($this->validarSesion() == 0) {
+		// 	return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
+		// }
+		// if ($this->validarSesion() == 1) {
+		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
+		// }
 
-		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
+		// $dataUsuario["id"] = session('dataUsuario')->idUsuario;
+		// $consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "object") {
-			$consultarClientes = $consultarClientes->message;
+		// if (gettype($consultarClientes) == "object") {
+		// 	$consultarClientes = $consultarClientes->message;
 
-			return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
-		}
+		// 	return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
+		// }
 		return view('roles.seller.cotizador.misClientes');
 	}
 
 	public function todosClientes()
 	{
-		if ($this->validarSesion() == 0) {
-			return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
-		}
-		if ($this->validarSesion() == 1) {
-			return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
-		}
+		// if ($this->validarSesion() == 0) {
+		// 	return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
+		// }
+		// if ($this->validarSesion() == 1) {
+		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
+		// }
 
-		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
+		// $dataUsuario["id"] = session('dataUsuario')->idUsuario;
+		// $consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 
-		if (gettype($consultarClientes) == "object") {
-			$consultarClientes = $consultarClientes->message;
-			return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
-		}
+		// if (gettype($consultarClientes) == "object") {
+		// 	$consultarClientes = $consultarClientes->message;
+		// 	return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
+		// }
 		return view('template.clientes');
 	}
 
