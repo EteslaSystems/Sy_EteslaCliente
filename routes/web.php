@@ -1,7 +1,7 @@
 <?php
-Route::get('misclientes', function(){
-    return view('roles.seller.cotizador.misClientes');
-});
+// Route::get('misclientes', function(){
+//     return view('roles.seller.cotizador.misClientes');
+// });
 
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');

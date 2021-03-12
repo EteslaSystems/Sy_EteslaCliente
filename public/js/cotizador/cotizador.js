@@ -187,6 +187,11 @@ function guardarPropuesta(){
             success: function(respuesta){
                 console.log('respuesta guardar propuesta');
                 console.log(respuesta);
+
+                if(respuesta.status === '200' || respuesta.status === 200){
+                    alert('Propuesta guardada con exito');
+                    $("#btnGuardarPropuesta").prop("disabled", true);
+                }
             },
             error: function(error){
                 reject('Hubo un error al intentar generar el PDF: '+error);

@@ -247,6 +247,7 @@ function backToCotizacionBT(){
     $("#divCotizacionBajaTension").css("display","");
     $("#divBtnCalcularBT").css("display","");
     $("#divResultCotizacionBT").css("display","none");
+    $("#btnGuardarPropuesta").prop("disabled", false);
 }
 
 function limpiarCampos(){

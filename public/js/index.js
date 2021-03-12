@@ -8,9 +8,9 @@ $("#menu-toggle").click(function(e){
 /*#region Buscador - Jesús Daniel Carrera Falcón*/
 $("input[name=inpSearchClient]").change(function()
 {
-    var search = document.querySelector('#inpSearchClient');
-    var results = document.querySelector('#clientes');
-    var templateContent = document.querySelector('#listtemplate').content;
+    let search = document.querySelector('#inpSearchClient');
+    let results = document.querySelector('#clientes');
+    let templateContent = document.querySelector('#listtemplate').content;
 
     while (results.children.length) results.removeChild(results.firstChild);
     var inputVal = new RegExp(search.value.trim(), 'i');
@@ -21,15 +21,15 @@ $("input[name=inpSearchClient]").change(function()
     document.createDocumentFragment());
     results.appendChild(set);
 
-    var value = $("input[name=inpSearchClient]").val();
-    var id = $('#clientes [value="' + value + '"]').data('value');
-    var nombre = document.getElementById("lblNombreCliente");
-    var direccion = document.getElementById("lblDireccion");
-    var celular = document.getElementById("lblCelular");
-    var email = document.getElementById("lblEmail");
-    var telefono = document.getElementById("lblTelefono");
-    var consumo = document.getElementById("lblConsumo");
-    var municipio = document.getElementById("divMunicipio");
+    let value = $("input[name=inpSearchClient]").val();
+    let id = $('#clientes [value="' + value + '"]').data('value');
+    let nombre = document.getElementById("lblNombreCliente");
+    let direccion = document.getElementById("lblDireccion");
+    let celular = document.getElementById("lblCelular");
+    let email = document.getElementById("lblEmail");
+    let telefono = document.getElementById("lblTelefono");
+    let consumo = document.getElementById("lblConsumo");
+    let municipio = document.getElementById("divMunicipio");
 
     $.ajax({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

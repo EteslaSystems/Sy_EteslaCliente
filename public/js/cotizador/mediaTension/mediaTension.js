@@ -427,8 +427,8 @@ function validarCamposVacios(){
 }
 
 function validarClienteCargado(){
-    var idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    var direccionCliente = $('#municipio').val();
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    let direccionCliente = $('#municipio').val();
 
     if(idCliente != "" && direccionCliente != ""){
         objResult = { id: idCliente, direccion: direccionCliente };
