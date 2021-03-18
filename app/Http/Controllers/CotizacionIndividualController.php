@@ -89,6 +89,7 @@ class CotizacionIndividualController extends Controller
 		$arrayCompleto["cantidadInversores"] = $request->cantidadInversores;
 		$arrayCompleto["cantidadEstructuras"] = $request->cantidadEstructuras;
 		$arrayCompleto["bInstalacion"] = $request->bInstalacion;
+		$arrayCompleto["tipoCotizacion"] = "individual";
 
 		$response = $this->cotizacion->sendSingleQuotation(['json' => $arrayCompleto]);
 		$response = response()->json($response);

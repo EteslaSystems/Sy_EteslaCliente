@@ -71,99 +71,40 @@
         <table class="table table-image">
             <thead>
                 <tr>
-                    <th class="text-left">Propuestas</th>
                     <th class="text-center">Nombre del cliente</th>
                     <th class="text-center">Opciones</th>
+                    <th class="text-left">Propuestas</th>
                 </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    <td class="td-2 text-center">
-                        <button type="button" class="btn btn-info btn-sm">
-                             &nbsp; <span class="badge badge-light">10</span> &nbsp;
-                        </button>
-                    </td>
-                    
-                    <td class="td-3 text-left">
-                        <i class="fa fa-user-o"></i> &nbsp; Pedro Pablo Pedroza Perez
-                    </td>
-
-                    <td class="td-4 text-center">
-                        <button type="button" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
-                            <small>Editar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-danger btn-sm">
-                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
-                            <small>Borrar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-success btn-sm">
-                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
-                            <small>Detalles</small>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="td-2 text-center">
-                        <button type="button" class="btn btn-info btn-sm">
-                             &nbsp; <span class="badge badge-light">5</span> &nbsp;
-                        </button>
-                    </td>
-                    
-                    <td class="td-3 text-left">
-                        <i class="fa fa-user-o"></i> &nbsp; Miriam Lopez Montosa
-                    </td>
-
-                    <td class="td-4 text-center">
-                        <button type="button" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
-                            <small>Editar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-danger btn-sm">
-                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
-                            <small>Borrar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-success btn-sm">
-                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
-                            <small>Detalles</small>
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="td-2 text-center">
-                        <button type="button" class="btn btn-info btn-sm">
-                             &nbsp; <span class="badge badge-light">24</span> &nbsp;
-                        </button>
-                    </td>
-                    
-                    <td class="td-3 text-left">
-                        <i class="fa fa-user-o"></i> &nbsp; Arnulfo Cerón Gutierrez
-                    </td>
-
-                    <td class="td-4 text-center">
-                        <button type="button" class="btn btn-outline-info btn-sm">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <br>
-                            <small>Editar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-danger btn-sm">
-                            <i class="fa fa-trash" aria-hidden="true"></i> <br>
-                            <small>Borrar</small>
-                        </button>
-
-                        <button type="button" class="btn btn-outline-success btn-sm">
-                            <i class="fa fa-eye" aria-hidden="true"></i> <br>
-                            <small>Detalles</small>
-                        </button>
-                    </td>
-                </tr>
+                @forelse($consultarClientes as $cliente)
+                    <!-- Fila-Encabezado acordeon -->
+                    <tr data-toggle="collapse" data-target="#demo1" data-parent="#myTable">
+                        <td class="td-3 text-left">
+                            <i class="fa fa-user-o"></i><a href="#" title="Visualizar info. del cliente" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{{ $cliente->vNombrePersona }} {{ $cliente->vPrimerApellido }} {{ $cliente->vSegundoApellido }}</a>
+                        </td>
+                        <td class="td-4 text-center">
+                            <button type="button" class="btn btn-outline-info btn-sm" title="Editar">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" title="Eliminar">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Contenido del acordion -->
+                    <tr id="demo1" class="collapse">
+                        <td colspan="6" class="hiddenRow">
+                            <div>Demo1</div>
+                        </td>
+                    </tr>
+                    <!-- Fin-Contenido -->
+                @empty
+                    <h1>No cuenta con clientes registrados!</h1>
+                @endforelse
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <h1>Some text about client</h1>
+                </div>
             </tbody>
         </table>
     </div>

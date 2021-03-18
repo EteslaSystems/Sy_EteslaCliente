@@ -1,6 +1,6 @@
 /*#region Datos*/
 async function calcularPropuestaBT(e, dataEdite){ ///Main()
-    this.tarifaMT = null;
+    sessionStorage.setItem("tarifaMT", null);
     let dataEdited = dataEdite || null;
     let data = null; //DATA de la propuesta a calcular
 
@@ -1084,6 +1084,8 @@ function sliderModificarPropuesta(){
 }
 
 async function modificarPropuesta(){
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
+
     // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
     $('listPaneles').val('-1');
     $('listInversores').val('-1');
@@ -1106,7 +1108,7 @@ async function modificarPropuesta(){
     let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
     // //Se realiza nuevamente la propuesta
-    if(tarifaMT === null || typeof tarifaMT === 'undefined'){
+    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){
         await calcularPropuestaBT(null, dataPorcentajes);
     }
     else{

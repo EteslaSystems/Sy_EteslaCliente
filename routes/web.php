@@ -20,7 +20,7 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 Route::get('/vendedor', 'vendedorController@index');
 
 Route::get('/registrarCliente', 'vendedorController@misClientes');
-Route::get('/clientes', 'vendedorController@todosClientes');
+Route::get('/clientes', 'vendedorController@clientes');
 Route::post('/agregar-cliente', 'MediaTensionController@create');
 
 //////COTIZACION

@@ -1,11 +1,11 @@
-var tarifaMT = 'GDMTO'; ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
+sessionStorage.setItem("tarifaMT", "GDMTO"); ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 var _periodos = [];
 
 /*#region Solicitudes Servidor*/
 async function calcularPropuestaMT(dataEditada){
     let dataEdited = dataEditada || null; //Propuesta nueva o editada
     let dataSent = {arrayPeriodos:'', direccionCliente:'', idCliente:'', tarifa:'', porcentajePropuesta:0, porcentajeDescuento:0};
-
+    let tarifaMT = sessionStorage.getItem(tarifaMT);
     //Validar que el cliente este cargado
     let clienteCargado = validarClienteCargado();
 
@@ -110,6 +110,7 @@ function calcularViaticosMT(obInversor){
 
     let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
 
+    let tarifaMT = sessionStorage.getItem(tarifaMT);
     sessionStorage.removeItem("propuestaMT");
 
     return new Promise((resolve, reject) => {
@@ -146,6 +147,7 @@ function calcularViaticosMT(obInversor){
 /*#region Data*/
 function agregarPeriodo(){
     var periodo = {};
+    let tarifaMT = sessionStorage.getItem(tarifaMT);
 
     if(validarCamposVacios() === true){
         //Se obtiene todos los inputs pertenecientes a la tarifa que esta seleccionada
@@ -170,6 +172,7 @@ function agregarPeriodo(){
 
 function actualizarPeriodo(){
     var iterador = $('#lstPeriodosGDMTH option:selected').val();
+    let tarifaMT = sessionStorage.getItem(tarifaMT);
 
     //Se obtiene todos los inputs pertenecientes a la tarifa que esta seleccionada
     _inputs = document.getElementsByClassName('inp'+tarifaMT); 
@@ -250,8 +253,11 @@ function crudState(opcion){
 }
 
 function tarifaSelected(botonTarifa){
-    this.tarifaMT = botonTarifa.id == "btnTarifGDMTH" ? "GDMTH" : "GDMTO";
+    let tarifaMT = botonTarifa.id == "btnTarifGDMTH" ? "GDMTH" : "GDMTO";
     tarifaOff = tarifaMT == "GDMTH" ? "GDMTO" : "GDMTH";
+
+    sessionStorage.setItem("tarifaMT", tarifaMT);
+
     $('#div'+tarifaOff).hide();
     $('#div'+tarifaMT).show();
 

@@ -5,6 +5,7 @@ async function generarEntregable(){
     let _consummo = null;
     let data = {};
     let tipoCotizacion = '';
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
     
     if(tarifaMT === null || typeof tarifaMT === 'undefined'){ //Cotizacion BajaTension
         tipoCotizacion = "bajaTension";
@@ -52,22 +53,7 @@ async function generarEntregable(){
         }
     }
 
-    pdfBase64 = await generarPDF(data);
-    nombreArchivoPDF = pdfBase64.fileName;
-    pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
-
-    //Se activan los botones que generan el //QR || PDF//
-    // $('#btnGenerarQrCode').prop("disabled",false);
-
-    $('#btnGenerarPdfFileViewer').prop("disabled",false);
-    $('#btnGenerarPdfFileViewer').on('click',function(){
-        console.log('Generando pdf. . .');
-        //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
-        let pdfWindow = window.open("");
-        pdfWindow.document.write(
-            "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
-        );
-    });
+    return pdfBase64 = await generarPDF(data);
 }
 /*                  Agregados_CRUD                  */
 var _agregado = [];
@@ -133,12 +119,42 @@ function validarInputsVaciosAg(val){
 /*#region Botones*/
 async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar Propuesta
     let idButton = control.id;
+    let respuesta;
 
     if(idButton === "btnGenerarEntregable"){ ///GENERAR PDF
-        await generarEntregable(); //:void
+        respuesta = await generarEntregable(); //:void
+
+        if(respuesta.status === '500' || respuesta.status === 500){
+            alert('Ah ocurrido un problema al intentar generar el PDF:\n'+respuesta.message);
+            return -1;
+        }
+        
+        nombreArchivoPDF = respuesta.fileName;
+        pdfBase64 = respuesta.pdfBase64; //Se obtiene el base64 decodificado
+
+        //Se activan los botones que generan el //QR || PDF//
+        // $('#btnGenerarQrCode').prop("disabled",false);
+
+        $('#btnGenerarPdfFileViewer').prop("disabled",false);
+        $('#btnGenerarPdfFileViewer').on('click',function(){
+            console.log('Generando pdf. . .');
+            //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
+            let pdfWindow = window.open("");
+            pdfWindow.document.write(
+                "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
+            );
+        });
     }
     else{ ///GUARDAR RESULTADOS DE PROPUESTA  
-        guardarPropuesta();
+        respuesta = await guardarPropuesta();
+
+        if(respuesta.status === '500' || respuesta.status === 500){
+            alert('Ah ocurrido un problema al intentar guardar la propuesta:\n'+respuesta.message.toString());
+            return -1;
+        }
+        
+        alert('Propuesta guardada con exito');
+        $("#btnGuardarPropuesta").prop("disabled", true);
     }
 }
 /*#endregion*/
@@ -157,7 +173,7 @@ function generarPDF(data){
                 resolve(pdfBase64);
             },
             error: function(error){
-                reject('Hubo un error al intentar generar el PDF: '+error);
+                reject('Hubo un error al intentar generar el PDF: '+error.message);
             }
         });
     });
@@ -166,18 +182,19 @@ function generarPDF(data){
 function guardarPropuesta(){
     let dataToSent = { idCliente: null, propuesta: null };
     dataToSent.idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
 
-    if(tarifaMT === null || typeof tarifaMT === 'undefined'){ //BajaTension
+    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //BajaTension
         dataToSent.propuesta = sessionStorage.getItem("answPropuesta");
     }
-    else if(tarifaMT == "indifidual"){ //Individual
+    else if(tarifaMT == "individual"){ //Individual
         dataToSent.propuesta = sessionStorage.getItem("ssPropuestaIndividual");
     }
     else{ //Mediatension
         dataToSent.propuesta = sessionStorage.getItem("propuestaMT");
     }
 
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
@@ -185,16 +202,10 @@ function guardarPropuesta(){
             dataType: 'json',
             data: dataToSent,
             success: function(respuesta){
-                console.log('respuesta guardar propuesta');
-                console.log(respuesta);
-
-                if(respuesta.status === '200' || respuesta.status === 200){
-                    alert('Propuesta guardada con exito');
-                    $("#btnGuardarPropuesta").prop("disabled", true);
-                }
+                resolve(respuesta);
             },
             error: function(error){
-                reject('Hubo un error al intentar generar el PDF: '+error);
+                reject('Hubo un error al intentar generar el PDF: '+error.message);
             }
         });
     });

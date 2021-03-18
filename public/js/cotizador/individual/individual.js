@@ -97,16 +97,15 @@ function validarCamposVaciosInd()
 }
 
 function sendSingleQuotation(){
-    var cantidadPaneles = document.getElementById('inpCantPaneles').value;
-    var cantidadInversores = document.getElementById('inpCantInversores').value;
-    var cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
+    let cantidadPaneles = document.getElementById('inpCantPaneles').value;
+    let cantidadInversores = document.getElementById('inpCantInversores').value;
+    let cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
     direccionCliente = document.getElementById('municipio').value;
-    //bEstructuras = false;
+
+    sessionStorage.setItem("tarifaMT", "individual");
 
     changeValue_bInstalacion();
-    /* if(checkCheckBox() == true){
-        bEstructuras = true;
-    } */
+
     if(validarUsuarioCargado(direccionCliente) === true){
         if(validarValoresDropDownLists(idPanel, idInversor) == true ){
             if(validarCamposVaciosInd() == true){
@@ -129,12 +128,9 @@ function sendSingleQuotation(){
                         alert('Algo ha ido mal al intentar realizar una cotizacion_individual');
                     }
                 })
-                .done(function(respuesta){
-                    console.log('respuesta -antes de la asignacion-');
-                    console.log(respuesta);
-
+                .done(function(respuest){
                     //Cotizacion individual - Result
-                    respuesta = respuesta.message;
+                    let respuesta = respuest.message;
                     console.log(respuesta);
 
                     //Se guarda la *propuesta_calculada* en un SessionStorage
@@ -219,8 +215,7 @@ function changeValue_bInstalacion(){
 
 /*#region Generar entregable_propuesta (PDF)*/
 //"catchDataResult()->"
-function generarEntregable(){   
-    this.tarifaMT = 'individual';
+function generarEntregable(){
     let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
 
