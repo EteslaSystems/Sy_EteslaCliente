@@ -1,11 +1,14 @@
-sessionStorage.setItem("tarifaMT", "GDMTO"); ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 var _periodos = [];
+
+$(document).ready(function(){
+    sessionStorage.setItem("tarifaMT", "GDMTO"); ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
+});
 
 /*#region Solicitudes Servidor*/
 async function calcularPropuestaMT(dataEditada){
     let dataEdited = dataEditada || null; //Propuesta nueva o editada
     let dataSent = {arrayPeriodos:'', direccionCliente:'', idCliente:'', tarifa:'', porcentajePropuesta:0, porcentajeDescuento:0};
-    let tarifaMT = sessionStorage.getItem(tarifaMT);
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
     //Validar que el cliente este cargado
     let clienteCargado = validarClienteCargado();
 
@@ -110,7 +113,7 @@ function calcularViaticosMT(obInversor){
 
     let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
 
-    let tarifaMT = sessionStorage.getItem(tarifaMT);
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
     sessionStorage.removeItem("propuestaMT");
 
     return new Promise((resolve, reject) => {
@@ -147,7 +150,7 @@ function calcularViaticosMT(obInversor){
 /*#region Data*/
 function agregarPeriodo(){
     var periodo = {};
-    let tarifaMT = sessionStorage.getItem(tarifaMT);
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
 
     if(validarCamposVacios() === true){
         //Se obtiene todos los inputs pertenecientes a la tarifa que esta seleccionada
@@ -407,6 +410,8 @@ function limpiarDropDownListPaneles(){
 }
 
 function limpiarCamposPeriodo(){
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
+
     $('.inp'+tarifaMT).val('');
 } 
 
@@ -420,6 +425,8 @@ function backToCotizacion(){
 /*#region Validaciones*/
 function validarCamposVacios(){
     let respuesta = '';
+    let tarifaMT = sessionStorage.getItem("tarifaMT");
+
     $(".inp"+tarifaMT).each(function(){
         respuesta = $(this).val() === "" ? false : true;
     });

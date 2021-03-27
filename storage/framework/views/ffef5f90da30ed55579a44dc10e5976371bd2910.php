@@ -43,7 +43,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-check pull-right" id="checkSalvarCombinacion" style="display:none;">
-                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion">
+                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion" onclick="document.getElementById('btnGenerarEntregable').disabled = false">
                                             <label for="salvarCombinacion">Salvar</label>
                                         </div>
                                     </div>

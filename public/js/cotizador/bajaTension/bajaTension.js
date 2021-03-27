@@ -145,7 +145,7 @@ function calcularViaticosBT(objInversor){
     //Equipos seleccionados
     let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
     let ssinversor = '';
-    let descuento = sessionStorage.getItem('descuentoPropuesta');
+    let descuento = sessionStorage.getItem('descuentoPropuesta') || 0;
     let consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
     consumptions = JSON.parse(consumptions);
     consumptions = consumptions.consumo;
@@ -157,7 +157,7 @@ function calcularViaticosBT(objInversor){
         ssinversor = objInversor;
     }
 
-    objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor };
+    objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento };
     _cotizarViaticos[0] = objEquiposSeleccionados;
 
     //Se limpia el storage
@@ -174,7 +174,7 @@ function calcularViaticosBT(objInversor){
                 "direccionCliente": datosPropuesta.direccionCliente,
                 "consumos": consumptions,
                 "tarifa": datosPropuesta.tarifa,
-                "descuentoPropuesta": 0
+                "descuentoPropuesta": descuento
             },
             dataType: 'json',
             success: function(resultViaticos){

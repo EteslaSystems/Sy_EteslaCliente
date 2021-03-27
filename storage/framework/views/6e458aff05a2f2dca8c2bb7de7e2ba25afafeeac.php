@@ -72,12 +72,12 @@
                 <tr>
                     <th class="text-center">Nombre del cliente</th>
                     <th class="text-center">Opciones</th>
-                    <th class="text-left">Propuestas</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $__empty_1 = true; $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <tr>
+                    <!-- Fila-Encabezado acordeon -->
+                    <tr data-toggle="collapse" data-target="#demo1" data-parent="#myTable">
                         <td class="td-3 text-left">
                             <i class="fa fa-user-o"></i><a href="#" title="Visualizar info. del cliente" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><?php echo e($cliente->vNombrePersona); ?> <?php echo e($cliente->vPrimerApellido); ?> <?php echo e($cliente->vSegundoApellido); ?></a>
                         </td>
@@ -90,6 +90,13 @@
                             </button>
                         </td>
                     </tr>
+                    <!-- Contenido del acordion -->
+                    <tr id="demo1" class="collapse">
+                        <td colspan="6" class="hiddenRow">
+                            <div>Demo1</div>
+                        </td>
+                    </tr>
+                    <!-- Fin-Contenido -->
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <h1>No cuenta con clientes registrados!</h1>
                 <?php endif; ?>

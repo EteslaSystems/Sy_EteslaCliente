@@ -73,7 +73,6 @@
                 <tr>
                     <th class="text-center">Nombre del cliente</th>
                     <th class="text-center">Opciones</th>
-                    <th class="text-left">Propuestas</th>
                 </tr>
             </thead>
             <tbody>

@@ -7,7 +7,7 @@ async function generarEntregable(){
     let tipoCotizacion = '';
     let tarifaMT = sessionStorage.getItem("tarifaMT");
     
-    if(tarifaMT === null || typeof tarifaMT === 'undefined'){ //Cotizacion BajaTension
+    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //Cotizacion BajaTension
         tipoCotizacion = "bajaTension";
         
         if($('#salvarCombinacion').prop('checked')){///Combinaciones
@@ -120,6 +120,7 @@ function validarInputsVaciosAg(val){
 async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar Propuesta
     let idButton = control.id;
     let respuesta;
+    let btnPDFGenerator = $('#btnGenerarPdfFileViewer');
 
     if(idButton === "btnGenerarEntregable"){ ///GENERAR PDF
         respuesta = await generarEntregable(); //:void
@@ -135,14 +136,15 @@ async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar
         //Se activan los botones que generan el //QR || PDF//
         // $('#btnGenerarQrCode').prop("disabled",false);
 
-        $('#btnGenerarPdfFileViewer').prop("disabled",false);
-        $('#btnGenerarPdfFileViewer').on('click',function(){
-            console.log('Generando pdf. . .');
+        btnPDFGenerator.prop("disabled",false);
+        btnPDFGenerator.on('click',function(){
             //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
             let pdfWindow = window.open("");
             pdfWindow.document.write(
                 "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
             );
+            
+            btnPDFGenerator.prop("disabled", true);
         });
     }
     else{ ///GUARDAR RESULTADOS DE PROPUESTA  
