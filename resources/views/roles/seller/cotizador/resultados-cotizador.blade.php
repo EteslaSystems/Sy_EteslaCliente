@@ -99,7 +99,7 @@
                                             <p><strong>Codigo QR</strong></p>
                                         </div>
                                         <div class="col">
-                                            <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" disabled><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
+                                            <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" onclick="visualizandoPDF()"  disabled><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
                                             <p><strong>Archivo PDF</strong></p>
                                         </div>
                                         <!-- Fin Botones generan entregable -->

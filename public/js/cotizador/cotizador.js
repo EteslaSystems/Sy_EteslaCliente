@@ -129,23 +129,13 @@ async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar
             alert('Ah ocurrido un problema al intentar generar el PDF:\n'+respuesta.message);
             return -1;
         }
-        
-        nombreArchivoPDF = respuesta.fileName;
-        pdfBase64 = respuesta.pdfBase64; //Se obtiene el base64 decodificado
+
+        sessionStorage.setItem("respuestaPDF",JSON.stringify(respuesta));
 
         //Se activan los botones que generan el //QR || PDF//
         // $('#btnGenerarQrCode').prop("disabled",false);
 
         btnPDFGenerator.prop("disabled",false);
-        btnPDFGenerator.on('click',function(){
-            //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
-            let pdfWindow = window.open("");
-            pdfWindow.document.write(
-                "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
-            );
-            
-            btnPDFGenerator.prop("disabled", true);
-        });
     }
     else{ ///GUARDAR RESULTADOS DE PROPUESTA  
         respuesta = await guardarPropuesta();
@@ -158,6 +148,21 @@ async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar
         alert('Propuesta guardada con exito');
         $("#btnGuardarPropuesta").prop("disabled", true);
     }
+}
+
+function visualizandoPDF(){
+    let respuesta = JSON.parse(sessionStorage.getItem("respuestaPDF"));
+
+    let nombreArchivoPDF = respuesta.fileName;
+    let pdfBase64 = respuesta.pdfBase64; //Se obtiene el base64 decodificado
+
+    //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
+    let pdfWindow = window.open("");
+    pdfWindow.document.write("<html<head><title>"+nombreArchivoPDF+"</title><style>body{margin: 0px;}iframe{border-width: 0px;}</style></head>");
+    pdfWindow.document.write("<body><embed width='100%' height='100%' src='data:application/pdf;base64, " + encodeURI(pdfBase64)+"#toolbar=0&navpanes=0&scrollbar=0'></embed></body></html>");
+    
+    sessionStorage.removeItem("respuestaPDF");
+    $('#btnGenerarPdfFileViewer').prop("disabled", true);
 }
 /*#endregion*/
 /*#region Solicitud-Servidor*/
