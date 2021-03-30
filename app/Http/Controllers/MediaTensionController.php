@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\APIModels\APIPaneles;
-use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
 use App\APIModels\APICotizacion;
@@ -11,17 +8,12 @@ use Illuminate\Http\Request;
 
 class MediaTensionController extends Controller
 {
-
-	protected $paneles;
-	protected $inversores;
 	protected $vendedor;
 	protected $clientes;
 	protected $cotizacion;
 
-	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
+	public function __construct(APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
 	{
-		//$this->paneles = $paneles;
-		//$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
 		$this->cotizacion = $cotizacion;
@@ -36,18 +28,18 @@ class MediaTensionController extends Controller
 		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
 		// }
 
-		//$vPaneles = $this->paneles->view();
-		//$vInversores = $this->inversores->view();
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/mediaTension', compact(/*'vPaneles', 'vInversores',*/ 'consultarClientes', 'rol'));
+		return view('roles/seller/cotizador/mediaTension', compact('consultarClientes', 'rol'));
 	}
 
 	public function create(Request $request)
 	{
+		$ruta = str_replace(url('/'), '', url()->previous());
+
 		$request["idUsuario"] = session('dataUsuario')->idUsuario;
 		$request["consumo"] = 0;
 		$request["calle"] = $request->calle . '-' . $request->colonia;
@@ -57,9 +49,9 @@ class MediaTensionController extends Controller
 		);
 
 		if($vCliente->status != 200) {
-			return redirect('/mediaT')->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
+			return redirect($ruta)->with('status-fail', $vCliente->message)->with('modal-fail', true)->withInput();
 		} else {
-			return redirect('/mediaT')->with('status-success', $vCliente->message)
+			return redirect($ruta)->with('status-success', $vCliente->message)
 			->with('nombre', $request["nombrePersona"] . ' ' . $request["primerApellido"] . ' ' . $request["segundoApellido"])
 			->with('direccion', $request["calle"] . ', ' . $request["municipio"] . ', ' . $request["estado"])
 			->with('celular', $request["celular"])

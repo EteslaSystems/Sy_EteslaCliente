@@ -74,7 +74,7 @@ class vendedorController extends Controller
 			$rol = session('dataUsuario')->rol;
 			$tipo = session('dataUsuario')->tipoUsuario;
 			
-			if ($rol == 5 && $tipo == 'Vend' || $rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+			if ($rol == 5 && $tipo == 'Vendedor' || $rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
 				return 2;
 			}
 			return 1;

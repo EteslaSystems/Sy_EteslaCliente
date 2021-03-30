@@ -1,4 +1,7 @@
 <?php
+use Illuminate\Http\Request;
+use App\APIModels\APICliente;
+
 // Route::get('misclientes', function(){
 //     return view('roles.seller.cotizador.misClientes');
 // });
@@ -21,7 +24,6 @@ Route::get('/vendedor', 'vendedorController@index');
 
 Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@clientes');
-Route::post('/agregar-cliente', 'MediaTensionController@create');
 
 //////COTIZACION
 Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
@@ -56,6 +58,12 @@ Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
+// $uriFrom = str_replace(url('/'), '', url()->previous()); //Nombre de la vista de donde proviene la solicitud
+
+Route::post('/agregar-cliente','MediaTensionController@create');
+
+/* --------------------------------- */
+
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
