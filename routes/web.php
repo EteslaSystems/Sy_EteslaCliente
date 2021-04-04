@@ -58,18 +58,17 @@ Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
-// $uriFrom = str_replace(url('/'), '', url()->previous()); //Nombre de la vista de donde proviene la solicitud
-
 Route::post('/agregar-cliente','MediaTensionController@create');
-
-/* --------------------------------- */
-
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
 Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
 Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
-/* --------------------------------------- */
+/* ------------------Cliente_Propuesta(s)--------------------- */
+Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient');
+/* --------------------------------- */
+
+
 
 /* --------------- Administrador --------------- */
 Route::get('/admin', 'administradorController@index');

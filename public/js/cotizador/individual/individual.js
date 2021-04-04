@@ -215,7 +215,7 @@ function changeValue_bInstalacion(){
 
 /*#region Generar entregable_propuesta (PDF)*/
 //"catchDataResult()->"
-function generarEntregable(){
+function generarEntregableInd(){
     let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
 

@@ -162,7 +162,7 @@
                                         <div class="slidecontainer">
                                             <div class="form-group">
                                                 <label>Propuesta </label>
-                                                <input id="inpSliderPropuesta" type="range" min="0" max="200" class="slider" oninput="rangeValuePropuesta.value=inpSliderPropuesta.value" onchange="sliderModificarPropuesta();">
+                                                <input id="inpSliderPropuesta" type="range" min="0" max="200" class="slider" value="0" oninput="rangeValuePropuesta.value=inpSliderPropuesta.value" onchange="sliderModificarPropuesta();">
                                                 <output id="rangeValuePropuesta"></output>%
                                             </div>
                                             <div class="form-group">

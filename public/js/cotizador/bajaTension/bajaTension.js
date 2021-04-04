@@ -617,6 +617,8 @@ function limpiarDropDownListModelosInversores(){
 function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores, totales, power, viaticos, etc
     let _viaticos = _viatics.message;
 
+    console.log(_viaticos);
+
     sessionStorage.setItem("ssViaticos", JSON.stringify(_viaticos));
     
     /*#region Formating*/
@@ -683,9 +685,11 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpAhorroAnual').val('$'+_viaticos[0].roi.ahorro.ahorroAnualEnPesosMXN);
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
+    $('#inpSliderPropuesta').val(_viaticos[0].power.porcentajePotencia);
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
     //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
-    $('#rangeValueDescuento').val(_viaticos[0].descuento)
+    $('#inpSliderDescuento').val(_viaticos[0].descuento);
+    $('#rangeValueDescuento').val(_viaticos[0].descuento);
 }
 /*#endregion*/
 /*#region Combinaciones*/
@@ -1098,8 +1102,8 @@ async function modificarPropuesta(){
     limpiarCampos();
 
     // //Cachar los valores de los porcentajes / panel de ajuste
-    let porcentajePropuesta = parseFloat($('#rangeValuePropuesta').val()) || 0;
-    let porcentajeDescuento = parseFloat($('#rangeValueDescuento').val()) || 0; 
+    let porcentajePropuesta = parseFloat($('#inpSliderPropuesta').val()) || 0;
+    let porcentajeDescuento = parseFloat($('#inpSliderDescuento').val()) || 0; 
 
     // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
     sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);

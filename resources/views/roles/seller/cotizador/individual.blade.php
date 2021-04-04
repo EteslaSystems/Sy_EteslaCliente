@@ -144,7 +144,7 @@
                 <div class="col-md-6 col-sm-6 fx-1"> 
                     <div class="btn-group">
                         <button id="btnGuardarPIndiv" type="button" class="btn btn-primary btn-sm btn-green" onclick="btnsGenerarEntregablePropuesta(this);" disabled>Guardar</button>
-                        <button id="btnGenerarPIndiv" type="button" class="btn btn-primary btn-sm btn-green"data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" onclick="generarEntregable()" disabled>Generar</button>
+                        <button id="btnGenerarPIndiv" type="button" class="btn btn-primary btn-sm btn-green"data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" onclick="generarEntregableInd()" disabled>Generar</button>
                     </div>
                     <!-- Modal 'Generar propuesta(PDF)' -->
                     <div id="modalGenrPropuestaOptions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

@@ -27,8 +27,6 @@ class vendedorController extends Controller
 		$precioDolar = $this->vendedor->precioDelDolar();
 		$precioDolar = json_decode($precioDolar->message);
 
-		// dd($precioDolar);
-
 		return view('roles.seller.inicioS', compact('precioDolar'));
 	}
 
@@ -64,6 +62,8 @@ class vendedorController extends Controller
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
+
+		// dd($consultarClientes);
 
 		return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
 	}

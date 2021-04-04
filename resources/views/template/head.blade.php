@@ -59,6 +59,7 @@
 <!-- En mantenimiento -->
 <script src="{{ asset('js/cotizador/mediaTension/mediaTension.js') }}"></script>
 <script src="{{ asset('js/cotizador/cotizador.js') }}"></script>
+<script src="{{ asset('js/cotizador/clientes.js') }}"></script>
 <!-- En mantenimiento -->
 
 
