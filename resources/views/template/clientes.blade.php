@@ -17,10 +17,10 @@
                             <button type="button" class="btn btn-warning" title="Editar cliente"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
                             <button type="button" class="btn btn-danger" title="Eliminar cliente"><img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/></button>
                         </div>
-                        <div class="p-2">
-                            <!-- Aqui va la cantidad de propuestas que tiene el cliente -->
+                        <!--div class="p-2">
+                            Aqui va la cantidad de propuestas que tiene el cliente
                             0
-                        </div>
+                        </div-->
                     </div>
                 </div>
                 <!-- Fin_Header Accordion -->
@@ -37,10 +37,6 @@
                             </ul>
                         </div>
                         <div class="col">
-                            <ul class="list-group">
-                                <li class="list-group-item"><strong>Consumo promedio</strong></li>
-                            </ul>
-                            <br>
                             <div class="pull-right">
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg" onclick='getPropuestasByCliente("{{ $cliente->idPersona }}")'><img src="https://img.icons8.com/ios/20/000000/document--v1.png"/><strong>Propuestas</strong></button>
                             </div>
@@ -61,6 +57,7 @@
                                                         <tr>
                                                             <th class="text-center">Propuesta</th>
                                                             <th class="text-center">Fecha creacion</th>
+                                                            <th class="text-center">Fecha expiracion</th>
                                                             <th class="text-center">Acciones</th>
                                                         </tr>
                                                     </thead>

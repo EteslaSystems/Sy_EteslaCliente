@@ -108,15 +108,12 @@
                                             </table>
                                         </p><hr>
                                         <p class="card-text text-right">
-                                            <small class="text-muted">
+                                            <small class="text-muted">   
+                                            @if($usuario->updated_at != null)
                                                 Última vez editado: <strong>&nbsp;
-                                                    @if($usuario->updated_at != null)
-                                                        {{$usuario->updated_at}}
-                                                    @else
-                                                        Nunca
-                                                    @endif
+                                                    {{$usuario->updated_at}}
+                                                @endif
                                                 </strong>
-                                                
                                             </small>
                                         </p>
                                     </div>
