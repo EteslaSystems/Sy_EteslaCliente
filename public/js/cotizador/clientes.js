@@ -1,3 +1,4 @@
+/*#region Propuestas*/
 function getPropuestasByCliente(idCliente){
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -10,15 +11,13 @@ function getPropuestasByCliente(idCliente){
                 if(propuestas.status === 200){
                     let _propuestas = propuestas.message;
 
-                    console.log(_propuestas);
-
                     //Se limpia la tabla
                     $(".filaPropuesta").remove();
 
                     //Se vacia la inform. en la tabla
                     for(let x=0; x<_propuestas.length; x++)
                     {
-                        $('#tbPropuestas>tbody').append('<tr class="filaPropuesta"><td>'+_propuestas[x].cTipoCotizacion+'</td><td>'+_propuestas[x].created_at+'</td><td>'+_propuestas[x].expire_at+'</td><td><button type="button" class="btn btn-sm btn-success" title="Detalles"><img src="https://img.icons8.com/ios/20/000000/details-pane.png"/></button><button type="button" class="btn btn-sm btn-danger" title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/></button></td></tr>');
+                        $('#tbPropuestas>tbody').append('<tr class="filaPropuesta"><td>'+_propuestas[x].cTipoCotizacion+'</td><td>'+_propuestas[x].created_at+'</td><td>'+_propuestas[x].expire_at+'</td><td><button type="button" class="btn btn-sm btn-success" title="Detalles" onclick="getDetailsPropuesta()"><img src="https://img.icons8.com/ios/20/000000/details-pane.png"/></button><button type="button" class="btn btn-sm btn-danger" title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/></button></td></tr>');
                     }
                 }
                 else{
@@ -31,3 +30,19 @@ function getPropuestasByCliente(idCliente){
         });
     });
 }
+
+function getDetailsPropuesta(){
+    openModalDetailsPropuesta();
+}
+
+/*------Modales_Propuestas------*/
+function openModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('hide');
+    $('.cd-example-modal-lg').modal('show');
+}
+
+function closeModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('show');
+    $('.cd-example-modal-lg').modal('hide');
+}
+/*#endregion*/
