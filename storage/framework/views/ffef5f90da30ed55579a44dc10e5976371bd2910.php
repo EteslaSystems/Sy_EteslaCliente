@@ -337,7 +337,7 @@
                                                         <div class="form-group row">
                                                             <label for="inpCostPorWatt" class="col-sm-4 col-form-label">Costo por watt</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostPorWatt">
+                                                                <input id="inpCostPorWatt" type="currency" class="form-control-plaintext inpAnsw" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -345,19 +345,19 @@
                                                         <div class="form-group row">
                                                             <label for="inpCostProyectoSIVA" class="col-lg-4 col-form-label">Costo proyecto s/IVA</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoSIVA">
+                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoSIVA">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="inpCostProyectoCIVA" class="col-sm-4 col-form-label">Costo proyecto c/IVA</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoCIVA">
+                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoCIVA">
                                                             </div>
                                                         </div> 
                                                         <div class="form-group row">
                                                             <label for="inpCostProyectoMXN" class="col-sm-4 col-form-label">Costo proyecto MXN</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoMXN">
+                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoMXN">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -874,51 +874,4 @@
             text-align: center;
         }
     </style>
-</body>
-
-<?php $__env->startSection('scripts'); ?>
-<script type="text/javascript">
-    const
-        range1 = document.getElementById('range-1'),
-        rangeV1 = document.getElementById('rangeV-1'),
-        setValue1 = ()=>{
-            const
-                newValue1 = Number( (range1.value - range1.min) * 100 / (range1.max - range1.min) ),
-                newPosition1 = 10 - (newValue1 * 0.2);
-            rangeV1.innerHTML = `<span><b>Propuesta:</b> ${range1.value}</span>`;
-            rangeV1.style.left = `calc(${newValue1}% + (${newPosition1}px))`;
-        };
-    document.addEventListener("DOMContentLoaded", setValue1);
-    range1.addEventListener('input', setValue1);
-</script>
-
-<script type="text/javascript">
-    const
-        range2 = document.getElementById('range-2'),
-        rangeV2 = document.getElementById('rangeV-2'),
-        setValue2 = ()=>{
-            const
-                newValue2 = Number( (range2.value - range2.min) * 100 / (range2.max - range2.min) ),
-                newPosition2 = 10 - (newValue2 * 0.2);
-            rangeV2.innerHTML = `<span><b>Potencia:</b> ${range2.value}</span>`;
-            rangeV2.style.left = `calc(${newValue2}% + (${newPosition2}px))`;
-        };
-    document.addEventListener("DOMContentLoaded", setValue2);
-    range2.addEventListener('input', setValue2);
-</script>
-
-<script type="text/javascript">
-    const
-        range3 = document.getElementById('range-3'),
-        rangeV3 = document.getElementById('rangeV-3'),
-        setValue3 = ()=>{
-            const
-                newValue3 = Number( (range3.value - range3.min) * 100 / (range3.max - range3.min) ),
-                newPosition3 = 10 - (newValue3 * 0.2);
-            rangeV3.innerHTML = `<span><b>Descuento:</b> ${range3.value}</span>`;
-            rangeV3.style.left = `calc(${newValue3}% + (${newPosition3}px))`;
-        };
-    document.addEventListener("DOMContentLoaded", setValue3);
-    range3.addEventListener('input', setValue3);
-</script>
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/resultados-cotizador.blade.php ENDPATH**/ ?>
+</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/resultados-cotizador.blade.php ENDPATH**/ ?>

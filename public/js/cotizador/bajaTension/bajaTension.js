@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    sessionStorage.clear();
+    sessionStorage.setItem("bndPropuestaEditada", 0);
+});
+
+
 /*#region Datos*/
 async function calcularPropuestaBT(e, dataEdite){ ///Main()
     sessionStorage.setItem("tarifaMT", null);
@@ -145,10 +151,16 @@ function calcularViaticosBT(objInversor){
     //Equipos seleccionados
     let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
     let ssinversor = '';
-    let descuento = sessionStorage.getItem('descuentoPropuesta') || 0;
     let consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
     consumptions = JSON.parse(consumptions);
     consumptions = consumptions.consumo;
+    let descuento = 0;
+
+    let bndPropuestaNueva = sessionStorage.getItem("bndPropuestaEditada");
+
+    if(bndPropuestaNueva === '1'){ //Propuesta modificada
+        descuento = sessionStorage.getItem("descuentoPropuesta");
+    }
 
     if(objInversor == null){
         ssinversor = sessionStorage.getItem('__ssInversorSeleccionado');
@@ -463,9 +475,17 @@ function mostrarPanelSeleccionado(){
     
             //Equipo seleccionado - Panel seleccionado
             sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
-    
+            
+            /////EXPERIMENTAL
+            let potenciaNecesaria = sessionStorage.getItem("_consumsFormated");
+            ///EXPERIMENTAL
+
+
+            //Create objRequest to Calculate Inversores
+            let objRequest = { panel: _paneles[ddlPanelesValue], potenciaNecesaria: potenciaNecesaria };
+
             //Se carga dropDownList -Inversores-
-            let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
+            let _inversores = await obtenerInversoresParaPanelSeleccionado(objRequest);
             _inversores = _inversores.message; //Formating
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
             
@@ -619,6 +639,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
 
     console.log(_viaticos);
 
+    sessionStorage.removeItem("ssViaticos");
     sessionStorage.setItem("ssViaticos", JSON.stringify(_viaticos));
     
     /*#region Formating*/
@@ -1090,6 +1111,10 @@ function sliderModificarPropuesta(){
 async function modificarPropuesta(){
     let tarifaMT = sessionStorage.getItem("tarifaMT");
 
+    //Modificar sessionStorage de "propuestaNueva" o "propuestaModificada" *0 = Nueva* *1 = Modificada*
+    sessionStorage.removeItem("bndPropuestaEditada");
+    sessionStorage.setItem("bndPropuestaEditada", 1);
+
     // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
     $('listPaneles').val('-1');
     $('listInversores').val('-1');
@@ -1106,6 +1131,7 @@ async function modificarPropuesta(){
     let porcentajeDescuento = parseFloat($('#inpSliderDescuento').val()) || 0; 
 
     // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
+    sessionStorage.removeItem("descuentoPropuesta");
     sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
 
     // //Se arma la data para editar la propuesta

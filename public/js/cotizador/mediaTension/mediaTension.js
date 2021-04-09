@@ -1,6 +1,7 @@
 var _periodos = [];
 
 $(document).ready(function(){
+    sessionStorage.removeItem("tarifaMT");
     sessionStorage.setItem("tarifaMT", "GDMTO"); ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
 });
 
