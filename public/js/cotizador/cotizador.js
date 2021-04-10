@@ -1,6 +1,6 @@
 /*#region Logica*/
 /* Generar - PDF */
-async function generarEntregable(){
+function generarEntregable(){
     let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let _consummo = null;
     let data = {};
@@ -53,7 +53,8 @@ async function generarEntregable(){
         }
     }
 
-    return pdfBase64 = await generarPDF(data);
+    //
+    return data;
 }
 /*                  Agregados_CRUD                  */
 var _agregado = [];
@@ -123,19 +124,10 @@ async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar
     let btnPDFGenerator = $('#btnGenerarPdfFileViewer');
 
     if(idButton === "btnGenerarEntregable"){ ///GENERAR PDF
-        respuesta = await generarEntregable(); //:void
+        let dataToPDF = generarEntregable(); //:void
 
-        if(respuesta.status === '500' || respuesta.status === 500){
-            alert('Ah ocurrido un problema al intentar generar el PDF:\n'+respuesta.message);
-            return -1;
-        }
-
-        sessionStorage.setItem("respuestaPDF",JSON.stringify(respuesta));
-
-        //Se activan los botones que generan el //QR || PDF//
-        // $('#btnGenerarQrCode').prop("disabled",false);
-
-        btnPDFGenerator.prop("disabled",false);
+        sessionStorage.removeItem("ssDataToGenerate");
+        sessionStorage.setItem("ssDataToGenerate", JSON.stringify(dataToPDF));
     }
     else{ ///GUARDAR RESULTADOS DE PROPUESTA  
         respuesta = await guardarPropuesta();
@@ -166,18 +158,17 @@ function visualizandoPDF(){
 }
 /*#endregion*/
 /*#region Solicitud-Servidor*/
-function generarPDF(data){
+function generarPDF(){
+    let data = sessionStorage.getItem("ssDataToGenerate");
+
     return new Promise((resolve, reject)=>{
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
             url: '/PDFgenerate',
-            dataType: 'json',
             data: data,
             success: function(pdfBase64){
-                pdfBase64 = pdfBase64.message; //Formating
-
-                resolve(pdfBase64);
+                console.log("hello pdf create");
             },
             error: function(error){
                 reject('Hubo un error al intentar generar el PDF: '+error.message);
