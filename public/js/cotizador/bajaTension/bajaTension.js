@@ -577,7 +577,8 @@ function searchInversor(_inversor,marcaInv){
 }
 
 function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
-    let oldPower=0, newPower=0;
+    // let oldPower=0, newPower=0;
+    let oldCost=0, newCost=0;
     let Respuesta = {};
     let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
 
@@ -597,16 +598,18 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
     //Se requiere el inversor con mayor potencia
     for(let i=0; i<_inversors.length; i++)
     {
-        newPower = _inversors[i].fPotencia;
-
-        if(i==0){
-            oldPrice = _inversors[i].fPrecio;
+        if(i === 0){
+            oldCost = _inversors[i].precioTotal;
+        }
+        else{
+            newCost = _inversors[i].precioTotal;
         }
 
-        //Se obtiene el MENOR *precio* y el que tenga MAYOR *potencia*
-        if(oldPower <= newPower){
+        if(oldCost >= newCost){ ///El costo mas -barato-
+            oldCost = newCost;
             Respuesta = _inversors[i];
         }
+
     }
 
     return Respuesta;

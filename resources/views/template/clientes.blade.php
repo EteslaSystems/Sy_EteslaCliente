@@ -18,8 +18,12 @@
                             </h2>
                             <div class="d-flex flex-row-reverse">
                                 <div class="p-2 btn-group">
-                                    <button type="button" class="btn btn-warning" title="Editar cliente"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                    <button type="button" class="btn btn-danger" title="Eliminar cliente"><img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/></button>
+                                    <a href="{{ url('editar-cliente', [$cliente->idPersona]) }}" class="btn btn-sm btn-warning" title="Editar">
+                                        <img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/>
+                                    </a>
+                                    <a href="{{ url('eliminar-cliente', [$cliente->idPersona]) }}" class="btn btn-sm btn-danger" title="Eliminar">
+                                        <img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/>
+                                    </a>
                                 </div>
                                 <!--div class="p-2">
                                     Aqui va la cantidad de propuestas que tiene el cliente

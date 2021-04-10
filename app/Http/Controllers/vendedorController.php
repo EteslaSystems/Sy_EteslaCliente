@@ -47,7 +47,7 @@ class vendedorController extends Controller
 
 		// 	return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
 		// }
-		return view('roles.seller.cotizador.misClientes');
+		return view('template.clientes');
 	}
 
 	public function clientes()
