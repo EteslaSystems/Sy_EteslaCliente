@@ -97,6 +97,7 @@ function validarCamposVaciosInd()
 }
 
 function sendSingleQuotation(){
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let cantidadPaneles = document.getElementById('inpCantPaneles').value;
     let cantidadInversores = document.getElementById('inpCantInversores').value;
     let cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
@@ -115,6 +116,7 @@ function sendSingleQuotation(){
                     url: '/enviarCotizIndiv',
                     data: {
                         "_token": $("meta[name='csrf-token']").attr('content'),
+                        "idCliente": idCliente,
                         "idPanel": idPanel,
                         "idInversor": idInversor,
                         "cantidadPaneles": cantidadPaneles,
@@ -134,6 +136,7 @@ function sendSingleQuotation(){
                     console.log(respuesta);
 
                     //Se guarda la *propuesta_calculada* en un SessionStorage
+                    sessionStorage.removeItem('ssPropuestaIndividual');
                     sessionStorage.setItem('ssPropuestaIndividual', JSON.stringify(respuesta))
 
                     /*#region Se desbloquean botones de "Guardar propuesta" y "Generar_PDF" */
@@ -212,57 +215,3 @@ function changeValue_bInstalacion(){
         bInstalacion = false;
     }
 }
-
-/*#region Generar entregable_propuesta (PDF)*/
-//"catchDataResult()->"
-function generarEntregableInd(){
-    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    let ssPropuestaIndividual = sessionStorage.getItem('ssPropuestaIndividual');
-
-    let data = { idCliente, ssPropuestaIndividual, tipoPropuesta: "individual" };
-
-    $.ajax({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-        type: 'POST',
-        url: '/PDFgenerate',
-        dataType: 'json',
-        data: data
-    })
-    .fail(function(err){
-        console.log('Error: '+JSON.stringify(err));
-        alert('Error al querer intentar datos del PDF al servidor');
-    })
-    .done(function(pdfBase64){
-        //Se formatea la respuesta del pdfBase64
-        pdfBase64 = pdfBase64.message; //Respuesta de la API - JSON
-        nombreArchivoPDF = pdfBase64.fileName;
-        pdfBase64 = pdfBase64.pdfBase64; //Se obtiene el base64 decodificado
-
-        //Se activan los botones que generan el //QR || PDF//
-        $('#btnGenerarQrCode').prop("disabled",false);
-        $('#btnGenerarPdfFileViewer').prop("disabled",false);
-
-        // $('#btnGenerarQrCode').on('click', function(){ 
-            //Mostrar un QR-Code el cual redireccione a la descarga/visualizacion del pdfBase64 en pdfFile
-
-
-            // var codigoQr = new QRCode(document.getElementById("divQrCodeViewer"));
-            // codigoQr.clear();
-            // codigoQr.makeCode("archivoPDF"); //Se pasa el documento PDF al codigoQR
-
-            // console.log('Generando codigo QR');
-        // });         
-
-        $('#btnGenerarPdfFileViewer').on('click', function(){
-            //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
-            let pdfWindow = window.open("");
-            pdfWindow.document.write(
-                "<iframe id='iframePDF' width='100%' height='100%' src='data:application/pdf;base64, " +encodeURI(pdfBase64)+ "' frameborder='0'></iframe>"
-            );
-
-            console.log('Nombre pdfFile:\n'+nombreArchivoPDF);
-            console.log('Generando pdf. . .');
-        });
-    });
-}
-/*#endregion*/

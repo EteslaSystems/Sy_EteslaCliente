@@ -82,6 +82,7 @@ class CotizacionIndividualController extends Controller
 
 	public function sendSingleQuotation(Request $request){
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["idPanel"] = $request->idPanel;
 		$arrayCompleto["idInversor"] = $request->idInversor;

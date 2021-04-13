@@ -95,6 +95,7 @@ function getVistaResultados(){
 }
 
 function calcularViaticosMT(obInversor){
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
     let inversor = '';
     let direccion = $('#municipio').val();
@@ -123,6 +124,7 @@ function calcularViaticosMT(obInversor){
             type: 'POST',
             url: '/calcularVT',
             data: { 
+                "idCliente": idCliente,
                 "propuesta": objPropuesta,
                 "direccionCliente": direccion,
                 "tarifa": tarifaMT,

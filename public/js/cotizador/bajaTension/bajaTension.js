@@ -172,9 +172,6 @@ function calcularViaticosBT(objInversor){
     objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento };
     _cotizarViaticos[0] = objEquiposSeleccionados;
 
-    //Se limpia el storage
-    sessionStorage.removeItem('answPropuesta');
-
     return new Promise((resolve, reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -182,6 +179,7 @@ function calcularViaticosBT(objInversor){
             url: '/calcularViaticosBTI',
             data: {
                 "_token": $("meta[name='csrf-token']").attr('content'),
+                "idCliente": datosPropuesta.idCliente,
                 "arrayBTI": _cotizarViaticos,
                 "direccionCliente": datosPropuesta.direccionCliente,
                 "consumos": consumptions,
@@ -190,6 +188,10 @@ function calcularViaticosBT(objInversor){
             },
             dataType: 'json',
             success: function(resultViaticos){
+                //Se limpia el storage
+                sessionStorage.removeItem('answPropuesta');
+                
+                //Se llena el storage
                 sessionStorage.setItem('answPropuesta',JSON.stringify(resultViaticos.message));
                 resolve(resultViaticos);
             },
@@ -203,7 +205,8 @@ function calcularViaticosBT(objInversor){
 /*#endregion*/
 /*#region Logica*/
 function cacharDatosPropuesta(){
-    banderaDelError = 0; //Bandera para validar si en algun proceso hubo un error
+    let banderaDelError = 0; //Bandera para validar si en algun proceso hubo un error
+    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
 
     let _consumosBimestres = () => {
         __consumosBimestres = [];
@@ -241,6 +244,7 @@ function cacharDatosPropuesta(){
 
     if(banderaDelError != 1){
         datosPropuesta = {
+            idCliente: idCliente,
             consumos: _consumosBimestres,
             tarifa: tarifaSeleccionada,
             direccionCliente: direccionCliente,
@@ -1141,10 +1145,10 @@ async function modificarPropuesta(){
     let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
 
     // //Se realiza nuevamente la propuesta
-    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){
+    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ ///BajaTension
         await calcularPropuestaBT(null, dataPorcentajes);
     }
-    else{
+    else{ ///MediaTension
         await calcularPropuestaMT(dataPorcentajes);
     }
 }

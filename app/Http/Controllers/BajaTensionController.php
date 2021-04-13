@@ -95,6 +95,7 @@ class BajaTensionController extends Controller
 
 	public function calculaViaticos_BT(Request $request)
 	{
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["arrayBTI"] = $request->arrayBTI;
@@ -111,6 +112,7 @@ class BajaTensionController extends Controller
 
 	public function askCombination(Request $request)
 	{
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;

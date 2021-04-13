@@ -1,10 +1,8 @@
 <?php
-use Illuminate\Http\Request;
-use App\APIModels\APICliente;
-
-// Route::get('misclientes', function(){
-//     return view('roles.seller.cotizador.misClientes');
-// });
+Route::get('/pdf', function(){
+    return view('PDFTemplates.pdfBajaTension');
+});
+Route::get('/pdfCreate', 'PDFController@index');
 
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');

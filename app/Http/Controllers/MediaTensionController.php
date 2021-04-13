@@ -104,6 +104,7 @@ class MediaTensionController extends Controller
 	//3er. Paso
 	public function calculateViaticsTotals(Request $request)
 	{
+		$array["idCliente"] = $request->idCliente;
 		$array["propuesta"] = $request->propuesta;
 		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
 		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla

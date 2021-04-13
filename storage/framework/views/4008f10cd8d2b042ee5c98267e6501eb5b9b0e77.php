@@ -142,8 +142,8 @@
                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                 <div class="col-md-6 col-sm-6 fx-1"> 
                     <div class="btn-group">
-                        <button id="btnGuardarPIndiv" type="button" class="btn btn-primary btn-sm btn-green" onclick="btnsGenerarEntregablePropuesta(this);" disabled>Guardar</button>
-                        <button id="btnGenerarPIndiv" type="button" class="btn btn-primary btn-sm btn-green"data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" onclick="generarEntregableInd()" disabled>Generar</button>
+                        <button id="btnGuardarPIndiv" type="button" class="btn btn-primary btn-sm btn-green" disabled>Guardar</button>
+                        <button id="btnGenerarPIndiv" type="button" class="btn btn-primary btn-sm btn-green"data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta">Generar</button>
                     </div>
                     <!-- Modal 'Generar propuesta(PDF)' -->
                     <div id="modalGenrPropuestaOptions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -161,7 +161,7 @@
                                             <p><strong>Codigo QR</strong></p>
                                         </div>
                                         <div class="col">
-                                            <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" onclick="generarEntregable();" disabled><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
+                                            <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" onclick="generarPDF();"><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
                                             <p><strong>Archivo PDF</strong></p>
                                         </div>
                                         <!-- Fin Botones generan entregable -->

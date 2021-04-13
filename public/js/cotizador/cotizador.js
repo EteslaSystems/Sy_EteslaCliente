@@ -1,61 +1,5 @@
 /*#region Logica*/
 /* Generar - PDF */
-function generarEntregable(){
-    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    let _consummo = null;
-    let data = {};
-    let tipoCotizacion = '';
-    let tarifaMT = sessionStorage.getItem("tarifaMT");
-    
-    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //Cotizacion BajaTension
-        tipoCotizacion = "bajaTension";
-        
-        if($('#salvarCombinacion').prop('checked')){///Combinaciones
-            let combSeleccionada = $('#listConvinaciones').val();
-            let dataCombinaciones = sessionStorage.getItem("arrayCombinaciones");
-    
-            data = {
-                idCliente: idCliente,
-                dataCombinaciones: dataCombinaciones,
-                combSeleccionada: combSeleccionada,
-                tipoPropuesta: tipoCotizacion,
-                combinacionesPropuesta: true
-            };
-        }   
-        else{///Equipo seleccionado
-            let valListInvers = $('#listInversores').val();
-    
-            //Se valida que la dropDownListInversores no este vacia
-            if(valListInvers != -1){
-                let ssObjPropuestaEquipoSeleccionado = sessionStorage.getItem("answPropuesta");
-                _consummo = sessionStorage.getItem("_consumsFormated");
-    
-                data = {
-                    idCliente: idCliente,
-                    consumos: _consummo,
-                    propuesta: ssObjPropuestaEquipoSeleccionado,
-                    tipoPropuesta: tipoCotizacion,
-                    combinacionesPropuesta: false
-                };
-            }
-        }
-    }
-    else{ //Cotizacion MediaTension
-        let ssObjPropuestaMT = sessionStorage.getItem("propuestaMT");
-        _consummo = sessionStorage.getItem("_consumsFormated");
-
-        data = {
-            idCliente: idCliente,
-            consumos: _consummo,
-            propuesta: ssObjPropuestaMT,
-            tipoPropuesta: "mediaTension",
-            combinacionesPropuesta: false
-        }
-    }
-
-    //
-    return data;
-}
 /*                  Agregados_CRUD                  */
 var _agregado = [];
 
@@ -118,30 +62,6 @@ function validarInputsVaciosAg(val){
 }
 /*#endregion*/
 /*#region Botones*/
-async function btnsGenerarEntregablePropuesta(control){ ///Generar PDF - Guardar Propuesta
-    let idButton = control.id;
-    let respuesta;
-    let btnPDFGenerator = $('#btnGenerarPdfFileViewer');
-
-    if(idButton === "btnGenerarEntregable"){ ///GENERAR PDF
-        let dataToPDF = generarEntregable(); //:void
-
-        sessionStorage.removeItem("ssDataToGenerate");
-        sessionStorage.setItem("ssDataToGenerate", JSON.stringify(dataToPDF));
-    }
-    else{ ///GUARDAR RESULTADOS DE PROPUESTA  
-        respuesta = await guardarPropuesta();
-
-        if(respuesta.status === '500' || respuesta.status === 500){
-            alert('Ah ocurrido un problema al intentar guardar la propuesta:\n'+respuesta.message.toString());
-            return -1;
-        }
-        
-        alert('Propuesta guardada con exito');
-        $("#btnGuardarPropuesta").prop("disabled", true);
-    }
-}
-
 function visualizandoPDF(){
     let respuesta = JSON.parse(sessionStorage.getItem("respuestaPDF"));
 
@@ -159,7 +79,23 @@ function visualizandoPDF(){
 /*#endregion*/
 /*#region Solicitud-Servidor*/
 function generarPDF(){
-    let data = sessionStorage.getItem("ssDataToGenerate");
+    let data = {};
+
+    //Validar que tipo de cotizacion se esta tratando de generarPDF
+    let tipoCotizacion = sessionStorage.getItem("tarifaMT");
+
+    if(tipoCotizacion === 'GDMTO' || tipoCotizacion === 'GDMTH'){ ///MediaTension
+        data = sessionStorage.getItem("propuestaMT");
+    }
+    else if(tipoCotizacion === 'null' || typeof tipoCotizacion === 'undefined'){ ///BajaTension
+        data = sessionStorage.getItem("answPropuesta");
+    }
+    else{ ///Individual
+        data = sessionStorage.getItem('ssPropuestaIndividual');
+    }
+    
+    data = JSON.parse(data);
+    data = data[0];
 
     return new Promise((resolve, reject)=>{
         $.ajax({
@@ -167,8 +103,8 @@ function generarPDF(){
             type: 'POST',
             url: '/PDFgenerate',
             data: data,
-            success: function(pdfBase64){
-                console.log("hello pdf create");
+            success: function(pdf){
+                console.log(pdf);
             },
             error: function(error){
                 reject('Hubo un error al intentar generar el PDF: '+error.message);
@@ -200,10 +136,17 @@ function guardarPropuesta(){
             dataType: 'json',
             data: dataToSent,
             success: function(respuesta){
-                resolve(respuesta);
+                if(resolve.status == "200" || resolve.status == 200){
+                    alert('Propuesta guardada con exito');
+                    $("#btnGuardarPropuesta").prop("disabled", true);
+                }
+                else{
+                    console.log('Ah ocurrido un problema al intentar guardar la propuesta:\n'+respuesta.message.toString());
+                    alert('Ah ocurrido un problema al intentar guardar la propuesta');
+                }
             },
             error: function(error){
-                reject('Hubo un error al intentar generar el PDF: '+error.message);
+                alert('Hubo un error al intentar guardar la propuesta: '+error.message);
             }
         });
     });
