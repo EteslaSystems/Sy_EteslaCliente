@@ -18,6 +18,21 @@
         margin: 0;
         padding: 0;
     }
+
+    .footer-page{
+        position: fixed; 
+        bottom: 0cm; 
+        left: 0cm; 
+        right: 0cm;
+        height: 4cm;
+
+        background-image: url('https://etesla.mx/wp-content/uploads/2020/02/interconexcion.png');
+        background-position: 50% 41%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        image-rendering: auto;
+    }
+
     /*Controles [generales - "que se ocupan en todas las hojas"]*/
     .jumbotron{
         background-color: #FFFFFF;
@@ -31,6 +46,14 @@
     table thead{
         color: white;
         text-align: center;
+    }
+
+    table tbody{
+        text-align: center;
+    }
+
+    #tblTotales tbody{
+        text-align: right;
     }
     /*-----------*/
     /*      Texto       */
@@ -66,19 +89,98 @@
             <h2 class="encabezado">Sistema Fotovoltaico<br>interconectado a la red CFE</h2>
             <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
         </div>
-        <table class="table table-sm">
-            <thead style="background-color: #41739C;">
-                <tr>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
+    </div>
+    <!-- Tabla de desgloce propuesta -->
+    <table id="tblConceptosCotizacion" class="table table-sm table-striped">
+        <thead style="background-color: #41739C;">
+            <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mano de obra</td>
+                <td>Etesla</td>
+                <td></td>
+                <td>Mano de obra para instalacion</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Material electrico</td>
+                <td>Etesla</td>
+                <td></td>
+                <td>Material electrico por sistema fotovoltaico</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Adicional</td>
+                <td>Etesla</td>
+                <td>1</td>
+                <td>Tramites CFE</td>
+                <td>$0.00 MXN</td>
+            </tr>
+            <tr>
+                <td>Adicional</td>
+                <td>Etesla</td>
+                <td>1</td>
+                <td>Servicio de UVIE y medidor<br>bidireccional para MT2</td>
+                <td>$70000.00</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Tabla totales/subtotales -->
+    <table id="tblTotales" class="table table-sm">
+        <tbody style="border-top: 3px solid black;">
+            <tr>
+                <th class="text-left" style="background-color: #E8E8E8;">Subtotal</th>
+                <th style="background-color: #E8E8E8;"></th>
+            </tr>
+            <tr>
+                <td><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
+                <td>$ 123 USD</td>
+            </tr>
+            <tr>
+                <td><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
+                <td>$ 123 MXN</td>
+            </tr>
+            <tr>
+                <th class="text-left" style="background-color: #E8E8E8;">Total c/ IVA</th>
+                <th style="background-color: #E8E8E8;"></th>
+            </tr>
+            <tr>
+                <td><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
+                <td>$ 123 USD</td>
+            </tr>
+            <tr>
+                <td><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
+                <td>$ 123 MXN</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <!-- Logotipos de panel e inversor -->
+    <div class="grid-container">
+        <div class="grid-item">
+            oijfaoiefja;oisejfaoisjefeoisjfo;iasejf;oiasijef;eiaosfejsi
+        </div>
+        <div class="grid-item">
+            oijfaoiefja;oisejfaoisjefeoisjfo;iasejf;oiasijef;eiaosfejsi
+        </div>
+    </div>
+    <div class="footer-page"></div>
 
-            </tbody>
-        </table>
+    <hr>
+
+    <!-- Pag 3 - ROI_Financiamiento -->
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid" style="height: 20px; border-color: #8CC6F6;">
+            <h2 class="encabezado">Retorno de inversion con paneles<br>solares</h2>
+            <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
+        </div>
     </div>
 </body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>

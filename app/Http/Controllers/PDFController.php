@@ -39,7 +39,7 @@ class PDFController extends Controller
     {
         $pdf = PDF::loadview('PDFTemplates.exampleDelete')
         ->setOptions(['isRemoteEnabled' => true])
-        ->setPaper('A4');
+        ->setPaper('A4','landscape');
 
         return $pdf->stream('test.pdf');
     }
