@@ -8,27 +8,39 @@ class PDFController extends Controller
 {
     //Aqui se programara todo lo relacionado al PDF (nombrado del archivo, la generacion, etc)
 
-    public function generatePDF($data)
+    public function generatePDF($propuesta)
     {   
-        // $data = [ 
-        //     'nombre' => 'LaloHer420',
-        //     'imgRouteCode' => 'https://drive.google.com/thumbnail?id=1N2wEt4wgaqz2iJacrll-WJW8ygDqgfUN'
-        // ];
-
-        $pdf = PDF::loadview('PDFTemplates.pdfBajaTension', $data)
+        $pdf = PDF::loadview('PDFTemplates.pdfBajaTension',$propuesta)
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
-        $path = public_path('pdfsGenerados/'); //Ruta de almacenamiento
-        // $fileName = $data->;
+        $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
+        $fileName = $this->getFileName($propuesta);
 
-        // return $pdf->stream('pdfPrueba.pdf');
+        $pdf->save($path . '/' . $fileName);
+
+        $pdf = $path . '/' . $fileName;
+
+        return response()->download($pdf);
     }
 
     public function getFileName($data)
     {
-        $nombreCliente = $data->cliente->vNombrePersona . $data->cliente->vPrimerApellido . $data->cliente->vSegundoApellido;
+        $nombreCliente = $data->cliente["vNombrePersona"] . $data->cliente["vPrimerApellido"] . $data->cliente["vSegundoApellido"];
         $tipoCotizacion = $data->tipoCotizacion;
-        $potencia = $data->paneles->fPotencia . 'W'; //Potencia a instalar
+        $potencia = $data->paneles["potencia"] . 'W'; //Potencia a instalar
+
+        $nombrePropuesta = $nombreCliente . '_' . $tipoCotizacion . '_' . $potencia . '_' . time() . '.pdf';
+
+        return $nombrePropuesta;
+    }
+
+    public function visualizarPDF()
+    {
+        $pdf = PDF::loadview('PDFTemplates.exampleDelete')
+        ->setOptions(['isRemoteEnabled' => true])
+        ->setPaper('A4');
+
+        return $pdf->stream('test.pdf');
     }
 }

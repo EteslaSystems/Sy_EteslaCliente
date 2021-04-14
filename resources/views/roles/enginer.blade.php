@@ -2,7 +2,7 @@
 @section('title')
     {{'Ingeniero'}}
 @stop
-<!-- Aqui va la ruta que redirecciona al nicio del Rol #Seller# -->
+<!-- Aqui va la ruta que redirecciona al nicio del Rol #Enginer# -->
 @section('rutaInicioUser')
     {{'/e'}}
 @stop

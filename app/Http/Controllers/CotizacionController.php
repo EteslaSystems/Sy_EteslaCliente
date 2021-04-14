@@ -20,9 +20,7 @@ class CotizacionController extends Controller
 	public function generatePDF(Request $request)
     {
 		if($request->isMethod('post')){
-			$data = json_decode($request->data);
-			
-			$this->pdfi->generatePDF($data);
+			return $this->pdfi->generatePDF($request);
 		}
 
 		// $arrayCompleto["idVendedor"] = session('dataUsuario')->idPersona;

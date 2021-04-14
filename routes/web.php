@@ -2,7 +2,7 @@
 Route::get('/pdf', function(){
     return view('PDFTemplates.pdfBajaTension');
 });
-Route::get('/pdfCreate', 'PDFController@index');
+Route::get('/pdfCreate', 'PDFController@visualizarPDF');
 
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');

@@ -107,7 +107,7 @@ function generarPDF(){
                 console.log(pdf);
             },
             error: function(error){
-                reject('Hubo un error al intentar generar el PDF: '+error.message);
+                console.log(error);
             }
         });
     });
