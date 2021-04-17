@@ -11,7 +11,7 @@ class PDFController extends Controller
     public function generatePDF($propuesta)
     {   
         $pdf = PDF::loadview('PDFTemplates.pdfBajaTension',$propuesta)
-        ->setOptions(['isRemoteEnabled' => true])
+        ->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true])
         ->setPaper('A4');
 
         $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
@@ -38,7 +38,7 @@ class PDFController extends Controller
     public function visualizarPDF()
     {
         $pdf = PDF::loadview('PDFTemplates.exampleDelete')
-        ->setOptions(['isRemoteEnabled' => true])
+        ->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true])
         ->setPaper('A4');
 
         return $pdf->stream('test.pdf');

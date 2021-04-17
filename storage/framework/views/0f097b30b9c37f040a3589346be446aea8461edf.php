@@ -89,7 +89,7 @@
 </style>
 <body>
     <!-- Pagina 1 -->
-    <img src="https://i.pinimg.com/originals/0c/bc/a1/0cbca13e291164dc93e1555a5c70a803.jpg">
+    <img src="https://drive.google.com/thumbnail?id=13LRqh_q_IUKdrmeSTN4l-7aYP1Yt2g1R" style="max-width: 100%; height: auto;">
     <p class="text-center subtitulo">efaesefasefasfasfasefs kWp de su sistema fotovoltaico</p>
     <div class="container">
         <h3 class="text-center" style="text-decoration: underline;">Propuesta solar</h3>
@@ -201,7 +201,7 @@
             <tr>
                 <th class="tabFinanciamientothtd">Pago de contado</th>
                 <td class="tabFinanciamientothtd">$10000</td>
-                <th class="tabFinanciamientothtd" style="background-color: #03BABE;">Ahorro mensual de luz</th>
+                <th class="tabFinanciamientothtd" style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
                 <td id="tdAhorroMensual" class="tabFinanciamientothtd" style="background-color: #03BABE;">$123456</td>
                 <th class="tabFinanciamientothtd">Retorno de inversión</th>
                 <td class="tabFinanciamientothtd">10 años</td>
@@ -295,7 +295,17 @@
         </div>
         <div class="divROI">
             <h5 class="text-center">RETORNO<br>DE INVERSION:</h5>
-            <h1 style="text-align: center;"><strong>7 años</strong></h1>
+            <h1 style="float: right; text-align: left;"><strong>7 años</strong></h1>
         </div>
+        <div><canvas id='cnvsROIChart'></canvas></div>
     </div>
-</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
+
+
+</body>
+<!-- Charting library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+
+<!-- Scripting para llenar Graficos -->
+<script type="text/javascript">
+
+</script><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
