@@ -484,13 +484,14 @@ function mostrarPanelSeleccionado(){
             let potenciaNecesaria = sessionStorage.getItem("_consumsFormated");
             ///EXPERIMENTAL
 
-
             //Create objRequest to Calculate Inversores
             let objRequest = { panel: _paneles[ddlPanelesValue], potenciaNecesaria: potenciaNecesaria };
 
             //Se carga dropDownList -Inversores-
             let _inversores = await obtenerInversoresParaPanelSeleccionado(objRequest);
             _inversores = _inversores.message; //Formating
+            
+            sessionStorage.removeItem("_respInversores");
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
             
             ///EXPERIMENTAL
@@ -609,11 +610,12 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
             newCost = _inversors[i].precioTotal;
         }
 
-        if(oldCost >= newCost){ ///El costo mas -barato-
-            oldCost = newCost;
-            Respuesta = _inversors[i];
+        if(i > 0){
+            if(oldCost >= newCost){ ///El costo mas -barato-
+                oldCost = newCost;
+                Respuesta = _inversors[i];
+            }
         }
-
     }
 
     return Respuesta;
@@ -704,7 +706,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpCostProyectoSIVA').val(_viaticos[0].totales.precio + '$');
     $('#inpCostProyectoCIVA').val(_viaticos[0].totales.precioMasIVA + '$');
     $('#inpCostPorWatt').val(_viaticos[0].totales.precio_watt + '$');
-    $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMasIVAMXN);
+    $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMXN);
     
     //Se pintan los resultados del roi
     $('#inpPagoAnteriorProm').val('$'+_viaticos[0].roi.consumo.consumoBimestralPesosMXN);
@@ -768,7 +770,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionOptima[0].totales.precio  + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionOptima[0].totales.precioMasIVA  + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionOptima[0].totales.precio_watt  + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionOptima[0].totales.precioMasIVAMXN  + '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionOptima[0].totales.precioMXN  + '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
@@ -814,7 +816,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionMediana[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionMediana[0].totales.precioMasIVAMXN+ '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionMediana[0].totales.precioMXN+ '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
@@ -861,7 +863,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionEconomica[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionEconomica[0].totales.precioMasIVAMXN+ '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionEconomica[0].totales.precioMXN+ '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;

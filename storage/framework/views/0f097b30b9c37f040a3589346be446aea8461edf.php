@@ -11,7 +11,6 @@
     html{
         margin: 0;
     }
-    
     .footer-page{
         position: fixed; 
         bottom: 0cm; 
@@ -55,22 +54,19 @@
         color: white;
         text-align: center;
     }
-
     table tbody{
         text-align: center;
     }
-
     #tblTotales tbody{
         text-align: right;
     }
     /* Tabla Financiamiento [ROI] */
     .tabFinanciamiento {
-            background-color: #3A565E;
-            border-collapse: collapse;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-    
+        background-color: #3A565E;
+        border-collapse: collapse;
+        border-radius: 20px;
+        overflow: hidden;
+    }
     .tabFinanciamientothtd{
         border: 3px solid white;
         color: white;
@@ -82,14 +78,16 @@
         font-family: "Lucida Console", monospace;
         font-size: 15px;
     }
-
     .encabezado{
         float: left;
     }
+    .texto-juntito{
+        line-height: 73%;
+    }
 </style>
 <body>
-    <!-- Pagina 1 -->
-    <img src="https://drive.google.com/thumbnail?id=13LRqh_q_IUKdrmeSTN4l-7aYP1Yt2g1R" style="max-width: 100%; height: auto;">
+    <!-- Pagina 1 - Portada -->
+    <img src="https://drive.google.com/uc?export=view&id=13LRqh_q_IUKdrmeSTN4l-7aYP1Yt2g1R" style="max-width:100%; height: 635px;">
     <p class="text-center subtitulo">efaesefasefasfasfasefs kWp de su sistema fotovoltaico</p>
     <div class="container">
         <h3 class="text-center" style="text-decoration: underline;">Propuesta solar</h3>
@@ -185,6 +183,11 @@
         </table>
         <!-- Logotipos de panel e inversor -->
         
+
+        <!-- Notita - TipoDeCambio -->
+        <p class="pNotita"><strong>NOTA: </strong>El tipo de cambio ($ mxn) se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+
+        <!-- FooterPagina -->
         <div class="footer-page"></div>
     </div>
 
@@ -300,12 +303,31 @@
         <div><canvas id='cnvsROIChart'></canvas></div>
     </div>
 
+    <hr class="salto-pagina">
 
-</body>
-<!-- Charting library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
-
-<!-- Scripting para llenar Graficos -->
-<script type="text/javascript">
-
-</script><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
+    <!-- Pagina 4 - ContraPortada -->
+    <img src="https://drive.google.com/uc?export=view&id=11AsS1jtmcJRVrrNYZMZihaeIb7rCJxeT" style="max-width:100%; height: 590px;">
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid headerPage" style="border-color: #8DEB6A; border-top: 5px solid #FFFB00;">
+            <div class="texto-juntito" style="margin-top: -65px;">
+                <p>Deseamos que la propuesta solar presentada a su nombre:<br><h5>Nombre del cliente</h5><br>sea de su agrado, quedamos a la espera de la aceptación.</p>
+            </div>
+        
+        
+        
+        
+        
+            
+            <div class="d-flex justify-content-center" title="nombre del asesor/vendedor">
+                <p>ASESOR: </p><h3>NOMBRE DEL ASESOR</h3>
+                <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 29%;">
+            </div>
+            <p style="text-decoration: underline;">Comunicate con nosotros:</p>
+            <p>OFICINA nombre_oficina<br>(direccion_oficina)</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/cell-phone.png"/>Telefono: 01 800 849 1725</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/domain.png"/>Pagina web: https://etesla.mx/</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/facebook-new.png"/>Facebook: @eteslasolar</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/instagram-new--v1.png"/>Instagram: @eteslasolar</p>
+        </div>
+    </div>
+</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
