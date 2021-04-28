@@ -365,7 +365,7 @@ function validarPeriodoVacio(periodo){
 
 /*#region Equipos seleccionados*/
 function vaciarRespuestaPaneles(resultPaneles){
-    var dropDownListPaneles = $('#listPaneles');
+    let dropDownListPaneles = $('#listPaneles');
 
     //Habilita lista de paneles
     dropDownListPaneles.attr("disabled", false);
@@ -690,8 +690,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     if(_viaticos[0].power.generacion.promedioDeGeneracion){
         generacionMensual = _viaticos[0].power.generacion.promedioDeGeneracion;
 
-        if(_viaticos[0].power.nuevosConsumos.promedioConsumoBimestral){
-            nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioConsumoBimestral;
+        if(_viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral){
+            nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
         }
     }
     else{
@@ -709,9 +709,9 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMXN);
     
     //Se pintan los resultados del roi
-    $('#inpPagoAnteriorProm').val('$'+_viaticos[0].roi.consumo.consumoBimestralPesosMXN);
-    $('#inpPagoNuevoProm').val('$'+_viaticos[0].roi.generacion.nuevoPagoBimestral);
-    $('#inpAhorroMensual').val('$'+_viaticos[0].roi.ahorro.ahorroMensualEnPesosMXN);
+    $('#inpPagoAnteriorBimsProm').val('$'+_viaticos[0].roi.consumo.consumoBimestralPesosMXN);
+    $('#inpPagoNuevoBimsProm').val('$'+_viaticos[0].roi.generacion.nuevoPagoBimestral);
+    $('#inpAhorroBimestral').val('$'+_viaticos[0].roi.ahorro.ahorroBimestralEnPesosMXN);
     $('#inpAhorroAnual').val('$'+_viaticos[0].roi.ahorro.ahorroAnualEnPesosMXN);
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
@@ -775,7 +775,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                 generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
+                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
                 $('#inpModeloPanel').val(combinaciones.combinacionOptima[0].paneles.nombre);
                 $('#inpModeloInversor').val(combinaciones.combinacionOptima[0].inversores.vNombreMaterialFot);
@@ -785,9 +785,9 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPorcentGeneracion').val(combinaciones.combinacionOptima[0].power.porcentajePotencia + '%');
 
                 //Page3_Result
-                $('#inpPagoAnteriorProm').val('$'+combinaciones.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
-                $('#inpPagoNuevoProm').val('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
-                $('#inpAhorroMensual').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
+                $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
+                $('#inpAhorroBimestral').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
                 //$('#plROIBruto1').val(combinaciones.combinacionOptima[0].roi. + 'años');
                 //$('#plROIDeduccion1').val(combinaciones.combinacionOptima[0].roi. + 'años');
@@ -821,7 +821,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                 generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
+                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
                 $('#inpModeloPanel').val(combinaciones.combinacionMediana[0].paneles.nombre);
                 $('#inpModeloInversor').val(combinaciones.combinacionMediana[0].inversores.vNombreMaterialFot);
@@ -831,9 +831,9 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPorcentGeneracion').val(combinaciones.combinacionMediana[0].power.porcentajePotencia + '%');
 
                 //Page3_Result
-                $('#inpPagoAnteriorProm').val('$'+combinaciones.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
-                $('#inpPagoNuevoProm').val('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
-                $('#inpAhorroMensual').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
+                $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
+                $('#inpAhorroBimestral').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
                 //$('#plROIBruto1').val(combinaciones.combinacionMediana[0].roi. + 'años');
                 //$('#plROIDeduccion1').val(combinaciones.combinacionMediana[0].roi. + 'años');
@@ -868,7 +868,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
                 generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
+                nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
                 $('#inpModeloPanel').val(combinaciones.combinacionEconomica[0].paneles.nombrePanel);
                 $('#inpModeloInversor').val(combinaciones.combinacionEconomica[0].inversores.vNombreMaterialFot);
@@ -878,9 +878,9 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPorcentGeneracion').val(combinaciones.combinacionEconomica[0].power.porcentajePotencia + '%');
 
                 //Page3_Result
-                $('#inpPagoAnteriorProm').val('$'+combinaciones.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
-                $('#inpPagoNuevoProm').val('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
-                $('#inpAhorroMensual').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
+                $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
+                $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
+                $('#inpAhorroBimestral').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
                 //$('#plROIBruto1').val(combinaciones.combinacionEconomica[0].roi. + 'años');
                 //$('#plROIDeduccion1').val(combinaciones.combinacionEconomica[0].roi. + 'años');
@@ -940,7 +940,7 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     //Page2_Result
     var generacionMensual = combinaciones.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionEconomica[0].power.nuevosConsumos.promedioConsumoBimestral;
+    var nuevoConsumoBimestral = combinaciones.combinacionEconomica[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel1').text(combinaciones.combinacionEconomica[0].paneles.nombre);
     $('#plModeloInversor1').text(combinaciones.combinacionEconomica[0].inversores.vNombreMaterialFot);
@@ -985,7 +985,7 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     //Page2_Result
     var generacionMensual = combinaciones.combinacionMediana[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionMediana[0].power.nuevosConsumos.promedioConsumoBimestral;
+    var nuevoConsumoBimestral = combinaciones.combinacionMediana[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel2').text(combinaciones.combinacionMediana[0].paneles.nombre);
     $('#plModeloInversor2').text(combinaciones.combinacionMediana[0].inversores.vNombreMaterialFot);
@@ -1030,7 +1030,7 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     //Page2_Result
     var generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioConsumoBimestral;
+    var nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel3').text(combinaciones.combinacionOptima[0].paneles.nombre);
     $('#plModeloInversor3').text(combinaciones.combinacionOptima[0].inversores.vNombreMaterialFot);

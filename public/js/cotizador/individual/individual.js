@@ -7,7 +7,6 @@
 var idPanel;
 var idInversor;
 var direccionCliente = '';
-var bInstalacion = false;
 
 $(document).ready(function(){
     var loader = $('#loader');
@@ -101,11 +100,11 @@ function sendSingleQuotation(){
     let cantidadPaneles = document.getElementById('inpCantPaneles').value;
     let cantidadInversores = document.getElementById('inpCantInversores').value;
     let cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
-    direccionCliente = document.getElementById('municipio').value;
+    let direccionCliente = document.getElementById('municipio').value;
+    let bInstalacion = $('#chbInstalacion').val();
 
+    sessionStorage.removeItem("tarifaMT");
     sessionStorage.setItem("tarifaMT", "individual");
-
-    changeValue_bInstalacion();
 
     if(validarUsuarioCargado(direccionCliente) === true){
         if(validarValoresDropDownLists(idPanel, idInversor) == true ){
@@ -170,7 +169,7 @@ function sendSingleQuotation(){
                     //Totales
                     $('#inpPrecio').val(respuesta[0].totales.precio+'$');
                     $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA+'$');
-                    $('#precioMXN').val('$'+respuesta[0].totales.precioMasIVAMXN);
+                    $('#precioMXN').val('$'+respuesta[0].totales.precioMXN);
                 });
             }
         }
@@ -208,10 +207,10 @@ function configurationItems_modal(){
 
 //Validations
 function changeValue_bInstalacion(){
-    if($('#chbInstalacion').is(":checked")){
-        bInstalacion = true;
-    }
-    else{
-        bInstalacion = false;
-    }
+    let checkValue = $('#chbInstalacion').val();
+
+    checkValue = checkValue === '0' ? '1' : '0';
+
+    //Se cambia el valor
+    $('#chbInstalacion').val(checkValue);
 }

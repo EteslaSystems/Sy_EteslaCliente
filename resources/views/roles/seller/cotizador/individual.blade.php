@@ -33,7 +33,7 @@
                                             <div class="p-2">
                                                 <div class="checkbox">
                                                     <label class="checkbox-inline">
-                                                        <input type="checkbox" id="chbInstalacion" checked><span class="badge badge-warning">Instalacion</span>
+                                                        <input type="checkbox" id="chbInstalacion" value="1" onclick="changeValue_bInstalacion();" checked><span class="badge badge-warning">Instalacion</span>
                                                     </label>
                                                 </div>
                                             </div>

@@ -410,27 +410,27 @@
                                                 <div id="pageResult3" class="row" style="display:none;">
                                                     <div class="col">
                                                         <div class="form-group row">
-                                                            <label for="inpPagoAnteriorProm" class="col-sm-4 col-form-label">Pago anterior(promedio)</label>
+                                                            <label for="inpPagoAnteriorBimsProm" class="col-sm-4 col-form-label">Pago anterior bimestral (promedio)</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoAnteriorProm">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoAnteriorBimsProm">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="inpPagoNuevoProm" class="col-sm-4 col-form-label">Pago nuevo(promedio)</label>
+                                                            <label for="inpPagoNuevoBimsProm" class="col-sm-4 col-form-label">Pago nuevo bimestral (promedio)</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoNuevoProm">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoNuevoBimsProm">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="inpAhorroMensual" class="col-sm-4 col-form-label">Ahorro mensual</label>
+                                                            <label for="inpAhorroBimestral" class="col-sm-4 col-form-label">Ahorro bimestral (promedio)</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroMensual">
+                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroBimestral">
                                                             </div>
                                                         </div>    
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group row">
-                                                            <label for="inpAhorroAnual" class="col-sm-4 col-form-label">Ahorro anual</label>
+                                                            <label for="inpAhorroAnual" class="col-sm-4 col-form-label">Ahorro anual (promedio)</label>
                                                             <div class="col-lg-6">
                                                                 <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroAnual">
                                                             </div>
