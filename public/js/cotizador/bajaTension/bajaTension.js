@@ -155,11 +155,13 @@ function calcularViaticosBT(objInversor){
     consumptions = JSON.parse(consumptions);
     consumptions = consumptions.consumo;
     let descuento = 0;
+    let aumento = 0;
 
     let bndPropuestaNueva = sessionStorage.getItem("bndPropuestaEditada");
 
     if(bndPropuestaNueva === '1'){ //Propuesta modificada
         descuento = sessionStorage.getItem("descuentoPropuesta");
+        aumento = sessionStorage.getItem("aumentoPropuesta");
     }
 
     if(objInversor == null){
@@ -184,7 +186,8 @@ function calcularViaticosBT(objInversor){
                 "direccionCliente": datosPropuesta.direccionCliente,
                 "consumos": consumptions,
                 "tarifa": datosPropuesta.tarifa,
-                "descuentoPropuesta": descuento
+                "descuentoPropuesta": descuento,
+                "aumentoPropuesta": aumento
             },
             dataType: 'json',
             success: function(resultViaticos){
@@ -1115,6 +1118,17 @@ function sliderModificarPropuesta(){
     if($('#btnModificarPropuesta').is(":disabled")){ //El boton de "modificar_propuesta" se encuentra inhabilitado
         $('#btnModificarPropuesta').attr("disabled",false); //Se habilita el boton de "modificar_propuesta"
     }
+
+    if($('#inpSliderDescuento').val() >= 1 || $('#inpSliderDescuento').val() >= '1'){
+        //Inhabilitar y dejar en 0 el slider de AUMENTO
+        $('#inpSliderAumento').val(0);
+        $('#rangeValueAumento').val(0);
+        $('#inpSliderAumento').prop("disabled", true);
+    }
+    else if($('#inpSliderDescuento').val() == 0){
+        //Habilitar el slider de AUMENTO
+        $('#inpSliderAumento').prop("disabled", false);
+    }
 }
 
 async function modificarPropuesta(){
@@ -1128,23 +1142,22 @@ async function modificarPropuesta(){
     $('listPaneles').val('-1');
     $('listInversores').val('-1');
 
-    // //Se limpian los dropDownList de Paneles e Inversores
-    // limpiarDropDownListPaneles();
-    // limpiarDropDownListInversores();
-
     // //Se limpian inputs de -result- anterior
     limpiarCampos();
 
     // //Cachar los valores de los porcentajes / panel de ajuste
     let porcentajePropuesta = parseFloat($('#inpSliderPropuesta').val()) || 0;
     let porcentajeDescuento = parseFloat($('#inpSliderDescuento').val()) || 0; 
+    let porcentajeAumento = parseFloat($('#inpSliderAumento').val()) || 0; 
 
     // //Se guarda el porcentaje de descuento, para su futura implementacion (ya que el descuento se aplica hasta el step:"cobrar_viaticos")
     sessionStorage.removeItem("descuentoPropuesta");
     sessionStorage.setItem("descuentoPropuesta",porcentajeDescuento);
+    sessionStorage.removeItem("aumentoPropuesta");
+    sessionStorage.setItem("aumentoPropuesta",porcentajeAumento);
 
     // //Se arma la data para editar la propuesta
-    let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento };
+    let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento, porcentajeAumento };
 
     // //Se realiza nuevamente la propuesta
     if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ ///BajaTension
