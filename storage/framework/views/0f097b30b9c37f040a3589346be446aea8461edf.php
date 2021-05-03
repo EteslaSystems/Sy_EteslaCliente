@@ -24,14 +24,18 @@
 
     /* Contenedores */
     .container-fluid{
-        padding:0 !important;
-    }
-    .table-contenedor, td, th{
-        border: 1px solid black;
+        padding: 0 !important;
     }
     .table-contenedor{
         width: 100%;
         border-collapse: collapse;
+    }
+    .table-contenedor th, .table-contenedor td{
+        border: 1px solid black;
+        text-align: center;
+    }
+    .table-desgloce th{
+        border-radius: 100em;
     }
 
     /* [Jumbotron] Styles */
@@ -67,13 +71,15 @@
     .texto-encabezado-pagina{
         text-align: left;
     }
-
     .subtitulo{
         font-family: "Lucida Console", monospace;
         font-size: 15px;
         text-align: center;
     }
-
+    .garantias{
+        line-height: 63%;
+        text-align: center;
+    }
     /*Imagenes*/
     .img-center{
         display: block;
@@ -98,7 +104,7 @@
     <hr class="salto-pagina">
     <!-- Pagina 2 -->
     <div class="container-fluid">
-        <div class="jumbotron bordeLateral" style="background-color: #fff; border-color: #8CC6F6; padding: 0; height: 16%;">
+        <div class="bordeLateral" style="background-color: #fff; border-color: #8CC6F6; height: 16%;">
             <table class="table-contenedor">
                 <tr>
                     <td>
@@ -112,14 +118,14 @@
             </table>
         </div>
         <!-- Tabla desglozado propuesta -->
-        <table class="table-contenedor">
+        <table class="table-contenedor table-desgloce">
             <thead style="background-color: #00A1FF;">
                 <tr>
-                    <th scope="col" style="border-radius: 4px;">Tipo</th>
-                    <th scope="col" style="border-radius: 4px;">Marca</th>
-                    <th scope="col" style="border-radius: 4px;">Cantidad</th>
-                    <th scope="col" style="border-radius: 4px;">Nombre</th>
-                    <th scope="col" style="border-radius: 4px;">Total</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -202,10 +208,10 @@
         </table>
         <!-- Fin logos/marcas equip. -->
         <!-- Garantias de las marcas -->
-        <div id="garantias">
-            <h5>Garantia de la marca-panel y los años de garantia que ofrece</h5>
-            <h5>Garantia de la marca-inversor y los años de garantia que ofrece</h5>
-            <h5>Garantia de la marca-soportes y los años de garantia que ofrece</h5>
+        <div class="garantias">
+            <p>Garantia de la marca-panel y los años de garantia que ofrece</p>
+            <p>Garantia de la marca-inversor y los años de garantia que ofrece</p>
+            <p>Garantia de la marca-soportes y los años de garantia que ofrece</p>
         </div>
         <hr class="linea-division">
         <table class="table-contenedor" style="margin-top: -8px;">
@@ -230,18 +236,136 @@
     <!-- Fin - Pagina2 -->
     <hr class="salto-pagina">
     <!-- Pagina3 [ROI] -->
-    <div class="jumbotron bordeLateral" style="background-color: #fff; border-color: #8DEB6A; padding: 0; height: 16%;">
-        <table class="table-contenedor">
+    <div class="container-fluid">
+        <div class="bordeLateral" style="background-color: #fff; border-color: #8DEB6A; padding: 0; height: 10%;">
+            <table class="table-contenedor">
+                <tr>
+                    <td>  
+                        <h1 class="texto-encabezado-pagina">Financiamiento y Retorno de Inversión</h1>
+                    </td>
+                    <td>
+                        <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Tabla financiamiento -->
+        <table class="tabFinanciamiento">
             <tr>
-                <td>
-                    <h3>¿Cuantos paneles necesito?</h3>    
-                    <h1 class="texto-encabezado-pagina">Sistema Fotovoltaico interconectado a la red CFE</h1>
-                </td>
-                <td>
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
-                </td>
+                <th class="tabFinanciamientothtd">Pago de contado</th>
+                <td class="tabFinanciamientothtd">$10000</td>
+                <th class="tabFinanciamientothtd" style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
+                <td id="tdAhorroMensual" class="tabFinanciamientothtd" style="background-color: #03BABE;">$123456</td>
+                <th class="tabFinanciamientothtd">Retorno de inversión</th>
+                <td class="tabFinanciamientothtd">10 años</td>
+            </tr>
+        </table>   
+        <table class="tabFinanciamiento">
+            <tr>
+                <th class="tabFinanciamientothtd">Tarjeta de credito</th>
+                <th class="tabFinanciamientothtd">3 meses</th>
+                <th class="tabFinanciamientothtd">6 meses</th>
+                <th class="tabFinanciamientothtd">9 meses</th>
+                <th class="tabFinanciamientothtd">12 meses</th>
+                <th class="tabFinanciamientothtd">18 meses</th>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd"> Pago mensual</th>
+                <td class="tabFinanciamientothtd">$ 123987</td>
+                <td class="tabFinanciamientothtd">$ 123987</td>
+                <td class="tabFinanciamientothtd">$ 123987</td>
+                <td class="tabFinanciamientothtd">$ 123987</td>
+                <td class="tabFinanciamientothtd">$ 123987</td>
             </tr>
         </table>
+        <table class="tabFinanciamiento">
+            <tr>
+                <th class="tabFinanciamientothtd">Financiamiento</th>
+                <th class="tabFinanciamientothtd">15%</th>
+                <th class="tabFinanciamientothtd">35%</th>
+                <th class="tabFinanciamientothtd">50%</th>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">Enganche</th>
+                <td class="tabFinanciamientothtd">$ 887987</td>
+                <td class="tabFinanciamientothtd">$ 887987</td>
+                <td class="tabFinanciamientothtd">$ 887987</td>
+            </tr>
+        </table>
+        <table id="tabFinanciamient" class="tabFinanciamiento">
+            <tr>
+                <th class="tabFinanciamientothtd">Pagos mensuales</br>por plazo</th>
+                <th class="tabFinanciamientothtd">15%</th>
+                <th class="tabFinanciamientothtd">35%</th>
+                <th class="tabFinanciamientothtd">50%</th>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 12 meses</th>
+                <td id="doce_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="doce_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="doce_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 24 meses</th>
+                <td id="veinticuatro_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="veinticuatro_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="veinticuatro_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 36 meses</th>
+                <td id="treintaseis_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="treintaseis_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="treintaseis_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 48 meses</th>
+                <td id="cuarentaocho_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="cuarentaocho_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="cuarentaocho_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 60 meses</th>
+                <td id="sesenta_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="sesenta_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="sesenta_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 72 meses</th>
+                <td id="setentados_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="setentados_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="setentados_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+            <tr>
+                <th class="tabFinanciamientothtd">A 84 meses</th>
+                <td id="ochentacuatro_15" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="ochentacuatro_35" class="tabFinanciamientothtd">$ 543678</td>
+                <td id="ochentacuatro_50" class="tabFinanciamientothtd">$ 543678</td>
+            </tr>
+        </table>
+        <!-- Fin_Tabla financiamiento -->
+        <hr class="linea-division">
+        <!-- ROI -->
+        <div style="padding: 0; height: 10%;">
+            <table class="table-contenedor">
+                <tr>
+                    <td style="text-align: left;">  
+                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 25%; margin-left: 30px; margin-right: -50px;">
+                    </td>
+                    <td style="background-color: #488D3E; color: #fff; line-height: 70%;">
+                        <h2>RETORNO DE INVERSIÓN</h2>
+                        <p style="font-size: 50px;"><strong>3 años</strong></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Grafico ROI -->
+
+
+
+        <!-- Globos de pagina3 [viejo_pdf] -->
+
+
+        <!-- Fin_ROI -->
     </div>
     <!-- Fin_Pagina3 -->
     <hr class="salto-pagina">
