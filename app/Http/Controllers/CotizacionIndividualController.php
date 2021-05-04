@@ -81,18 +81,18 @@ class CotizacionIndividualController extends Controller
 	}
 
 	public function sendSingleQuotation(Request $request){
-		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
-		$arrayCompleto["idCliente"] = $request->idCliente;
-		$arrayCompleto["destino"] = $request->direccionCliente;
-		$arrayCompleto["idPanel"] = $request->idPanel;
-		$arrayCompleto["idInversor"] = $request->idInversor;
-		$arrayCompleto["cantidadPaneles"] = $request->cantidadPaneles;
-		$arrayCompleto["cantidadInversores"] = $request->cantidadInversores;
-		$arrayCompleto["cantidadEstructuras"] = $request->cantidadEstructuras;
-		$arrayCompleto["bInstalacion"] = $request->bInstalacion;
-		$arrayCompleto["tipoCotizacion"] = "individual";
+		$cotizacionIndividual["origen"] = session('dataUsuario')->oficina;
+		$cotizacionIndividual["idCliente"] = $request->idCliente;
+		$cotizacionIndividual["destino"] = $request->direccionCliente;
+		$cotizacionIndividual["idPanel"] = $request->idPanel;
+		$cotizacionIndividual["idInversor"] = $request->idInversor;
+		$cotizacionIndividual["cantidadPaneles"] = $request->cantidadPaneles;
+		$cotizacionIndividual["cantidadInversores"] = $request->cantidadInversores;
+		$cotizacionIndividual["cantidadEstructuras"] = $request->cantidadEstructuras;
+		$cotizacionIndividual["bInstalacion"] = $request->bInstalacion;
+		$cotizacionIndividual["tipoCotizacion"] = 'individual';
 
-		$response = $this->cotizacion->sendSingleQuotation(['json' => $arrayCompleto]);
+		$response = $this->cotizacion->sendSingleQuotation(['json' => $cotizacionIndividual]);
 		$response = response()->json($response);
 
 		return $response;

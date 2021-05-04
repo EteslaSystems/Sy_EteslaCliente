@@ -38,6 +38,21 @@
         border-radius: 100em;
     }
 
+    /*Tabla - Financiamiento*/
+    .tabFinanciamiento{
+        width: 100%;
+        color: #fff;
+        background-color: #3A565E;
+        border-collapse: collapse;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .tabFinanciamiento th, .tabFinanciamiento td{
+        border: 3px solid white;
+        color: white;
+        text-align: center;
+    }
+
     /* [Jumbotron] Styles */
     .jumbotron{
         background: #eee;
@@ -98,7 +113,7 @@
             <p id="direccionCliente" class="subtitulo">Direccion cliente</p>
             <p id="fechaActual" class="subtitulo">Fecha de hoy</p>
         </div>
-        <img class="img-center" src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="height: 140px; width: 225px;">
+        <img class="img-center" src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="height: 140px; width: 238px;">
     </div>
     <!-- Fin - Pagina1 -->
     <hr class="salto-pagina">
@@ -241,7 +256,7 @@
             <table class="table-contenedor">
                 <tr>
                     <td>  
-                        <h1 class="texto-encabezado-pagina">Financiamiento y Retorno de Inversión</h1>
+                        <h1 class="texto-encabezado-pagina">Financiamiento y<br>Retorno de Inversión</h1>
                     </td>
                     <td>
                         <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
@@ -249,111 +264,116 @@
                 </tr>
             </table>
         </div>
+        <br>
         <!-- Tabla financiamiento -->
-        <table class="tabFinanciamiento">
-            <tr>
-                <th class="tabFinanciamientothtd">Pago de contado</th>
-                <td class="tabFinanciamientothtd">$10000</td>
-                <th class="tabFinanciamientothtd" style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
-                <td id="tdAhorroMensual" class="tabFinanciamientothtd" style="background-color: #03BABE;">$123456</td>
-                <th class="tabFinanciamientothtd">Retorno de inversión</th>
-                <td class="tabFinanciamientothtd">10 años</td>
-            </tr>
-        </table>   
-        <table class="tabFinanciamiento">
-            <tr>
-                <th class="tabFinanciamientothtd">Tarjeta de credito</th>
-                <th class="tabFinanciamientothtd">3 meses</th>
-                <th class="tabFinanciamientothtd">6 meses</th>
-                <th class="tabFinanciamientothtd">9 meses</th>
-                <th class="tabFinanciamientothtd">12 meses</th>
-                <th class="tabFinanciamientothtd">18 meses</th>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd"> Pago mensual</th>
-                <td class="tabFinanciamientothtd">$ 123987</td>
-                <td class="tabFinanciamientothtd">$ 123987</td>
-                <td class="tabFinanciamientothtd">$ 123987</td>
-                <td class="tabFinanciamientothtd">$ 123987</td>
-                <td class="tabFinanciamientothtd">$ 123987</td>
-            </tr>
-        </table>
-        <table class="tabFinanciamiento">
-            <tr>
-                <th class="tabFinanciamientothtd">Financiamiento</th>
-                <th class="tabFinanciamientothtd">15%</th>
-                <th class="tabFinanciamientothtd">35%</th>
-                <th class="tabFinanciamientothtd">50%</th>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">Enganche</th>
-                <td class="tabFinanciamientothtd">$ 887987</td>
-                <td class="tabFinanciamientothtd">$ 887987</td>
-                <td class="tabFinanciamientothtd">$ 887987</td>
-            </tr>
-        </table>
-        <table id="tabFinanciamient" class="tabFinanciamiento">
-            <tr>
-                <th class="tabFinanciamientothtd">Pagos mensuales</br>por plazo</th>
-                <th class="tabFinanciamientothtd">15%</th>
-                <th class="tabFinanciamientothtd">35%</th>
-                <th class="tabFinanciamientothtd">50%</th>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 12 meses</th>
-                <td id="doce_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="doce_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="doce_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 24 meses</th>
-                <td id="veinticuatro_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="veinticuatro_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="veinticuatro_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 36 meses</th>
-                <td id="treintaseis_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="treintaseis_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="treintaseis_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 48 meses</th>
-                <td id="cuarentaocho_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="cuarentaocho_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="cuarentaocho_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 60 meses</th>
-                <td id="sesenta_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="sesenta_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="sesenta_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 72 meses</th>
-                <td id="setentados_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="setentados_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="setentados_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-            <tr>
-                <th class="tabFinanciamientothtd">A 84 meses</th>
-                <td id="ochentacuatro_15" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="ochentacuatro_35" class="tabFinanciamientothtd">$ 543678</td>
-                <td id="ochentacuatro_50" class="tabFinanciamientothtd">$ 543678</td>
-            </tr>
-        </table>
+        <div style="margin-top: 8px; margin-bottom: 25px; margin-left: 25px; margin-right: 25px;">
+            <table class="tabFinanciamiento">
+                <tr>
+                    <th>Pago de contado</th>
+                    <td>$10000</td>
+                    <th style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
+                    <td style="background-color: #03BABE;">$123456</td>
+                    <th>Retorno de inversión</th>
+                    <td>10 años</td>
+                </tr>
+            </table>
+            <br>  
+            <table class="tabFinanciamiento">
+                <tr>
+                    <th>Tarjeta de credito</th>
+                    <th>3 meses</th>
+                    <th>6 meses</th>
+                    <th>9 meses</th>
+                    <th>12 meses</th>
+                    <th>18 meses</th>
+                </tr>
+                <tr>
+                    <th> Pago mensual</th>
+                    <td>$ 123987</td>
+                    <td>$ 123987</td>
+                    <td>$ 123987</td>
+                    <td>$ 123987</td>
+                    <td>$ 123987</td>
+                </tr>
+            </table>
+            <br>
+            <table id="tabFinanciamient" class="tabFinanciamiento">
+                <tr>
+                    <th>Financiamiento</th>
+                    <th>15%</th>
+                    <th>35%</th>
+                    <th>50%</th>
+                </tr>
+                <tr>
+                    <th>Enganche</th>
+                    <td>$ 887987</td>
+                    <td>$ 887987</td>
+                    <td>$ 887987</td>
+                </tr>
+                <tr>
+                    <th>Pagos mensuales</br>por plazo</th>
+                    <th>15%</th>
+                    <th>35%</th>
+                    <th>50%</th>
+                </tr>
+                <tr>
+                    <th>A 12 meses</th>
+                    <td id="doce_15">$ 543678</td>
+                    <td id="doce_35">$ 543678</td>
+                    <td id="doce_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 24 meses</th>
+                    <td id="veinticuatro_15">$ 543678</td>
+                    <td id="veinticuatro_35">$ 543678</td>
+                    <td id="veinticuatro_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 36 meses</th>
+                    <td id="treintaseis_15">$ 543678</td>
+                    <td id="treintaseis_35">$ 543678</td>
+                    <td id="treintaseis_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 48 meses</th>
+                    <td id="cuarentaocho_15">$ 543678</td>
+                    <td id="cuarentaocho_35">$ 543678</td>
+                    <td id="cuarentaocho_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 60 meses</th>
+                    <td id="sesenta_15">$ 543678</td>
+                    <td id="sesenta_35">$ 543678</td>
+                    <td id="sesenta_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 72 meses</th>
+                    <td id="setentados_15">$ 543678</td>
+                    <td id="setentados_35">$ 543678</td>
+                    <td id="setentados_50">$ 543678</td>
+                </tr>
+                <tr>
+                    <th>A 84 meses</th>
+                    <td id="ochentacuatro_15">$ 543678</td>
+                    <td id="ochentacuatro_35">$ 543678</td>
+                    <td id="ochentacuatro_50">$ 543678</td>
+                </tr>
+            </table>
+        </div>
         <!-- Fin_Tabla financiamiento -->
+
         <hr class="linea-division">
+        
         <!-- ROI -->
         <div style="padding: 0; height: 10%;">
             <table class="table-contenedor">
                 <tr>
-                    <td style="text-align: left;">  
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 25%; margin-left: 30px; margin-right: -50px;">
+                    <td style="text-align: left; width: 25%;">  
+                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
                     </td>
-                    <td style="background-color: #488D3E; color: #fff; line-height: 70%;">
-                        <h2>RETORNO DE INVERSIÓN</h2>
-                        <p style="font-size: 50px;"><strong>3 años</strong></p>
+                    <td style="background-color: #488D3E; color: #fff; line-height: 81%;">
+                        <p style="font-size: 40px;">RETORNO DE INVERSIÓN</p>
+                        <p style="font-size: 35px;"><strong>3 años</strong></p>
                     </td>
                 </tr>
             </table>
@@ -390,4 +410,10 @@
         <p><strong>NOTA: </strong>El tipo de cambio ($20.30mxn) se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
     </div>
     <!-- Fin - Pagina4 -->
-</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('#doce_15').css("background-color","#EEF509");
+    });
+</script><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>

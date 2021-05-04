@@ -101,7 +101,19 @@ function sendSingleQuotation(){
     let cantidadInversores = document.getElementById('inpCantInversores').value;
     let cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
     let direccionCliente = document.getElementById('municipio').value;
-    let bInstalacion = $('#chbInstalacion').val();
+    let bInstalacn = document.getElementById('chbInstalacion').value;
+    let data = {};
+
+    data = {
+        idCliente: idCliente,
+        idPanel: idPanel,
+        idInversor: idInversor,
+        cantidadPaneles: cantidadPaneles,
+        cantidadInversores: cantidadInversores,
+        cantidadEstructuras: cantidadEstructuras,
+        direccionCliente: direccionCliente,
+        bInstalacion: bInstalacn
+    };
 
     sessionStorage.removeItem("tarifaMT");
     sessionStorage.setItem("tarifaMT", "individual");
@@ -113,63 +125,53 @@ function sendSingleQuotation(){
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     type: 'POST',
                     url: '/enviarCotizIndiv',
-                    data: {
-                        "_token": $("meta[name='csrf-token']").attr('content'),
-                        "idCliente": idCliente,
-                        "idPanel": idPanel,
-                        "idInversor": idInversor,
-                        "cantidadPaneles": cantidadPaneles,
-                        "cantidadInversores": cantidadInversores,
-                        "cantidadEstructuras": cantidadEstructuras,
-                        "direccionCliente": direccionCliente,
-                        "bInstalacion": bInstalacion
-                    },
+                    data: data,
                     dataType: 'json',
+                    success: function(respuest){
+                        //Cotizacion individual - Result
+                        let respuesta = respuest.message;
+                        console.log(respuesta);
+
+                        //Se guarda la *propuesta_calculada* en un SessionStorage
+                        sessionStorage.removeItem('ssPropuestaIndividual');
+                        sessionStorage.setItem('ssPropuestaIndividual', JSON.stringify(respuesta))
+
+                        /*#region Se desbloquean botones de "Guardar propuesta" y "Generar_PDF" */
+                        $('#btnGuardarPIndiv').attr("disabled",false);
+                        $('#btnGenerarPIndiv').attr("disabled",false);
+                        /*#endregion*/
+
+                        if(respuesta[0].paneles != null){
+                            //Paneles
+                            $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotal + '$');
+                            $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.noModulos+')');
+
+                            //Estructuras
+                            respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
+                        }
+
+                        if(respuesta[0].inversores != null){
+                            //Inversores
+                            $('#inpCostTotalInversores').val(respuesta[0].inversores.precioTotal + '$');
+                            $('#txtCantidadInversoresInd').val(respuesta[0].inversores.numeroDeInversores);
+                        }
+                        else{
+                            //Inversores
+                            $('#inpCostTotalInversores').val(0 + '$');
+                            $('#txtCantidadInversoresInd').val(0);
+                        }
+
+                        //Viaticos
+                        $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT+'$');
+
+                        //Totales
+                        $('#inpPrecio').val(respuesta[0].totales.precio+'$');
+                        $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA+'$');
+                        $('#precioMXN').val('$'+respuesta[0].totales.precioMXN);
+                    },
                     error: function(){
                         alert('Algo ha ido mal al intentar realizar una cotizacion_individual');
                     }
-                })
-                .done(function(respuest){
-                    //Cotizacion individual - Result
-                    let respuesta = respuest.message;
-                    console.log(respuesta);
-
-                    //Se guarda la *propuesta_calculada* en un SessionStorage
-                    sessionStorage.removeItem('ssPropuestaIndividual');
-                    sessionStorage.setItem('ssPropuestaIndividual', JSON.stringify(respuesta))
-
-                    /*#region Se desbloquean botones de "Guardar propuesta" y "Generar_PDF" */
-                    $('#btnGuardarPIndiv').attr("disabled",false);
-                    $('#btnGenerarPIndiv').attr("disabled",false);
-                    /*#endregion*/
-
-                    if(respuesta[0].paneles != null){
-                        //Paneles
-                        $('#inpCostTotalPaneles').val(respuesta[0].paneles.costoTotal + '$');
-                        $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.noModulos+')');
-    
-                        //Estructuras
-                        respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
-                    }
-
-                    if(respuesta[0].inversores != null){
-                        //Inversores
-                        $('#inpCostTotalInversores').val(respuesta[0].inversores.precioTotal + '$');
-                        $('#txtCantidadInversoresInd').val(respuesta[0].inversores.numeroDeInversores);
-                    }
-                    else{
-                        //Inversores
-                        $('#inpCostTotalInversores').val(0 + '$');
-                        $('#txtCantidadInversoresInd').val(0);
-                    }
-
-                    //Viaticos
-                    $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT+'$');
-
-                    //Totales
-                    $('#inpPrecio').val(respuesta[0].totales.precio+'$');
-                    $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA+'$');
-                    $('#precioMXN').val('$'+respuesta[0].totales.precioMXN);
                 });
             }
         }
