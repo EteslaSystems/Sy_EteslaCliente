@@ -716,6 +716,9 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpPagoNuevoBimsProm').val('$'+_viaticos[0].roi.generacion.nuevoPagoBimestral);
     $('#inpAhorroBimestral').val('$'+_viaticos[0].roi.ahorro.ahorroBimestralEnPesosMXN);
     $('#inpAhorroAnual').val('$'+_viaticos[0].roi.ahorro.ahorroAnualEnPesosMXN);
+
+    $('#inpROIBruto').val(+_viaticos[0].roi.roiEnAnios+'años');
+    $('#inpROIDeduccion').val(+_viaticos[0].roi.roiConDeduccion+'años');
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#inpSliderPropuesta').val(_viaticos[0].power.porcentajePotencia);
@@ -792,8 +795,8 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
                 $('#inpAhorroBimestral').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                //$('#plROIBruto1').val(combinaciones.combinacionOptima[0].roi. + 'años');
-                //$('#plROIDeduccion1').val(combinaciones.combinacionOptima[0].roi. + 'años');
+                $('#plROIBruto1').val(combinaciones.combinacionOptima[0].roi.roiEnAnios + 'años');
+                $('#plROIDeduccion1').val(combinaciones.combinacionOptima[0].roi.roiConDeduccion + 'años');
 
                 //Boton_salvar
                 $('#checkSalvarCombinacion').css("display", "");
@@ -838,8 +841,8 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
                 $('#inpAhorroBimestral').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                //$('#plROIBruto1').val(combinaciones.combinacionMediana[0].roi. + 'años');
-                //$('#plROIDeduccion1').val(combinaciones.combinacionMediana[0].roi. + 'años');
+                $('#plROIBruto1').val(combinaciones.combinacionMediana[0].roi.roiEnAnios + 'años');
+                $('#plROIDeduccion1').val(combinaciones.combinacionMediana[0].roi.roiConDeduccion + 'años');
 
                 //Boton_salvar
                 $('#checkSalvarCombinacion').css("display", "");
@@ -885,8 +888,8 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
                 $('#inpAhorroBimestral').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroBimestralEnPesosMXN);
                 $('#inpAhorroAnual').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                //$('#plROIBruto1').val(combinaciones.combinacionEconomica[0].roi. + 'años');
-                //$('#plROIDeduccion1').val(combinaciones.combinacionEconomica[0].roi. + 'años');
+                $('#plROIBruto1').val(combinaciones.combinacionEconomica[0].roi.roiEnAnios + 'años');
+                $('#plROIDeduccion1').val(combinaciones.combinacionEconomica[0].roi.roiConDeduccion + 'años');
 
                 //Boton_salvar
                 $('#checkSalvarCombinacion').css("display", "");
@@ -957,8 +960,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plPagoPromedioNuevo1').text('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
     $('#plAhorroMensual1').text('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
     $('#plAhorroAnual1').text('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
-    //$('#plROIBruto1').text(combinaciones.combinacionEconomica[0].roi. + 'años');
-    //$('#plROIDeduccion1').text(combinaciones.combinacionEconomica[0].roi. + 'años');
+    $('#plROIBruto1').text(combinaciones.combinacionEconomica[0].roi.roiEnAnios + 'años');
+    $('#plROIDeduccion1').text(combinaciones.combinacionEconomica[0].roi.roiConDeduccion + 'años');
 
     /*             --Combinacion Mediana--             */
     /* Se cargan imagenes de logos && equipos */
@@ -1002,8 +1005,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plPagoPromedioNuevo2').text('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
     $('#plAhorroMensual2').text('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
     $('#plAhorroAnual2').text('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
-    //$('#plROIBruto2').text(combinaciones.combinacionMediana[0].roi. + 'años');
-    //$('#plROIDeduccion2').text(combinaciones.combinacionMediana[0].roi. + 'años');
+    $('#plROIBruto2').text(combinaciones.combinacionMediana[0].roi.roiEnAnios + 'años');
+    $('#plROIDeduccion2').text(combinaciones.combinacionMediana[0].roi.roiConDeduccion + 'años');
 
     /*             --Combinacion Optima--             */
     /* Se cargan imagenes de logos &&  equipos */
@@ -1048,8 +1051,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plPagoPromedioNuevo3').text('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
     $('#plAhorroMensual3').text('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
     $('#plAhorroAnual3').text('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
-    //$('#plROIBruto3').text(combinaciones.combinacionOptima[0].roi. + 'años');
-    //$('#plROIDeduccion3').text(combinaciones.combinacionOptima[0].roi. + 'años');
+    $('#plROIBruto3').text(combinaciones.combinacionOptima[0].roi.roiEnAnios + 'años');
+    $('#plROIDeduccion3').text(combinaciones.combinacionOptima[0].roi.roiConDeduccion + 'años');
 }
 /*#endregion*/
 

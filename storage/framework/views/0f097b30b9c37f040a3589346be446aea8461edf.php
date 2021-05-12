@@ -34,9 +34,6 @@
         border: 1px solid black;
         text-align: center;
     }
-    .table-desgloce th{
-        border-radius: 100em;
-    }
 
     /*Tabla - Financiamiento*/
     .tabFinanciamiento{
@@ -83,8 +80,13 @@
     } 
 
     /*Textos*/
+    *{
+        font-family: Helvetica, sans-serif;
+    }
+
     .texto-encabezado-pagina{
-        text-align: left;
+        font-weight: bold;
+        font-size: 30px;
     }
     .subtitulo{
         font-family: "Lucida Console", monospace;
@@ -119,94 +121,78 @@
     <hr class="salto-pagina">
     <!-- Pagina 2 -->
     <div class="container-fluid">
-        <div class="bordeLateral" style="background-color: #fff; border-color: #8CC6F6; height: 16%;">
-            <table class="table-contenedor">
+        <div class="bordeLateral" style="background-color: #fff; border-color: #8CC6F6; height: 13%; text-align: center;">
+            <table>
                 <tr>
                     <td>
-                        <h3>¿Cuantos paneles necesito?</h3>    
-                        <h1 class="texto-encabezado-pagina">Sistema Fotovoltaico interconectado a la red CFE</h1>
+                        <p class="texto-encabezado-pagina" style="font-size: 18px;">¿Cuantos paneles necesito?</p>    
+                        <p class="texto-encabezado-pagina">Sistema Fotovoltaico interconectado a la red CFE</p>
                     </td>
                     <td>
                         <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
                     </td>
-                </tr>
+                </tr>9
             </table>
         </div>
-        <!-- Tabla desglozado propuesta -->
-        <table class="table-contenedor table-desgloce">
-            <thead style="background-color: #00A1FF;">
-                <tr>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mano de obra</td>
-                    <td>Etesla</td>
-                    <td></td>
-                    <td>Mano de obra para instalacion</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Material electrico</td>
-                    <td>Etesla</td>
-                    <td></td>
-                    <td>Material electrico por sistema fotovoltaico</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Adicional</td>
-                    <td>Etesla</td>
-                    <td>1</td>
-                    <td>Tramites CFE</td>
-                    <td>$0.00 MXN</td>
-                </tr>
-                <tr>
-                    <td>Adicional</td>
-                    <td>Etesla</td>
-                    <td>1</td>
-                    <td>Servicio de UVIE y medidor<br>bidireccional para MT2</td>
-                    <td>$70000.00</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Fin_Tabla desglozado propuesta -->
-        <br>
-        <!-- Tabla subtotales -->
-        <table id="tblTotales" class="table-contenedor">
-            <tbody style="border-top: 3px solid black;">
-                <tr>
-                    <th class="text-left" style="background-color: #E8E8E8;">Subtotal</th>
-                    <th style="background-color: #E8E8E8;"></th>
-                </tr>
-                <tr>
-                    <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
-                    <td align="center">$ 123 USD</td>
-                </tr>
-                <tr>
-                    <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
-                    <td align="center">$ 123 MXN</td>
-                </tr>
-                <tr>
-                    <th class="text-left" style="background-color: #E8E8E8;">Total c/ IVA</th>
-                    <th style="background-color: #E8E8E8;"></th>
-                </tr>
-                <tr>
-                    <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
-                    <td align="center">$ 123 USD</td>
-                </tr>
-                <tr>
-                    <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
-                    <td align="center">$ 123 MXN</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Fin_Tabla subtotales -->
-        <br>
+        <div style="margin-top: 10px; margin-bottom: 25px; margin-left: 25px; margin-right: 25px;">
+            <!-- Tabla desglozado propuesta -->
+            <table style="width: 100%; text-align: center; border-collapse: collapse; border-radius: 1em; overflow: hidden;">
+                <thead style="background-color: #00A1FF;">
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody style="border:1px solid;">
+                    <tr>
+                        <td>Mano de obra</td>
+                        <td>Etesla</td>
+                        <td></td>
+                        <td>Mano de obra para instalacion</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Material electrico</td>
+                        <td>Etesla</td>
+                        <td></td>
+                        <td>Material electrico por sistema fotovoltaico</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Adicional</td>
+                        <td>Etesla</td>
+                        <td>1</td>
+                        <td>Tramites CFE</td>
+                        <td>$0.00 MXN</td>
+                    </tr>
+                    <tr>
+                        <td>Adicional</td>
+                        <td>Etesla</td>
+                        <td>1</td>
+                        <td>Servicio de UVIE y medidor<br>bidireccional para MT2</td>
+                        <td>$70000.00</td>
+                    </tr>
+                    <tr style="background-color: #E8E8E8;">
+                        <td><strong>Subtotal</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
+                        <td align="center">$ 123 USD</td>
+                    </tr>
+                    <tr style="background-color: #E8E8E8;">
+                        <td><strong>Total c/ IVA</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
+                        <td align="center">$ 123 MXN</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Fin_Tabla desglozado propuesta -->
+        </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
         <table class="table-contenedor">
             <tr>
@@ -232,16 +218,16 @@
         <table class="table-contenedor" style="margin-top: -8px;">
             <tr style="line-height: 80%;">
                 <td align="center">
-                    <p><strong>TODO INCLUIDO:</strong></p>
-                    <p>*Instalación. *Servicio. *Anclaje.<br>*Fijación. *Garantia. *Mano de obra.</p>
+                    <p style="font-size: 23px;"><strong>TODO INCLUIDO:</strong></p>
+                    <p style="font-size: 18px;">*Instalación. *Servicio. *Anclaje.<br>*Fijación. *Garantia. *Mano de obra.</p>
                 </td>
                 <td align="center" style="background-color: #DADADA;">
-                    <p>KWP POR INSTALAR:</p>
-                    <p id="kwpInstalados"><strong>123.4 kW</strong></p>
+                    <p style="font-size: 23px;">KWP POR INSTALAR:</p>
+                    <p style="font-size: 18px;"><strong>123.4 kW</strong></p>
                 </td>
                 <td align="center">
                     <p>PORCENTAJE ENERGÉTICO:</p>
-                    <p><strong>101.5 %</strong></p>
+                    <p style="font-size: 23px;"><strong>101.5 %</strong></p>
                 </td>
             </tr>
         </table>
@@ -252,11 +238,11 @@
     <hr class="salto-pagina">
     <!-- Pagina3 [ROI] -->
     <div class="container-fluid">
-        <div class="bordeLateral" style="background-color: #fff; border-color: #8DEB6A; padding: 0; height: 10%;">
-            <table class="table-contenedor">
+        <div class="bordeLateral" style="background-color: #fff; border-color: #8DEB6A; padding: 0; height: 10%; text-align: center;">
+            <table>
                 <tr>
                     <td>  
-                        <h1 class="texto-encabezado-pagina">Financiamiento y<br>Retorno de Inversión</h1>
+                        <p class="texto-encabezado-pagina">Financiamiento y Retorno de Inversión</p>
                     </td>
                     <td>
                         <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 25%; float: right;">
@@ -264,7 +250,6 @@
                 </tr>
             </table>
         </div>
-        <br>
         <!-- Tabla financiamiento -->
         <div style="margin-top: 8px; margin-bottom: 25px; margin-left: 25px; margin-right: 25px;">
             <table class="tabFinanciamiento">
@@ -277,7 +262,7 @@
                     <td>10 años</td>
                 </tr>
             </table>
-            <br>  
+            <br>
             <table class="tabFinanciamiento">
                 <tr>
                     <th>Tarjeta de credito</th>
@@ -365,26 +350,53 @@
         <hr class="linea-division">
         
         <!-- ROI -->
-        <div style="padding: 0; height: 10%;">
-            <table class="table-contenedor">
-                <tr>
+        <div class="container-fluid">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr style="height: 30px;">
                     <td style="text-align: left; width: 25%;">  
                         <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
                     </td>
-                    <td style="background-color: #488D3E; color: #fff; line-height: 81%;">
-                        <p style="font-size: 40px;">RETORNO DE INVERSIÓN</p>
-                        <p style="font-size: 35px;"><strong>3 años</strong></p>
+                    <td style="background-color: #488D3E; color: #fff;">
+                        <p style="font-size: 20px;">RETORNO DE INVERSIÓN</p>
+                        <p style="font-size: 15px;"><strong>3 años</strong></p>
                     </td>
                 </tr>
             </table>
         </div>
+        <br>
         <!-- Grafico ROI -->
-
-
-
+        <div class="container-fluid" style="text-align: center;">
+            <img style="width: 100%; height: 250px ;" src="https://quickchart.io/chart?c={
+                type:'line',
+                data:{
+                    labels:[2012,2013,2014,2015,2016],
+                    datasets:[{
+                        label:'Costo s/paneles',
+                        borderColor:'red',
+                        backgroundColor: 'rgba(237,180,180,1)',
+                        data:[90,60,50,80,20]
+                    },{
+                        label:'Costo c/paneles',
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(42,173,40,0.4)',
+                        data:[100,50,40,130,100]
+                    }]
+                }
+            }">
+        </div>
         <!-- Globos de pagina3 [viejo_pdf] -->
-
-
+        <div class="container-fluid">
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <td style="text-align: center;">  
+                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                    </td>
+                    <td>
+                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                    </td>
+                </tr>
+            </table>
+        </div>
         <!-- Fin_ROI -->
     </div>
     <!-- Fin_Pagina3 -->
@@ -410,10 +422,4 @@
         <p><strong>NOTA: </strong>El tipo de cambio ($20.30mxn) se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
     </div>
     <!-- Fin - Pagina4 -->
-</body>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function(){
-        $('#doce_15').css("background-color","#EEF509");
-    });
-</script><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>
+</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>

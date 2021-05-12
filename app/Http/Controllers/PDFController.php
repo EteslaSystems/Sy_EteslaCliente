@@ -37,8 +37,10 @@ class PDFController extends Controller
 
     public function visualizarPDF()
     {
+        // $numeros = [123, 321, 0];
+
         $pdf = PDF::loadview('PDFTemplates.exampleDelete')
-        ->setOptions(['isRemoteEnabled' => true, 'isJavascriptEnabled' => true])
+        ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
         return $pdf->stream('test.pdf');
