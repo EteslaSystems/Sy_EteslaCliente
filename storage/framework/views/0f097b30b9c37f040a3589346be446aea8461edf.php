@@ -111,9 +111,9 @@
     <div class="container-fluid" style="margin-top: -25px;">
         <h3 style="text-align: center; text-decoration: underline;">Propuesta solar</h3>
         <div class="jumbotron bordeLateral" style="border-color: #8DEB6A;">
-            <h1 id="nombreCliente">Nombre completo cliente</h1>
-            <p id="direccionCliente" class="subtitulo">Direccion cliente</p>
-            <p id="fechaActual" class="subtitulo">Fecha de hoy</p>
+            <h1 id="nombreCliente"><?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?></h1>
+            <p id="direccionCliente" class="subtitulo"><?php echo e($cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vEstado"]); ?></p>
+            <p id="fechaActual" class="subtitulo"><?php echo e(now()); ?></p>
         </div>
         <img class="img-center" src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="height: 140px; width: 238px;">
     </div>
@@ -147,47 +147,68 @@
                     </tr>
                 </thead>
                 <tbody style="border:1px solid;">
+                    <tr id="desglocePanel">
+                        <td>Panel</td>
+                        <td><?php echo e($paneles["marca"]); ?></td>
+                        <td><?php echo e($paneles["noModulos"]); ?></td>
+                        <td><?php echo e($paneles["nombre"]); ?></td>
+                        <td><?php echo e($paneles["costoTotal"]); ?>$</td>
+                    </tr>
+                    <tr id="desgloceInversor">
+                        <td>Inversor</td>
+                        <td><?php echo e($inversores["vMarca"]); ?></td>
+                        <td><?php echo e($inversores["numeroDeInversores"]); ?></td>
+                        <td><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
+                        <td><?php echo e($inversores["precioTotal"]); ?>$</td>
+                    </tr>
+                    <tr id="desgloceEstructura">
+                        <td>Estructura</td>
+                        <td>Supports</td>
+                        <td><?php echo e($paneles["noModulos"]); ?></td>
+                        <td>Estructura de aluminio</td>
+                        <td><?php echo e($paneles["costoDeEstructuras"]); ?>$</td>
+                    </tr>
                     <tr>
                         <td>Mano de obra</td>
                         <td>Etesla</td>
                         <td></td>
                         <td>Mano de obra para instalacion</td>
-                        <td></td>
+                        <td><?php echo e($totales["manoDeObra"]); ?>$</td>
                     </tr>
                     <tr>
                         <td>Material electrico</td>
                         <td>Etesla</td>
                         <td></td>
                         <td>Material electrico por sistema fotovoltaico</td>
-                        <td></td>
+                        <td><?php echo e($totales["otrosTotal"]); ?>$</td>
                     </tr>
                     <tr>
                         <td>Adicional</td>
                         <td>Etesla</td>
                         <td>1</td>
                         <td>Tramites CFE</td>
-                        <td>$0.00 MXN</td>
+                        <td>$0.00</td>
                     </tr>
                     <tr>
                         <td>Adicional</td>
                         <td>Etesla</td>
                         <td>1</td>
                         <td>Servicio de UVIE y medidor<br>bidireccional para MT2</td>
-                        <td>$70000.00</td>
+                        <td>$0.00</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal</strong></td>
                         <td></td>
                         <td></td>
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
-                        <td align="center">$ 123 USD</td>
+                        <td align="center">$<?php echo e($totales["precio"]); ?> USD</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total c/ IVA</strong></td>
                         <td></td>
                         <td></td>
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
-                        <td align="center">$ 123 MXN</td>
+                        <td align="center">$<?php echo e($totales["precioMXN"]); ?> MXN</td>
                     </tr>
                 </tbody>
             </table>
@@ -197,10 +218,10 @@
         <table class="table-contenedor">
             <tr>
                 <td id="imgLogoPanel" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=<?php echo e($paneles['imgRuta']); ?>" style="width: 32%;">
                 </td>
                 <td id="imgLogoInversor" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=<?php echo e($inversores['imgRuta']); ?>" style="width: 32%;">
                 </td>
                 <td id="imgLogoEstructuras" align="center">
                     <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
@@ -210,9 +231,9 @@
         <!-- Fin logos/marcas equip. -->
         <!-- Garantias de las marcas -->
         <div class="garantias">
-            <p>Garantia de la marca-panel y los años de garantia que ofrece</p>
-            <p>Garantia de la marca-inversor y los años de garantia que ofrece</p>
-            <p>Garantia de la marca-soportes y los años de garantia que ofrece</p>
+            <p>Garantia en el panel <?php echo e($paneles["marca"]); ?> con <?php echo e($paneles["garantia"]); ?> años de garantia</p>
+            <p>Garantia en el inversor <?php echo e($inversores["vMarca"]); ?> con <?php echo e($inversores["vGarantia"]); ?> años de garantia</p>
+            <p>Garantia con la marca Supports</p>
         </div>
         <hr class="linea-division">
         <table class="table-contenedor" style="margin-top: -8px;">
@@ -223,11 +244,11 @@
                 </td>
                 <td align="center" style="background-color: #DADADA;">
                     <p style="font-size: 23px;">KWP POR INSTALAR:</p>
-                    <p style="font-size: 18px;"><strong>123.4 kW</strong></p>
+                    <p style="font-size: 18px;"><strong><?php echo e($paneles["potenciaReal"]); ?> Kwp</strong></p>
                 </td>
                 <td align="center">
                     <p>PORCENTAJE ENERGÉTICO:</p>
-                    <p style="font-size: 23px;"><strong>101.5 %</strong></p>
+                    <p style="font-size: 23px;"><strong><?php echo e($power["porcentajePotencia"]); ?> %</strong></p>
                 </td>
             </tr>
         </table>
@@ -255,11 +276,11 @@
             <table class="tabFinanciamiento">
                 <tr>
                     <th>Pago de contado</th>
-                    <td>$10000</td>
+                    <td>$<?php echo e($totales["precioMXN"]); ?></td>
                     <th style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
-                    <td style="background-color: #03BABE;">$123456</td>
+                    <td style="background-color: #03BABE;">$<?php echo e($roi["ahorro"]["ahorroMensualEnPesosMXN"]); ?></td>
                     <th>Retorno de inversión</th>
-                    <td>10 años</td>
+                    <td><?php echo e($roi["roiEnAnios"]); ?> años</td>
                 </tr>
             </table>
             <br>
@@ -274,11 +295,11 @@
                 </tr>
                 <tr>
                     <th> Pago mensual</th>
-                    <td>$ 123987</td>
-                    <td>$ 123987</td>
-                    <td>$ 123987</td>
-                    <td>$ 123987</td>
-                    <td>$ 123987</td>
+                    <td>$<?php echo e($financiamiento["objMensualidadesCreditCard"]["tresMeses"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objMensualidadesCreditCard"]["seisMeses"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objMensualidadesCreditCard"]["nueveMeses"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objMensualidadesCreditCard"]["doceMeses"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objMensualidadesCreditCard"]["dieciochoMeses"]); ?></td>
                 </tr>
             </table>
             <br>
@@ -291,9 +312,9 @@
                 </tr>
                 <tr>
                     <th>Enganche</th>
-                    <td>$ 887987</td>
-                    <td>$ 887987</td>
-                    <td>$ 887987</td>
+                    <td>$<?php echo e($financiamiento["objEnganche"]["quincePorcent"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objEnganche"]["treintacincoPorcent"]); ?></td>
+                    <td>$<?php echo e($financiamiento["objEnganche"]["cincuentaPorcent"]); ?></td>
                 </tr>
                 <tr>
                     <th>Pagos mensuales</br>por plazo</th>
@@ -303,9 +324,9 @@
                 </tr>
                 <tr>
                     <th>A 12 meses</th>
-                    <td id="doce_15">$ 543678</td>
-                    <td id="doce_35">$ 543678</td>
-                    <td id="doce_50">$ 543678</td>
+                    <td>$ 543678</td>
+                    <td>$ 543678</td>
+                    <td>$ 543678</td>
                 </tr>
                 <tr>
                     <th>A 24 meses</th>
@@ -358,7 +379,7 @@
                     </td>
                     <td style="background-color: #488D3E; color: #fff;">
                         <p style="font-size: 20px;">RETORNO DE INVERSIÓN</p>
-                        <p style="font-size: 15px;"><strong>3 años</strong></p>
+                        <p style="font-size: 15px;"><strong><?php echo e($roi["roiEnAnios"]); ?> años</strong></p>
                     </td>
                 </tr>
             </table>
@@ -405,21 +426,21 @@
     <img src="https://drive.google.com/uc?export=view&id=11AsS1jtmcJRVrrNYZMZihaeIb7rCJxeT" style="max-width:100%; height: 500px;">
     <div class="bordeLateral" style="border-color: #8DEB6A; border-top: 5px solid #FFFB00; margin-left: 32px; margin-top: 23px; text-align: center;">
         <div>
-            <p>Deseamos que la propuesta solar presentada a su nombre:<br><strong>NOMBRE DEL CLIENTE</strong><br>sea de su agrado, quedamos a la espera de la aceptación.</p>
+            <p>Deseamos que la propuesta solar presentada a su nombre:<br><strong><?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?></strong><br>sea de su agrado, quedamos a la espera de la aceptación.</p>
         </div>
         <div style="line-height: 45%;">
-            <p>ASESOR: NOMBRE DEL ASESOR</p>
+            <p>ASESOR: <?php echo e($vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"]); ?></p>
             <br>
             <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 29%;">
             <p style="text-decoration: underline;">Comunicate con nosotros:</p>
             <p>OFICINA</p>
-            <p><img src="https://img.icons8.com/ios/18/000000/cell-phone.png"/>Telefono: 01 800 849 1725</p>
-            <p><img src="https://img.icons8.com/ios/18/000000/domain.png"/>Pagina web: https://etesla.mx/</p>
-            <p><img src="https://img.icons8.com/ios/18/000000/facebook-new.png"/>Facebook: @eteslasolar</p>
-            <p><img src="https://img.icons8.com/ios/18/000000/instagram-new--v1.png"/>Instagram: @eteslasolar</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/cell-phone.png"/><strong>Telefono:</strong> 01 800 849 1725</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/domain.png"/><strong>Pagina web:</strong> https://etesla.mx/</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/facebook-new.png"/><strong>Facebook:</strong> @eteslasolar</p>
+            <p><img src="https://img.icons8.com/ios/18/000000/instagram-new--v1.png"/><strong>Instagram:</strong> @eteslasolar</p>
         </div>
         <br>
-        <p><strong>NOTA: </strong>El tipo de cambio ($20.30mxn) se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+        <p><strong>NOTA: </strong>El tipo de cambio ($<?php echo e($tipoDeCambio); ?> mxn) se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
     </div>
     <!-- Fin - Pagina4 -->
 </body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/exampleDelete.blade.php ENDPATH**/ ?>

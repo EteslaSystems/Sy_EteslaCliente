@@ -542,6 +542,7 @@ function mostrarInversorSeleccionado(){
             activarDesactivarBotones(1,0); //Se desactivan controles
         }
         else{
+
             activarDesactivarBotones(1,1); //Se activan controles
     
             let objInversorCB = getInversorCostoBeneficio(1);
@@ -613,11 +614,9 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
             newCost = _inversors[i].precioTotal;
         }
 
-        if(i > 0){
-            if(oldCost >= newCost){ ///El costo mas -barato-
-                oldCost = newCost;
-                Respuesta = _inversors[i];
-            }
+        if(oldCost >= newCost){ ///El costo mas -barato-
+            oldCost = newCost;
+            Respuesta = _inversors[i];
         }
     }
 
