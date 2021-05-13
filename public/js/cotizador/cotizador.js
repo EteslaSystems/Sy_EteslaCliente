@@ -103,8 +103,13 @@ function generarPDF(){
             type: 'POST',
             url: '/PDFgenerate',
             data: data,
-            success: function(pdf){
-                console.log(pdf);
+            success: function(pdfResponse){
+                let blobPDF = new Blob([pdfResponse]);
+                let link = document.createElement('a');
+
+                link.href = window.URL.createObjectURL(blobPDF);
+                link.download = "Example.pdf";
+                link.click();
             },
             error: function(error){
                 console.log(error);

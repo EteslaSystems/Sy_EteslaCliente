@@ -218,10 +218,10 @@
         <table class="table-contenedor">
             <tr>
                 <td id="imgLogoPanel" align="center">
-                    <img src="https://drive.google.com/uc?export={{ $paneles['imgRuta'] }}" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=view&id={{ $paneles['imgRuta'] }}" style="width: 32%;">
                 </td>
                 <td id="imgLogoInversor" align="center">
-                    <img src="https://drive.google.com/uc?export={{ $inversores['imgRuta'] }}" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}" style="width: 32%;">
                 </td>
                 <td id="imgLogoEstructuras" align="center">
                     <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
@@ -306,9 +306,9 @@
             <table id="tabFinanciamient" class="tabFinanciamiento">
                 <tr>
                     <th>Financiamiento</th>
-                    <th>15%</th>
-                    <th>35%</th>
-                    <th>50%</th>
+                    <th style="background-color: #F5B070;">15%</th>
+                    <th style="background-color: #F5B070;">35%</th>
+                    <th style="background-color: #F5B070;">50%</th>
                 </tr>
                 <tr>
                     <th>Enganche</th>
@@ -318,52 +318,42 @@
                 </tr>
                 <tr>
                     <th>Pagos mensuales</br>por plazo</th>
-                    <th>15%</th>
-                    <th>35%</th>
-                    <th>50%</th>
+                    <th style="background-color: #F5B070;">15%</th>
+                    <th style="background-color: #F5B070;">35%</th>
+                    <th style="background-color: #F5B070;">50%</th>
                 </tr>
-                <tr>
-                    <th>A 12 meses</th>
-                    <td>$ 543678</td>
-                    <td>$ 543678</td>
-                    <td>$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 24 meses</th>
-                    <td id="veinticuatro_15">$ 543678</td>
-                    <td id="veinticuatro_35">$ 543678</td>
-                    <td id="veinticuatro_50">$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 36 meses</th>
-                    <td id="treintaseis_15">$ 543678</td>
-                    <td id="treintaseis_35">$ 543678</td>
-                    <td id="treintaseis_50">$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 48 meses</th>
-                    <td id="cuarentaocho_15">$ 543678</td>
-                    <td id="cuarentaocho_35">$ 543678</td>
-                    <td id="cuarentaocho_50">$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 60 meses</th>
-                    <td id="sesenta_15">$ 543678</td>
-                    <td id="sesenta_35">$ 543678</td>
-                    <td id="sesenta_50">$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 72 meses</th>
-                    <td id="setentados_15">$ 543678</td>
-                    <td id="setentados_35">$ 543678</td>
-                    <td id="setentados_50">$ 543678</td>
-                </tr>
-                <tr>
-                    <th>A 84 meses</th>
-                    <td id="ochentacuatro_15">$ 543678</td>
-                    <td id="ochentacuatro_35">$ 543678</td>
-                    <td id="ochentacuatro_50">$ 543678</td>
-                </tr>
+                @foreach($financiamiento["_pagosMensualesPorPlazo"][0] as $financ)
+                    @for($x=12; $x == 84; $x+12)
+                        <tr>
+                            <th>A {{ $x }} meses</th>
+                            @for($i=1; $i<=3; $i++)
+                                {{ $porcent }}
+
+                                @switch($i)
+                                    @case(1)
+                                        $porcent = 'fifteenPorcent';
+                                    @break
+                                    @case(2)
+                                        $porcent = 'fiftyPorcent';
+                                    @break
+                                    @case(3)
+                                        $porcent = 'thirtyFive';
+                                    @break
+                                    @default
+                                        $i == 3;
+                                @endswitch
+
+                                @if($financ[$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financ[$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
+                                    <td id="amarillo" style="background-color:#E0D30C">${{ $financ[$x][$porcent] }}</td>
+                                @elseif($financ[$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
+                                    <td id="verde" style="background-color:#44C331">${{ $financ[$x][$porcent] }}</td>
+                                @else
+                                    <td id="normal" style="background-color:#3A565E">${{ $financ[$x][$porcent] }}</td>
+                                @endif
+                            @endfor
+                        </tr>
+                    @endfor
+                @endforeach
             </table>
         </div>
         <!-- Fin_Tabla financiamiento -->
