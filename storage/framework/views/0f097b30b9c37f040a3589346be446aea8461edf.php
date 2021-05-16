@@ -322,39 +322,41 @@
                     <th style="background-color: #F5B070;">35%</th>
                     <th style="background-color: #F5B070;">50%</th>
                 </tr>
-                <?php $__currentLoopData = $financiamiento["_pagosMensualesPorPlazo"][0]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $financ): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php for($x=12; $x == 84; $x+12): ?>
-                        <tr>
-                            <th>A <?php echo e($x); ?> meses</th>
-                            <?php for($i=1; $i<=3; $i++): ?>
-                                <?php echo e($porcent); ?>
+                <?php for($x = 12; $x <= 84; $x = $x + 12): ?>
+                    <tr>
+                        <th>A <?php echo e($x); ?> meses</th>
+                        <?php for($i=1; $i<=3; $i++): ?>
+                            
 
+                            <?php switch($i):
+                                case (1): ?>
+                                    <?php echo e($porcent = 'fifteenPorcent'); ?>
 
-                                <?php switch($i):
-                                    case (1): ?>
-                                        $porcent = 'fifteenPorcent';
-                                    <?php break; ?>
-                                    <?php case (2): ?>
-                                        $porcent = 'fiftyPorcent';
-                                    <?php break; ?>
-                                    <?php case (3): ?>
-                                        $porcent = 'thirtyFive';
-                                    <?php break; ?>
-                                    <?php default: ?>
-                                        $i == 3;
-                                <?php endswitch; ?>
+                                <?php break; ?>
+                                <?php case (2): ?>
+                                    <?php echo e($porcent = 'fiftyPorcent'); ?>
 
-                                <?php if($financ[$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financ[$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10)): ?>
-                                    <td id="amarillo" style="background-color:#E0D30C">$<?php echo e($financ[$x][$porcent]); ?></td>
-                                <?php elseif($financ[$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"]): ?>
-                                    <td id="verde" style="background-color:#44C331">$<?php echo e($financ[$x][$porcent]); ?></td>
-                                <?php else: ?>
-                                    <td id="normal" style="background-color:#3A565E">$<?php echo e($financ[$x][$porcent]); ?></td>
-                                <?php endif; ?>
-                            <?php endfor; ?>
-                        </tr>
-                    <?php endfor; ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php break; ?>
+                                <?php case (3): ?>
+                                    <?php echo e($porcent = 'thirtyFive'); ?>
+
+                                <?php break; ?>
+                                <?php default: ?>
+                                    <?php echo e($i == 3); ?>
+
+                                <?php break; ?>;
+                            <?php endswitch; ?>
+                            
+                            <?php if($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10)): ?>
+                                <td id="amarillo" style="background-color:#E0D30C">$<?php echo e($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent]); ?></td>
+                            <?php elseif($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"]): ?>
+                                <td id="verde" style="background-color:#44C331">$<?php echo e($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent]); ?></td>
+                            <?php else: ?>
+                                <td id="normal" style="background-color:#3A565E">$<?php echo e($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent]); ?></td>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </tr>
+                <?php endfor; ?>
             </table>
         </div>
         <!-- Fin_Tabla financiamiento -->

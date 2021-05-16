@@ -322,38 +322,37 @@
                     <th style="background-color: #F5B070;">35%</th>
                     <th style="background-color: #F5B070;">50%</th>
                 </tr>
-                @foreach($financiamiento["_pagosMensualesPorPlazo"][0] as $financ)
-                    @for($x=12; $x == 84; $x+12)
-                        <tr>
-                            <th>A {{ $x }} meses</th>
-                            @for($i=1; $i<=3; $i++)
-                                {{ $porcent }}
+                @for($x = 12; $x <= 84; $x = $x + 12)
+                    <tr>
+                        <th>A {{ $x }} meses</th>
+                        @for($i=1; $i<=3; $i++)
+                            @php($porcent = '')
 
-                                @switch($i)
-                                    @case(1)
-                                        $porcent = 'fifteenPorcent';
-                                    @break
-                                    @case(2)
-                                        $porcent = 'fiftyPorcent';
-                                    @break
-                                    @case(3)
-                                        $porcent = 'thirtyFive';
-                                    @break
-                                    @default
-                                        $i == 3;
-                                @endswitch
-
-                                @if($financ[$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financ[$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
-                                    <td id="amarillo" style="background-color:#E0D30C">${{ $financ[$x][$porcent] }}</td>
-                                @elseif($financ[$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
-                                    <td id="verde" style="background-color:#44C331">${{ $financ[$x][$porcent] }}</td>
-                                @else
-                                    <td id="normal" style="background-color:#3A565E">${{ $financ[$x][$porcent] }}</td>
-                                @endif
-                            @endfor
-                        </tr>
-                    @endfor
-                @endforeach
+                            @switch($i)
+                                @case(1)
+                                    {{ $porcent = 'fifteenPorcent' }}
+                                @break
+                                @case(2)
+                                    {{ $porcent = 'fiftyPorcent' }}
+                                @break
+                                @case(3)
+                                    {{ $porcent = 'thirtyFive' }}
+                                @break
+                                @default
+                                    {{ $i == 3 }}
+                                @break;
+                            @endswitch
+                            
+                            @if($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
+                                <td id="amarillo" style="background-color:#E0D30C">${{ $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] }}</td>
+                            @elseif($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
+                                <td id="verde" style="background-color:#44C331">${{ $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] }}</td>
+                            @else
+                                <td id="normal" style="background-color:#3A565E">${{ $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] }}</td>
+                            @endif
+                        @endfor
+                    </tr>
+                @endfor
             </table>
         </div>
         <!-- Fin_Tabla financiamiento -->
@@ -368,8 +367,8 @@
                         <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
                     </td>
                     <td style="background-color: #488D3E; color: #fff;">
-                        <p style="font-size: 20px;">RETORNO DE INVERSIÓN</p>
-                        <p style="font-size: 15px;"><strong>{{ $roi["roiEnAnios"] }} años</strong></p>
+                        <p style="font-size: 20px; display: inline-block;">RETORNO DE INVERSIÓN</p>
+                        <p style="font-size: 40px; display: inline-block;"><strong>{{ $roi["roiEnAnios"] }} años</strong></p>
                     </td>
                 </tr>
             </table>
@@ -397,13 +396,13 @@
         </div>
         <!-- Globos de pagina3 [viejo_pdf] -->
         <div class="container-fluid">
-            <table style="width:100%; border-collapse:collapse;">
+            <table style="width:48%; height: 76px; border-collapse:collapse;">
                 <tr>
                     <td style="text-align: center;">  
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                        <img src="https://drive.google.com/uc?export=view&id=1Aqudq97YNDqrSHUJMB2sqPmYRD4dRwSi" style="width: 100%; margin-left: 30px; margin-right: 5px;">
                     </td>
                     <td>
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 100%; margin-left: 30px; margin-right: 5px;">
                     </td>
                 </tr>
             </table>

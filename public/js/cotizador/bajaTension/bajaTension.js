@@ -586,8 +586,7 @@ function searchInversor(_inversor,marcaInv){
 }
 
 function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
-    // let oldPower=0, newPower=0;
-    let oldCost=0, newCost=0;
+    let costoMinimo;
     let Respuesta = {};
     let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
 
@@ -595,6 +594,7 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
         let marcaSeleccionada = $('#listInversores').val();
         let newInversoresFiltered = [];
 
+        //Se retorna un nuevo array con los modelos de la marca que el usuario selecciono
         $.each(_inversors, function(i, inversor){
             if(inversor.vMarca == marcaSeleccionada){
                 newInversoresFiltered.push(inversor);
@@ -604,18 +604,13 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un objeto
         _inversors = newInversoresFiltered;
     }
 
-    //Se requiere el inversor con mayor potencia
+    //Se filtra el inversor con mayor potencia
+    costoMinimo = _inversors[0].precioTotal;
+
     for(let i=0; i<_inversors.length; i++)
     {
-        if(i === 0){
-            oldCost = _inversors[i].precioTotal;
-        }
-        else{
-            newCost = _inversors[i].precioTotal;
-        }
-
-        if(oldCost >= newCost){ ///El costo mas -barato-
-            oldCost = newCost;
+        if(_inversors[i].precioTotal < costoMinimo){
+            costoMinimo = _inversors[i].precioTotal;
             Respuesta = _inversors[i];
         }
     }

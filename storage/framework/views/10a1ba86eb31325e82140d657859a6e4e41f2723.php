@@ -29,7 +29,7 @@
 </style>
 <body>
     <img src="https://i.pinimg.com/originals/0c/bc/a1/0cbca13e291164dc93e1555a5c70a803.jpg">
-    <p class="text-center subtitulo"><?php echo e($paneles["potencia"] kWp de su sistema fotovoltaico); ?></p>
+    <p class="text-center subtitulo"><?php echo e($paneles["potencia"]); ?> kWp de su sistema fotovoltaico</p>
     <div class="container">
         <h3 class="text-center" style="text-decoration: underline;">Propuesta solar</h3>
         <div class="jumbotron jumbotron-fluid">
