@@ -373,22 +373,20 @@
         <hr class="linea-division">
         
         <!-- ROI -->
-        <div class="container-fluid">
-            <table style="width:100%; border-collapse:collapse;">
-                <tr style="height: 30px;">
-                    <td style="text-align: left; width: 25%;">  
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
-                    </td>
-                    <td style="background-color: #488D3E; color: #fff;">
-                        <p style="font-size: 20px; display: inline-block;">RETORNO DE INVERSIÓN:</p>
-                        <p style="display: inline-block;">4 años</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <br>
+        <table style="width:100%; border-collapse:collapse;">
+            <tr style="height: 30px;">
+                <td style="text-align: left; width: 25%;">  
+                    <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                </td>
+                <td style="background-color: #488D3E; color: #fff;">
+                    <p style="font-size: 20px; display: inline-block;">RETORNO DE INVERSIÓN:</p>
+                    <p style="display: inline-block;">4 años</p>
+                </td>
+            </tr>
+        </table>
         <!-- Grafico ROI -->
         <div class="container-fluid" style="text-align: center;">
+            <!-- Eje X - Grafico Proyeccion -->
             @php($anioActual = now()->year)
             @php($aniosProyeccion = [])
             @php($aniosProyeccion[0] = $anioActual)
@@ -397,10 +395,10 @@
                 @php($aniosProyeccion[$i] = (int)$anioActual + $i)
             @endfor
 
-            <img style="width: 93%; height: 250px;" src="https://quickchart.io/chart?c={
+            <img style="width: 88%; height: 250px;" src="https://quickchart.io/chart?c={
                 type:'line',
                 data:{
-                    labels: {{{ $aniosProyeccion }}},
+                    labels: @json($aniosProyeccion),
                     datasets:[{
                         label:'Costo s/paneles',
                         borderColor:'red',
@@ -415,20 +413,16 @@
                 }
             }">
         </div>
+        <br>
         <!-- Globos de pagina3 [viejo_pdf] -->
-        <div class="container-fluid">
-            <table style="width:48%; height: 81px; border-collapse:collapse;">
+        <div class="container-fluid bordeLateral" style="border-color: #8DEB6A; height: 50%;">
+            <table style="width:100%; height: 81px; border-collapse:collapse;">
                 <tr>
-                    <td style="text-align: center;">  
-                        <img src="https://drive.google.com/uc?export=view&id=1Aqudq97YNDqrSHUJMB2sqPmYRD4dRwSi" style="width: 75%; margin-left: 10px; margin-right: 5px;">
+                    <td style="width:100%; display:flex; justify-content:center; align-items: center; text-align:center; margin-left: 35px;">
+                        <p style="font-weight: 800; color: #67B03D; margin-top: -35px; font-size: 22px; font-family: 'Segoe UI';">El sistema fotovoltaico presentado en esta propuesta, equivale a #numeroArboles# árboles plantados</p>
                     </td>
                     <td>
-                        <td style="text-align: center;">
-                            <p style="font-weight: 800; color: #67B03D; font-size: 14px; font-family: Trebuchet MS;">El sistema fotovoltaico presentado en esta propuesta, equivale a #numeroArboles# árboles plantados</p>
-                        </td>
-                        <td>
-                            <img style="float: right;" src="https://s1.significados.com/foto/shutterstock-273030704_sm.jpg">
-                        </td>
+                        <img style="float: right;" src="https://s1.significados.com/foto/shutterstock-273030704_sm.jpg">
                     </td>
                 </tr>
             </table>
