@@ -326,7 +326,7 @@
                     <tr>
                         <th>A <?php echo e($x); ?> meses</th>
                         <?php for($i=1; $i<=3; $i++): ?>
-                            
+                            <?php ($porcent = ''); ?>
 
                             <?php switch($i):
                                 case (1): ?>
@@ -364,49 +364,65 @@
         <hr class="linea-division">
         
         <!-- ROI -->
-        <div class="container-fluid">
-            <table style="width:100%; border-collapse:collapse;">
-                <tr style="height: 30px;">
-                    <td style="text-align: left; width: 25%;">  
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
-                    </td>
-                    <td style="background-color: #488D3E; color: #fff;">
-                        <p style="font-size: 20px;">RETORNO DE INVERSIÓN</p>
-                        <p style="font-size: 15px;"><strong><?php echo e($roi["roiEnAnios"]); ?> años</strong></p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <table style="width:80%; border-collapse:collapse;">
+            <tr style="height: 30px;">
+                <td style="text-align: left; width: 25%;">  
+                    <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                </td>
+                <td style="background-color: #488D3E; color: #fff;">
+                    <p style="font-size: 20px; display: inline-block;">RETORNO DE INVERSIÓN:</p>
+                    <p style="display: inline-block;">4 años</p>
+                </td>
+            </tr>
+        </table>
         <br>
         <!-- Grafico ROI -->
         <div class="container-fluid" style="text-align: center;">
-            <img style="width: 100%; height: 250px ;" src="https://quickchart.io/chart?c={
-                type:'line',
+            <!-- Eje X - Grafico Proyeccion -->
+            <?php ($anioActual = now()->year); ?>
+            <?php ($aniosProyeccion = []); ?>
+            <?php ($aniosProyeccion[0] = $anioActual); ?>
+
+            <?php for($i=1; $i<=10; $i++): ?>
+                <?php ($aniosProyeccion[$i] = (int)$anioActual + $i); ?>
+            <?php endfor; ?>
+
+            <img style="width: 80%; height: 220px ;" src='https://quickchart.io/chart?c={
+                type:"line",
                 data:{
-                    labels:[2012,2013,2014,2015,2016],
+                    labels: <?php echo json_encode($aniosProyeccion, 15, 512) ?>,
                     datasets:[{
-                        label:'Costo s/paneles',
-                        borderColor:'red',
-                        backgroundColor: 'rgba(237,180,180,1)',
-                        data:[90,60,50,80,20]
+                        label:"Costo s/paneles",
+                        borderColor:"red",
+                        data: <?php echo json_encode($power["objConsumoEnPesos"]["_proyeccion10anios"]["_proyeccionEnDinero"], 15, 512) ?>
                     },{
-                        label:'Costo c/paneles',
-                        borderColor: 'green',
-                        backgroundColor: 'rgba(42,173,40,0.4)',
-                        data:[100,50,40,130,100]
+                        label:"Costo c/paneles",
+                        borderColor: "green",
+                        data: <?php echo json_encode($power["objGeneracionEnpesos"]["_proyeccion10anios"]["_proyeccionEnDinero"], 15, 512) ?>
                     }]
+                },
+                options:{
+                    scales:{
+                        yAxes:[{
+                            ticks:{
+                                callback: function(label){
+                                    return "$" + label.toString();
+                                }
+                            }
+                        }]
+                    }
                 }
-            }">
+            }'>
         </div>
         <!-- Globos de pagina3 [viejo_pdf] -->
-        <div class="container-fluid">
-            <table style="width:100%; border-collapse:collapse;">
+        <div class="container-fluid bordeLateral" style="border-color: #8DEB6A; height: 40%;">
+            <table style="width:100%; height: 81px; border-collapse:collapse;">
                 <tr>
-                    <td style="text-align: center;">  
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                    <td style="width:100%; display:flex; justify-content:center; align-items: center; text-align:center; margin-left: 35px;">
+                        <p style="font-weight: 800; color: #67B03D; margin-top: -35px; font-size: 22px; font-family: 'Segoe UI';">El sistema fotovoltaico presentado en esta propuesta, equivale a #numeroArboles# árboles plantados</p>
                     </td>
                     <td>
-                        <img src="https://www.pngkit.com/png/full/170-1708875_relacionado-dinero-mexico-png.png" style="width: 76%; margin-left: 30px; margin-right: 5px;">
+                        <img style="float: right;" src="https://s1.significados.com/foto/shutterstock-273030704_sm.jpg">
                     </td>
                 </tr>
             </table>
