@@ -9,13 +9,13 @@
         margin: 0;
     }
     .footer-page{
-        position: fixed; 
+        position: fixed;
         bottom: 0cm; 
         left: 0cm; 
         right: 0cm;
-        height: 4cm;
+        height: 9cm;
 
-        background-image: url('https://etesla.mx/wp-content/uploads/2020/02/interconexcion.png');
+        /* Img de fondo */
         background-position: 50% 41%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -216,17 +216,7 @@
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
         <table class="table-contenedor">
-            <tr>
-                <td id="imgLogoPanel" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
-                </td>
-                <td id="imgLogoInversor" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
-                </td>
-                <td id="imgLogoEstructuras" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
-                </td>
-            </tr>
+            
         </table>
         <!-- Fin logos/marcas equip. -->
         <!-- Garantias de las marcas -->
@@ -235,7 +225,6 @@
             <p>Garantia en el inversor MarcaInversor con 5 años de garantia</p>
             <p>Garantia con la marca Supports</p>
         </div>
-        <hr class="linea-division">
         <table class="table-contenedor" style="margin-top: -8px;">
             <tr style="line-height: 80%;">
                 <td align="center">
@@ -252,8 +241,35 @@
                 </td>
             </tr>
         </table>
-        <!-- FooterPagina -->
-        <div class="footer-page"></div>
+        <!-- FooterPagina (Nueva integracion) -->
+        <div class="footer-page" style="border-style: solid; border-top: 8px; border-color: #8DEB6A;">
+            <p class="texto-encabezado-pagina" style="text-align: center; font-size: 17px;">ANTIGUO / NUEVO PAGO EN TU RECIBO DE LUZ</p>
+            <table class="table-contenedor" style="margin-left: 12px; margin-right: 35px;">
+                <tr>
+                    <td style="text-align:left; border-left:none; border-top:none;">
+                        <img width="156px;" height="80px;" src="https://drive.google.com/uc?export=view&id=1OcQ39-BUh14iVhbz7cOvOrauD-UpQpZO">
+                    </td>
+                    <td style="background-color: #E3E3E3; text-align:left; border:3px solid white;">
+                        <p style="font-size: 9px; line-height:5px;">ANTIGUO PAGO</p>
+                        <p style="font-size: 13px; line-height:5px; font-weight: bold;">TOTAL A PAGAR:</p>
+                        <p id="viejoConsumoCFE" style="font-size: 32px; line-height:5px;">$500</p>
+                    </td>
+                </tr>
+                <tr style="background-color: #E3E3E3;">
+                    <td style="text-align: left; border: 3px solid white;">
+                        <p style="font-size: 17px; line-height:5px;">NOMBRE DEL CLIENTE</p>
+                        <p style="font-size: 10px; line-height:5px;">Calle / Colonia del cliente</p>
+                        <p style="font-size: 10px; line-height:5px;">Ciudad</p>
+                        <p style="font-size: 10px; line-height:5px;">Estado</p>
+                    </td>
+                    <td style="text-align: left; border: 3px solid white;">
+                        <p style="font-size: 9px; line-height:5px;">NUEVO PAGO</p>
+                        <p style="font-size: 13px; line-height:5px; font-weight: bold;">TOTAL A PAGAR:</p>
+                        <p id="nuevoConsumoCFE" style="font-size: 32px; line-height:5px;">$50</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <!-- Fin - Pagina2 -->
     <hr class="salto-pagina">
@@ -413,8 +429,9 @@
                 }
             }">
         </div>
+        <br>
         <!-- Globos de pagina3 [viejo_pdf] -->
-        <div class="container-fluid bordeLateral" style="border-color: #8DEB6A; height: 20px;">
+        <div class="container-fluid bordeLateral" style="border-color: #8DEB6A; height: 50%;">
             <table style="width:100%; height: 81px; border-collapse:collapse;">
                 <tr>
                     <td style="width:100%; display:flex; justify-content:center; align-items: center; text-align:center; margin-left: 35px;">

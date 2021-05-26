@@ -396,22 +396,6 @@
                         borderColor: "green",
                         data: @json($power["objGeneracionEnpesos"]["_proyeccion10anios"]["_proyeccionEnDinero"])
                     }]
-                },
-                options:{
-                    scales:{
-                        yAxes:[{
-                            ticks:{
-                                callback: function(label){
-                                    let _values = json_decode(label);
-
-                                    for(let i=0; i<_values.length; i++)
-                                    {
-                                        return "$" + _values[i];
-                                    }
-                                }
-                            }
-                        }]
-                    }
                 }
             }'>
         </div>

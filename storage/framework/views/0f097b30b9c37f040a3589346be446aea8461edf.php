@@ -224,7 +224,7 @@
                     <img src="https://drive.google.com/uc?export=view&id=<?php echo e($inversores['imgRuta']); ?>" style="width: 32%;">
                 </td>
                 <td id="imgLogoEstructuras" align="center">
-                    <img src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="width: 32%;">
+                    <img src="https://tiendapanelsolar.mx/wp-content/uploads/2018/02/marca-everest-solar-icon.png" style="width: 32%;">
                 </td>
             </tr>
         </table>
@@ -233,7 +233,7 @@
         <div class="garantias">
             <p>Garantia en el panel <?php echo e($paneles["marca"]); ?> con <?php echo e($paneles["garantia"]); ?> años de garantia</p>
             <p>Garantia en el inversor <?php echo e($inversores["vMarca"]); ?> con <?php echo e($inversores["vGarantia"]); ?> años de garantia</p>
-            <p>Garantia con la marca Supports</p>
+            <p>Garantia de 25 años en la marca de soportes <strong>Everest</strong></p>
         </div>
         <hr class="linea-division">
         <table class="table-contenedor" style="margin-top: -8px;">
@@ -400,17 +400,6 @@
                         borderColor: "green",
                         data: <?php echo json_encode($power["objGeneracionEnpesos"]["_proyeccion10anios"]["_proyeccionEnDinero"], 15, 512) ?>
                     }]
-                },
-                options:{
-                    scales:{
-                        yAxes:[{
-                            ticks:{
-                                callback: function(label){
-                                    return "$" + label.toString();
-                                }
-                            }
-                        }]
-                    }
                 }
             }'>
         </div>
