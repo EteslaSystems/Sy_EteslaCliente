@@ -388,11 +388,11 @@
                 data:{
                     labels: @json($aniosProyeccion),
                     datasets:[{
-                        label:"Costo s/paneles",
+                        label:"Pago a CFE s/paneles",
                         borderColor:"red",
                         data: @json($power["objConsumoEnPesos"]["_proyeccion10anios"]["_proyeccionEnDinero"])
                     },{
-                        label:"Costo c/paneles",
+                        label:"Pago a CFE c/paneles",
                         borderColor: "green",
                         data: @json($power["objGeneracionEnpesos"]["_proyeccion10anios"]["_proyeccionEnDinero"])
                     }]

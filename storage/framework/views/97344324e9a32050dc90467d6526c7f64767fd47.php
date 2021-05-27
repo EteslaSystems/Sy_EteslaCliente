@@ -97,6 +97,10 @@
         line-height: 63%;
         text-align: center;
     }
+
+    .contenido-recibo{
+        margin-left: 5px;
+    }
     /*Imagenes*/
     .img-center{
         display: block;
@@ -242,30 +246,30 @@
             </tr>
         </table>
         <!-- FooterPagina (Nueva integracion) -->
-        <div class="footer-page" style="border-style: solid; border-top: 8px; border-color: #8DEB6A;">
-            <p class="texto-encabezado-pagina" style="text-align: center; font-size: 17px;">ANTIGUO / NUEVO PAGO EN TU RECIBO DE LUZ</p>
-            <table class="table-contenedor" style="margin-left: 12px; margin-right: 35px;">
+        <div class="footer-page" style="border-style:solid; border-top:8px; border-color:#8DEB6A;">
+            <p class="texto-encabezado-pagina" style="text-align:center; font-size:17px;">ANTIGUO / NUEVO PAGO EN TU RECIBO DE LUZ</p>
+            <table class="table-contenedor" style="margin-left:12px; margin-right:35px; border-radius: 0 20px 0 0;">
                 <tr>
-                    <td style="text-align:left; border-left:none; border-top:none;">
+                    <td style="text-align:left; border-left:none; border-top:none; ">
                         <img width="156px;" height="80px;" src="https://drive.google.com/uc?export=view&id=1OcQ39-BUh14iVhbz7cOvOrauD-UpQpZO">
                     </td>
-                    <td style="background-color: #E3E3E3; text-align:left; border:3px solid white;">
-                        <p style="font-size: 9px; line-height:5px;">ANTIGUO PAGO</p>
-                        <p style="font-size: 13px; line-height:5px; font-weight: bold;">TOTAL A PAGAR:</p>
-                        <p id="viejoConsumoCFE" style="font-size: 32px; line-height:5px;">$500</p>
+                    <td style="background-color: #F5F3F3; text-align:left; border:3px solid white;">
+                        <p class="contenido-recibo" style="font-size:9px; line-height:5px;">ANTIGUO PAGO</p>
+                        <p class="contenido-recibo" style="font-size:13px; line-height:5px; font-weight:bold;">TOTAL A PAGAR:</p>
+                        <p id="viejoConsumoCFE" class="contenido-recibo" style="font-size:32px; line-height:5px;">$500</p>
                     </td>
                 </tr>
-                <tr style="background-color: #E3E3E3;">
-                    <td style="text-align: left; border: 3px solid white;">
-                        <p style="font-size: 17px; line-height:5px;">NOMBRE DEL CLIENTE</p>
-                        <p style="font-size: 10px; line-height:5px;">Calle / Colonia del cliente</p>
-                        <p style="font-size: 10px; line-height:5px;">Ciudad</p>
-                        <p style="font-size: 10px; line-height:5px;">Estado</p>
+                <tr style="background-color:#F5F3F3;">
+                    <td style="text-align:left; border: 3px solid white;">
+                        <p class="contenido-recibo" style="font-size:17px; line-height:5px; font-weight:bold;">NOMBRE DEL CLIENTE</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">Calle / Colonia del cliente</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">Ciudad</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">Estado</p>
                     </td>
-                    <td style="text-align: left; border: 3px solid white;">
-                        <p style="font-size: 9px; line-height:5px;">NUEVO PAGO</p>
-                        <p style="font-size: 13px; line-height:5px; font-weight: bold;">TOTAL A PAGAR:</p>
-                        <p id="nuevoConsumoCFE" style="font-size: 32px; line-height:5px;">$50</p>
+                    <td style="text-align:left; border: 3px solid white;">
+                        <p class="contenido-recibo" style="font-size:9px; line-height:5px;">NUEVO PAGO</p>
+                        <p class="contenido-recibo" style="font-size:13px; line-height:5px; font-weight:bold;">TOTAL A PAGAR:</p>
+                        <p class="contenido-recibo" id="nuevoConsumoCFE" style="font-size: 32px; line-height:5px;">$50</p>
                     </td>
                 </tr>
             </table>
