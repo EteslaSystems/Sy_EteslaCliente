@@ -392,11 +392,11 @@
                 data:{
                     labels: <?php echo json_encode($aniosProyeccion, 15, 512) ?>,
                     datasets:[{
-                        label:"Costo s/paneles",
+                        label:"Pago a CFE s/paneles",
                         borderColor:"red",
                         data: <?php echo json_encode($power["objConsumoEnPesos"]["_proyeccion10anios"]["_proyeccionEnDinero"], 15, 512) ?>
                     },{
-                        label:"Costo c/paneles",
+                        label:"Pago a CFE c/paneles",
                         borderColor: "green",
                         data: <?php echo json_encode($power["objGeneracionEnpesos"]["_proyeccion10anios"]["_proyeccionEnDinero"], 15, 512) ?>
                     }]

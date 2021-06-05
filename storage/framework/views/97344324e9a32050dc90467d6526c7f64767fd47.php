@@ -248,7 +248,7 @@
         <!-- FooterPagina (Nueva integracion) -->
         <div class="footer-page" style="border-style:solid; border-top:8px; border-color:#8DEB6A;">
             <p class="texto-encabezado-pagina" style="text-align:center; font-size:17px;">ANTIGUO / NUEVO PAGO EN TU RECIBO DE LUZ</p>
-            <table class="table-contenedor" style="margin-left:12px; margin-right:35px; border-radius: 0 20px 0 0;">
+            <table class="table-contenedor" style="margin-left:12px; margin-right:35px;">
                 <tr>
                     <td style="text-align:left; border-left:none; border-top:none; ">
                         <img width="156px;" height="80px;" src="https://drive.google.com/uc?export=view&id=1OcQ39-BUh14iVhbz7cOvOrauD-UpQpZO">
