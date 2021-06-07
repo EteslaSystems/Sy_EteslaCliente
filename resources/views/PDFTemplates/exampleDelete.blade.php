@@ -9,13 +9,13 @@
         margin: 0;
     }
     .footer-page{
-        position: fixed; 
+        position: fixed;
         bottom: 0cm; 
         left: 0cm; 
         right: 0cm;
-        height: 4cm;
+        height: 9cm;
 
-        background-image: url('https://etesla.mx/wp-content/uploads/2020/02/interconexcion.png');
+        /* Img de fondo */
         background-position: 50% 41%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -218,13 +218,13 @@
         <table class="table-contenedor">
             <tr>
                 <td id="imgLogoPanel" align="center">
-                    <img src="https://drive.google.com/uc?export=view&id={{ $paneles['imgRuta'] }}" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=view&id={{ $paneles['imgRuta'] }}" style="width: 15%; height: 15%;">
                 </td>
                 <td id="imgLogoInversor" align="center">
-                    <img src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}" style="width: 32%;">
+                    <img src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}" style="width: 15%; height: 15%;">
                 </td>
                 <td id="imgLogoEstructuras" align="center">
-                    <img src="https://tiendapanelsolar.mx/wp-content/uploads/2018/02/marca-everest-solar-icon.png" style="width: 32%;">
+                    <img src="https://tiendapanelsolar.mx/wp-content/uploads/2018/02/marca-everest-solar-icon.png" style="width: 15%; height: 15%;">
                 </td>
             </tr>
         </table>
@@ -235,7 +235,6 @@
             <p>Garantia en el inversor {{ $inversores["vMarca"] }} con {{ $inversores["vGarantia"] }} años de garantia</p>
             <p>Garantia de 25 años en la marca de soportes <strong>Everest</strong></p>
         </div>
-        <hr class="linea-division">
         <table class="table-contenedor" style="margin-top: -8px;">
             <tr style="line-height: 80%;">
                 <td align="center">
@@ -251,9 +250,36 @@
                     <p style="font-size: 23px;"><strong>{{ $power["porcentajePotencia"] }} %</strong></p>
                 </td>
             </tr>
-        </table>
+        </table>    
         <!-- FooterPagina -->
-        <div class="footer-page"></div>
+        <div class="footer-page" style="border-style:solid; border-top:8px; border-color:#8DEB6A;">
+            <p class="texto-encabezado-pagina" style="text-align:center; font-size:17px;">ANTIGUO / NUEVO PAGO EN TU RECIBO DE LUZ</p>
+            <table class="table-contenedor" style="margin-left:12px; margin-right:35px;">
+                <tr>
+                    <td style="text-align:left; border-left:none; border-top:none; ">
+                        <img width="156px;" height="80px;" src="https://drive.google.com/uc?export=view&id=1OcQ39-BUh14iVhbz7cOvOrauD-UpQpZO">
+                    </td>
+                    <td style="background-color: #F5F3F3; text-align:left; border:3px solid white;">
+                        <p class="contenido-recibo" style="font-size:9px; line-height:5px;">ANTIGUO PAGO</p>
+                        <p class="contenido-recibo" style="font-size:13px; line-height:5px; font-weight:bold;">TOTAL A PAGAR:</p>
+                        <p id="viejoConsumoCFE" class="contenido-recibo" style="font-size:32px; line-height:5px;">${{ $power["objConsumoEnPesos"]["pagoPromedioBimestralConIva"] }}</p>
+                    </td>
+                </tr>
+                <tr style="background-color:#F5F3F3;">
+                    <td style="text-align:left; border: 3px solid white;">
+                        <p class="contenido-recibo" style="font-size:17px; line-height:5px; font-weight:bold;">{{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">{{ $cliente["vCalle"] }}</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">{{ $cliente["vMunicipio"] }}</p>
+                        <p class="contenido-recibo" style="font-size:10px; line-height:5px;">{{ $cliente["vEstado"] }}</p>
+                    </td>
+                    <td style="text-align:left; border: 3px solid white;">
+                        <p class="contenido-recibo" style="font-size:9px; line-height:5px;">NUEVO PAGO</p>
+                        <p class="contenido-recibo" style="font-size:13px; line-height:5px; font-weight:bold;">TOTAL A PAGAR:</p>
+                        <p class="contenido-recibo" id="nuevoConsumoCFE" style="font-size: 32px; line-height:5px;">${{ $power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] }}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <!-- Fin - Pagina2 -->
     <hr class="salto-pagina">
