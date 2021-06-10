@@ -119,7 +119,7 @@
             <p id="direccionCliente" class="subtitulo">Direccion del cliente</p>
             <p id="fechaActual" class="subtitulo">{{ now() }}</p>
         </div>
-        <img class="img-center" src="https://etesla.mx/wp-content/uploads/2019/05/eTesla-Logo-2-01.png" style="height: 140px; width: 238px;">
+        <img class="img-center" src='data:image/jpg;base64,' style="height: 140px; width: 238px;">
     </div>
     <!-- Fin - Pagina1 -->
     <hr class="salto-pagina">

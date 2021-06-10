@@ -703,7 +703,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpCostProyectoSIVA').val(_viaticos[0].totales.precio + '$');
     $('#inpCostProyectoCIVA').val(_viaticos[0].totales.precioMasIVA + '$');
     $('#inpCostPorWatt').val(_viaticos[0].totales.precio_watt + '$');
-    $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMXN);
+    $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMXNConIVA);
     
     //Se pintan los resultados del roi
     $('#inpPagoAnteriorBimsProm').val('$'+_viaticos[0].roi.consumo.consumoBimestralPesosMXN);
@@ -770,7 +770,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionOptima[0].totales.precio  + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionOptima[0].totales.precioMasIVA  + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionOptima[0].totales.precio_watt  + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionOptima[0].totales.precioMXN  + '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionOptima[0].totales.precioMXNConIVA  + '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
@@ -816,7 +816,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionMediana[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionMediana[0].totales.precioMXN+ '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionMediana[0].totales.precioMXNConIVA+ '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
@@ -863,7 +863,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
                 $('#inpCostProyectoSIVA').val(combinaciones.combinacionEconomica[0].totales.precio + '$');
                 $('#inpCostProyectoCIVA').val(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
                 $('#inpCostPorWatt').val(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
-                $('#inpCostProyectoMXN').val(combinaciones.combinacionEconomica[0].totales.precioMXN+ '$');
+                $('#inpCostProyectoMXN').val(combinaciones.combinacionEconomica[0].totales.precioMXNConIVA+ '$');
 
                 //Page2_Result
                 promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
