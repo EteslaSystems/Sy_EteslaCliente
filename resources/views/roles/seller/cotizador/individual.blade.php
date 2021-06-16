@@ -37,7 +37,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="p-2">
+                                            <div class="p-2" style="display: none;">
                                                 <div class="checkbox">
                                                     <label class="checkbox-inline">
                                                         <input type="checkbox" id="chbMonitoreo"><span class="badge badge-warning">Monitoreo</span>

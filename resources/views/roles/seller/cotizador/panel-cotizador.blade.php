@@ -146,7 +146,7 @@
                     <div class="col-12 col-sm-12 col-md-12">
                         <form method="POST" action="" class="background-muted">
                             <div class="row mn-1 pa-ma-1">
-                                <div class="col-sm-6 col-md-4 offset-md-2">
+                                <div class="col-sm-6 col-md-4 offset-md-2" style="display: none;">
                                     <div class="form-group">
                                         <label for="serviceCFE">No. servicio CFE</label>
 

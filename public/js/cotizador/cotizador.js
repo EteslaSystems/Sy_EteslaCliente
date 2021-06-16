@@ -103,19 +103,52 @@ function generarPDF(){
             type: 'POST',
             url: '/PDFgenerate',
             data: data,
-            success: function(pdfResponse){
-                let blobPDF = new Blob([pdfResponse]);
-                let link = document.createElement('a');
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(pdfResponse, status){
+                if(status === 'success'){ ///PDF generado con exito
+                    let blobPDF = new Blob([pdfResponse],{type: "application/pdf"});
 
-                link.href = window.URL.createObjectURL(blobPDF);
-                link.download = "Example.pdf";
-                link.click();
+                    // IE doesn't allow using a blob object directly as link href
+                    // instead it is necessary to use msSaveOrOpenBlob
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(blobPDF);
+                        return;
+                    } 
+
+                    let link = document.createElement('a');
+
+                    let fileName = getPDFFileName(data);
+
+                    link.href = window.URL.createObjectURL(blobPDF);
+                    link.download = fileName;
+                    link.click();
+
+                    //Only Firefox Browser
+                    setTimeout(function(){
+                        // For Firefox it is necessary to delay revoking the ObjectURL
+                        window.URL.revokeObjectURL(data);
+                    }, 100);
+                }
+                else{
+                    alert('Se presento una falla a la hora de querer generar el PDF - Error 500!');
+                }
             },
             error: function(error){
                 console.log(error);
+                alert('Se presento una falla a la hora de querer generar el PDF');
             }
         });
     });
+}
+
+function getPDFFileName(dataPropuesta){
+    let nombreCliente = dataPropuesta.cliente.vNombrePersona + dataPropuesta.cliente.vPrimerApellido + dataPropuesta.cliente.vSegundoApellido;
+    let tipoCotizacion = dataPropuesta.tipoCotizacion;
+    let potencia = dataPropuesta.paneles.potenciaReal;
+
+    return nombreCliente + '_' + tipoCotizacion + '_' + potencia + 'w' + '_' + Date.now() + '.pdf';
 }
 
 function guardarPropuesta(){
