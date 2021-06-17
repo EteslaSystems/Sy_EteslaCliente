@@ -66,7 +66,13 @@ function enviarCotizacion(data){ //Paneles
                     //#region Formating
                     respuesta = respuesta.message;
                     ////#endregion
+                    
+                    //
+                    sessionStorage.removeItem("_consumsFormated");
                     sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
+
+                    //
+                    sessionStorage.removeItem("_respPaneles");
                     sessionStorage.setItem("_respPaneles",JSON.stringify(respuesta));
 
                     resolve(respuesta);
@@ -370,21 +376,27 @@ function validarPeriodoVacio(periodo){
 function vaciarRespuestaPaneles(resultPaneles){
     let dropDownListPaneles = $('#listPaneles');
 
-    //Habilita lista de paneles
-    dropDownListPaneles.attr("disabled", false);
+    //Valida que la coleccion de paneles no venga vacia
+    if(resultPaneles.length > 0){
+        //Habilita lista de paneles
+        dropDownListPaneles.prop("disabled", false);
 
-    //Limpiar dropdownlist
-    limpiarDropDownListPaneles();
+        //Limpiar dropdownlist
+        limpiarDropDownListPaneles();
 
-    //DropDownList-Paneles
-    for(var i=1; i<resultPaneles.length; i++)
-    {
-        dropDownListPaneles.append(
-            $('<option/>', {
-                value: i,
-                text: resultPaneles[i].panel.nombre
-            })
-        );
+        //DropDownList-Paneles
+        for(var i=1; i<resultPaneles.length; i++)
+        {
+            dropDownListPaneles.append(
+                $('<option/>', {
+                    value: i,
+                    text: resultPaneles[i].panel.nombre
+                })
+            );
+        }
+    }
+    else{
+        alert('Error! Coleccion de paneles vacia');
     }
 }
 
@@ -654,7 +666,6 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     /*#endregion*/
 
     //Se pintan resultados de inversores
-    //Se cargan los inputs de la vista
     $('#inpCostTotalInversores').val(_viaticos[0].inversores.precioTotal);
 
     //Inversores  - /Tabla_oculta\
@@ -674,14 +685,11 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#porcentajeSobreDim').val(_viaticos[0].inversores.porcentajeSobreDimens);
     $('#precioInv').val(_viaticos[0].inversores.fPrecio); 
     $('#costoTotalInversores').val(_viaticos[0].inversores.precioTotal);
-        
-        
-    ///Pintada de resultados - Inversor
     $('#inpModeloInversor').val(_viaticos[0].inversores.vNombreMaterialFot);
 
-    //Se pintan los resultados del calculo de viaticos
-    let generacionMensual = '';
-    let nuevoConsumoBimestral = '';
+    //Se pintan los resultados de -POWER-
+    let generacionMensual = 0;
+    let nuevoConsumoBimestral = 0;
     let promedioConsumoMensual = objResp.consumo._promCons.consumoMensual.promedioConsumoMensual;
 
     if(_viaticos[0].power.generacion.promedioDeGeneracion){
@@ -700,6 +708,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#inpNuevoConsumoMensual').val(nuevoConsumoBimestral/2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
     $('#inpPorcentGeneracion').val(_viaticos[0].power.porcentajePotencia + '%');
 
+    //Se pintan los resultados del calculo de viaticos
     $('#inpCostProyectoSIVA').val(_viaticos[0].totales.precio + '$');
     $('#inpCostProyectoCIVA').val(_viaticos[0].totales.precioMasIVA + '$');
     $('#inpCostPorWatt').val(_viaticos[0].totales.precio_watt + '$');

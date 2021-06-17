@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 
+use Illuminate\Support\Facades\Blade;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Currency @Helper *To* Blade
+        Blade::directive('money', function($monto){
+            return "<?php echo '$' . number_format($monto, 2); ?>";
+        });
     }
 
     /**

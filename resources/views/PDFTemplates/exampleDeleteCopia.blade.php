@@ -156,7 +156,7 @@
                         <td>Marca panel</td>
                         <td>Cantidad de paneles</td>
                         <td>Modelo del panel</td>
-                        <td>1234$</td>
+                        <td>@money(1234a)</td>
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>

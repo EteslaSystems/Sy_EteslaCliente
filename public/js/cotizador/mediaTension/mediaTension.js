@@ -18,54 +18,31 @@ async function calcularPropuestaMT(dataEditada){
     dataSent.idCliente = clienteCargado.id;
     dataSent.tarifa = tarifaMT;
 
-    if(dataEdited != null){
+    if(dataEdited != null){ ///Propuesta editada
         dataSent.porcentajePropuesta = dataEdited.porcentajePropuesta;
     }
 
     if(clienteCargado != false){
         if(validarPeriodosVacios() === true){
-            if(dataEdited === null){ ///COTIZACION_NUEVA
+            if(dataEdited === null){ ///Cotizacion Nueva
                 //Pintar vista de resultados
                 await getVistaResultados();
-            }
+                
+                //Mandar a calcular la propuesta
+                let cotizacionPaneles = await sendMediaTensionCotizacion(dataSent);
+                vaciarRespuestaPaneles(cotizacionPaneles);
 
-            new Promise((resolve, reject) => {
-                $.ajax({
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    type: 'POST',
-                    url: '/enviarPeriodos',
-                    data: dataSent,
-                    dataType: 'json',
-                    success: function(respuesta){
-                        if(respuesta.status == '500'){
-                            alert('Error al intentar ejecutar su propuesta!');
-                        }
-                        else{
-                            respuesta = respuesta.message; //Array paneles
-                            
-                            //Retornar _arrayPaneles
-                            resolve(respuesta);
-                        }
-                    },
-                    error: function(){
-                        reject('Al parecer hubo un error con la peticion AJAX de la cotizacion MediaTension');
-                    }
-                });
-            })
-            .then(resultPaneles => {
-                //Se guarda la respuesta de los periodos-procesados
-                sessionStorage.setItem('_consumsFormated',JSON.stringify(resultPaneles[0]));
-                //Se guarda la respuesta paneles para su futura implementacion
-                sessionStorage.setItem('_respPanelesMT',JSON.stringify(resultPaneles));
-                
-                //Llenar dropDownList de paneles
-                vaciarRespuestaPaneles(resultPaneles);
-                
-                //Dotar de funcionalidad al DropDownListPaneles
+                //Experimental
                 mostrarPanelSelected();
-            });
+            }
+            else{ ///Cotizacion Editada
+            
+            }
         }
-    }   
+    }
+    else{
+        alert('Falta cargar un cliente!!');
+    }  
 }
 
 function getVistaResultados(){
@@ -99,17 +76,16 @@ function calcularViaticosMT(obInversor){
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
     let inversor = '';
     let direccion = $('#municipio').val();
-    let periodos = sessionStorage.getItem("_respPanelesMT"); ///Periodos recolectados (sin calcular)
+    let periodos = sessionStorage.getItem("_consumsFormated"); ///Periodos recolectados (sin calcular)
     periodos = JSON.parse(periodos);
-    periodos = periodos[0];
     
     _agregado = _agregado; ///Arreglo de objAgregados *
     _agregado = _agregado == null || _agregado.length == 0 ? null : _agregado;///Comprobacion de que no venga vacio
 
-    if(obInversor == null){
+    if(obInversor == null){ //El inversor es seleccionado por el sistema
         inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
     }
-    else{
+    else{ //El inversor es seleccionado por el usuario
         inversor = obInversor;
     }
 
@@ -129,7 +105,7 @@ function calcularViaticosMT(obInversor){
                 "direccionCliente": direccion,
                 "tarifa": tarifaMT,
                 "_agregados": _agregado
-            },
+            },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
             dataType: 'json',
             success: function(resultViaticos){
                 if(resultViaticos.status === "200" || resultViaticos.status === 200){
@@ -151,6 +127,42 @@ function calcularViaticosMT(obInversor){
 /*#endregion*/
 
 /*#region Data*/
+function sendMediaTensionCotizacion(cotiData){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'POST',
+            url: '/enviarPeriodos',
+            data: cotiData,
+            dataType: 'json',
+            success: function(respuesta){
+                if(respuesta.status == '500'){
+                    alert('Error al intentar ejecutar su propuesta!');
+                }
+                else{
+                    respuesta = respuesta.message; //Array paneles
+
+                    //Formatear sessionStorage
+                    sessionStorage.removeItem('_consumsFormated');
+                    //Se guarda la respuesta de los periodos-procesados
+                    sessionStorage.setItem('_consumsFormated',JSON.stringify(respuesta[0]));
+
+                    //Formatear sessionStorage
+                    sessionStorage.removeItem('_respPanelesMT');
+                    //Se guarda la respuesta paneles para su futura implementacion
+                    sessionStorage.setItem('_respPanelesMT',JSON.stringify(respuesta));
+
+                    //Retornar _arrayPaneles
+                    resolve(respuesta);
+                }
+            },
+            error: function(error){
+                reject('Estatus: 500! \n Al parecer hubo un error con la peticion AJAX de la cotizacion MediaTension\n'+error);
+            }
+        });
+    });
+}
+
 function agregarPeriodo(){
     var periodo = {};
     let tarifaMT = sessionStorage.getItem("tarifaMT");
@@ -300,10 +312,10 @@ function sumarIndexador(){
 }
 
 function mostrarPanelSelected(){
-    var ddlPaneles = $('#listPaneles');
+    let ddlPaneles = $('#listPaneles');
 
     $('#listPaneles').change(async function(){
-        var ddlPanelesValue = parseInt(ddlPaneles.val());
+        let ddlPanelesValue = parseInt(ddlPaneles.val());
         limpiarCampos();
 
         if(ddlPanelesValue === '-1'  || ddlPanelesValue === -1 || typeof ddlPanelesValue === "undefined" ){
@@ -321,7 +333,7 @@ function mostrarPanelSelected(){
             $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.marca);
     
             //Consumos
-            var promedioConsumoMensual = _paneles[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
+            let promedioConsumoMensual = _paneles[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
             $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
             
             //Pintada de resultados - Paneles
@@ -331,16 +343,17 @@ function mostrarPanelSelected(){
             $('#inpPotencia').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
     
             //Equipo seleccionado - Panel seleccionado
+            sessionStorage.removeItem('__ssPanelSeleccionadoMT');
             sessionStorage.setItem('__ssPanelSeleccionadoMT',JSON.stringify(_paneles[ddlPanelesValue].panel));
-    
+
             //Se carga dropDownList -Inversores-
             let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
             _inversores = _inversores.message;
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
             
             ///EXPERIMENTAL
-            mostrarInversorSelected(); //MARCA
-            mostrarInversorModeloSelected(); //MODELO
+            mostrarInversorSelected(); //MARCA - DropDownList
+            mostrarInversorModeloSelected(); //MODELO - DropDownList
 
             vaciarRespuestaInversores(_inversores); //:void() = Se pintan las marcas de los inversores
             let objInversorCB = getInversorCostoBeneficio(0); //Se obtiene la mejor opcion 'Costo-Beneficio'
@@ -451,7 +464,6 @@ function validarClienteCargado(){
         return objResult;
     }
     else{
-        alert('Falta cargar un cliente!!');
         return false;
     }
 }
