@@ -71,18 +71,23 @@ Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient')
 /* --------------- Administrador --------------- */
 Route::get('/admin', 'administradorController@index');
 
+//PANELES
 Route::get('/paneles', 'PanelesController@index');
 Route::post('/agregar-panel', 'PanelesController@create');
 Route::get('/eliminar-panel/{idPanel}', 'PanelesController@destroy');
 Route::get('/editar-panel/{idPanel}', 'PanelesController@edit');
 Route::put('/editar-panel/{idPanel}', 'PanelesController@update');
 
+//INVERSORES
 Route::get('/inversores', 'InversoresController@index');
 Route::post('/inversoresSelectos', 'InversoresController@getInversoresSelectos');
 Route::post('/agregar-inversor', 'InversoresController@create');
 Route::get('/eliminar-inversor/{idInversor}', 'InversoresController@destroy');
 Route::get('/editar-inversor/{idInversor}', 'InversoresController@edit');
 Route::put('/editar-inversor/{idInversor}', 'InversoresController@update');
+
+//ESTRUCTURAS
+Route::get('/estructuras', 'EstructurasController@read');
 /* --------------------------------------------- */
 
 /* --------------- Ingeniero --------------- */
@@ -123,28 +128,5 @@ Route::get('/cor',function() {
 Route::get('/head',function() {
     return view('template/head');
 });
-
-//Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
-
-// Route::get('/inversores', function(){
-//     return view('roles/admin/inversores');
-// });
-
-// /*--- Ingeniero ---*/
-// Route::get('/levantamiento', function(){
-//     return view('roles/enginer/levantamiento');
-// });
-
-// Route::get('/levantamient', function(){
-//     return view('roles/enginer/levantamient');
-// });
-
-// Route::get('/instalacion', function(){
-//     return view('roles/enginer/instalacion');
-// });
-
-// Route::get('configuracion', function(){
-//     return view('roles/enginer/configuracion');
-// });
 
 Route::post('enviarConfiguracion',['as'=>'enviarConfiguracion','uses'=>'ConfiguracionController@enviarConfiguracion']);

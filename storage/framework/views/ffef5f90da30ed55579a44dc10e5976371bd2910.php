@@ -69,7 +69,13 @@
                                 </div>
                                 <div id="divDropDownListInversorModelo" class="form-row" style="display:none;">
                                     <label>Inversor (modelo)</label>
-                                    <select class="form-control" id="listModelosInversor">
+                                    <select id="listModelosInversor" class="form-control">
+                                        <option selected value="-1">Elige una opción:</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <label>Estructura</label>
+                                    <select id="listEstructura" class="form-control" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
@@ -205,11 +211,9 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <img id="imgLogoPanel<?php echo e($i); ?>" height="35" weight="100">
-                                                        <img id="imgPanel<?php echo e($i); ?>" height="100" weight="80">
                                                     </div> 
                                                     <div class="col">
                                                         <img id="imgLogoInversor<?php echo e($i); ?>" height="35" weight="100">
-                                                        <img id="imgInversor<?php echo e($i); ?>" height="100" weight="80">
                                                     </div>
                                                 </div>
                                                 <ul id="modalResultPageX<?php echo e($i); ?>" class="list-group">

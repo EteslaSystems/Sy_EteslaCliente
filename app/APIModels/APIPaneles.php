@@ -1,5 +1,4 @@
 <?php
-
 namespace App\APIModels;
 
 class APIPaneles extends GuzzleHttpRequest

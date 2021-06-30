@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\APIModels\APIVendedor;
+
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class vendedorController extends Controller
 {
@@ -32,21 +35,6 @@ class vendedorController extends Controller
 
 	public function misClientes()
 	{
-		// if ($this->validarSesion() == 0) {
-		// 	return redirect('/')->with('status-fail', 'Debe iniciar sesión para acceder al sistema.');
-		// }
-		// if ($this->validarSesion() == 1) {
-		// 	return redirect('index')->with('status-fail', 'Solo los vendedores pueden acceder a esta vista.');
-		// }
-
-		// $dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		// $consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
-
-		// if (gettype($consultarClientes) == "object") {
-		// 	$consultarClientes = $consultarClientes->message;
-
-		// 	return view('roles.seller.cotizador.misClientes', compact('consultarClientes', 'consultarClientes'));
-		// }
 		return view('template.clientes');
 	}
 
@@ -63,9 +51,9 @@ class vendedorController extends Controller
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		// dd($consultarClientes);
+		$consultarClientes = $this->paginate($consultarClientes);
 
-		return view('template.clientes', compact('consultarClientes', 'consultarClientes'));
+		return view('template.clientes', compact('consultarClientes'));
 	}
 
 	public function validarSesion()
@@ -81,4 +69,11 @@ class vendedorController extends Controller
 		}
 		return 0;
 	}
+
+	public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 }

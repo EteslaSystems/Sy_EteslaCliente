@@ -30,8 +30,13 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
         _combinaciones = await obtenerCombinaciones(data);
         await vaciarCombinaciones(_combinaciones);
         
-        _cotizacion = await enviarCotizacion(data); //Se obtienen paneles
+        //Se obtienen paneles
+        _cotizacion = await enviarCotizacion(data); 
         vaciarRespuestaPaneles(_cotizacion);
+
+        //Se obtiene estructuras
+        // let estructuras = await getListEstructuras();
+        // llenarDropDownListEstructuras(estructuras.message);
         
         ///EXPERIMENTAL
         mostrarPanelSeleccionado();
@@ -378,9 +383,6 @@ function vaciarRespuestaPaneles(resultPaneles){
 
     //Valida que la coleccion de paneles no venga vacia
     if(resultPaneles.length > 0){
-        //Habilita lista de paneles
-        dropDownListPaneles.prop("disabled", false);
-
         //Limpiar dropdownlist
         limpiarDropDownListPaneles();
 
@@ -394,10 +396,40 @@ function vaciarRespuestaPaneles(resultPaneles){
                 })
             );
         }
+
+        //Habilita lista de paneles
+        dropDownListPaneles.prop("disabled", false);
     }
     else{
         alert('Error! Coleccion de paneles vacia');
     }
+}
+
+function llenarDropDownListEstructuras(estructuras){
+    let listEstructuras = $('#listEstructura');
+
+    limpiarDropDownListEstructuras();
+
+    for(let i=0; i<estructuras.length; i++)
+    {
+        listEstructuras.append(
+            $('<option/>', {
+                value: estructuras[i].vMarca,
+                text: estructuras[i].vMarca
+            })
+        );
+    }
+}
+
+function limpiarDropDownListEstructuras(){
+    //Se borran los options
+    $('#listEstructura option').each(function(){
+        if($(this).val() != "-1"){
+            $(this).val('');
+            $(this).text('');
+            $(this).remove();
+        }
+    });
 }
 
 function vaciarRespuestaInversores(resultInversores){ ///Se vacian MARCAS
@@ -422,9 +454,6 @@ function vaciarRespuestaInversores(resultInversores){ ///Se vacian MARCAS
     //Limpiar dropdownlist
     limpiarDropDownListInversores();
 
-    //Activar lista de inversores
-    dropDownListInversores.attr("disabled", false);
-
     //DropDownList-Paneles
     for(let marca in InversoresGroupByMerch)
     {
@@ -435,6 +464,9 @@ function vaciarRespuestaInversores(resultInversores){ ///Se vacian MARCAS
             })
         );
     }
+
+    //Activar lista de inversores
+    dropDownListInversores.attr("disabled", false);
 }
 
 function vaciarModelosInversores(){
@@ -755,7 +787,7 @@ function llenarListaDesplegableCombinaciones(combinaciones){
 
     //DropDownList de combinaciones
     ddlCombinaciones.on('change', function(){
-        var valueOfListCombinaciones = ddlCombinaciones.val();
+        let valueOfListCombinaciones = ddlCombinaciones.val();
 
         switch(valueOfListCombinaciones)
         {
@@ -924,11 +956,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     /*             --Combinacion Economica--             */
     /* Se cargan imagenes de logos && equipos */
     /* __logos__ */
-    $('#imgLogoPanel1').attr("src", "img/paneles/logo/"+combinaciones.combinacionEconomica[0].paneles.marca.toString()+".png");
-    $('#imgLogoInversor1').attr("src", "img/inversores/logo/"+combinaciones.combinacionEconomica[0].inversores.vMarca.toString()+".png");
-    /* __equipos__ */
-    $('#imgPanel1').attr("src", "img/paneles/equipo/panel.png");
-    $('#imgInversor1').attr("src", "img/inversores/equipo/"+combinaciones.combinacionEconomica[0].inversores.vMarca.toString()+".jpg");
+    $('#imgLogoPanel1').attr("src", "https://drive.google.com/uc?export=view&id="+combinaciones.combinacionEconomica[0].paneles.imgRuta);
+    $('#imgLogoInversor1').attr("src", "https://drive.google.com/uc?export=view&id="+combinaciones.combinacionEconomica[0].inversores.imgRuta);
     /* Se llenan labels_pills de data */
     $('#combinacionTitle1').text("Combinacion economica");
     
@@ -948,14 +977,14 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plCostoWatt1').text(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
 
     //Page2_Result
-    var generacionMensual = combinaciones.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionEconomica[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
+    let generacionMensual1 = combinaciones.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
+    let nuevoConsumoBimestral1 = combinaciones.combinacionEconomica[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel1').text(combinaciones.combinacionEconomica[0].paneles.nombre);
     $('#plModeloInversor1').text(combinaciones.combinacionEconomica[0].inversores.vNombreMaterialFot);
     $('#plConsumoMensual1').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-    $('#plGeneracionMensual1').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-    $('#plNuevoConsumoMensual1').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
+    $('#plGeneracionMensual1').text(generacionMensual1 + ' kWh(' + generacionMensual1 * 2 + '/bim)');
+    $('#plNuevoConsumoMensual1').text(nuevoConsumoBimestral1 / 2 + ' kw(' + nuevoConsumoBimestral1 + '/bim)');
     $('#plPorcentajeGeneracion1').text(combinaciones.combinacionEconomica[0].power.porcentajePotencia + '%');
 
     //Page3_Result
@@ -993,14 +1022,14 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plCostoWatt2').text(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
 
     //Page2_Result
-    var generacionMensual = combinaciones.combinacionMediana[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionMediana[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
+    let generacionMensual2 = combinaciones.combinacionMediana[0].power.generacion.promedioDeGeneracion;
+    let nuevoConsumoBimestral2 = combinaciones.combinacionMediana[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel2').text(combinaciones.combinacionMediana[0].paneles.nombre);
     $('#plModeloInversor2').text(combinaciones.combinacionMediana[0].inversores.vNombreMaterialFot);
     $('#plConsumoMensual2').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-    $('#plGeneracionMensual2').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-    $('#plNuevoConsumoMensual2').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
+    $('#plGeneracionMensual2').text(generacionMensual2 + ' kWh(' + generacionMensual2 * 2 + '/bim)');
+    $('#plNuevoConsumoMensual2').text(nuevoConsumoBimestral2 / 2 + ' kw(' + nuevoConsumoBimestral2 + '/bim)');
     $('#plPorcentajeGeneracion2').text(combinaciones.combinacionMediana[0].power.porcentajePotencia + '%');
 
     // //Page3_Result
@@ -1038,15 +1067,15 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#plCostoWatt3').text(combinaciones.combinacionOptima[0].totales.precio_watt + '$');
 
     //Page2_Result
-    var generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-    var nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
+    let generacionMensual3 = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
+    let nuevoConsumoBimestral3 = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
 
     $('#plModeloPanel3').text(combinaciones.combinacionOptima[0].paneles.nombre);
     $('#plModeloInversor3').text(combinaciones.combinacionOptima[0].inversores.vNombreMaterialFot);
 
     $('#plConsumoMensual3').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-    $('#plGeneracionMensual3').text(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-    $('#plNuevoConsumoMensual3').text(nuevoConsumoBimestral / 2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
+    $('#plGeneracionMensual3').text(generacionMensual3 + ' kWh(' + generacionMensual3 * 2 + '/bim)');
+    $('#plNuevoConsumoMensual3').text(nuevoConsumoBimestral3 / 2 + ' kw(' + nuevoConsumoBimestral3 + '/bim)');
     $('#plPorcentajeGeneracion3').text(combinaciones.combinacionOptima[0].power.porcentajePotencia + '%');
 
     // //Page3_Result
@@ -1177,5 +1206,32 @@ async function modificarPropuesta(){
 function deshabilitarBotonesPDF(){
     $('#btnGenerarQrCode').prop("disabled",true);
     $('#btnGenerarPdfFileViewer').prop("disabled",true);
+}
+/*#endregion*/
+
+/*#region Estructuras*/
+function getListEstructuras(){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'GET',
+            url: '/estructuras',
+            dataType: 'json',
+            success: function(respuesta){
+                if(respuesta.status == '500'){
+                    reject('Error al intentar consultar estructuras!');
+                    console.log('Error estructuras:');
+                    console.log(respuesta.message);
+                }
+                else{
+                    resolve(respuesta);
+                }
+            },
+            error: function(error){
+                alert('Hubo un error al consultar las estructuras');
+                console.log('Error estructuras:\n'+error);
+            }
+        });
+    });
 }
 /*#endregion*/

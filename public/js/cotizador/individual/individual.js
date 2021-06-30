@@ -165,12 +165,12 @@ function sendSingleQuotation(){
                         $('#inpCostoTotalViaticos').val(respuesta[0].totales.totalViaticosMT+'$');
 
                         //Totales
-                        $('#inpPrecio').val(respuesta[0].totales.precio+'$');
-                        $('#inpPrecioIVA').val(respuesta[0].totales.precioMasIVA+'$');
-                        $('#precioMXN').val('$'+respuesta[0].totales.precioMXN);
+                        $('#inpPrecio').val('$'+respuesta[0].totales.precio+' USD');
+                        $('#inpPrecioIVA').val('$'+respuesta[0].totales.precioMasIVA+' USD');
+                        $('#precioMXN').val('$'+respuesta[0].totales.precioMXNConIVA+' MXN');
                     },
-                    error: function(){
-                        alert('Algo ha ido mal al intentar realizar una cotizacion_individual');
+                    error: function(error){
+                        alert('Algo ha ido mal al intentar realizar una cotizacion_individual \n'+error);
                     }
                 });
             }

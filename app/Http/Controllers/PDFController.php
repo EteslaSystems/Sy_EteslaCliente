@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 use PDF;
 
-
 class PDFController extends Controller
 {
-    //Aqui se programara todo lo relacionado al PDF (nombrado del archivo, la generacion, etc)
-
     public function generatePDF($propuesta)
     {   
-        $pdf = PDF::loadview('PDFTemplates.exampleDelete',$propuesta)
+        $pdfTemplate = '';
+
+        if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
+            $pdfTemplate = 'PDFTemplates.bajaTensionPDF';
+        }
+        else{ //individual
+            $pdfTemplate = 'PDFTemplates.individualPDF';
+        }
+
+        $pdf = PDF::loadview($pdfTemplate,$propuesta)
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
         $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
-        $fileName = $this->getFileName($propuesta);
+        $fileName = $this->getFileName($propuesta); //Nombre del documento PDF
 
-        $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en    el server(root)
+        $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)
 
         $pdf = $path . '/' . $fileName; ///Nombre path + Nombre documento.pdf
 
@@ -37,7 +43,8 @@ class PDFController extends Controller
 
     public function visualizarPDF()
     {
-        $pdf = PDF::loadview('PDFTemplates.exampleDeleteCopia')
+        // $pdf = PDF::loadview('PDFTemplates.exampleDeleteCopia')
+        $pdf = PDF::loadview('PDFTemplates.individualPDF')
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
