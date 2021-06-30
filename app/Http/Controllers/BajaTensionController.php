@@ -104,6 +104,7 @@ class BajaTensionController extends Controller
 		$arrayCompleto["tarifa"] = $request->tarifa;
 		$arrayCompleto["descuento"] = $request->descuentoPropuesta;
 		$arrayCompleto["aumento"] = $request->aumentoPropuesta;
+		$arrayCompleto["estructura"] = $request->estructura;
 		$arrayCompleto["tipoCotizacion"] = "bajaTension";
 		$arrayCompleto["bInstalacion"] = 1; //1 || true
 

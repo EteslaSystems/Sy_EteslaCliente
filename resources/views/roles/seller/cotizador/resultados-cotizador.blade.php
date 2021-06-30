@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-row">
                                     <label>Estructura</label>
-                                    <select id="listEstructura" class="form-control" disabled>
+                                    <select id="listEstructura" class="form-control" onchange="cambiarEstructura();" disabled>
                                         <option selected value="-1">Elige una opción:</option>
                                     </select>
                                 </div>
