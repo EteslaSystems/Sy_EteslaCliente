@@ -100,9 +100,20 @@ function sendSingleQuotation(){
     let cantidadPaneles = document.getElementById('inpCantPaneles').value;
     let cantidadInversores = document.getElementById('inpCantInversores').value;
     let cantidadEstructuras = document.getElementById('inpCantidadEstruct').value;
+    let marcaEstructura = $('#optEstructuras option:selected').val();
     let direccionCliente = document.getElementById('municipio').value;
     let bInstalacn = document.getElementById('chbInstalacion').value;
     let data = {};
+    let Estructura = null;
+
+    if(cantidadEstructuras > 0){
+        if(marcaEstructura.length > 0){
+            Estructura = { marca: marcaEstructura, cantidad: cantidadEstructuras };
+        }
+        else{
+            alert('Falta escoger una marca de estructuras');
+        }
+    }
 
     data = {
         idCliente: idCliente,
@@ -110,7 +121,7 @@ function sendSingleQuotation(){
         idInversor: idInversor,
         cantidadPaneles: cantidadPaneles,
         cantidadInversores: cantidadInversores,
-        cantidadEstructuras: cantidadEstructuras,
+        Estructura: Estructura,
         direccionCliente: direccionCliente,
         bInstalacion: bInstalacn
     };

@@ -9,6 +9,7 @@ use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
 use App\APIModels\APICotizacion;
+use App\APIModels\APIEstructuras;
 
 class CotizacionIndividualController extends Controller
 {
@@ -17,14 +18,16 @@ class CotizacionIndividualController extends Controller
 	protected $vendedor;
 	protected $clientes;
 	protected $cotizacion;
+	protected $estructuras;
 
-	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
+	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion, APIEstructuras $estructuras)
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
 		$this->cotizacion = $cotizacion;
+		$this->estructuras = $estructuras;
 	}
 	
 	public function index()
@@ -38,12 +41,14 @@ class CotizacionIndividualController extends Controller
 
 		$vPaneles = $this->paneles->view();
 		$vInversores = $this->inversores->view();
+		$vEstructuras = $this->estructuras->view();
+		$vEstructuras = $vEstructuras->message;
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'consultarClientes', 'rol'));
+		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'vEstructuras', 'consultarClientes', 'rol'));
 	}
 
 	public function create(Request $request)
@@ -88,7 +93,7 @@ class CotizacionIndividualController extends Controller
 		$cotizacionIndividual["idInversor"] = $request->idInversor;
 		$cotizacionIndividual["cantidadPaneles"] = $request->cantidadPaneles;
 		$cotizacionIndividual["cantidadInversores"] = $request->cantidadInversores;
-		$cotizacionIndividual["cantidadEstructuras"] = $request->cantidadEstructuras;
+		$cotizacionIndividual["Estructura"] = $request->Estructura;
 		$cotizacionIndividual["bInstalacion"] = $request->bInstalacion;
 		$cotizacionIndividual["tipoCotizacion"] = 'individual';
 

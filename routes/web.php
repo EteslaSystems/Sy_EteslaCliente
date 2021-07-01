@@ -71,6 +71,9 @@ Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient')
 /* --------------- Administrador --------------- */
 Route::get('/admin', 'administradorController@index');
 
+//Material_Fotovoltaico
+Route::get('/material-fotovoltaico', 'MaterialFotovoltaicoController@index' );
+
 //PANELES
 Route::get('/paneles', 'PanelesController@index');
 Route::post('/agregar-panel', 'PanelesController@create');

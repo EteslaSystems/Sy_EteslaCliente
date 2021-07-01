@@ -89,44 +89,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <!-- <div class="col">
-                        <div class="menu-content shadow" id="menuContent">
-                            <div class="form-group row justify-content-center align-items-center">
-                            <label for="inpCantidadEstructuras" class="col-xs-3 col-form-label mr-2">No. de estructuras</label>
-                                <div class="col-xs-9">
-                                    <input class="form-control" type="number" id="inpCantidadEstructuras">
-                                </div>
-                            </div>
-                            <div class="form-group row justify-content-center align-items-center">
-                                <label class="col-xs-3 col-form-label mr-2"><strong>Cobrar instalacion</strong></label>
-                                <div class="col-xs-9">
-                                    <div class="checkbox">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" id="chbEstructuras" disabled>Estructuras
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inpCantidadEstructuras" class="col-xs-3 col-form-label mr-2">No. de estructuras</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" type="number" id="inpCantidadEstructuras">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Agregar</strong></label>
-                                <div class="checkbox">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="chbEstructuras" disabled>Estructuras
-                                    </label>
+                        <div class="form-row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="mn-1">Seleccionar Estructura:</label>
+                                    <select id="optEstructuras" class="form-control">
+                                        <option selected value="-1">Elige una opción:</option>
+                                            @foreach($vEstructuras as $estructura)
+                                                <option value="{{ $estructura->vMarca }}" >{{ $estructura->vMarca }}</option>
+                                            @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                </div>
+                <div class="row text-center">
                     <div class="col">
                         <button onclick="sendSingleQuotation()" class="btn btn-green text-uppercase shadow pull-right" id="btnCalcularIndividual">
                             <i class="fa fa-check" aria-hidden="true"></i>
