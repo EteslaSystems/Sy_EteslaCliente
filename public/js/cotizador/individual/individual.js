@@ -107,7 +107,7 @@ function sendSingleQuotation(){
     let Estructura = null;
 
     if(cantidadEstructuras > 0){
-        if(marcaEstructura.length > 0){
+        if(marcaEstructura != '-1'){
             Estructura = { marca: marcaEstructura, cantidad: cantidadEstructuras };
         }
         else{
@@ -158,7 +158,7 @@ function sendSingleQuotation(){
                             $('#txtCantidadPanelesInd').html('('+respuesta[0].paneles.noModulos+')');
 
                             //Estructuras
-                            respuesta[0].paneles.costoDeEstructuras != null ? $('#inpCostTotalEstructuras').val(respuesta[0].paneles.costoDeEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
+                            respuesta[0].estructura != null ? $('#inpCostTotalEstructuras').val(respuesta[0].costoTotalEstructuras + '$') : $('#inpCostTotalEstructuras').val(0 + '$');
                         }
 
                         if(respuesta[0].inversores != null){
