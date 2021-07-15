@@ -306,253 +306,228 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="cotizacion-tab" data-toggle="tab" href="#cotizacioncotizacion" role="tab" aria-controls="cotizacion-tab" aria-selected="true">Cotizacion</a>
-                                    </li>
-                                    <li class="nav-item" style="display:none;" id="navPower">
-                                        <a class="nav-link" id="power-tab" data-toggle="tab" href="#power" role="tab" aria-controls="power-tab" aria-selected="false"s>Power</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="cotizacioncotizacion" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="container">
-                                            <form class="form-inline">
-                                                <!--oculto-->
-                                                <input id="inpMarcaPanelS" class="form-control inpAnsw" style="display:none;">
-                                                <input id="inpMarcaInversorS" class="form-control inpAnsw" style="display:none;">
-                                                <!--fin_oculto-->
-                                                <!-- Page1 -->
-                                                <div id="pageResult1" class="row">
-                                                    <div class="col">
-                                                        <div class="form-group row">
-                                                            <label for="inpPotencia" class="col-sm-4 col-form-label">Potencia</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPotencia">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="inpCantidadPaneles" class="col-sm-4 col-form-label">Cantidad paneles</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadPaneles">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpCantidadInvers" class="col-sm-4 col-form-label">Cantidad inversores</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpCantidadInvers">
-                                                            </div>
-                                                        </div>  
-                                                        <div class="form-group row">
-                                                            <label for="inpCostPorWatt" class="col-sm-4 col-form-label">Costo por watt</label>
-                                                            <div class="col-lg-6">
-                                                                <input id="inpCostPorWatt" type="currency" class="form-control-plaintext inpAnsw" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group row">
-                                                            <label for="inpCostProyectoSIVA" class="col-lg-4 col-form-label">Costo proyecto s/IVA</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoSIVA">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="inpCostProyectoCIVA" class="col-sm-4 col-form-label">Costo proyecto c/IVA</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoCIVA">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpCostProyectoMXN" class="col-sm-4 col-form-label">Costo proyecto MXN</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="currency" readonly class="form-control-plaintext inpAnsw" id="inpCostProyectoMXN">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End_Page1 -->
-                                                <!-- Page2 -->
-                                                <div id="pageResult2" class="row" style="display:none;">
-                                                    <div class="col">
-                                                        <div class="form-group row">
-                                                            <label for="inpModeloPanel" class="col-sm-4 col-form-label">Modelo panel</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloPanel">                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="inpModeloInversor" class="col-sm-4 col-form-label">Modelo inversor</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpModeloInversor">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpConsumoMensual" class="col-sm-4 col-form-label">Consumo mensual</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpConsumoMensual">
-                                                            </div>
-                                                        </div>     
-                                                    </div>
-                                                    <div class="col">
-                                                    <div class="form-group row">
-                                                            <label for="inpGeneracionMensual" class="col-sm-4 col-form-label">Generación mensual</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpGeneracionMensual">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpNuevoConsumoMensual" class="col-sm-4 col-form-label">Nuevo consumo mensual</label>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpNuevoConsumoMensual">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpPorcentGeneracion" class="col-sm-4 col-form-label">% de generación</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPorcentGeneracion">
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                                <!-- End_Page2 -->
-                                                <!-- Page3 -->
-                                                <div id="pageResult3" class="row" style="display:none;">
-                                                    <div class="col">
-                                                        <div class="form-group row">
-                                                            <label for="inpPagoAnteriorBimsProm" class="col-sm-4 col-form-label">Pago anterior bimestral (promedio)</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoAnteriorBimsProm">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="inpPagoNuevoBimsProm" class="col-sm-4 col-form-label">Pago nuevo bimestral (promedio)</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpPagoNuevoBimsProm">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="inpAhorroBimestral" class="col-sm-4 col-form-label">Ahorro bimestral (promedio)</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroBimestral">
-                                                            </div>
-                                                        </div>    
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group row">
-                                                            <label for="inpAhorroAnual" class="col-sm-4 col-form-label">Ahorro anual (promedio)</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpAhorroAnual">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpROIBruto" class="col-sm-4 col-form-label">ROI bruto</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpROIBruto">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="form-group row">
-                                                            <label for="inpROIDeduccion" class="col-sm-4 col-form-label">ROI con deducción</label>
-                                                            <div class="col-lg-6">
-                                                                <input type="text" readonly class="form-control-plaintext inpAnsw" id="inpROIDeduccion">
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                                <!-- End_Page3 -->
-                                            </form>
-                                        </div>
+                                <nav>
+                                    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                                        <a id="cotizacion-tab" class="nav-item nav-link active"  data-toggle="tab" href="#cotizacion" role="tab" aria-controls="cotizacion" aria-selected="true">Cotizacion</a>
+                                        <a id="ahorro-tab" class="nav-item nav-link" data-toggle="tab" href="#ahorro" role="tab" aria-controls="ahorro" aria-selected="false">Ahorro</a>
+                                        <a id="roi-tab" class="nav-item nav-link" data-toggle="tab" href="#roi" role="tab" aria-controls="roi" aria-selected="false">ROI</a>
                                     </div>
-                                    <div class="tab-pane fade" id="power" role="tabpanel" aria-labelledby="profile-tab" style="display:none;">
+                                </nav>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="cotizacion" role="tabpanel" aria-labelledby="cotizacion-tab">
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col table-responsive-sm">
-                                                    <table class="table table-bordered" >
-                                                        <thead class="thead-dark">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="col">
+                                                                <!-- Tabla Paneles -->
+                                                                <table id="paneles" class="table table-sm table-bordered">
+                                                                    <thead>
+                                                                        <th scope="col" colspan="4" class="text-center" style="background-color:black; color:white;">Panel</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><strong>Equipo</strong></td>
+                                                                            <td colspan="3" id="tdPanelEquipo"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Modelo</strong></td>
+                                                                            <td colspan="3" id="tdPanelModelo"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Potencia</strong></td>
+                                                                            <td colspan="3" id="tdPanelPotencia"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Cantidad</strong></td>
+                                                                            <td id="tdPanelCantidad"></td>
+                                                                            <tr>
+                                                                                <td><strong>Potencia instalada</strong></td>
+                                                                                <td id="tdPanelPotenciaReal"></td>
+                                                                            </tr>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Costo por watt</strong></td>
+                                                                            <td id="tdCostoWatt"></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <table id="inversores" class="table table-sm table-bordered">
+                                                                <thead>
+                                                                    <th scope="col" colspan="2" class="text-center" style="background-color:black; color:white;">Inversor</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><strong>Equipo</strong></td>
+                                                                        <td id="tdInversorEquipo"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Modelo</strong></td>
+                                                                        <td id="tdInversorModelo"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Potencia</strong></td>
+                                                                        <td colspan="3" id="tdInversorPotencia"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Cantidad</strong></td>
+                                                                        <td id="tdInversorCantidad"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-center" style="margin-top: -10px;">
+                                                        <div class="col-6">
+                                                            <!-- Tabla costos totales -->
+                                                            <table id="costos" class="table table-sm table-striped table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th class="text-center" style="background-color:black; color:white;">Subtotal s/IVA</th>
+                                                                        <th class="text-center" style="background-color:black; color:white;">Total + IVA</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;">USD</td>
+                                                                        <td id="tdSubtotalUSD" class="text-center"></td>
+                                                                        <td id="tdTotalUSD" class="text-center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center" style="background-color:#29D337; color:white;">MXN</td>
+                                                                        <td id="tdSubtotalMXN" class="text-center"></td>
+                                                                        <td id="tdTotalMXN" class="text-center"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="ahorro" role="tabpanel" aria-labelledby="ahorro-tab">
+                                        <!-- Ahorro -->
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <select id="graficosDisponibles">
+                                                        <option value="-1" selected>Escoger grafico</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <img width="150px" height="150px" src="https://drive.google.com/thumbnail?id=1gl4DLSKQjFybMMJ4--2n1elNqeSrnKC4" />
+                                                    <!-- canvas id="graficos" width="150px" height="150px"></canvas-->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:6px;">
+                                                        <thead>
+                                                            <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Ahorro energetico</th>
                                                             <tr>
-                                                                <th style="text-align:center;">Produccion anual kWh</th>
-                                                                <th style="text-align:center;">Produccion anual mWh</th>
-                                                                <th style="text-align:center;">Total sin solar</th>
-                                                                <th style="text-align:center;">Total con solar</th>
-                                                                <th style="text-align:center;">Ahorro</th>
-                                                                <th style="text-align:center;">Ahorro %</th>
+                                                                <td colspan="2"><strong>Consumo actual</strong></td>
+                                                                <td colspan="2"><strong>Generacion</strong></td>
+                                                                <td colspan="2"><strong>Nuevo consumo</strong></td>
+                                                                <td colspan="2"><strong>% generacion</strong></td>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td id="tdProduccionAnualKwh"></td>
-                                                                <td id="tdProduccionAnualMwh"></td>
-                                                                <td id="tdTotalSinSolar"></td>
-                                                                <td id="tdTotalConSolar"></td>
-                                                                <td id="tdAhorro"></td>
-                                                                <td id="tdAhorroPorcentaje"></td>
+                                                                <td><strong>Mes(kw)</strong></td>
+                                                                <td><strong>Bim(kw)</strong></td>
+                                                                <td><strong>Mes(kw)</strong></td>
+                                                                <td><strong>Bim(kw)</strong></td>
+                                                                <td><strong>Mes(kw)</strong></td>
+                                                                <td><strong>Bim(kw)</strong></td>
+                                                                <td id="tdPorcentajePropuesta"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="tdConsumoActualKwMes"></td>
+                                                                <td id="tdConsumoActualKwBim"></td>
+                                                                <td id="tdGeneracionKwMes"></td>
+                                                                <td id="tdGeneracionKwBim"></td>
+                                                                <td id="tdNuevoConsumoMes"></td>
+                                                                <td id="tdNuevoConsumoBim"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="tdConsumoActualDinMes"></td>
+                                                                <td id="tdConsumoActualDinBim"></td>
+                                                                <td id="tdGeneracionDinMes"></td>
+                                                                <td id="tdGeneracionDinBim"></td>
+                                                                <td id="tdNuevoConsumoDinMes"></td>
+                                                                <td id="tdNuevoConsumoDinBim"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col">
+                                                    <table id="ahorroEconomico" class="table table-sm table-bordered" style="margin-top:6px;">
+                                                        <thead>
+                                                            <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Ahorro economico</th>
+                                                            <tr>
+                                                                <td colspan="2"><strong>Consumo actual</strong></td>
+                                                                <td colspan="2"><strong>Generacion</strong></td>
+                                                                <td colspan="2"><strong>Nuevo consumo</strong></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><strong>Mes($)</strong></td>
+                                                                <td><strong>Bim($)</strong></td>
+                                                                <td><strong>Mes($)</strong></td>
+                                                                <td><strong>Bim($)</strong></td>
+                                                                <td><strong>Mes($)</strong></td>
+                                                                <td><strong>Bim($)</strong></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                                <td>x</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
-                                            <br>
-                                            <div class="row" style="overflow-x: auto">
-                                                <div>
-                                                    <table class="table table-responsive-md table-bordered">
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="roi" role="tabpanel" aria-labelledby="roi-tab">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <!-- Visualizacion - Tabla(s) financiamiento -->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <table id="ahorroKw" class="table table-sm table-bordered">
                                                         <thead>
+                                                            <th scope="col" colspan="8" class="text-center" style="background-color:black; color:white;">Ahorro energetico</th>
                                                             <tr>
-                                                                <th style="text-align:center;">
-                                                                    <select class="form-control" id="listPagosTotales">
-                                                                        <option value="-1" title="Elige una opcion" active>Elegir</option>
-                                                                        <option value="optSinSolar">Sin solar</option>
-                                                                        <option value="optConSolar">Con solar</option>
-                                                                    </select>
-                                                                </th>
-                                                                <th>Enero</th>
-                                                                <th>Febrero</th>
-                                                                <th>Marzo</th>
-                                                                <th>Abril</th>
-                                                                <th>Mayo</th>
-                                                                <th>Junio</th>
-                                                                <th>Julio</th>
-                                                                <th>Agosto</th>
-                                                                <th>Septiembre</th>
-                                                                <th>Octubre</th>
-                                                                <th>Noviembre</th>
-                                                                <th>Diciembre</th>
-                                                            </tr>
+                                                                <td><strong>ROI bruto</strong></td>
+                                                                <td><strong>ROI con deduccion</strong></td>
+                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row">Transmision</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpTransmision{{ $i }}"></td>
-                                                                @endfor
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Energia</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpEnergia{{ $i }}"></td>
-                                                                @endfor
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Capacidad</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpCapacidad{{ $i }}"></td>
-                                                                @endfor
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Distribucion</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpDistribucion{{ $i }}"></td>
-                                                                @endfor
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">IVA</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpIVA{{ $i }}"></td>
-                                                                @endfor
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Total</th>
-                                                                @for($i=0; $i<12; $i++)
-                                                                    <td id="inpTotal{{ $i }}"></td>
-                                                                @endfor
+                                                                <td id="tdROIbruto"></td>
+                                                                <td id="tdROIdeduccion"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -590,7 +565,7 @@
                                 <td>
                                     <b>Potencia necesaria</b>
                                 </td>
-                                <td id="potenciaNecesaria"></td>
+                                f
                             </tr>
                             <tr>
                                 <td>
@@ -702,12 +677,6 @@
                                     <b>Potencia pico</b>
                                 </td>
                                 <td id="potenciaPicoInv"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Porcentaje sobre dimensionamiento</b>
-                                </td>
-                                <td id="porcentajeSobreDim"></td>
                             </tr>
                             <tr>
                                 <td>

@@ -26,8 +26,103 @@
 </style>
 <div class="container-fluid">
     <br>
+<!-- Filtros - EquiposFotovoltaicos -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div id="PanelAdminEquipFot" class="card">
+                <div class="card-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="ddlTipoEquipo">Tipo de equipo</label>
+                            <select id="ddlTipoEquipo" class="form-control form-control-sm">
+                                <option value="-1" selected>Elige una opcion</option>
+                                <option value="panel">Panel</option>
+                                <option value="inversor">Inversor</option>
+                                <option value="estructura">Estructura</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ddlMarcaEquipo">Marca</label>
+                            <select id="ddlMarcaEquipo" class="form-control form-control-sm">
+                                <option value="-1" selected>Elige una opcion</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Paneles -->
-    <h3 align="center">Paneles</h3>
+    <div class="row">
+        <div class="col">
+            <button id="addPanel" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-paneles">+</button>
+        </div>
+        <div class="col">
+            <h3 align="right">Paneles</h3>
+        </div>
+        <!-- Modal agregar/editar Panel -->
+        <div id="modalPanel" class="modal fade modal-paneles" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title col-11 text-center">Paneles</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body container">
+                        <form method="POST" action="{{ url('agregar-panel') }}">
+                            {{csrf_field()}}
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <label for="nombrePanel">Nombre</label>
+                                    <input id="nombrePanel" name="p_nombrematerial" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="marcaPanel">Marca</label>
+                                    <input id="marcaPanel" name="p_marca" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="potenciaPanel">Potencia</label>
+                                    <input id="potenciaPanel" name="p_potencia" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioPanel">Precio</label>
+                                    <input id="precioPanel" name="p_precio" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="garantiaPanel">Garantia</label>
+                                    <input id="garantiaPanel" name="p_garantia" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="origenPanel">Origen</label>
+                                    <input id="origenPanel" name="p_origen" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="iscPanel">ISC</label>
+                                    <input id="iscPanel" name="p_isc" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vocPanel">VOC</label>
+                                    <input id="vocPanel" name="p_voc" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vmpPanel">VMP</label>
+                                    <input id="vmpPanel" name="p_vmp" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imgPanel">Ruta imagen</label>
+                                    <input id="imgPanel" name="p_imgRuta" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr class="separador">
     <div class="table-wrapper-scroll-y my-scrollbar">
         <table class="table table-bordered table-striped table-sm tableScrollXY">
@@ -60,7 +155,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-sm btn-warning" onclick='editarPanel("{{ $panel->idPanel }}")' title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <button id="eliminarPanel" type="button" class="btn btn-sm btn-danger"  title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></button>
+                                <a href="{{ url('eliminar-panel',$panel->idPanel) }}" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
                             </div>
                         </td>
                     </tr>
@@ -74,7 +169,97 @@
     <br>
 
 <!-- Inversores -->
-    <h3 align="center">Inversores</h3>
+    <div class="row">
+        <div class="col">
+            <button id="addInversor" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-inversores">+</button>
+        </div>
+        <div class="col">
+            <h3 align="right">Inversores</h3>
+        </div>
+        <!-- Modal agregar Inversor -->
+        <div id="modalInversor" class="modal fade modal-inversores" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title col-11 text-center">Inversores</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ url('agregar-inversor') }}">
+                            {{csrf_field()}}
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <label for="tipoInversor">Tipo inversor</label>
+                                    <select id="tipoInversor" name="sctTipoInversor" class="form-control" onchange="selectTipoInversor();">
+                                        <option value="-1" selected>Elige una opcion</option>
+                                        <option value="MicroInversor">MicroInversor</option>
+                                        <option value="Inversor">Inversor</option>
+                                    </select>
+                                </div>
+                                <!-- NOTA: Este apartado de controles solo se mostrara cuando se agregue un *MICROINVERSOR* -->
+                                <div id="contenedorPaneleSoportados" class="form-group" style="display:none;">
+                                    <label for="noPanelesSoportados">Paneles Soportados</label>
+                                    <input id="noPanelesSoportados" name="i_paneleSoportados" class="form-control" type="number">
+                                </div>
+                                <!-- FIN NOTA -->
+                                <div class="form-group">
+                                    <label for="nombreInversor">Nombre</label>
+                                    <input id="nombreInversor" name="i_nombrematerial" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="marcaInversor">Marca</label>
+                                    <input id="marcaInversor" name="i_marca" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="potenciaInversor">Potencia</label>
+                                    <input id="potenciaInversor" name="i_potencia" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioInversor">Precio</label>
+                                    <input id="precioInversor" name="i_precio" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="garantiaInversor">Garantia</label>
+                                    <input id="garantiaInversor" name="i_garantia" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="origenInversor">Origen</label>
+                                    <input id="origenInversor" name="i_origen" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="iscInversor">ISC</label>
+                                    <input id="iscInversor" name="i_isc" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vminInversor">VMIN</label>
+                                    <input id="vminInversor" name="i_vmin" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="vmaxInversor">VMAX</label>
+                                    <input id="vmaxInversor" name="i_vmax" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pminInversor">PMIN</label>
+                                    <input id="pminInversor" name="i_pmin" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pmaxInversor">PMAX</label>
+                                    <input id="pmaxInversor" name="i_pmax" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imgInversor">Ruta imagen</label>
+                                    <input id="imgInversor" name="i_imgRuta" class="form-control">
+                                </div>
+                            </div>
+                            <button id="btnGuardarInversor" type="submit" class="btn btn-sm btn-primary pull-right" style="display: none;">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr class="separador">
     <div class="table-wrapper-scroll-y my-scrollbar">
         <table class="table table-bordered table-striped table-sm tableScrollXY">
@@ -111,7 +296,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <button id="btnEditarInversor" type="button" onclick='editarInversor("{{ $inversor->idInversor }}")' class="btn btn-sm btn-warning" title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <button id="btnEliminarInversor" type="button" class="btn btn-sm btn-danger" title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></button>
+                                <a href="{{ url('eliminar-inversor',$inversor->idInversor) }}" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
                             </div>
                         </td>
                     </tr>
@@ -125,7 +310,59 @@
     <br>
 
 <!-- Estructuras -->
-    <h3 align="center">Estructuras</h3>
+    <div class="row">
+        <div class="col">
+            <button id="addEstructura" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-estructuras">+</button>
+        </div>
+        <div class="col">
+            <h3 align="right">Estructuras</h3>
+        </div>
+        <!-- Modal agregar Estructura -->
+        <div id="modalEstructura" class="modal fade modal-estructuras" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title col-11 text-center">Estructuras</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ url('agregar-estructura') }}">
+                            {{csrf_field()}}
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <label for="nombreEstructura">Nombre</label>
+                                    <input id="nombreEstructura" name="p_nombrematerial" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="marcaEstructura">Marca</label>
+                                    <input id="marcaEstructura" name="p_marca" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="precioEstructura">Precio</label>
+                                    <input id="precioEstructura" name="p_precio" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="garantiaEstructura">Garantia</label>
+                                    <input id="garantiaEstructura" name="p_garantia" type="number" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="origenEstructura">Origen</label>
+                                    <input id="origenEstructura" name="p_origen" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="imgEstructura">Ruta imagen</label>
+                                    <input id="imgEstructura" name="p_imgRuta" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary pull-right">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr class="separador">
     <div class="table-wrapper-scroll-y my-scrollbar">
         <table class="table table-bordered table-striped table-sm tableScrollXY">
@@ -150,7 +387,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <button id="btnEditarEstructura" type="button" onclick='editarEstructura("{{ $estructura->idEstructura }}")' class="btn btn-sm btn-warning" title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <button id="btnEliminarEstructura" type="button" class="btn btn-sm btn-danger" title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></button>
+                                <a href="{{ url('eliminar-estructura',$estructura->idEstructura) }}" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
                             </div>
                         </td>
                     </tr>
@@ -161,117 +398,110 @@
         </table>
     </div>
 </div>
-<!-- Modal Edit [panel, inversor, estructura] -->
-<div class="modal fade" id="editModalEquipos" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body container">
-                <div class="row">
-                    <form class="form-inline">
-                        <div class="col">
-                            <div class="form-group mb-2">
-                                <label for="vNombreMaterialFot">Nombre</label>
-                                <input type="text" class="form-control" id="vNombreMaterialFot">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="vMarca">Marca</label>
-                                <input type="text" class="form-control" id="vMarca">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="fPotencia">Potencia</label>
-                                <input type="number" class="form-control" id="fPotencia">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="fPrecio">Precio</label>
-                                <input type="number" class="form-control" id="fPrecio">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="vGarantia">Garantia</label>
-                                <input type="number" class="form-control" id="vGarantia">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="vOrigen">Origen</label>
-                                <input type="text" class="form-control" id="vOrigen">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="fISC">ISC</label>
-                                <input type="number" class="form-control" id="fISC">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="fVOC">VOC</label>
-                                <input type="number" class="form-control" id="fVOC">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group mb-2">
-                                <label for="iVMIN">VMIN</label>
-                                <input type="number" class="form-control" id="iVMIN">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="iVMAX">VMAX</label>
-                                <input type="number" class="form-control" id="iVMAX">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="iPMAX">PMIN</label>
-                                <input type="number" class="form-control" id="iPMAX">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="iPMIN">PMAX</label>
-                                <input type="number" class="form-control" id="iPMIN">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="iVMP">VMP</label>
-                                <input type="number" class="form-control" id="iVMP">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="vTipoInversor">Tipo de Equipo</label>
-                                <select id="vTipoInversor">
-                                    <option value="-1">Inversor</option>
-                                    <option>Inversor</option>
-                                    <option>MicroInversor</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="iPanelSoportados">Paneles soportados</label>
-                                <input type="number" class="form-control" id="iPanelSoportados">
-                            </div>
-                        </div>
-                        <div id="imgEquipo" class="col">
-                            <div class="form-group">
-                                <label for="imgRuta">Ruta imagen logotipo</label>
-                                <input type="text" class="form-control" id="imgRuta">
-                                <img id="imgLogoEquipo" src="#"/>
-                            </div>
-                            <button type="button" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 @section('scripts')
 <script type="text/javascript">
     /*#section Panel*/
     function editarPanel(idPanel){
-        $('#editModalEquipos').modal('show');
+        new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: "/",
+                traditional: true,
+                data: idPanel,
+                succes: function(panelFiltrado){
+                    if(panelFiltrado.status === 200){
+
+                    }
+                    else{
+                        alert('Al parecer surgio un error al consultar info. del Panel seleccionado');
+                    }
+                }
+            });
+        });
+
+        //Abrir modal
+        $('#modalPanel').modal('show');
     }
     /*#endsection*/
     /*#section Inversor*/
-    // function editarInversor(){
-        
-    // }
+    function selectTipoInversor(){
+        let tipoInversorSeleccionado = $('#tipoInversor').val();
+
+        if(tipoInversorSeleccionado != "-1"){
+            if(tipoInversorSeleccionado === 'Inversor'){ ///Inversor central
+                $('#contenedorPaneleSoportados').css('display','none');
+            }
+            else{ ///Microinversor
+                $('#contenedorPaneleSoportados').css('display','');
+            }
+
+            $('#btnGuardarInversor').css('display','');
+        }
+        else{
+            $('#contenedorPaneleSoportados').css('display','none');
+            $('#btnGuardarInversor').css('display','none');
+        }
+    }
+
+    function editarInversor(idInversor){
+        new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: "/",
+                traditional: true,
+                data: idInversor,
+                succes: function(inversorFiltrado){
+                    if(inversorFiltrado.status === 200){
+
+                    }
+                    else{
+                        alert('Al parecer surgio un error al consultar info. del Inversor seleccionado');
+                    }
+                }
+            });
+        });
+
+
+
+        //Abrir modal
+        $('#modalInversor').modal('show');
+    }
     /*#endsection*/
     /*#section Estructura*/
-    // function editarEstructura(){
-        
-    // }
+    async function editarEstructura(idEstructura){
+        let estructuraFiltrada = await filtrarEstructura(idEstructura);
+
+        //Abrir modal
+        // $('#modalEstructura').modal('show');
+    }
+
+    function filtrarEstructura(idEstruct){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                type: "PUT",
+                url: "/editar-estructura",
+                data: { id: idEstruct },
+                dataType: 'json',
+                succes: function(estructuraFiltrada){
+                    console.log(estructuraFiltrada);
+
+                    if(estructuraFiltrada.status === 200){
+                        console.log(estructuraFiltrada);
+                    }
+                    else{
+                        alert('Al parecer surgio un error al consultar info. de la Estructura seleccionada');
+                        console.log(estructuraFiltrada.message);
+                    }
+                },
+                error: function(error){
+                    alert('Al parecer surgio un error al consultar info. de la Estructura seleccionada');
+                    console.log(error.message);
+                }
+            });
+        });
+    }
     /*#endsection*/
 </script>
 @endsection

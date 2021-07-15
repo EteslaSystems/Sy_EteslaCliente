@@ -91,6 +91,9 @@ Route::put('/editar-inversor/{idInversor}', 'InversoresController@update');
 
 //ESTRUCTURAS
 Route::get('/estructuras', 'EstructurasController@read');
+Route::post('/agregar-estructura', 'EstructurasController@create');
+Route::get('/eliminar-estructura/{idEstructura}', 'EstructurasController@destroy');
+Route::put('/editar-estructura', 'EstructurasController@searcH');
 /* --------------------------------------------- */
 
 /* --------------- Ingeniero --------------- */

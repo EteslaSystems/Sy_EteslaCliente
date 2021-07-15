@@ -99,15 +99,15 @@ function obtenerInversoresParaPanelSeleccionado(panelSeleccionado){ //Inversores
             type: 'POST',
             url: '/inversoresSelectos',
             data: {
-                "_token": $("meta[name='csrf-token']").attr('content'),
                 "objPanelSelect": panelSeleccionado
             },
             dataType: 'json',
             success: function(_inversores){
                 resolve(_inversores);
             },
-            error: function(){
-                reject('Hubo un error al intentar obtener los inversores para el panel seleccionado');
+            error: function(error){
+                alert('Hubo un error al intentar obtener los inversores para el panel seleccionado');
+                console.log(error);
             }
         });
     });
@@ -485,10 +485,11 @@ function mostrarPanelSeleccionado(){
             $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
             
             //Pintada de resultados - Paneles
-            $('#inpCantidadPaneles').val(_paneles[ddlPanelesValue].panel.noModulos);
-            $('#inpModeloPanel').val(_paneles[ddlPanelesValue].panel.nombre);
-            $('#inpMarcaPanel').val(_paneles[ddlPanelesValue].panel.marca);
-            $('#inpPotencia').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
+            $('#tdPanelCantidad').val(_paneles[ddlPanelesValue].panel.noModulos);
+            $('#tdPanelModelo').val(_paneles[ddlPanelesValue].panel.nombre);
+            $('#tdPanelEquipo').val(_paneles[ddlPanelesValue].panel.marca);
+            $('#tdPanelPotencia').val(_paneles[ddlPanelesValue].panel.fPotencia + 'W');
+            $('#tdPanelPotenciaReal').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
     
             //Equipo seleccionado - Panel seleccionado
             sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
@@ -770,25 +771,34 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
         generacionMensual = _viaticos[0].power.generacion.promedioGeneracionMensual;
     }
 
-    $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-    $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-    $('#inpNuevoConsumoMensual').val(nuevoConsumoBimestral/2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
-    $('#inpPorcentGeneracion').val(_viaticos[0].power.porcentajePotencia + '%');
+    //Ahorro energetico
+    $('#tdConsumoActualKwMes').val(promedioConsumoMensual + ' kWh');
+    $('#tdConsumoActualKwBim').val(promedioConsumoMensual *2 + ' kWh');
+    $('#tdGeneracionKwMes').val(generacionMensual + ' kWh');
+    $('#tdGeneracionKwBim').val(generacionMensual * 2 + ' kWh');
+    $('#tdNuevoConsumoMes').val(nuevoConsumoBimestral/2 + ' kw');
+    $('#tdNuevoConsumoBim').val(nuevoConsumoBimestral + ' kw');
+
+    //Ahorro en dinero
+    $('#tdConsumoActualDinMes').val('$'+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral) / 2 +'MXN');
+    $('#tdConsumoActualDinBim').val('$'+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral +'MXN');
+    $('#tdGeneracionDinMes').val('$'+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2 +'MXN');
+    $('#tdGeneracionDinBim').val('$'+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +'MXN');
+    $('#tdNuevoConsumoDinMes').val('$'+ ((_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2) +'MXN');
+    $('#tdNuevoConsumoDinBim').val('$'+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +'MXN');
+
+    $('#tdPorcentajePropuesta').val(_viaticos[0].power.porcentajePotencia + '%');
 
     //Se pintan los resultados del calculo de viaticos
-    $('#inpCostProyectoSIVA').val(_viaticos[0].totales.precio + '$');
-    $('#inpCostProyectoCIVA').val(_viaticos[0].totales.precioMasIVA + '$');
-    $('#inpCostPorWatt').val(_viaticos[0].totales.precio_watt + '$');
-    $('#inpCostProyectoMXN').val('$' +_viaticos[0].totales.precioMXNConIVA);
-    
-    //Se pintan los resultados del roi
-    $('#inpPagoAnteriorBimsProm').val('$'+_viaticos[0].roi.consumo.consumoBimestralPesosMXN);
-    $('#inpPagoNuevoBimsProm').val('$'+_viaticos[0].roi.generacion.nuevoPagoBimestral);
-    $('#inpAhorroBimestral').val('$'+_viaticos[0].roi.ahorro.ahorroBimestralEnPesosMXN);
-    $('#inpAhorroAnual').val('$'+_viaticos[0].roi.ahorro.ahorroAnualEnPesosMXN);
+    $('#tdSubtotalUSD').val('$' + _viaticos[0].totales.precio);
+    $('#tdTotalUSD').val('$' + _viaticos[0].totales.precioMasIVA);
+    $('#tdSubtotalMXN').val('$' + _viaticos[0].totales.precioMXNSinIVA);
+    $('#tdTotalMXN').val('$' + _viaticos[0].totales.precioMXNConIVA);
 
-    $('#inpROIBruto').val(+_viaticos[0].roi.roiEnAnios+'años');
-    $('#inpROIDeduccion').val(+_viaticos[0].roi.roiConDeduccion+'años');
+    $('#tdCostoWatt').val('$' + _viaticos[0].totales.precio_watt + 'USD');
+
+    $('#tdROIbruto').val(+_viaticos[0].roi.roiEnAnios+'años');
+    $('#tdROIdeduccion').val(+_viaticos[0].roi.roiConDeduccion+'años');
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#inpSliderPropuesta').val(_viaticos[0].power.porcentajePotencia);
@@ -989,10 +999,6 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* Pildoras_Modal */
     /*             --Combinacion Economica--             */
-    /* Se cargan imagenes de logos && equipos */
-    /* __logos__ */
-    $('#imgLogoPanel1').attr("src", "https://drive.google.com/uc?export=view&id="+combinaciones.combinacionEconomica[0].paneles.imgRuta);
-    $('#imgLogoInversor1').attr("src", "https://drive.google.com/uc?export=view&id="+combinaciones.combinacionEconomica[0].inversores.imgRuta);
     /* Se llenan labels_pills de data */
     $('#combinacionTitle1').text("Combinacion economica");
     
@@ -1032,9 +1038,6 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /*             --Combinacion Mediana--             */
     /* Se cargan imagenes de logos && equipos */
-    /* __logos__ */
-    $('#imgLogoPanel2').attr("src", "img/paneles/logo/"+combinaciones.combinacionMediana[0].paneles.marca.toString()+".png");
-    $('#imgLogoInversor2').attr("src", "img/inversores/logo/"+combinaciones.combinacionMediana[0].inversores.vMarca.toString()+".png");
     /* __equipos__ */
     $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
     $('#imgInversor2').attr("src", "img/inversores/equipo/"+combinaciones.combinacionMediana[0].inversores.vMarca.toString()+".jpg");
@@ -1077,9 +1080,6 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /*             --Combinacion Optima--             */
     /* Se cargan imagenes de logos &&  equipos */
-    /* __logos__ */
-    $('#imgLogoPanel3').attr("src", "img/paneles/logo/"+combinaciones.combinacionOptima[0].paneles.marca.toString()+".png");
-    $('#imgLogoInversor3').attr("src", "img/inversores/logo/"+combinaciones.combinacionOptima[0].inversores.vMarca.toString()+".png");
     /* __equipos__ */
     $('#imgPanel3').attr("src", "img/paneles/equipo/panel.png");
     $('#imgInversor3').attr("src", "img/inversores/equipo/"+combinaciones.combinacionOptima[0].inversores.vMarca.toString()+".jpg");

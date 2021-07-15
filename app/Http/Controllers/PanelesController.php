@@ -36,9 +36,9 @@ class PanelesController extends Controller
         ]);
 
         if($vPaneles->status != 200) {
-            return redirect('/paneles')->with('status-fail', $vPaneles->message);
+            return redirect('material-fotovoltaico')->with('status-fail', $vPaneles->message);
         } else {
-            return redirect('/paneles')->with('status-success', $vPaneles->message);
+            return redirect('material-fotovoltaico')->with('status-success', $vPaneles->message);
         }
     }
 
@@ -98,15 +98,16 @@ class PanelesController extends Controller
         $data["origen"] = $request->get('p_origen');
         $data["voc"] = $request->get('p_voc');
         $data["vmp"] = $request->get('p_vmp');
+        $data["imgRuta"] = $request->get('p_imgRuta');
 
         $vPaneles = $this->paneles->add([
             'json' => $data
         ]);
 
         if($vPaneles->status != 200){
-            return redirect('/paneles')->with('status-fail', $vPaneles->message);
+            return redirect('/material-fotovoltaico')->with('status-fail', $vPaneles->message);
         } else {
-            return redirect('/paneles')->with('status-success', $vPaneles->message);
+            return redirect('/material-fotovoltaico')->with('status-success', $vPaneles->message);
         }
     }
 
