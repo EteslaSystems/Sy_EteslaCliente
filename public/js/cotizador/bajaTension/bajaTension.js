@@ -302,7 +302,8 @@ function backToCotizacionBT(){
 }
 
 function limpiarCampos(){
-    $('.inpAnsw').text("").val("");
+    $('.inpAnsw').val("");
+    $('.tdAnsw').text("");
 }
 
 function activarDesactivarBotones(equipo,habilidad){
@@ -347,42 +348,40 @@ function limpiarResultados(limpiaResult){
     1 - inversores */
 
     if(limpiaResult == 0){
-        /*Limpiar panel_result*/
-        $('#inpPotencia').val('');
-        $('#inpCantidadPaneles').val('');
-        $('#inpModeloPanel').val('');
-        $('#inpConsumoMensual').val('');
+        /*Limpiar Resultados de -Paneles-*/
+        $('#tdPanelPotencia').text('');
+        $('#tdPanelCantidad').text('');
+        $('#tdPanelModelo').text('');
+
+        $('#tdCostoWatt').text('');
+        $('#tdPanelPotenciaReal').text('');
     }
     else{
-        /*Limpiar inversor_result*/
-        $('#inpCostTotalInversores').val('');
-        $('#potenciaInversor').val('');
-        $('#potenciaNominalInv').val('');
-        $('#precioInv').val('');
-        $('#potenciaMaximaInv').val('');
-        $('#cantidadInversores').val('');
-        $('#potenciaPicoInv').val('');
-        $('#porcentajeSobreDim').val('');
-        $('#costoTotalInversores').val('');
-        
-        /*Limpiar inputs de viaticos - totales*/
-        $('#inpCostoTotalViaticos').val('');
+        /*Limpiar Resultados de -Inversor-*/
+        $('#tdInversorPotencia').text('');
+        $('#tdInversorCantidad').text('');
 
-        $('#inpPrecio').val('');
-        $('#inpPrecioIVA').val('');
-        $('#inpPrecioMXN').val('');
+        /*Limpiar Resultados Energeticos ( $$/Watt ) */
+        ///Ahorro energetico
+        $('#tdConsumoActualKwMes').text('');
+        $('#tdConsumoActualKwBim').text('');
+        $('#tdGeneracionKwMes').text('');
+        $('#tdGeneracionKwBim').text('');
+        $('#tdNuevoConsumoMes').text('');
+        $('#tdNuevoConsumoBim').text('');
+        ///Ahorro economico
+        $('#tdConsumoActualDinMes').text('');
+        $('#tdConsumoActualDinBim').text('');
+        $('#tdGeneracionDinMes').text('');
+        $('#tdGeneracionDinBim').text('');
+        $('#tdNuevoConsumoDinMes').text('');
+        $('#tdNuevoConsumoDinBim').text('');
 
-        //Consumo Result
-        $('#inpConsumoMensual').val('');
-        $('#inpGeneracionMensual').val('');
-        $('#inpNuevoConsumoMensual').val('');
-        $('#inpPorcentGeneracion').val('');
-
-        //CostosTotales Result
-        $('#inpCostProyectoSIVA').val('');
-        $('#inpCostProyectoCIVA').val('');
-        $('#inpCostPorWatt').val('');
-        $('#inpCostProyectoMXN').val('');
+        /*Limpiar Resultados de Costos - Totales*/
+        $('#tdSubtotalUSD').text('');
+        $('#tdTotalUSD').text('');
+        $('#tdSubtotalMXN').text('');
+        $('#tdTotalMXN').text('');
     }
 }
 /*#endregion*/
@@ -485,11 +484,10 @@ function mostrarPanelSeleccionado(){
             $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
             
             //Pintada de resultados - Paneles
-            $('#tdPanelCantidad').val(_paneles[ddlPanelesValue].panel.noModulos);
-            $('#tdPanelModelo').val(_paneles[ddlPanelesValue].panel.nombre);
-            $('#tdPanelEquipo').val(_paneles[ddlPanelesValue].panel.marca);
-            $('#tdPanelPotencia').val(_paneles[ddlPanelesValue].panel.fPotencia + 'W');
-            $('#tdPanelPotenciaReal').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
+            $('#tdPanelCantidad').text(_paneles[ddlPanelesValue].panel.noModulos);
+            $('#tdPanelModelo').text(_paneles[ddlPanelesValue].panel.nombre);
+            $('#tdPanelPotencia').text(_paneles[ddlPanelesValue].panel.potencia + ' W');
+            $('#tdPanelPotenciaReal').text(_paneles[ddlPanelesValue].panel.potenciaReal + ' Kw');
     
             //Equipo seleccionado - Panel seleccionado
             sessionStorage.setItem('__ssPanelSeleccionado',JSON.stringify(_paneles[ddlPanelesValue].panel));
@@ -733,27 +731,18 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     objResp = JSON.parse(objResp);
     /*#endregion*/
 
-    //Se pintan resultados de inversores
-    $('#inpCostTotalInversores').val(_viaticos[0].inversores.precioTotal);
-
     //Inversores  - /Tabla_oculta\
     if(_viaticos[0].inversores.combinacion === "true" || _viaticos[0].inversores.combinacion === true){
-        $('#cantidadInversores').val('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
-        $('#inpCantidadInvers').val('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
+        $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
+        $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
     }
     else{
-        $('#cantidadInversores').val(_viaticos[0].inversores.numeroDeInversores);
-        $('#inpCantidadInvers').val(_viaticos[0].inversores.numeroDeInversores);
+        $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores);
+        $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores);
     }
 
-    $('#potenciaInversor').val(_viaticos[0].inversores.fPotencia);
-    $('#potenciaMaximaInv').val(_viaticos[0].inversores.iPMAX);
-    $('#potenciaNominalInv').val(_viaticos[0].inversores.potenciaNominal);
-    $('#potenciaPicoInv').val(_viaticos[0].inversores.potenciaPico);
-    $('#porcentajeSobreDim').val(_viaticos[0].inversores.porcentajeSobreDimens);
-    $('#precioInv').val(_viaticos[0].inversores.fPrecio); 
-    $('#costoTotalInversores').val(_viaticos[0].inversores.precioTotal);
-    $('#inpModeloInversor').val(_viaticos[0].inversores.vNombreMaterialFot);
+    $('#tdInversorPotencia').text(_viaticos[0].inversores.fPotencia + ' W');
+    $('#tdInversorModelo').text(_viaticos[0].inversores.vNombreMaterialFot);
 
     //Se pintan los resultados de -POWER-
     let generacionMensual = 0;
@@ -772,37 +761,38 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     }
 
     //Ahorro energetico
-    $('#tdConsumoActualKwMes').val(promedioConsumoMensual + ' kWh');
-    $('#tdConsumoActualKwBim').val(promedioConsumoMensual *2 + ' kWh');
-    $('#tdGeneracionKwMes').val(generacionMensual + ' kWh');
-    $('#tdGeneracionKwBim').val(generacionMensual * 2 + ' kWh');
-    $('#tdNuevoConsumoMes').val(nuevoConsumoBimestral/2 + ' kw');
-    $('#tdNuevoConsumoBim').val(nuevoConsumoBimestral + ' kw');
+    $('#tdConsumoActualKwMes').text(promedioConsumoMensual + ' kW');
+    $('#tdConsumoActualKwBim').text(promedioConsumoMensual *2 + ' kW');
+    $('#tdGeneracionKwMes').text(generacionMensual + ' kW');
+    $('#tdGeneracionKwBim').text(generacionMensual * 2 + ' kW');
+    $('#tdNuevoConsumoMes').text(nuevoConsumoBimestral/2 + ' kw');
+    $('#tdNuevoConsumoBim').text(nuevoConsumoBimestral + ' kw');
 
     //Ahorro en dinero
-    $('#tdConsumoActualDinMes').val('$'+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral) / 2 +'MXN');
-    $('#tdConsumoActualDinBim').val('$'+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral +'MXN');
-    $('#tdGeneracionDinMes').val('$'+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2 +'MXN');
-    $('#tdGeneracionDinBim').val('$'+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +'MXN');
-    $('#tdNuevoConsumoDinMes').val('$'+ ((_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2) +'MXN');
-    $('#tdNuevoConsumoDinBim').val('$'+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +'MXN');
+    $('#tdConsumoActualDinMes').text('$ '+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral) / 2 +' MXN');
+    $('#tdConsumoActualDinBim').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral +' MXN');
+    $('#tdGeneracionDinMes').text('$ '+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2 +' MXN');
+    $('#tdGeneracionDinBim').text('$ '+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +' MXN');
+    $('#tdNuevoConsumoDinMes').text('$ '+ ((_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2) +' MXN');
+    $('#tdNuevoConsumoDinBim').text('$ '+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +' MXN');
 
-    $('#tdPorcentajePropuesta').val(_viaticos[0].power.porcentajePotencia + '%');
+    $('#tdPorcentajePropuesta').text(_viaticos[0].power.porcentajePotencia + '%');
 
     //Se pintan los resultados del calculo de viaticos
-    $('#tdSubtotalUSD').val('$' + _viaticos[0].totales.precio);
-    $('#tdTotalUSD').val('$' + _viaticos[0].totales.precioMasIVA);
-    $('#tdSubtotalMXN').val('$' + _viaticos[0].totales.precioMXNSinIVA);
-    $('#tdTotalMXN').val('$' + _viaticos[0].totales.precioMXNConIVA);
+    $('#tdSubtotalUSD').text('$ ' + _viaticos[0].totales.precio);
+    $('#tdTotalUSD').text('$ ' + _viaticos[0].totales.precioMasIVA);
+    $('#tdSubtotalMXN').text('$ ' + _viaticos[0].totales.precioMXNSinIVA);
+    $('#tdTotalMXN').text('$ ' + _viaticos[0].totales.precioMXNConIVA);
 
-    $('#tdCostoWatt').val('$' + _viaticos[0].totales.precio_watt + 'USD');
+    $('#tdCostoWatt').text('$ ' + _viaticos[0].totales.precio_watt + ' USD');
 
-    $('#tdROIbruto').val(+_viaticos[0].roi.roiEnAnios+'años');
-    $('#tdROIdeduccion').val(+_viaticos[0].roi.roiConDeduccion+'años');
+    $('#tdROIbruto').text(+_viaticos[0].roi.roiEnAnios+' años');
+    $('#tdROIdeduccion').text(+_viaticos[0].roi.roiConDeduccion+' años');
     
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#inpSliderPropuesta').val(_viaticos[0].power.porcentajePotencia);
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
+    
     //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
     $('#inpSliderDescuento').val(_viaticos[0].descuento);
     $('#rangeValueDescuento').val(_viaticos[0].descuento);
@@ -1124,7 +1114,7 @@ function vaciarCombinacionesEnModal(combinaciones){
 /*#endregion*/
 
 function cambiarModalidad(control){
-    var valor = control.value;
+    let valor = control.value;
 
     $('#listConvinaciones').val(-1);
     $('#listPaneles').val(-1);
