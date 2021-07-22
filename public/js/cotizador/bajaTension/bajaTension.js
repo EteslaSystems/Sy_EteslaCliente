@@ -164,11 +164,9 @@ function calcularViaticosBT(objInversor){
     //Equipos seleccionados
     let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
     let ssinversor = '';
-    let consumptions = sessionStorage.getItem("_consumsFormated"); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
-    consumptions = JSON.parse(consumptions);
+    let consumptions = JSON.parse(sessionStorage.getItem("_consumsFormated")); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
     consumptions = consumptions.consumo;
-    let descuento = 0;
-    let aumento = 0;
+    let descuento = 0, aumento = 0;
 
     let bndPropuestaNueva = sessionStorage.getItem("bndPropuestaEditada"); //Bandra Propuesta Nueva
 
@@ -190,7 +188,7 @@ function calcularViaticosBT(objInversor){
 
                 let estructuraSeleccionada = $('#listEstructura').val();
             
-                objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento };
+                objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento, aumento };
                 _cotizarViaticos[0] = objEquiposSeleccionados;
             
                 return new Promise((resolve, reject) => {
@@ -213,9 +211,16 @@ function calcularViaticosBT(objInversor){
                         success: function(resultViaticos){
                             //Se limpia el storage
                             sessionStorage.removeItem('answPropuesta');
-                            
                             //Se llena el storage
                             sessionStorage.setItem('answPropuesta',JSON.stringify(resultViaticos.message));
+                            
+                            /*#region Graficos*/
+                            //Se selecciona de primera instancia 'AhorroEnergetico' en el <select>
+                            $('#ddlGraficoView option[value="ahorroEnergetico"]').attr("selected",true);
+                            //Se pinta el grafico
+                            pintarGrafico();
+                            /*#endregion*/
+                            
                             resolve(resultViaticos);
                         },
                         error: function(error){
@@ -486,7 +491,7 @@ function mostrarPanelSeleccionado(){
             //Pintada de resultados - Paneles
             $('#tdPanelCantidad').text(_paneles[ddlPanelesValue].panel.noModulos);
             $('#tdPanelModelo').text(_paneles[ddlPanelesValue].panel.nombre);
-            $('#tdPanelPotencia').text(_paneles[ddlPanelesValue].panel.potencia + ' W');
+            $('#tdPanelPotencia').text(_paneles[ddlPanelesValue].panel.potencia.toLocaleString('es-MX') + ' W');
             $('#tdPanelPotenciaReal').text(_paneles[ddlPanelesValue].panel.potenciaReal + ' Kw');
     
             //Equipo seleccionado - Panel seleccionado
@@ -731,7 +736,6 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     objResp = JSON.parse(objResp);
     /*#endregion*/
 
-    //Inversores  - /Tabla_oculta\
     if(_viaticos[0].inversores.combinacion === "true" || _viaticos[0].inversores.combinacion === true){
         $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
         $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
@@ -745,44 +749,50 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#tdInversorModelo').text(_viaticos[0].inversores.vNombreMaterialFot);
 
     //Se pintan los resultados de -POWER-
-    let generacionMensual = 0;
-    let nuevoConsumoBimestral = 0;
+    let generacionMensual = 0, generacionBimestral = 0;
+    let nuevoConsumoBimestral = 0, nuevoConsumoMensual = 0;
     let promedioConsumoMensual = objResp.consumo._promCons.consumoMensual.promedioConsumoMensual;
+    let promedioConsumoBimestral = 0;
 
     if(_viaticos[0].power.generacion.promedioDeGeneracion){
         generacionMensual = _viaticos[0].power.generacion.promedioDeGeneracion;
+        generacionBimestral = _viaticos[0].power.generacion.promeDGeneracionBimestral;
+        promedioConsumoBimestral = _viaticos[0].power._consumos._promCons.promConsumosBimestrales;
 
-        if(_viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral){
+        if(_viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral){ //Kw
             nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
+            nuevoConsumoMensual = _viaticos[0].power.nuevosConsumos.promedioNuevosConsumosMensuales;
         }
     }
     else{
         generacionMensual = _viaticos[0].power.generacion.promedioGeneracionMensual;
     }
 
+    //Tarifas (actual y nueva)
+    $('#tdTarifaActual').text(_viaticos[0].power.old_dac_o_nodac);
+    $('#tdTarifaNueva').text(_viaticos[0].power.new_dac_o_nodac);
+
     //Ahorro energetico
-    $('#tdConsumoActualKwMes').text(promedioConsumoMensual + ' kW');
-    $('#tdConsumoActualKwBim').text(promedioConsumoMensual *2 + ' kW');
-    $('#tdGeneracionKwMes').text(generacionMensual + ' kW');
-    $('#tdGeneracionKwBim').text(generacionMensual * 2 + ' kW');
-    $('#tdNuevoConsumoMes').text(nuevoConsumoBimestral/2 + ' kw');
-    $('#tdNuevoConsumoBim').text(nuevoConsumoBimestral + ' kw');
+    $('#tdConsumoActualKwMes').text(promedioConsumoMensual.toLocaleString('es-MX') + ' kW');
+    $('#tdConsumoActualKwBim').text(promedioConsumoBimestral.toLocaleString('es-MX') + ' kW');
+    $('#tdGeneracionKwMes').text(generacionMensual.toLocaleString('es-MX') + ' kW');
+    $('#tdGeneracionKwBim').text(generacionBimestral.toLocaleString('es-MX') + ' kW');
+    $('#tdNuevoConsumoMes').text(nuevoConsumoMensual.toLocaleString('es-MX') + ' kw');
+    $('#tdNuevoConsumoBim').text(nuevoConsumoBimestral.toLocaleString('es-MX') + ' kw');
 
     //Ahorro en dinero
-    $('#tdConsumoActualDinMes').text('$ '+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral) / 2 +' MXN');
-    $('#tdConsumoActualDinBim').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral +' MXN');
-    $('#tdGeneracionDinMes').text('$ '+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2 +' MXN');
-    $('#tdGeneracionDinBim').text('$ '+ (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +' MXN');
-    $('#tdNuevoConsumoDinMes').text('$ '+ ((_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) / 2) +' MXN');
-    $('#tdNuevoConsumoDinBim').text('$ '+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral - _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral) +' MXN');
+    $('#tdConsumoActualDinMes').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioMensual.toLocaleString('es-MX') +' MXN');
+    $('#tdConsumoActualDinBim').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral.toLocaleString('es-MX') +' MXN');
+    $('#tdNuevoConsumoDinMes').text('$ ' + _viaticos[0].power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') +' MXN');
+    $('#tdNuevoConsumoDinBim').text('$ ' + _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') +' MXN');
 
     $('#tdPorcentajePropuesta').text(_viaticos[0].power.porcentajePotencia + '%');
 
     //Se pintan los resultados del calculo de viaticos
-    $('#tdSubtotalUSD').text('$ ' + _viaticos[0].totales.precio);
-    $('#tdTotalUSD').text('$ ' + _viaticos[0].totales.precioMasIVA);
-    $('#tdSubtotalMXN').text('$ ' + _viaticos[0].totales.precioMXNSinIVA);
-    $('#tdTotalMXN').text('$ ' + _viaticos[0].totales.precioMXNConIVA);
+    $('#tdSubtotalUSD').text('$ ' + _viaticos[0].totales.precio.toLocaleString('es-MX'));
+    $('#tdTotalUSD').text('$ ' + _viaticos[0].totales.precioMasIVA.toLocaleString('es-MX'));
+    $('#tdSubtotalMXN').text('$ ' + _viaticos[0].totales.precioMXNSinIVA.toLocaleString('es-MX'));
+    $('#tdTotalMXN').text('$ ' + _viaticos[0].totales.precioMXNConIVA.toLocaleString('es-MX'));
 
     $('#tdCostoWatt').text('$ ' + _viaticos[0].totales.precio_watt + ' USD');
 

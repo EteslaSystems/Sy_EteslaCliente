@@ -194,38 +194,118 @@ function guardarPropuesta(){
 /*#endregion*/
 /*#region Graficos*/
 function pintarGrafico(){
-    var grafico = document.getElementById('crtGraficos').getContext('2d');
-    var configChart = {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: { y: { beginAtZero: true } }
-        }
-    };
+    let tipoCotizacion = /*data.tipoCotizacion;*/ 'bajaTension';
+    let grafico = document.getElementById('crtGraficos').getContext('2d');
+    let confingChart = {};
+    let dataToSetGraphic = { sinPaneles: null, conPaneles: null };
+    let data = {};
 
-    window.grafico = new Chart(grafico, configChart);
+    let optionSelected = $('#ddlGraficoView').val();
+
+    try{
+        if(optionSelected != '-1'){
+            //Llenado de la DATA para pintar las graficas [ 'energetico' || 'economico' ]
+            if(tipoCotizacion === 'bajaTension'){ //BajaTension
+                data = JSON.parse(sessionStorage.getItem('answPropuesta'));
+
+                if(optionSelected == 'ahorroEnergetico'){ //[DATA] Ahorro energetico
+                    dataToSetGraphic.sinPaneles = data[0].power._consumos._promCons._consumosBimestrales;
+                    dataToSetGraphic.conPaneles = data[0].power.nuevosConsumos._consumosNuevosBimestrales;
+                }
+                else{ //[DATA] Ahorro economico
+                    dataToSetGraphic.sinPaneles = data[0].power.objConsumoEnPesos._pagosBimestrales;
+                    dataToSetGraphic.conPaneles = data[0].power.objGeneracionEnpesos._pagosBimestrales;
+                }
+            }
+            // else{ //MediaTension
+
+            // }
+
+            //Configuracion - Graficos
+            switch(tipoCotizacion)
+            {
+                case 'bajaTension':
+                    confingChart = {
+                        type: 'bar',
+                        data: {
+                            labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
+                            datasets: [
+                                {
+                                    label: 'Consumo actual',
+                                    data: null,
+                                    borderColor: 'rgb(235, 68, 65)',
+                                    backgroundColor: 'rgb(235, 68, 65, 0.51)',
+                                },
+                                {
+                                    label: 'Nuevo consumo',
+                                    data: null,
+                                    borderColor: 'rgb(109, 198, 20)',
+                                    backgroundColor: 'rgba(109, 198, 20, 0.21)',
+                                }
+                            ]
+                        },
+                        options: {
+                            title:{
+                                display: true,
+                                position: 'top',
+                                text: null
+                            },
+                            scales: {
+                                yAxes: []
+                            } 
+                        }
+                    };
+
+                    if(optionSelected == 'ahorroEnergetico'){ //[DATA] Ahorro energetico
+                        //Title graphic
+                        confingChart.options.title.text = 'Ahorro energetico';
+
+                        //Formateado de data - Ahorro energetico
+                        confingChart.data.datasets[0].data = dataToSetGraphic.sinPaneles;
+                        confingChart.data.datasets[1].data = dataToSetGraphic.conPaneles;
+
+                        //Formateado -Eje Y- 'kw'
+                        confingChart.options.scales.yAxes[0] = {
+                            ticks: {
+                                //Incluye -'kw'- a los valores que se muestran en el eje Y
+                                callback: function(value, index, values) {
+                                    return value.toLocaleString('es-MX') + ' kw';
+                                }
+                            }
+                        };
+                    }
+                    else{ //[DATA] Ahorro economico
+                        //Title graphic
+                        confingChart.options.title.text = 'Ahorro economico';
+
+                        //Formateado de data - Ahorro energetico
+                        confingChart.data.datasets[0].data = dataToSetGraphic.sinPaneles;
+                        confingChart.data.datasets[1].data = dataToSetGraphic.conPaneles;
+
+                        //Formateado de -Eje Y- '$'
+                        confingChart.options.scales.yAxes[0] = {
+                            ticks: {
+                                //Incluye -'kw'- a los valores que se muestran en el eje Y
+                                callback: function(value, index, values) {
+                                    return '$' + value.toLocaleString('es-MX');
+                                }
+                            }
+                        };
+                    }
+                break;
+                case 'mediaTension':
+                    confingChart = {};
+                break;
+                default:
+                    -1;
+                break;
+            }
+
+            window.grafico = new Chart(grafico, confingChart);
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
 }
 /*#endregion*/

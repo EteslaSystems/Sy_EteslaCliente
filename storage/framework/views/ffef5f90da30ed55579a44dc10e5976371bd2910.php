@@ -162,9 +162,6 @@
                             <div class="col-8 d-flex justify-content-center">
                                 <button id="btnDivCombinaciones" class="btn btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" title="comparativa combinaciones" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
                             </div>
-                            <div class="col-xs">
-                                <button id="btnDetails" type="button" class="btn btn-xs pull-rigth" style="padding: 4px;" onclick="buttonDetails(this)" title="detalles de la propuesta"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
-                            </div>
                         </div>
                         <!-- #ModalsZone -->
                         <!-- Modal_AjustePropuesta -->
@@ -324,7 +321,6 @@
                                     <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                                         <a id="cotizacion-tab" class="nav-item nav-link active"  data-toggle="tab" href="#cotizacion" role="tab" aria-controls="cotizacion" aria-selected="true">Cotizacion</a>
                                         <a id="ahorro-tab" class="nav-item nav-link" data-toggle="tab" href="#ahorro" role="tab" aria-controls="ahorro" aria-selected="false">Ahorro</a>
-                                        <a id="roi-tab" class="nav-item nav-link" data-toggle="tab" href="#roi" role="tab" aria-controls="roi" aria-selected="false">ROI</a>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="myTabContent">
@@ -405,12 +401,12 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;">USD</td>
+                                                                        <td class="text-center" style="background-color:#03B1FF; color:white; font-weight: bolder;">USD</td>
                                                                         <td id="tdSubtotalUSD" class="text-center tdAnsw"></td>
                                                                         <td id="tdTotalUSD" class="text-center tdAnsw"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-center" style="background-color:#29D337; color:white;">MXN</td>
+                                                                        <td class="text-center" style="background-color:#29D337; color:white; font-weight: bolder;">MXN</td>
                                                                         <td id="tdSubtotalMXN" class="text-center tdAnsw"></td>
                                                                         <td id="tdTotalMXN" class="text-center tdAnsw"></td>
                                                                     </tr>
@@ -426,18 +422,55 @@
                                         <!-- Ahorro -->
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col">
-                                                    <div class="from-row">
-                                                        <select id="graficosDisponibles" class="form-control" onchange="pintarGrafico()">
-                                                            <option value="-1" selected>Escoger grafico</option>
-                                                            <option value="lineas">Lineas</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="col-5">
                                                     <div class="form-row">
+                                                        <select id="ddlGraficoView" class="custom-select custom-select-sm" onchange="pintarGrafico()">
+                                                            <option value="-1">Escoge una opcion</option>
+                                                            <option value="ahorroEnergetico">Ahorro energetico</option>
+                                                            <option value="ahorroEconomico">Ahorro economico</option>
+                                                        </select>
                                                         <canvas id="crtGraficos" width="150px" height="100px"></canvas>
+                                                        <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados bimestralmente</p>
                                                     </div>
                                                 </div>
                                                 <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:7px;">
+                                                                <thead>
+                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Tarifas</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><strong>Tarifa actual</strong></td>
+                                                                        <td id="tdTarifaActual"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Tarifa nueva</strong></td>
+                                                                        <td id="tdTarifaNueva"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col" style="margin-top:6px;">
+                                                            <table id="costos" class="table table-sm table-striped table-bordered">
+                                                                <tbody> 
+                                                                    <tr>
+                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>% generacion</strong></td>
+                                                                        <td id="tdPorcentajePropuesta" class="text-center tdAnsw"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>ROI bruto</strong></td>
+                                                                        <td id="tdROIbruto" class="tdAnsw"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>ROI con deduccion</strong></td>
+                                                                        <td id="tdROIdeduccion"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col">
                                                             <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:6px;">
@@ -477,7 +510,6 @@
                                                                     <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Ahorro economico</th>
                                                                     <tr>
                                                                         <td colspan="2"><strong>Consumo actual</strong></td>
-                                                                        <td colspan="2"><strong>Generacion</strong></td>
                                                                         <td colspan="2"><strong>Nuevo consumo</strong></td>
                                                                     </tr>
                                                                 </thead>
@@ -486,15 +518,11 @@
                                                                         <td class="tdMes"><strong>Mes($)</strong></td>
                                                                         <td id="tdConsumoActualDinMes" class="tdAnsw"></td>
                                                                         <td class="tdMes"><strong>Mes($)</strong></td>
-                                                                        <td id="tdGeneracionDinMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes"><strong>Mes($)</strong></td>
                                                                         <td id="tdNuevoConsumoDinMes" class="tdAnsw"></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="tdBim"><strong>Bim($)</strong></td>
                                                                         <td id="tdConsumoActualDinBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim"><strong>Bim($)</strong></td>
-                                                                        <td id="tdGeneracionDinBim" class="tdAnsw"></td>
                                                                         <td class="tdBim"><strong>Bim($)</strong></td>
                                                                         <td id="tdNuevoConsumoDinBim" class="tdAnsw"></td>
                                                                     </tr>
@@ -502,44 +530,6 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <table id="costos" class="table table-sm table-striped table-bordered">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;">Porcentaje de generacion</td>
-                                                                        <td id="tdPorcentajePropuesta" class="text-center tdAnsw"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="roi" role="tabpanel" aria-labelledby="roi-tab">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <!-- Visualizacion - Tabla(s) financiamiento -->
-                                                </div>
-                                                <div class="col">
-                                                    <table id="ahorroKw" class="table table-sm table-bordered">
-                                                        <thead>
-                                                            <th scope="col" colspan="8" class="text-center" style="background-color:black; color:white;">Retorno de Inversionr</th>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="tdMes"><strong>ROI bruto</strong></td>
-                                                                <td id="tdROIbruto" class="tdAnsw"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="tdBim"><strong>ROI con deduccion</strong></td>
-                                                                <td id="tdROIdeduccion" class="tdAnsw"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

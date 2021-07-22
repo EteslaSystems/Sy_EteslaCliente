@@ -52,7 +52,6 @@
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
 <script src="<?php echo e(asset('js/index.js')); ?>"></script> <!-- Este archivo es necesario para el CP y buscador -->
