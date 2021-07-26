@@ -445,9 +445,9 @@
                                                                         <td><strong>Tarifa actual</strong></td>
                                                                         <td id="tdTarifaActual"></td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr id="trTarifaNueva">
                                                                         <td><strong>Tarifa nueva</strong></td>
-                                                                        <td id="tdTarifaNueva"></td>
+                                                                        <td></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

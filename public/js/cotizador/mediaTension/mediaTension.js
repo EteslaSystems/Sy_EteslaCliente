@@ -32,6 +32,12 @@ async function calcularPropuestaMT(dataEditada){
                 let cotizacionPaneles = await sendMediaTensionCotizacion(dataSent);
                 vaciarRespuestaPaneles(cotizacionPaneles);
 
+                //Se obtiene estructuras
+                let estructuras = await getListEstructuras();
+                llenarDropDownListEstructuras(estructuras.message);
+                //El sistema selecciona una estructura
+                seleccionaUnaEstructura('Everest');
+
                 //Experimental
                 mostrarPanelSelected();
             }
@@ -74,25 +80,28 @@ function getVistaResultados(){
 function calcularViaticosMT(obInversor){
     let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let panel = sessionStorage.getItem("__ssPanelSeleccionadoMT");
-    let inversor = '';
+    let inversor = {};
     let direccion = $('#municipio').val();
     let periodos = sessionStorage.getItem("_consumsFormated"); ///Periodos recolectados (sin calcular)
     periodos = JSON.parse(periodos);
     
-    _agregado = _agregado; ///Arreglo de objAgregados *
+    _agregado = _agregado; ///Arreglo de objAgregados*
     _agregado = _agregado == null || _agregado.length == 0 ? null : _agregado;///Comprobacion de que no venga vacio
 
-    if(obInversor == null){ //El inversor es seleccionado por el sistema
-        inversor = sessionStorage.getItem("__ssInversorSeleccionadoMT");
+    if(obInversor == null || typeof tipoCotizacion === 'undefined'){ //El inversor es seleccionado por el sistema
+        inversor = JSON.parse(sessionStorage.getItem("__ssInversorSeleccionado"));
     }
     else{ //El inversor es seleccionado por el usuario
         inversor = obInversor;
     }
 
-    let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos };
+    let estructuraSeleccionada = $('#listEstructura').val();
+    estructuraSeleccionada = estructuraSeleccionada != '-1' || estructuraSeleccionada != -1 ? estructuraSeleccionada : null;
 
+    let objPropuesta = { panel: panel, inversor: inversor, periodos: periodos, estructura: estructuraSeleccionada };
+
+    //Se obtiene tarifa_mediaTension (GDMTO/GDMTH)
     let tarifaMT = sessionStorage.getItem("tarifaMT");
-    sessionStorage.removeItem("propuestaMT");
 
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -109,12 +118,15 @@ function calcularViaticosMT(obInversor){
             dataType: 'json',
             success: function(resultViaticos){
                 if(resultViaticos.status === "200" || resultViaticos.status === 200){
+                    //Se guarda la propuesta calculada (c/Viaticos)
+                    sessionStorage.removeItem("propuestaMT");
                     sessionStorage.setItem('propuestaMT',JSON.stringify(resultViaticos.message));
+
                     resolve(resultViaticos);
                 }
                 else{
                     console.log('Error, calcular viaticos: '+resultViaticos.message);
-                    alert('Error, calcular viaticos: '+resultViaticos.message);
+                    alert('Error, calcular viaticos: \nChecar "console.log() del navegador"');
                 }
             },
             error: function(error){
@@ -328,8 +340,6 @@ function mostrarPanelSelected(){
             _paneles = JSON.parse(_paneles);
             /*#endregion*/
     
-            _potenciaReal = _paneles[ddlPanelesValue].panel.potenciaReal;
-    
             $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.marca);
     
             //Consumos
@@ -337,10 +347,10 @@ function mostrarPanelSelected(){
             $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh('+promedioConsumoMensual * 2+'/bim)');
             
             //Pintada de resultados - Paneles
-            $('#inpCantidadPaneles').val(_paneles[ddlPanelesValue].panel.noModulos);
-            $('#inpModeloPanel').val(_paneles[ddlPanelesValue].panel.nombre);
-            $('#inpMarcaPanel').val(_paneles[ddlPanelesValue].panel.marca);
-            $('#inpPotencia').val(_paneles[ddlPanelesValue].panel.potenciaReal + 'Kw');
+            $('#tdPanelCantidad').text(_paneles[ddlPanelesValue].panel.noModulos);
+            $('#tdPanelModelo').text(_paneles[ddlPanelesValue].panel.nombre);
+            $('#tdPanelPotencia').text(_paneles[ddlPanelesValue].panel.potencia.toLocaleString('es-MX') + ' W');
+            $('#tdPanelPotenciaReal').text(_paneles[ddlPanelesValue].panel.potenciaReal + ' Kw');
     
             //Equipo seleccionado - Panel seleccionado
             sessionStorage.removeItem('__ssPanelSeleccionadoMT');
@@ -349,6 +359,9 @@ function mostrarPanelSelected(){
             //Se carga dropDownList -Inversores-
             let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[ddlPanelesValue]);
             _inversores = _inversores.message;
+
+            //SessionStorage
+            sessionStorage.removeItem("_respInversores");
             sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
             
             ///EXPERIMENTAL
@@ -358,15 +371,19 @@ function mostrarPanelSelected(){
             vaciarRespuestaInversores(_inversores); //:void() = Se pintan las marcas de los inversores
             let objInversorCB = getInversorCostoBeneficio(0); //Se obtiene la mejor opcion 'Costo-Beneficio'
             
+            //Guardar inversor
+            sessionStorage.removeItem('__ssInversorSeleccionado')
+            sessionStorage.setItem('__ssInversorSeleccionado', JSON.stringify(objInversorCB));
+
             //Se selecciona MARCA en el dropDownListInversoresMarca
             $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
             
-            vaciarModelosInversores(); //:void() = Se pitan los modelos de la marca seleccionada
+            vaciarModelosInversores(); //:void()
 
             //Se selecciona MODELO en el dropDownListInversoresModelos
             $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
             let _viaticos = await calcularViaticosMT(objInversorCB);
-            mostrarRespuestaViaticos(_viaticos); //:void() =
+            mostrarRespuestaViaticos(_viaticos); //:void()
             ///EXPERIMENTAL
         }
     });
@@ -378,37 +395,54 @@ function mostrarInversorSelected(){
     ddlInversores.on("change", async function(){
         let ddlInversoresValue = ddlInversores.val(); //Marca del Inversor
 
+        //Limpieza de dropDownList y campos -Inversores-
         limpiarResultados(1);
         limpiarDropDownListModelosInversores();
     
+        /*Cuando el dropDownList de inversores *NO TIENE* un equipo seleccionado*/
         if(ddlInversoresValue === '-1' || ddlInversoresValue === -1){
-            activarDesactivarBotones(1,0); //Se desactivan controles
+            //Se desactivan controles
+            activarDesactivarBotones(1,0);
         }
         else{
-            activarDesactivarBotones(1,1); //Se activan controles
+            /*Cuando el dropDownList de inversores *TIENE* un equipo seleccionado*/
+
+            //Se activan controles
+            activarDesactivarBotones(1,1); 
     
+            //Se obtiene el mejor inversor -CostoBeneficio-
             let objInversorCB = getInversorCostoBeneficio(1);
+
+            //Se pinta en los dropDownList -el inversor seleccionado *CostoBeneficio*-
             $('#listInversores option[value="'+objInversorCB.vMarca+'"]').attr("selected", true);
-            vaciarModelosInversores();
+            vaciarModelosInversores(); //:void()
             $('#listModelosInversor option[value="'+objInversorCB.vNombreMaterialFot+'"]').attr("selected", true);
+
+            //Se calculan viaticos del equipo 
             let _viaticos = await calcularViaticosMT(objInversorCB);
-            mostrarRespuestaViaticos(_viaticos); //:void() =
+            mostrarRespuestaViaticos(_viaticos); //:void()
         }
     });
 }
 
 function mostrarInversorModeloSelected(){
-    let ddlModelosInversor = $('#listModelosInversor');
+    /* Muestra todos los modelos relacionados dependiendo de la -MARCA- pintada en el primer <select>*/
+
+    let ddlModelosInversor = $('#listModelosInversor'); //ModelosInversores
     
     ddlModelosInversor.on('change', async function(){
-        let valueListModlsInv = ddlModelosInversor.val(); //Nombre - Modelo de inversor
+        let valueListModlsInv = ddlModelosInversor.val(); //obtener - Modelo de inversor
         let _inversors = JSON.parse(sessionStorage.getItem("_respInversores"));
         
         limpiarResultados(1);
 
         if(valueListModlsInv != '-1' || valueListModlsInv != -1){
-            let inversorFiltrado = searchInversor(_inversors,valueListModlsInv);
-            let _viatico = await calcularViaticosMT(inversorFiltrado);
+            let inversorFiltradoh = searchInversor(_inversors,valueListModlsInv);
+
+            sessionStorage.removeItem('__ssInversorSeleccionado');
+            sessionStorage.setItem('__ssInversorSeleccionado', JSON.stringify(inversorFiltradoh));
+
+            let _viatico = await calcularViaticosMT(inversorFiltradoh);
             mostrarRespuestaViaticos(_viatico);
         }
     });
@@ -471,7 +505,6 @@ function validarClienteCargado(){
 function validarPeriodosVacios(){
     if(_periodos.length === 0){
         alert('Periodos insuficientes para calcular');
-        return false;
     }
     else{
         return true;
