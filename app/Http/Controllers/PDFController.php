@@ -44,7 +44,7 @@ class PDFController extends Controller
     public function visualizarPDF()
     {
         // $pdf = PDF::loadview('PDFTemplates.exampleDeleteCopia')
-        $pdf = PDF::loadview('PDFTemplates.individualPDF')
+        $pdf = PDF::loadview('PDFTemplates.bajaTension')
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 

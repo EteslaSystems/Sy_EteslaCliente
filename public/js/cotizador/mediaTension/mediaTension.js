@@ -154,9 +154,8 @@ function sendMediaTensionCotizacion(cotiData){
                 else{
                     respuesta = respuesta.message; //Array paneles
 
-                    //Formatear sessionStorage
+                    //Se guarda la respuesta de los *PERIODOS-PROCESADOS*
                     sessionStorage.removeItem('_consumsFormated');
-                    //Se guarda la respuesta de los periodos-procesados
                     sessionStorage.setItem('_consumsFormated',JSON.stringify(respuesta[0]));
 
                     //Formatear sessionStorage

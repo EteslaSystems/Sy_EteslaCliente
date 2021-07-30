@@ -194,13 +194,18 @@ function guardarPropuesta(){
 /*#endregion*/
 /*#region Graficos*/
 function pintarGrafico(){
-    let tipoCotizacion = /*data.tipoCotizacion;*/ 'bajaTension';
+    let tipoCotizacion = null;
     let grafico = document.getElementById('crtGraficos').getContext('2d');
     let confingChart = {};
     let dataToSetGraphic = { sinPaneles: null, conPaneles: null };
     let data = {};
 
     let optionSelected = $('#ddlGraficoView').val();
+
+    //Formating... * BajaTension || MediaTension *
+    tipoCotizacion = JSON.parse(sessionStorage.getItem("ssViaticos")); //get - [data]
+    // tipoCotizacion = tipoCotizacion.tipoCotizacion;
+    tipoCotizacion = 'bajaTension';
 
     try{
         if(optionSelected != '-1'){

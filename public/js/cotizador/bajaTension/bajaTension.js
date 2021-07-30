@@ -840,8 +840,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     
     $('#tdCostoWatt').text('$ ' + _viaticos[0].totales.precio_watt + ' USD');
     
-    $('#tdROIbruto').text(+_viaticos[0].roi.roiEnAnios+' años');
-    $('#tdROIdeduccion').text(+_viaticos[0].roi.roiConDeduccion+' años');
+    $('#tdROIbruto').text(+_viaticos[0].roi.roiEnAnios+' año(s)');
+    $('#tdROIdeduccion').text(+_viaticos[0].roi.roiConDeduccion+' año(s)');
         
     ///Porcentaje de propuesta que aparece en el panelAjustePropuesta
     $('#inpSliderPropuesta').val(_viaticos[0].power.porcentajePotencia);

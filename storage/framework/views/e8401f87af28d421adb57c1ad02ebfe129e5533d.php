@@ -482,10 +482,8 @@
         return new Promise((resolve, reject) => {
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                type: "PUT",
-                url: "/editar-estructura",
-                data: { id: idEstruct },
-                dataType: 'json',
+                type: "GET",
+                url: `/editar-estructura/${idEstruct}`,
                 succes: function(estructuraFiltrada){
                     console.log(estructuraFiltrada);
 

@@ -52,7 +52,8 @@ class PanelesController extends Controller
 
         if($vPaneles->status != 200) {
             return redirect('/paneles')->with('status-fail', $vPaneles->message);
-        } else {
+        } 
+        else {
             $panel = $vPaneles->message;
 
             return view('roles/admin/forms/form-edit-panel', compact('panel'));
