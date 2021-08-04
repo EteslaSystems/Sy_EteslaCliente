@@ -277,7 +277,7 @@
                     <img style="margin-top: -50px; margin-left: 10px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAFA0lEQVRIibWXYWydZRXHf//nvS3TbVTZkBlmGVOGuN3ervfWudAp03XqBwOIhCwRNQHHByTpLQRinKaa+EEzvAszRoEEjSaAyYLzk6EduqAI6723652g3RJYx2A62Wwzh8h6n78f2nt7i8t604zn0/uec/7//3POe54854UFro7hvkKmlN+9ULwWAsoWH2g7x9uvAotsPnqou/DyuyLcMdw/gNxp81irzg6eY/H3wJ/FOo6Il51pu/H0pZMbifRJvDSaK3x7Ps5Uk9s7DdwoccM5FrcBbznqc3JyjKR64PTSyTOYBNFiNNQMZXPCLeEJzlULUfGTKLSGKjcrcB9UEewGPQtgPBSS+HgzlKGZoEpm50nByyEmnUnUtxBfFQwjF43vsv2NKK4CThxcv2uiGc55M84M9683/q7hSmC18aeS0LJupOuHrwNkDuYf9RR/IfqPiPd1DOf3yHxn9OOFFxeccbrU91PLZcTikFQzkhcB+2qiAKOdhdeAoSCuUFVdiMsdOJQu9j+0YGHHZI/Ec8BGV5NtwJvAFeeJXAG8SeLbgRzwAvZvL8Q95zilS/dm5bgHuOpCoAWso+BbKrld5ZphzjcO9o4IL6Bwy0WVdbwftAP4Ys1Uz/iG3w+kTi2dPIW1TcFRkZsvimbgKUcF5MeXnWlb9ofNA1PQ8I0nlkxsEFyi1rDfJm+xtg6G5RbbLdXjLTZZbJp9V7DYbljeELMWuFetYb/gkoklExtqvnqpq9JWwXPXjo2/NbZ65Ubkm0Zzu54BSA/3fV5ocyX3o6/X4jPD+Z8BjHYX7qrZOor5LxF4ZDRb+B1AR7n/M0Tvvez0kv+eWjr55xjYAvxpTsYyvaDBv324vRN4T3XR2wdqvkBoFxxrorLHDO31tyQ8D7S+0TbZKTGI1TvLCWx4/p5LEbkYPCjHHqD84tqf/Hu21G63PD6vrBkXrgtXMjvPAiPB6gnVOAhsyBYfaIOZ5koX+24SerSSbftAR2nySeDTwCsNlO0zmzzaYKsducYNrQIic6tzNfBMJdt2W0dp8qTNHYe6C3tT0+rqNexDA5Fivgf4pcVLNaTs+4XKUQzN2vgygMWv6uUzW4y7LD3cEPcx4DY0EF3M7wuoF9grgEwxf8T4ByGJ+2M1GaMlWVHJ7DxZA3cU869gvlnpLjxRs523uYb7tiF9v5IrrK7Z1pfvubwaU/+oijUBbZZ9XyVXuDZ0jvStMnwkJAxVY9IDHG4UvfXXtybAldGat7nCdIlXzmAAGOna/U/gSEA9KelpYE3nSN+qUI3aChw+uH7XUVBP7W6trbH2FR8EWpLW+ZsrVqvjQMvhNStXvMP1rMz1I10PjgNHYpUtKZleWYMAsnsQ5XQpv70OsVcBZoovpEv5OGvmOoDGWJlgsKd8d7qUb2zExdid0zF6OoreFLA54jswUpk3bK4RXDOLEUDZcKf8/1nK1IVn3GXQ1nfGGv4OEBWHhB5JAcsI4TjCoxSuv1ApL8pS8iqOy1OGE3K8M13KZ991UQB7neFESkG3O3qHTHeT0CzwV6aHAoD3AtcBpeaEOWv4SlNz9boD/R9Kgu/GvH/6lgq5Q9kHS1AfHooyDyP+5ampH1c+sfv4fJxNTZkh+Clmr8CH4qL/jNV8M8/T85XYRCr1m2Y4m/uTKOYj1tccdMHJUdFrkX9eyRXmTai5gR5eR/6FfJ7zNEcZgNeaIfwf3/sPFq92d68AAAAASUVORK5CYII=">
                 </td>
                 <td>
-                    <div style="line-height: 5%;">
+                    <div style="line-height: 5%; margin-top: -75px;">
                         <p class="text-inferior-pag1">TODO INCLUIDO:</p>
                         <p>*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
                     </div>
@@ -317,10 +317,10 @@
             </tr>
             <tr>
                 <td>
-                    <img style="margin-top: -77px; margin-left: 19px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAADJUlEQVRIibWVXWibVRjHf/83aaoB91UQEcVdiBZCk5mmm3i1shuHIm6s283YHMOBiYOkZSDswnozLySJm1sVZKA3Qp0iwi50XngxGGZpWpsuXih2HfgxwY91TLFpcx4vNDMVWd43bZ+78z/n/f/OeZ7nnFd0GPGJ3Bkg/T9TdTmS01uLtTt9H+4EGruU2wQ8Z9IR0GRTF41dmJ6f/339t+08OgKHIxwy7MeZ5PqzaNQ19b7K8JuSG5sbHP2znYcXmGrI4IjwxlqhW8rZ7TKLu0V7y49NYHDfRPZJ4MGlur3TqjtpRMa7Vx4/+ZMfn8CplpQG3qs9Ufy1qSVKw48YttMLeXG/PoHAj02OPNRwbqfJ29aqu7AbxvTJVDL/1ZqAnXMvYFyeSeUrTS12KbdJxn5kzwTx8l3jh7852m1wSJ7GWvVwxDLAbDX5+udrAo7e6NoHePM3132wfDNKy+w1hK0JGFka7O3WOxq9Ed4P5paiG8aDQMFnjfsqI/2YS4W80L5lexFHDd0M/zH/RqKca5ngw+lU8cKKwWBp4PxUMn9tmYrGZbb59ljcDzxt4ot2jmq3YMtUdoNr6Htn3rNXBvKf3WltvJL9GNM91f7ijnY1b3ti19BBoNuTG0qUc3uauklz1VTh1dvQ8vABzHaYEffTaO2bS0zKOCv718wgCXawOY5dPnYfsiJwfGagONvWEx8nrvYXLwIXW7XERPaCiU+b45CWzgBfPzr73emqH6of8H+jt5TpMTTYkI4BJCq5vWY8FfK85Lm95xp+fQL/nbrC3buBq7VkYbq3lOkx45Shl4O80x2BPXNDyN4HiIQip4AfItwqBPVpe51ao7eU6YmEItcbnlJdzj3g0EcybZseKEwFBQeqcSTUtQvs2l0uMrdI/TymE51AIWCqDQ1hGl+kngd+a0TXnegEGgjcW8r0CAYNfgYOeM4drsVG62sO/jvN/CLxoqDw5daT5U6hgcDg7QHuBRajdV5ZCRR8dnVf9aWNqi9cB8KI7f+8ZisKXyfWwsJuIAKcXg2obzDSEDDXuHvh+GpA/YOxzcgO12Jjt1YL/BfKPCSzGCCAUQAAAABJRU5ErkJggg==">
+                    <img style="margin-top: -77px; margin-left: 17px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAADJUlEQVRIibWVXWibVRjHf/83aaoB91UQEcVdiBZCk5mmm3i1shuHIm6s283YHMOBiYOkZSDswnozLySJm1sVZKA3Qp0iwi50XngxGGZpWpsuXih2HfgxwY91TLFpcx4vNDMVWd43bZ+78z/n/f/OeZ7nnFd0GPGJ3Bkg/T9TdTmS01uLtTt9H+4EGruU2wQ8Z9IR0GRTF41dmJ6f/339t+08OgKHIxwy7MeZ5PqzaNQ19b7K8JuSG5sbHP2znYcXmGrI4IjwxlqhW8rZ7TKLu0V7y49NYHDfRPZJ4MGlur3TqjtpRMa7Vx4/+ZMfn8CplpQG3qs9Ufy1qSVKw48YttMLeXG/PoHAj02OPNRwbqfJ29aqu7AbxvTJVDL/1ZqAnXMvYFyeSeUrTS12KbdJxn5kzwTx8l3jh7852m1wSJ7GWvVwxDLAbDX5+udrAo7e6NoHePM3132wfDNKy+w1hK0JGFka7O3WOxq9Ed4P5paiG8aDQMFnjfsqI/2YS4W80L5lexFHDd0M/zH/RqKca5ngw+lU8cKKwWBp4PxUMn9tmYrGZbb59ljcDzxt4ot2jmq3YMtUdoNr6Htn3rNXBvKf3WltvJL9GNM91f7ijnY1b3ti19BBoNuTG0qUc3uauklz1VTh1dvQ8vABzHaYEffTaO2bS0zKOCv718wgCXawOY5dPnYfsiJwfGagONvWEx8nrvYXLwIXW7XERPaCiU+b45CWzgBfPzr73emqH6of8H+jt5TpMTTYkI4BJCq5vWY8FfK85Lm95xp+fQL/nbrC3buBq7VkYbq3lOkx45Shl4O80x2BPXNDyN4HiIQip4AfItwqBPVpe51ao7eU6YmEItcbnlJdzj3g0EcybZseKEwFBQeqcSTUtQvs2l0uMrdI/TymE51AIWCqDQ1hGl+kngd+a0TXnegEGgjcW8r0CAYNfgYOeM4drsVG62sO/jvN/CLxoqDw5daT5U6hgcDg7QHuBRajdV5ZCRR8dnVf9aWNqi9cB8KI7f+8ZisKXyfWwsJuIAKcXg2obzDSEDDXuHvh+GpA/YOxzcgO12Jjt1YL/BfKPCSzGCCAUQAAAABJRU5ErkJggg==">
                 </td>
                 <td>
-                    <div style="line-height: 5%;">
+                    <div style="line-height: 5%; margin-left: 3px; margin-top: -80px;">
                         <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
                         <p>4.43 KwP</p>
                     </div>
@@ -331,9 +331,9 @@
                     <img src="https://img.icons8.com/ios/30/26e07f/electrical.png"/>
                 </td>
                 <td>
-                    <div style="line-height: 80%;">
-                        <p class="text-inferior-pag1">PORCENTAJE DE AHORRO ENERGETICO:</p>
-                        <p>53 %</p>
+                    <div style="line-height: 30%; margin-top: -50px;">
+                        <p class="text-inferior-pag1">% DE AHORRO ENERGETICO:</p>
+                        <p>53%</p>
                     </div>
                 </td>
             </tr>
