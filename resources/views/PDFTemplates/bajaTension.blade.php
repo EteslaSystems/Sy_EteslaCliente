@@ -114,23 +114,34 @@
 
     /* Cards */
     .card{
-        margin-top: 10px;
+        margin-top: 3px;
         width: 175px;
         padding: 20px;
         border-radius: 20px;
-        text-align: center;
     }
     .card-header{
         background: rgb(52, 181, 69); 
-        color: rgb(255, 255, 255);       
+        color: rgb(255, 255, 255);
         margin: -20px;
         padding: 10px;
         font-size: 10px;
         height: 10px;
+        text-align: center;
     }
     .card-body{ 
         margin: -20px;
         padding: 20px;
+        font-size: 18px;
+        line-height: 20%;
+
+        border-top: none;
+        border-left: 1px solid #D9D9D9;
+        border-right: 1px solid #D9D9D9;
+        border-bottom: 1px solid #D9D9D9;
+    }
+    .rectangulo-into-card{
+        border-style: groove;
+        border: 1px solid;
     }
 </style>
 <body>
@@ -265,21 +276,33 @@
                 </td>
                 <td>
                     <div class="card" style="margin-right: -65px">
+                        <!-- CONSUMO ACTUAL -->
                         <div class="card-header">
                             <h2 style="margin-top: -4px;">ANTES</h2>
                         </div>
                         <div class="card-body">
-                            <strong>CUERPO TARJETA</strong>
+                            <div class="rectangulo-into-card" style="border: #C31801;">
+                                <p style="font-size: 9px;"><strong>CONSUMO (DAC)</strong></p>
+                                <p style="color: #C31801; font-weight: bolder;">1234 kW</p>
+                                <strong style="font-size: 9px;">TOTAL A PAGAR</strong>
+                                <p style="color: #C31801; font-weight: bolder;">$234</p>
+                            </div>
                         </div>
                     </div>
                 </td>
                 <td>
                     <div class="card" style="margin-right: -60px">
+                        <!-- NUEVO CONSUMO -->
                         <div class="card-header">
                             <h2 style="margin-top: -4px;">AHORA</h2>
                         </div>
                         <div class="card-body">
-                            <strong>CUERPO TARJETA</strong>
+                            <div class="rectangulo-into-card" style="border: #1E9F26;">
+                                <p style="font-size: 9px;"><strong>CONSUMO (1c)</strong></p>
+                                <p style="color: #1E9F26; font-weight: bolder;">234 kW</p>
+                                <strong style="font-size: 9px;">TOTAL A PAGAR</strong>
+                                <p style="color: #1E9F26; font-weight: bolder;">$234</p>
+                            </div>
                         </div>
                     </div> 
                 </td>
