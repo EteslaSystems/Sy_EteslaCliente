@@ -5,7 +5,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
-    /* Formato Paginas */
+    /* --------------- ---------------------- */
     *{
         font-family: 'Roboto', sans-serif;
     }
@@ -17,7 +17,7 @@
         bottom: 0cm; 
         left: 0cm; 
         right: 0cm;
-        height: 23px;
+        height: 19px;
         background-color: #5FC055;
     }
 
@@ -42,6 +42,8 @@
         height: 6.5px;
         border-style: none;
     } 
+
+    /* --------------- ---------------------- */
 
     /* Contenido hoja */
     #logoTipoEtesla{
@@ -107,11 +109,11 @@
         line-height: 75%;
     }
     .text-inferior-pag1{
-        font-size: 13px;
+        font-size: 11px;
         font-weight: bolder;
     }
     .text-inferior-pag1-secundary{
-        font-size: 7px;
+        font-size: 10px;
     }
     .garantias{
         line-height: 5%;
@@ -148,6 +150,10 @@
     .rectangulo-into-card{
         border-style: groove;
         border: 1px solid;
+
+        width: 160px;
+        height: 100px;
+        margin-left: 10px;
     }
 </style>
 <body>
@@ -187,7 +193,7 @@
                 <tbody>
                     <tr id="desglocePanel">
                         <td>Panel</td>
-                        <td>*</td>
+                        <td>Marca</td>
                         <td>*</td>
                         <td>*</td>
                         <td>$* USD</td>
@@ -273,71 +279,77 @@
         <hr class="linea-division" style="background-color: #5576F2; margin-top:-8px;">
         <table class="table-contenedor">
             <tr>
-                <td style="padding-left: 5px;">
-                    <img style="margin-top: -50px; margin-left: 10px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAFA0lEQVRIibWXYWydZRXHf//nvS3TbVTZkBlmGVOGuN3ervfWudAp03XqBwOIhCwRNQHHByTpLQRinKaa+EEzvAszRoEEjSaAyYLzk6EduqAI6723652g3RJYx2A62Wwzh8h6n78f2nt7i8t604zn0/uec/7//3POe54854UFro7hvkKmlN+9ULwWAsoWH2g7x9uvAotsPnqou/DyuyLcMdw/gNxp81irzg6eY/H3wJ/FOo6Il51pu/H0pZMbifRJvDSaK3x7Ps5Uk9s7DdwoccM5FrcBbznqc3JyjKR64PTSyTOYBNFiNNQMZXPCLeEJzlULUfGTKLSGKjcrcB9UEewGPQtgPBSS+HgzlKGZoEpm50nByyEmnUnUtxBfFQwjF43vsv2NKK4CThxcv2uiGc55M84M9683/q7hSmC18aeS0LJupOuHrwNkDuYf9RR/IfqPiPd1DOf3yHxn9OOFFxeccbrU91PLZcTikFQzkhcB+2qiAKOdhdeAoSCuUFVdiMsdOJQu9j+0YGHHZI/Ec8BGV5NtwJvAFeeJXAG8SeLbgRzwAvZvL8Q95zilS/dm5bgHuOpCoAWso+BbKrld5ZphzjcO9o4IL6Bwy0WVdbwftAP4Ys1Uz/iG3w+kTi2dPIW1TcFRkZsvimbgKUcF5MeXnWlb9ofNA1PQ8I0nlkxsEFyi1rDfJm+xtg6G5RbbLdXjLTZZbJp9V7DYbljeELMWuFetYb/gkoklExtqvnqpq9JWwXPXjo2/NbZ65Ubkm0Zzu54BSA/3fV5ocyX3o6/X4jPD+Z8BjHYX7qrZOor5LxF4ZDRb+B1AR7n/M0Tvvez0kv+eWjr55xjYAvxpTsYyvaDBv324vRN4T3XR2wdqvkBoFxxrorLHDO31tyQ8D7S+0TbZKTGI1TvLCWx4/p5LEbkYPCjHHqD84tqf/Hu21G63PD6vrBkXrgtXMjvPAiPB6gnVOAhsyBYfaIOZ5koX+24SerSSbftAR2nySeDTwCsNlO0zmzzaYKsducYNrQIic6tzNfBMJdt2W0dp8qTNHYe6C3tT0+rqNexDA5Fivgf4pcVLNaTs+4XKUQzN2vgygMWv6uUzW4y7LD3cEPcx4DY0EF3M7wuoF9grgEwxf8T4ByGJ+2M1GaMlWVHJ7DxZA3cU869gvlnpLjxRs523uYb7tiF9v5IrrK7Z1pfvubwaU/+oijUBbZZ9XyVXuDZ0jvStMnwkJAxVY9IDHG4UvfXXtybAldGat7nCdIlXzmAAGOna/U/gSEA9KelpYE3nSN+qUI3aChw+uH7XUVBP7W6trbH2FR8EWpLW+ZsrVqvjQMvhNStXvMP1rMz1I10PjgNHYpUtKZleWYMAsnsQ5XQpv70OsVcBZoovpEv5OGvmOoDGWJlgsKd8d7qUb2zExdid0zF6OoreFLA54jswUpk3bK4RXDOLEUDZcKf8/1nK1IVn3GXQ1nfGGv4OEBWHhB5JAcsI4TjCoxSuv1ApL8pS8iqOy1OGE3K8M13KZ991UQB7neFESkG3O3qHTHeT0CzwV6aHAoD3AtcBpeaEOWv4SlNz9boD/R9Kgu/GvH/6lgq5Q9kHS1AfHooyDyP+5ampH1c+sfv4fJxNTZkh+Clmr8CH4qL/jNV8M8/T85XYRCr1m2Y4m/uTKOYj1tccdMHJUdFrkX9eyRXmTai5gR5eR/6FfJ7zNEcZgNeaIfwf3/sPFq92d68AAAAASUVORK5CYII=">
-                </td>
-                <td>
-                    <div style="line-height: 5%; margin-top: -75px;">
-                        <p class="text-inferior-pag1">TODO INCLUIDO:</p>
-                        <p>*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                <td style="padding-right: 60px;">
+                    <div style="margin-top: -10px;">
+                        <div style="margin-left:32px;">
+                            <img style="margin-top:18px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAAFA0lEQVRIibWXYWydZRXHf//nvS3TbVTZkBlmGVOGuN3ervfWudAp03XqBwOIhCwRNQHHByTpLQRinKaa+EEzvAszRoEEjSaAyYLzk6EduqAI6723652g3RJYx2A62Wwzh8h6n78f2nt7i8t604zn0/uec/7//3POe54854UFro7hvkKmlN+9ULwWAsoWH2g7x9uvAotsPnqou/DyuyLcMdw/gNxp81irzg6eY/H3wJ/FOo6Il51pu/H0pZMbifRJvDSaK3x7Ps5Uk9s7DdwoccM5FrcBbznqc3JyjKR64PTSyTOYBNFiNNQMZXPCLeEJzlULUfGTKLSGKjcrcB9UEewGPQtgPBSS+HgzlKGZoEpm50nByyEmnUnUtxBfFQwjF43vsv2NKK4CThxcv2uiGc55M84M9683/q7hSmC18aeS0LJupOuHrwNkDuYf9RR/IfqPiPd1DOf3yHxn9OOFFxeccbrU91PLZcTikFQzkhcB+2qiAKOdhdeAoSCuUFVdiMsdOJQu9j+0YGHHZI/Ec8BGV5NtwJvAFeeJXAG8SeLbgRzwAvZvL8Q95zilS/dm5bgHuOpCoAWso+BbKrld5ZphzjcO9o4IL6Bwy0WVdbwftAP4Ys1Uz/iG3w+kTi2dPIW1TcFRkZsvimbgKUcF5MeXnWlb9ofNA1PQ8I0nlkxsEFyi1rDfJm+xtg6G5RbbLdXjLTZZbJp9V7DYbljeELMWuFetYb/gkoklExtqvnqpq9JWwXPXjo2/NbZ65Ubkm0Zzu54BSA/3fV5ocyX3o6/X4jPD+Z8BjHYX7qrZOor5LxF4ZDRb+B1AR7n/M0Tvvez0kv+eWjr55xjYAvxpTsYyvaDBv324vRN4T3XR2wdqvkBoFxxrorLHDO31tyQ8D7S+0TbZKTGI1TvLCWx4/p5LEbkYPCjHHqD84tqf/Hu21G63PD6vrBkXrgtXMjvPAiPB6gnVOAhsyBYfaIOZ5koX+24SerSSbftAR2nySeDTwCsNlO0zmzzaYKsducYNrQIic6tzNfBMJdt2W0dp8qTNHYe6C3tT0+rqNexDA5Fivgf4pcVLNaTs+4XKUQzN2vgygMWv6uUzW4y7LD3cEPcx4DY0EF3M7wuoF9grgEwxf8T4ByGJ+2M1GaMlWVHJ7DxZA3cU869gvlnpLjxRs523uYb7tiF9v5IrrK7Z1pfvubwaU/+oijUBbZZ9XyVXuDZ0jvStMnwkJAxVY9IDHG4UvfXXtybAldGat7nCdIlXzmAAGOna/U/gSEA9KelpYE3nSN+qUI3aChw+uH7XUVBP7W6trbH2FR8EWpLW+ZsrVqvjQMvhNStXvMP1rMz1I10PjgNHYpUtKZleWYMAsnsQ5XQpv70OsVcBZoovpEv5OGvmOoDGWJlgsKd8d7qUb2zExdid0zF6OoreFLA54jswUpk3bK4RXDOLEUDZcKf8/1nK1IVn3GXQ1nfGGv4OEBWHhB5JAcsI4TjCoxSuv1ApL8pS8iqOy1OGE3K8M13KZ991UQB7neFESkG3O3qHTHeT0CzwV6aHAoD3AtcBpeaEOWv4SlNz9boD/R9Kgu/GvH/6lgq5Q9kHS1AfHooyDyP+5ampH1c+sfv4fJxNTZkh+Clmr8CH4qL/jNV8M8/T85XYRCr1m2Y4m/uTKOYj1tccdMHJUdFrkX9eyRXmTai5gR5eR/6FfJ7zNEcZgNeaIfwf3/sPFq92d68AAAAASUVORK5CYII=">
+                        </div>
+                        <div style="margin-top:-50px; margin-left:80px;">
+                            <p class="text-inferior-pag1">TODO INCLUIDO:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-left:32px;">
+                            <img style="margin-top:10px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAADJUlEQVRIibWVXWibVRjHf/83aaoB91UQEcVdiBZCk5mmm3i1shuHIm6s283YHMOBiYOkZSDswnozLySJm1sVZKA3Qp0iwi50XngxGGZpWpsuXih2HfgxwY91TLFpcx4vNDMVWd43bZ+78z/n/f/OeZ7nnFd0GPGJ3Bkg/T9TdTmS01uLtTt9H+4EGruU2wQ8Z9IR0GRTF41dmJ6f/339t+08OgKHIxwy7MeZ5PqzaNQ19b7K8JuSG5sbHP2znYcXmGrI4IjwxlqhW8rZ7TKLu0V7y49NYHDfRPZJ4MGlur3TqjtpRMa7Vx4/+ZMfn8CplpQG3qs9Ufy1qSVKw48YttMLeXG/PoHAj02OPNRwbqfJ29aqu7AbxvTJVDL/1ZqAnXMvYFyeSeUrTS12KbdJxn5kzwTx8l3jh7852m1wSJ7GWvVwxDLAbDX5+udrAo7e6NoHePM3132wfDNKy+w1hK0JGFka7O3WOxq9Ed4P5paiG8aDQMFnjfsqI/2YS4W80L5lexFHDd0M/zH/RqKca5ngw+lU8cKKwWBp4PxUMn9tmYrGZbb59ljcDzxt4ot2jmq3YMtUdoNr6Htn3rNXBvKf3WltvJL9GNM91f7ijnY1b3ti19BBoNuTG0qUc3uauklz1VTh1dvQ8vABzHaYEffTaO2bS0zKOCv718wgCXawOY5dPnYfsiJwfGagONvWEx8nrvYXLwIXW7XERPaCiU+b45CWzgBfPzr73emqH6of8H+jt5TpMTTYkI4BJCq5vWY8FfK85Lm95xp+fQL/nbrC3buBq7VkYbq3lOkx45Shl4O80x2BPXNDyN4HiIQip4AfItwqBPVpe51ao7eU6YmEItcbnlJdzj3g0EcybZseKEwFBQeqcSTUtQvs2l0uMrdI/TymE51AIWCqDQ1hGl+kngd+a0TXnegEGgjcW8r0CAYNfgYOeM4drsVG62sO/jvN/CLxoqDw5daT5U6hgcDg7QHuBRajdV5ZCRR8dnVf9aWNqi9cB8KI7f+8ZisKXyfWwsJuIAKcXg2obzDSEDDXuHvh+GpA/YOxzcgO12Jjt1YL/BfKPCSzGCCAUQAAAABJRU5ErkJggg==">
+                        </div>
+                        <div style="margin-top: -50px; margin-left:80px;">
+                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">4.43 KwP</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-left:35px;">
+                            <img style="margin-top: 12px;" src="https://img.icons8.com/ios/25/26e07f/electrical.png"/>
+                        </div>
+                        <div style="margin-top: -50px; margin-left:80px;">
+                            <p class="text-inferior-pag1">PORCENTAJE DE AHORRO ENERGETICO:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-11px;">53%</p>
+                        </div>
                     </div>
                 </td>
                 <td>
-                    <div class="card" style="margin-right: -65px">
-                        <!-- CONSUMO ACTUAL -->
-                        <div class="card-header">
-                            <h2 style="margin-top: -4px;">ANTES</h2>
-                        </div>
-                        <div class="card-body">
-                            <div class="rectangulo-into-card" style="border: #C31801;">
-                                <p style="font-size: 9px;"><strong>CONSUMO (DAC)</strong></p>
-                                <p style="color: #C31801; font-weight: bolder;">1234 kW</p>
-                                <strong style="font-size: 9px;">TOTAL A PAGAR</strong>
-                                <p style="color: #C31801; font-weight: bolder;">$234</p>
+                    <!-- CARDS -->
+                    <div>
+                        <!-- CARD - "ANTES" -->
+                        <div style="margin-left: -230px; margin-top: -15px;">
+                            <div class="card" style="margin-right: -65px; margin-left: 10px;">
+                                <!-- CONSUMO ACTUAL -->
+                                <div class="card-header">
+                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="rectangulo-into-card" style="border: #C31801;">
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (DAC)</strong></p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">1234 kW</p>
+                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">$234 MXN</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="card" style="margin-right: -60px">
-                        <!-- NUEVO CONSUMO -->
-                        <div class="card-header">
-                            <h2 style="margin-top: -4px;">AHORA</h2>
+                        <!-- CARD - "NUEVO" -->
+                        <div style="margin-top: -300px; margin-left: 16px;">
+                            <div class="card" style="margin-right: -80px;">
+                                <!-- NUEVO CONSUMO -->
+                                <div class="card-header">
+                                    <h2 style="margin-top: -4px;">AHORA</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (1c)</strong></p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">234 kW</p>
+                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">$234 MXN</p>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
-                        <div class="card-body">
-                            <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                <p style="font-size: 9px;"><strong>CONSUMO (1c)</strong></p>
-                                <p style="color: #1E9F26; font-weight: bolder;">234 kW</p>
-                                <strong style="font-size: 9px;">TOTAL A PAGAR</strong>
-                                <p style="color: #1E9F26; font-weight: bolder;">$234</p>
-                            </div>
-                        </div>
-                    </div> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img style="margin-top: -77px; margin-left: 17px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAADJUlEQVRIibWVXWibVRjHf/83aaoB91UQEcVdiBZCk5mmm3i1shuHIm6s283YHMOBiYOkZSDswnozLySJm1sVZKA3Qp0iwi50XngxGGZpWpsuXih2HfgxwY91TLFpcx4vNDMVWd43bZ+78z/n/f/OeZ7nnFd0GPGJ3Bkg/T9TdTmS01uLtTt9H+4EGruU2wQ8Z9IR0GRTF41dmJ6f/339t+08OgKHIxwy7MeZ5PqzaNQ19b7K8JuSG5sbHP2znYcXmGrI4IjwxlqhW8rZ7TKLu0V7y49NYHDfRPZJ4MGlur3TqjtpRMa7Vx4/+ZMfn8CplpQG3qs9Ufy1qSVKw48YttMLeXG/PoHAj02OPNRwbqfJ29aqu7AbxvTJVDL/1ZqAnXMvYFyeSeUrTS12KbdJxn5kzwTx8l3jh7852m1wSJ7GWvVwxDLAbDX5+udrAo7e6NoHePM3132wfDNKy+w1hK0JGFka7O3WOxq9Ed4P5paiG8aDQMFnjfsqI/2YS4W80L5lexFHDd0M/zH/RqKca5ngw+lU8cKKwWBp4PxUMn9tmYrGZbb59ljcDzxt4ot2jmq3YMtUdoNr6Htn3rNXBvKf3WltvJL9GNM91f7ijnY1b3ti19BBoNuTG0qUc3uauklz1VTh1dvQ8vABzHaYEffTaO2bS0zKOCv718wgCXawOY5dPnYfsiJwfGagONvWEx8nrvYXLwIXW7XERPaCiU+b45CWzgBfPzr73emqH6of8H+jt5TpMTTYkI4BJCq5vWY8FfK85Lm95xp+fQL/nbrC3buBq7VkYbq3lOkx45Shl4O80x2BPXNDyN4HiIQip4AfItwqBPVpe51ao7eU6YmEItcbnlJdzj3g0EcybZseKEwFBQeqcSTUtQvs2l0uMrdI/TymE51AIWCqDQ1hGl+kngd+a0TXnegEGgjcW8r0CAYNfgYOeM4drsVG62sO/jvN/CLxoqDw5daT5U6hgcDg7QHuBRajdV5ZCRR8dnVf9aWNqi9cB8KI7f+8ZisKXyfWwsJuIAKcXg2obzDSEDDXuHvh+GpA/YOxzcgO12Jjt1YL/BfKPCSzGCCAUQAAAABJRU5ErkJggg==">
-                </td>
-                <td>
-                    <div style="line-height: 5%; margin-left: 3px; margin-top: -80px;">
-                        <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
-                        <p>4.43 KwP</p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="https://img.icons8.com/ios/30/26e07f/electrical.png"/>
-                </td>
-                <td>
-                    <div style="line-height: 30%; margin-top: -50px;">
-                        <p class="text-inferior-pag1">% DE AHORRO ENERGETICO:</p>
-                        <p>53%</p>
                     </div>
                 </td>
             </tr>
         </table>
+        <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 1 -->
 
