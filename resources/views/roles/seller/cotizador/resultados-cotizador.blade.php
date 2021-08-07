@@ -91,7 +91,7 @@
 
                                             <!-- Botones GuardaPropuesta_GenerarPDF -->
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                                <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" title="guardar propuesta" disabled>GUARDAR</button>
+                                                <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" onclick="guardarPropuesta();" title="guardar propuesta" disabled>GUARDAR</button>
                                                 <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" disabled>GENERAR</button>
                                             </div>
                                             <!-- Fin Botones GuardaPropuesta_GenerarPDF -->

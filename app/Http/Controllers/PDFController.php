@@ -10,10 +10,10 @@ class PDFController extends Controller
         $pdfTemplate = '';
 
         if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
-            $pdfTemplate = 'PDFTemplates.bajaTensionPDF';
+            $pdfTemplate = 'PDFTemplates.bajaTension';
         }
         else{ //individual
-            $pdfTemplate = 'PDFTemplates.individualPDF';
+            $pdfTemplate = 'PDFTemplates.individual';
         }
 
         $pdf = PDF::loadview($pdfTemplate,$propuesta)
