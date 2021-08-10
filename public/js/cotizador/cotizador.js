@@ -176,13 +176,14 @@ function guardarPropuesta(){
             dataType: 'json',
             data: dataToSent,
             success: function(respuesta){
-                if(resolve.status == "200" || resolve.status == 200){
-                    alert('Propuesta guardada con exito');
-                    $("#btnGuardarPropuesta").prop("disabled", true);
+                if(resolve.status == "500" || resolve.status == 500){
+                    console.log('Ah ocurrido un problema al intentar guardar la propuesta:');
+                    console.log(respuesta.message);
+                    alert('Ah ocurrido un problema al intentar guardar la propuesta');
                 }
                 else{
-                    console.log('Ah ocurrido un problema al intentar guardar la propuesta:\n'+respuesta.message.toString());
-                    alert('Ah ocurrido un problema al intentar guardar la propuesta');
+                    alert(respuesta.message);
+                    $("#btnGuardarPropuesta").prop("disabled", true);
                 }
             },
             error: function(error){
