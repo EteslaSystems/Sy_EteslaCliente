@@ -2,13 +2,14 @@
 
 /*                  Agregados_CRUD                  */
 var _agregado = [];
+var contadorDeAgregados;
 
 function addAgregado(element){
+    let objAgregado = {};
     let nombreAgregado = $('#inpAgregado').val();
     let cantidadAgregado = $('#inpCantidadAg').val();
     let precioAgregado = $('#inpPrecioAg').val();
-    let contadorDeAgregados = parseInt(element.value);
-    let objAgregado = {};
+    contadorDeAgregados = parseInt(element.value);
 
     if(validarInputsVaciosAg(nombreAgregado) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
         objAgregado = {
@@ -22,7 +23,7 @@ function addAgregado(element){
     
         //Pintar 'Agregado' en tabla
         let tableBody = $('#tblAgregados > tbody');
-        tableBody.append('<tr><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(event);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(event);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
         
         contadorDeAgregados++;
         $('#'+element.id).val(contadorDeAgregados);
@@ -37,8 +38,9 @@ function eliminarAgregado(event){
     
     //Se elimina visualmente de la tabla
     event.preventDefault();
-    $(this).closest('tr').remove();
+    $('#trContAg'+posicionAgregado).remove();
 
+    //Disminuye el contador de agregados
     contadorDeAgregados--;
 }
 
