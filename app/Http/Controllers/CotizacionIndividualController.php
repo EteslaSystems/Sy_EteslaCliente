@@ -87,14 +87,7 @@ class CotizacionIndividualController extends Controller
 
 	public function sendSingleQuotation(Request $request){
 		$cotizacionIndividual["origen"] = session('dataUsuario')->oficina;
-		$cotizacionIndividual["idCliente"] = $request->idCliente;
-		$cotizacionIndividual["destino"] = $request->direccionCliente;
-		$cotizacionIndividual["idPanel"] = $request->idPanel;
-		$cotizacionIndividual["idInversor"] = $request->idInversor;
-		$cotizacionIndividual["cantidadPaneles"] = $request->cantidadPaneles;
-		$cotizacionIndividual["cantidadInversores"] = $request->cantidadInversores;
-		$cotizacionIndividual["Estructura"] = $request->Estructura;
-		$cotizacionIndividual["bInstalacion"] = $request->bInstalacion;
+		$cotizacionIndividual["cotizacionIndividual"] = $request->dataCotInd;
 		$cotizacionIndividual["tipoCotizacion"] = 'individual';
 
 		$response = $this->cotizacion->sendSingleQuotation(['json' => $cotizacionIndividual]);
