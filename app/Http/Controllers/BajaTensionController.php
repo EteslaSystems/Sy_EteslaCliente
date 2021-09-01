@@ -70,8 +70,15 @@ class BajaTensionController extends Controller
 
 	public function validarSesion()
 	{
+		// if (session()->has('dataUsuario')) {
+		// 	if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+		// 		return 2;
+		// 	}
+		// 	return 1;
+		// }
+
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+			if (session('dataUsuario')->rol == 5 || session('dataUsuario')->rol == 1 || session('dataUsuario')->rol == 0 ) {
 				return 2;
 			}
 			return 1;

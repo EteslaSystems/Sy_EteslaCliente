@@ -45,9 +45,13 @@ class administradorController extends Controller
 	{
 		if (session()->has('dataUsuario')) {
 			$rol = session('dataUsuario')->rol;
-			$tipo = session('dataUsuario')->tipoUsuario;
+			// $tipo = session('dataUsuario')->tipoUsuario;
 			
-			if ($rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+			// if ($rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+			// 	return 2;
+			// }
+
+			if ($rol == 1 || $rol == 0) {
 				return 2;
 			}
 			return 1;

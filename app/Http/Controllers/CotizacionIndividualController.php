@@ -76,8 +76,14 @@ class CotizacionIndividualController extends Controller
 
 	public function validarSesion()
 	{
+		// if (session()->has('dataUsuario')) {
+		// 	if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+		// 		return 2;
+		// 	}
+		// 	return 1;
+		// }
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+			if (session('dataUsuario')->rol == 5 || session('dataUsuario')->rol == 1 || session('dataUsuario')->rol == 0 ) {
 				return 2;
 			}
 			return 1;
@@ -86,6 +92,7 @@ class CotizacionIndividualController extends Controller
 	}
 
 	public function sendSingleQuotation(Request $request){
+		$cotizacionIndividual["idUsuario"] = session('dataUsuario')->idPersona;
 		$cotizacionIndividual["origen"] = session('dataUsuario')->oficina;
 		$cotizacionIndividual["cotizacionIndividual"] = $request->dataCotInd;
 		$cotizacionIndividual["tipoCotizacion"] = 'individual';

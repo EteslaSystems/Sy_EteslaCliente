@@ -101,15 +101,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="iscPanel">ISC</label>
-                                    <input id="iscPanel" name="p_isc" type="number" class="form-control">
+                                    <input id="iscPanel" name="p_isc" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="vocPanel">VOC</label>
-                                    <input id="vocPanel" name="p_voc" type="number" class="form-control">
+                                    <input id="vocPanel" name="p_voc" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="vmpPanel">VMP</label>
-                                    <input id="vmpPanel" name="p_vmp" type="number" class="form-control">
+                                    <input id="vmpPanel" name="p_vmp" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="imgPanel">Ruta imagen</label>
@@ -160,7 +160,11 @@
                         </td>
                     </tr>
                 @empty
-                    <h1>Sin registros</h1>
+                    <tr>
+                        <td colspan="10">
+                            <h1>Sin registros</h1>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
@@ -230,23 +234,23 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="iscInversor">ISC</label>
-                                    <input id="iscInversor" name="i_isc" type="number" class="form-control">
+                                    <input id="iscInversor" name="i_isc" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="vminInversor">VMIN</label>
-                                    <input id="vminInversor" name="i_vmin" type="number" class="form-control">
+                                    <input id="vminInversor" name="i_vmin" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="vmaxInversor">VMAX</label>
-                                    <input id="vmaxInversor" name="i_vmax" type="number" class="form-control">
+                                    <input id="vmaxInversor" name="i_vmax" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="pminInversor">PMIN</label>
-                                    <input id="pminInversor" name="i_pmin" type="number" class="form-control">
+                                    <input id="pminInversor" name="i_pmin" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="pmaxInversor">PMAX</label>
-                                    <input id="pmaxInversor" name="i_pmax" type="number" class="form-control">
+                                    <input id="pmaxInversor" name="i_pmax" type="number" step="any" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="imgInversor">Ruta imagen</label>
@@ -301,7 +305,11 @@
                         </td>
                     </tr>
                 @empty
-                    <h1>Sin registros</h1>
+                    <tr>
+                        <td colspan="12">
+                            <h1>Sin registros</h1>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
@@ -392,7 +400,11 @@
                         </td>
                     </tr>
                 @empty
-                    <h1>Sin registros</h1>
+                    <tr>
+                        <td colspan="10">
+                            <h1>Sin registros</h1>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

@@ -51,15 +51,20 @@ function getCotizacionIndividual(dataCotInd){
                     $('#generarPDF').prop('disabled',false);
                     $('#guardarPropuesta').prop('disabled',false);
 
+                    //Guardar PropuestaResult en un SessionStorage
+                    sessionStorage.removeItem('ssPropuestaIndividual');
+                    sessionStorage.setItem('ssPropuestaIndividual',JSON.stringify(cotizacionIndividual[0]))
+
                     resolve(cotizacionIndividual);
                 }
                 else{
-                    reject('Error! Status Server 500!')
                     console.log(cotizacionIndividual);
+                    throw 'Error! Status Server 500!';
                 }
             },
             error: function(error){
-                reject(error);
+                console.log(error);
+                throw 'Ocurrio un error';
             }
         });
     });
@@ -183,7 +188,33 @@ function catchDataCotizacionIndividual(){
 }
 
 function pintarResultadoCotizacion(cotizacionResult){
+    let cotizacionIndividual = cotizacionResult[0]; //Formating of Array to Object
 
+    let potenciaInstalad = ((cotizacionIndividual.paneles.fPotencia * cotizacionIndividual.paneles.noModulos) / 1000);
+    let costoPanel = cotizacionIndividual.paneles.costoTotal;
+    let costoInversor = cotizacionIndividual.inversores != null ? cotizacionIndividual.inversores.precioTotal : 0;
+    let costoEstructura = cotizacionIndividual.estructura != null ? cotizacionIndividual.costoTotalEstructuras : 0;
+    let costoViaticos = cotizacionIndividual.totales.totalViaticosMT;
+    let costoMO = cotizacionIndividual.totales.manoDeObra + cotizacionIndividual.totales.otrosTotal;
+    let costoFletes =cotizacionIndividual.totales.fletes; //$$ - USD
+    let subtotalUSD = cotizacionIndividual.totales.precio;
+    let subtotalMXN = cotizacionIndividual.totales.precioMXNSinIVA;
+    let totalUSD = cotizacionIndividual.totales.precioMasIVA;
+    let totalMXN = cotizacionIndividual.totales.precioMXNConIVA;
+
+    $('#resPotenciaInstalada').text(potenciaInstalad + ' kw');
+    $('#resCostoPanel').text('$' + costoPanel + ' USD');
+    $('#resCostInversor').text('$' + costoInversor + ' USD');
+    $('#resCostEstruct').text('$' + costoEstructura + ' USD');
+    $('#resCostoViaticos').text('$' + costoViaticos + ' USD');
+    $('#resCostoMO').text('$' + costoMO + ' USD');
+    $('#resCostoFletes').text('$' + costoFletes + ' USD');
+
+    //Subtotales y totales
+    $('#tdSubtotalUSD').text('$' + subtotalUSD + ' USD');
+    $('#tdSubtotalMXN').text('$' + subtotalMXN + ' MXN');
+    $('#tdTotalUSD').text('$' + totalUSD + ' USD');
+    $('#tdTotalMXN').text('$' + totalMXN + ' MXN');
 }
 
 function catchDataEquipos(){
