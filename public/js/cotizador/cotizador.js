@@ -184,7 +184,7 @@ function guardarPropuesta(){
                     alert('Ah ocurrido un problema al intentar guardar la propuesta');
                 }
                 else{
-                    alert(respuesta.message);
+                    alert(respuesta.message.message);
                     $("#btnGuardarPropuesta").prop("disabled", true);
                 }
             },

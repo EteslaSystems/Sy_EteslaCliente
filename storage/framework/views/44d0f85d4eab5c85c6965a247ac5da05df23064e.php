@@ -217,7 +217,7 @@
                         <td>Etesla</td>
                         <td></td>
                         <td>Mano de obra para instalacion</td>
-                        <td id="costoTotalManoDeObra">$$<?php echo e(number_format($totales["manoDeObra"], 2)); ?> USD</td>
+                        <td id="costoTotalManoDeObra">$<?php echo e(number_format($totales["manoDeObra"], 2)); ?> USD</td>
                     </tr>
                     <tr>
                         <td>Material electrico</td>
@@ -258,13 +258,13 @@
         <table class="table-contenedor" style="margin-top: -15px;">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
-                    <img style="width: 140px; height: 95px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($paneles['imgRuta']); ?>">
+                    <img style="width: 140px; height: 67px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($paneles['imgRuta']); ?>">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
-                    <img style="width: 140px; height: 95px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($inversores['imgRuta']); ?>">
+                    <img style="width: 140px; height: 67px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($inversores['imgRuta']); ?>">
                 </td>
                 <td id="imgLogoEstructuras" align="center" style="border: none;">
-                    <img style="width: 120px; height: 95px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($estructura['imgRuta']); ?>">
+                    <img style="width: 120px; height: 67px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($estructura['imgRuta']); ?>">
                 </td>
             </tr>
         </table>
@@ -417,7 +417,7 @@
             <br>
             <table id="tabFinanciamient" class="tabFinanciamiento">
                 <tr>
-                    <th>Pagos mensuales</br>por plazo</th>
+                    <th>Pagos mensuales</br> por plazo</th>
                     <th style="background-color: #F5B070;">15%</th>
                     <th style="background-color: #F5B070;">35%</th>
                     <th style="background-color: #F5B070;">50%</th>

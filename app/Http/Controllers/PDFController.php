@@ -20,7 +20,14 @@ class PDFController extends Controller
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
+        //Se comprueba *LA EXISTENCIA* del directorio en donde se almacenaran los PDF
+        if(!file_exists(public_path('/pdfsGenerados'))){
+            //Si no existe, SE CREA EL DIRECTORIO
+            mkdir(public_path().'/pdfsGenerados');
+        }
+
         $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
+
         $fileName = $this->getFileName($propuesta); //Nombre del documento PDF
 
         $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)

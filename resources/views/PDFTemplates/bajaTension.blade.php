@@ -258,13 +258,13 @@
         <table class="table-contenedor" style="margin-top: -15px;">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
-                    <img style="width: 140px; height: 63px;" src="https://drive.google.com/uc?export=view&id={{ $paneles['imgRuta'] }}">
+                    <img style="width: 140px; height: 67px;" src="https://drive.google.com/uc?export=view&id={{ $paneles['imgRuta'] }}">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
-                    <img style="width: 140px; height: 63px;" src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}">
+                    <img style="width: 140px; height: 67px;" src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}">
                 </td>
                 <td id="imgLogoEstructuras" align="center" style="border: none;">
-                    <img style="width: 120px; height: 63px;" src="https://drive.google.com/uc?export=view&id={{ $estructura['imgRuta'] }}">
+                    <img style="width: 120px; height: 67px;" src="https://drive.google.com/uc?export=view&id={{ $estructura['imgRuta'] }}">
                 </td>
             </tr>
         </table>
