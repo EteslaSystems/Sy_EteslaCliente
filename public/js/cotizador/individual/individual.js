@@ -45,7 +45,7 @@ function getCotizacionIndividual(dataCotInd){
             dataType: 'json',
             success: function(cotizacionIndividual){
                 if(cotizacionIndividual.status == 200){
-                    cotizacionIndividual = cotizacionIndividual.message;
+                    cotizacionIndividual = cotizacionIndividual.message.message;
 
                     //Activar botones de -guardar- y -generar
                     $('#generarPDF').prop('disabled',false);

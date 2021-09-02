@@ -12,7 +12,7 @@ class PDFController extends Controller
         if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
             $pdfTemplate = 'PDFTemplates.bajaTension';
         }
-        else{ //individual
+        else if($propuesta["tipoCotizacion"] === "individual"){ //individual
             $pdfTemplate = 'PDFTemplates.individual';
         }
 
