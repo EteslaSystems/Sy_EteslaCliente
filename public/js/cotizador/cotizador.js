@@ -99,7 +99,7 @@ function generarPDF(){
     }
     
     data = JSON.parse(data);
-    data = data[0];
+    data = data.tipoCotizacion ? data : data[0];
 
     return new Promise((resolve, reject)=>{
         $.ajax({

@@ -12,7 +12,8 @@ class PDFController extends Controller
         if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
             $pdfTemplate = 'PDFTemplates.bajaTension';
         }
-        else if($propuesta["tipoCotizacion"] === "individual"){ //individual
+        
+        if($propuesta["tipoCotizacion"] === "individual"){ //individual
             $pdfTemplate = 'PDFTemplates.individual';
         }
 
@@ -41,9 +42,8 @@ class PDFController extends Controller
     {
         $nombreCliente = $data->cliente["vNombrePersona"] . $data->cliente["vPrimerApellido"] . $data->cliente["vSegundoApellido"];
         $tipoCotizacion = $data->tipoCotizacion;
-        $potencia = $data->paneles["potencia"] . 'W'; //Potencia a instalar
 
-        $nombrePropuesta = $nombreCliente . '_' . $tipoCotizacion . '_' . $potencia . '_' . time() . '.pdf';
+        $nombrePropuesta = $nombreCliente . '_' . $tipoCotizacion . '_'  . time() . '.pdf';
 
         return $nombrePropuesta;
     }
