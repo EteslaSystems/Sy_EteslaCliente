@@ -55,7 +55,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <label>Panel</label>
-                                        <select id="listPaneles" class="form-control" disabled>
+                                        <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado()" disabled>
                                             <option selected value="-1">Elige una opción:</option>
                                         </select>
                                     </div>
@@ -65,13 +65,13 @@
                                                 <input id="chckModelosInversor" type="checkbox" class="form-check-input" title="modelos inversor" onclick="mostrarListModelosInversores();">
                                                 <label class="form-check-label" for="chckModelosInversor">Inversor (marca)</label>
                                             </div>
-                                            <select class="form-control" id="listInversores" disabled>
+                                            <select class="form-control" id="listInversores" onchange="mostrarInversorSeleccionado()" disabled>
                                                 <option selected value="-1">Elige una opción:</option>
                                             </select>
                                         </div>
                                         <div id="divDropDownListInversorModelo" class="form-row" style="display:none;">
                                             <label>Inversor (modelo)</label>
-                                            <select id="listModelosInversor" class="form-control">
+                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()">
                                                 <option selected value="-1">Elige una opción:</option>
                                             </select>
                                         </div>
@@ -447,7 +447,7 @@
                                                                     </tr>
                                                                     <tr id="trTarifaNueva">
                                                                         <td><strong>Tarifa nueva</strong></td>
-                                                                        <td></td>
+                                                                        <td id="tdTarifaNueva"></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
