@@ -42,6 +42,9 @@
     <script type="text/javascript">
         window.onload = function() {
             myAlert();
+
+            ///
+            sessionStorage.removeItem("tarifaMT");
         };
 
         $(document).ready(function(){

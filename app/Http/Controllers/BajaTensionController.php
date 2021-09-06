@@ -70,8 +70,15 @@ class BajaTensionController extends Controller
 
 	public function validarSesion()
 	{
+		// if (session()->has('dataUsuario')) {
+		// 	if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+		// 		return 2;
+		// 	}
+		// 	return 1;
+		// }
+
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+			if (session('dataUsuario')->rol == 5 || session('dataUsuario')->rol == 1 || session('dataUsuario')->rol == 0 ) {
 				return 2;
 			}
 			return 1;
@@ -84,6 +91,8 @@ class BajaTensionController extends Controller
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;
 		$arrayCompleto["tarifa"] = $request->tarifa;
+		$arrayCompleto["porcentajePropuesta"] = $request->porcentajePropuesta;
+		$arrayCompleto["porcentajeDescuento"] = $request->porcentajeDescuento;
 
 		$response = $this->cotizacion->sendPeriodsBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);
@@ -93,9 +102,18 @@ class BajaTensionController extends Controller
 
 	public function calculaViaticos_BT(Request $request)
 	{
+		$arrayCompleto["idUsuario"] = session('dataUsuario')->idPersona;
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["arrayBTI"] = $request->arrayBTI;
+		$arrayCompleto["consumos"] = $request->consumos;
+		$arrayCompleto["tarifa"] = $request->tarifa;
+		$arrayCompleto["descuento"] = $request->descuentoPropuesta;
+		$arrayCompleto["aumento"] = $request->aumentoPropuesta;
+		$arrayCompleto["estructura"] = $request->estructura;
+		$arrayCompleto["tipoCotizacion"] = "bajaTension";
+		$arrayCompleto["bInstalacion"] = 1; //1 || true
 
 		$response = $this->cotizacion->calcularViaticosBT(['json' => $arrayCompleto]);
 		$response = response()->json($response);
@@ -105,11 +123,13 @@ class BajaTensionController extends Controller
 
 	public function askCombination(Request $request)
 	{
+		$arrayCompleto["idUsuario"] = session('dataUsuario')->idPersona;
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["consumos"] = $request->consumos;
-		$arrayCompleto["tarifa"] = $request->tarifa;
 		$arrayCompleto["tipoCotizacion"] = "bajaTension";
+		$arrayCompleto["tarifa"] = $request->tarifa;
 
 		$response = $this->cotizacion->busquedaInteligente(['json' => $arrayCompleto]);
 		$response = response()->json($response);

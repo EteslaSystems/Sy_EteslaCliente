@@ -10,20 +10,18 @@
                     </div>
                     <div class="hr-vertical"></div>
                     <div class="col">
-                        @foreach($precioDolar as $precioDolars)
-                            <div class="form-group">
-                                <label><strong>Precio dolar</strong></label>
-                                <p>${{ $precioDolars -> precioDolar }} MXN</p>
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Ultima actualizacion</strong></label>
-                                <p>{{ $precioDolars -> fechaUpdate }}</p>
-                            </div>
-                            <div class="form-group">
-                                <label><strong>Fuente web</strong></label><br>
-                                <a href="{{ $precioDolars -> fuente }}">{{ $precioDolars -> fuente }}</a>
-                            </div>
-                        @endforeach
+                        <div class="form-group">
+                            <label><strong>Precio dolar</strong></label>
+                            <p>${{ $precioDolar -> precioDolar }} MXN</p>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Ultima actualizacion</strong></label>
+                            <p>{{ $precioDolar -> fechaUpdate }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Fuente web</strong></label><br>
+                            <a href="{{ $precioDolar -> fuente }}">{{ $precioDolar -> fuente }}</a>
+                        </div>
                     </div>  
                 </div>
             </div>

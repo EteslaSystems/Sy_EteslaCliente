@@ -13,6 +13,8 @@
                             <th style="width: 10%;">Potencia</th>
                             <th style="width: 10%;">ISC</th>
                             <th style="width: 10%;">Precio</th>
+                            <th style="width: 10%;">Garantia</th>
+                            <th style="width: 10%;">Origen</th>
                             <th style="width: 10%;">VOC</th>
                             <th style="width: 10%;">VMP</th>
                             <th style="width: 10%;" colspan="2">Acciones</th>
@@ -27,6 +29,8 @@
                                 <td><?php echo e($details->fPotencia); ?></td>
                                 <td><?php echo e($details->fISC); ?></td>
                                 <td><?php echo e($details->fPrecio); ?></td>
+                                <td><?php echo e($details->vGarantia); ?></td>
+                                <td><?php echo e($details->vOrigen); ?></td>
                                 <td><?php echo e($details->fVOC); ?></td>
                                 <td><?php echo e($details->fVMP); ?></td>
                                 <td>

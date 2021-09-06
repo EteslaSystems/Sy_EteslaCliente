@@ -109,16 +109,13 @@
                                             </table>
                                         </p><hr>
                                         <p class="card-text text-right">
-                                            <small class="text-muted">
+                                            <small class="text-muted">   
+                                            <?php if($usuario->updated_at != null): ?>
                                                 Última vez editado: <strong>&nbsp;
-                                                    <?php if($usuario->updated_at != null): ?>
-                                                        <?php echo e($usuario->updated_at); ?>
+                                                    <?php echo e($usuario->updated_at); ?>
 
-                                                    <?php else: ?>
-                                                        Nunca
-                                                    <?php endif; ?>
+                                                <?php endif; ?>
                                                 </strong>
-                                                
                                             </small>
                                         </p>
                                     </div>

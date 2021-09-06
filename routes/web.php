@@ -1,10 +1,8 @@
 <?php
-//PDF
-Route::get('/pdf-template',function(){
-    return view('pdf-template');
+Route::get('/pdf', function(){
+    return view('PDFTemplates.pdfBajaTension');
 });
-
-
+Route::get('/pdfCreate', 'PDFController@visualizarPDF');
 
 /* --------------- Usuario --------------- */
 Route::get('/', 'usuarioController@index');
@@ -23,8 +21,11 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 Route::get('/vendedor', 'vendedorController@index');
 
 Route::get('/registrarCliente', 'vendedorController@misClientes');
-Route::get('/clientes', 'vendedorController@todosClientes');
-Route::post('/agregar-cliente', 'MediaTensionController@create');
+Route::get('/clientes', 'vendedorController@clientes');
+
+//////COTIZACION
+Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
+Route::post('/GuardarPropuesta','CotizacionController@guardarPropuesta');
 
 /* --- Cotizacion Media Tension --- */
 Route::get('/mediaT', 'MediaTensionController@index');
@@ -50,31 +51,50 @@ Route::post('/sendPeriodsBT', 'BajaTensionController@getCotizacionBT');
 Route::post('/calcularViaticosBTI', 'BajaTensionController@calculaViaticos_BT');
 //Busqueda_inteligente
 Route::post('/askCombinations', 'BajaTensionController@askCombination');
+//[ Hoja:POWER ]
+Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
+Route::post('/agregar-cliente','MediaTensionController@create');
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
 Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
 Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
-/* --------------------------------------- */
+/* ------------------Cliente_Propuesta(s)--------------------- */
+Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient');
+/* --------------------------------- */
+
+
 
 /* --------------- Administrador --------------- */
 Route::get('/admin', 'administradorController@index');
 
+//Material_Fotovoltaico
+Route::get('/material-fotovoltaico', 'MaterialFotovoltaicoController@index' );
+
+//PANELES
 Route::get('/paneles', 'PanelesController@index');
 Route::post('/agregar-panel', 'PanelesController@create');
 Route::get('/eliminar-panel/{idPanel}', 'PanelesController@destroy');
 Route::get('/editar-panel/{idPanel}', 'PanelesController@edit');
 Route::put('/editar-panel/{idPanel}', 'PanelesController@update');
 
+//INVERSORES
 Route::get('/inversores', 'InversoresController@index');
 Route::post('/inversoresSelectos', 'InversoresController@getInversoresSelectos');
 Route::post('/agregar-inversor', 'InversoresController@create');
 Route::get('/eliminar-inversor/{idInversor}', 'InversoresController@destroy');
 Route::get('/editar-inversor/{idInversor}', 'InversoresController@edit');
 Route::put('/editar-inversor/{idInversor}', 'InversoresController@update');
+
+//ESTRUCTURAS
+Route::get('/estructuras', 'EstructurasController@read');
+Route::post('/agregar-estructura', 'EstructurasController@create');
+Route::get('/eliminar-estructura/{idEstructura}', 'EstructurasController@destroy');
+
+Route::get('/editar-estructura/{idEstructura}', 'EstructurasController@edit');
 /* --------------------------------------------- */
 
 /* --------------- Ingeniero --------------- */
@@ -115,32 +135,5 @@ Route::get('/cor',function() {
 Route::get('/head',function() {
     return view('template/head');
 });
-
-//Route::get('/bajaTension', function(){ return view('roles/seller/cotizador/bajaTension'); });
-
-// Route::get('/paneles', function(){
-//     return view('roles/admin/paneles');
-// });
-
-// Route::get('/inversores', function(){
-//     return view('roles/admin/inversores');
-// });
-
-// /*--- Ingeniero ---*/
-// Route::get('/levantamiento', function(){
-//     return view('roles/enginer/levantamiento');
-// });
-
-// Route::get('/levantamient', function(){
-//     return view('roles/enginer/levantamient');
-// });
-
-// Route::get('/instalacion', function(){
-//     return view('roles/enginer/instalacion');
-// });
-
-// Route::get('configuracion', function(){
-//     return view('roles/enginer/configuracion');
-// });
 
 Route::post('enviarConfiguracion',['as'=>'enviarConfiguracion','uses'=>'ConfiguracionController@enviarConfiguracion']);

@@ -13,6 +13,8 @@
                             <th style="width: 7.5%;">Potencia</th>
                             <th style="width: 5%;">ISC</th>
                             <th style="width: 7.5%;">Precio</th>
+                            <th style="width: 10%;">Garantia</th>
+                            <th style="width: 10%;">Origen</th>
                             <th style="width: 12.5%;" colspan="2">VMAX / VMIN</th>
                             <th style="width: 12.5%;" colspan="2">PMAX / PMIN</th>
                             <th style="width: 12.5%;" colspan="2">Acciones</th>
@@ -27,6 +29,8 @@
                                 <td><?php echo e($details->fPotencia); ?></td>
                                 <td><?php echo e($details->fISC); ?></td>
                                 <td><?php echo e($details->fPrecio); ?></td>
+                                <td><?php echo e($details->vGarantia); ?></td>
+                                <td><?php echo e($details->vOrigen); ?></td>
                                 <td><?php echo e($details->iVMAX); ?></td>
                                 <td><?php echo e($details->iVMIN); ?></td>
                                 <td><?php echo e($details->iPMAX); ?></td>

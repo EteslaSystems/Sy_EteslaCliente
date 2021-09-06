@@ -14,6 +14,8 @@
                             <th style="width: 10%;">Potencia</th>
                             <th style="width: 10%;">ISC</th>
                             <th style="width: 10%;">Precio</th>
+                            <th style="width: 10%;">Garantia</th>
+                            <th style="width: 10%;">Origen</th>
                             <th style="width: 10%;">VOC</th>
                             <th style="width: 10%;">VMP</th>
                             <th style="width: 10%;" colspan="2">Acciones</th>
@@ -28,6 +30,8 @@
                                 <td>{{ $details->fPotencia }}</td>
                                 <td>{{ $details->fISC }}</td>
                                 <td>{{ $details->fPrecio }}</td>
+                                <td>{{ $details->vGarantia }}</td>
+                                <td>{{ $details->vOrigen }}</td>
                                 <td>{{ $details->fVOC }}</td>
                                 <td>{{ $details->fVMP }}</td>
                                 <td>

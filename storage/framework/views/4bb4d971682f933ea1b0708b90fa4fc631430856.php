@@ -197,7 +197,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
-                    <div class="row row-cols-2">
+                    <div class="row row-cols-3">
                         <div class="col">
                             <div class="form-group">
                                 <label for="p_voc"><?php echo e(__('Voltaje en circuito abierto:')); ?></label>
@@ -227,7 +227,53 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
+                        <div class="col">
+			                <div class="form-group">
+			                    <label for="p_garantia"><?php echo e(__('Garantia:')); ?></label>
 
+			                    <small class="note-form darkred">* Campo requerido</small>
+
+			                    <input id="p_garantia" type="text" step="any" class="form-control" autofocus>
+
+			                    <?php $__errorArgs = ['p_garantia'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+			                    <span class="invalid-feedback" role="alert">
+			                        <strong><?php echo e($message); ?></strong>
+			                    </span>
+			                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+			                </div>
+						</div>
+						<div class="col">
+			                <div class="form-group">
+			                    <label for="p_origen"><?php echo e(__('Origen:')); ?></label>
+
+			                    <small class="note-form darkred">* Campo requerido</small>
+
+			                    <input id="p_origen" type="text" step="any" class="form-control" autofocus>
+
+			                    <?php $__errorArgs = ['p_origen'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+			                    <span class="invalid-feedback" role="alert">
+			                        <strong><?php echo e($message); ?></strong>
+			                    </span>
+			                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+			                </div>
+						</div>
+                    </div>
+
+                    <div class="row row-cols-2">
                         <div class="col">
                             <div class="form-group">
                                 <label for="p_vmp"><?php echo e(__('Voltaje en máxima potencia:')); ?></label>
