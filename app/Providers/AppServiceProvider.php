@@ -16,10 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //Currency @Helper *To* Blade
-        Blade::directive('money', function($monto){
-            return "<?php echo '$' . number_format($monto, 2); ?>";
-        });
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
     }
 
     /**

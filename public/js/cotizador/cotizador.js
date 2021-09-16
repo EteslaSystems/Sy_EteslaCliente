@@ -1,47 +1,67 @@
+$(document).on('ready',function(){
+    sessionStorage.removeItem("_agregados");
+    sessionStorage.removeItem("contadorAgregados");
+});
+
 /*#region Logica*/
-
 /*                  Agregados_CRUD                  */
-var _agregado = [];
-var contadorDeAgregados;
-
-function addAgregado(element){
-    let objAgregado = {};
-    let nombreAgregado = $('#inpAgregado').val();
+function addAgregado(){
+    let _agregados = [];
+    let Agregado = { nombreAgregado: null, cantidadAgregado: null, precioAgregado: null };
+    let nombreAgregao = $('#inpAgregado').val();
     let cantidadAgregado = $('#inpCantidadAg').val();
     let precioAgregado = $('#inpPrecioAg').val();
-    contadorDeAgregados = parseInt(element.value);
+    let contadorDeAgregados = 0;
 
-    if(validarInputsVaciosAg(nombreAgregado) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
-        objAgregado = {
-            nombreAgregado: nombreAgregado, 
-            cantidadAgregado: cantidadAgregado, 
-            precioAgregado: precioAgregado
-        };
-    
-        //Guardo de 'Agregado' en Array
-        _agregado.push(objAgregado);
-    
+    /* Contador - Agregados */
+    contadorDeAgregados = sessionStorage["contadorAgregados"] ? parseInt(sessionStorage.getItem("contadorAgregados")) : contadorDeAgregados;
+
+    if(validarInputsVaciosAg(nombreAgregao) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
+        Agregado.nombreAgregado = nombreAgregao;
+        Agregado.cantidadAgregado = cantidadAgregado;
+        Agregado.precioAgregado = precioAgregado;
+
+        //[]
+        if(contadorDeAgregados === 0){
+            _agregados[contadorDeAgregados] = Agregado;
+        }
+        else{
+            _agregados = JSON.parse(sessionStorage.getItem("_agregados"))
+            _agregados[contadorDeAgregados] = Agregado;
+        }
+
         //Pintar 'Agregado' en tabla
         let tableBody = $('#tblAgregados > tbody');
-        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdContAg'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregado[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregado[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregado[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(event);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
-        
-        contadorDeAgregados++;
-        $('#'+element.id).val(contadorDeAgregados);
+        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdAgregado'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregados[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregados[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregados[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(this);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+
+        //
+        sessionStorage.setItem("_agregados", JSON.stringify(_agregados));
+
+        contadorDeAgregados++; //Se incrementa el contadorDeAgregados
+        sessionStorage.setItem("contadorAgregados", contadorDeAgregados); //Se modifica por el nuevo -valor- al sessionStorage
         limpiarInputsAgregado();
     }
 }
 
-function eliminarAgregado(event){
-    //Se borra el *obj* logicamente del array
-    let posicionAgregado = event.target.id;
+function eliminarAgregado(control){
+    let contadorDeAgregados = 0;
+    let posicionAgregado = control.id;//Se borra el *obj* logicamente del array
+    let _agregado = JSON.parse(sessionStorage.getItem('_agregados'));
+
     _agregado.splice(posicionAgregado, 1);
+
+    //Se remplaza el antiguo 'sessionStorage' con el nuevo array -_agregado-
+    sessionStorage.removeItem('_agregados');
+    sessionStorage.setItem('_agregados', JSON.stringify(_agregado));
     
     //Se elimina visualmente de la tabla
-    event.preventDefault();
     $('#trContAg'+posicionAgregado).remove();
 
+    /* Contador - Agregados */
     //Disminuye el contador de agregados
+    contadorDeAgregados = parseInt(sessionStorage.getItem("contadorAgregados")); //Se obtiene el contador del 'value' del -btnAddAg-
     contadorDeAgregados--;
+    sessionStorage.setItem("contadorAgregados", contadorDeAgregados); //Se modifica por el nuevo -valor-
 }
 
 //Validaciones y eventos - *Agregados*
@@ -206,9 +226,8 @@ function pintarGrafico(){
     let optionSelected = $('#ddlGraficoView').val();
 
     //Formating... * BajaTension || MediaTension *
-    tipoCotizacion = JSON.parse(sessionStorage.getItem("ssViaticos")); //get - [data]
-    // tipoCotizacion = tipoCotizacion.tipoCotizacion;
-    tipoCotizacion = 'bajaTension';
+    tipoCotizacion = JSON.parse(sessionStorage.getItem("answPropuesta")); //get - [data_propuesta]
+    tipoCotizacion = tipoCotizacion[0].tipoCotizacion;
 
     try{
         if(optionSelected != '-1'){

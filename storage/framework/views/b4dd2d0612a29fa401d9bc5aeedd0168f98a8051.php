@@ -199,7 +199,7 @@
                             <td><?php echo e($paneles["vMarca"]); ?></td>
                             <td><?php echo e($paneles["noModulos"]); ?></td>
                             <td><?php echo e($paneles["vNombreMaterialFot"]); ?></td>
-                            <td>$<?php echo e(number_format($paneles["costoTotal"], 2)); ?> USD</td>
+                            <td id="costoTotalPanel"></td>
                         </tr>
                     <?php endif; ?>
                     <?php if(!is_null($inversores)): ?>
@@ -209,17 +209,17 @@
                             <td id="marcaInversor"><?php echo e($inversores["vMarca"]); ?></td>
                             <td id="cantidadInversor"><?php echo e($inversores["numeroDeInversores"]); ?></td>
                             <td id="modeloInversor"><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
-                            <td id="costoTotalInversor">$<?php echo e(number_format($inversores["precioTotal"], 2)); ?> USD</td>
+                            <td id="costoTotalInversor"></td>
                         </tr>
                     <?php endif; ?>
-                    <?php if(!is_null($estructura)): ?>
+                    <?php if(!is_null($estructura["_estructuras"])): ?>
                         <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
                         <tr id="desgloceEstructura">
                             <td>Estructura</td>
                             <td id="marcaEstructura"><?php echo e($estructura["vMarca"]); ?></td>
                             <td id="cantidadEstructura"><?php echo e(($estructura["fPrecio"] / $costoTotalEstructuras)); ?></td>
                             <td>Estructura de aluminio</td>
-                            <td id="costoTotalEstructura">$<?php echo e(number_format($costoTotalEstructuras, 2)); ?> USD</td>
+                            <td id="costoTotalEstructura"></td>
                         </tr>
                     <?php endif; ?>
                     <?php if($totales["manoDeObra"] > 0): ?>
@@ -228,8 +228,8 @@
                             <td>Mano de obra</td>
                             <td>Etesla</td>
                             <td></td>
-                            <td>Mano de obra para instalacion</td>
-                            <td>$<?php echo e(number_format($totales["manoDeObra"], 2)); ?> USD</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     <?php endif; ?>
                     <?php if($totales["otrosTotal"] > 0): ?>
@@ -238,8 +238,8 @@
                             <td>Material electrico</td>
                             <td>Etesla</td>
                             <td></td>
-                            <td>Material electrico por sistema fotovoltaico</td>
-                            <td id="costoTotalOtros">$<?php echo e(number_format($totales["otrosTotal"], 2)); ?> USD</td>
+                            <td></td>
+                            <td id="costoTotalOtros"></td>
                         </tr>
                     <?php endif; ?>
                     <tr>
@@ -283,7 +283,7 @@
                         <img style="width: 140px; height: 78px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($inversores['imgRuta']); ?>">
                     </td>
                 <?php endif; ?>
-                <?php if(!is_null($estructura)): ?>
+                <?php if(!is_null($estructura["_estructuras"])): ?>
                     <td id="imgLogoEstructuras" align="center" style="border: none;">
                         <img style="width: 120px; height: 78px;" src="https://drive.google.com/uc?export=view&id=<?php echo e($estructura['imgRuta']); ?>">
                     </td>
@@ -299,7 +299,7 @@
             <?php if(!is_null($inversores)): ?>
                 <p>Garantia en el inversor <strong><?php echo e($inversores["vMarca"]); ?></strong> con <?php echo e($inversores["vGarantia"]); ?> años de garantia</p>
             <?php endif; ?>
-            <?php if(!is_null($estructura)): ?>
+            <?php if(!is_null($estructura["_estructuras"])): ?>
                 <p>Garantia de <?php echo e($estructura["vGarantia"]); ?> años en la marca de soportes <strong><?php echo e($estructura["vMarca"]); ?></strong></p>
             <?php endif; ?>
         </div>
@@ -334,5 +334,39 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 1 -->
+    <!-- Pagina 2 - Agregados -->
+    <?php if(!is_null($agregados["_agregados"])): ?>
+        <!-- Salto de pagina -->
+        <hr class="salto-pagina">
+        <!-- Tabla de agregados -->
+        <div class="container-fluid">
+            <div class="container-table">
+                <table class="table-costos-proyecto">
+                    <thead>
+                        <tr>
+                            <th>Agregado</th>
+                            <th>Cantidad</th>
+                            <th>Precio unit.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $__currentLoopData = $agregados["_agregados"]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agregado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                                <td><?php echo e($agregado["nombreAgregado"]); ?></td>
+                                <td><?php echo e($agregado["cantidadAgregado"]); ?></td>
+                                <td><?php echo e($agregado["precioAgregado"]); ?></td>
+                            </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td></td>
+                            <td>Costo total</td>
+                            <td><?php echo e($agregados["costoTotal"]); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php endif; ?>
+    <!-- Fin Pagina 2 -->
 </body>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/individual.blade.php ENDPATH**/ ?>

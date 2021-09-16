@@ -155,18 +155,31 @@ function limpiarInput(nombreInput){
 
 /*#region Funcionalidad*/
 function catchDataCotizacionIndividual(){
-    let dataCotIndividual = { cliente: { id: null, direccion: null }, complementos: { manoObra: null, otros: null, viaticos: {  }, fletes: null }, agregados: null, equipos: null };
+    let dataCotIndividual = { 
+        cliente: { id: null, direccion: null },
+        ajustePropuesta: { aumento: null, descuento: null },
+        complementos: { 
+            manoObra: null, 
+            otros: null, 
+            viaticos: {}, 
+            fletes: null 
+        }, 
+        agregados: null, 
+        equipos: null
+    };
+    let _agregado = null;
+    
     dataCotIndividual.cliente.id = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     dataCotIndividual.cliente.direccion = document.getElementById('municipio').value;
 
-    /*Cliente*/
+    /* Cliente */
     if(validarUsuarioCargado(dataCotIndividual.cliente.id) == true){
-        /*Equipos*/
+        /* Equipos */
         if(validarInputsEquipos() === true){
-            /*Equipos (paneles, inversores, estructuras)*/
+            /* Equipos (paneles, inversores, estructuras) */
             dataCotIndividual.equipos = catchDataEquipos();
 
-            /*Complementos [ManoObra, Otros, Viaticos, Fletes]*/
+            /* Complementos [ManoObra, Otros, Viaticos, Fletes] */
             dataCotIndividual.complementos.manoObra = $('#chbMO').val();
             dataCotIndividual.complementos.otros = $('#chbOtros').val();
             dataCotIndividual.complementos.viaticos = {
@@ -178,16 +191,19 @@ function catchDataCotizacionIndividual(){
             };
             dataCotIndividual.complementos.fletes = $('#chbFletes').val();
 
-            /*Agregados*/
-            _agregado = _agregado; ///Arreglo de objAgregados (var - global)*
-            _agregado = _agregado == null || _agregado.length == 0 ? null : _agregado;///Comprobacion de que no venga vacio
+            /* Agregados */
+            _agregado = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
             dataCotIndividual.agregados = _agregado;
+
+            /* AjustePropuesta */
+            dataCotIndividual.ajustePropuesta = {
+                aumento: $('#inpSliderAumento').val() || 0, 
+                descuento: $('#inpSliderDescuento').val() || 0
+            };
 
             return dataCotIndividual;
         }
     }
-
-    //return false;
 }
 
 function pintarResultadoCotizacion(cotizacionResult){

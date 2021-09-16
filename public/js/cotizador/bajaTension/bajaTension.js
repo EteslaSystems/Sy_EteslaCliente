@@ -1262,17 +1262,15 @@ function sliderModificarPropuesta(){
 }
 
 async function modificarPropuesta(){
-    let tarifaMT = sessionStorage.getItem("tarifaMT");
-
     //Modificar sessionStorage de "propuestaNueva" o "propuestaModificada" *0 = Nueva* *1 = Modificada*
     sessionStorage.removeItem("bndPropuestaEditada");
     sessionStorage.setItem("bndPropuestaEditada", 1);
 
-    // //Se cambia de estado el dropDownList de "Inversores" a -1 (para que se vacie de los inversores anteriores y traiga los nuevos de la propuesta modificada)
+    //Se cambia de estado los dropDownList de Equipos [ Paneles, Inversores ]
     $('listPaneles').val('-1');
     $('listInversores').val('-1');
 
-    // //Se limpian inputs de -result- anterior
+    // //Se limpian inputs de resultados
     limpiarCampos();
 
     // //Cachar los valores de los porcentajes / panel de ajuste

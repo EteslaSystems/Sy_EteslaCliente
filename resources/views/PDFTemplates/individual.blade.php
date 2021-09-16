@@ -199,7 +199,7 @@
                             <td>{{ $paneles["vMarca"] }}</td>
                             <td>{{ $paneles["noModulos"] }}</td>
                             <td>{{ $paneles["vNombreMaterialFot"] }}</td>
-                            <td>${{ number_format($paneles["costoTotal"], 2) }} USD</td>
+                            <td id="costoTotalPanel"></td>
                         </tr>
                     @endif
                     @if(!is_null($inversores))
@@ -209,17 +209,17 @@
                             <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
                             <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
                             <td id="modeloInversor">{{ $inversores["vNombreMaterialFot"] }}</td>
-                            <td id="costoTotalInversor">${{ number_format($inversores["precioTotal"], 2) }} USD</td>
+                            <td id="costoTotalInversor"></td>
                         </tr>
                     @endif
-                    @if(!is_null($estructura))
+                    @if(!is_null($estructura["_estructuras"]))
                         <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
                         <tr id="desgloceEstructura">
                             <td>Estructura</td>
                             <td id="marcaEstructura">{{ $estructura["vMarca"] }}</td>
                             <td id="cantidadEstructura">{{ ($estructura["fPrecio"] / $costoTotalEstructuras) }}</td>
                             <td>Estructura de aluminio</td>
-                            <td id="costoTotalEstructura">${{ number_format($costoTotalEstructuras, 2) }} USD</td>
+                            <td id="costoTotalEstructura"></td>
                         </tr>
                     @endif
                     @if($totales["manoDeObra"] > 0)
@@ -228,8 +228,8 @@
                             <td>Mano de obra</td>
                             <td>Etesla</td>
                             <td></td>
-                            <td>Mano de obra para instalacion</td>
-                            <td>${{ number_format($totales["manoDeObra"], 2) }} USD</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endif
                     @if($totales["otrosTotal"] > 0)
@@ -238,8 +238,8 @@
                             <td>Material electrico</td>
                             <td>Etesla</td>
                             <td></td>
-                            <td>Material electrico por sistema fotovoltaico</td>
-                            <td id="costoTotalOtros">${{ number_format($totales["otrosTotal"], 2) }} USD</td>
+                            <td></td>
+                            <td id="costoTotalOtros"></td>
                         </tr>
                     @endif
                     <tr>
@@ -283,7 +283,7 @@
                         <img style="width: 140px; height: 78px;" src="https://drive.google.com/uc?export=view&id={{ $inversores['imgRuta'] }}">
                     </td>
                 @endif
-                @if(!is_null($estructura))
+                @if(!is_null($estructura["_estructuras"]))
                     <td id="imgLogoEstructuras" align="center" style="border: none;">
                         <img style="width: 120px; height: 78px;" src="https://drive.google.com/uc?export=view&id={{ $estructura['imgRuta'] }}">
                     </td>
@@ -299,7 +299,7 @@
             @if(!is_null($inversores))
                 <p>Garantia en el inversor <strong>{{ $inversores["vMarca"] }}</strong> con {{ $inversores["vGarantia"] }} años de garantia</p>
             @endif
-            @if(!is_null($estructura))
+            @if(!is_null($estructura["_estructuras"]))
                 <p>Garantia de {{ $estructura["vGarantia"] }} años en la marca de soportes <strong>{{ $estructura["vMarca"] }}</strong></p>
             @endif
         </div>
@@ -334,5 +334,39 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 1 -->
+    <!-- Pagina 2 - Agregados -->
+    @if(!is_null($agregados["_agregados"]))
+        <!-- Salto de pagina -->
+        <hr class="salto-pagina">
+        <!-- Tabla de agregados -->
+        <div class="container-fluid">
+            <div class="container-table">
+                <table class="table-costos-proyecto">
+                    <thead>
+                        <tr>
+                            <th>Agregado</th>
+                            <th>Cantidad</th>
+                            <th>Precio unit.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($agregados["_agregados"] as $agregado)
+                            <tr>
+                                <td>{{ $agregado["nombreAgregado"] }}</td>
+                                <td>{{ $agregado["cantidadAgregado"] }}</td>
+                                <td>{{ $agregado["precioAgregado"] }}</td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <td></td>
+                            <td>Costo total</td>
+                            <td>{{ $agregados["costoTotal"] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
+    <!-- Fin Pagina 2 -->
 </body>
 </html>

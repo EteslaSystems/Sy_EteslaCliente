@@ -196,35 +196,35 @@
                         <td id="marcaPanel">{{ $paneles["marca"] }}</td>
                         <td id="cantidadPanel">{{ $paneles["noModulos"] }}</td>
                         <td id="modeloPanel">{{ $paneles["nombre"] }}</td>
-                        <td id="costoTotalPanel">${{ number_format($paneles['costoTotal'], 2) }} USD</td>
+                        <td id="costoTotalPanel"></td>
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
                         <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
                         <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
                         <td id="modeloInversor">{{ $inversores["vNombreMaterialFot"] }}</td>
-                        <td id="costoTotalInversor">${{ number_format($inversores["precioTotal"], 2) }} USD</td>
+                        <td id="costoTotalInversor"></td>
                     </tr>
                     <tr id="desgloceEstructura">
                         <td>Estructura</td>
                         <td id="marcaEstructura">{{ $estructura["vMarca"] }}</td>
                         <td id="cantidadEstructura">{{ $paneles["noModulos"] }}</td>
                         <td>Estructura de aluminio</td>
-                        <td id="costoTotalEstructura">${{ number_format(($estructura["fPrecio"] * $paneles["noModulos"]), 2) }} USD</td>
+                        <td id="costoTotalEstructura"></td>
                     </tr>
                     <tr>
                         <td>Mano de obra</td>
-                        <td>Etesla</td>
                         <td></td>
-                        <td>Mano de obra para instalacion</td>
-                        <td id="costoTotalManoDeObra">${{ number_format($totales["manoDeObra"], 2) }} USD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Material electrico</td>
-                        <td>Etesla</td>
                         <td></td>
-                        <td>Material electrico por sistema fotovoltaico</td>
-                        <td id="costoTotalOtros">${{ number_format($totales["otrosTotal"], 2) }} USD</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
