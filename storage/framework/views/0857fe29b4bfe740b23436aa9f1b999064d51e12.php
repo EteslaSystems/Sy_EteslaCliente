@@ -233,14 +233,14 @@
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
                     </tr>
-                    <tr style="background-color: #808080;">
+                    <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
                         <td></td>
                         <td align="center";>$* USD</td>
                         <td align="center";>$* MXN</td>
                     </tr>
-                    <tr style="background-color: #808080;">
+                    <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
                         <td></td>
@@ -258,13 +258,13 @@
         <table class="table-contenedor" style="margin-top: -15px;">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
-                    <img style="width: 140px; height: 95px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                    <img style="width: 140px; height: 78px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
-                    <img style="width: 140px; height: 95px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                    <img style="width: 140px; height: 78px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
                 </td>
                 <td id="imgLogoEstructuras" align="center" style="border: none;">
-                    <img style="width: 120px; height: 95px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                    <img style="width: 120px; height: 78px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
                 </td>
             </tr>
         </table>

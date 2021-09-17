@@ -209,10 +209,11 @@ function catchDataCotizacionIndividual(){
 function pintarResultadoCotizacion(cotizacionResult){
     let cotizacionIndividual = cotizacionResult[0]; //Formating of Array to Object
 
+    //Setters data
     let potenciaInstalad = ((cotizacionIndividual.paneles.fPotencia * cotizacionIndividual.paneles.noModulos) / 1000);
     let costoPanel = cotizacionIndividual.paneles.costoTotal;
     let costoInversor = cotizacionIndividual.inversores != null ? cotizacionIndividual.inversores.precioTotal : 0;
-    let costoEstructura = cotizacionIndividual.estructura != null ? cotizacionIndividual.costoTotalEstructuras : 0;
+    let costoEstructura = cotizacionIndividual.estructura._estructuras != null ? cotizacionIndividual.estructura.costoTotal : 0;
     let costoViaticos = cotizacionIndividual.totales.totalViaticosMT;
     let costoMO = cotizacionIndividual.totales.manoDeObra + cotizacionIndividual.totales.otrosTotal;
     let costoFletes =cotizacionIndividual.totales.fletes; //$$ - USD

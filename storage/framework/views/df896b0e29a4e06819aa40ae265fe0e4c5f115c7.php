@@ -59,19 +59,19 @@
                                                             <strong>Cargo:</strong>
                                                         </th>
                                                         <td style="width: 70%;">
-                                                            <?php if($usuario->ttTipoUsuario == 'Admin'): ?>
+                                                            <?php if($usuario->siRol == 1): ?>
                                                                 <strong>Administrador</strong>
                                                             <?php endif; ?>
-                                                            <?php if($usuario->ttTipoUsuario == 'Operac'): ?>
+                                                            <?php if($usuario->siRol == 2): ?>
                                                                 <strong>Operaciones</strong>
                                                             <?php endif; ?>
-                                                            <?php if($usuario->ttTipoUsuario == 'GerenteIng'): ?>
+                                                            <?php if($usuario->siRol == 3): ?>
                                                                 <strong>Gerente de ingeniería</strong>
                                                             <?php endif; ?>
-                                                            <?php if($usuario->ttTipoUsuario == 'Ing'): ?>
+                                                            <?php if($usuario->siRol == 4): ?>
                                                                 <strong>Ingeniero</strong>
                                                             <?php endif; ?>
-                                                            <?php if($usuario->ttTipoUsuario == 'Vend'): ?>
+                                                            <?php if($usuario->siRol == 5): ?>
                                                                 <strong>Vendedor</strong>
                                                             <?php endif; ?>
                                                         </td>
