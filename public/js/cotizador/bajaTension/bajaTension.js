@@ -11,44 +11,49 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
     let data = null; //DATA de la propuesta a calcular
 
     //Se valida si la propuesta a realizar es una NUEVA o AJUSTADA(modificada)
-    if(dataEdited === null){
-        //Se obtienen los datos de la propuesta
-        let dataPropuesta = cacharDatosPropuesta();
+    try{
+        if(dataEdited === null){
+            //Se obtienen los datos de la propuesta
+            let dataPropuesta = cacharDatosPropuesta();
+    
+            if(typeof dataPropuesta != "undefined"){
+                data = dataPropuesta;
+            }
+            else{
+                e.preventDefault();
+            }
+        }
+    
+        if(dataEdited === null){ //Cotizacion nueva
+            /* Enviar Propuesta - Manipular resultado */
+            await pintarVistaDeResultados();
+    
+            _combinaciones = await obtenerCombinaciones(data);
+            $('#ddlCombinaciones').prop("disabled",false);//Se activa el ddlCombinaciones
 
-        if(typeof dataPropuesta != "undefined"){
+            //Se obtienen paneles
+            _cotizacion = await enviarCotizacion(data); 
+            vaciarRespuestaPaneles(_cotizacion);
+    
+            //Se obtiene estructuras
+            let estructuras = await getListEstructuras();
+            llenarDropDownListEstructuras(estructuras.message);
+            //El sistema selecciona una estructura
+            seleccionaUnaEstructura('Everest');
+        }
+        else{ //Cotizacion ajustada
+            dataPropuesta = cacharDatosPropuesta();
+            dataPropuesta.porcentajePropuesta = dataEdited.porcentajePropuesta;
+            dataPropuesta.porcentajeDescuento = dataEdited.porcentajeDescuento;
             data = dataPropuesta;
-        }
-        else{
-            e.preventDefault();
+    
+            ///Enviar propuesta AJUSTADA
+            _cotizacionAjustada = await enviarCotizacion(data);
+            vaciarRespuestaPaneles(_cotizacionAjustada);
         }
     }
-
-    if(dataEdited === null){ //Cotizacion nueva
-        /* Enviar Propuesta - Manipular resultado */
-        await pintarVistaDeResultados();
-
-        _combinaciones = await obtenerCombinaciones(data);
-        await vaciarCombinaciones(_combinaciones);
-        
-        //Se obtienen paneles
-        _cotizacion = await enviarCotizacion(data); 
-        vaciarRespuestaPaneles(_cotizacion);
-
-        //Se obtiene estructuras
-        let estructuras = await getListEstructuras();
-        llenarDropDownListEstructuras(estructuras.message);
-        //El sistema selecciona una estructura
-        seleccionaUnaEstructura('Everest');
-    }
-    else{ //Cotizacion ajustada
-        dataPropuesta = cacharDatosPropuesta();
-        dataPropuesta.porcentajePropuesta = dataEdited.porcentajePropuesta;
-        dataPropuesta.porcentajeDescuento = dataEdited.porcentajeDescuento;
-        data = dataPropuesta;
-
-        ///Enviar propuesta AJUSTADA
-        _cotizacionAjustada = await enviarCotizacion(data);
-        vaciarRespuestaPaneles(_cotizacionAjustada);
+    catch(error){
+        alert(error);
     }
 }
 
@@ -70,11 +75,11 @@ function enviarCotizacion(data){ //Paneles
                     respuesta = respuesta.message;
                     ////#endregion
                     
-                    //
+                    //Consumos - Result [Formated]
                     sessionStorage.removeItem("_consumsFormated");
                     sessionStorage.setItem("_consumsFormated",JSON.stringify(respuesta[0]));
 
-                    //
+                    //Paneles - Result [Formated]
                     sessionStorage.removeItem("_respPaneles");
                     sessionStorage.setItem("_respPaneles",JSON.stringify(respuesta));
 
@@ -144,10 +149,21 @@ function obtenerCombinaciones(data){
             data: data,
             dataType: 'json',
             success: function(result){
-                resolve(result);
+                if(result.status === 200){
+                    //Guardar en un SessionStorage el -ArrayCombinaciones-
+                    sessionStorage.removeItem("arrayCombinaciones");
+                    sessionStorage.setItem("arrayCombinaciones", JSON.stringify(result.message));
+
+                    resolve(result.message);
+                }
+                else{
+                    console.log(result.message);
+                    reject('Ah ocurrido un problema con la solicitud de -combinaciones-:\n'+result.message);
+                }
             },
             error: function(error){
-                reject('Hubo un error al intentar procesar combinaciones: '+error);
+                console.log(error);
+                reject('Ah ocurrido un problema con la solicitud de -combinaciones-:\n'+error);
             }
         });
     });
@@ -177,6 +193,7 @@ function calcularViaticosBT(objInversor){
             
                 if(objInversor === null || typeof objInversor === 'undefined'){
                     ssinversor = sessionStorage.getItem('__ssInversorSeleccionado');
+                    ssinversor = ssinversor === null ? sessionStorage.getItem('ssInversorCostoBeneficio') : ssinversor;
                 }
                 else{
                     ssinversor = objInversor;
@@ -214,7 +231,7 @@ function calcularViaticosBT(objInversor){
                             //Se selecciona de primera instancia 'AhorroEnergetico' en el <select>
                             $('#ddlGraficoView option[value="ahorroEnergetico"]').attr("selected",true);
                             //Se pinta el grafico
-                            pintarGrafico();
+                            // pintarGrafico();
                             /*#endregion*/
                             
                             resolve(resultViaticos);
@@ -345,8 +362,8 @@ function activarDesactivarBotones(equipo,habilidad){
 }
 
 function limpiarResultados(limpiaResult){
-    /* 0 - paneles
-    1 - inversores */
+//     /* 0 - paneles
+//     1 - inversores */
 
     if(limpiaResult == 0){
         /*Limpiar Resultados de -Paneles-*/
@@ -357,33 +374,32 @@ function limpiarResultados(limpiaResult){
         $('#tdCostoWatt').text('');
         $('#tdPanelPotenciaReal').text('');
     }
-    else{
-        /*Limpiar Resultados de -Inversor-*/
+    else{ //Inversores
+        $('#tdInversorModelo').text('');
         $('#tdInversorPotencia').text('');
         $('#tdInversorCantidad').text('');
-
-        /*Limpiar Resultados Energeticos ( $$/Watt ) */
-        ///Ahorro energetico
-        $('#tdConsumoActualKwMes').text('');
-        $('#tdConsumoActualKwBim').text('');
-        $('#tdGeneracionKwMes').text('');
-        $('#tdGeneracionKwBim').text('');
-        $('#tdNuevoConsumoMes').text('');
-        $('#tdNuevoConsumoBim').text('');
-        ///Ahorro economico
-        $('#tdConsumoActualDinMes').text('');
-        $('#tdConsumoActualDinBim').text('');
-        $('#tdGeneracionDinMes').text('');
-        $('#tdGeneracionDinBim').text('');
-        $('#tdNuevoConsumoDinMes').text('');
-        $('#tdNuevoConsumoDinBim').text('');
-
-        /*Limpiar Resultados de Costos - Totales*/
         $('#tdSubtotalUSD').text('');
         $('#tdTotalUSD').text('');
         $('#tdSubtotalMXN').text('');
         $('#tdTotalMXN').text('');
     }
+}
+
+function selectOptionEntregable(chbx){
+    let idChbx = chbx.id;
+    let bandera = false;
+
+    //Se guarda el -id- del chbtn/opcion Seleccionada
+    sessionStorage.removeItem('chbxEntregable');
+    sessionStorage.setItem('chbxEntregable',idChbx);
+
+    if($('#'+idChbx).is(":checked")){
+        bandera = true;
+    }
+
+    idChbx = idChbx === "rbtnQR" ? "rbtnPDF" : "rbtnQR";
+
+    $('#'+idChbx).prop("disabled",bandera);
 }
 /*#endregion*/
 /*#region Validaciones*/
@@ -491,6 +507,10 @@ async function mostrarPanelSeleccionado(){
 
         /* Se pinta el mejor CostoBeneficio en INVERSORES */
         let InversorCostoBeneficio = getInversorCostoBeneficio(0);
+
+        //Guardar Inversor-CostoBeneficio [sessionStorage]
+        sessionStorage.removeItem('ssInversorCostoBeneficio');
+        sessionStorage.setItem('ssInversorCostoBeneficio',JSON.stringify(InversorCostoBeneficio));
 
         //:void() = Se pintan los MODELOS de inversores
         vaciarModelosInversores(InversorCostoBeneficio.vMarca);
@@ -859,326 +879,112 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
 }
 /*#endregion*/
 /*#region Combinaciones*/
-async function vaciarCombinaciones(resultCombinacione){
+function vaciarCombinaciones(resultCombinacione){
     let resultCombinaciones = resultCombinacione.message; //Formating
     resultCombinaciones = resultCombinaciones[0]; //ArrayCombinaciones
 
-    //Guardar en un SessionStorage el ArrayCombinaciones
-    sessionStorage.setItem("arrayCombinaciones", JSON.stringify(resultCombinaciones));
-
-    //Se llena la lista desplegable de *combinaciones*
-    llenarListaDesplegableCombinaciones(resultCombinaciones); //AJAX - request
-
+    
 
     //Se pintan las combinaciones en el *modal_combinaciones*
     vaciarCombinacionesEnModal(resultCombinaciones); //AJAX - request
 }
 
-function llenarListaDesplegableCombinaciones(combinaciones){
-    try{
-        let ddlCombinaciones = $('#listConvinaciones');
+function seleccionarCombinacion(ddlCombinaciones){
+    let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
 
-        $('#listConvinaciones').prop("disabled", false); //Se desbloquea DropDownList-Combinaciones
-        $('#btnDivCombinaciones').prop("disabled", false);//Se desbloquea boton-divCombinaciones
-    
-        //DropDownList de combinaciones
-        ddlCombinaciones.on('change', function(){
-            let valueOfListCombinaciones = ddlCombinaciones.val();
-    
-            switch(valueOfListCombinaciones)
-            {
-                case 'optConvinacionOptima'://Optima
-                    //tipo_combinacion
-                    $('#inpTipoCombinacion0').val("optima");//Input oculto - combinacion_mediana
-                    //Page1_Result
-                    $('#inpPotencia').val(combinaciones.combinacionOptima[0].paneles.potenciaReal + 'kW');
-                    $('#inpMarcaPanelS').val(combinaciones.combinacionOptima[0].paneles.marca);
-                    $('#inpMarcaInversorS').val(combinaciones.combinacionOptima[0].inversores.vMarca);
-                    $('#inpCantidadPaneles').val(combinaciones.combinacionOptima[0].paneles.noModulos);
-    
-                    if(combinaciones.combinacionOptima[0].inversores.combinacion === true){
-                        $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMen);
-                    }
-                    else{
-                        $('#inpCantidadInvers').val(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
-                    }
-    
-                    $('#inpCantidadInvers').val(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
-                    $('#inpCostProyectoSIVA').val(combinaciones.combinacionOptima[0].totales.precio  + '$');
-                    $('#inpCostProyectoCIVA').val(combinaciones.combinacionOptima[0].totales.precioMasIVA  + '$');
-                    $('#inpCostPorWatt').val(combinaciones.combinacionOptima[0].totales.precio_watt  + '$');
-                    $('#inpCostProyectoMXN').val(combinaciones.combinacionOptima[0].totales.precioMXNConIVA  + '$');
-    
-                    //Page2_Result
-                    promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                    nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-    
-                    $('#inpModeloPanel').val(combinaciones.combinacionOptima[0].paneles.nombre);
-                    $('#inpModeloInversor').val(combinaciones.combinacionOptima[0].inversores.vNombreMaterialFot);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-                    $('#inpGeneracionMensual').val(generacionMensual + ' kWh(' + generacionMensual * 2 + '/bim)');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoBimestral/2 + ' kw(' + nuevoConsumoBimestral + '/bim)');
-                    $('#inpPorcentGeneracion').val(combinaciones.combinacionOptima[0].power.porcentajePotencia + '%');
-    
-                    //Page3_Result
-                    $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroBimestral').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroBimestralEnPesosMXN);
-                    $('#inpAhorroAnual').val('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    $('#plROIBruto1').val(combinaciones.combinacionOptima[0].roi.roiEnAnios + 'años');
-                    $('#plROIDeduccion1').val(combinaciones.combinacionOptima[0].roi.roiConDeduccion + 'años');
-    
-                    //Boton_salvar
-                    $('#checkSalvarCombinacion').css("display", "");
-                    //Boton_details
-                    $('#btnDetails').css("display", "");
-                    //Boton_ajustePropuesta
-                    $('#btnModalAjustePropuesta').css("display", "");
-                break;
-                case 'optConvinacionMediana'://Mediana
-                    //tipo_combinacion
-                    $('#inpTipoCombinacion1').val("mediana");//Input oculto - combinacion_mediana
-                    //Page1_Result
-                    $('#inpPotencia').val(combinaciones.combinacionMediana[0].paneles.potenciaReal + 'kW');
-                    $('#inpCantidadPaneles').val(combinaciones.combinacionMediana[0].paneles.noModulos);
-    
-                    if(cantidadInversores.combinacion === true){
-                        $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMen);
-                    }
-                    else{
-                        $('#inpCantidadInvers').val(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
-                    }
-                    
-                    $('#inpCostProyectoSIVA').val(combinaciones.combinacionMediana[0].totales.precio + '$');
-                    $('#inpCostProyectoCIVA').val(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
-                    $('#inpCostPorWatt').val(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
-                    $('#inpCostProyectoMXN').val(combinaciones.combinacionMediana[0].totales.precioMXNConIVA+ '$');
-    
-                    //Page2_Result
-                    promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                    nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-    
-                    $('#inpModeloPanel').val(combinaciones.combinacionMediana[0].paneles.nombre);
-                    $('#inpModeloInversor').val(combinaciones.combinacionMediana[0].inversores.vNombreMaterialFot);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
-                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoBimestral/2 + 'kw(' + nuevoConsumoBimestral + '/bim)');
-                    $('#inpPorcentGeneracion').val(combinaciones.combinacionMediana[0].power.porcentajePotencia + '%');
-    
-                    //Page3_Result
-                    $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroBimestral').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroBimestralEnPesosMXN);
-                    $('#inpAhorroAnual').val('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    $('#plROIBruto1').val(combinaciones.combinacionMediana[0].roi.roiEnAnios + 'años');
-                    $('#plROIDeduccion1').val(combinaciones.combinacionMediana[0].roi.roiConDeduccion + 'años');
-    
-                    //Boton_salvar
-                    $('#checkSalvarCombinacion').css("display", "");
-                    //Boton_details
-                    $('#btnDetails').css("display", "");
-                    //Boton_ajustePropuesta
-                    $('#btnModalAjustePropuesta').css("display", "");
-                break;
-                case 'optConvinacionEconomica'://Economica
-                    //tipo_combinacion
-                    $('#inpTipoCombinacion2').val("economica");//Input oculto - combinacion_economica
-                    
-                    //Page1_Result
-                    $('#inpPotencia').val(combinaciones.combinacionEconomica[0].paneles.potenciaReal + 'kW');
-                    $('#inpCantidadPaneles').val(combinaciones.combinacionEconomica[0].paneles.noModulos).val(combinaciones.combinacionEconomica[0].paneles.noModulos);
-    
-                    if(combinaciones.combinacionEconomica[0].inversores.combinacion === true){
-                        $('#inpCantidadInvers').val('QS1: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMen);
-                    }
-                    else{
-                        $('#inpCantidadInvers').val(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
-                    }
-    
-                    $('#inpCostProyectoSIVA').val(combinaciones.combinacionEconomica[0].totales.precio + '$');
-                    $('#inpCostProyectoCIVA').val(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
-                    $('#inpCostPorWatt').val(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
-                    $('#inpCostProyectoMXN').val(combinaciones.combinacionEconomica[0].totales.precioMXNConIVA+ '$');
-    
-                    //Page2_Result
-                    promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-                    generacionMensual = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-                    nuevoConsumoBimestral = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-    
-                    $('#inpModeloPanel').val(combinaciones.combinacionEconomica[0].paneles.nombrePanel);
-                    $('#inpModeloInversor').val(combinaciones.combinacionEconomica[0].inversores.vNombreMaterialFot);
-                    $('#inpConsumoMensual').val(promedioConsumoMensual + 'kWh(' +promedioConsumoMensual *2 + '/bim)');
-                    $('#inpGeneracionMensual').val(generacionMensual + 'kWh(' + generacionMensual * 2 + '/bim)');
-                    $('#inpNuevoConsumoMensual').val(nuevoConsumoBimestral/2 + 'kw(' + nuevoConsumoBimestral + '/bim)');
-                    $('#inpPorcentGeneracion').val(combinaciones.combinacionEconomica[0].power.porcentajePotencia + '%');
-    
-                    //Page3_Result
-                    $('#inpPagoAnteriorBimsProm').val('$'+combinaciones.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
-                    $('#inpPagoNuevoBimsProm').val('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
-                    $('#inpAhorroBimestral').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroBimestralEnPesosMXN);
-                    $('#inpAhorroAnual').val('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
-                    $('#plROIBruto1').val(combinaciones.combinacionEconomica[0].roi.roiEnAnios + 'años');
-                    $('#plROIDeduccion1').val(combinaciones.combinacionEconomica[0].roi.roiConDeduccion + 'años');
-    
-                    //Boton_salvar
-                    $('#checkSalvarCombinacion').css("display", "");
-                    //Boton_details
-                    $('#btnDetails').css("display", "");
-                    //Boton_ajustePropuesta
-                    $('#btnModalAjustePropuesta').css("display", "");
-                    //Boton details - propuesta
-                    $('#btnDetails').css("display","");
-                break;
-                default:
-                    //Limpiar campos de -resultado-
-                    limpiarCampos();
-                    //Boton_salvar
-                    $('#checkSalvarCombinacion').css("display", "none");
-                    //Boton_details
-                    $('#btnDetails').css("display", "none");
-                    //Boton_ajustePropuesta
-                    $('#btnModalAjustePropuesta').css("display", "none");
-                break;
-            }
-        });
+    console.log('Combinaciones');
+    console.log(_combinaciones);
+
+    if(ddlCombinaciones.value != -1){
+        let ddlCombinacionesValor = ddlCombinaciones.value;
+
+        //Llenado de celdas de *RESULTADOS*
+        /* PotenciaInstalada / CostoPorWatt  */
+        $('#tdPanelPotenciaReal').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.potenciaReal + ' Kw');
+        $('#tdCostoWatt').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precio_watt + ' USD');
+
+        /* Tarifas */
+        $('#tdTarifaActual').text(_combinaciones[0][ddlCombinacionesValor][0].power.old_dac_o_nodac);
+        $('#tdTarifaNueva').text(_combinaciones[0][ddlCombinacionesValor][0].power.new_dac_o_nodac);
+
+        /* % Generacion */
+        $('#tdPorcentajePropuesta').text(_combinaciones[0][ddlCombinacionesValor][0].power.porcentajePotencia + ' %');
+        /* ROI */
+        $('#tdROIbruto').text(_combinaciones[0][ddlCombinacionesValor][0].roi.roiEnAnios + ' años');
+        $('#tdROIdeduccion').text(_combinaciones[0][ddlCombinacionesValor][0].roi.roiConDeduccion + ' años');
+
+        /* Panel */
+        $('#tdPanelModelo').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.nombre);
+        $('#tdPanelPotencia').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.potencia + ' W');
+        $('#tdPanelCantidad').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.noModulos);
+        
+        /* Inversor */
+        $('#tdInversorModelo').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.vNombreMaterialFot);
+        $('#tdInversorPotencia').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.fPotencia + ' W');
+        $('#tdInversorCantidad').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.numeroDeInversores);
+
+        /* [AhorroEnergetico] */
+        //ConsumoActual
+        $('#tdConsumoActualKwMes').text(_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales.toLocaleString('es-MX') + ' Kw');
+        $('#tdConsumoActualKwBim').text(_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promConsumosBimestrales.toLocaleString('es-MX') + ' Kw');
+        //Generacion
+        $('#tdGeneracionKwMes').text(_combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion.toLocaleString('es-MX') + ' Kw');
+        $('#tdGeneracionKwBim').text(_combinaciones[0][ddlCombinacionesValor][0].power.generacion.promeDGeneracionBimestral.toLocaleString('es-MX') + ' Kw');
+        //NuevoConsumo
+        $('#tdNuevoConsumoMes').text((_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales - _combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion).toLocaleString('es-MX') + ' Kw');
+        $('#tdNuevoConsumoBim').text(((_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales - _combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion) * 2).toLocaleString('es-MX') + ' Kw');
+        /* [AhorroEconomico] */
+        //ConsumoActual
+        $('#tdConsumoActualDinMes').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objConsumoEnPesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
+        $('#tdConsumoActualDinBim').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objConsumoEnPesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
+        //NuevoConsumo
+        $('#tdNuevoConsumoDinMes').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
+        $('#tdNuevoConsumoDinBim').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
+
+        /* Totales */
+        $('#tdSubtotalUSD').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precio.toLocaleString('es-MX') + ' USD');
+        $('#tdTotalUSD').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
+        $('#tdSubtotalMXN').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMXNSinIVA.toLocaleString('es-MX') + ' MXN');
+        $('#tdTotalMXN').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMXNConIVA.toLocaleString('es-MX') + ' MXN');
     }
-    catch(error){
-        console.log('llenarListaDesplegableCombinaciones() error:\n'+error);
+    else{
+        limpiarCampos();
     }
 }
 
 function vaciarCombinacionesEnModal(combinaciones){
     try{
-        let promedioConsumoMensual = combinaciones._arrayConsumos.consumo._promCons.consumoMensual.promedioConsumoMensual;
-
-        /* Pildoras_Modal */
-        /*             --Combinacion Economica--             */
-        /* Se llenan labels_pills de data */
-        $('#combinacionTitle1').text("Combinacion economica");
         
-        //Page1_Result
-        $('#plPotenciaNecesaria1').text(combinaciones.combinacionEconomica[0].paneles.potenciaReal+'kw');
-        $('#plCantidadPaneles1').text(combinaciones.combinacionEconomica[0].paneles.noModulos);
-
-        if(combinaciones.combinacionEconomica[0].inversores.combinacion === true){
-            $('#plCantidadInversores1').text('QS1: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionEconomica[0].inversores.numeroDeInversores.invSoportMen);
-        }
-        else{
-            $('#plCantidadInversores1').text(combinaciones.combinacionEconomica[0].inversores.numeroDeInversores);
-        }
-
-        $('#plCostoProyectoSIVA1').text(combinaciones.combinacionEconomica[0].totales.precio + '$');
-        $('#plCostoProyectoCIVA1').text(combinaciones.combinacionEconomica[0].totales.precioMasIVA + '$');
-        $('#plCostoWatt1').text(combinaciones.combinacionEconomica[0].totales.precio_watt + '$');
-
-        //Page2_Result
-        let generacionMensual1 = combinaciones.combinacionEconomica[0].power.generacion.promedioDeGeneracion;
-        let nuevoConsumoBimestral1 = combinaciones.combinacionEconomica[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-
-        $('#plModeloPanel1').text(combinaciones.combinacionEconomica[0].paneles.nombre);
-        $('#plModeloInversor1').text(combinaciones.combinacionEconomica[0].inversores.vNombreMaterialFot);
-        $('#plConsumoMensual1').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-        $('#plGeneracionMensual1').text(generacionMensual1 + ' kWh(' + generacionMensual1 * 2 + '/bim)');
-        $('#plNuevoConsumoMensual1').text(nuevoConsumoBimestral1 / 2 + ' kw(' + nuevoConsumoBimestral1 + '/bim)');
-        $('#plPorcentajeGeneracion1').text(combinaciones.combinacionEconomica[0].power.porcentajePotencia + '%');
-
-        //Page3_Result
-        $('#plPagoPromedioAnterior1').text('$'+combinaciones.combinacionEconomica[0].roi.consumo.consumoBimestralPesosMXN);
-        $('#plPagoPromedioNuevo1').text('$'+combinaciones.combinacionEconomica[0].roi.generacion.nuevoPagoBimestral);
-        $('#plAhorroMensual1').text('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroMensualEnPesosMXN);
-        $('#plAhorroAnual1').text('$'+combinaciones.combinacionEconomica[0].roi.ahorro.ahorroAnualEnPesosMXN);
-        $('#plROIBruto1').text(combinaciones.combinacionEconomica[0].roi.roiEnAnios + 'años');
-        $('#plROIDeduccion1').text(combinaciones.combinacionEconomica[0].roi.roiConDeduccion + 'años');
-
-        /*             --Combinacion Mediana--             */
-        /* Se cargan imagenes de logos && equipos */
-        /* __equipos__ */
-        $('#imgPanel2').attr("src", "img/paneles/equipo/panel.png");
-        $('#imgInversor2').attr("src", "img/inversores/equipo/"+combinaciones.combinacionMediana[0].inversores.vMarca.toString()+".jpg");
-        /* Se llenan labels_pills de data */
-        $('#combinacionTitle2').text('Combinacion mediana');
-        
-        //Page1_Result
-        $('#plPotenciaNecesaria2').text(combinaciones.combinacionMediana[0].paneles.potenciaReal+'kw');
-        $('#plCantidadPaneles2').text(combinaciones.combinacionMediana[0].paneles.noModulos);
-
-        if(combinaciones.combinacionMediana[0].inversores.combinacion === true){
-            $('#plCantidadInversores2').text('QS1: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionMediana[0].inversores.numeroDeInversores.invSoportMen);
-        }
-        else{
-            $('#plCantidadInversores2').text(combinaciones.combinacionMediana[0].inversores.numeroDeInversores);
-        }
-
-        $('#plCostoProyectoSIVA2').text(combinaciones.combinacionMediana[0].totales.precio + '$');
-        $('#plCostoProyectoCIVA2').text(combinaciones.combinacionMediana[0].totales.precioMasIVA + '$');
-        $('#plCostoWatt2').text(combinaciones.combinacionMediana[0].totales.precio_watt + '$');
-
-        //Page2_Result
-        let generacionMensual2 = combinaciones.combinacionMediana[0].power.generacion.promedioDeGeneracion;
-        let nuevoConsumoBimestral2 = combinaciones.combinacionMediana[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-
-        $('#plModeloPanel2').text(combinaciones.combinacionMediana[0].paneles.nombre);
-        $('#plModeloInversor2').text(combinaciones.combinacionMediana[0].inversores.vNombreMaterialFot);
-        $('#plConsumoMensual2').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-        $('#plGeneracionMensual2').text(generacionMensual2 + ' kWh(' + generacionMensual2 * 2 + '/bim)');
-        $('#plNuevoConsumoMensual2').text(nuevoConsumoBimestral2 / 2 + ' kw(' + nuevoConsumoBimestral2 + '/bim)');
-        $('#plPorcentajeGeneracion2').text(combinaciones.combinacionMediana[0].power.porcentajePotencia + '%');
-
-        // //Page3_Result
-        $('#plPagoPromedioAnterior2').text('$'+combinaciones.combinacionMediana[0].roi.consumo.consumoBimestralPesosMXN);
-        $('#plPagoPromedioNuevo2').text('$'+combinaciones.combinacionMediana[0].roi.generacion.nuevoPagoBimestral);
-        $('#plAhorroMensual2').text('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroMensualEnPesosMXN);
-        $('#plAhorroAnual2').text('$'+combinaciones.combinacionMediana[0].roi.ahorro.ahorroAnualEnPesosMXN);
-        $('#plROIBruto2').text(combinaciones.combinacionMediana[0].roi.roiEnAnios + 'años');
-        $('#plROIDeduccion2').text(combinaciones.combinacionMediana[0].roi.roiConDeduccion + 'años');
-
-        /*             --Combinacion Optima--             */
-        /* Se cargan imagenes de logos &&  equipos */
-        /* __equipos__ */
-        $('#imgPanel3').attr("src", "img/paneles/equipo/panel.png");
-        $('#imgInversor3').attr("src", "img/inversores/equipo/"+combinaciones.combinacionOptima[0].inversores.vMarca.toString()+".jpg");
-        /* Se llenan labels_pills de data */
-        $('#combinacionTitle3').text('Combinacion optima');
-
-        //Page1_Result
-        $('#plPotenciaNecesaria3').text(combinaciones.combinacionOptima[0].paneles.potenciaReal+'kw');
-        $('#plCantidadPaneles3').text(combinaciones.combinacionOptima[0].paneles.noModulos);
-
-        if(combinaciones.combinacionOptima[0].inversores.combinacion === true){
-            $('#plCantidadInversores3').text('QS1: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+combinaciones.combinacionOptima[0].inversores.numeroDeInversores.invSoportMen);
-        }
-        else{
-            $('#plCantidadInversores3').text(combinaciones.combinacionOptima[0].inversores.numeroDeInversores);
-        }
-
-        $('#plCostoProyectoSIVA3').text(combinaciones.combinacionOptima[0].totales.precio + '$');
-        $('#plCostoProyectoCIVA3').text(combinaciones.combinacionOptima[0].totales.precioMasIVA + '$');
-        $('#plCostoWatt3').text(combinaciones.combinacionOptima[0].totales.precio_watt + '$');
-
-        //Page2_Result
-        let generacionMensual3 = combinaciones.combinacionOptima[0].power.generacion.promedioDeGeneracion;
-        let nuevoConsumoBimestral3 = combinaciones.combinacionOptima[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-
-        $('#plModeloPanel3').text(combinaciones.combinacionOptima[0].paneles.nombre);
-        $('#plModeloInversor3').text(combinaciones.combinacionOptima[0].inversores.vNombreMaterialFot);
-
-        $('#plConsumoMensual3').text(promedioConsumoMensual + ' kWh(' +promedioConsumoMensual *2 + '/bim)');
-        $('#plGeneracionMensual3').text(generacionMensual3 + ' kWh(' + generacionMensual3 * 2 + '/bim)');
-        $('#plNuevoConsumoMensual3').text(nuevoConsumoBimestral3 / 2 + ' kw(' + nuevoConsumoBimestral3 + '/bim)');
-        $('#plPorcentajeGeneracion3').text(combinaciones.combinacionOptima[0].power.porcentajePotencia + '%');
-
-        // //Page3_Result
-        $('#plPagoPromedioAnterior3').text('$'+combinaciones.combinacionOptima[0].roi.consumo.consumoBimestralPesosMXN);
-        $('#plPagoPromedioNuevo3').text('$'+combinaciones.combinacionOptima[0].roi.generacion.nuevoPagoBimestral);
-        $('#plAhorroMensual3').text('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroMensualEnPesosMXN);
-        $('#plAhorroAnual3').text('$'+combinaciones.combinacionOptima[0].roi.ahorro.ahorroAnualEnPesosMXN);
-        $('#plROIBruto3').text(combinaciones.combinacionOptima[0].roi.roiEnAnios + 'años');
-        $('#plROIDeduccion3').text(combinaciones.combinacionOptima[0].roi.roiConDeduccion + 'años');
     }
     catch(error){
         console.log('Error vaciarCombinacionesEnModal():\n'+error);
+    }
+}
+
+function salvarCombinacion(){
+    let ddlCombinacionesValue = $('#ddlCombinaciones').val();
+
+    //Valida que se haya seleccionado alguna combinacion
+    if(ddlCombinacionesValue != -1){
+        let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
+
+        //Se guarda en -sessionStorage- la combinacion a -salvar/guardar-
+        sessionStorage.removeItem('combinacionSafe');
+        sessionStorage.setItem('combinacionSafe', JSON.stringify(_combinaciones[0][ddlCombinacionesValue][0]));
+
+        //Validar si el chbSalvarCombinacion, esta 'checked' o 'no-checked'
+        if($('#salvarCombinacion').is(':checked')){
+            //Se bloquea la lista desplegable de -combinaciones-
+            $('#ddlCombinaciones').prop("disabled", true);
+        }
+        else{
+            //Se desbloquea la lista desplegable de -combinaciones-
+            $('#ddlCombinaciones').prop("disabled", false);
+        }
+    }
+    else{
+        alert('No se a seleccionado ninguna de las -combinaciones-');
+        $('#salvarCombinacion').prop("checked", false);
     }
 }
 /*#endregion*/
@@ -1186,10 +992,11 @@ function vaciarCombinacionesEnModal(combinaciones){
 function cambiarModalidad(control){
     let valor = control.value;
 
-    $('#listConvinaciones').val(-1);
+    $('#ddlCombinaciones').val(-1);
     $('#listPaneles').val(-1);
     $('#listInversores').val(-1);
     limpiarCampos();
+    $('#crtGraficos').remove();//Se -elimina- el canvas[grafico]
 
     if(valor === "0"){
         /* div_ElegirEquipo */
@@ -1200,7 +1007,6 @@ function cambiarModalidad(control){
         $('#divElegirEquipo').css("display","");
 
         //
-        $('#checkSalvarCombinacion').css("display","none");
         $('#btnDivCombinaciones').css("display","none");
 
         //Resetean dropdownlist
@@ -1220,7 +1026,6 @@ function cambiarModalidad(control){
         $('#divElegirEquipo').css("display","none");
 
         //
-        $('#checkSalvarCombinacion').css("display","");
         $('#btnDivCombinaciones').css("display","");
 
         //Resetean dropdownlist
@@ -1228,19 +1033,6 @@ function cambiarModalidad(control){
         $('#listInversores').val(-1).attr("disabled",true);
 
         $('#switchConvEquip').val("0");
-    }
-}
-
-function mostrarListModelosInversores(){
-    let divDDLInversoresModelo = $('#divDropDownListInversorModelo');
-    let ddlInversoresModelo = $('#listModelosInversor');
-
-    if($('#chckModelosInversor').is(":checked")){
-        divDDLInversoresModelo.show();
-    }
-    else{
-        divDDLInversoresModelo.hide();
-        ddlInversoresModelo.attr("disabled",false);
     }
 }
 
@@ -1262,6 +1054,8 @@ function sliderModificarPropuesta(){
 }
 
 async function modificarPropuesta(){
+    let tipoCotizacion = sessionStorage.getItem('tarifaMT');
+
     //Modificar sessionStorage de "propuestaNueva" o "propuestaModificada" *0 = Nueva* *1 = Modificada*
     sessionStorage.removeItem("bndPropuestaEditada");
     sessionStorage.setItem("bndPropuestaEditada", 1);
@@ -1288,7 +1082,7 @@ async function modificarPropuesta(){
     let dataPorcentajes = { porcentajePropuesta, porcentajeDescuento, porcentajeAumento };
 
     // //Se realiza nuevamente la propuesta
-    if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ ///BajaTension
+    if(tipoCotizacion === "null" || typeof tipoCotizacion === 'undefined'){ ///BajaTension
         await calcularPropuestaBT(null, dataPorcentajes);
     }
     else{ ///MediaTension

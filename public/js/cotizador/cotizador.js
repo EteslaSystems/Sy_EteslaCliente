@@ -86,6 +86,10 @@ function validarInputsVaciosAg(val){
 
 /* Generar - PDF */
 /*#region Botones*/
+function generarEntregable(){
+    
+}
+
 function visualizandoPDF(){
     let respuesta = JSON.parse(sessionStorage.getItem("respuestaPDF"));
 
@@ -333,6 +337,7 @@ function pintarGrafico(){
     }
     catch(error){
         console.log(error);
+        alert('Error al intentar pintar las graficas');
     }
 }
 /*#endregion*/

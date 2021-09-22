@@ -40,17 +40,23 @@ class PDFController extends Controller
 
     public function getFileName($data)
     {
-        $nombreCliente = $data->cliente["vNombrePersona"] . $data->cliente["vPrimerApellido"] . $data->cliente["vSegundoApellido"];
+        /* Nombre del cliente - Estructurado */
+        $nombre = is_null($data->cliente["vNombrePersona"]) ? ' ' : $data->cliente["vNombrePersona"];
+        $primerApellido = is_null($data->cliente["vPrimerApellido"]) ? ' ' : $data->cliente["vPrimerApellido"];
+        $segundoApellido = is_null($data->cliente["vSegundoApellido"]) ? ' ' : $data->cliente["vSegundoApellido"];
+        
+        /* Nombre del cliente - Completo */
+        $fullName = $nombre . $primerApellido . $segundoApellido;
+
         $tipoCotizacion = $data->tipoCotizacion;
 
-        $nombrePropuesta = $nombreCliente . '_' . $tipoCotizacion . '_'  . time() . '.pdf';
+        $nombrePropuesta = $fullName . '_' . $tipoCotizacion . '_'  . time() . '.pdf';
 
         return $nombrePropuesta;
     }
 
     public function visualizarPDF()
     {
-        // $pdf = PDF::loadview('PDFTemplates.exampleDeleteCopia')
         $pdf = PDF::loadview('PDFTemplates.machotes.individual')
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
