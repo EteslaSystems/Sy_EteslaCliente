@@ -154,6 +154,9 @@ function obtenerCombinaciones(data){
                     sessionStorage.removeItem("arrayCombinaciones");
                     sessionStorage.setItem("arrayCombinaciones", JSON.stringify(result.message));
 
+                    //\\
+                    console.log(result.message);
+
                     resolve(result.message);
                 }
                 else{
@@ -329,7 +332,7 @@ function activarDesactivarBotones(equipo,habilidad){
      * 0 - Paneles
      * 1 - Inversores
      * /*2do - N
-     ******* 0 - Desactivado
+     ******* 0 - Desactivado 
      ******* 1 - Activado
     */
 
@@ -712,10 +715,12 @@ function vaciarRespuestaInversores(resultInversores){ ///Se vacian MARCAS
     }
 
     //Activar lista de inversores
-    dropDownListInversores.attr("disabled", false);
+    dropDownListInversores.prop("disabled", false);
 }
 
 function vaciarModelosInversores(marcaSeleccionada){//Se limpia el DDL - ModelosInversor de los antiguos elementos y se agregan nuevos
+    let ddlModelosInversores = $('#listModelosInversor');
+
     /*#region Formating _respuestaInversores*/
     let _inversores = sessionStorage.getItem('_respInversores');
     _inversores = JSON.parse(_inversores);
@@ -725,7 +730,7 @@ function vaciarModelosInversores(marcaSeleccionada){//Se limpia el DDL - Modelos
 
     _inversores.forEach(inversor => {
         if(inversor.vMarca === marcaSeleccionada){
-            $('#listModelosInversor').append(
+            ddlModelosInversores.append(
                 $('<option/>', {
                     value: inversor.vNombreMaterialFot,
                     text: inversor.vNombreMaterialFot
@@ -733,6 +738,8 @@ function vaciarModelosInversores(marcaSeleccionada){//Se limpia el DDL - Modelos
             );
         }
     });
+
+    ddlModelosInversores.prop('disabled',false);
 }
 
 function mostrarRespuestaConsumos(Consumo){
@@ -892,9 +899,6 @@ function vaciarCombinaciones(resultCombinacione){
 function seleccionarCombinacion(ddlCombinaciones){
     let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
 
-    console.log('Combinaciones');
-    console.log(_combinaciones);
-
     if(ddlCombinaciones.value != -1){
         let ddlCombinacionesValor = ddlCombinaciones.value;
 
@@ -976,15 +980,28 @@ function salvarCombinacion(){
         if($('#salvarCombinacion').is(':checked')){
             //Se bloquea la lista desplegable de -combinaciones-
             $('#ddlCombinaciones').prop("disabled", true);
+
+            //Habilitar botones de -GUARDAR- && -GENERAR-
+            $('#btnGuardarPropuesta').prop("disabled",false);
+            $('#btnGenerarEntregable').prop("disabled",false);
         }
         else{
             //Se desbloquea la lista desplegable de -combinaciones-
             $('#ddlCombinaciones').prop("disabled", false);
+
+            //Deshabilitar botones de -GUARDAR- && -GENERAR-
+            $('#btnGuardarPropuesta').prop("disabled",true);
+            $('#btnGenerarEntregable').prop("disabled",true);
         }
     }
     else{
-        alert('No se a seleccionado ninguna de las -combinaciones-');
+        //Desmarcar el -checklist-
         $('#salvarCombinacion').prop("checked", false);
+        //Deshabilitar botones de -GUARDAR- && -GENERAR-
+        $('#btnGuardarPropuesta').prop("disabled",true);
+        $('#btnGenerarEntregable').prop("disabled",true);
+
+        alert('No se a seleccionado ninguna de las -combinaciones-');
     }
 }
 /*#endregion*/
@@ -992,11 +1009,19 @@ function salvarCombinacion(){
 function cambiarModalidad(control){
     let valor = control.value;
 
+    //
+    if($('#ddlCombinaciones').is(":disabled")){
+        $('#ddlCombinaciones').prop("disabled",false);
+    }
+
+    //
     $('#ddlCombinaciones').val(-1);
     $('#listPaneles').val(-1);
     $('#listInversores').val(-1);
-    limpiarCampos();
     $('#crtGraficos').remove();//Se -elimina- el canvas[grafico]
+    $('#btnGuardarPropuesta').prop("disabled",true);//Bloquear boton -Guardar-
+    $('#btnGenerarEntregable').prop("disabled",true);//Bloquear boton -Generar-
+    limpiarCampos();
 
     if(valor === "0"){
         /* div_ElegirEquipo */
@@ -1030,7 +1055,8 @@ function cambiarModalidad(control){
 
         //Resetean dropdownlist
         $('#listPaneles').val(-1);
-        $('#listInversores').val(-1).attr("disabled",true);
+        $('#listInversores').val(-1).prop("disabled",true);
+        $('#listModelosInversor').val(-1).prop("disabled",true);
 
         $('#switchConvEquip').val("0");
     }

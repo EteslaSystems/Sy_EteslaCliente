@@ -71,7 +71,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()">
+                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()" disabled>
                                                 <option selected value="-1">Elige un inversor (modelo)</option>
                                             </select>
                                         </div>

@@ -86,23 +86,62 @@ function validarInputsVaciosAg(val){
 
 /* Generar - PDF */
 /*#region Botones*/
-function generarEntregable(){
+async function generarEntregable(){ //:void()
+    //Se comprueba que opcion fue seleccionada -QrCode- o -PdfFile-
+    let opcSeleccionada = null;
     
+    try{
+        //
+        if($('#rbtnPDF').is(":checked") && !$('#rbtnQR').is(":checked")){
+            opcSeleccionada = "rbtnPDF";
+        }
+        else if(!$('#rbtnPDF').is(":checked") && $('#rbtnQR').is(":checked")){
+            opcSeleccionada = "rbtnQR";
+        }
+
+        switch(opcSeleccionada)
+        {
+            case 'rbtnPDF':
+                let pdfResponse = await generarPDF(); //Retur: PDFFile encode
+                visualizandoPDF(pdfResponse); //:void()
+            break;
+            case 'rbtnQR':
+
+            break;
+            default: 
+                alert('Favor de escoger una opcion de -Generar- el entregable PDF/CodigoQr');
+            break;
+        }
+    }
+    catch(error){
+        console.log(error);
+        alert('Error al intentar generar el entregable:\n'+error);
+    }
 }
 
-function visualizandoPDF(){
-    let respuesta = JSON.parse(sessionStorage.getItem("respuestaPDF"));
+function visualizandoPDF(pdfFile){
+    let blobPDF = new Blob([pdfFile.pdfResponse],{type: "application/pdf"});
 
-    let nombreArchivoPDF = respuesta.fileName;
-    let pdfBase64 = respuesta.pdfBase64; //Se obtiene el base64 decodificado
+    // IE doesn't allow using a blob object directly as link href
+    // instead it is necessary to use msSaveOrOpenBlob
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blobPDF);
+        return;
+    } 
 
-    //Mostrar el pdfBase64 en un iFrame (ventana navegador nueva)
-    let pdfWindow = window.open("");
-    pdfWindow.document.write("<html<head><title>"+nombreArchivoPDF+"</title><style>body{margin: 0px;}iframe{border-width: 0px;}</style></head>");
-    pdfWindow.document.write("<body><embed width='100%' height='100%' src='data:application/pdf;base64, " + encodeURI(pdfBase64)+"#toolbar=0&navpanes=0&scrollbar=0'></embed></body></html>");
-    
-    sessionStorage.removeItem("respuestaPDF");
-    $('#btnGenerarPdfFileViewer').prop("disabled", true);
+    let link = document.createElement('a');
+
+    let fileName = getPDFFileName(pdfFile.data);
+
+    link.href = window.URL.createObjectURL(blobPDF);
+    link.download = fileName;
+    link.click();
+
+    //Only Firefox Browser
+    setTimeout(function(){
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(pdfFile.data);
+    }, 100);
 }
 /*#endregion*/
 /*#region Solicitud-Servidor*/

@@ -10,6 +10,7 @@ use App\APIModels\APICotizacion;
 class CotizacionController extends Controller
 {
     protected $cotizacion;
+	protected $pdfi;
 
 	public function __construct(APICotizacion $cotizacion, PDFController $pdfi)
 	{
