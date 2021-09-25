@@ -155,6 +155,7 @@ function obtenerCombinaciones(data){
                     sessionStorage.setItem("arrayCombinaciones", JSON.stringify(result.message));
 
                     //\\
+                    console.log('Combinaciones:');
                     console.log(result.message);
 
                     resolve(result.message);
@@ -970,6 +971,10 @@ function salvarCombinacion(){
 
     //Valida que se haya seleccionado alguna combinacion
     if(ddlCombinacionesValue != -1){
+        //Se vacia el sessionStorage de la propuesta -SIN COMBINACIONES-
+        sessionStorage.removeItem('answPropuesta');
+
+        //Se obtiene el sessionStorage de -COMBINACIONES-
         let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
 
         //Se guarda en -sessionStorage- la combinacion a -salvar/guardar-

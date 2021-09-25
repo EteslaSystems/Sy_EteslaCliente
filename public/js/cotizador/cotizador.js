@@ -131,7 +131,8 @@ function visualizandoPDF(pdfFile){
 
     let link = document.createElement('a');
 
-    let fileName = getPDFFileName(pdfFile.data);
+    // let fileName = getPDFFileName(pdfFile.data);
+    let fileName = 'test.pdf';
 
     link.href = window.URL.createObjectURL(blobPDF);
     link.download = fileName;
@@ -155,7 +156,8 @@ function generarPDF(){
         data = sessionStorage.getItem("propuestaMT");
     }
     else if(tipoCotizacion === 'null' || typeof tipoCotizacion === 'undefined'){ ///BajaTension
-        data = sessionStorage.getItem("answPropuesta");
+        data = sessionStorage.getItem("answPropuesta"); //Sin Combinaciones
+        data = data != null ? data : sessionStorage.getItem("arrayCombinaciones"); //Con Combinaciones
     }
     else{ ///Individual
         data = sessionStorage.getItem('ssPropuestaIndividual');
@@ -174,37 +176,13 @@ function generarPDF(){
                 responseType: 'blob'
             },
             success: function(pdfResponse, status){
-                if(status === 'success'){ ///PDF generado con exito
-                    let blobPDF = new Blob([pdfResponse],{type: "application/pdf"});
-
-                    // IE doesn't allow using a blob object directly as link href
-                    // instead it is necessary to use msSaveOrOpenBlob
-                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                        window.navigator.msSaveOrOpenBlob(blobPDF);
-                        return;
-                    } 
-
-                    let link = document.createElement('a');
-
-                    let fileName = getPDFFileName(data);
-
-                    link.href = window.URL.createObjectURL(blobPDF);
-                    link.download = fileName;
-                    link.click();
-
-                    //Only Firefox Browser
-                    setTimeout(function(){
-                        // For Firefox it is necessary to delay revoking the ObjectURL
-                        window.URL.revokeObjectURL(data);
-                    }, 100);
-                }
-                else{
-                    alert('Se presento una falla a la hora de querer generar el PDF - Error 500!');
+                if(status === 'success'){
+                    resolve({ pdfResponse, data });
                 }
             },
             error: function(error){
                 console.log(error);
-                alert('Se presento una falla a la hora de querer generar el PDF');
+                reject('Se presento una falla a la hora de querer generar el PDF\n'+error);
             }
         });
     });
@@ -219,12 +197,29 @@ function getPDFFileName(dataPropuesta){
 }
 
 function guardarPropuesta(){
+    let propuesta = {};
     let dataToSent = { idCliente: null, propuesta: null };
     dataToSent.idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     let tarifaMT = sessionStorage.getItem("tarifaMT");
 
     if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //BajaTension
-        dataToSent.propuesta = sessionStorage.getItem("answPropuesta");
+        //Se obtiene la propuesta -BajaTension-
+        propuesta = sessionStorage.getItem("answPropuesta");
+        
+        //Se valida la propuesta BajaTension... Si es ConCombinaciones o SinCombinaciones
+        propuesta = propuesta != null ? propuesta : sessionStorage.getItem("arrayCombinaciones");
+        
+        //
+        propuesta = JSON.parse(propuesta);
+        propuesta = propuesta.tipoCotizacion ? propuesta : propuesta[0];
+
+        //Validar si la propuesta tiene -COMBINACIONES-
+        if(propuesta.combinaciones){
+            //Obtener la propuesta con la -combinacion_seleccionada-
+            propuesta = JSON.parse(sessionStorage.getItem('combinacionSafe'));
+        }
+
+        dataToSent.propuesta = propuesta;
     }
     else if(tarifaMT == "individual"){ //Individual
         dataToSent.propuesta = sessionStorage.getItem("ssPropuestaIndividual");

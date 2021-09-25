@@ -12,17 +12,13 @@ class PDFController extends Controller
             $pdfTemplate = '';
 
             if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
-                // if(isset($propuesta->combinaciones)){ //Con Combinaciones
-                //     echo 'hello world!';
-                // }
-                // else{ //Sin Combinaciones
-                    
-                // }
-
-                // $pdfTemplate = 'PDFTemplates.bajaTension';
-                $pdfTemplate = 'PDFTemplates.propuestaCombinaciones';
+                $pdfTemplate = 'PDFTemplates.bajaTension';
             }
             
+            if($propuesta["combinaciones"] === true){
+                $pdfTemplate = 'PDFTemplates.machotes.propuestaCombinaciones';
+            }
+
             if($propuesta["tipoCotizacion"] === "individual"){ //individual
                 $pdfTemplate = 'PDFTemplates.individual';
             }
@@ -39,8 +35,9 @@ class PDFController extends Controller
 
             $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
 
-            // $fileName = $this->getFileName($propuesta); //Nombre del documento PDF
-            $fileName = 'test.pdf';
+            //Nombre del documento PDF
+            // $fileName = $this->getFileName($propuesta);
+            $fileName = "test.pdf";
 
             $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)
 
@@ -77,7 +74,7 @@ class PDFController extends Controller
 
     public function visualizarPDF()
     {
-        $pdf = PDF::loadview('PDFTemplates.machotes.bajaTension')
+        $pdf = PDF::loadview('PDFTemplates.propuestaCombinaciones')
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 
