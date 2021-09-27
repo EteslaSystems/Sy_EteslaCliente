@@ -10,7 +10,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-lg-7">
                 <div class="card shadow mb-3">
                     <div class="card-header">
                         <div class="container">
@@ -32,18 +32,20 @@
                             <!-- Sección combinaciones -->
                             <div class="col form-group" id="divConvinaciones">
                                 <div class="form-row">
-                                    <label>Combinacion</label>
-                                    <select class="form-control" id="listConvinaciones" disabled>
-                                        <option selected value="-1">Elige una opción:</option>
-                                        <option value="optConvinacionOptima">Óptima</option>
-                                        <option value="optConvinacionMediana">Mediana</option>
-                                        <option value="optConvinacionEconomica">Económica</option>
+                                    <select class="form-control" id="ddlCombinaciones" onchange="seleccionarCombinacion(this)" disabled>
+                                        <option selected value="-1">Elige una combinacion</option>
+                                        <option value="combinacionOptima">Óptima</option>
+                                        <option value="combinacionMediana">Mediana</option>
+                                        <option value="combinacionEconomica">Económica</option>
                                     </select>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="margin-top: 9px;">
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-warning" title="Visualizar combinaciones" style="color:#FFFFFF; font-weight:bold;" data-toggle="modal" data-target="#modalCombinaciones">Visualizar</button>
+                                    </div>
                                     <div class="col">
-                                        <div class="form-check pull-right" id="checkSalvarCombinacion" style="display:none;">
-                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion" onclick="document.getElementById('btnGenerarEntregable').disabled = false">
+                                        <div class="form-check pull-right" id="checkSalvarCombinacion">
+                                            <input type="checkbox" class="form-check-input" id="salvarCombinacion" onclick="salvarCombinacion();">
                                             <label for="salvarCombinacion">Salvar</label>
                                         </div>
                                     </div>
@@ -53,100 +55,92 @@
                             <!-- Seccion "Elegir un equipo" -->
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="row">
-                                    <div class="col">
-                                        <label>Panel</label>
-                                        <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado()" disabled>
-                                            <option selected value="-1">Elige una opción:</option>
-                                        </select>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado()" disabled>
+                                                <option selected value="-1">Elige un panel</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="listEstructura" class="form-control" onchange="cambiarEstructura();" disabled>
+                                                <option selected value="-1">Elige una estructura</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-row">
-                                            <div class="form-group form-check">
-                                                <input id="chckModelosInversor" type="checkbox" class="form-check-input" title="modelos inversor" onclick="mostrarListModelosInversores();">
-                                                <label class="form-check-label" for="chckModelosInversor">Inversor (marca)</label>
-                                            </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
                                             <select class="form-control" id="listInversores" onchange="mostrarInversorSeleccionado()" disabled>
-                                                <option selected value="-1">Elige una opción:</option>
+                                                <option selected value="-1">Elige un inversor (marca)</option>
                                             </select>
                                         </div>
-                                        <div id="divDropDownListInversorModelo" class="form-row" style="display:none;">
-                                            <label>Inversor (modelo)</label>
-                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()">
-                                                <option selected value="-1">Elige una opción:</option>
+                                        <div class="form-group">
+                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()" disabled>
+                                                <option selected value="-1">Elige un inversor (modelo)</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <label>Estructura</label>
-                                        <select id="listEstructura" class="form-control" onchange="cambiarEstructura();" disabled>
-                                            <option selected value="-1">Elige una opción:</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="container text-right">
-                                        <div class="form-group" style="margin-right: -26px;">
-                                            <!-- Boton ajuste-propuesta -->
-                                            <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
-
-                                            <!-- Botones GuardaPropuesta_GenerarPDF -->
-                                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                                <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" onclick="guardarPropuesta();" title="guardar propuesta" disabled>GUARDAR</button>
-                                                <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalGenrPropuestaOptions" title="generar propuesta" disabled>GENERAR</button>
-                                            </div>
-                                            <!-- Fin Botones GuardaPropuesta_GenerarPDF -->
-                                        </div>
+                                    <div class="col-md-auto">
+                                        <!-- Boton ajuste-propuesta -->
+                                        <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
                                     </div>
                                 </div>
                             </div>
                             <!--Fin Seccion "Elegir un equipo" -->
-                            <!-- Modal Opciones de generar propuesta -->
-                            <div id="modalGenrPropuestaOptions" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="deshabilitarBotonesPDF();">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card shadow mb-3">
+                    <div class="card-header">
+                        <p class="d-block mn-1 p-titulos" id="lblConvEquip">Propuesta</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="col-md-6" style="height: 118px;">
+                                <div id="carouselExampleControls" class="carousel slide" data-interval="false" style="margin-top:15px;">
+                                    <div class="carousel-inner text-center">
+                                        <div class="carousel-item">
+                                            <div class="custom-control custom-checkbox image-checkbox">
+                                                <input id="rbtnQR" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)" disabled>
+                                                <label class="custom-control-label" for="rbtnQR">
+                                                    <img src="https://img.icons8.com/cotton/80/000000/qr-code--v2.png"/>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="modal-body row text-center">
-                                            <!-- Botones generan entregable -->
-                                            <div class="col">
-                                                <button id="btnGenerarQrCode" type="button" class="btn" data-toggle="modal" data-target="#modalQRCode" title="qr code generate" disabled><img src="https://img.icons8.com/cotton/48/000000/qr-code--v2.png"/></button>
-                                                <p><strong>Codigo QR</strong></p>
+                                        <div class="carousel-item active">
+                                            <div class="custom-control custom-checkbox image-checkbox">
+                                                <input id="rbtnPDF" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)">
+                                                <label class="custom-control-label" for="rbtnPDF">
+                                                    <img src="https://img.icons8.com/color/80/000000/pdf.png"/>
+                                                </label>
+                                                <p></p>
                                             </div>
-                                            <div class="col">
-                                                <button id="btnGenerarPdfFileViewer" type="button" class="btn" title="pdf file viewer" onclick="generarPDF()"><img src="https://img.icons8.com/color/48/000000/pdf.png"/></button>
-                                                <p><strong>Archivo PDF</strong></p>
-                                            </div>
-                                            <!-- Fin Botones generan entregable -->
                                         </div>
                                     </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
                             </div>
-                            <!-- Fin Modal Opciones de generar propuesta -->
-                        </div>
-                        <!-- Modal Codigo Qr - Generado -->
-                        <div id="modalQRCode" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                            <div class="col-md-auto">
+                                <!-- Contenedor de Botones de Guardar/Generar -->
+                                <div class="col text-center" style="margin-top:15px;">
+                                    <div class="form-group">
+                                        <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" onclick="guardarPropuesta();" title="guardar propuesta" disabled>GUARDAR</button>
                                     </div>
-                                    <div class="modal-body row text-center">
-                                        <div id="divQrCodeViewer" class="col">
-                                            <!-- Aqui se visualiza el codigo QR -->
-                                        </div>
-                                        <div id="divLeyendaIndicacionesCodigoQr" class="col">
-                                            <p>Para poder descargar el archivo PDF de tu propuesta, deberas leer el iguiente <strong>Código QR</strong>, con un escaner/lector. Este lo puedes encontrar integrado en la camara de tu smarthphone o en dado caso de no contar con uno, descargarlo de la galeria de aplicaciones de tu convenencia.</p>
-                                        </div>
+                                    <div class="form-group">
+                                        <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" title="generar propuesta" onclick="generarEntregable()" disabled>GENERAR</button>
                                     </div>
                                 </div>
+                                <!-- Fin Contenedor de Botones de Guardar/Generar -->
                             </div>
                         </div>
-                        <!-- Fin Modal Codigo Qr - Generado -->
                     </div>
                 </div>
             </div>
@@ -158,9 +152,6 @@
                         <div class="row">
                             <div class="col">
                                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
-                            </div>
-                            <div class="col-8 d-flex justify-content-center">
-                                <button id="btnDivCombinaciones" class="btn btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" title="comparativa combinaciones" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
                             </div>
                         </div>
                         <!-- #ModalsZone -->
@@ -201,112 +192,159 @@
                         </div>
                         <!-- #End - Modal_combinaciones -->
                         <!-- Modal_combinaciones -->
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                        <div id="modalCombinaciones" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header row">
-                                        <div class="col">
-                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails(this)" title="Detalles propuesta"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
-                                        </div>
-                                        <div class="col">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Combinaciones</h5>                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="modal-body row">
-                                        @for($i=1; $i<=3; $i++)
-                                            <div class="col" id="divCombinacion{{ $i }}">
-                                                <input id="inpTipoCombinacion{{ $i }}" class="d-none">
-                                                <h5 id="combinacionTitle{{ $i }}" class="title-combination" ></h5>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <img id="imgLogoPanel{{ $i }}" height="35" weight="100">
-                                                    </div> 
-                                                    <div class="col">
-                                                        <img id="imgLogoInversor{{ $i }}" height="35" weight="100">
-                                                    </div>
-                                                </div>
-                                                <ul id="modalResultPageX{{$i}}" class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Potencia
-                                                        <span class="badge badge-primary badge-pill" id="plPotenciaNecesaria{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Cantidad paneles
-                                                        <span class="badge badge-primary badge-pill" id="plCantidadPaneles{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Cantidad inversores 
-                                                        <span class="badge badge-primary badge-pill" id="plCantidadInversores{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo proyecto s/IVA
-                                                        <span class="badge badge-primary badge-pill" id="plCostoProyectoSIVA{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo proyecto c/IVA
-                                                        <span class="badge badge-primary badge-pill" id="plCostoProyectoCIVA{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo por watt
-                                                        <span class="badge badge-primary badge-pill" id="plCostoWatt{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                                <ul id="modalResultPageY{{$i}}" class="list-group" style="display:none;">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Modelo panel
-                                                        <span class="badge badge-primary badge-pill" id="plModeloPanel{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Modelo inversor
-                                                        <span class="badge badge-primary badge-pill" id="plModeloInversor{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Consumo mensual
-                                                        <span class="badge badge-primary badge-pill" id="plConsumoMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Generacion mensual
-                                                        <span class="badge badge-primary badge-pill" id="plGeneracionMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Nuevo consumo mensual
-                                                        <span class="badge badge-primary badge-pill" id="plNuevoConsumoMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        % de generación
-                                                        <span class="badge badge-primary badge-pill" id="plPorcentajeGeneracion{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                                <ul id="modalResultPageZ{{$i}}" class="list-group" style="display:none;">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Pago promedio(anterior)
-                                                        <span class="badge badge-primary badge-pill" id="plPagoPromedioAnterior{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Pago promedio(nuevo)
-                                                        <span class="badge badge-primary badge-pill" id="plPagoPromedioNuevo{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Ahorro mensual
-                                                        <span class="badge badge-primary badge-pill" id="plAhorroMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Ahorro anual
-                                                        <span class="badge badge-primary badge-pill" id="plAhorroAnual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        ROI Bruto
-                                                        <span class="badge badge-primary badge-pill" id="plROIBruto{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        ROI con deducción
-                                                        <span class="badge badge-primary badge-pill" id="plROIDeduccion{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        @endfor
+                                    <div class="modal-body table-responsive-xl">
+                                        <table class="table table-bordered table-sm text-center">
+                                            <thead style="background-color:#D68910; color:#FFFFFF;">
+                                                <tr>
+                                                    <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
+                                                    <th scope="col"><strong>A</strong></th>
+                                                    <th scope="col"><strong>B</strong></th>
+                                                    <th scope="col"><strong>C</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border-left:0px; border-top:0px;"></td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col-sm">
+                                                                <img id="imgPanelA" style="width:70px; height:44px;">
+                                                            </div>
+                                                            <div class="col-sm">
+                                                                <img id="imgInversorA" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm">
+                                                                <img id="imgEstructuraA" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img id="imgPanelB" style="width:70px; height:44px;">
+                                                            </div>
+                                                            <div class="col">
+                                                                <img id="imgInversorB" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img id="imgEstructuraB" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img id="imgPanelC" style="width:70px; height:44px;">
+                                                            </div>
+                                                            <div class="col">
+                                                                <img id="imgInversorC" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img id="imgEstructuraC" style="width:70px; height:44px;">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Costo por watt</strong></td>
+                                                    <td id="tdCostoWattA">*</td>
+                                                    <td id="tdCostoWattB">*</td>
+                                                    <td id="tdCostoWattC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia instalada</strong></td>
+                                                    <td id="tdPotenciaInstaladaA">*</td>
+                                                    <td id="tdPotenciaInstaladaB">*</td>
+                                                    <td id="tdPotenciaInstaladaC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td id="tdModeloPanelA">*</td>
+                                                    <td id="tdModeloPanelB">*</td>
+                                                    <td id="tdModeloPanelC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td id="tdCantidadPanelA">*</td>
+                                                    <td id="tdCantidadPanelB">*</td>
+                                                    <td id="tdCantidadPanelC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia</strong></td>
+                                                    <td id="tdPotenciaPanelA">*</td>
+                                                    <td id="tdPotenciaPanelB">*</td>
+                                                    <td id="tdPotenciaPanelC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td id="tdModeloInversorA">*</td>
+                                                    <td id="tdModeloInversorB">*</td>
+                                                    <td id="tdModeloInversorC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td id="tdCantidadInversorA">*</td>
+                                                    <td id="tdCantidadInversorB">*</td>
+                                                    <td id="tdCantidadInversorC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia</strong></td>
+                                                    <td id="tdPotenciaInversorA">*</td>
+                                                    <td id="tdPotenciaInversorB">*</td>
+                                                    <td id="tdPotenciaInversorC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td id="tdModeloEstructuraA">*</td>
+                                                    <td id="tdModeloEstructuraB">*</td>
+                                                    <td id="tdModeloEstructuraC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td id="tdCantidadEstructuraA">*</td>
+                                                    <td id="tdCantidadEstructuraB">*</td>
+                                                    <td id="tdCantidadEstructuraC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Subtotal s/IVA</strong></td>
+                                                    <td id="tdSubtotalA">*</td>
+                                                    <td id="tdSubtotalB">*</td>
+                                                    <td id="tdSubtotalC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total c/IVA</strong></td>
+                                                    <td id="tdTotalA">*</td>
+                                                    <td id="tdTotalB">*</td>
+                                                    <td id="tdTotalC">*</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -443,11 +481,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td><strong>Tarifa actual</strong></td>
-                                                                        <td id="tdTarifaActual"></td>
+                                                                        <td id="tdTarifaActual" class="tdAnsw"></td>
                                                                     </tr>
                                                                     <tr id="trTarifaNueva">
                                                                         <td><strong>Tarifa nueva</strong></td>
-                                                                        <td id="tdTarifaNueva"></td>
+                                                                        <td id="tdTarifaNueva" class="tdAnsw"></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -465,7 +503,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>ROI con deduccion</strong></td>
-                                                                        <td id="tdROIdeduccion"></td>
+                                                                        <td id="tdROIdeduccion" class="tdAnsw"></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

@@ -58,19 +58,19 @@
                                                             <strong>Cargo:</strong>
                                                         </th>
                                                         <td style="width: 70%;">
-                                                            @if($usuario->ttTipoUsuario == 'Admin')
+                                                            @if($usuario->siRol == 1)
                                                                 <strong>Administrador</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Operac')
+                                                            @if($usuario->siRol == 2)
                                                                 <strong>Operaciones</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'GerenteIng')
+                                                            @if($usuario->siRol == 3)
                                                                 <strong>Gerente de ingeniería</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Ing')
+                                                            @if($usuario->siRol == 4)
                                                                 <strong>Ingeniero</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Vend')
+                                                            @if($usuario->siRol == 5)
                                                                 <strong>Vendedor</strong>
                                                             @endif
                                                         </td>

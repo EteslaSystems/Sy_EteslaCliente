@@ -3,34 +3,6 @@
 - @author: 				LH420
 - @date: 				19/05/2020
 */
-
-var idPanel;
-var idInversor;
-var direccionCliente = '';
-
-$(document).ready(function(){
-    var loader = $('#loader');
-
-    /* readyLoader(loader); */
-});
-
-/* function readyLoader(loader){
-    $(document)
-    .ajaxStart(function(){
-        loader.fadeIn();
-    })
-    .ajaxStop(function(){
-        loader.fadeOut();
-        $('#divResultCotIndv').css("display","");
-    });
-} 
-
-function loadMenuAddItem(){    
-    document.getElementById("menuContent").classList.toggle("menu-active");
-}
-*/
-
-
 /*#region Server*/
 function getCotizacionIndividual(dataCotInd){
     sessionStorage.removeItem("tarifaMT");
@@ -155,18 +127,31 @@ function limpiarInput(nombreInput){
 
 /*#region Funcionalidad*/
 function catchDataCotizacionIndividual(){
-    let dataCotIndividual = { cliente: { id: null, direccion: null }, complementos: { manoObra: null, otros: null, viaticos: {  }, fletes: null }, agregados: null, equipos: null };
+    let dataCotIndividual = { 
+        cliente: { id: null, direccion: null },
+        ajustePropuesta: { aumento: null, descuento: null },
+        complementos: { 
+            manoObra: null, 
+            otros: null, 
+            viaticos: {}, 
+            fletes: null 
+        }, 
+        agregados: null, 
+        equipos: null
+    };
+    let _agregado = null;
+    
     dataCotIndividual.cliente.id = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
     dataCotIndividual.cliente.direccion = document.getElementById('municipio').value;
 
-    /*Cliente*/
+    /* Cliente */
     if(validarUsuarioCargado(dataCotIndividual.cliente.id) == true){
-        /*Equipos*/
+        /* Equipos */
         if(validarInputsEquipos() === true){
-            /*Equipos (paneles, inversores, estructuras)*/
+            /* Equipos (paneles, inversores, estructuras) */
             dataCotIndividual.equipos = catchDataEquipos();
 
-            /*Complementos [ManoObra, Otros, Viaticos, Fletes]*/
+            /* Complementos [ManoObra, Otros, Viaticos, Fletes] */
             dataCotIndividual.complementos.manoObra = $('#chbMO').val();
             dataCotIndividual.complementos.otros = $('#chbOtros').val();
             dataCotIndividual.complementos.viaticos = {
@@ -178,25 +163,29 @@ function catchDataCotizacionIndividual(){
             };
             dataCotIndividual.complementos.fletes = $('#chbFletes').val();
 
-            /*Agregados*/
-            _agregado = _agregado; ///Arreglo de objAgregados (var - global)*
-            _agregado = _agregado == null || _agregado.length == 0 ? null : _agregado;///Comprobacion de que no venga vacio
+            /* Agregados */
+            _agregado = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
             dataCotIndividual.agregados = _agregado;
+
+            /* AjustePropuesta */
+            dataCotIndividual.ajustePropuesta = {
+                aumento: $('#inpSliderAumento').val() || 0, 
+                descuento: $('#inpSliderDescuento').val() || 0
+            };
 
             return dataCotIndividual;
         }
     }
-
-    //return false;
 }
 
 function pintarResultadoCotizacion(cotizacionResult){
     let cotizacionIndividual = cotizacionResult[0]; //Formating of Array to Object
 
+    //Setters data
     let potenciaInstalad = ((cotizacionIndividual.paneles.fPotencia * cotizacionIndividual.paneles.noModulos) / 1000);
     let costoPanel = cotizacionIndividual.paneles.costoTotal;
     let costoInversor = cotizacionIndividual.inversores != null ? cotizacionIndividual.inversores.precioTotal : 0;
-    let costoEstructura = cotizacionIndividual.estructura != null ? cotizacionIndividual.costoTotalEstructuras : 0;
+    let costoEstructura = cotizacionIndividual.estructura._estructuras != null ? cotizacionIndividual.estructura.costoTotal : 0;
     let costoViaticos = cotizacionIndividual.totales.totalViaticosMT;
     let costoMO = cotizacionIndividual.totales.manoDeObra + cotizacionIndividual.totales.otrosTotal;
     let costoFletes =cotizacionIndividual.totales.fletes; //$$ - USD
@@ -205,19 +194,19 @@ function pintarResultadoCotizacion(cotizacionResult){
     let totalUSD = cotizacionIndividual.totales.precioMasIVA;
     let totalMXN = cotizacionIndividual.totales.precioMXNConIVA;
 
-    $('#resPotenciaInstalada').text(potenciaInstalad + ' kw');
-    $('#resCostoPanel').text('$' + costoPanel + ' USD');
-    $('#resCostInversor').text('$' + costoInversor + ' USD');
-    $('#resCostEstruct').text('$' + costoEstructura + ' USD');
-    $('#resCostoViaticos').text('$' + costoViaticos + ' USD');
-    $('#resCostoMO').text('$' + costoMO + ' USD');
-    $('#resCostoFletes').text('$' + costoFletes + ' USD');
+    $('#resPotenciaInstalada').text(potenciaInstalad + ' kW');
+    $('#resCostoPanel').text('$ ' + costoPanel + ' USD');
+    $('#resCostInversor').text('$ ' + costoInversor + ' USD');
+    $('#resCostEstruct').text('$ ' + costoEstructura + ' USD');
+    $('#resCostoViaticos').text('$ ' + costoViaticos + ' USD');
+    $('#resCostoMO').text('$ ' + costoMO + ' USD');
+    $('#resCostoFletes').text('$ ' + costoFletes + ' USD');
 
     //Subtotales y totales
-    $('#tdSubtotalUSD').text('$' + subtotalUSD + ' USD');
-    $('#tdSubtotalMXN').text('$' + subtotalMXN + ' MXN');
-    $('#tdTotalUSD').text('$' + totalUSD + ' USD');
-    $('#tdTotalMXN').text('$' + totalMXN + ' MXN');
+    $('#tdSubtotalUSD').text('$ ' + subtotalUSD.toLocaleString('es-MX') + ' USD');
+    $('#tdSubtotalMXN').text('$ ' + subtotalMXN.toLocaleString('es-MX') + ' MXN');
+    $('#tdTotalUSD').text('$ ' + totalUSD.toLocaleString('es-MX') + ' USD');
+    $('#tdTotalMXN').text('$ ' + totalMXN.toLocaleString('es-MX') + ' MXN');
 }
 
 function catchDataEquipos(){
