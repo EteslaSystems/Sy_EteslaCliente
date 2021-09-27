@@ -10,16 +10,18 @@ class PDFController extends Controller
     {   
         try{
             $pdfTemplate = '';
+            $tipoCotizacion = $propuesta["tipoCotizacion"];
 
-            if($propuesta["tipoCotizacion"] === "bajaTension"){ //bajaTension || mediaTension
+            if($tipoCotizacion === "bajaTension"){ //bajaTension || mediaTension
                 $pdfTemplate = 'PDFTemplates.bajaTension';
             }
             
-            if($propuesta["combinaciones"] === true){
+            if($tipoCotizacion === 'CombinacionCotizacion'){
                 $pdfTemplate = 'PDFTemplates.machotes.propuestaCombinaciones';
+                // $propuesta = ["propuesta"];
             }
 
-            if($propuesta["tipoCotizacion"] === "individual"){ //individual
+            if($tipoCotizacion === "individual"){ //individual
                 $pdfTemplate = 'PDFTemplates.individual';
             }
 
@@ -74,7 +76,7 @@ class PDFController extends Controller
 
     public function visualizarPDF()
     {
-        $pdf = PDF::loadview('PDFTemplates.propuestaCombinaciones')
+        $pdf = PDF::loadview('PDFTemplates.machotes.bajaTension')
         ->setOptions(['isRemoteEnabled' => true])
         ->setPaper('A4');
 

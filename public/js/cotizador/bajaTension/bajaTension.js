@@ -887,16 +887,6 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
 }
 /*#endregion*/
 /*#region Combinaciones*/
-function vaciarCombinaciones(resultCombinacione){
-    let resultCombinaciones = resultCombinacione.message; //Formating
-    resultCombinaciones = resultCombinaciones[0]; //ArrayCombinaciones
-
-    
-
-    //Se pintan las combinaciones en el *modal_combinaciones*
-    vaciarCombinacionesEnModal(resultCombinaciones); //AJAX - request
-}
-
 function seleccionarCombinacion(ddlCombinaciones){
     let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
 
@@ -958,12 +948,7 @@ function seleccionarCombinacion(ddlCombinaciones){
 }
 
 function vaciarCombinacionesEnModal(combinaciones){
-    try{
-        
-    }
-    catch(error){
-        console.log('Error vaciarCombinacionesEnModal():\n'+error);
-    }
+    
 }
 
 function salvarCombinacion(){

@@ -383,15 +383,15 @@
             <table class="tabCombinaciones">
                 <thead>
                     <tr>
-                        <th style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
-                        <th scope="col" style="background-color:#70D85F; color:#FFFFFF;"><strong>A</strong></th>
-                        <th scope="col" style="background-color:#31AEC1; color:#FFFFFF;"><strong>B</strong></th>
-                        <th scope="col" style="background-color:#C7CACA; color:#FFFFFF;"><strong>C</strong></th>
+                        <th id="invisible" style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
+                        <th scope="col"><strong>A</strong></th>
+                        <th scope="col"><strong>B</strong></th>
+                        <th scope="col"><strong>C</strong></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="border-left:0px; border-top:0px;"></td>
+                        <td id="invisible" style="border-left:0px; border-top:0px;"></td>
                         <td id="imgLogos">
                             <div>
                                 <img style="width:120px; height:58px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">

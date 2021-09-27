@@ -166,7 +166,13 @@ function generarPDF(){
     data = JSON.parse(data);
     data = data.tipoCotizacion ? data : data[0];
 
-    return new Promise((resolve, reject)=>{
+    //Si tiene -COMBINACIONES- se manda la data de la -CombinacionSeleccionada- && -arrayCombinaciones-
+    if(data.combinaciones){
+        data.tipoCotizacion = 'CombinacionCotizacion';
+        Object.assign(data,{ propuesta: JSON.parse(sessionStorage.getItem("combinacionSafe")) });
+    }
+
+    return new Promise((resolve, reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
@@ -215,8 +221,13 @@ function guardarPropuesta(){
 
         //Validar si la propuesta tiene -COMBINACIONES-
         if(propuesta.combinaciones){
+            let tipoCotizacion = propuesta.tipoCotizacion;
+
             //Obtener la propuesta con la -combinacion_seleccionada-
             propuesta = JSON.parse(sessionStorage.getItem('combinacionSafe'));
+
+            //
+            Object.assign(propuesta,{ tipCotizacion: tipoCotizacion });
         }
 
         dataToSent.propuesta = propuesta;

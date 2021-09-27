@@ -39,9 +39,12 @@
                                         <option value="combinacionEconomica">Económica</option>
                                     </select>
                                 </div>
-                                <div class="form-row pull-right">
+                                <div class="form-row" style="margin-top: 9px;">
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn btn-sm btn-warning" title="Visualizar combinaciones" style="color:#FFFFFF; font-weight:bold;" data-toggle="modal" data-target="#modalCombinaciones">Visualizar</button>
+                                    </div>
                                     <div class="col">
-                                        <div class="form-check" id="checkSalvarCombinacion">
+                                        <div class="form-check pull-right" id="checkSalvarCombinacion">
                                             <input type="checkbox" class="form-check-input" id="salvarCombinacion" onclick="salvarCombinacion();">
                                             <label for="salvarCombinacion">Salvar</label>
                                         </div>
@@ -150,9 +153,6 @@
                             <div class="col">
                                 <p class="d-block mn-1 p-titulos"><ins>Resultados</ins></p>
                             </div>
-                            <div class="col-8 d-flex justify-content-center">
-                                <button id="btnDivCombinaciones" class="btn btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg" style="padding: 4px;" title="comparativa combinaciones" disabled><img src="https://img.icons8.com/ios/24/000000/eye-checked.png"/></button>
-                            </div>
                         </div>
                         <!-- #ModalsZone -->
                         <!-- Modal_AjustePropuesta -->
@@ -192,112 +192,147 @@
                         </div>
                         <!-- #End - Modal_combinaciones -->
                         <!-- Modal_combinaciones -->
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                        <div id="modalCombinaciones" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header row">
-                                        <div class="col">
-                                            <button id="btnDetailsModal" class="btn btn-xs details-propuesta-modal" onclick="buttonDetails(this)" title="Detalles propuesta"><img src="https://img.icons8.com/material-outlined/24/000000/details.png"/></button>
-                                        </div>
-                                        <div class="col">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Combinaciones</h5>                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="modal-body row">
-                                        @for($i=1; $i<=3; $i++)
-                                            <div class="col" id="divCombinacion{{ $i }}">
-                                                <input id="inpTipoCombinacion{{ $i }}" class="d-none">
-                                                <h5 id="combinacionTitle{{ $i }}" class="title-combination" ></h5>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <img id="imgLogoPanel{{ $i }}" height="35" weight="100">
-                                                    </div> 
-                                                    <div class="col">
-                                                        <img id="imgLogoInversor{{ $i }}" height="35" weight="100">
-                                                    </div>
-                                                </div>
-                                                <ul id="modalResultPageX{{$i}}" class="list-group">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Potencia
-                                                        <span class="badge badge-primary badge-pill" id="plPotenciaNecesaria{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Cantidad paneles
-                                                        <span class="badge badge-primary badge-pill" id="plCantidadPaneles{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Cantidad inversores 
-                                                        <span class="badge badge-primary badge-pill" id="plCantidadInversores{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo proyecto s/IVA
-                                                        <span class="badge badge-primary badge-pill" id="plCostoProyectoSIVA{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo proyecto c/IVA
-                                                        <span class="badge badge-primary badge-pill" id="plCostoProyectoCIVA{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Costo por watt
-                                                        <span class="badge badge-primary badge-pill" id="plCostoWatt{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                                <ul id="modalResultPageY{{$i}}" class="list-group" style="display:none;">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Modelo panel
-                                                        <span class="badge badge-primary badge-pill" id="plModeloPanel{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Modelo inversor
-                                                        <span class="badge badge-primary badge-pill" id="plModeloInversor{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Consumo mensual
-                                                        <span class="badge badge-primary badge-pill" id="plConsumoMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Generacion mensual
-                                                        <span class="badge badge-primary badge-pill" id="plGeneracionMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Nuevo consumo mensual
-                                                        <span class="badge badge-primary badge-pill" id="plNuevoConsumoMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        % de generación
-                                                        <span class="badge badge-primary badge-pill" id="plPorcentajeGeneracion{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                                <ul id="modalResultPageZ{{$i}}" class="list-group" style="display:none;">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Pago promedio(anterior)
-                                                        <span class="badge badge-primary badge-pill" id="plPagoPromedioAnterior{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Pago promedio(nuevo)
-                                                        <span class="badge badge-primary badge-pill" id="plPagoPromedioNuevo{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Ahorro mensual
-                                                        <span class="badge badge-primary badge-pill" id="plAhorroMensual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        Ahorro anual
-                                                        <span class="badge badge-primary badge-pill" id="plAhorroAnual{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        ROI Bruto
-                                                        <span class="badge badge-primary badge-pill" id="plROIBruto{{ $i }}"></span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        ROI con deducción
-                                                        <span class="badge badge-primary badge-pill" id="plROIDeduccion{{ $i }}"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        @endfor
+                                    <div class="modal-body">
+                                        <table class="table table-bordered table-sm text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
+                                                    <th scope="col"><strong>A</strong></th>
+                                                    <th scope="col"><strong>B</strong></th>
+                                                    <th scope="col"><strong>C</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border-left:0px; border-top:0px;"></td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col-sm">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                            <div class="col-sm">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td id="imgLogos">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Modelo</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Subtotal s/IVA</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total c/IVA</strong></td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                    <td>*</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
