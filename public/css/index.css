@@ -13,6 +13,27 @@ body {
     background-color: var(--gray);
 }
 
+/* LodingSpinner */
+  .loading-spinner{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(255,255,255,0.8) url("https://c.tenor.com/8KWBGNcD-zAAAAAC/loader.gif") center no-repeat;
+  }
+
+  body.loading{
+    overflow: hidden;
+  }
+
+  body.loading .loading-spinner{
+    display: block;
+  }
+/* Fin LodingSpinner */
+
 label,
 h3,
 h4{

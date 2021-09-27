@@ -14,7 +14,8 @@ function addAgregado(){
     let contadorDeAgregados = 0;
 
     /* Contador - Agregados */
-    contadorDeAgregados = sessionStorage["contadorAgregados"] ? parseInt(sessionStorage.getItem("contadorAgregados")) : contadorDeAgregados;
+    contadorDeAgregados = sessionStorage.getItem('contadorAgregados');
+    contadorDeAgregados = contadorDeAgregados != null ? parseInt(contadorDeAgregados) : 0;
 
     if(validarInputsVaciosAg(nombreAgregao) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
         Agregado.nombreAgregado = nombreAgregao;
@@ -30,9 +31,12 @@ function addAgregado(){
             _agregados[contadorDeAgregados] = Agregado;
         }
 
-        //Pintar 'Agregado' en tabla
+        //Pintar <td>'Agregado'</td> en tabla
         let tableBody = $('#tblAgregados > tbody');
-        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdAgregado'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregados[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregados[contadorDeAgregados].cantidadAgregado+'</td><td>$'+_agregados[contadorDeAgregados].precioAgregado+'</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(this);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdAgregado'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregados[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregados[contadorDeAgregados].cantidadAgregado+'</td><td id="tdPrecioUnitario">$ '+_agregados[contadorDeAgregados].precioAgregado.toLocaleString('es-MX')+' MXN</td><td id="tdSubtotal">$ '+(_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioAgregado).toLocaleString('es-MX')+' MXN</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(this);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+
+        //Se afecta[SUMA] el contador -costoTotalAgregados-
+        costoTotalAgregados(0, (_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioAgregado));
 
         //
         sessionStorage.setItem("_agregados", JSON.stringify(_agregados));
@@ -43,28 +47,70 @@ function addAgregado(){
     }
 }
 
-function eliminarAgregado(control){
-    let contadorDeAgregados = 0;
-    let posicionAgregado = control.id;//Se borra el *obj* logicamente del array
+function eliminarAgregado(){
     let _agregado = JSON.parse(sessionStorage.getItem('_agregados'));
+    let contadorDeAgregados = parseInt(sessionStorage.getItem("contadorAgregados")); //Se obtiene el contador del 'value' del -btnAddAg-
 
-    _agregado.splice(posicionAgregado, 1);
+    //Se afecta[RESTA] el contador -costoTotalAgregados-
+    costoTotalAgregados(1, (_agregado[contadorDeAgregados - 1].cantidadAgregado * _agregado[contadorDeAgregados - 1].precioAgregado));
+
+    _agregado.splice((contadorDeAgregados - 1), 1);
+
 
     //Se remplaza el antiguo 'sessionStorage' con el nuevo array -_agregado-
     sessionStorage.removeItem('_agregados');
     sessionStorage.setItem('_agregados', JSON.stringify(_agregado));
     
     //Se elimina visualmente de la tabla
-    $('#trContAg'+posicionAgregado).remove();
+    $('#trContAg'+(contadorDeAgregados - 1)).remove();
 
     /* Contador - Agregados */
     //Disminuye el contador de agregados
-    contadorDeAgregados = parseInt(sessionStorage.getItem("contadorAgregados")); //Se obtiene el contador del 'value' del -btnAddAg-
     contadorDeAgregados--;
     sessionStorage.setItem("contadorAgregados", contadorDeAgregados); //Se modifica por el nuevo -valor-
 }
 
 //Validaciones y eventos - *Agregados*
+function costoTotalAgregados(operacion, costoTotal){ //Afecta el -contador- de *CostoTotal* de Agregados y pintarlo/mostrarlo
+    /* 
+        ->operacion [suma || resta]
+        ->costoTotal [cantidadDeAgregados * costoUnitarioAgregado]
+    */
+    let costoTotalAgregados = 0;
+
+    //Leer el sessionStorage del contador -costoTotal-
+    costoTotalAgregados = sessionStorage.getItem('costoTotalAgregados');
+    costoTotalAgregados = costoTotalAgregados != null ? costoTotalAgregados : 0; //Si encuentra el sessionStorage de -costoTotalAgregados-, lo settea y si no, se le inicializa 0
+    costoTotalAgregados = parseFloat(costoTotalAgregados);
+
+    //Captar que operacion se realizara
+    switch(operacion)
+    {
+        case 0: //Suma
+            //Se realiza la operacion correspondiente
+            costoTotalAgregados = costoTotalAgregados + costoTotal;
+
+            //Se settea el valor al -sessionStorage-
+            sessionStorage.removeItem('costoTotalAgregados');
+            sessionStorage.setItem('costoTotalAgregados',costoTotalAgregados);
+        break;
+        case 1: //Resta
+            //Se realiza la operacion correspondiente
+            costoTotalAgregados = costoTotalAgregados - costoTotal;
+
+            //Se settea el valor al -sessionStorage-
+            sessionStorage.removeItem('costoTotalAgregados');
+            sessionStorage.setItem('costoTotalAgregados',costoTotalAgregados);
+        break;
+        default:
+            -1;
+        break;
+    }
+
+    //Pintar resultado del -contador-
+    $('#costoTotalAgregados').text('$ ' + costoTotalAgregados.toLocaleString('es-MX') + ' MXN');
+}
+
 function limpiarInputsAgregado(){
     $('.inpAg').val('');
     $('#inpCantidadAg').focus();
@@ -131,8 +177,8 @@ function visualizandoPDF(pdfFile){
 
     let link = document.createElement('a');
 
-    // let fileName = getPDFFileName(pdfFile.data);
-    let fileName = 'test.pdf';
+    let fileName = getPDFFileName(pdfFile.data);
+    // let fileName = 'test.pdf';
 
     link.href = window.URL.createObjectURL(blobPDF);
     link.download = fileName;

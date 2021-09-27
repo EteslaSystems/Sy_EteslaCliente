@@ -1,4 +1,22 @@
 /*#region index(general)*/
+$(document).ready(function(){
+    readyLoader();
+});
+
+function readyLoader(){
+    $(document)
+    .ajaxStart(function(){
+        $("body").addClass("loading");
+    })
+    .ajaxStop(function(){
+        $("body").removeClass("loading");
+    });
+} 
+
+function loadMenuAddItem(){    
+    document.getElementById("menuContent").classList.toggle("menu-active");
+}
+
 $("#menu-toggle").click(function(e){
     $("#wrapper").toggleClass("toggled");
     e.preventDefault();

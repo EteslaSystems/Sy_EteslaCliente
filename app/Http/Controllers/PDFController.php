@@ -38,8 +38,8 @@ class PDFController extends Controller
             $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
 
             //Nombre del documento PDF
-            // $fileName = $this->getFileName($propuesta);
-            $fileName = "test.pdf";
+            $fileName = $this->getFileName($propuesta);
+            // $fileName = "test.pdf";
 
             $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)
 

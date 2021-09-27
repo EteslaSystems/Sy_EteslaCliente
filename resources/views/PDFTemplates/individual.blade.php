@@ -128,10 +128,6 @@
     .text-inferior-pag1-secundary{
         font-size: 10px;
     }
-    .garantias{
-        line-height: 50%;
-        text-align: center;
-    }
 
     /* Cards */
     .card{
@@ -315,19 +311,6 @@
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-        <!-- Garantias de las marcas -->
-        <div class="garantias">
-            @if(!is_null($paneles))
-                <p>Garantia en el panel <strong>{{ $paneles["vMarca"] }}</strong> con {{ $paneles["vGarantia"] }} años de garantia</p>
-            @endif
-            @if(!is_null($inversores))
-                <p>Garantia en el inversor <strong>{{ $inversores["vMarca"] }}</strong> con {{ $inversores["vGarantia"] }} años de garantia</p>
-            @endif
-            @if(!is_null($estructura["_estructuras"]))
-                <p>Garantia de {{ $estructura["_estructuras"]["vMarca"] }} años en la marca de soportes <strong>{{ $estructura["_estructuras"]["vGarantia"] }}</strong></p>
-            @endif
-        </div>
-        <!-- Fin - Garantias de las marcas -->
         <hr class="linea-division" style="background-color: #5576F2; margin-top:-8px;">
         <table class="table-contenedor" style="margin-top: 35px;">
             <tr>

@@ -102,7 +102,7 @@
                                     <div class="carousel-inner text-center">
                                         <div class="carousel-item">
                                             <div class="custom-control custom-checkbox image-checkbox">
-                                                <input id="rbtnQR" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)">
+                                                <input id="rbtnQR" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)" disabled>
                                                 <label class="custom-control-label" for="rbtnQR">
                                                     <img src="https://img.icons8.com/cotton/80/000000/qr-code--v2.png"/>
                                                 </label>
@@ -200,11 +200,11 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body table-responsive-xl">
                                         <table class="table table-bordered table-sm text-center">
-                                            <thead>
+                                            <thead style="background-color:#D68910; color:#FFFFFF;">
                                                 <tr>
-                                                    <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
+                                                    <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
                                                     <th scope="col"><strong>A</strong></th>
                                                     <th scope="col"><strong>B</strong></th>
                                                     <th scope="col"><strong>C</strong></th>
@@ -216,120 +216,132 @@
                                                     <td id="imgLogos">
                                                         <div class="row">
                                                             <div class="col-sm">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgPanelA" style="width:70px; height:44px;">
                                                             </div>
                                                             <div class="col-sm">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgInversorA" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgEstructuraA" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td id="imgLogos">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgPanelB" style="width:70px; height:44px;">
                                                             </div>
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgInversorB" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgEstructuraB" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td id="imgLogos">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgPanelC" style="width:70px; height:44px;">
                                                             </div>
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgInversorC" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img style="width:70px; height:44px;" src="https://drive.google.com/uc?export=view&id=1eFwmZHxzPfu4nJTPdzCE0mx-rbdAh47x">
+                                                                <img id="imgEstructuraC" style="width:70px; height:44px;">
                                                             </div>
                                                         </div>
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Costo por watt</strong></td>
+                                                    <td id="tdCostoWattA">*</td>
+                                                    <td id="tdCostoWattB">*</td>
+                                                    <td id="tdCostoWattC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Potencia instalada</strong></td>
+                                                    <td id="tdPotenciaInstaladaA">*</td>
+                                                    <td id="tdPotenciaInstaladaB">*</td>
+                                                    <td id="tdPotenciaInstaladaC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Modelo</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdModeloPanelA">*</td>
+                                                    <td id="tdModeloPanelB">*</td>
+                                                    <td id="tdModeloPanelC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Cantidad</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdCantidadPanelA">*</td>
+                                                    <td id="tdCantidadPanelB">*</td>
+                                                    <td id="tdCantidadPanelC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Potencia</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdPotenciaPanelA">*</td>
+                                                    <td id="tdPotenciaPanelB">*</td>
+                                                    <td id="tdPotenciaPanelC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Modelo</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdModeloInversorA">*</td>
+                                                    <td id="tdModeloInversorB">*</td>
+                                                    <td id="tdModeloInversorC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Cantidad</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdCantidadInversorA">*</td>
+                                                    <td id="tdCantidadInversorB">*</td>
+                                                    <td id="tdCantidadInversorC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Potencia</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdPotenciaInversorA">*</td>
+                                                    <td id="tdPotenciaInversorB">*</td>
+                                                    <td id="tdPotenciaInversorC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Modelo</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdModeloEstructuraA">*</td>
+                                                    <td id="tdModeloEstructuraB">*</td>
+                                                    <td id="tdModeloEstructuraC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Cantidad</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdCantidadEstructuraA">*</td>
+                                                    <td id="tdCantidadEstructuraB">*</td>
+                                                    <td id="tdCantidadEstructuraC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Subtotal s/IVA</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdSubtotalA">*</td>
+                                                    <td id="tdSubtotalB">*</td>
+                                                    <td id="tdSubtotalC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Total c/IVA</strong></td>
-                                                    <td>*</td>
-                                                    <td>*</td>
-                                                    <td>*</td>
+                                                    <td id="tdTotalA">*</td>
+                                                    <td id="tdTotalB">*</td>
+                                                    <td id="tdTotalC">*</td>
                                                 </tr>
                                             </tbody>
                                         </table>

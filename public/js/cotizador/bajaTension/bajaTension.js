@@ -29,6 +29,7 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
             await pintarVistaDeResultados();
     
             _combinaciones = await obtenerCombinaciones(data);
+            vaciarCombinacionesEnModal(_combinaciones); // :void()
             $('#ddlCombinaciones').prop("disabled",false);//Se activa el ddlCombinaciones
 
             //Se obtienen paneles
@@ -948,7 +949,78 @@ function seleccionarCombinacion(ddlCombinaciones){
 }
 
 function vaciarCombinacionesEnModal(combinaciones){
-    
+    let CombinacionA = combinaciones[0].combinacionEconomica[0]; //CombinacionEconomica
+    let CombinacionB = combinaciones[0].combinacionMediana[0]; //CombinacionMediana
+    let CombinacionC = combinaciones[0].combinacionOptima[0]; //CombinacionOptima
+
+    /* CombinacionA */
+    ///ImagenesLogos
+    $('#imgPanelA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.paneles.imgRuta);
+    $('#imgInversorA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.inversores.imgRuta);
+    $('#imgEstructuraA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.estructura._estructuras.imgRuta);
+    ///CostoWatt
+    $('#tdCostoWattA').text('$ '+CombinacionA.totales.precio_watt+' USD');
+    $('#tdPotenciaInstaladaA').text(CombinacionA.paneles.potenciaReal + ' Kw');
+    ///Panel
+    $('#tdModeloPanelA').text(CombinacionA.paneles.nombre);
+    $('#tdCantidadPanelA').text(CombinacionA.paneles.noModulos);
+    $('#tdPotenciaPanelA').text(CombinacionA.paneles.potencia + ' W');
+    ///Inversor
+    $('#tdModeloInversorA').text(CombinacionA.inversores.vNombreMaterialFot);
+    $('#tdCantidadInversorA').text(CombinacionA.inversores.numeroDeInversores);
+    $('#tdPotenciaInversorA').text(CombinacionA.inversores.fPotencia + ' W');
+    ///Estructura
+    $('#tdModeloEstructuraA').text(CombinacionA.estructura._estructuras.vNombreMaterialFot);
+    $('#tdCantidadEstructuraA').text(CombinacionA.estructura.cantidad);
+    ///Subtotales&&Totales
+    $('#tdSubtotalA').text('$ ' + CombinacionA.totales.precio.toLocaleString('es-MX') + ' USD');
+    $('#tdTotalA').text('$ ' + CombinacionA.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
+
+    /* CombinacionB */
+    ///ImagenesLogos
+    $('#imgPanelB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.paneles.imgRuta);
+    $('#imgInversorB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.inversores.imgRuta);
+    $('#imgEstructuraB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.estructura._estructuras.imgRuta);
+    ///CostoWatt
+    $('#tdCostoWattB').text('$ ' + CombinacionB.totales.precio_watt + ' USD');
+    $('#tdPotenciaInstaladaB').text(CombinacionB.paneles.potenciaReal + ' Kw');
+    ///Panel
+    $('#tdModeloPanelB').text(CombinacionB.paneles.nombre);
+    $('#tdCantidadPanelB').text(CombinacionB.paneles.noModulos);
+    $('#tdPotenciaPanelB').text(CombinacionB.paneles.potencia + ' W');
+    ///Inversor
+    $('#tdModeloInversorB').text(CombinacionB.inversores.vNombreMaterialFot);
+    $('#tdCantidadInversorB').text(CombinacionB.inversores.numeroDeInversores);
+    $('#tdPotenciaInversorB').text(CombinacionB.inversores.fPotencia + ' W');
+    ///Estructura
+    $('#tdModeloEstructuraB').text(CombinacionB.estructura._estructuras.vNombreMaterialFot);
+    $('#tdCantidadEstructuraB').text(CombinacionB.estructura.cantidad);
+    ///Subtotales&&Totales
+    $('#tdSubtotalB').text('$ ' + CombinacionB.totales.precio.toLocaleString('es-MX') + ' USD');
+    $('#tdTotalB').text('$ ' + CombinacionB.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
+
+    /* CombinacionC */
+    ///ImagenesLogos
+    $('#imgPanelC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.paneles.imgRuta);
+    $('#imgInversorC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.inversores.imgRuta);
+    $('#imgEstructuraC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.estructura._estructuras.imgRuta);
+    ///CostoWatt
+    $('#tdCostoWattC').text('$ ' + CombinacionC.totales.precio_watt+' USD');
+    $('#tdPotenciaInstaladaC').text(CombinacionC.paneles.potenciaReal + ' Kw');
+    ///Panel
+    $('#tdModeloPanelC').text(CombinacionC.paneles.nombre);
+    $('#tdCantidadPanelC').text(CombinacionC.paneles.noModulos);
+    $('#tdPotenciaPanelC').text(CombinacionC.paneles.potencia + ' W');
+    ///Inversor
+    $('#tdModeloInversorC').text(CombinacionC.inversores.vNombreMaterialFot);
+    $('#tdCantidadInversorC').text(CombinacionC.inversores.numeroDeInversores);
+    $('#tdPotenciaInversorC').text(CombinacionC.inversores.fPotencia + ' W');
+    ///Estructura
+    $('#tdModeloEstructuraC').text(CombinacionC.estructura._estructuras.vNombreMaterialFot);
+    $('#tdCantidadEstructuraC').text(CombinacionC.estructura.cantidad);
+    ///Subtotales&&Totales
+    $('#tdSubtotalC').text('$ ' + CombinacionC.totales.precio.toLocaleString('es-MX') + ' USD');
+    $('#tdTotalC').text('$ ' + CombinacionC.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
 }
 
 function salvarCombinacion(){

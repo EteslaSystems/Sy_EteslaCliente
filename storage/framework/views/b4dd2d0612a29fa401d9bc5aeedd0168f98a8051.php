@@ -128,10 +128,6 @@
     .text-inferior-pag1-secundary{
         font-size: 10px;
     }
-    .garantias{
-        line-height: 50%;
-        text-align: center;
-    }
 
     /* Cards */
     .card{
@@ -315,19 +311,6 @@
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-        <!-- Garantias de las marcas -->
-        <div class="garantias">
-            <?php if(!is_null($paneles)): ?>
-                <p>Garantia en el panel <strong><?php echo e($paneles["vMarca"]); ?></strong> con <?php echo e($paneles["vGarantia"]); ?> años de garantia</p>
-            <?php endif; ?>
-            <?php if(!is_null($inversores)): ?>
-                <p>Garantia en el inversor <strong><?php echo e($inversores["vMarca"]); ?></strong> con <?php echo e($inversores["vGarantia"]); ?> años de garantia</p>
-            <?php endif; ?>
-            <?php if(!is_null($estructura["_estructuras"])): ?>
-                <p>Garantia de <?php echo e($estructura["_estructuras"]["vMarca"]); ?> años en la marca de soportes <strong><?php echo e($estructura["_estructuras"]["vGarantia"]); ?></strong></p>
-            <?php endif; ?>
-        </div>
-        <!-- Fin - Garantias de las marcas -->
         <hr class="linea-division" style="background-color: #5576F2; margin-top:-8px;">
         <table class="table-contenedor" style="margin-top: 35px;">
             <tr>

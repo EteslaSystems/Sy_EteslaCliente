@@ -3,34 +3,6 @@
 - @author: 				LH420
 - @date: 				19/05/2020
 */
-
-var idPanel;
-var idInversor;
-var direccionCliente = '';
-
-$(document).ready(function(){
-    var loader = $('#loader');
-
-    /* readyLoader(loader); */
-});
-
-/* function readyLoader(loader){
-    $(document)
-    .ajaxStart(function(){
-        loader.fadeIn();
-    })
-    .ajaxStop(function(){
-        loader.fadeOut();
-        $('#divResultCotIndv').css("display","");
-    });
-} 
-
-function loadMenuAddItem(){    
-    document.getElementById("menuContent").classList.toggle("menu-active");
-}
-*/
-
-
 /*#region Server*/
 function getCotizacionIndividual(dataCotInd){
     sessionStorage.removeItem("tarifaMT");
@@ -222,19 +194,19 @@ function pintarResultadoCotizacion(cotizacionResult){
     let totalUSD = cotizacionIndividual.totales.precioMasIVA;
     let totalMXN = cotizacionIndividual.totales.precioMXNConIVA;
 
-    $('#resPotenciaInstalada').text(potenciaInstalad + ' kw');
-    $('#resCostoPanel').text('$' + costoPanel + ' USD');
-    $('#resCostInversor').text('$' + costoInversor + ' USD');
-    $('#resCostEstruct').text('$' + costoEstructura + ' USD');
-    $('#resCostoViaticos').text('$' + costoViaticos + ' USD');
-    $('#resCostoMO').text('$' + costoMO + ' USD');
-    $('#resCostoFletes').text('$' + costoFletes + ' USD');
+    $('#resPotenciaInstalada').text(potenciaInstalad + ' kW');
+    $('#resCostoPanel').text('$ ' + costoPanel + ' USD');
+    $('#resCostInversor').text('$ ' + costoInversor + ' USD');
+    $('#resCostEstruct').text('$ ' + costoEstructura + ' USD');
+    $('#resCostoViaticos').text('$ ' + costoViaticos + ' USD');
+    $('#resCostoMO').text('$ ' + costoMO + ' USD');
+    $('#resCostoFletes').text('$ ' + costoFletes + ' USD');
 
     //Subtotales y totales
-    $('#tdSubtotalUSD').text('$' + subtotalUSD + ' USD');
-    $('#tdSubtotalMXN').text('$' + subtotalMXN + ' MXN');
-    $('#tdTotalUSD').text('$' + totalUSD + ' USD');
-    $('#tdTotalMXN').text('$' + totalMXN + ' MXN');
+    $('#tdSubtotalUSD').text('$ ' + subtotalUSD.toLocaleString('es-MX') + ' USD');
+    $('#tdSubtotalMXN').text('$ ' + subtotalMXN.toLocaleString('es-MX') + ' MXN');
+    $('#tdTotalUSD').text('$ ' + totalUSD.toLocaleString('es-MX') + ' USD');
+    $('#tdTotalMXN').text('$ ' + totalMXN.toLocaleString('es-MX') + ' MXN');
 }
 
 function catchDataEquipos(){
