@@ -9,6 +9,7 @@ use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
 use App\APIModels\APICotizacion;
+use App\APIModels\APIEstructuras;
 
 class CotizacionIndividualController extends Controller
 {
@@ -17,14 +18,16 @@ class CotizacionIndividualController extends Controller
 	protected $vendedor;
 	protected $clientes;
 	protected $cotizacion;
+	protected $estructuras;
 
-	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion)
+	public function __construct(APIPaneles $paneles, APIInversores $inversores, APIVendedor $vendedor, APICliente $clientes, APICotizacion $cotizacion, APIEstructuras $estructuras)
 	{
 		$this->paneles = $paneles;
 		$this->inversores = $inversores;
 		$this->vendedor = $vendedor;
 		$this->clientes = $clientes;
 		$this->cotizacion = $cotizacion;
+		$this->estructuras = $estructuras;
 	}
 	
 	public function index()
@@ -38,12 +41,14 @@ class CotizacionIndividualController extends Controller
 
 		$vPaneles = $this->paneles->view();
 		$vInversores = $this->inversores->view();
+		$vEstructuras = $this->estructuras->view();
+		$vEstructuras = $vEstructuras->message;
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'consultarClientes', 'rol'));
+		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'vEstructuras', 'consultarClientes', 'rol'));
 	}
 
 	public function create(Request $request)
@@ -71,8 +76,14 @@ class CotizacionIndividualController extends Controller
 
 	public function validarSesion()
 	{
+		// if (session()->has('dataUsuario')) {
+		// 	if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+		// 		return 2;
+		// 	}
+		// 	return 1;
+		// }
 		if (session()->has('dataUsuario')) {
-			if (session('dataUsuario')->rol == 5 && session('dataUsuario')->tipoUsuario == 'Vend' || session('dataUsuario')->rol == 1 && session('dataUsuario')->tipoUsuario == 'Admin' || session('dataUsuario')->rol == 0 && session('dataUsuario')->tipoUsuario == 'SU') {
+			if (session('dataUsuario')->rol == 5 || session('dataUsuario')->rol == 1 || session('dataUsuario')->rol == 0 ) {
 				return 2;
 			}
 			return 1;
@@ -81,16 +92,12 @@ class CotizacionIndividualController extends Controller
 	}
 
 	public function sendSingleQuotation(Request $request){
-		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
-		$arrayCompleto["destino"] = $request->direccionCliente;
-		$arrayCompleto["idPanel"] = $request->idPanel;
-		$arrayCompleto["idInversor"] = $request->idInversor;
-		$arrayCompleto["cantidadPaneles"] = $request->cantidadPaneles;
-		$arrayCompleto["cantidadInversores"] = $request->cantidadInversores;
-		$arrayCompleto["cantidadEstructuras"] = $request->cantidadEstructuras;
-		$arrayCompleto["bInstalacion"] = $request->bInstalacion;
+		$cotizacionIndividual["idUsuario"] = session('dataUsuario')->idPersona;
+		$cotizacionIndividual["origen"] = session('dataUsuario')->oficina;
+		$cotizacionIndividual["cotizacionIndividual"] = $request->dataCotInd;
+		$cotizacionIndividual["tipoCotizacion"] = 'individual';
 
-		$response = $this->cotizacion->sendSingleQuotation(['json' => $arrayCompleto]);
+		$response = $this->cotizacion->sendSingleQuotation(['json' => $cotizacionIndividual]);
 		$response = response()->json($response);
 
 		return $response;

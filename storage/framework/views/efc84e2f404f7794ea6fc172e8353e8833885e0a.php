@@ -21,20 +21,10 @@
                 <a class="list-group-item list-group-item-action bg-ligth" href="/individual">Individual</a>
             </li>
         </ul>
-        <a href="#cotizadorSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light">
+        <a href="/material-fotovoltaico" class="list-group-item list-group-item-action bg-light">
             <img src="https://img.icons8.com/officel/30/000000/solar-panel.png"> Material fotovoltaico
         </a>
-
-        <ul class="collapse list-unstyled" id="cotizadorSubmenu">
-            <li>
-                <a class="list-group-item list-group-item-action bg-ligth" href="/paneles">Paneles</a>
-            </li>
-            <li>
-                <a class="list-group-item list-group-item-action bg-ligth" href="/inversores">Inversores</a>
-            </li>
-        </ul>
     <?php $__env->stopSection(); ?>
-
     <?php $__env->startSection('content'); ?>
         <br>
         <?php echo $__env->yieldContent('contenidoAdmin'); ?>

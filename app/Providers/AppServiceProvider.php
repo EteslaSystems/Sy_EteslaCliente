@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
 
+use Illuminate\Support\Facades\Blade;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
@@ -26,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('GuzzleHttp\Client', function(){
             return new Client([
-                'base_uri' => 'https://etesla-api.herokuapp.com/'
+                'base_uri' => 'http://137.184.97.127:4000/'
             ]);
         });
     }

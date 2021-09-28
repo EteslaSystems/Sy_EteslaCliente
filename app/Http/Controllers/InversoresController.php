@@ -36,9 +36,9 @@ class InversoresController extends Controller
         ]);
 
         if($vInversores->status != 200) {
-            return redirect('/inversores')->with('status-fail', $vInversores->message);
+            return redirect('material-fotovoltaico')->with('status-fail', $vInversores->message);
         } else {
-            return redirect('/inversores')->with('status-success', $vInversores->message);
+            return redirect('material-fotovoltaico')->with('status-success', $vInversores->message);
         }
     }
 
@@ -69,10 +69,13 @@ class InversoresController extends Controller
         $data["potencia"] = $request->get('i_potencia');
         $data["isc"] = $request->get('i_isc');
         $data["moneda"] = $request->get('i_tipomoneda');
+        $data["garantia"] = $request->get('i_garantia');
+        $data["origen"] = $request->get('i_origen');
         $data["ivmin"] = $request->get('i_vmin');
         $data["ivmax"] = $request->get('i_vmax');
         $data["ipmin"] = $request->get('i_pmin');
         $data["ipmax"] = $request->get('i_pmax');
+        $data["imgRuta"] = $request->get('i_imgRuta');
 
         $vInversores = $this->inversores->edit([
             'json' => $data
@@ -87,26 +90,30 @@ class InversoresController extends Controller
 
     public function create(Request $request)
     {
-
+        $data["vTipoInversor"] = $request->get('sctTipoInversor');
+        $data["panelesSoportados"] = $request->get('i_paneleSoportados');
         $data["nombrematerial"] = $request->get('i_nombrematerial');
         $data["marca"] = $request->get('i_marca');
         $data["precio"] = $request->get('i_precio');
         $data["potencia"] = $request->get('i_potencia');
         $data["isc"] = $request->get('i_isc');
         $data["moneda"] = $request->get('i_tipomoneda');
+        $data["garantia"] = $request->get('i_garantia');
+        $data["origen"] = $request->get('i_origen');
         $data["ivmin"] = $request->get('i_vmin');
         $data["ivmax"] = $request->get('i_vmax');
         $data["ipmin"] = $request->get('i_pmin');
         $data["ipmax"] = $request->get('i_pmax');
+        $data["imgRuta"] = $request->get('i_imgRuta');
 
         $vInversores = $this->inversores->add([
             'json' => $data
         ]);
 
         if($vInversores->status != 200){
-            return redirect('/inversores')->with('status-fail', $vInversores->message);
+            return redirect('/material-fotovoltaico')->with('status-fail', $vInversores->message);
         } else {
-            return redirect('/inversores')->with('status-success', $vInversores->message);
+            return redirect('/material-fotovoltaico')->with('status-success', $vInversores->message);
         }
     }
 
@@ -126,7 +133,7 @@ class InversoresController extends Controller
 
     public function getInversoresSelectos(Request $request)
     {
-        $array["potenciaReal"] = $request->potenciaReal;
+        $array["objPanelSelect"] = $request->objPanelSelect;
         $vInversores = $this->inversores->inversores_selectos(['json' => $array]);
         $vInversores = response()->json($vInversores);
 

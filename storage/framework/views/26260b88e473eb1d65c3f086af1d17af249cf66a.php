@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/machotes/propuestaCombinaciones.blade.php ENDPATH**/ ?>

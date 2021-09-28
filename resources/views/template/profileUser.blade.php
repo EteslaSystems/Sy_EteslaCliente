@@ -58,19 +58,19 @@
                                                             <strong>Cargo:</strong>
                                                         </th>
                                                         <td style="width: 70%;">
-                                                            @if($usuario->ttTipoUsuario == 'Admin')
+                                                            @if($usuario->siRol == 1)
                                                                 <strong>Administrador</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Operac')
+                                                            @if($usuario->siRol == 2)
                                                                 <strong>Operaciones</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'GerenteIng')
+                                                            @if($usuario->siRol == 3)
                                                                 <strong>Gerente de ingeniería</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Ing')
+                                                            @if($usuario->siRol == 4)
                                                                 <strong>Ingeniero</strong>
                                                             @endif
-                                                            @if($usuario->ttTipoUsuario == 'Vend')
+                                                            @if($usuario->siRol == 5)
                                                                 <strong>Vendedor</strong>
                                                             @endif
                                                         </td>
@@ -108,15 +108,12 @@
                                             </table>
                                         </p><hr>
                                         <p class="card-text text-right">
-                                            <small class="text-muted">
+                                            <small class="text-muted">   
+                                            @if($usuario->updated_at != null)
                                                 Última vez editado: <strong>&nbsp;
-                                                    @if($usuario->updated_at != null)
-                                                        {{$usuario->updated_at}}
-                                                    @else
-                                                        Nunca
-                                                    @endif
+                                                    {{$usuario->updated_at}}
+                                                @endif
                                                 </strong>
-                                                
                                             </small>
                                         </p>
                                     </div>
