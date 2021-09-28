@@ -7,6 +7,69 @@
 
 
 <?php $__env->startSection('content'); ?>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <small>Buscador de clientes</small>
+                        <hr class="separador" style="margin-top:-10px;">
+                        <div class="form-group">
+                            <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente" onkeyup="autoCompletarCliente(this);"/>
+                            <button for="inpBuscarCliente" class="btn btn-success btn-sm pull-right" type="button" data-toggle="modal" data-target="#modal-agregarcliente" style="margin-top:5px;"><img src="https://img.icons8.com/ios-glyphs/20/000000/user-male-circle.png"/>Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <small>Datos del cliente</small>
+                        <hr class="separador" style="margin-top:-10px;">
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Nombre completo" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Direccion" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Telefono" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Celular" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" type="mail" placeholder="Correo electronico" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
             <div class="input-group">
@@ -45,26 +108,22 @@
                             <div class="col-12 col-sm-4 col-md-4 fx-1">
                                 <label for="default-name" class="mn-1">Nombre completo</label>
                             </div>
-
                             <div class="col-12 col-sm-8 col-md-8" id="lblNombreCliente">
                                 <input type="text" class="form-control" name="default-name" <?php if(session('nombre')): ?>  value="<?php echo e(session('nombre')); ?>" <?php endif; ?> disabled readonly>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-4 col-md-4 fx-1">
                                 <label for="default-address" class="mn-1">Dirección</label>
                             </div>
-
                             <div class="col-12 col-sm-8 col-md-8" id="lblDireccion">
                                 <input type="text" class="form-control" name="default-address" <?php if(session('direccion')): ?>  value="<?php echo e(session('direccion')); ?>" <?php endif; ?> disabled readonly>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div id="vmas" class="row">
                     <div class="col text-center" >
                         <a class="btn btn-primary btn-sm" id="vmasbtn" data-toggle="collapse" data-target="#info-cliente" aria-expanded="false" aria-controls="info-cliente">
