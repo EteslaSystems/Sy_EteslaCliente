@@ -18,8 +18,7 @@ class clienteController extends Controller
     public function registrarCliente(Request $request)
     {
         $request["idUsuario"] = session('dataUsuario')->idUsuario;
-        $request["consumo"] = 0;
-        $request["calle"] = $request->calle . '-' . $request->colonia;
+        $request["calle"] = $request->calle . ' ' . $request->colonia;
 
         $registrarCliente = $this->cliente->insertarCliente(['json' => $request->all()]);
 

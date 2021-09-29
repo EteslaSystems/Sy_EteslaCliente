@@ -58,6 +58,9 @@ Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* --------------- Cliente --------------- */
 Route::post('/agregar-cliente','MediaTensionController@create');
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
+/* --------------- */
+
+
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
 Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');

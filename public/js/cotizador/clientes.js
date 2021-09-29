@@ -1,4 +1,27 @@
+/*#region Cliente*/
+function pintarCliente(cliente){
+    
+}
+/*#endregion*/
+
 /*#region Propuestas*/
+function getDetailsPropuesta(){
+    openModalDetailsPropuesta();
+}
+
+/*------Modales_Propuestas------*/
+function openModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('hide');
+    $('.cd-example-modal-lg').modal('show');
+}
+
+function closeModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('show');
+    $('.cd-example-modal-lg').modal('hide');
+}
+/*#endregion*/
+
+/* #region Server */
 function getPropuestasByCliente(idCliente){
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -31,18 +54,23 @@ function getPropuestasByCliente(idCliente){
     });
 }
 
-function getDetailsPropuesta(){
-    openModalDetailsPropuesta();
+function buscarCliente(cliente){
+    return new Promise((resolve,reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'GET',
+            url: '/',
+            data: { idUsuario, cliente },
+            dataType: 'json',
+            success: function(cliente){
+                if(propuestas.status === 200){
+                    
+                }
+            },
+            error: function(error){
+                reject('Se ha generado un error al intentar buscar al cliente\n'+error);
+            }
+        });
+    });
 }
-
-/*------Modales_Propuestas------*/
-function openModalDetailsPropuesta(){
-    $('.bd-example-modal-lg').modal('hide');
-    $('.cd-example-modal-lg').modal('show');
-}
-
-function closeModalDetailsPropuesta(){
-    $('.bd-example-modal-lg').modal('show');
-    $('.cd-example-modal-lg').modal('hide');
-}
-/*#endregion*/
+/* #endregion */

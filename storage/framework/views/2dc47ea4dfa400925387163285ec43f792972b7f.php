@@ -7,6 +7,77 @@
 
 
 <?php $__env->startSection('content'); ?>
+<br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <small>Buscador de clientes</small>
+                        <hr class="separador" style="margin-top:-10px;">
+                        <div class="form-group">
+                            <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente" onkeyup="autoCompletarCliente(this);"/>
+                            <button for="inpBuscarCliente" class="btn btn-success btn-sm pull-right" type="button" data-toggle="modal" data-target="#modal-agregarcliente" style="margin-top:5px;"><img src="https://img.icons8.com/ios-glyphs/20/000000/user-male-circle.png"/>Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <small>Datos del cliente</small>
+                        <hr class="separador" style="margin-top:-10px;">
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Nombre completo" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Direccion" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Telefono" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control" placeholder="Celular" readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control" type="mail" placeholder="Correo electronico" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="form-group row">
         <div class="col-12 col-sm-7 offset-sm-5 col-md-4 offset-md-8">
             <div class="input-group">
@@ -26,11 +97,6 @@
                 <input type="search" class="form-control form-control-lg" id="inpSearchClient" name="inpSearchClient" list="clientes" placeholder="Busca a tu cliente.">
                 <datalist id="clientes"></datalist>
                 <template id="listtemplate">
-                <?php if(isset($consultarClientes)): ?>
-                    <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($cliente->vNombrePersona); ?>&nbsp;<?php echo e($cliente->vPrimerApellido); ?>&nbsp;<?php echo e($cliente->vSegundoApellido); ?>" data-value="<?php echo e($cliente->idPersona); ?>"></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
                 </template>
             </div>
         </div>
@@ -178,7 +244,7 @@
                         </div>
 
                         <div class="col-12 col-sm-12 col-md-12">
-                            <form action="<?php echo e(url('agregar-cliente')); ?>" method="POST" class="row">
+                            <form action="<?php echo e(url('  ')); ?>" method="POST" class="row">
                                 <?php echo csrf_field(); ?>
 
                                 <div class="col-12 col-sm-6 col-md-6">

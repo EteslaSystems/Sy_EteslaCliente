@@ -49,6 +49,13 @@ hr{
   border-top: 2px solid var(--green);
 }
 
+.separador{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .btn-green{
   background: var(--green-3);
   border-color: var(--green-3);
