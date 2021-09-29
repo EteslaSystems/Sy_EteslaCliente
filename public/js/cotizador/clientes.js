@@ -1,6 +1,28 @@
 /*#region Cliente*/
+function agregarCliente(){
+    logicaFormularioCliente(0);
+
+}
+
 function pintarCliente(cliente){
     
+}
+
+function logicaFormularioCliente(estado){
+    switch(estado)
+    {
+        case 0: //[ Nuevo Cliente ]
+            $('#btnAgregarCliente').prop("disabled",true);
+            $('.datosCliente').prop("readonly",false);
+            $('.form-group-buttons').css("display",'');
+        break;
+        case 1: //[ Cancelar ]
+        
+        break;
+        default:
+            -1;
+        break;
+    }
 }
 /*#endregion*/
 

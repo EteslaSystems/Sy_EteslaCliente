@@ -15,40 +15,65 @@
                     <div class="card-body">
                         <small>Buscador de clientes</small>
                         <hr class="separador" style="margin-top:-10px;">
-                        <div class="form-group">
-                            <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente" onkeyup="autoCompletarCliente(this);"/>
-                            <button for="inpBuscarCliente" class="btn btn-success btn-sm pull-right" type="button" data-toggle="modal" data-target="#modal-agregarcliente" style="margin-top:5px;"><img src="https://img.icons8.com/ios-glyphs/20/000000/user-male-circle.png"/>Agregar</button>
-                        </div>
+                        <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente" onkeyup="autoCompletarCliente(this);"/>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <small>Datos del cliente</small>
-                        <hr class="separador" style="margin-top:-10px;">
                         <div class="row">
-                            <div class="col form-group">
-                                <input class="form-control" placeholder="Nombre completo" readonly/>
+                            <div class="col">
+                                <small>Datos del cliente</small>
+                                <hr class="separador" style="margin-top:-10px;">
+                            </div>
+                            <div class="col">
+                                <button id="btnAgregarCliente" type="button" class="btn btn-success btn-xs pull-right" style="margin-top: -12px;" onclick="agregarCliente();">+</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
-                                <input class="form-control" placeholder="Direccion" readonly/>
+                                <input class="form-control datosCliente" placeholder="Nombre" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control datosCliente" placeholder="Primer apellido" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control datosCliente" placeholder="Segundo apellido" readonly/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
-                                <input class="form-control" placeholder="Telefono" readonly/>
+                                <input class="form-control datosCliente" placeholder="Telefono" readonly/>
                             </div>
                             <div class="col form-group">
-                                <input class="form-control" placeholder="Celular" readonly/>
+                                <input class="form-control datosCliente" placeholder="Celular" readonly/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
-                                <input class="form-control" type="mail" placeholder="Correo electronico" readonly/>
+                                <input class="form-control datosCliente" type="mail" placeholder="Correo electronico" readonly/>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                            <input class="form-control datosCliente" placeholder="Direccion (calle)" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control datosCliente" placeholder="C.P." readonly/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <input class="form-control datosCliente" placeholder="Municipio" readonly/>
+                            </div>
+                            <div class="col form-group">
+                                <input class="form-control datosCliente" placeholder="Estado" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-buttons" style="display:none;">
+                            <button type="button" class="btn btn-danger pull-right">Cancelar</button>
+                            <button type="button" class="btn btn-success pull-right">Guardar</button>
                         </div>
                     </div>
                 </div>
