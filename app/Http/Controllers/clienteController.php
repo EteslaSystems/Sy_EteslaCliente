@@ -26,6 +26,7 @@ class clienteController extends Controller
         $cliente["telefono"] = $request->inpClienteTelefono;
         $cliente["celular"] = $request->inpClienteCelular;
         $cliente["mail"] = $request->inpClienteMail;
+        $cliente["codigoPostal"] = $request->inpCP;
         $cliente["calle"] = $request->inpClienteCalle;
         $cliente["ciudad"] = $request->inpClienteCiudad;
         $cliente["estado"] = $request->inpClienteEstado;

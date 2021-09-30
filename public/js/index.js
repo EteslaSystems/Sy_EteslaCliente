@@ -1,6 +1,6 @@
 /*#region index(general)*/
 $(document).ready(function(){
-    // readyLoader();
+    readyLoader();
 });
 
 /* #region Spinner-Load */

@@ -24,26 +24,61 @@ async function buscarCoincidenciaCliente(){
     }
 }
 
-function pintarCliente(cliente){
+function pintarCliente(Cliente){
+    $('#inpClienteId').val(Cliente.idCliente); //hidden
+    $('#inpClienteNombre').val(Cliente.vNombrePersona);
+    $('#inpClientePrimerAp').val(Cliente.vPrimerApellido);
+    $('#inpClienteSegundoAp').val(Cliente.vSegundoApellido);
+    $('#inpClienteTelefono').val(Cliente.vTelefono);
+    $('#inpClienteCelular').val(Cliente.vCelular);
+    $('#inpClienteMail').val(Cliente.vEmail);
+    $('#inpCP').val(Cliente.cCodigoPostal);
+    $('#inpClienteCalle').val(Cliente.vCalle);
+    $('#inpClienteMunicipio').val(Cliente.vMunicipio);
+    $('#inpClienteCiudad').val(Cliente.vCiudad);
+    $('#inpClienteEstado').val(Cliente.vEstado);
+}
+
+function seleccionarCliente(optionSelected){
+    let optionValue = optionSelected.value;
+    let idDDL = optionSelected.id;
     
+    if(optionValue != -1){
+        //Obtener el sessionStorage de las coincidenciasClientes
+        let _coincidenciasClientes = JSON.parse(sessionStorage.getItem('coincidenciaClientes'));
+        
+        //Concidencias Filtradas para pintar el cliente que se selecciono
+        _coincidenciasClientes = _coincidenciasClientes.find(cliente => (cliente.vNombrePersona + ' ' + cliente.vPrimerApellido + ' ' + cliente.vSegundoApellido) === optionValue);
+
+        /* Pintar / Cargar el cliente en los inputs */
+        pintarCliente(_coincidenciasClientes);
+
+        //
+        $('#'+idDDL).css("display","none");
+        $('#inpBuscarCliente').val('');
+    }
 }
 
 function llenarDDLCoincidenciasClientes(_clientes){
     $.each(_clientes, function(index,cliente){
         $('#ddlCoincidenciasCliente').append(
             $('<option/>', {
-                value: cliente.NombreCompleto,
-                text: cliente.NombreCompleto
+                value: cliente.vNombrePersona + ' ' + cliente.vPrimerApellido + ' ' + cliente.vSegundoApellido,
+                text: cliente.vNombrePersona + ' ' + cliente.vPrimerApellido + ' ' + cliente.vSegundoApellido
             })
         );
     });
 }
 
 function logicaFormularioCliente(estado){
+    //Limpiar todos los campos
+    $('.datosCliente').val('');
+
     switch(estado)
     {
         case 0: //[ Nuevo Cliente ]
             $('#btnAgregarCliente').prop("disabled",true);
+            $('#searchCP').prop("disabled",false);
             $('.datosCliente').prop("readonly",false);
             $('.form-group-buttons').css("display",'');
         break;
@@ -51,6 +86,7 @@ function logicaFormularioCliente(estado){
             $('.form-group-buttons').css("display",'none');
             $('.datosCliente').prop("readonly",true);
             $('#btnAgregarCliente').prop("disabled",false);
+            $('#searchCP').prop("disabled",true);
         break;
         default:
             -1;
@@ -139,6 +175,10 @@ function buscarCliente(cliente){
             data: { nombre: cliente },
             dataType: 'json',
             success: function(clientResult){
+                //Guardar coincidencias en un sessionStorage
+                sessionStorage.removeItem('coincidenciaClientes');
+                sessionStorage.setItem('coincidenciaClientes',JSON.stringify(clientResult.message));
+
                 resolve(clientResult.message);
             },
             error: function(error){
@@ -151,50 +191,57 @@ function buscarCliente(cliente){
 
 function buscarCPInfo(){
     let codigoPostal = $('#inpCP').val();
-    let token = 'e607b483-300d-43f2-aa43-79deee41b818';
-    let uri = 'https://api.copomex.com/query/info_cp/'+codigoPostal+'?token='+token;
+    let key = '20210930-4417258e230cddfe';
+    let uri = 'https://apis.forcsec.com/api/codigos-postales/'+key+'/'+codigoPostal;
 
-    //Se activa el inpClienteMunicipio
-    $('#inpClienteMunicipio').prop("disabled",false);
-    
-    $.ajax({
-        type: 'GET',
-        url: uri,
-        success: function(coincidenciasCP){
-            console.log(coincidenciasCP);
+    if(codigoPostal.length >= 5){
+        //Se activa el inpClienteMunicipio
+        $('#inpClienteMunicipio').prop("disabled",false);
+            
+        $.ajax({
+            type: 'GET',
+            url: uri,
+            success: function(coincidenciasCP){
+                console.log(coincidenciasCP);
+                //Validar si la coleccion -coincidenciasCP- *no viene vacia* o *no hubo error*
+                if(coincidenciasCP.estatus === "si"){
+                    //Se muestra la ddlMunicipio & ddlCiudad
+                    estadoBusqueda(0);
 
-            //Se muestra la ddlMunicipio & ddlCiudad
-            estadoBusqueda(0);
+                    //Se llenan los inputs de Ciudad && Estado
+                    $('#inpClienteCiudad').val(coincidenciasCP.data.asentamientos[0].ciudad);
+                    $('#inpClienteEstado').val(coincidenciasCP.data.estado);
 
-            //Se llenan los inputs de Ciudad && Estado
-            $('#inpClienteCiudad').val(coincidenciasCP[0].response.ciudad);
-            $('#inpClienteEstado').val(coincidenciasCP[0].response.estado);
-
-            //Se llena el ddlMuncipio
-            llenarDDLEntidad('ddlMunicipio', coincidenciasCP, 'asentamiento');
-        },
-        error: function(error){
-            console.log(error);
-            alert('Se ha generado un error al intentar consultar el C.P. del Cliente');
-        }
-    });
+                    //Se llena el ddlMuncipio
+                    llenarDDLEntidad('ddlMunicipio', coincidenciasCP.data.asentamientos, 'asentamiento');
+                }
+            },
+            error: function(error){
+                console.log(error);
+                alert('Se ha generado un error al intentar consultar el C.P. del Cliente');
+            }
+        });
+    }
+    else{
+        alert('Formato de C.P. invalido o vacio');
+    } 
 }
 /* #endregion */
 
 /* #region Logica - Controls */
-function llenarDDLEntidad(ddlEntidad, _entidades, propiedad){
+function llenarDDLEntidad(ddlEntidad, Entidades, propiedad){
     //Limpiar ListaDesplegable
     limpiarDDLEntidad(ddlEntidad);
 
     //Llenar ListaDesplegable
-    $.each(_entidades, function(index,entidad){
+    for(let entidad of Entidades){
         $('#'+ddlEntidad).append(
             $('<option/>', {
-                value: entidad.response[propiedad],
-                text: entidad.response[propiedad]
+                value: entidad.nombre,
+                text: entidad.nombre
             })
         );
-    });
+    }
 }
 
 function selectOptEntidad(selectControl){ // :onChange

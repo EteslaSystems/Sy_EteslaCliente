@@ -12,7 +12,7 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
 
     //Se valida si la propuesta a realizar es una NUEVA o AJUSTADA(modificada)
     try{
-        if(dataEdited === null){
+        if(dataEdited === null){ //Cotizacio nueva
             //Se obtienen los datos de la propuesta
             let dataPropuesta = cacharDatosPropuesta();
     
@@ -20,11 +20,9 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
                 data = dataPropuesta;
             }
             else{
-                e.preventDefault();
+                throw 'ERROR! La -data- de la Propuesta se encuentra vacia y es imposible cotizar';
             }
-        }
-    
-        if(dataEdited === null){ //Cotizacion nueva
+
             /* Enviar Propuesta - Manipular resultado */
             await pintarVistaDeResultados();
     
@@ -264,7 +262,7 @@ function calcularViaticosBT(objInversor){
 /*#region Logica*/
 function cacharDatosPropuesta(){
     let banderaDelError = 0; //Bandera para validar si en algun proceso hubo un error
-    let idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    let idCliente = $('#inpClienteId').val();
 
     let _consumosBimestres = () => {
         __consumosBimestres = [];
@@ -285,10 +283,14 @@ function cacharDatosPropuesta(){
         return __consumosBimestres;
     };
     let direccionCliente = () => {
-        direc = $('#municipio').val() || null;
+        let calle = $('#inpClienteCalle').val() || '';
+        let asentamiento = $('#inpClienteMunicipio').val() || '';
+        let ciudad = $('#inpClienteCiudad').val() || '';
+        let codigoPostal = $('#inpCP').val() || '';
+        let estado = $('#inpClienteEstado').val() || '';
 
-        if(direc.length>0){
-            return direc;
+        if(estado.length>0){
+            return calle + ' ' + asentamiento + ' ' + ciudad + ' ' + codigoPostal + ' ' + estado;
         }
         else{
             banderaDelError = 1;
@@ -296,7 +298,7 @@ function cacharDatosPropuesta(){
         }
     };
 
-    var tarifaSeleccionada = $('#tarifa-actual').val();
+    let tarifaSeleccionada = $('#tarifa-actual').val();
     _consumosBimestres = _consumosBimestres();
     direccionCliente = direccionCliente();
 

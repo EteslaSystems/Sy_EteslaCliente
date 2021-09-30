@@ -141,8 +141,24 @@ function catchDataCotizacionIndividual(){
     };
     let _agregado = null;
     
-    dataCotIndividual.cliente.id = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
-    dataCotIndividual.cliente.direccion = document.getElementById('municipio').value;
+    let catchDireccion = () => {
+        let calle = $('#inpClienteCalle').val() || '';
+        let asentamiento = $('#inpClienteMunicipio').val() || '';
+        let ciudad = $('#inpClienteCiudad').val() || '';
+        let codigoPostal = $('#inpCP').val() || '';
+        let estado = $('#inpClienteEstado').val() || '';
+
+        if(estado.length>0){
+            return calle + ' ' + asentamiento + ' ' + ciudad + ' ' + codigoPostal + ' ' + estado;
+        }
+        else{
+            banderaDelError = 1;
+            alert('Falta cargar un cliente!');
+        }
+    };
+
+    dataCotIndividual.cliente.id = $('#inpClienteId').val();
+    dataCotIndividual.cliente.direccion = catchDireccion;
 
     /* Cliente */
     if(validarUsuarioCargado(dataCotIndividual.cliente.id) == true){
