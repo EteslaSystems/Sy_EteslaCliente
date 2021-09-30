@@ -17,17 +17,27 @@ class clienteController extends Controller
 
     public function registrarCliente(Request $request)
     {
-        $request["idUsuario"] = session('dataUsuario')->idUsuario;
-        $request["consumo"] = 0;
-        $request["calle"] = $request->calle . '-' . $request->colonia;
+        $ruta = str_replace(url('/'), '', url()->previous());
 
-        $registrarCliente = $this->cliente->insertarCliente(['json' => $request->all()]);
+        $cliente["idUsuario"] = session('dataUsuario')->idUsuario; //IdVendedor
+        $cliente["nombre"] = $request->inpClienteNombre;
+        $cliente["primerApellido"] = $request->inpClientePrimerAp;
+        $cliente["segundoApellido"] = $request->inpClienteSegundoAp;
+        $cliente["telefono"] = $request->inpClienteTelefono;
+        $cliente["celular"] = $request->inpClienteCelular;
+        $cliente["mail"] = $request->inpClienteMail;
+        $cliente["codigoPostal"] = $request->inpCP;
+        $cliente["calle"] = $request->inpClienteCalle;
+        $cliente["ciudad"] = $request->inpClienteCiudad;
+        $cliente["estado"] = $request->inpClienteEstado;
+
+        $registrarCliente = $this->cliente->insertarCliente(['json' => $cliente]);
 
         if ($registrarCliente->status == 200) {
-            return redirect('registrarCliente')->with('status-success', $registrarCliente->message);
+            return redirect($ruta)->with('status-success', $registrarCliente->message);
         }
         else {
-            return redirect('registrarCliente')->with('status-fail', $registrarCliente->message);
+            return redirect($ruta)->with('status-fail', $registrarCliente->message);
         }
     }
 
@@ -84,5 +94,13 @@ class clienteController extends Controller
         $dataUsuario["id"] = $request->id;
         $consultarClientePorId = $this->cliente->consultarClientePorId(['json' => $dataUsuario]);
         return response()->json($consultarClientePorId);
+    }
+
+    public function consultarClientePorNombre(Request $request)
+    {
+        $clientee["idUsuario"] = session('dataUsuario')->idUsuario; //IdVendedor
+        $clientee["nombre"] = $request->nombre;
+        $clienteResult = $this->cliente->buscarClientePorNombre(['json' => $clientee]);
+        return response()->json($clienteResult);
     }
 }

@@ -3,24 +3,6 @@ $(document).ready(function(){
     readyLoader();
 });
 
-/* #region Buscar-Cliente */
-function autoCompletarCliente(key){
-    let nombreUsuario = key.value;
-
-    $('#inpBuscarCliente').autocomplete({
-        source: async function(){
-            try{
-                let cliente = await buscarCliente(nombreUsuario);
-                pintarCliente(cliente); //:void
-            }
-            catch(error){
-                console.log(error);
-            }
-        }
-    });
-}
-/* #endregion */
-
 /* #region Spinner-Load */
 function readyLoader(){
     $(document)

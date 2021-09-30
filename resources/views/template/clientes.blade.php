@@ -21,7 +21,7 @@
                         @foreach($consultarClientes as $cliente)
                             <tr>
                                 <td>{{ $cliente->vNombrePersona }} {{ $cliente->vPrimerApellido }} {{ $cliente->vSegundoApellido }}</td>
-                                <td>{{ $cliente->vCalle }} {{ $cliente->vMunicipio }} {{ $cliente->vEstado }}</td>
+                                <td>{{ $cliente->vCalle }} {{ $cliente->vMunicipio }}, {{ $cliente->cCodigoPostal }} {{ $cliente->vCiudad }} {{ $cliente->vEstado }}</td>
                                 <td>\</td>
                                 <td>
                                     <div class="btn-group" role="group">

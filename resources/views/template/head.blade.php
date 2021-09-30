@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/alert-bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
 
     <!-- DataTables plugin js -->
     <!-- link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/ -->
@@ -48,22 +47,22 @@
     <!-- Fin Loading Spinner -->
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="{{ asset('js/alert-bootstrap.js') }}" type="text/javascript"></script>
+
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
-<script type="text/javascript" src="http://api.geonames.org/export/geonamesData.js?username=urakirabe"></script>
-
 <script src="{{ asset('js/index.js') }}"></script> <!-- Este archivo es necesario para el CP y buscador -->
 <script src="{{ asset('js/log.js') }}"></script>
-<script src="{{ asset('js/alert-bootstrap.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/cotizador/bajaTension/bajaTension.js') }}"></script>
 <script src="{{ asset('js/cotizador/individual/individual.js') }}"></script>
 
 <!-- DataTable plugin -->
-<!-- script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script-->
+<!-- script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script -->
 
 <!-- En mantenimiento -->
 <script src="{{ asset('js/cotizador/mediaTension/mediaTension.js') }}"></script>

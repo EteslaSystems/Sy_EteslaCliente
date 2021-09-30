@@ -21,7 +21,7 @@
                         <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($cliente->vNombrePersona); ?> <?php echo e($cliente->vPrimerApellido); ?> <?php echo e($cliente->vSegundoApellido); ?></td>
-                                <td><?php echo e($cliente->vCalle); ?> <?php echo e($cliente->vMunicipio); ?> <?php echo e($cliente->vEstado); ?></td>
+                                <td><?php echo e($cliente->vCalle); ?> <?php echo e($cliente->vMunicipio); ?>, <?php echo e($cliente->cCodigoPostal); ?> <?php echo e($cliente->vCiudad); ?> <?php echo e($cliente->vEstado); ?></td>
                                 <td>\</td>
                                 <td>
                                     <div class="btn-group" role="group">
