@@ -16,13 +16,6 @@
         top: 0;
         z-index: 10;
     }
-
-    .separador{
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        border: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-    }
 </style>
 <div class="container-fluid">
     <br>
