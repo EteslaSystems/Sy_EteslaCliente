@@ -13,68 +13,93 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <small>Buscador de clientes</small>
-                        <hr class="separador" style="margin-top:-10px;">
-                        <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente" onkeyup="autoCompletarCliente(this);"/>
+                        <div class="row">
+                            <div class="col-sm">
+                                <input id="inpBuscarCliente" class="form-control" placeholder="Busca a tu cliente"/>
+                            </div>
+                            <div class="col-sm-auto">
+                                <button type="button" class="btn btn-success btn-xs" title="Buscar cliente" onclick="buscarCoincidenciaCliente()"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/000000/external-search-interface-kiranshastry-lineal-kiranshastry.png"/></button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <select id="ddlCoincidenciasCliente" class="form-control-sm" style="display:none;" onchange=""></select>
+                            <small id="txtNoHayCoincidencia" style="display:none;">No hay coincidencia</small>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <small>Datos del cliente</small>
-                                <hr class="separador" style="margin-top:-10px;">
+                        <form method="POST" action="{{ url('registrarCliente') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <small>Datos del cliente</small>
+                                    <hr class="separador" style="margin-top:-10px;">
+                                </div>
+                                <div class="col">
+                                    <button id="btnAgregarCliente" type="button" class="btn btn-success btn-xs pull-right" style="margin-top: -12px;" onclick="logicaFormularioCliente(0);">+</button>
+                                </div>
                             </div>
-                            <div class="col">
-                                <button id="btnAgregarCliente" type="button" class="btn btn-success btn-xs pull-right" style="margin-top: -12px;" onclick="agregarCliente();">+</button>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="inpClienteNombre" class="form-control datosCliente" placeholder="Nombre" readonly/>
+                                </div>
+                                <div class="col form-group">
+                                    <input name="inpClientePrimerAp" class="form-control datosCliente" placeholder="Primer apellido" readonly/>
+                                </div>
+                                <div class="col form-group">
+                                    <input name="inpClienteSegundoAp" class="form-control datosCliente" placeholder="Segundo apellido" readonly/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Nombre" readonly/>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="inpClienteTelefono" class="form-control datosCliente" placeholder="Telefono" readonly/>
+                                </div>
+                                <div class="col form-group">
+                                    <input name="inpClienteCelular" class="form-control datosCliente" placeholder="Celular" readonly/>
+                                </div>
                             </div>
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Primer apellido" readonly/>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="inpClienteMail" class="form-control datosCliente" type="mail" placeholder="Correo electronico" readonly/>
+                                </div>
                             </div>
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Segundo apellido" readonly/>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="inpClienteCalle" class="form-control datosCliente" placeholder="Direccion (calle)" readonly/>
+                                </div>
+                                <div class="col form-row">
+                                    <div class="col-sm">
+                                        <input id="inpCP" class="form-control datosCliente" placeholder="C.P." readonly/>
+                                    </div>
+                                    <div class="col-sm-auto">
+                                        <button id="searchCP" type="button" class="btn btn-success btn-xs" onclick="buscarCPInfo()"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/20/000000/external-search-interface-kiranshastry-lineal-kiranshastry.png"/></button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Telefono" readonly/>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input id="inpClienteMunicipio" name="inpClienteMunicipio" class="form-control datosCliente" placeholder="Asentamiento" readonly/>
+                                    <select id="ddlMunicipio" class="form-control" style="display:none;" onchange="selectOptEntidad(this)">
+                                        <option value="-1">Escoge un asentamiento</option>
+                                    </select>
+                                </div>
+                                <div class="col form-group">
+                                    <input id="inpClienteCiudad" name="inpClienteCiudad" class="form-control datosCliente" placeholder="Ciudad" readonly/>
+                                </div>
                             </div>
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Celular" readonly/>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input id="inpClienteEstado" name="inpClienteEstado" class="form-control datosCliente" placeholder="Estado" readonly/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" type="mail" placeholder="Correo electronico" readonly/>
+                            <div class="form-group form-group-buttons" style="display:none;">
+                                <button type="button" class="btn btn-danger pull-right" onclick="logicaFormularioCliente(1);">Cancelar</button>
+                                <button type="submit" class="btn btn-success pull-right">Guardar</button>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                            <input class="form-control datosCliente" placeholder="Direccion (calle)" readonly/>
-                            </div>
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="C.P." readonly/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Municipio" readonly/>
-                            </div>
-                            <div class="col form-group">
-                                <input class="form-control datosCliente" placeholder="Estado" readonly/>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-buttons" style="display:none;">
-                            <button type="button" class="btn btn-danger pull-right">Cancelar</button>
-                            <button type="button" class="btn btn-success pull-right">Guardar</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

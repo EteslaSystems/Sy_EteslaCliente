@@ -56,15 +56,22 @@ Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 /* ---------------------------------------- */
 
 /* --------------- Cliente --------------- */
-Route::post('/agregar-cliente','MediaTensionController@create');
+// Route::post('/agregar-cliente','MediaTensionController@create');
+
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
-/* --------------- */
-
-
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
 Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
+
+
+
+/* ------------------------------------------------ */
 Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
+
+Route::put('/buscarCliente/{cliente?}','clienteController@consultarClientePorNombre');
+/* ------------------------------------------------ */
+
+
 /* ------------------Cliente_Propuesta(s)--------------------- */
 Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient');
 /* --------------------------------- */
