@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col form-group">
                                     <input id="inpClienteMunicipio" name="inpClienteMunicipio" class="form-control datosCliente" placeholder="Asentamiento" required readonly/>
-                                    <select id="ddlMunicipio" class="form-control" style="display:none;" onchange="selectOptEntidad(this)">
+                                    <select id="ddlMunicipio" class="form-control-sm" style="display:none;" onchange="selectOptEntidad(this)">
                                         <option value="-1">Escoge un asentamiento</option>
                                     </select>
                                 </div>
