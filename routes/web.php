@@ -104,7 +104,7 @@ Route::get('/estructuras', 'EstructurasController@read');
 Route::post('/agregar-estructura', 'EstructurasController@create');
 Route::get('/eliminar-estructura/{idEstructura}', 'EstructurasController@destroy');
 
-Route::get('/editar-estructura/{idEstructura}', 'EstructurasController@edit');
+Route::put('/editar-estructura/{idEstructura?}', 'EstructurasController@edit');
 /* --------------------------------------------- */
 
 /* --------------- Ingeniero --------------- */

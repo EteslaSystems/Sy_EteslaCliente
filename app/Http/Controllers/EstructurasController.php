@@ -57,9 +57,9 @@ class EstructurasController extends Controller
         return $vEstructuras;
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $data["id"] = $id;
+        $data["id"] = $request->idEstructura;
         
         $vEstructuras = $this->estructuras->search(['json' => $data]);
         return response()->json($vEstructuras);

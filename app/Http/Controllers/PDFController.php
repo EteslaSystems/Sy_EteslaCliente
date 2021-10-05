@@ -18,7 +18,6 @@ class PDFController extends Controller
             
             if($tipoCotizacion === 'CombinacionCotizacion'){
                 $pdfTemplate = 'PDFTemplates.machotes.propuestaCombinaciones';
-                // $propuesta = ["propuesta"];
             }
 
             if($tipoCotizacion === "individual"){ //individual
@@ -30,12 +29,12 @@ class PDFController extends Controller
             ->setPaper('A4');
 
             //Se comprueba *LA EXISTENCIA* del directorio en donde se almacenaran los PDF
-            if(!file_exists(public_path('/pdfsGenerados'))){
+            if(!file_exists(storage_path('/pdfsGenerados'))){
                 //Si no existe, SE CREA EL DIRECTORIO
-                mkdir(public_path().'/pdfsGenerados');
+                mkdir(storage_path().'/pdfsGenerados');
             }
 
-            $path = public_path('/pdfsGenerados'); //Ruta de almacenamiento
+            $path = storage_path('/pdfsGenerados'); //Ruta de almacenamiento
 
             //Nombre del documento PDF
             $fileName = $this->getFileName($propuesta);
