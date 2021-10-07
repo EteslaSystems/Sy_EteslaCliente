@@ -6,6 +6,6 @@ class APIPropuestas extends GuzzleHttpRequest
 {
     public function getPropuestasByCliente($request)
     {
-        return $this->post("getPropuestaByCliente", $request);
+        return $this->put("getPropuestaByCliente", $request);
     }
 }

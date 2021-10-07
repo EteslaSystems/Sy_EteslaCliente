@@ -17,11 +17,10 @@ class PropuestasController extends Controller
 
     public function getPropuestasByClient(Request $request)
     {
-        $solicitudPropuesta["idCliente"] = $request->idCliente;
+        $solicitudPropuesta["id"] = $request->idCliente;
 
-        $propuestas = $this->propuesta->getPropuestasByCliente(['json' => $solicitudPropuesta]);
-        $propuestas = response()->json($propuestas);
+        $propuestas = $this->propuesta->getPropuestasByCliente(['json' => $solicitudPropuesta]); 
 
-		return $propuestas;
+		return response()->json($propuestas);
     }
 }

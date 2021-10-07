@@ -3,7 +3,7 @@ async function buscarCoincidenciaCliente(){
     let textoBusqueda = $('#inpBuscarCliente').val(); //Cliente a buscar
     textoBusqueda = textoBusqueda.trim();
 
-    let clienteResult = await buscarCliente(textoBusqueda);
+    let clienteResult = await buscarClientePorNombre(textoBusqueda);
 
     console.log(clienteResult);
 
@@ -114,121 +114,69 @@ function statusControlsBusqueda(opcion){
         break;
     }
 }
-/*#endregion*/
 
-/*#region Propuestas*/
-function getDetailsPropuesta(){
-    openModalDetailsPropuesta();
+function pintarClienteDetails(Clientee){
+    let Cliente = Clientee[0]; //Formating
+
+    //Cliente - info
+    $('#inpDetailsClienteNombre').val(Cliente.vNombrePersona);
+    $('#inpDetailsCliente1erAp').val(Cliente.vPrimerApellido);
+    $('#inpDetailsCliente2doAp').val(Cliente.vSegundoApellido);
+    $('#inpDetailsClienteTel').val(Cliente.vTelefono);
+    $('#inpDetailsClienteCel').val(Cliente.vCelular);
+    //Direccion - info
+    $('#inpDetailsClienteCP').val(Cliente.cCodigoPostal);
+    $('#inpDetailsClienteCalle').val(Cliente.vCalle);
+    $('#inpDetailsClienteMunic').val(Cliente.vMunicipio);
+    $('#inpDetailsClienteCiud').val(Cliente.vCiudad);
+    $('#inpDetailsClienteEstado').val(Cliente.vEstado);
+}
+/*#region Logica - Botones*/
+async function mostrarClienteDetails(idCliente){
+    /*#region Guardar en memoria */
+    sessionStorage.removeItem('IdCliente');
+    sessionStorage.setItem('IdCliente',idCliente);
+    /*#endregion */
+
+    let Cliente = await buscarClientePorId(idCliente);
+    pintarClienteDetails(Cliente); //:void()
 }
 
-/*------Modales_Propuestas------*/
-function openModalDetailsPropuesta(){
-    $('.bd-example-modal-lg').modal('hide');
-    $('.cd-example-modal-lg').modal('show');
-}
+function editarClienteDetails(state){
+    switch(state)
+    {
+        case 0: //Editar
+            //Ocultar boton de -editar-
+            $('#editClienteDetails').css("display","none");
+            //Mostrar conjunto de botones
+            $('#grBttnsDetails').css("display","");
+            //Habilitar todos los campos
+            $('.inpDetailsCliente').attr("disabled",false);
+        break;
+        case 1: //Actualizar (guardar cambios - actualizar registro[details])
 
-function closeModalDetailsPropuesta(){
-    $('.bd-example-modal-lg').modal('show');
-    $('.cd-example-modal-lg').modal('hide');
-}
-/*#endregion*/
-
-/* #region Server */
-function getPropuestasByCliente(idCliente){
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'POST',
-            url: '/propuestasByClient',
-            data: { idCliente: idCliente },
-            dataType: 'json',
-            success: function(propuestas){
-                if(propuestas.status === 200){
-                    let _propuestas = propuestas.message;
-
-                    //Se limpia la tabla
-                    $(".filaPropuesta").remove();
-
-                    //Se vacia la inform. en la tabla
-                    for(let x=0; x<_propuestas.length; x++)
-                    {
-                        $('#tbPropuestas>tbody').append('<tr class="filaPropuesta"><td>'+_propuestas[x].cTipoCotizacion+'</td><td>'+_propuestas[x].created_at+'</td><td>'+_propuestas[x].expire_at+'</td><td><button type="button" class="btn btn-sm btn-success" title="Detalles" onclick="getDetailsPropuesta()"><img src="https://img.icons8.com/ios/20/000000/details-pane.png"/></button><button type="button" class="btn btn-sm btn-danger" title="Eliminar"><img src="https://img.icons8.com/ios/20/000000/delete-trash.png"/></button></td></tr>');
-                    }
-                }
-                else{
-                    alert("Ha ocurrido un error al intentar consultar las propuestas!");
-                }
-            },
-            error: function(){
-                reject('Al parecer hubo un error al intentar consultar las propuestas');
-            }
-        });
-    });
-}
-
-function buscarCliente(cliente){
-    return new Promise((resolve,reject) => {
-        $.ajax({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'PUT',
-            url: '/buscarCliente',
-            data: { nombre: cliente },
-            dataType: 'json',
-            success: function(clientResult){
-                //Guardar coincidencias en un sessionStorage
-                sessionStorage.removeItem('coincidenciaClientes');
-                sessionStorage.setItem('coincidenciaClientes',JSON.stringify(clientResult.message));
-
-                resolve(clientResult.message);
-            },
-            error: function(error){
-                console.log(error);
-                reject('Se ha generado un error al intentar buscar al cliente');
-            }
-        });
-    });
-}
-
-function buscarCPInfo(){
-    let codigoPostal = $('#inpCP').val();
-    let key = '20210930-4417258e230cddfe';
-    let uri = 'https://apis.forcsec.com/api/codigos-postales/'+key+'/'+codigoPostal;
-
-    if(codigoPostal.length >= 5){
-        //Se activa el inpClienteMunicipio
-        $('#inpClienteMunicipio').prop("disabled",false);
-            
-        $.ajax({
-            type: 'GET',
-            url: uri,
-            success: function(coincidenciasCP){
-                console.log(coincidenciasCP);
-                //Validar si la coleccion -coincidenciasCP- *no viene vacia* o *no hubo error*
-                if(coincidenciasCP.estatus === "si"){
-                    //Se muestra la ddlMunicipio & ddlCiudad
-                    estadoBusqueda(0);
-
-                    //Se llenan los inputs de Ciudad && Estado
-                    $('#inpClienteCiudad').val(coincidenciasCP.data.asentamientos[0].ciudad);
-                    $('#inpClienteEstado').val(coincidenciasCP.data.estado);
-
-                    //Se llena el ddlMuncipio
-                    llenarDDLEntidad('ddlMunicipio', coincidenciasCP.data.asentamientos, 'asentamiento');
-                }
-            },
-            error: function(error){
-                console.log(error);
-                alert('Se ha generado un error al intentar consultar el C.P. del Cliente');
-            }
-        });
+        break;
+        case 2: //Cancel
+            //Mostrar boton de -editar-
+            $('#editClienteDetails').css("display","");
+            //Ocultar conjunto de botones
+            $('#grBttnsDetails').css("display","none");
+            //Deshabilitar todos los campos
+            $('.inpDetailsCliente').attr("disabled",true);
+        break;
+        case 3: //Click into -Cliente-
+            //Mostrar boton de -editar-
+            $('#editClienteDetails').css("display","");
+        break;
+        default: //Click into -Propuestas-
+            //Ocultar boton de -editar-
+            $('#editClienteDetails').css("display","none");
+            //Deshabilitar todos los campos
+            $('.inpDetailsCliente').attr("disabled",true);
+        break;
     }
-    else{
-        alert('Formato de C.P. invalido o vacio');
-    } 
 }
-/* #endregion */
 
-/* #region Logica - Controls */
 function llenarDDLEntidad(ddlEntidad, Entidades, propiedad){
     //Limpiar ListaDesplegable
     limpiarDDLEntidad(ddlEntidad);
@@ -307,4 +255,140 @@ function estadoBusqueda(estado){
         break;
     }
 }
-/* #endregion */
+
+/*#region Server*/
+function buscarClientePorId(idClientee){
+    return new Promise((resolve,reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'PUT',
+            url: '/consultarClientePorId',
+            data: { id: idClientee },
+            dataType: 'json',
+            success: function(clienteEncontrado){
+                resolve(clienteEncontrado.message);
+            },
+            error: function(error){
+                console.log(error);
+                reject('Se ha generado un error al intentar buscar al cliente por su Id');
+            }
+        });
+    });
+}
+
+function buscarClientePorNombre(cliente){
+    return new Promise((resolve,reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'PUT',
+            url: '/buscarCliente',
+            data: { nombre: cliente },
+            dataType: 'json',
+            success: function(clientResult){
+                //Guardar coincidencias en un sessionStorage
+                sessionStorage.removeItem('coincidenciaClientes');
+                sessionStorage.setItem('coincidenciaClientes',JSON.stringify(clientResult.message));
+
+                resolve(clientResult.message);
+            },
+            error: function(error){
+                console.log(error);
+                reject('Se ha generado un error al intentar buscar al cliente por su nombre');
+            }
+        });
+    });
+}
+
+function buscarCPInfo(){
+    let codigoPostal = $('#inpCP').val();
+    let key = '20210930-4417258e230cddfe';
+    let uri = 'https://apis.forcsec.com/api/codigos-postales/'+key+'/'+codigoPostal;
+
+    if(codigoPostal.length >= 5){
+        //Se activa el inpClienteMunicipio
+        $('#inpClienteMunicipio').prop("disabled",false);
+            
+        $.ajax({
+            type: 'GET',
+            url: uri,
+            success: function(coincidenciasCP){
+                console.log(coincidenciasCP);
+                //Validar si la coleccion -coincidenciasCP- *no viene vacia* o *no hubo error*
+                if(coincidenciasCP.estatus === "si"){
+                    //Se muestra la ddlMunicipio & ddlCiudad
+                    estadoBusqueda(0);
+
+                    //Se llenan los inputs de Ciudad && Estado
+                    $('#inpClienteCiudad').val(coincidenciasCP.data.asentamientos[0].ciudad);
+                    $('#inpClienteEstado').val(coincidenciasCP.data.estado);
+
+                    //Se llena el ddlMuncipio
+                    llenarDDLEntidad('ddlMunicipio', coincidenciasCP.data.asentamientos, 'asentamiento');
+                }
+            },
+            error: function(error){
+                console.log(error);
+                alert('Se ha generado un error al intentar consultar el C.P. del Cliente');
+            }
+        });
+    }
+    else{
+        alert('Formato de C.P. invalido o vacio');
+    } 
+}
+/*#endregion*/
+/*#endregion*/
+/*#endregion*/
+/*#region Propuestas*/
+/*#region Server*/
+function getPropuestasByCliente(idCliente){
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: 'PUT',
+            url: '/propuestasByClient',
+            data: { idCliente: idCliente },
+            dataType: 'json',
+            success: function(propuestas){
+                //Formating
+                resolve(propuestas.message); 
+            },
+            error: function(error){
+                console.log(error);
+                reject('Al parecer hubo un error al intentar consultar las propuestas');
+            }
+        });
+    });
+}
+/*#endregion*/
+/*#region Logica - Botones*/
+/*------Modales_Propuestas------*/
+function openModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('hide');
+    $('.cd-example-modal-lg').modal('show');
+}
+
+function closeModalDetailsPropuesta(){
+    $('.bd-example-modal-lg').modal('show');
+    $('.cd-example-modal-lg').modal('hide');
+}
+
+async function getPropuestas(){
+    //Get() IdCliente
+    let idCliente = sessionStorage.getItem('IdCliente');
+
+    //Controles
+    editarClienteDetails();
+
+    //Obtener todas las propuestas del Cliente
+    let _propuestas = await getPropuestasByCliente(idCliente);
+    pintarPropuestas(_propuestas);
+}
+
+function pintarPropuestas(_propuestas){
+    //Limpiar tabla - Propuestas
+
+    
+}
+/*#endregion*/
+/*#endregion*/

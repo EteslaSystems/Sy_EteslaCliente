@@ -20,7 +20,6 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
 
-Route::get('/registrarCliente', 'vendedorController@misClientes');
 Route::get('/clientes', 'vendedorController@clientes');
 
 //////COTIZACION
@@ -66,14 +65,14 @@ Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente')
 
 
 /* ------------------------------------------------ */
-Route::post('/consultarClientePorId', 'clienteController@consultarClientePorId');
+Route::put('/consultarClientePorId/{cliente?}', 'clienteController@consultarClientePorId');
 
 Route::put('/buscarCliente/{cliente?}','clienteController@consultarClientePorNombre');
 /* ------------------------------------------------ */
 
 
 /* ------------------Cliente_Propuesta(s)--------------------- */
-Route::post('/propuestasByClient', 'PropuestasController@getPropuestasByClient');
+Route::put('/propuestasByClient/{idCliente?}', 'PropuestasController@getPropuestasByClient');
 /* --------------------------------- */
 
 

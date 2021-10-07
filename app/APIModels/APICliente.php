@@ -21,7 +21,7 @@ class APICliente extends GuzzleHttpRequest
 
 	public function consultarClientePorId($request)
 	{
-		return $this->put("lista-clientes-id", $request);
+		return $this->put("cliente-por-id", $request);
 	}
 
 	public function buscarClientePorNombre($request)

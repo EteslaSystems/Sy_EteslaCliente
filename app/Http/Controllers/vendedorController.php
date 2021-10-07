@@ -33,11 +33,6 @@ class vendedorController extends Controller
 		return view('roles.seller.inicioS', compact('precioDolar'));
 	}
 
-	public function misClientes()
-	{
-		return view('template.clientes');
-	}
-
 	public function clientes()
 	{
 		if ($this->validarSesion() == 0) {
@@ -51,7 +46,7 @@ class vendedorController extends Controller
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		$consultarClientes = $this->paginate($consultarClientes);
+		// dd($consultarClientes);
 
 		return view('template.clientes', compact('consultarClientes'));
 	}
@@ -73,11 +68,4 @@ class vendedorController extends Controller
 		}
 		return 0;
 	}
-
-	public function paginate($items, $perPage = 5, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    }
 }

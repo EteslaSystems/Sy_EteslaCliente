@@ -53,19 +53,6 @@ class clienteController extends Controller
         }
     }
 
-    public function mostrarCliente($id)
-    {
-        $data["id"] = $id;
-        $cliente = $this->cliente->consultarClientePorId(['json' => $data]);
-
-        if($cliente->status != 200) {
-            return redirect('registrarCliente')->with('status-fail', $cliente->message);
-        } else {
-            $clienteInfo = $cliente->message;
-            return view('roles/seller/cotizador/form-edit-cliente', compact('clienteInfo'));
-        }
-    }
-
     public function actualizarCliente(Request $request, $id)
     {
         $data["idPersona"] = $id;
@@ -91,9 +78,9 @@ class clienteController extends Controller
 
     public function consultarClientePorId(Request $request)
     {
-        $dataUsuario["id"] = $request->id;
-        $consultarClientePorId = $this->cliente->consultarClientePorId(['json' => $dataUsuario]);
-        return response()->json($consultarClientePorId);
+        $clientee["id"] = $request->id;
+        $clienteEncontrado = $this->cliente->consultarClientePorId(['json' => $clientee]);
+        return response()->json($clienteEncontrado);
     }
 
     public function consultarClientePorNombre(Request $request)
