@@ -195,11 +195,12 @@
                             {{csrf_field()}}
                             <div class="row justify-content-center">
                                 <div class="form-group">
-                                    <label for="tipoInversor">Tipo inversor</label>
-                                    <select id="tipoInversor" name="sctTipoInversor" class="form-control" onchange="selectTipoInversor();">
+                                    <label for="ddlTipoInversor">Tipo inversor</label>
+                                    <select id="ddlTipoInversor" name="sctTipoInversor" class="form-control" onchange="selectTipoInversor();">
                                         <option value="-1" selected>Elige una opcion</option>
                                         <option value="MicroInversor">MicroInversor</option>
                                         <option value="Inversor">Inversor</option>
+                                        <option value="Combinacion">Combinacion</option>
                                     </select>
                                 </div>
                                 <!-- NOTA: Este apartado de controles solo se mostrara cuando se agregue un *MICROINVERSOR* -->
@@ -208,7 +209,19 @@
                                     <input id="noPanelesSoportados" name="i_paneleSoportados" class="form-control" type="number">
                                 </div>
                                 <!-- FIN NOTA -->
-                                <div class="form-group">
+                                <div class="form-group equipoCombin" style="display:none;">
+                                    <label for="ddlMicroInv1">Equipo 1</label>
+                                    <select id="ddlMicroInv1" name="sctMicroInv1" class="form-control" onchange="selectEquipo1o2(this)">
+                                        <option value="-1">Escoge equipo1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group equipoCombin" style="display:none;">
+                                    <label for="ddlMicroInv2">Equipo 2</label>
+                                    <select id="ddlMicroInv2" name="sctMicroInv2" class="form-control" onchange="selectEquipo1o2(this)">
+                                        <option value="-1">Escoge equipo2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group equipoNormal">
                                     <label for="nombreInversor">Nombre</label>
                                     <input id="nombreInversor" name="i_nombrematerial" class="form-control">
                                 </div>
@@ -216,11 +229,11 @@
                                     <label for="marcaInversor">Marca</label>
                                     <input id="marcaInversor" name="i_marca" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="potenciaInversor">Potencia</label>
                                     <input id="potenciaInversor" name="i_potencia" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="precioInversor">Precio</label>
                                     <input id="precioInversor" name="i_precio" class="form-control">
                                 </div>
@@ -232,23 +245,23 @@
                                     <label for="origenInversor">Origen</label>
                                     <input id="origenInversor" name="i_origen" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="iscInversor">ISC</label>
                                     <input id="iscInversor" name="i_isc" type="number" step="any" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="vminInversor">VMIN</label>
                                     <input id="vminInversor" name="i_vmin" type="number" step="any" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="vmaxInversor">VMAX</label>
                                     <input id="vmaxInversor" name="i_vmax" type="number" step="any" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="pminInversor">PMIN</label>
                                     <input id="pminInversor" name="i_pmin" type="number" step="any" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group equipoNormal">
                                     <label for="pmaxInversor">PMAX</label>
                                     <input id="pmaxInversor" name="i_pmax" type="number" step="any" class="form-control">
                                 </div>

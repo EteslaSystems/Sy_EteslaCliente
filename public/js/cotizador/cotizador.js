@@ -251,7 +251,7 @@ function getPDFFileName(dataPropuesta){
 function guardarPropuesta(){
     let propuesta = {};
     let dataToSent = { idCliente: null, propuesta: null };
-    dataToSent.idCliente = $('#clientes [value="' + $("input[name=inpSearchClient]").val() + '"]').data('value');
+    dataToSent.idCliente = $('#inpClienteId').val();
     let tarifaMT = sessionStorage.getItem("tarifaMT");
 
     if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //BajaTension

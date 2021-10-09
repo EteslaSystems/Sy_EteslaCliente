@@ -225,15 +225,25 @@
                         <div class="form-group">
                             <label class="mn-1">Seleccionar Inversor:</label>
                             <select class="form-control" id="optInversores" onchange="activarInputsDDL(this)">
-                                <option selected value="-1">Elige una opción:</option>
+                                <option title="-1" value="-1" selected>Elige una opción:</option>
                                 <?php $__currentLoopData = $vInversores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($details->idInversor); ?>" ><?php echo e($details->vNombreMaterialFot); ?></option>
+                                    <option title="<?php echo e($details->vTipoInversor); ?>" value="<?php echo e($details->idInversor); ?>"><?php echo e($details->vNombreMaterialFot); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div id="cntInversor" class="form-group">
                             <label class="mn-1">Cantidad inversores:</label>
                             <input class="form-control input-sm inputResult" type="number" id="inpCantInversores" disabled>
+                        </div>
+                        <div id="cntCombinacion" class="form-row" style="display:none;">
+                            <div class="col">
+                                <label id="lblMicroInversorUno" class="mn-1"></label>
+                                <input id="inpCantMicro1" class="form-control input-sm inputResult" type="number" disabled>
+                            </div>
+                            <div class="col">
+                                <label id="lblMicroInversorDos" class="mn-1"></label>
+                                <input id="inpCantMicro2" class="form-control input-sm inputResult" type="number" disabled>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -59,7 +59,7 @@ async function calcularCotizacionIndividual(){ //:Main()
 }
 
 function activarInputsDDL(listDesplegable){ //Activa los campos debajo de los DropDownList (paneles, inversores, estructuras)
-    let dropDownListId = listDesplegable.id;
+    let dropDownListId = listDesplegable.id; //Tipo de DropwDownList [ paneles, inversores, estructuras ]
     let inputDropDownListId = '';
 
     switch(dropDownListId)
@@ -69,6 +69,7 @@ function activarInputsDDL(listDesplegable){ //Activa los campos debajo de los Dr
         break;
         case 'optInversores':
             inputDropDownListId = 'inpCantInversores';
+            captaCombinacionMicros(listDesplegable);
         break;
         case 'optEstructuras':
             inputDropDownListId = 'inpCantEstructuras';
@@ -110,6 +111,47 @@ function cambiaValorCheckBox(checkBox){
                 $('#'+nombreChbox).prop('checked', true);
                 $('#'+nombreChbox).prop('disabled', false);
             });
+        }
+    }
+}
+
+function captaCombinacionMicros(option){
+    /* 
+      Obtiene el tipo de -Inversor[ inversor, micro, combinacionMicros ] className del [option]
+      del DropDownListInversores(select).
+    */
+   let valueOption = option.value;
+
+    if(valueOption != -1){
+        let tipoInversor = option[option.selectedIndex].title;
+
+        if(tipoInversor == "Combinacion"){
+            //Obtener el -texto- de la opcion seleccionada [combinacionMicroInversor]
+            let nombreCombinacion = option[option.selectedIndex].text;
+
+            //Aparece los inputs de -combinacionMicros-
+            $('#cntInversor').hide();
+            $('#cntCombinacion').show();
+
+            //Activar los inputs de -combinacionMicros-
+            $("#inpCantMicro1").prop("disabled",false);
+            $("#inpCantMicro2").prop("disabled",false);
+
+            //Obtener los nombres de los micros por separado
+            let MicrosNombres = obtenerNombresEquipos(nombreCombinacion);
+
+            //Agregar el texto a los labels [microInversor1 && microInversor2]
+            $('#lblMicroInversorUno').text("Cantidad de "+MicrosNombres.equipo1);
+            $('#lblMicroInversorDos').text("Cantidad de "+MicrosNombres.equipo2);
+        }
+        else{
+            //Aparece los inputs de -inversores-
+            $('#cntCombinacion').hide();
+            $('#cntInversor').show();
+
+            //Desactivar los inputs de -combinacionMicros-
+            $("#inpCantMicro1").prop("disabled",true);
+            $("#inpCantMicro2").prop("disabled",true);
         }
     }
 }
@@ -236,10 +278,27 @@ function catchDataEquipos(){
     }
     
     if($('#optInversores').val() != '-1' || $('#optInversores').val() != -1){
-        equipos.inversores = {
-            modelo: $('#optInversores').val(),
-            cantidad: $('#inpCantInversores').val()
-        };
+        let tipoInversor = $('#optInversores option:selected').attr("title");
+
+        if(tipoInversor === "Combinacion"){
+            equipos.inversores = {
+                equipo1: {
+                    modelo: $('#lblMicroInversorUno').text(),
+                    cantidad: $('#inpCantMicro1').val()
+                },
+                equipo2: {
+                    modelo: $('#lblMicroInversorDos').text(),
+                    cantidad: $('#inpCantMicro2').val()
+                },
+                combinacion: true
+            };
+        }
+        else{
+            equipos.inversores = {
+                modelo: $('#optInversores').val(),
+                cantidad: $('#inpCantInversores').val()
+            };
+        }
     }
     
     if($('#optEstructuras').val() != '-1' || $('#optEstructuras').val() != -1){
@@ -250,6 +309,29 @@ function catchDataEquipos(){
     }
 
     return equipos;
+}
+
+function obtenerNombresEquipos(combinacionMicros){ //Return [Object]
+    /* [Descripcion]
+      Se obtiene el string del nombre de la -combinacionMicros ["microInversor1+microInversor2"]-.
+      Se recorre la cadena y se separa los dos nombres de los micros. Se retornan los 2 nombres por separado
+    */
+    let objResult = {};
+    let equipo1 = "", equipo2 = "";
+    let totalDeCaracteres = 0, indice = 0;
+    
+    //Devuelve la longitud del nombre de la -combinacion-
+    totalDeCaracteres = combinacionMicros.length;
+
+    //Equipo1
+    indice = combinacionMicros.indexOf("+");
+    equipo1 = combinacionMicros.substring(0, indice);
+
+    //Equpo2
+    indice = equipo1.length + 1;
+    equipo2 = combinacionMicros.substring(indice, totalDeCaracteres);
+
+    return objResult = { equipo1, equipo2 };
 }
 /*#endregion*/
 
@@ -265,10 +347,10 @@ function validarUsuarioCargado(direccion_Cliente){
 
 function validarInputsEquipos(){ //Valida solo los inputs vacios de los *dropDownList que fueron ocupados*
     let _listasDesplegables = ['optPaneles','optInversores','optEstructuras']
-    let inputDropDownListId = '', valorInput = '';
+    let inputDropDownListId = '', valorInput = '', tipoInversor = '';
 
     //Iteras coleccion de dropDownList
-    $.each(_listasDesplegables, function(i, nombreDDL){
+    $.each(_listasDesplegables, function(i,nombreDDL){
         //Se valida que el dropDownList haya sido usado
         if($('#'+nombreDDL).val() != '-1'){
             //Se identifica el -input- del dropDownList ocupado
@@ -278,6 +360,9 @@ function validarInputsEquipos(){ //Valida solo los inputs vacios de los *dropDow
                     inputDropDownListId = 'inpCantPaneles';
                 break;
                 case 'optInversores':
+                    /* tipoInversor = [ inversor, micro, combinacion ] */
+                    tipoInversor = $('#'+nombreDDL+' option:selected').attr("title");
+
                     inputDropDownListId = 'inpCantInversores';
                 break;
                 case 'optEstructuras':
@@ -289,12 +374,29 @@ function validarInputsEquipos(){ //Valida solo los inputs vacios de los *dropDow
             }
 
             //Se valida que dicho -input- NO ESTE VACIO
-            valorInput = $('#'+inputDropDownListId).val();
+            if(tipoInversor != '' && tipoInversor == 'Combinacion'){ ///Combinacion de MicroInversores
+                let valInpMicroInv1 = null, valInpMicroInv2 = null;
+
+                valInpMicroInv1 = $('#inpCantMicro1').val();
+                valInpMicroInv2 = $('#inpCantMicro2').val();
+
+                if(valInpMicroInv1 === "" && valInpMicroInv2 === ""){
+                    throw 'Alguno de los inputs pertenecientes a la combinacion de micro inversores se encuentra vacio.';
+                }
+                else if(valInpMicroInv1 === "0" || valInpMicroInv2 === "0"){
+                    throw 'No se permite el valor {0}';
+                }
+
+                valorInput = [valInpMicroInv1,valInpMicroInv2];
+            }
+            else{
+                valorInput = $('#'+inputDropDownListId).val();
+            }
 
             if(valorInput.length < 1){
                 throw 'Input '+inputDropDownListId+', se encuentra vacio.\nFavor de llenarlo o inhabilitar la lista desplegable correspondiente';
             }
-            else if(valorInput === 0){
+            else if(valorInput === '0'){
                 throw 'El valor del Input '+inputDropDownListId+', no puede ser 0.\nFavor de ingresar un valor mayor a 0';
             }
         }

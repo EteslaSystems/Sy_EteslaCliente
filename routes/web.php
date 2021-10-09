@@ -97,6 +97,7 @@ Route::post('/agregar-inversor', 'InversoresController@create');
 Route::get('/eliminar-inversor/{idInversor}', 'InversoresController@destroy');
 Route::get('/editar-inversor/{idInversor}', 'InversoresController@edit');
 Route::put('/editar-inversor/{idInversor}', 'InversoresController@update');
+Route::put('/get-micros/{vTipoInversor?}','InversoresController@getMicroInversores');
 
 //ESTRUCTURAS
 Route::get('/estructuras', 'EstructurasController@read');

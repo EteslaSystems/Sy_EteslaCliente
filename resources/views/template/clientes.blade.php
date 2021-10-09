@@ -170,25 +170,16 @@
                                     </div>
                                     <div id="propuestas-info" class="tab-pane fade" role="tabpanel" aria-labelledby="propuestas-tab">
                                         <div class="table-responsive">
-                                            <table class="table table-sm table-bordered table-striped text-center">
+                                            <table id="tblPropuestas" class="table table-sm table-bordered table-striped text-center">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Tipo</th>
                                                         <th scope="col">Creacion</th>
-                                                        <th scope="col">Modificacion</th>
                                                         <th scope="col">Expiracion</th>
                                                         <th scope="col">Acciones</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>*</td>
-                                                        <td>*</td>
-                                                        <td>*</td>
-                                                        <td>*</td>
-                                                        <td>*</td>
-                                                    </tr>
-                                                </tbody>
+                                                <tbody></tbody>
                                             </table>
                                         </div>
                                     </div>

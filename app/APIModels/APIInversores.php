@@ -33,4 +33,9 @@ class APIInversores extends GuzzleHttpRequest
 	{
 		return $this->post("inversores-selectos", $request);
 	}
+
+	public function obtenerMicroInversores($request)
+	{
+		return $this->put("listar-micros", $request);
+	}
 }

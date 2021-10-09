@@ -772,9 +772,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     objResp = JSON.parse(objResp);
     /*#endregion*/
     
-    if(_viaticos[0].inversores.combinacion === "true" || _viaticos[0].inversores.combinacion === true){
-        $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
-        $('#tdInversorCantidad').text('QS1: '+_viaticos[0].inversores.numeroDeInversores.invSoportMay+' YC600: '+_viaticos[0].inversores.numeroDeInversores.invSoportMen);
+    if(_viaticos[0].inversores.combinacion){
+        $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores.MicroUno.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroUno.numeroDeInversores + '\n' + _viaticos[0].inversores.numeroDeInversores.MicroDos.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroDos.numeroDeInversores);
     }
     else{
         $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores);

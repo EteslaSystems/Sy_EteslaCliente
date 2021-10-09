@@ -106,9 +106,11 @@ class InversoresController extends Controller
         $data["ipmax"] = $request->get('i_pmax');
         $data["imgRuta"] = $request->get('i_imgRuta');
 
-        $vInversores = $this->inversores->add([
-            'json' => $data
-        ]);
+        /* */
+        $data["microInversor1"] = $request->get('sctMicroInv1');
+        $data["microInversor2"] = $request->get('sctMicroInv2');
+
+        $vInversores = $this->inversores->add(['json' => $data]);
 
         if($vInversores->status != 200){
             return redirect('/material-fotovoltaico')->with('status-fail', $vInversores->message);
@@ -138,5 +140,13 @@ class InversoresController extends Controller
         $vInversores = response()->json($vInversores);
 
         return $vInversores;
+    }
+
+    public function getMicroInversores(Request $request)
+    {
+        $micros["vTipoInversor"] = $request->vTipoInversor;
+        $micros = $this->inversores->obtenerMicroInversores(['json' => $micros]);
+
+        return response()->json($micros);
     }
 }

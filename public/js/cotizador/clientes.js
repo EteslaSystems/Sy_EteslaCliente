@@ -386,9 +386,42 @@ async function getPropuestas(){
 }
 
 function pintarPropuestas(_propuestas){
-    //Limpiar tabla - Propuestas
-
+    let tblBodyPropuestas = $('#tblPropuestas > tbody');
     
+    //Limpiar tabla - Propuestas
+    tblBodyPropuestas.html("");
+
+    //Validar que tenga propuestas
+    if(_propuestas.length > 0){
+        $.each(_propuestas,(index, propuesta)=>{
+            tblBodyPropuestas.append(`
+                <tr class="trDataPropuesta">
+                    <td id="tdTipoPropuesta">`+propuesta.cTipoCotizacion+`</td>
+                    <td id="tdFechaCreacion">`+propuesta.created_at+`</td>
+                    <td id="tdFechaExpiracion">`+propuesta.expired_at+`</td>
+                    <td id="tdAcciones">
+                        <div class="btn-group" role="group">
+                            <button id="btnVisualizarInfPropuesta" type="button" class="btn btn-sm btn-secondary" title="visualizar">
+                                <img src="https://img.icons8.com/ios-glyphs/14/000000/visible--v2.png"/>
+                            </button>
+                            <button id="btnEliminarPropuesta" type="button" class="btn btn-sm btn-danger" title="Eliminar propuesta">
+                                <img src="https://img.icons8.com/ios-filled/14/000000/delete--v2.png"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `);
+        });
+    }
+    else{
+        tblBodyPropuestas.append(`
+            <tr>
+                <td colspan="4">
+                    <h1><strong>El cliente no cuenta con propuestas guardadas ! ! !</strong></h1>
+                </td>
+            </tr>
+        `);
+    }
 }
 /*#endregion*/
 /*#endregion*/

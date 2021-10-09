@@ -1,6 +1,6 @@
 /*#section Panel*/
 function editarPanel(idPanel){
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",
             url: "/",
@@ -20,24 +20,74 @@ function editarPanel(idPanel){
     //Abrir modal
     $('#modalPanel').modal('show');
 }
+
+function getAllMicroInversores(vTipoInversor){ //Obtener todos los microInversores
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: "PUT",
+            url: "/get-micros",
+            dataType: "json",
+            data: { vTipoInversor: vTipoInversor },
+            success: function(microinversores){
+                if(microinversores.status === 200){
+                    resolve(microinversores.message);
+                }
+                else{
+                    reject('Al parecer surgio un error al consultar info. del Panel seleccionado');
+                }
+            },
+            error: function(error){
+                console.log(error);
+                reject(error);
+            }
+        });
+    });
+}
 /*#endsection*/
 /*#section Inversor*/
-function selectTipoInversor(){
-    let tipoInversorSeleccionado = $('#tipoInversor').val();
+async function selectTipoInversor(){
+    let tipoInversorSeleccionado = $('#ddlTipoInversor').val();
 
     if(tipoInversorSeleccionado != "-1"){
-        if(tipoInversorSeleccionado === 'Inversor'){ ///Inversor central
-            $('#contenedorPaneleSoportados').css('display','none');
+        if(tipoInversorSeleccionado === 'Inversor' || tipoInversorSeleccionado === 'MicroInversor'){
+            stateRegistroEquInversores(0);
+            $('#btnGuardarInversor').show();
         }
-        else{ ///Microinversor
-            $('#contenedorPaneleSoportados').css('display','');
+        else{ //Combinaciones Micros
+            stateRegistroEquInversores(1);
         }
 
-        $('#btnGuardarInversor').css('display','');
+        switch(tipoInversorSeleccionado)
+        {
+            case 'Inversor':
+                $('#contenedorPaneleSoportados').hide();
+            break;
+            case 'MicroInversor':
+                $('#contenedorPaneleSoportados').show();
+            break;
+            case 'Combinacion': ///Combinaciones de -MicroInversores-
+                //Se llenan ambos ddl Equipos -Micros-
+                await llenarDDLEMicros(); //:void()
+            break;
+            default: 
+                -1;
+            break;
+        }
     }
     else{
         $('#contenedorPaneleSoportados').css('display','none');
-        $('#btnGuardarInversor').css('display','none');
+        $('#btnGuardarInversor').hide();
+        stateRegistroEquInversores(0);
+    }
+}
+
+function selectEquipo1o2(optionValue){
+    if(optionValue.value != -1){
+        $('#btnGuardarInversor').show();
+    }
+    else{
+        $('#btnGuardarInversor').hide();
     }
 }
 
@@ -63,6 +113,47 @@ function editarInversor(idInversor){
 
     //Abrir modal
     $('#modalInversor').modal('show');
+}
+
+function stateRegistroEquInversores(state){
+    if(state === 0){ //Inversores && Micros
+        $('.equipoNormal').show();
+        $('.equipoCombin').hide();
+    }
+    else{ //Combinaciones de micros
+        $('.equipoNormal').hide();
+        $('.equipoCombin').show();
+    }
+}
+
+async function llenarDDLEMicros(){
+    let ddlNames = ['ddlMicroInv1','ddlMicroInv2'];
+
+    let _micros = await getAllMicroInversores('MicroInversor');
+
+    for(let ddlName of ddlNames){
+        //
+        limpiarDDLEquiTipo(ddlName);
+
+        $.each(_micros, (index, micro) => {
+            $('#'+ddlName).append(
+                $('<option/>', {
+                    value: micro.vNombreMaterialFot,
+                    text: micro.vNombreMaterialFot
+                })
+            );
+        });
+    }
+}
+
+function limpiarDDLEquiTipo(ddl){
+    $('#'+ ddl + ' option').each(function(option){
+        if($(this).val() != "-1"){
+            $(this).val('');
+            $(this).text('');
+            $(this).remove();
+        }
+    });
 }
 /*#endsection*/
 /*#section Estructura*/
