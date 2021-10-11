@@ -377,7 +377,7 @@ async function getPropuestas(){
     //Get() IdCliente
     let idCliente = sessionStorage.getItem('IdCliente');
 
-    //Controles
+    //Estado de edicion - [Default]
     editarClienteDetails();
 
     //Obtener todas las propuestas del Cliente

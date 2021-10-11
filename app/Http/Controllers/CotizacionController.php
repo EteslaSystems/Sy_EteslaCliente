@@ -26,7 +26,7 @@ class CotizacionController extends Controller
     }
 
 	public function guardarPropuesta(Request $request){
-		$propuesta["idVendedor"] = session('dataUsuario')->idPersona;
+		$propuesta["idVendedor"] = session('dataUsuario')->idUsuario;
 		$propuesta["idCliente"] = $request->idCliente;
 		$propuesta["propuesta"] = $request->propuesta;
 

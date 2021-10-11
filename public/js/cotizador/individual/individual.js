@@ -138,7 +138,7 @@ function captaCombinacionMicros(option){
             $("#inpCantMicro2").prop("disabled",false);
 
             //Obtener los nombres de los micros por separado
-            let MicrosNombres = obtenerNombresEquipos(nombreCombinacion);
+            let MicrosNombres = obtenerNombresEquiposMicros(nombreCombinacion);
 
             //Agregar el texto a los labels [microInversor1 && microInversor2]
             $('#lblMicroInversorUno').text("Cantidad de "+MicrosNombres.equipo1);
@@ -281,13 +281,17 @@ function catchDataEquipos(){
         let tipoInversor = $('#optInversores option:selected').attr("title");
 
         if(tipoInversor === "Combinacion"){
+            let nombreCombinacion = $('#optInversores option:selected').text();
+            let Micros = obtenerNombresEquiposMicros(nombreCombinacion);
+
             equipos.inversores = {
+                vNombreMaterialFot: 'nombreCombinacion',
                 equipo1: {
-                    modelo: $('#lblMicroInversorUno').text(),
+                    modelo: Micros.equipo1,
                     cantidad: $('#inpCantMicro1').val()
                 },
                 equipo2: {
-                    modelo: $('#lblMicroInversorDos').text(),
+                    modelo: Micros.equipo2,
                     cantidad: $('#inpCantMicro2').val()
                 },
                 combinacion: true
@@ -311,7 +315,7 @@ function catchDataEquipos(){
     return equipos;
 }
 
-function obtenerNombresEquipos(combinacionMicros){ //Return [Object]
+function obtenerNombresEquiposMicros(combinacionMicros){ //Return [Object]
     /* [Descripcion]
       Se obtiene el string del nombre de la -combinacionMicros ["microInversor1+microInversor2"]-.
       Se recorre la cadena y se separa los dos nombres de los micros. Se retornan los 2 nombres por separado
