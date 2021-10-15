@@ -133,13 +133,12 @@ function pintarClienteDetails(Clientee){
 }
 /*#region Logica - Botones*/
 async function mostrarClienteDetails(idCliente){
-    /*#region Guardar en memoria */
-    sessionStorage.removeItem('IdCliente');
-    sessionStorage.setItem('IdCliente',idCliente);
-    /*#endregion */
 
     let Cliente = await buscarClientePorId(idCliente);
     pintarClienteDetails(Cliente); //:void()
+
+    let _propuestas = await getPropuestasByCliente(idCliente);
+    pintarPropuestas(_propuestas);
 }
 
 function editarClienteDetails(state){
@@ -340,6 +339,11 @@ function buscarCPInfo(){
 /*#endregion*/
 /*#endregion*/
 /*#region Propuestas*/
+/*#region Funcionalidad */
+function limpiarTablaPropuestas(){
+    $('#tblPropuestas > tbody').html("");
+}
+/*#endregion*/
 /*#region Server*/
 function getPropuestasByCliente(idCliente){
     return new Promise((resolve, reject) => {
@@ -373,23 +377,11 @@ function closeModalDetailsPropuesta(){
     $('.cd-example-modal-lg').modal('hide');
 }
 
-async function getPropuestas(){
-    //Get() IdCliente
-    let idCliente = sessionStorage.getItem('IdCliente');
-
-    //Estado de edicion - [Default]
-    editarClienteDetails();
-
-    //Obtener todas las propuestas del Cliente
-    let _propuestas = await getPropuestasByCliente(idCliente);
-    pintarPropuestas(_propuestas);
-}
-
 function pintarPropuestas(_propuestas){
     let tblBodyPropuestas = $('#tblPropuestas > tbody');
     
     //Limpiar tabla - Propuestas
-    tblBodyPropuestas.html("");
+    limpiarTablaPropuestas();
 
     //Validar que tenga propuestas
     if(_propuestas.length > 0){
@@ -401,12 +393,12 @@ function pintarPropuestas(_propuestas){
                     <td id="tdFechaExpiracion">`+propuesta.expired_at+`</td>
                     <td id="tdAcciones">
                         <div class="btn-group" role="group">
-                            <button id="btnVisualizarInfPropuesta" type="button" class="btn btn-sm btn-secondary" title="visualizar">
+                            <a href="/detallesPropuesta/`+propuesta.idPropuesta+`" type="button" class="btn btn-sm btn-secondary btnVisualizarInfPropuesta" title="Visualizar detalles de propuesta">
                                 <img src="https://img.icons8.com/ios-glyphs/14/000000/visible--v2.png"/>
-                            </button>
-                            <button id="btnEliminarPropuesta" type="button" class="btn btn-sm btn-danger" title="Eliminar propuesta">
+                            </a>
+                            <a href="/eliminarPropuesta/`+propuesta.idPropuesta+`" type="button" class="btn btn-sm btn-danger btnEliminarPropuesta" title="Eliminar propuesta">
                                 <img src="https://img.icons8.com/ios-filled/14/000000/delete--v2.png"/>
-                            </button>
+                            </a>
                         </div>
                     </td>
                 </tr>

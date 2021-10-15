@@ -23,8 +23,7 @@ Route::get('/vendedor', 'vendedorController@index');
 Route::get('/clientes', 'vendedorController@clientes');
 
 //////COTIZACION
-Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
-Route::post('/GuardarPropuesta','CotizacionController@guardarPropuesta');
+Route::post('/PDFgenerate', 'CotizacionController@generatePDF');\
 
 /* --- Cotizacion Media Tension --- */
 Route::get('/mediaT', 'MediaTensionController@index');
@@ -56,24 +55,25 @@ Route::post('/powerBT', 'BajaTensionController@getPowerBT');
 
 /* --------------- Cliente --------------- */
 // Route::post('/agregar-cliente','MediaTensionController@create');
-
 Route::post('/registrarCliente', 'clienteController@registrarCliente');
 Route::get('/eliminar-cliente/{idCliente}', 'clienteController@eliminarCliente');
 Route::get('/editar-cliente/{idPersona}', 'clienteController@mostrarCliente');
 Route::put('/editar-cliente/{idPersona}', 'clienteController@actualizarCliente');
-
-
-
-/* ------------------------------------------------ */
 Route::put('/consultarClientePorId/{cliente?}', 'clienteController@consultarClientePorId');
-
 Route::put('/buscarCliente/{cliente?}','clienteController@consultarClientePorNombre');
 /* ------------------------------------------------ */
 
-
-/* ------------------Cliente_Propuesta(s)--------------------- */
+/* --------------------[ PROPUESTA ]---------------------------- */
+///Guardar Propuesta
+Route::post('/GuardarPropuesta','PropuestasController@guardarPropuesta');
+///Detalles de las propuestas [Propuesta by Id]
+Route::get('/detallesPropuesta/{idPropuesta?}','PropuestasController@getPropuestaById');
+///Eliminar propuesta
+Route::get('/eliminarPropuesta/{idPropuesta?}','PropuestasController@eliminarPropuesta');
+///
 Route::put('/propuestasByClient/{idCliente?}', 'PropuestasController@getPropuestasByClient');
-/* --------------------------------- */
+/* ------------------------------------------------ */
+
 
 
 

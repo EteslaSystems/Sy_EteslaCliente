@@ -69,10 +69,5 @@ class APICotizacion extends GuzzleHttpRequest
     {
         return $this->post("pdf",$request);
     }
-
-    public function guardarPropuesta($request)
-    {
-        return $this->post("guardar-propuesta",$request);
-    }
     /*#endregion*/
 }

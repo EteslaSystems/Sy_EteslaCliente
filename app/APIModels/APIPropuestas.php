@@ -8,4 +8,21 @@ class APIPropuestas extends GuzzleHttpRequest
     {
         return $this->put("getPropuestaByCliente", $request);
     }
+
+    public function save($request)
+    {
+        return $this->post("guardar-propuesta",$request);
+    }
+
+    /* ------ NUEVA FUNCIONALIDAD -------- (BORRAR ESTE COMENT) */
+
+    public function delete($request)
+    {
+        return $this->put("eliminar-propuesta",$request);
+    }
+
+    public function getDetailsPropuestaById($request)
+    {
+        return $this->get("details-propuesta-id",$request);
+    }
 }

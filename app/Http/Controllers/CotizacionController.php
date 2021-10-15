@@ -24,15 +24,4 @@ class CotizacionController extends Controller
 			return $this->pdfi->generatePDF($request);
 		}
     }
-
-	public function guardarPropuesta(Request $request){
-		$propuesta["idVendedor"] = session('dataUsuario')->idUsuario;
-		$propuesta["idCliente"] = $request->idCliente;
-		$propuesta["propuesta"] = $request->propuesta;
-
-		$response = $this->cotizacion->guardarPropuesta(['json' => $propuesta]);
-		$response = response()->json($response);
-
-		return $response;
-	}
 }

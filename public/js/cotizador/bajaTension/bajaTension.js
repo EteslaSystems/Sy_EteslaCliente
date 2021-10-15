@@ -884,8 +884,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     $('#rangeValuePropuesta').val(_viaticos[0].power.porcentajePotencia);
         
     //Porcentaje de descuentoPropuesta que aparece en el panelAjustePropuesta
-    $('#inpSliderDescuento').val(_viaticos[0].descuento);
-    $('#rangeValueDescuento').val(_viaticos[0].descuento);
+    $('#inpSliderDescuento').val(_viaticos[0].descuento.porcentaje);
+    $('#rangeValueDescuento').val(_viaticos[0].descuento.porcentaje);
 }
 /*#endregion*/
 /*#region Combinaciones*/

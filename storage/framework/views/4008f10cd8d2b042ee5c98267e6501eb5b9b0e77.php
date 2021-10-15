@@ -5,27 +5,33 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body row" style="border-left: 3px solid #F9FE39; border-right: 3px solid #F9FE39; border-top: 3px solid #F9FE39; border-bottom: 3px solid #F9FE39;">
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chbMO" onclick="cambiaValorCheckBox(this)" checked>
-                                <label class="form-check-label" for="chbMO" style="color: #888;">Mano de obra</label>
+                        <?php if($rol == 2): ?>
+                        <!-- Controles accesibles unicamente para Operaciones -->
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="chbMO" onclick="cambiaValorCheckBox(this)" checked>
+                                    <label class="form-check-label" for="chbMO" style="color: #888;">Mano de obra</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="chbOtros" onclick="cambiaValorCheckBox(this)" checked>
+                                    <label class="form-check-label" for="chbOtros" style="color: #888;">Otros</label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chbOtros" onclick="cambiaValorCheckBox(this)" checked>
-                                <label class="form-check-label" for="chbOtros" style="color: #888;">Otros</label>
-                            </div>
-                        </div>
+                        <?php endif; ?>
                         <div class="col-sm-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chbFletes" onclick="cambiaValorCheckBox(this)" checked>
-                                <label class="form-check-label" for="chbFletes" style="color: #888;">Fletes</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chbViaticos" onclick="cambiaValorCheckBox(this)" checked>
-                                <label class="form-check-label" for="chbViaticos" style="color: #888;">
-                                    <a href="#" data-toggle="modal" data-target=".bd-viaticos-modal-sm">Viaticos</a>
-                                </label>
-                            </div>
+                            <?php if($rol == 2): ?>
+                            <!-- Controles accesibles unicamente para Operaciones -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="chbFletes" onclick="cambiaValorCheckBox(this)" checked>
+                                    <label class="form-check-label" for="chbFletes" style="color: #888;">Fletes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="chbViaticos" onclick="cambiaValorCheckBox(this)" checked>
+                                    <label class="form-check-label" for="chbViaticos" style="color: #888;">
+                                        <a href="#" data-toggle="modal" data-target=".bd-viaticos-modal-sm">Viaticos</a>
+                                    </label>
+                                </div>
+                            <?php endif; ?>
                             <!-- Modal viaticos -->
                             <div class="modal fade bd-viaticos-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -114,12 +120,12 @@
                                     <div class="modal-body">
                                         <div class="slidecontainer">
                                             <div class="form-group">
-                                                <label>Descuento</label>
-                                                <input id="inpSliderDescuento" type="range" min="0" max="100" class="slider" value="0" oninput="rangeValueDescuento.value=inpSliderDescuento.value" onchange="sliderModificarPropuesta();">
+                                                <label>Descuento de costo del proyecto</label>
+                                                <input id="inpSliderDescuento" type="range" min="0" max="30" class="slider" value="0" oninput="rangeValueDescuento.value=inpSliderDescuento.value" onchange="sliderModificarPropuesta();">
                                                 <output id="rangeValueDescuento"></output>%
                                             </div>
                                             <div class="form-group">
-                                                <label>Aumento</label>
+                                                <label>Aumento de costo del proyecto</label>
                                                 <input id="inpSliderAumento" type="range" min="0" max="100" class="slider" value="0" oninput="rangeValueAumento.value=inpSliderAumento.value">
                                                 <output id="rangeValueAumento"></output>%
                                             </div>

@@ -238,12 +238,26 @@ function catchDataCotizacionIndividual(){
 
 function pintarResultadoCotizacion(cotizacionResult){
     let cotizacionIndividual = cotizacionResult[0]; //Formating of Array to Object
+    let potenciaInstalad = 0, costoPanel = 0, costoInversor = 0, costoEstructura = 0;
 
-    //Setters data
-    let potenciaInstalad = ((cotizacionIndividual.paneles.fPotencia * cotizacionIndividual.paneles.noModulos) / 1000);
-    let costoPanel = cotizacionIndividual.paneles.costoTotal;
-    let costoInversor = cotizacionIndividual.inversores != null ? cotizacionIndividual.inversores.precioTotal : 0;
-    let costoEstructura = cotizacionIndividual.estructura._estructuras != null ? cotizacionIndividual.estructura.costoTotal : 0;
+    /* [ Setters data ] */
+    /// [ Paneles ]
+    if(cotizacionIndividual.paneles != null){
+        potenciaInstalad = ((cotizacionIndividual.paneles.fPotencia * cotizacionIndividual.paneles.noModulos) / 1000);
+        costoPanel = cotizacionIndividual.paneles.costoTotal;
+    }
+
+    /// [ Inversores ]
+    if(cotizacionIndividual.inversores != null){
+        costoInversor = cotizacionIndividual.inversores.precioTotal;
+    }
+
+    /// [ Estructuras ]
+    if(cotizacionIndividual.estructura._estructuras != null){
+        costoEstructura = cotizacionIndividual.estructura.costoTotal;
+    }
+
+    /// [Totales && Subtotales]
     let costoViaticos = cotizacionIndividual.totales.totalViaticosMT;
     let costoMO = cotizacionIndividual.totales.manoDeObra + cotizacionIndividual.totales.otrosTotal;
     let costoFletes =cotizacionIndividual.totales.fletes; //$$ - USD
@@ -252,6 +266,7 @@ function pintarResultadoCotizacion(cotizacionResult){
     let totalUSD = cotizacionIndividual.totales.precioMasIVA;
     let totalMXN = cotizacionIndividual.totales.precioMXNConIVA;
 
+    /* ------------ */
     $('#resPotenciaInstalada').text(potenciaInstalad + ' kW');
     $('#resCostoPanel').text('$ ' + costoPanel + ' USD');
     $('#resCostInversor').text('$ ' + costoInversor + ' USD');

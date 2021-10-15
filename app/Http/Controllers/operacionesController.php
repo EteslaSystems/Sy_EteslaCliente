@@ -22,9 +22,8 @@ class operacionesController extends Controller
 	{
 		if (session()->has('dataUsuario')) {
 			$rol = session('dataUsuario')->rol;
-			$tipo = session('dataUsuario')->tipoUsuario;
 			
-			if ($rol == 2 && $tipo == 'Operac' || $rol == 1 && $tipo == 'Admin' || $rol == 0 && $tipo == 'SU') {
+			if ($rol == 2  || $rol == 1 || $rol == 0 ) {
 				return 2;
 			}
 			return 1;

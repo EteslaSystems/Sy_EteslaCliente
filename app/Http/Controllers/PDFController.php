@@ -16,7 +16,7 @@ class PDFController extends Controller
                 $pdfTemplate = 'PDFTemplates.bajaTension';
             }
             
-            if($tipoCotizacion === 'CombinacionCotizacion'){
+            if($tipoCotizacion === "CombinacionCotizacion"){
                 $pdfTemplate = 'PDFTemplates.machotes.propuestaCombinaciones';
             }
 
@@ -38,7 +38,6 @@ class PDFController extends Controller
 
             //Nombre del documento PDF
             $fileName = $this->getFileName($propuesta);
-            // $fileName = "test.pdf";
 
             $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)
 
@@ -76,7 +75,7 @@ class PDFController extends Controller
     public function visualizarPDF()
     {
         $pdf = PDF::loadview('PDFTemplates.machotes.bajaTension')
-        ->setOptions(['isRemoteEnabled' => true])
+        ->setOptions(['isRemoteEnabled' => false])
         ->setPaper('A4');
 
         return $pdf->stream('test.pdf');

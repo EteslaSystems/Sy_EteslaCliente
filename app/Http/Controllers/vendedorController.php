@@ -46,8 +46,6 @@ class vendedorController extends Controller
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
 		$consultarClientes = $consultarClientes->message;
 
-		// dd($consultarClientes);
-
 		return view('template.clientes', compact('consultarClientes'));
 	}
 

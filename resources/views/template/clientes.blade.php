@@ -50,7 +50,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Detalles</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="limpiarTablaPropuestas()">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -61,7 +61,7 @@
                                         <div class="col">
                                             <div id="cabezales-nav" class="nav nav-tabs" role="tablist">
                                                 <a id="ciente-info-tab" class="nav-item nav-link active"  data-toggle="tab" href="#cliente-info" role="tab" aria-controls="cliente-info" aria-selected="true" onclick="editarClienteDetails(3)">Cliente</a>
-                                                <a id="propuestas-info-tab" class="nav-item nav-link" data-toggle="tab" href="#propuestas-info" role="tab" aria-controls="propuestas-info" aria-selected="false" onclick="getPropuestas()">Propuestas</a>
+                                                <a id="propuestas-info-tab" class="nav-item nav-link" data-toggle="tab" href="#propuestas-info" role="tab" aria-controls="propuestas-info" aria-selected="false">Propuestas</a>
                                             </div>
                                         </div>
                                         <div class="col">
