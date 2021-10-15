@@ -123,15 +123,17 @@ class BajaTensionController extends Controller
 
 	public function askCombination(Request $request)
 	{
-		$arrayCompleto["idUsuario"] = session('dataUsuario')->idPersona;
-		$arrayCompleto["idCliente"] = $request->idCliente;
-		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
-		$arrayCompleto["destino"] = $request->direccionCliente;
-		$arrayCompleto["consumos"] = $request->consumos;
-		$arrayCompleto["tipoCotizacion"] = "bajaTension";
-		$arrayCompleto["tarifa"] = $request->tarifa;
+		$cotizacion["idUsuario"] = session('dataUsuario')->idPersona;
+		$cotizacion["idCliente"] = $request->idCliente;
+		$cotizacion["origen"] = session('dataUsuario')->oficina;
+		$cotizacion["destino"] = $request->direccionCliente;
+		$cotizacion["consumos"] = $request->consumos;
+		$cotizacion["tipoCotizacion"] = "bajaTension";
+		$cotizacion["tarifa"] = $request->tarifa;
+		$cotizacion["porcentajeDescuento"] = $request->porcentajeDescuento;
+		$cotizacion["porcentajePropuesta"] = $request->porcentajePropuesta;
 
-		$response = $this->cotizacion->busquedaInteligente(['json' => $arrayCompleto]);
+		$response = $this->cotizacion->busquedaInteligente(['json' => $cotizacion]);
 		$response = response()->json($response);
 
 		return $response;

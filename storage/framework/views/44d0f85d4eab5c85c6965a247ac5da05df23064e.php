@@ -54,11 +54,11 @@
     }
     #recuadroFlotante{
         background-color: white;
-        margin-top: -200px;
+        margin-top: -260px;
         margin-left: 80px;
         border-radius: 15px;
         width: 360px;
-        height: 225px;
+        height: 260px;
         text-align: left;
     }
     /* Tablas */
@@ -161,11 +161,12 @@
         <img id="recuadroPaneles" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/Paneles-solares-tesla.jpg')))); ?>"/>
         <div id="recuadroFlotante">
             <div>
+                <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: <?php echo e(date('Y-m-d')); ?></strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong><?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?></p>
-                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong><?php echo e($cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vEstado"]); ?></p>
-                <p id="fechaCreacion" class="textIncProupesta"><strong><?php echo e(now()); ?></strong></p>
+                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong><?php echo e($cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"]); ?></p>
                 <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> <?php echo e($vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"]); ?></p>
-                <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>15 dias</u></strong></p>
+                <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong><?php echo e($vendedor["vOficina"]); ?></p>
+                <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u><?php echo e($expiracion["cantidad"] . " " . $expiracion["unidadMedida"]); ?></u></strong></p>
             </div>
         </div>
         <div class="container-table">
@@ -433,12 +434,12 @@
                                 <?php break; ?>;
                             <?php endswitch; ?>
                             
-                            <?php if($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10)): ?>
-                                <td id="amarillo" style="background-color:#E0D30C">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2)); ?></td>
-                            <?php elseif($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"]): ?>
-                                <td id="verde" style="background-color:#44C331">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2)); ?></td>
+                            <?php if($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10)): ?>
+                                <td id="amarillo" style="background-color:#E0D30C">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
+                            <?php elseif($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"]): ?>
+                                <td id="verde" style="background-color:#44C331">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
                             <?php else: ?>
-                                <td id="normal" style="background-color:#3A565E">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2)); ?></td>
+                                <td id="normal" style="background-color:#3A565E">$<?php echo e(number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
                             <?php endif; ?>
                         <?php endfor; ?>
                     </tr>

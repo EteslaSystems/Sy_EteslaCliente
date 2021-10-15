@@ -323,7 +323,7 @@
                             <img style="margin-top:18px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png'))) }}">
                         </div>
                         <div style="margin-top:-50px; margin-left:100px;">
-                            <p class="text-inferior-pag1">TODO INCLUIDO:</p>
+                            <p class="text-inferior-pag1">INCLUYE:</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 65%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
                         </div>
                     </div>

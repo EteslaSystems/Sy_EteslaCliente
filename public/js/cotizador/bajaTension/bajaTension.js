@@ -45,7 +45,11 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
             dataPropuesta.porcentajePropuesta = dataEdited.porcentajePropuesta;
             dataPropuesta.porcentajeDescuento = dataEdited.porcentajeDescuento;
             data = dataPropuesta;
-    
+            
+            ///Modificar las combinaciones
+            _combinaciones = await obtenerCombinaciones(data);
+            vaciarCombinacionesEnModal(_combinaciones); // :void()
+
             ///Enviar propuesta AJUSTADA
             _cotizacionAjustada = await enviarCotizacion(data);
             vaciarRespuestaPaneles(_cotizacionAjustada);

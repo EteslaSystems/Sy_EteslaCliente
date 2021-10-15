@@ -161,10 +161,9 @@
         <img id="recuadroPaneles" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/Paneles-solares-tesla.jpg'))) }}"/>
         <div id="recuadroFlotante">
             <div>
-                <p id="fechaCreacion" class="textIncProupesta">><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
+                <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}</p>
                 <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}</p>
-                <p id="fechaCreacion" class="textIncProupesta"><strong>{{ now() }}</strong></p>
                 <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> {{ $vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"] }}</p>
                 <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $vendedor["vOficina"] }}</p>
                 <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>{{ $expiracion["cantidad"] . " " . $expiracion["unidadMedida"] }}</u></strong></p>
@@ -274,7 +273,7 @@
                             <img height="48px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png'))) }}">
                         </div>
                         <div style="margin-top:-50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">TODO INCLUIDO:</p>
+                            <p class="text-inferior-pag1">INCLUYE:</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
                         </div>
                     </div>
@@ -431,12 +430,12 @@
                                 @break;
                             @endswitch
                             
-                            @if($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
-                                <td id="amarillo" style="background-color:#E0D30C">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2) }}</td>
-                            @elseif($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
-                                <td id="verde" style="background-color:#44C331">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2) }}</td>
+                            @if($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
+                                <td id="amarillo" style="background-color:#E0D30C">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
+                            @elseif($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
+                                <td id="verde" style="background-color:#44C331">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
                             @else
-                                <td id="normal" style="background-color:#3A565E">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][0][$x][$porcent], 2) }}</td>
+                                <td id="normal" style="background-color:#3A565E">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
                             @endif
                         @endfor
                     </tr>

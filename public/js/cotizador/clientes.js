@@ -1,26 +1,35 @@
 /*#region Cliente*/
-async function buscarCoincidenciaCliente(){
-    let textoBusqueda = $('#inpBuscarCliente').val(); //Cliente a buscar
-    textoBusqueda = textoBusqueda.trim();
+async function buscarCoincidenciaCliente(evento){
+    let keyCode = evento.keyCode || evento;
 
-    let clienteResult = await buscarClientePorNombre(textoBusqueda);
+    if(keyCode === 13 || keyCode.onclick){ ///Validar que la tecla -Enter- se haya presionado
+        //Cliente a buscar
+        let textoBusqueda = $('#inpBuscarCliente').val();
+        textoBusqueda = textoBusqueda.trim();
 
-    console.log(clienteResult);
+        //Validar que el campo este lleno
+        if(textoBusqueda.length > 0){
+            let clienteResult = await buscarClientePorNombre(textoBusqueda);
+            
+            //Validar si hubo coincidencia con la -busquedaCliente-
+            if(clienteResult.length > 0){
+                //Limpiar ddlCoincidenciasClientes
+                limpiarDDLEntidad('ddlCoincidenciasCliente');
 
-    //Validar si hubo coincidencia con la -busquedaCliente-
-    if(clienteResult.length > 0){
-        //Limpiar ddlCoincidenciasClientes
-        limpiarDDLEntidad('ddlCoincidenciasCliente');
-
-        //Se llena ddlCoincidenciasClientes
-        llenarDDLCoincidenciasClientes(clienteResult);
-        
-        //Se muestra ddlCoincidenciasClientes
-        statusControlsBusqueda(0);
-    }
-    else{
-        //Se muestra ddlCoincidenciasClientes
-        statusControlsBusqueda(1);
+                //Se llena ddlCoincidenciasClientes
+                llenarDDLCoincidenciasClientes(clienteResult);
+                
+                //Se muestra ddlCoincidenciasClientes
+                statusControlsBusqueda(0);
+            }
+            else{
+                //Se muestra ddlCoincidenciasClientes
+                statusControlsBusqueda(1);
+            }
+        }
+        else{
+            alert('Campo de -busqueda de cliente- VACIO!! Favor de rellenarlo');
+        }
     }
 }
 
