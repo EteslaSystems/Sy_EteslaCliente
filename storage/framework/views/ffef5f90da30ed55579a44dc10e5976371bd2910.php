@@ -2,10 +2,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo e(asset('css/index.css')); ?>">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
@@ -81,7 +80,9 @@
                                     </div>
                                     <div class="col-md-auto">
                                         <!-- Boton ajuste-propuesta -->
-                                        <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej"><img src="https://img.icons8.com/ios-glyphs/24/000000/administrative-tools.png"/></button>
+                                        <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej" title="Ajuste de propuesta">
+                                            <img width="100%" height="35px" src="<?php echo e(asset('/img/icon/configuration-icon.png')); ?>"/>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -92,19 +93,58 @@
             </div>
             <div class="col-lg-5">
                 <div class="card shadow mb-3">
-                    <div class="card-header">
-                        <p class="d-block mn-1 p-titulos" id="lblConvEquip">Propuesta</p>
+                    <div class="card-header" style="height:50px;">
+                        <div class="row">
+                            <div class="col-sm">
+                                <p class="d-block mn-1 p-titulos" id="lblConvEquip">Propuesta</p>
+                            </div>
+                            <div class="col-sm-auto" style="margin-top:-10px;">
+                                <label for="configPDF" class="text-white" style="margin-top:9px;">
+                                    <strong>PDF configuration</strong>
+                                </label>
+                                <button id="configPDF" type="button" class="btn btn-xs pull-right" data-toggle="modal" data-target="#mdlPDFConfiguration" title="Configuracion del PDF" disabled>
+                                    <img width="100%" height="30px" src="<?php echo e(asset('img/icon/configuration-icon.png')); ?>"/>
+                                </button>
+                            </div>
+                            <!-- Modal => PDFConfiguration -->
+                            <div id="mdlPDFConfiguration" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Configuracion PDF</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <a id="configurationPdf-paginaUno-tab" class="nav-item nav-link active"  data-toggle="tab" href="#configurationPdf-paginaUno" role="tab" aria-controls="configurationPdf-paginaUno" aria-selected="true">Hoja 1</a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content">
+                                                <div id="configurationPdf-paginaUno" class="tab-pane fade show active" role="tabpanel">
+                                                    <label for="swtSubtDesglozados">Subtotales desglozados</label>
+                                                    <input id="swtSubtDesglozados" type="checkbox" data-toggle="toggle" data-width="135" data-on="Habilitado" data-off="Deshabilitado" data-onstyle="success" data-offstyle="danger" checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin Modal => PDFConfiguration -->
+                        </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="height:135px;">
                         <div class="form-row">
                             <div class="col-md-6" style="height: 118px;">
                                 <div id="carouselExampleControls" class="carousel slide" data-interval="false" style="margin-top:15px;">
                                     <div class="carousel-inner text-center">
                                         <div class="carousel-item">
                                             <div class="custom-control custom-checkbox image-checkbox">
-                                                <input id="rbtnQR" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)" disabled>
+                                                <input id="rbtnQR" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)" title="Seleccionar opcion de entregable" disabled>
                                                 <label class="custom-control-label" for="rbtnQR">
-                                                    <img src="https://img.icons8.com/cotton/80/000000/qr-code--v2.png"/>
+                                                    <img src="<?php echo e(asset('img/icon/qr-icon.png')); ?>"/>
                                                 </label>
                                             </div>
                                         </div>
@@ -112,7 +152,7 @@
                                             <div class="custom-control custom-checkbox image-checkbox">
                                                 <input id="rbtnPDF" type="checkbox" class="custom-control-input" name="rbtnEntregable" onclick="selectOptionEntregable(this)">
                                                 <label class="custom-control-label" for="rbtnPDF">
-                                                    <img src="https://img.icons8.com/color/80/000000/pdf.png"/>
+                                                    <img src="<?php echo e(asset('img/icon/pdf-icon.png')); ?>"/>
                                                 </label>
                                                 <p></p>
                                             </div>
@@ -128,17 +168,11 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-auto">
-                                <!-- Contenedor de Botones de Guardar/Generar -->
-                                <div class="col text-center" style="margin-top:15px;">
-                                    <div class="form-group">
-                                        <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" onclick="guardarPropuesta();" title="guardar propuesta" disabled>GUARDAR</button>
-                                    </div>
-                                    <div class="form-group">
-                                        <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" title="generar propuesta" onclick="generarEntregable()" disabled>GENERAR</button>
-                                    </div>
+                            <div class="col-auto">
+                                <div class="btn-group" role="group">
+                                    <button id="btnGuardarPropuesta" type="button" class="btn btn-secondary" onclick="guardarPropuesta();" title="guardar propuesta" disabled>GUARDAR</button>
+                                    <button id="btnGenerarEntregable" type="button" class="btn btn-secondary" title="generar propuesta" onclick="generarEntregable()" disabled>GENERAR</button>
                                 </div>
-                                <!-- Fin Contenedor de Botones de Guardar/Generar -->
                             </div>
                         </div>
                     </div>
@@ -215,46 +249,46 @@
                                                     <td style="border-left:0px; border-top:0px;"></td>
                                                     <td id="imgLogos">
                                                         <div class="row">
-                                                            <div class="col-sm">
-                                                                <img id="imgPanelA" style="width:70px; height:44px;">
+                                                            <div class="co-sml">
+                                                                <img id="imgPanelA" width="90%" height="44px">
                                                             </div>
                                                             <div class="col-sm">
-                                                                <img id="imgInversorA" style="width:70px; height:44px;">
+                                                                <img id="imgInversorA" width="90%" height="44px">
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm">
-                                                                <img id="imgEstructuraA" style="width:70px; height:44px;">
+                                                            <div class="col">
+                                                                <img id="imgEstructuraA" width="50%" height="44px">
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td id="imgLogos">
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <img id="imgPanelB" style="width:70px; height:44px;">
+                                                            <div class="col-sm">
+                                                                <img id="imgPanelB" width="90%" height="44px">
                                                             </div>
-                                                            <div class="col">
-                                                                <img id="imgInversorB" style="width:70px; height:44px;">
+                                                            <div class="col-sm">
+                                                                <img id="imgInversorB" width="90%" height="44px">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img id="imgEstructuraB" style="width:70px; height:44px;">
+                                                                <img id="imgEstructuraB" width="50%" height="44px">
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td id="imgLogos">
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <img id="imgPanelC" style="width:70px; height:44px;">
+                                                            <div class="col-sm">
+                                                                <img id="imgPanelC" width="90%" height="44px">
                                                             </div>
-                                                            <div class="col">
-                                                                <img id="imgInversorC" style="width:70px; height:44px;">
+                                                            <div class="col-sm">
+                                                                <img id="imgInversorC" width="90%" height="44px">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <img id="imgEstructuraC" style="width:70px; height:44px;">
+                                                                <img id="imgEstructuraC" width="50%" height="44px">
                                                             </div>
                                                         </div>
                                                     </td>
@@ -270,6 +304,12 @@
                                                     <td id="tdPotenciaInstaladaA">*</td>
                                                     <td id="tdPotenciaInstaladaB">*</td>
                                                     <td id="tdPotenciaInstaladaC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Porcentaje de generacion</strong></td>
+                                                    <td id="tdPorcentajePropuestaA">*</td>
+                                                    <td id="tdPorcentajePropuestaB">*</td>
+                                                    <td id="tdPorcentajePropuestaC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
@@ -361,8 +401,8 @@
                                         <a id="ahorro-tab" class="nav-item nav-link" data-toggle="tab" href="#ahorro" role="tab" aria-controls="ahorro" aria-selected="false">Ahorro</a>
                                     </div>
                                 </nav>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="cotizacion" role="tabpanel" aria-labelledby="cotizacion-tab">
+                                <div class="tab-content">
+                                    <div id="cotizacion" class="tab-pane fade show active" role="tabpanel" aria-labelledby="cotizacion-tab">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col">
@@ -513,10 +553,10 @@
                                                         <div class="col">
                                                             <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:6px;">
                                                                 <thead>
-                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Ahorro energetico</th>
+                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Informacion de consumo</th>
                                                                     <tr>
                                                                         <td colspan="2"><strong>Consumo actual</strong></td>
-                                                                        <td colspan="2"><strong>Generacion</strong></td>
+                                                                        <td colspan="2"><strong>Generacion c/paneles</strong></td>
                                                                         <td colspan="2"><strong>Nuevo consumo</strong></td>
                                                                     </tr>
                                                                 </thead>
@@ -545,10 +585,10 @@
                                                         <div class="col">
                                                             <table id="ahorroEconomico" class="table table-sm table-bordered" style="margin-top:6px;">
                                                                 <thead>
-                                                                    <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Ahorro economico</th>
+                                                                    <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Informacion economica</th>
                                                                     <tr>
-                                                                        <td colspan="2"><strong>Consumo actual</strong></td>
-                                                                        <td colspan="2"><strong>Nuevo consumo</strong></td>
+                                                                        <td colspan="2"><strong>Gasto actual</strong></td>
+                                                                        <td colspan="2"><strong>Pago c/paneles</strong></td>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -599,4 +639,5 @@
             color: white;
         }
     </style>
-</body><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/resultados-cotizador.blade.php ENDPATH**/ ?>
+</body>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/resultados-cotizador.blade.php ENDPATH**/ ?>

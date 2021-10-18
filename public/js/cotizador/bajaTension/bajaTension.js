@@ -400,11 +400,17 @@ function selectOptionEntregable(chbx){
     let idChbx = chbx.id;
     let bandera = false;
 
-    //Se guarda el -id- del chbtn/opcion Seleccionada
-    sessionStorage.removeItem('chbxEntregable');
-    sessionStorage.setItem('chbxEntregable',idChbx);
-
     if($('#'+idChbx).is(":checked")){
+        //Comprobar si la opcion de "PDF" esta seleccionada
+        if($('#rbtnPDF').is(":checked")){
+            //Habilitar boton de *pdf-configuration*
+            $('#configPDF').attr("disabled",false);
+        }
+        else{
+            //Deshabilitar boton de *pdf-configuration*
+            $('#configPDF').attr("disabled",true);
+        }
+        
         bandera = true;
     }
 
@@ -960,12 +966,15 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionA */
     ///ImagenesLogos
-    $('#imgPanelA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.paneles.imgRuta);
-    $('#imgInversorA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.inversores.imgRuta);
-    $('#imgEstructuraA').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionA.estructura._estructuras.imgRuta);
+    $('#imgPanelA').prop("src","../img/equipos-logos/panel/" + CombinacionA.paneles.marca + '.png');
+    $('#imgInversorA').prop("src","../img/equipos-logos/inversor/" + CombinacionA.inversores.vMarca + '.jpg');
+    $('#imgEstructuraA').prop("src","../img/equipos-logos/estructura/" + CombinacionA.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattA').text('$ '+CombinacionA.totales.precio_watt+' USD');
+    ///Potencia instalada
     $('#tdPotenciaInstaladaA').text(CombinacionA.paneles.potenciaReal + ' Kw');
+    ///Porcentaje Generacion
+    $('#tdPorcentajePropuestaA').text(CombinacionA.power.porcentajePotencia + ' %');
     ///Panel
     $('#tdModeloPanelA').text(CombinacionA.paneles.nombre);
     $('#tdCantidadPanelA').text(CombinacionA.paneles.noModulos);
@@ -983,16 +992,19 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionB */
     ///ImagenesLogos
-    $('#imgPanelB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.paneles.imgRuta);
-    $('#imgInversorB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.inversores.imgRuta);
-    $('#imgEstructuraB').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionB.estructura._estructuras.imgRuta);
+    $('#imgPanelB').prop("src","../img/equipos-logos/panel/" + CombinacionB.paneles.marca + '.png');
+    $('#imgInversorB').prop("src","../img/equipos-logos/inversor/" + CombinacionB.inversores.vMarca + '.jpg');
+    $('#imgEstructuraB').prop("src","../img/equipos-logos/estructura/" + CombinacionB.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattB').text('$ ' + CombinacionB.totales.precio_watt + ' USD');
     $('#tdPotenciaInstaladaB').text(CombinacionB.paneles.potenciaReal + ' Kw');
     ///Panel
     $('#tdModeloPanelB').text(CombinacionB.paneles.nombre);
     $('#tdCantidadPanelB').text(CombinacionB.paneles.noModulos);
+    ///Potencia instalada
     $('#tdPotenciaPanelB').text(CombinacionB.paneles.potencia + ' W');
+    ///Porcentaje Generacion
+    $('#tdPorcentajePropuestaB').text(CombinacionB.power.porcentajePotencia + ' %');
     ///Inversor
     $('#tdModeloInversorB').text(CombinacionB.inversores.vNombreMaterialFot);
     $('#tdCantidadInversorB').text(CombinacionB.inversores.numeroDeInversores);
@@ -1006,12 +1018,15 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionC */
     ///ImagenesLogos
-    $('#imgPanelC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.paneles.imgRuta);
-    $('#imgInversorC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.inversores.imgRuta);
-    $('#imgEstructuraC').prop("src","https://drive.google.com/uc?export=view&id=" + CombinacionC.estructura._estructuras.imgRuta);
+    $('#imgPanelC').prop("src","../img/equipos-logos/panel/" + CombinacionC.paneles.marca + '.png');
+    $('#imgInversorC').prop("src","../img/equipos-logos/inversor/" + CombinacionC.inversores.vMarca + '.jpg');
+    $('#imgEstructuraC').prop("src","../img/equipos-logos/estructura/" + CombinacionC.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattC').text('$ ' + CombinacionC.totales.precio_watt+' USD');
+    ///Potencia instalada
     $('#tdPotenciaInstaladaC').text(CombinacionC.paneles.potenciaReal + ' Kw');
+    ///Porcentaje Generacion
+    $('#tdPorcentajePropuestaC').text(CombinacionC.power.porcentajePotencia + ' %');
     ///Panel
     $('#tdModeloPanelC').text(CombinacionC.paneles.nombre);
     $('#tdCantidadPanelC').text(CombinacionC.paneles.noModulos);

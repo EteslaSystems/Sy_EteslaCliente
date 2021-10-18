@@ -2,7 +2,13 @@
 @section('body')
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading" align="center"><img src="https://img.icons8.com/cotton/30/000000/solar-panel.png"><br><strong>ETESLA<small>&copy;</small></strong><br><small>Paneles Solares</small></div>
+        <div class="sidebar-heading" align="center">
+            <img width="20%" height="30px" src="{{ asset('img/icon/solar-panel-icon.png') }}">
+            <br>
+            <strong>ETESLA<small>&copy;</small></strong>
+            <br>
+            <small>Paneles Solares</small>
+        </div>
         <div class="list-group list-group-flush">
             @section('sidebar')
             @show
@@ -24,7 +30,9 @@
                         <a class="nav-link" id="navOption" href="/">Inicio<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="https://img.icons8.com/cotton/35/000000/name.png"></a>
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Editar perfil">
+                            <img width="100%" height="30px" src="{{ asset('img/icon/user-icon.png') }}">
+                        </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/perfil">Editar perfil</a>
                             <a class="dropdown-item" href="/logout">Cerrar sesión</a>

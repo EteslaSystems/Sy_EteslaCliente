@@ -3,8 +3,8 @@ $(document).on('ready',function(){
     sessionStorage.removeItem("contadorAgregados");
 });
 
+/*   Agregados_CRUD   */
 /*#region Logica*/
-/*                  Agregados_CRUD                  */
 function addAgregado(){
     let _agregados = [];
     let Agregado = { nombreAgregado: null, cantidadAgregado: null, precioAgregado: null };
@@ -130,7 +130,22 @@ function validarInputsVaciosAg(val){
 }
 /*#endregion*/
 
-/* Generar - PDF */
+/* PDF */
+/*#region Funcionalidad */
+function catchPDFConfiguration(){ ///Return [Object]
+    /* Se obtiene un Objeto de como se configurara/imprimira el PDF */
+
+    let PDFConfiguration = {};
+
+    let subDesglozados = $('#swtSubtDesglozados').is(":checked"); //Subtotales desglozados
+
+    PDFConfiguration = {
+        subtotalesDesglozados: subDesglozados
+    };
+
+    return PDFConfiguration;
+}
+/*#endregion*/
 /*#region Botones*/
 async function generarEntregable(){ //:void()
     //Se comprueba que opcion fue seleccionada -QrCode- o -PdfFile-
@@ -198,6 +213,9 @@ function generarPDF(){
     //Validar que tipo de cotizacion se esta tratando de generarPDF
     let tipoCotizacion = sessionStorage.getItem("tarifaMT");
 
+    //Obtener la configuracion del PDF
+    let PdfConfig = catchPDFConfiguration();
+
     if(tipoCotizacion === 'GDMTO' || tipoCotizacion === 'GDMTH'){ ///MediaTension
         data = sessionStorage.getItem("propuestaMT");
     }
@@ -211,6 +229,9 @@ function generarPDF(){
     
     data = JSON.parse(data);
     data = data.tipoCotizacion ? data : data[0];
+
+    //Se agrega a la [data] el Objeto de -PDFConfig-
+    Object.assign(data, PdfConfig);
 
     //Si tiene -COMBINACIONES- se manda la data de la -CombinacionSeleccionada- && -arrayCombinaciones-
     if(data.combinaciones){

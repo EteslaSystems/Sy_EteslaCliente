@@ -273,7 +273,7 @@
                             <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png')))); ?>">
                         </div>
                         <div style="margin-top:-50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">TODO INCLUIDO:</p>
+                            <p class="text-inferior-pag1">INCLUYE:</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
                         </div>
                     </div>

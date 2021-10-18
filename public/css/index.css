@@ -122,7 +122,8 @@ hr{
 }
 
 #navOption{
-    color: EFF6EF;
+    color: white;
+    border-width: inherit;
 }
 
 #navbarDropdown{
