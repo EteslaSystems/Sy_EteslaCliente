@@ -963,6 +963,9 @@ function vaciarCombinacionesEnModal(combinaciones){
     let CombinacionA = combinaciones[0].combinacionEconomica[0]; //CombinacionEconomica
     let CombinacionB = combinaciones[0].combinacionMediana[0]; //CombinacionMediana
     let CombinacionC = combinaciones[0].combinacionOptima[0]; //CombinacionOptima
+    let consumAntEnergetico = 0, consumNueEnergetico = 0; ///[bimestrales]
+    let consumAntEconomico = 0, consumNuevEconomico = 0; ///[bimestrales]
+    let ahorroEnergetico = 0, ahorroEconomico = 0; ///[bimestrales]
 
     /* CombinacionA */
     ///ImagenesLogos
@@ -986,6 +989,9 @@ function vaciarCombinacionesEnModal(combinaciones){
     ///Estructura
     $('#tdModeloEstructuraA').text(CombinacionA.estructura._estructuras.vNombreMaterialFot);
     $('#tdCantidadEstructuraA').text(CombinacionA.estructura.cantidad);
+    ///Ahorro [energetico && economico]
+    $('#tdAhorroEnergeticoA').text(CombinacionA.power.Ahorro.ahorroBimestral.toLocaleString('es-MX') + ' Kw/bim');
+    $('#tdAhorroEconomicoA').text('$' + CombinacionA.roi.ahorro.ahorroBimestralEnPesosMXN.toLocaleString('es-MX') + ' MXN');
     ///Subtotales&&Totales
     $('#tdSubtotalA').text('$ ' + CombinacionA.totales.precio.toLocaleString('es-MX') + ' USD');
     $('#tdTotalA').text('$ ' + CombinacionA.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
@@ -1012,6 +1018,9 @@ function vaciarCombinacionesEnModal(combinaciones){
     ///Estructura
     $('#tdModeloEstructuraB').text(CombinacionB.estructura._estructuras.vNombreMaterialFot);
     $('#tdCantidadEstructuraB').text(CombinacionB.estructura.cantidad);
+    ///Ahorro [energetico && economico]
+    $('#tdAhorroEnergeticoB').text(CombinacionB.power.Ahorro.ahorroBimestral.toLocaleString('es-MX') + ' Kw/bim');
+    $('#tdAhorroEconomicoB').text('$' + CombinacionB.roi.ahorro.ahorroBimestralEnPesosMXN.toLocaleString('es-MX') + ' MXN');
     ///Subtotales&&Totales
     $('#tdSubtotalB').text('$ ' + CombinacionB.totales.precio.toLocaleString('es-MX') + ' USD');
     $('#tdTotalB').text('$ ' + CombinacionB.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
@@ -1038,6 +1047,9 @@ function vaciarCombinacionesEnModal(combinaciones){
     ///Estructura
     $('#tdModeloEstructuraC').text(CombinacionC.estructura._estructuras.vNombreMaterialFot);
     $('#tdCantidadEstructuraC').text(CombinacionC.estructura.cantidad);
+    ///Ahorro [energetico && economico]
+    $('#tdAhorroEnergeticoC').text(CombinacionC.power.Ahorro.ahorroBimestral.toLocaleString('es-MX') + ' Kw/bim');
+    $('#tdAhorroEconomicoC').text('$' + CombinacionC.roi.ahorro.ahorroBimestralEnPesosMXN.toLocaleString('es-MX') + ' MXN');
     ///Subtotales&&Totales
     $('#tdSubtotalC').text('$ ' + CombinacionC.totales.precio.toLocaleString('es-MX') + ' USD');
     $('#tdTotalC').text('$ ' + CombinacionC.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');

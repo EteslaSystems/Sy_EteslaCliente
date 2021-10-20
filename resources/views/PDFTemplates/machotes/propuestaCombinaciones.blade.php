@@ -203,35 +203,35 @@
                         <td style="border-left:0px; border-top:0px;"></td>
                         <td>
                             <div>
-                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
+                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png'))) }}">
                             </div>
                             <div>
-                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
+                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg'))) }}">
                             </div>
                             <div>
-                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
+                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png'))) }}">
                             </div>
                         </td>
                         <td">
                             <div>
-                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
+                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png'))) }}">
                             </div>
                             <div>
-                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
+                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg'))) }}">
                             </div>
                             <div>
-                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
+                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png'))) }}">
                             </div>
                         </td>
                         <td>
                             <div>
-                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
+                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png'))) }}">
                             </div>
                             <div>
-                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
+                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg'))) }}">
                             </div>
                             <div>
-                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
+                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png'))) }}">
                             </div>
                         </td>
                     </tr>
@@ -345,4 +345,4 @@
         </div>
     </div>
 </body>
-</html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/machotes/propuestaCombinaciones.blade.php ENDPATH**/ ?>
+</html>

@@ -175,65 +175,85 @@
                     <tr>
                         <th scope="col">TIPO</th>
                         <th scope="col">MARCA</th>
-                        <th scope="col">CANTIDAD</th>
+                        <th scope="col" style="width:10%;">CANTIDAD</th>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="desglocePanel">
+                    <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
                         <td id="marcaPanel"><?php echo e($paneles["marca"]); ?></td>
-                        <td id="cantidadPanel"><?php echo e($paneles["noModulos"]); ?></td>
-                        <td id="modeloPanel"><?php echo e($paneles["nombre"]); ?></td>
-                        <td id="costoTotalPanel"></td>
+                        <td id="cantidadPanel" style="width:10%;"><?php echo e($paneles["noModulos"]); ?></td>
+                        <td id="modeloPanel" style="font-size: 13px;"><?php echo e($paneles["nombre"]); ?></td>
+                        <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
+                            <td id="costoTotalPanel">$<?php echo e(number_format($paneles["costoTotal"],2)); ?> USD</td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
                         <td id="marcaInversor"><?php echo e($inversores["vMarca"]); ?></td>
-                        <td id="cantidadInversor"><?php echo e($inversores["numeroDeInversores"]); ?></td>
-                        <td id="modeloInversor"><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
-                        <td id="costoTotalInversor"></td>
+                        <td id="cantidadInversor" style="width:10%;"><?php echo e($inversores["numeroDeInversores"]); ?></td>
+                        <td id="modeloInversor" style="font-size: 13px;"><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
+                        <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
+                            <td id="costoTotalInversor">$<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD</td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                     </tr>
-                    <tr id="desgloceEstructura">
+                    <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
                         <td id="marcaEstructura"><?php echo e($estructura["_estructuras"]["vMarca"]); ?></td>
-                        <td id="cantidadEstructura"><?php echo e($paneles["noModulos"]); ?></td>
+                        <td id="cantidadEstructura" style="width:10%;"><?php echo e($estructura["cantidad"]); ?></td>
                         <td>Estructura de aluminio</td>
-                        <td id="costoTotalEstructura"></td>
+                        <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
+                            <td id="costoTotalEstructura">$<?php echo e(number_format($estructura["costoTotal"],2)); ?> USD</td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
+                        <td style="width:10%;"></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
+                            <td id="costoTotalMO">$<?php echo e(number_format($totales["manoDeObra"],2)); ?> USD</td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                     </tr>
-                    <tr>
+                    <tr style="background-color:#F2F1F0;">
                         <td>Material electrico</td>
                         <td></td>
+                        <td style="width:10%;"></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
+                            <td id="costoTotalOtros">$<?php echo e(number_format($totales["otrosTotal"],2)); ?> USD</td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png')))); ?>"/></td>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png')))); ?>"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td id="subtotalSinIVAUSD" align="center">$<?php echo e(number_format($totales["precio"], 2)); ?> USD</td>
                         <td id="subtotalSinIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNSinIVA"], 2)); ?> MXN</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td id="totalConIVAUSD" align="center">$<?php echo e(number_format($totales["precioMasIVA"], 2)); ?> USD</td>
                         <td id="totalConIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?> MXN</td>
                     </tr>

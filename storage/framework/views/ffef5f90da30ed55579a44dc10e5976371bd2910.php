@@ -230,7 +230,8 @@
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Combinaciones</h5>                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <h5 class="modal-title">Combinaciones</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -367,6 +368,21 @@
                                                     <td id="tdCantidadEstructuraA">*</td>
                                                     <td id="tdCantidadEstructuraB">*</td>
                                                     <td id="tdCantidadEstructuraC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Energetico</strong></td>
+                                                    <td id="tdAhorroEnergeticoA">*</td>
+                                                    <td id="tdAhorroEnergeticoB">*</td>
+                                                    <td id="tdAhorroEnergeticoC">*</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Economico</strong></td>
+                                                    <td id="tdAhorroEconomicoA">*</td>
+                                                    <td id="tdAhorroEconomicoB">*</td>
+                                                    <td id="tdAhorroEconomicoC">*</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>

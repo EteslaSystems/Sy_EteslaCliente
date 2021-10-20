@@ -175,65 +175,85 @@
                     <tr>
                         <th scope="col">TIPO</th>
                         <th scope="col">MARCA</th>
-                        <th scope="col">CANTIDAD</th>
+                        <th scope="col" style="width:10%;">CANTIDAD</th>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="desglocePanel">
+                    <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
                         <td id="marcaPanel">{{ $paneles["marca"] }}</td>
-                        <td id="cantidadPanel">{{ $paneles["noModulos"] }}</td>
-                        <td id="modeloPanel">{{ $paneles["nombre"] }}</td>
-                        <td id="costoTotalPanel"></td>
+                        <td id="cantidadPanel" style="width:10%;">{{ $paneles["noModulos"] }}</td>
+                        <td id="modeloPanel" style="font-size: 13px;">{{ $paneles["nombre"] }}</td>
+                        @if($PdfConfig["subtotalesDesglozados"] === "true")
+                            <td id="costoTotalPanel">${{ number_format($paneles["costoTotal"],2) }} USD</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
                         <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
-                        <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
-                        <td id="modeloInversor">{{ $inversores["vNombreMaterialFot"] }}</td>
-                        <td id="costoTotalInversor"></td>
+                        <td id="cantidadInversor" style="width:10%;">{{ $inversores["numeroDeInversores"] }}</td>
+                        <td id="modeloInversor" style="font-size: 13px;">{{ $inversores["vNombreMaterialFot"] }}</td>
+                        @if($PdfConfig["subtotalesDesglozados"] === "true")
+                            <td id="costoTotalInversor">${{ number_format($inversores["precioTotal"],2) }} USD</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
-                    <tr id="desgloceEstructura">
+                    <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
                         <td id="marcaEstructura">{{ $estructura["_estructuras"]["vMarca"] }}</td>
-                        <td id="cantidadEstructura">{{ $paneles["noModulos"] }}</td>
+                        <td id="cantidadEstructura" style="width:10%;">{{ $estructura["cantidad"] }}</td>
                         <td>Estructura de aluminio</td>
-                        <td id="costoTotalEstructura"></td>
+                        @if($PdfConfig["subtotalesDesglozados"] === "true")
+                            <td id="costoTotalEstructura">${{ number_format($estructura["costoTotal"],2) }} USD</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
+                        <td style="width:10%;"></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        @if($PdfConfig["subtotalesDesglozados"] === "true")
+                            <td id="costoTotalMO">${{ number_format($totales["manoDeObra"],2) }} USD</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
-                    <tr>
+                    <tr style="background-color:#F2F1F0;">
                         <td>Material electrico</td>
                         <td></td>
+                        <td style="width:10%;"></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        @if($PdfConfig["subtotalesDesglozados"] === "true")
+                            <td id="costoTotalOtros">${{ number_format($totales["otrosTotal"],2) }} USD</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png'))) }}"/></td>
                         <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png'))) }}"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td id="subtotalSinIVAUSD" align="center">${{ number_format($totales["precio"], 2) }} USD</td>
                         <td id="subtotalSinIVAMXN" align="center">${{ number_format($totales["precioMXNSinIVA"], 2) }} MXN</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td style="width:10%;"></td>
                         <td id="totalConIVAUSD" align="center">${{ number_format($totales["precioMasIVA"], 2) }} USD</td>
                         <td id="totalConIVAMXN" align="center">${{ number_format($totales["precioMXNConIVA"], 2) }} MXN</td>
                     </tr>

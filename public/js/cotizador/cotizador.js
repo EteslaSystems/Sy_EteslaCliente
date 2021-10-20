@@ -176,7 +176,7 @@ async function generarEntregable(){ //:void()
     }
     catch(error){
         console.log(error);
-        alert('Error al intentar generar el entregable:\n'+error);
+        alert(error);
     }
 }
 
@@ -192,8 +192,8 @@ function visualizandoPDF(pdfFile){
 
     let link = document.createElement('a');
 
-    let fileName = getPDFFileName(pdfFile.data);
-    // let fileName = 'test.pdf';
+    // let fileName = getPDFFileName(pdfFile.data);
+    let fileName = 'test.pdf';
 
     link.href = window.URL.createObjectURL(blobPDF);
     link.download = fileName;
@@ -231,7 +231,7 @@ function generarPDF(){
     data = data.tipoCotizacion ? data : data[0];
 
     //Se agrega a la [data] el Objeto de -PDFConfig-
-    Object.assign(data, PdfConfig);
+    Object.assign(data,{PdfConfig: PdfConfig});
 
     //Si tiene -COMBINACIONES- se manda la data de la -CombinacionSeleccionada- && -arrayCombinaciones-
     if(data.combinaciones){
