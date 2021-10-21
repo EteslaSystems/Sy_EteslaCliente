@@ -29,6 +29,7 @@
         margin-left: 25px;
         margin-right: 20px;
     }
+
     /* Salto de pagina [hr] */
     hr.salto-pagina{
         page-break-after: always;
@@ -150,7 +151,6 @@
         <table>
             <tr>
                 <td>
-                    <!-- LogoTipo Etesla -->
                     <img id="logoTipoEtesla" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>"> 
                 </td>
                 <td>
@@ -269,15 +269,15 @@
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
                     <?php ($image = $paneles['marca'] . '.png'); ?>
-                    <img style="width: 140px; height: 67px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/' . $image)))); ?>">
+                    <img style="width: 140px; height: 67px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
                     <?php ($image = $inversores['vMarca'] . '.jpg'); ?>
-                    <img style="width: 140px; height: 67px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/' . $image)))); ?>">
+                    <img style="width: 140px; height: 67px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
                     <?php ($image = $estructura["_estructuras"]['vMarca'] . '.png'); ?>
-                    <img style="width: 140px; height: 67px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/' . $image)))); ?>">
+                    <img style="width: 140px; height: 67px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
                 </td>
             </tr>
         </table>
@@ -360,6 +360,7 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 1 -->
+    
     <hr class="salto-pagina">
 
     <!-- Pagina 2 -->
@@ -505,7 +506,6 @@
         </table>
         <div class="footer-page"></div>
     </div>
-    <!-- Fin pagina 2 -->
     <!-- Fin pagina 2 -->
 </body>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/bajaTension.blade.php ENDPATH**/ ?>

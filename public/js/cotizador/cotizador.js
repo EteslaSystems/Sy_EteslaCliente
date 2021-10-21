@@ -163,7 +163,7 @@ async function generarEntregable(){ //:void()
         switch(opcSeleccionada)
         {
             case 'rbtnPDF':
-                let pdfResponse = await generarPDF(); //Retur: PDFFile encode
+                let pdfResponse = await generarPDF(); //Return: PDFFile encode
                 visualizandoPDF(pdfResponse); //:void()
             break;
             case 'rbtnQR':
@@ -213,9 +213,6 @@ function generarPDF(){
     //Validar que tipo de cotizacion se esta tratando de generarPDF
     let tipoCotizacion = sessionStorage.getItem("tarifaMT");
 
-    //Obtener la configuracion del PDF
-    let PdfConfig = catchPDFConfiguration();
-
     if(tipoCotizacion === 'GDMTO' || tipoCotizacion === 'GDMTH'){ ///MediaTension
         data = sessionStorage.getItem("propuestaMT");
     }
@@ -230,14 +227,25 @@ function generarPDF(){
     data = JSON.parse(data);
     data = data.tipoCotizacion ? data : data[0];
 
+    //Validar que tenga -COMBINACIONES- se agrega la data de la -CombinacionSeleccionada-
+    if(data.combinaciones){
+        let _dataFiltrada = getDataCombinacionesFiltrada(data);
+
+
+
+
+
+
+
+        // data.tipoCotizacion = 'CombinacionCotizacion';
+        // Object.assign(data,{ propuesta:  });
+    }
+
+    //Obtener la configuracion del PDF
+    let PdfConfig = catchPDFConfiguration();
+    
     //Se agrega a la [data] el Objeto de -PDFConfig-
     Object.assign(data,{PdfConfig: PdfConfig});
-
-    //Si tiene -COMBINACIONES- se manda la data de la -CombinacionSeleccionada- && -arrayCombinaciones-
-    if(data.combinaciones){
-        data.tipoCotizacion = 'CombinacionCotizacion';
-        Object.assign(data,{ propuesta: JSON.parse(sessionStorage.getItem("combinacionSafe")) });
-    }
 
     return new Promise((resolve, reject) => {
         $.ajax({

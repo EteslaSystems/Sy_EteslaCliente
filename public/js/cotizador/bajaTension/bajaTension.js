@@ -969,9 +969,9 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionA */
     ///ImagenesLogos
-    $('#imgPanelA').prop("src","../img/equipos-logos/panel/" + CombinacionA.paneles.marca + '.png');
-    $('#imgInversorA').prop("src","../img/equipos-logos/inversor/" + CombinacionA.inversores.vMarca + '.jpg');
-    $('#imgEstructuraA').prop("src","../img/equipos-logos/estructura/" + CombinacionA.estructura._estructuras.vMarca + '.png');
+    $('#imgPanelA').prop("src","../img/equipos/logos/panel/" + CombinacionA.paneles.marca + '.png');
+    $('#imgInversorA').prop("src","../img/equipos/logos/inversor/" + CombinacionA.inversores.vMarca + '.jpg');
+    $('#imgEstructuraA').prop("src","../img/equipos/logos/estructura/" + CombinacionA.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattA').text('$ '+CombinacionA.totales.precio_watt+' USD');
     ///Potencia instalada
@@ -998,9 +998,9 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionB */
     ///ImagenesLogos
-    $('#imgPanelB').prop("src","../img/equipos-logos/panel/" + CombinacionB.paneles.marca + '.png');
-    $('#imgInversorB').prop("src","../img/equipos-logos/inversor/" + CombinacionB.inversores.vMarca + '.jpg');
-    $('#imgEstructuraB').prop("src","../img/equipos-logos/estructura/" + CombinacionB.estructura._estructuras.vMarca + '.png');
+    $('#imgPanelB').prop("src","../img/equipos/logos/panel/" + CombinacionB.paneles.marca + '.png');
+    $('#imgInversorB').prop("src","../img/equipos/logos/inversor/" + CombinacionB.inversores.vMarca + '.jpg');
+    $('#imgEstructuraB').prop("src","../img/equipos/logos/estructura/" + CombinacionB.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattB').text('$ ' + CombinacionB.totales.precio_watt + ' USD');
     $('#tdPotenciaInstaladaB').text(CombinacionB.paneles.potenciaReal + ' Kw');
@@ -1027,9 +1027,9 @@ function vaciarCombinacionesEnModal(combinaciones){
 
     /* CombinacionC */
     ///ImagenesLogos
-    $('#imgPanelC').prop("src","../img/equipos-logos/panel/" + CombinacionC.paneles.marca + '.png');
-    $('#imgInversorC').prop("src","../img/equipos-logos/inversor/" + CombinacionC.inversores.vMarca + '.jpg');
-    $('#imgEstructuraC').prop("src","../img/equipos-logos/estructura/" + CombinacionC.estructura._estructuras.vMarca + '.png');
+    $('#imgPanelC').prop("src","../img/equipos/logos/panel/" + CombinacionC.paneles.marca + '.png');
+    $('#imgInversorC').prop("src","../img/equipos/logos/inversor/" + CombinacionC.inversores.vMarca + '.jpg');
+    $('#imgEstructuraC').prop("src","../img/equipos/logos/estructura/" + CombinacionC.estructura._estructuras.vMarca + '.png');
     ///CostoWatt
     $('#tdCostoWattC').text('$ ' + CombinacionC.totales.precio_watt+' USD');
     ///Potencia instalada
@@ -1097,6 +1097,55 @@ function salvarCombinacion(){
 
         alert('No se a seleccionado ninguna de las -combinaciones-');
     }
+}
+
+function getDataCombinacionesFiltrada(_Combinaciones){
+    /* Optimiza los nodos de la data de combinaciones. Eliminando todo lo innecesario y asi aligerando
+       en tamaño y volumen la data.
+    */
+    ///Cachar el nombre de la [combinacionSalvada]
+    let nameCombinSalvada = $('#ddlCombinaciones').val();
+    let dataFiltrada = {};
+
+    //Propuesta seleccionada
+    dataFiltrada = { propuesta: _Combinaciones[0][nameCombinSalvada][0] };
+
+    //Iterar toda la data para extraer las combinaciones *DISTINTAS* a la que fue seleccionada
+    $.each(_Combinaciones, (i, Combinacion) => {
+        //Validar que son array (Solo las combinaciones *son Array*)
+        if(Array.isArray(Combinacion) === true){
+            //Tratar la data[combinacion] y retornar la data solo con las propiedades necesarias/filtrada
+            let dataTratada = {
+                paneles: { 
+                    potenciaReal,
+                    nombre,
+                    noModulos,
+                    potencia    
+                },
+                inversores: { 
+                    vNombreMaterialFot,
+                    numeroDeInversores,
+                    fPotencia
+                },
+                estructura: { 
+                    cantidad,
+                    marca
+                },
+                power: { 
+                    porcentajePotencia,
+                    Ahorro: { ahorroBimestral }
+                },
+                roi: { 
+                    ahorro: { ahorroBimestralEnPesosMXN }
+                },
+                totales: { 
+                    precio_watt,
+                    precio,
+                    precioMasIVA
+                }
+            };
+        }
+    });
 }
 /*#endregion*/
 

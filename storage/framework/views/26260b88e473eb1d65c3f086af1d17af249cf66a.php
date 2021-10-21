@@ -29,7 +29,11 @@
         margin-left: 25px;
         margin-right: 20px;
     }
-
+    .div-contenedor{
+        margin-left:40px; 
+        margin-right:40px; 
+        margin-top:7px;
+    }
     /* Salto de pagina [hr] */
     hr.salto-pagina{
         page-break-after: always;
@@ -116,20 +120,28 @@
     .table-comparative{
         width: 100%;
         border-collapse: collapse;
-        border-radius: 1em;
+        border-radius: 10px;
         overflow: hidden;
         text-align: center;
-        border: 1px;
         border-color: #DE1616;
     }
 
     .table-comparative th, .table-comparative td{
-        border: 1px solid black; 
+        border: 1px solid black;
+        width: 45%;
     }
     .imgLogos{
         height: 40px;
         width: 55px;
         margin-top: 6px;
+    }
+    .recuadroInfo{
+        /* Recuadro */
+        width: 100%;
+        border-style: ridge;
+        text-align: justify;
+        /* Texto */
+        font-size: 12px;
     }
 
     /* Textos */
@@ -186,9 +198,215 @@
     }
 </style>
 <body>
-    <!-- Paga # - Comparativa[combinaciones] -->
+    <!-- Pagina 1 -->
+    <div class="container-fluid" style="border-top: 10px solid #5576F2;">
+        <table>
+            <tr>
+                <td>
+                    <img id="logoTipoEtesla" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>"> 
+                </td>
+                <td>
+                    <h1 style="font-size:25px; text-align:right; margin-right: 27px;">SISTEMA FOTOVOLTAICO INTERCONECTADO A LA RED DE CFE</h1>
+                </td>
+            </tr>
+        </table>
+        <img id="recuadroPaneles" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/Paneles-solares-tesla.jpg')))); ?>"/>
+        <div id="recuadroFlotante">
+            <div>
+                <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: <?php echo e(date('Y-m-d')); ?></strong></p>
+                <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>Eduardo Herrera Aldaraca</p>
+                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>Calle siempre viva, Springfield</p>
+                <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> Jose Antonio Hernandez Gutierrez</p>
+                <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>Veracruz, Veracruz</p>
+                <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>30 dias</u></strong></p>
+            </div>
+        </div>
+        <div class="container-table">
+            <table class="table-costos-proyecto">
+                <thead>
+                    <tr>
+                        <th scope="col">TIPO</th>
+                        <th scope="col">MARCA</th>
+                        <th scope="col" style="width:10%;">CANTIDAD</th>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="desglocePanel" style="background-color:#F2F1F0;">
+                        <td>Panel</td>
+                        <td id="marcaPanel">Canadian</td>
+                        <td id="cantidadPanel" style="width:10%;">5</td>
+                        <td id="modeloPanel" style="font-size: 13px;">Canadian 420 w</td>
+                        <td id="costoTotalPanel">$3,000 USD</td>
+                    </tr>
+                    <tr id="desgloceInversor">
+                        <td>Inversor</td>
+                        <td id="marcaInversor">ABB Fimer</td>
+                        <td id="cantidadInversor" style="width:10%;">4</td>
+                        <td id="modeloInversor" style="font-size: 13px;">ABB Fimer 220 w</td>
+                        <td id="costoTotalInversor">$1,000 USD</td>
+                    </tr>
+                    <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
+                        <td>Estructura</td>
+                        <td id="marcaEstructura">Everest</td>
+                        <td id="cantidadEstructura" style="width:10%;">3</td>
+                        <td>Estructura de aluminio</td>
+                        <td id="costoTotalEstructura">$1,000 USD</td>
+                    </tr>
+                    <tr>
+                        <td>Mano de obra</td>
+                        <td></td>
+                        <td style="width:10%;"></td>
+                        <td></td>
+                        <td id="costoTotalMO">$10 USD</td>
+                    </tr>
+                    <tr style="background-color:#F2F1F0;">
+                        <td>Material electrico</td>
+                        <td></td>
+                        <td style="width:10%;"></td>
+                        <td></td>
+                        <td id="costoTotalOtros">$2,000 USD</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="width:10%;"></td>
+                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png')))); ?>"/></td>
+                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png')))); ?>"/></td>
+                    </tr>
+                    <tr style="background-color: #E8E8E8;">
+                        <td><strong>Subtotal sin IVA</strong></td>
+                        <td></td>
+                        <td style="width:10%;"></td>
+                        <td id="subtotalSinIVAUSD" align="center">$10,000 USD</td>
+                        <td id="subtotalSinIVAMXN" align="center">$20,000 MXN</td>
+                    </tr>
+                    <tr style="background-color: #E8E8E8;">
+                        <td><strong>Total con IVA</strong></td>
+                        <td></td>
+                        <td style="width:10%;"></td>
+                        <td id="totalConIVAUSD" align="center">$15,000 USD</td>
+                        <td id="totalConIVAMXN" align="center">$30,000 MXN</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Leyenda - Tipo de cambio -->
+        <div id="leyendaTipoDeCambio" style="margin-left:20px; margin-right:20px;">
+            <p style="font-size:11px; color: #969696;" align="center"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">($20.00 mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+        </div>
+        <!-- Logotipos && garantias de las marcas de los equipos -->
+        <table class="table-contenedor">
+            <tr>
+                <td id="imgLogoPanel" align="center" style="border: none;">
+                    <img style="width:140px; height:97px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Canadian.png')))); ?>">
+                </td>
+                <td id="imgLogoInversor" align="center" style="border: none;">
+                    <img style="width:140px; height:97px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/APSystem.jpg')))); ?>">
+                </td>
+                <td id="imgLogoInversor" align="center" style="border: none;">
+                    <img style="width:140px; height:97px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
+                </td>
+            </tr>
+        </table>
+        <!-- Fin logos/marcas equip. -->
+
+        <hr class="linea-division" style="background-color:#5576F2;">
+
+        <table class="table-contenedor">
+            <tr>
+                <td style="padding-right: 60px;">
+                    <div>
+                        <div style="margin-left:20px;">
+                            <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png')))); ?>">
+                        </div>
+                        <div style="margin-top:-50px; margin-left:98px;">
+                            <p class="text-inferior-pag1">INCLUYE:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-left:20px;">
+                            <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png')))); ?>">
+                        </div>
+                        <div style="margin-top: -50px; margin-left:98px;">
+                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">2.6 KwP</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-left:20px;">
+                            <img height="45px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/saving.png')))); ?>"/>
+                        </div>
+                        <div style="margin-top: -50px; margin-left:98px;">
+                            <p class="text-inferior-pag1">PORCENTAJE DE AHORRO<br>ENERGETICO:</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-11px;">50%</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <!-- CARDS -->
+                    <div style="margin-top:-100px;">
+                        <!-- CARD - "ANTES" -->
+                        <div>
+                            <div class="card" style="margin-left:-250px; margin-top:120px;">
+                                <!-- CONSUMO ACTUAL -->
+                                <div class="card-header">
+                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="rectangulo-into-card" style="border: #C31801;">
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (DAC)</strong></p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">1,500 kW</p>
+                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">$10,000 MXN</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD - "NUEVO" -->
+                        <div>
+                            <div class="card" style="margin-right:-70px; margin-top:-163px;">
+                                <!-- NUEVO CONSUMO -->
+                                <div class="card-header">
+                                    <h2 style="margin-top: -4px;">AHORA</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (1c)</strong></p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">5,000 kW</p>
+                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">$30,000 MXN</p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="footer-page"></div>
+    </div>
+    <!-- Fin pagina 1 -->
+
+    <hr class="salto-pagina">
+
+    <!-- Pagina 2 - Comparativa[combinaciones] -->
     <div class="container-fluid">
-        <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
+        <table>
+            <tr>
+                <td>
+                    <img id="logoTipoEtesla" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>"> 
+                </td>
+                <td>
+                    <h1 style="font-size:25px;">
+                        COMPARATIVA DE PROPUESTAS
+                    </h1>
+                </td>
+            </tr>
+        </table>
+        <div class="div-contenedor">
             <table class="table-comparative">
                 <thead style="background-color:#D68910; color:#FFFFFF;">
                     <tr>
@@ -200,38 +418,38 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="border-left:0px; border-top:0px;"></td>
+                        <td name="tdInvisible" style="border-left:0px; border-top:0px;"></td>
                         <td>
-                            <div>
-                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
+                            <div style="margin-left:-80px;">
+                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                            </div>
+                            <div style="margin-left:90px; margin-top:-55px;">
+                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
                             </div>
                             <div>
-                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
-                            </div>
-                        </td>
-                        <td">
-                            <div>
-                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
+                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
                             </div>
                         </td>
                         <td>
-                            <div>
-                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/Axitec.png')))); ?>">
+                            <div style="margin-left:-80px;">
+                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                            </div>
+                            <div style="margin-left:90px; margin-top:-55px;">
+                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
                             </div>
                             <div>
-                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/ABB Fimer.jpg')))); ?>">
+                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="margin-left:-80px;">
+                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                            </div>
+                            <div style="margin-left:90px; margin-top:-55px;">
+                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
                             </div>
                             <div>
-                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/Everest.png')))); ?>">
+                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
                             </div>
                         </td>
                     </tr>
@@ -343,6 +561,44 @@
                 </tbody>
             </table>
         </div>
+        <!-- Info. sobre los equipos seleccionados -->
+        <div class="div-contenedor">
+            <p style="text-align:center;">
+                <span style="background-color:#718AE2; color:white; font-weight: bolder;">
+                    Equipos seleccionados
+                </span>
+            </p>
+            <table>
+                <tr name="div-panel">
+                    <td name="img-equipo" width="30%">
+                        <div class="div-contenedor" style="margin-top:-40px; margin-left:-23px;">
+                            <img height="195px" width="187px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/panel/Axitec.png')))); ?>">
+                        </div>
+                    </td>
+                    <td name="info-equipo" width="500px">
+                        <div class="div-contenedor recuadroInfo" style="margin-top:-35px; margin-left:-300px; margin-right:270px;">
+                            <p style="margin-left:10px; margin-right:10px;">AXITEC GmbH fué creada en 2001 y cuenta con su sede en Stuttgart (Alemania). Desde hace años pertenece a las principales empresas productoras de módulos fotovoltaicos a nivel internacional, debido a su calidad. AXITEC está especializada en la producción de módulos fotovoltaicos, y abarca toda la cadena de procesamiento del módulo solar. No sólo se encarga de su diseño y fabricación sino que también es responsable de su comercialización y de su servicio técnico.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr name="div-inversor">
+                    <td name="info-equipo" width="500px">
+                        <div class="div-contenedor recuadroInfo" style="margin-left:-12px;">
+                            <p style="margin-left:10px; margin-right:10px;">Al abandonar paulatinamente los combustibles fósiles, consumiremos más electricidad en los sectores de calefacción (sistemas modernos de calefacción con bomba de calor) y movilidad (automóviles eléctricos). Por lo tanto, es sensato empezar a pensar hoy acerca de cómo se puede satisfacer esta demanda creciente de manera sostenible y rentable.
+
+                            Con una instalación fotovoltaica, no solo podrá alimentar sus electrodomésticos con energía solar, sino también podrá calentar agua para ducharse o cargar su automóvil eléctrico.</p>
+                        </div>
+                    </td>
+                    <td name="img-equipo" width="30%">
+                        <div class="div-contenedor">
+                            <img height="195px" width="187px" style="margin-top:-20px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/inversor/Fronius Solar.jpg')))); ?>">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer-page"></div>
     </div>
+    <!-- Fin pagina 2 -->
 </body>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/machotes/propuestaCombinaciones.blade.php ENDPATH**/ ?>
