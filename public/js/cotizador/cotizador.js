@@ -192,8 +192,7 @@ function visualizandoPDF(pdfFile){
 
     let link = document.createElement('a');
 
-    // let fileName = getPDFFileName(pdfFile.data);
-    let fileName = 'test.pdf';
+    let fileName = getPDFFileName(pdfFile.data);
 
     link.href = window.URL.createObjectURL(blobPDF);
     link.download = fileName;
@@ -231,14 +230,11 @@ function generarPDF(){
     if(data.combinaciones){
         let _dataFiltrada = getDataCombinacionesFiltrada(data);
 
+        //Agregar el -tipoCotizacion- a *_dataFiltrada*
+        Object.assign(_dataFiltrada, { tipoCotizacion: 'CombinacionCotizacion' });
 
-
-
-
-
-
-        // data.tipoCotizacion = 'CombinacionCotizacion';
-        // Object.assign(data,{ propuesta:  });
+        //Se *settea* la nueva data [_dataFiltrada] con la data original [data]
+        data = _dataFiltrada;
     }
 
     //Obtener la configuracion del PDF
@@ -270,6 +266,9 @@ function generarPDF(){
 }
 
 function getPDFFileName(dataPropuesta){
+    //Validar si la propuesta es -NORMAL- o -COMBINACIONES-
+    dataPropuesta = dataPropuesta.tipoCotizacion != "CombinacionCotizacion" ? dataPropuesta : dataPropuesta.propuesta;
+
     let nombreCliente = dataPropuesta.cliente.vNombrePersona + dataPropuesta.cliente.vPrimerApellido + dataPropuesta.cliente.vSegundoApellido;
     let tipoCotizacion = dataPropuesta.tipoCotizacion;
     let potencia = dataPropuesta.paneles.potenciaReal;

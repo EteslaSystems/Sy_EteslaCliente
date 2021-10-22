@@ -163,7 +163,7 @@
             <div>
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: <?php echo e(date('Y-m-d')); ?></strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong><?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?></p>
-                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong><?php echo e($cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"]); ?></p>
+                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong><?php echo e($cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"]); ?></p>
                 <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> <?php echo e($vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"]); ?></p>
                 <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong><?php echo e($vendedor["vOficina"]); ?></p>
                 <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u><?php echo e($expiracion["cantidad"] . " " . $expiracion["unidadMedida"]); ?></u></strong></p>
@@ -189,7 +189,7 @@
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalPanel">$<?php echo e(number_format($paneles["costoTotal"],2)); ?> USD</td>
                         <?php else: ?>
-                            <td></td>
+                            <td id="costoTotalPanel"></td>
                         <?php endif; ?>
                     </tr>
                     <tr id="desgloceInversor">
@@ -222,7 +222,7 @@
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalMO">$<?php echo e(number_format($totales["manoDeObra"],2)); ?> USD</td>
                         <?php else: ?>
-                            <td></td>
+                            <td id="costoTotalMO"></td>
                         <?php endif; ?>
                     </tr>
                     <tr style="background-color:#F2F1F0;">
@@ -302,7 +302,7 @@
                             <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png')))); ?>">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
+                            <p class="text-inferior-pag1">POTENCIA INSTALAR:</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px;"><?php echo e($paneles["potenciaReal"]); ?> KwP</p>
                         </div>
                     </div>

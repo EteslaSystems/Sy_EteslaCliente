@@ -163,7 +163,7 @@
             <div>
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}</p>
-                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}</p>
+                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}</p>
                 <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> {{ $vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"] }}</p>
                 <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $vendedor["vOficina"] }}</p>
                 <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>{{ $expiracion["cantidad"] . " " . $expiracion["unidadMedida"] }}</u></strong></p>
@@ -189,7 +189,7 @@
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
                             <td id="costoTotalPanel">${{ number_format($paneles["costoTotal"],2) }} USD</td>
                         @else
-                            <td></td>
+                            <td id="costoTotalPanel"></td>
                         @endif
                     </tr>
                     <tr id="desgloceInversor">
@@ -222,7 +222,7 @@
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
                             <td id="costoTotalMO">${{ number_format($totales["manoDeObra"],2) }} USD</td>
                         @else
-                            <td></td>
+                            <td id="costoTotalMO"></td>
                         @endif
                     </tr>
                     <tr style="background-color:#F2F1F0;">
@@ -302,7 +302,7 @@
                             <img height="48px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png'))) }}">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
+                            <p class="text-inferior-pag1">POTENCIA INSTALAR:</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">{{ $paneles["potenciaReal"] }} KwP</p>
                         </div>
                     </div>

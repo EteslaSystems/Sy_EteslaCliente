@@ -9,53 +9,26 @@ class PDFController extends Controller
     public function generatePDF($propuesta)
     {  
         try{
-            /*#region Variables*/
             $pdfTemplate = '';
             $tipoCotizacion = $propuesta["tipoCotizacion"];
-            ///Arrays - Only **Combinaciones**
-            /*#region Arrays*/
-            $_consumos = [];
-            $_combinacionEconomica = [];
-            $_combinacionMediana = [];
-            $_combinacionOptima = [];
-            // $_combinaciones = [];
-            $_propuestaSeleccionada = [];
-            /*#endregion*/
-            /*#endregion*/
-            
-            ////
-            if($tipoCotizacion === "bajaTension"){ //bajaTension || mediaTension
+
+            if($tipoCotizacion === "bajaTension"){
                 $pdfTemplate = 'PDFTemplates.bajaTension';
             }
-            
+
             if($tipoCotizacion === "CombinacionCotizacion"){
-                $pdfTemplate = 'PDFTemplates.machotes.propuestaCombinaciones';
-                $_consumos = $propuesta["_arrayConsumos"]["consumo"];
-                $_combinacionEconomica = $propuesta["combinacionEconomica"][0];
-                $_combinacionMediana = $propuesta["combinacionMediana"][0];
-                $_combinacionOptima = $propuesta["combinacionOptima"][0];
-                $_propuestaSeleccionada = $propuesta["propuesta"];
+                // $pdfTemplate = 'PDFTemplates.propuestaCombinaciones';
+                $pdfTemplate = 'PDFTemplates.machotes.pro213';
+                $propuesta = $propuesta["propuesta"];
             }
 
-            if($tipoCotizacion === "individual"){ //individual
+            if($tipoCotizacion === "individual"){
                 $pdfTemplate = 'PDFTemplates.individual';
             }
 
-            /*
-                NOTA: Dependiendo de que la propuesta traiga o no -Combinaciones-
-                sera como se mande a llamar la funcion de -loadview()-
-            */
-            //Validar que la propuesta TENGA o NO, -Combinaciones-
-            if($tipoCotizacion === "CombinacionCotizacion"){
-                $pdf = PDF::loadview($pdfTemplate, $_propuestaSeleccionada);
-            }
-            else{
-                $pdf = PDF::loadview($pdfTemplate, $propuesta);
-            }
-
-
-            $pdf->setOptions(['isRemoteEnabled' => true]);
-            $pdf->setPaper('A4');
+            $pdf = PDF::loadview($pdfTemplate, $propuesta)
+            ->setOptions(['isRemoteEnabled' => true])
+            ->setPaper('A4');
 
             //Se comprueba *LA EXISTENCIA* del directorio en donde se almacenaran los PDF
             if(!file_exists(storage_path('/pdfsGenerados'))){
@@ -66,8 +39,7 @@ class PDFController extends Controller
             $path = storage_path('/pdfsGenerados'); //Ruta de almacenamiento
 
             //Nombre del documento PDF
-            // $fileName = $this->getFileName($propuesta);
-            $fileName = 'test.pdf';
+            $fileName = $this->getFileName($propuesta);
 
             $pdf->save($path . '/' . $fileName); ///Se guarda el pdf elaborado en el server (root)
 

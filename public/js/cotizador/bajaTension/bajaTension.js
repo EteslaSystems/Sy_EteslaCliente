@@ -963,9 +963,6 @@ function vaciarCombinacionesEnModal(combinaciones){
     let CombinacionA = combinaciones[0].combinacionEconomica[0]; //CombinacionEconomica
     let CombinacionB = combinaciones[0].combinacionMediana[0]; //CombinacionMediana
     let CombinacionC = combinaciones[0].combinacionOptima[0]; //CombinacionOptima
-    let consumAntEnergetico = 0, consumNueEnergetico = 0; ///[bimestrales]
-    let consumAntEconomico = 0, consumNuevEconomico = 0; ///[bimestrales]
-    let ahorroEnergetico = 0, ahorroEconomico = 0; ///[bimestrales]
 
     /* CombinacionA */
     ///ImagenesLogos
@@ -1105,47 +1102,62 @@ function getDataCombinacionesFiltrada(_Combinaciones){
     */
     ///Cachar el nombre de la [combinacionSalvada]
     let nameCombinSalvada = $('#ddlCombinaciones').val();
-    let dataFiltrada = {};
 
     //Propuesta seleccionada
-    dataFiltrada = { propuesta: _Combinaciones[0][nameCombinSalvada][0] };
+    let dataFiltrada = { propuesta: _Combinaciones[nameCombinSalvada][0], propuestaSeleccionada: nameCombinSalvada };
+
+    //Se *Settea* la data de -Cliente- && -Vendedor- al objeto Propuesta
+    dataFiltrada.propuesta.cliente = _Combinaciones.cliente;
+    dataFiltrada.propuesta.vendedor = _Combinaciones.vendedor;
 
     //Iterar toda la data para extraer las combinaciones *DISTINTAS* a la que fue seleccionada
-    $.each(_Combinaciones, (i, Combinacion) => {
+    $.each(_Combinaciones, (iteracion, Combinacion) => {
         //Validar que son array (Solo las combinaciones *son Array*)
         if(Array.isArray(Combinacion) === true){
+            //Filtrar las demas combinaciones, *menos la "salvada" / seleccionada*
             //Tratar la data[combinacion] y retornar la data solo con las propiedades necesarias/filtrada
             let dataTratada = {
                 paneles: { 
-                    potenciaReal,
-                    nombre,
-                    noModulos,
-                    potencia    
+                    potenciaReal: Combinacion[0].paneles.potenciaReal,
+                    nombre: Combinacion[0].paneles.nombre,
+                    noModulos: Combinacion[0].paneles.noModulos,
+                    potencia: Combinacion[0].paneles.potencia,
+                    marca: Combinacion[0].paneles.marca
                 },
                 inversores: { 
-                    vNombreMaterialFot,
-                    numeroDeInversores,
-                    fPotencia
+                    vNombreMaterialFot: Combinacion[0].inversores.vNombreMaterialFot,
+                    numeroDeInversores: Combinacion[0].inversores.numeroDeInversores,
+                    fPotencia: Combinacion[0].inversores.fPotencia,
+                    marca: Combinacion[0].inversores.vMarca
                 },
                 estructura: { 
-                    cantidad,
-                    marca
+                    cantidad: Combinacion[0].estructura.cantidad,
+                    marca: Combinacion[0].estructura._estructuras.vMarca,
+                    costoTotal: Combinacion[0].estructura.costoTotal
                 },
                 power: { 
-                    porcentajePotencia,
-                    Ahorro: { ahorroBimestral }
+                    porcentajePotencia: Combinacion[0].power.porcentajePotencia,
+                    Ahorro: { ahorroBimestral: Combinacion[0].power.Ahorro.ahorroBimestral }
                 },
                 roi: { 
-                    ahorro: { ahorroBimestralEnPesosMXN }
+                    ahorro: { ahorroBimestralEnPesosMXN: Combinacion[0].roi.ahorro.ahorroBimestralEnPesosMXN }
                 },
                 totales: { 
-                    precio_watt,
-                    precio,
-                    precioMasIVA
+                    precio_watt: Combinacion[0].totales.precio_watt,
+                    precio: Combinacion[0].totales.precio,
+                    precioMasIVA: Combinacion[0].totales.precioMasIVA
                 }
             };
+
+            //Se mezcla *dataTratada* -To- *dataFiltrada*
+            Object.defineProperty(dataFiltrada, iteracion, {
+                enumerable: true,
+                value: dataTratada
+            }); 
         }
     });
+
+    return dataFiltrada;
 }
 /*#endregion*/
 
