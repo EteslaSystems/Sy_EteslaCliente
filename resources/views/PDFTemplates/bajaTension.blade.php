@@ -288,31 +288,36 @@
         <table class="table-contenedor">
             <tr>
                 <td style="padding-right: 60px;">
-                    <div>
+                    <div name="ANCE">
                         <div style="margin-left:20px;">
-                            <img height="48px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png'))) }}">
+                            <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
                         </div>
-                        <div style="margin-top:-50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">INCLUYE:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                        <div style="margin-top:-50px; margin-left:80px;">
+                            <p class="text-inferior-pag1">
+                                Certificado de proveedor confiable
+                            </p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
+                                Clave: 20FIR00010A00R00
+                            </p>
                         </div>
                     </div>
                     <div>
                         <div style="margin-left:20px;">
-                            <img height="48px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png'))) }}">
+                            <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">POTENCIA INSTALAR:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">{{ $paneles["potenciaReal"] }} KwP</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-left:20px;">
-                            <img height="45px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/saving.png'))) }}"/>
-                        </div>
-                        <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">PORCENTAJE DE AHORRO<br>ENERGETICO:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-11px;">{{ $power["porcentajePotencia"] }}%</p>
+                            <p class="text-inferior-pag1">World Wide Fund For Nature</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
+                                Ren Mx | WWF México
+                                www.ren.mx
+                                <br>
+                                Av. México 51
+                                Col. Hipódromo 06100
+                                <br> 
+                                Ciudad de México
+                                <br>
+                                +51 (55) 5286 5631
+                            </p>
                         </div>
                     </div>
                 </td>
@@ -475,18 +480,18 @@
                     @php($aniosProyeccion[$i] = (int)$anioActual + $i)
                 @endfor
 
-                <table class="table-contenedor" style="margin-top: -20px;">
+                <!-- table class="table-contenedor" style="margin-top: -20px;">
                     <tr>
                         <td id="graficaPuntos" align="center" style="border: none;">
                             <h3>Con paneles / Sin paneles</h3>
-                            <!-- Aqui va la grafica 1 - [ Puntos ] -->
+                            <! Aqui va la grafica 1 - [ Puntos ] !>
                         </td>
                         <td id="graficaBarras" align="center" style="border: none;">
                             <h3>Consumo actual <strong>Vs.</strong> Nuevo consumo c/paneles solares</h3>
-                            <!-- Aqui va la grafica 2 - [ Barras ] -->
+                            <! Aqui va la grafica 2 - [ Barras ] !>
                         </td>
                     </tr>
-                </table>
+                </table-->
             </div>
         </div>
         <hr class="linea-division" style="background-color:#5576F2; margin-left:-15px; margin-right:-15px;">

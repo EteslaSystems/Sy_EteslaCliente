@@ -49,7 +49,7 @@ function cuadroDialogo(_array){
 			$('#btnModalConfirm').css("display","");
 		break;
 		case 1:
-			//Confirm (Message with twice button)
+			//Confirm (Message with double button)
 			src = '../public/img/modal-notification/error.png';
 			modal.css("display","");
 			$('#mdlImage').attr("src",src);

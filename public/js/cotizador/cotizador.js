@@ -277,32 +277,20 @@ function getPDFFileName(dataPropuesta){
 }
 
 function guardarPropuesta(){
-    let propuesta = {};
-    let dataToSent = { idCliente: null, propuesta: null };
-    dataToSent.idCliente = $('#inpClienteId').val();
+    let dataToSent = { propuesta: null };
     let tarifaMT = sessionStorage.getItem("tarifaMT");
 
     if(tarifaMT === "null" || typeof tarifaMT === 'undefined'){ //BajaTension
         //Se obtiene la propuesta -BajaTension-
-        propuesta = sessionStorage.getItem("answPropuesta");
+        let propuesta = sessionStorage.getItem("answPropuesta");
         
         //Se valida la propuesta BajaTension... Si es ConCombinaciones o SinCombinaciones
-        propuesta = propuesta != null ? propuesta : sessionStorage.getItem("arrayCombinaciones");
+        //Si tiene combinaciones, unicamente se guarda la -combinacionSalvada- ya que es la que se va a guardar en la BD
+        propuesta = propuesta != null ? propuesta : sessionStorage.getItem("combinacionSafe");
         
         //
         propuesta = JSON.parse(propuesta);
         propuesta = propuesta.tipoCotizacion ? propuesta : propuesta[0];
-
-        //Validar si la propuesta tiene -COMBINACIONES-
-        if(propuesta.combinaciones){
-            let tipoCotizacion = propuesta.tipoCotizacion;
-
-            //Obtener la propuesta con la -combinacion_seleccionada-
-            propuesta = JSON.parse(sessionStorage.getItem('combinacionSafe'));
-
-            //
-            Object.assign(propuesta,{ tipCotizacion: tipoCotizacion });
-        }
 
         dataToSent.propuesta = propuesta;
     }

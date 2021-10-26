@@ -516,7 +516,7 @@
                                         <!-- Ahorro -->
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-5">
+                                                <!--div class="col-5">
                                                     <div class="form-row">
                                                         <select id="ddlGraficoView" class="custom-select custom-select-sm" onchange="pintarGrafico()">
                                                             <option value="-1">Escoge una opcion</option>
@@ -526,7 +526,7 @@
                                                         <canvas id="crtGraficos" width="150px" height="100px"></canvas>
                                                         <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados bimestralmente</p>
                                                     </div>
-                                                </div>
+                                                </div-->
                                                 <div class="col">
                                                     <div class="row">
                                                         <div class="col">

@@ -1063,9 +1063,18 @@ function salvarCombinacion(){
         //Se obtiene el sessionStorage de -COMBINACIONES-
         let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
 
-        //Se guarda en -sessionStorage- la combinacion a -salvar/guardar-
+        /*#region CombinacionSafe - Guardar Propuesta Salvada*/
+        //Formatea el Object [CombinacionSalvada]
+        let CombinacionSalvada = { propuesta: _combinaciones[0][ddlCombinacionesValue][0] };
+
+        //Settear las propiedades[Object] de ->cliente && ->vendedor
+        CombinacionSalvada.propuesta.cliente = _combinaciones[0].cliente;
+        CombinacionSalvada.propuesta.vendedor = _combinaciones[0].vendedor;
+
+        //Guardar en -sessionStorage- la combinacion a -salvar/guardar-
         sessionStorage.removeItem('combinacionSafe');
-        sessionStorage.setItem('combinacionSafe', JSON.stringify(_combinaciones[0][ddlCombinacionesValue][0]));
+        sessionStorage.setItem('combinacionSafe', JSON.stringify(CombinacionSalvada.propuesta));
+        /*#endregion */
 
         //Validar si el chbSalvarCombinacion, esta 'checked' o 'no-checked'
         if($('#salvarCombinacion').is(':checked')){

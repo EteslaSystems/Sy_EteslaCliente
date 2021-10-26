@@ -270,7 +270,7 @@
                         <td>Mano de obra</td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td></td>
+                        <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalMO">$<?php echo e(number_format($propuesta["totales"]["manoDeObra"],2)); ?> USD</td>
                         <?php else: ?>
@@ -278,10 +278,10 @@
                         <?php endif; ?>
                     </tr>
                     <tr style="background-color:#F2F1F0;">
-                        <td>Material electrico</td>
+                        <td>Otros</td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td></td>
+                        <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalOtros">$<?php echo e(number_format($propuesta["totales"]["otrosTotal"],2)); ?> USD</td>
                         <?php else: ?>
@@ -299,15 +299,15 @@
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td id="subtotalSinIVAUSD" align="center">$<?php echo e($propuesta["totales"]["precio"]); ?> USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">$<?php echo e($propuesta["totales"]["precioMasIVA"]); ?> MXN</td>
+                        <td id="subtotalSinIVAUSD" align="center">$<?php echo e(number_format($propuesta["totales"]["precio"],2)); ?> USD</td>
+                        <td id="subtotalSinIVAMXN" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMasIVA"],2)); ?> MXN</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td id="totalConIVAUSD" align="center">$<?php echo e($propuesta["totales"]["precioMXNSinIVA"]); ?> USD</td>
-                        <td id="totalConIVAMXN" align="center">$<?php echo e($propuesta["totales"]["precioMXNConIVA"]); ?> MXN</td>
+                        <td id="totalConIVAUSD" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMXNSinIVA"],2)); ?> USD</td>
+                        <td id="totalConIVAMXN" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMXNConIVA"],2)); ?> MXN</td>
                     </tr>
                 </tbody>
             </table>
@@ -340,31 +340,36 @@
         <table class="table-contenedor">
             <tr>
                 <td style="padding-right: 60px;">
-                    <div>
+                    <div name="ANCE">
                         <div style="margin-left:20px;">
-                            <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png')))); ?>">
+                            <img height="68px" width="60px" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg')))); ?>">
                         </div>
-                        <div style="margin-top:-50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">INCLUYE:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                        <div style="margin-top:-50px; margin-left:80px;">
+                            <p class="text-inferior-pag1">
+                                Certificado de proveedor confiable
+                            </p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
+                                Clave: 20FIR00010A00R00
+                            </p>
                         </div>
                     </div>
                     <div>
                         <div style="margin-left:20px;">
-                            <img height="48px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png')))); ?>">
+                            <img height="68px" width="60px" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg')))); ?>">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;"><?php echo e($propuesta["paneles"]["potenciaReal"]); ?> KwP</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-left:20px;">
-                            <img height="45px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/saving.png')))); ?>"/>
-                        </div>
-                        <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">PORCENTAJE DE AHORRO<br>ENERGETICO:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-11px;"><?php echo e($propuesta["power"]["porcentajePotencia"]); ?>%</p>
+                            <p class="text-inferior-pag1">World Wide Fund For Nature</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
+                                Ren Mx | WWF México
+                                www.ren.mx
+                                <br>
+                                Av. México 51
+                                Col. Hipódromo 06100
+                                <br> 
+                                Ciudad de México
+                                <br>
+                                +51 (55) 5286 5631
+                            </p>
                         </div>
                     </div>
                 </td>
@@ -752,18 +757,18 @@
                     <?php ($aniosProyeccion[$i] = (int)$anioActual + $i); ?>
                 <?php endfor; ?>
 
-                <table class="table-contenedor" style="margin-top: -20px;">
+                <!--table class="table-contenedor" style="margin-top: -20px;">
                     <tr>
                         <td id="graficaPuntos" align="center" style="border: none;">
                             <h3>Con paneles / Sin paneles</h3>
-                            <!-- Aqui va la grafica 1 - [ Puntos ] -->
+                            <! Aqui va la grafica 1 - [ Puntos ] >
                         </td>
                         <td id="graficaBarras" align="center" style="border: none;">
                             <h3>Consumo actual <strong>Vs.</strong> Nuevo consumo c/paneles solares</h3>
-                            <!-- Aqui va la grafica 2 - [ Barras ] -->
+                            <! Aqui va la grafica 2 - [ Barras ] >
                         </td>
                     </tr>
-                </table>
+                </table -->
             </div>
         </div>
         <hr class="linea-division" style="background-color:#5576F2; margin-left:-15px; margin-right:-15px;">
