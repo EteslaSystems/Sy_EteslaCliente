@@ -218,7 +218,7 @@
                         <td>Mano de obra</td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td></td>
+                        <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalMO">$<?php echo e(number_format($totales["manoDeObra"],2)); ?> USD</td>
                         <?php else: ?>
@@ -226,10 +226,10 @@
                         <?php endif; ?>
                     </tr>
                     <tr style="background-color:#F2F1F0;">
-                        <td>Material electrico</td>
+                        <td>Otros</td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td></td>
+                        <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalOtros">$<?php echo e(number_format($totales["otrosTotal"],2)); ?> USD</td>
                         <?php else: ?>
@@ -240,8 +240,8 @@
                         <td></td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png')))); ?>"/></td>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png')))); ?>"/></td>
+                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/></td>
+                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -306,17 +306,13 @@
                             <img height="68px" width="60px" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg')))); ?>">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">World Wide Fund For Nature</p>
+                            <p class="text-inferior-pag1">World Wildlife Fund</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
                                 Ren Mx | WWF México
-                                www.ren.mx
                                 <br>
-                                Av. México 51
-                                Col. Hipódromo 06100
-                                <br> 
-                                Ciudad de México
-                                <br>
-                                +51 (55) 5286 5631
+                                <a href="https://www.wwf.org.mx/">
+                                    https://www.wwf.org.mx/
+                                </a>
                             </p>
                         </div>
                     </div>

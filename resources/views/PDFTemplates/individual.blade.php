@@ -184,7 +184,6 @@
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}</p>
                 <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $cliente["vCalle"] ." ". $cliente["vMunicipio"] ." ". $cliente["vEstado"] }}</p>
-                <p id="fechaCreacion" class="textIncProupesta"><strong>{{ now() }}</strong></p>
                 <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> {{ $vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"] }}</p>
                 <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $vendedor["vOficina"] }}</p>
                 <p id="caducidad-propuesta" style="margin-left:13px; margin-top:-7px;"><strong>Validez de <u>{{ $expiracion["cantidad"] . " " . $expiracion["unidadMedida"] }}</u></strong></p>
@@ -209,7 +208,11 @@
                             <td>{{ $paneles["vMarca"] }}</td>
                             <td>{{ $paneles["noModulos"] }}</td>
                             <td>{{ $paneles["vNombreMaterialFot"] }}</td>
-                            <td id="costoTotalPanel"></td>
+                            @if($PdfConfig["subtotalesDesglozados"] === "true")
+                                <td id="costoTotalPanel">${{ number_format($paneles["costoTotal"],2) }} USD</td>
+                            @else
+                                <td id="costoTotalPanel"></td>
+                            @endif
                         </tr>
                     @endif
                     @if(!is_null($inversores))
@@ -219,7 +222,11 @@
                             <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
                             <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
                             <td id="modeloInversor">{{ $inversores["vNombreMaterialFot"] }}</td>
-                            <td id="costoTotalInversor"></td>
+                            @if($PdfConfig["subtotalesDesglozados"] === "true")
+                                <td id="costoTotalInversor">${{ number_format($inversores["precioTotal"],2) }} USD</td>
+                            else
+                                <td id="costoTotalInversor"></td>
+                            @endif
                         </tr>
                     @endif
                     @if(!is_null($estructura["_estructuras"]))
@@ -229,7 +236,11 @@
                             <td id="marcaEstructura">{{ $estructura["_estructuras"]["vMarca"] }}</td>
                             <td id="cantidadEstructura">{{ $estructura["cantidad"] }}</td>
                             <td>Estructura de aluminio</td>
-                            <td id="costoTotalEstructura"></td>
+                            @if($PdfConfig["subtotalesDesglozados"] === "true")
+                                <td id="costoTotalEstructuras">${{ number_format($estructura["costoTotal"],2) }} USD</td>
+                            else
+                                <td id="costoTotalEstructuras"></td>
+                            @endif
                         </tr>
                     @endif
                     @if(!is_null($agregados["_agregados"]))
@@ -246,19 +257,19 @@
                         <!-- SI LA COTIZACION TIENE *MANO DE OBRA* -->
                         <tr id="desgloceManoDeObra">
                             <td>Mano de obra</td>
-                            <td>Etesla</td>
                             <td></td>
-                            <td></td>
+                            <td style="width:10%;"></td>
+                            <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                             <td></td>
                         </tr>
                     @endif
                     @if($totales["otrosTotal"] > 0)
                         <!-- SI LA COTIZACION TIENE *OTROS* -->
                         <tr>
-                            <td>Material electrico</td>
-                            <td>Etesla</td>
+                            <td>Otros</td>
                             <td></td>
-                            <td></td>
+                            <td style="width:10%;"></td>
+                            <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                             <td id="costoTotalOtros"></td>
                         </tr>
                     @endif
@@ -266,8 +277,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png'))) }}"/></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png'))) }}"/></td>
+                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/></td>
+                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -291,56 +302,93 @@
             <p style="font-size:11px; color: #969696;" align="center"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $tipoDeCambio }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
-        <table class="table-contenedor" style="margin-top: 5px;">
+        <table class="table-contenedor" style="margin-top:15px;">
             <tr>
                 @if(!is_null($paneles))
                     @php($image = $paneles['vMarca'] . '.png')
                     <td id="imgLogoPanel" align="center" style="border: none;">
-                        <img style="width: 140px; height: 78px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/panel/' . $image))) }}">
+                        <img style="width: 140px; height: 85px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                            <strong>{{ $paneles['vMarca'] }}</strong>
+                        </p>
                     </td>
                 @endif
                 @if(!is_null($inversores))
                     @php($image = $inversores['vMarca'] . '.jpg')
                     <td id="imgLogoInversor" align="center" style="border: none;">
-                        <img style="width: 140px; height: 78px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/inversor/' . $image))) }}">
+                        <img style="width: 140px; height: 85px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                            <strong>{{ $inversores['vMarca'] }}</strong>
+                        </p>
                     </td>
                 @endif
                 @if(!is_null($estructura["_estructuras"]))
                     @php($image = $estructura["_estructuras"]['vMarca'] . '.png')
                     <td id="imgLogoEstructuras" align="center" style="border: none;">
-                        <img style="width: 120px; height: 78px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos-logos/estructura/' . $image))) }}">
+                        <img style="width: 120px; height: 85px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                            <strong>{{ $estructura["_estructuras"]['vMarca'] }}</strong>
+                        </p>
                     </td>
                 @endif
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-        <hr class="linea-division" style="background-color: #5576F2; margin-top:5px;">
-        <table class="table-contenedor" style="margin-top: 35px;">
+        <hr class="linea-division" style="background-color: #5576F2; margin-top:9px;">
+        
+        <!-- * Sellos * -->
+        <table class="table-contenedor" style="margin-top:20px;">
             <tr>
-                <td>
-                    <div>
-                        <div style="margin-left:32px;">
-                            <img style="margin-top:18px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/panel-proyecto.png'))) }}">
+                <td style="padding-right: 60px;">
+                    <div name="ANCE">
+                        <div style="margin-left:20px;">
+                            <img height="90px" width="12%" style="margin-top:15px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
                         </div>
-                        <div style="margin-top:-50px; margin-left:100px;">
-                            <p class="text-inferior-pag1">INCLUYE:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 65%;">*Instalación. *Servicio. *Anclaje. *Fijación. *Garantia. *Mano de obra.</p>
+                        <div style="margin-top:-70px; margin-left:120px;">
+                            <p class="text-inferior-pag1">
+                                Certificado de proveedor<br>confiable
+                            </p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
+                                Clave: 20FIR00010A00R00
+                            </p>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <div>
-                        <div style="margin-left:32px;">
-                            <img style="margin-top:10px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/power.png'))) }}">
+                    <div style="margin-top:-50px; margin-left:480px;">
+                        <div style="margin-left:-305px; margin-top:60px;">
+                            <img height="100px" width="20%" style="margin-left:-220px; margin-bottom:20px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
                         </div>
-                        <div style="margin-top: -50px; margin-left:100px;">
-                            <p class="text-inferior-pag1">POTENCIA POR INSTALAR:</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">4.43 KwP</p>
+                        <div style="margin-top:-100px; margin-left:-390px;">
+                            <p class="text-inferior-pag1">World Wildlife Fund</p>
+                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
+                                Ren Mx | WWF México
+                                <br>
+                                <a href="https://www.wwf.org.mx/">
+                                    https://www.wwf.org.mx/
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div style="margin-left:-266px;">
+                        <div>
+                           <img height="50px" width="27%" style="margin-left:15px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/csolar.jpg'))) }}"> 
+                        </div>
+                        <div>
+                            <p style="text-align:center; font-size:9px;">Programa avalado por INEEL, NAFIN, ICM y el Programa de las<br>Naciones Unidas para el Medio Ambiente (ONU)</p>
+                            <p class="text-inferior-pag1-secundary" style="text-align:center;">
+                                <a href="https://csolarmexico.com/empresas-fotovoltaicas-participantes/">
+                                    https://csolarmexico.com/empresas-fotovoltaicas-participantes/
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </td>
             </tr>
         </table>
+
         <div class="footer-page"></div>
         <!-- Fin pagina 1 -->
 

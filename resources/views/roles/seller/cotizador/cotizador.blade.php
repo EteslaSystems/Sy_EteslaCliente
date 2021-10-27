@@ -6,6 +6,10 @@
 
 @extends($layout)
 
+@section('links')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
 <br>
     <div class="container-fluid">
@@ -293,6 +297,8 @@
     @yield('cotizadores')
 
     @section('scripts')
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
         <script type="text/javascript">
             // Función invocada en los inputs tipo number, no permite insertar datos que no sean numéricos.
             $('#form-group-inputs input[type="number"]').keydown(function(event) {

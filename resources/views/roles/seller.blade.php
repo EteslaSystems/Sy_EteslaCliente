@@ -6,6 +6,7 @@
 @section('rutaInicioUser')
     {{'/s'}}
 @stop
+
 @section('sidebar')
     <a href="#cotizadorSubmenu" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action bg-light dropdown-toggle">
         <img width="14%" height="25px" src="{{ asset('img/icon/calculator-icon.png') }}"> Cotizador

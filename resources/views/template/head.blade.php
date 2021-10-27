@@ -9,11 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/alert-bootstrap.css') }}">
-
-    <!-- DataTables plugin js -->
-    <!-- link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/ -->
-
     <title>Etesla Paneles Solares - @section('title')@show</title>
+    @yield('links')
 </head>
 <body>
     <div class="d-flex" id="wrapper">

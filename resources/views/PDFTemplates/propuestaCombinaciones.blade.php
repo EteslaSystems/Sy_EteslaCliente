@@ -91,15 +91,6 @@
         width: 100%;
         border-collapse: collapse;
     }
-    /* Tab - Comparativa_Combinaciones */
-    .tabCombinaciones{
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-    }
-    .tabCombinaciones th, .tabCombinaciones td{
-        border: 1px solid black;
-    }
 
     /* Tab - Financiamiento */
     .tabFinanciamiento{
@@ -292,8 +283,8 @@
                         <td></td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png'))) }}"/></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png'))) }}"/></td>
+                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/></td>
+                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -358,17 +349,13 @@
                             <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
                         </div>
                         <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">World Wide Fund For Nature</p>
+                            <p class="text-inferior-pag1">World Wildlife Fund</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
                                 Ren Mx | WWF México
-                                www.ren.mx
                                 <br>
-                                Av. México 51
-                                Col. Hipódromo 06100
-                                <br> 
-                                Ciudad de México
-                                <br>
-                                +51 (55) 5286 5631
+                                <a href="https://www.wwf.org.mx/">
+                                    https://www.wwf.org.mx/
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -524,10 +511,19 @@
                         <td id="tdCantidadPanelC">{{ $combinacionOptima["paneles"]["noModulos"] }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Potencia</strong></td>
-                        <td id="tdPotenciaPanelA">{{ number_format($combinacionEconomica["paneles"]["potencia"],2) }} W</td>
-                        <td id="tdPotenciaPanelB">{{ number_format($combinacionMediana["paneles"]["potencia"],2) }} W</td>
-                        <td id="tdPotenciaPanelC">{{ number_format($combinacionOptima["paneles"]["potencia"],2) }} W</td>
+                        <td><strong>Origen</strong></td>
+                        <td id="tdOrigenPanelA">
+                            @php($image = $combinacionEconomica['paneles']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenPanelB">
+                            @php($image = $combinacionMediana['paneles']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenPanelC">
+                            @php($image = $combinacionOptima['paneles']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
@@ -551,6 +547,21 @@
                         <td id="tdPotenciaInversorC">{{ $combinacionOptima["inversores"]["fPotencia"] }} W</td>
                     </tr>
                     <tr>
+                        <td><strong>Origen</strong></td>
+                        <td id="tdOrigenInversorA">
+                            @php($image = $combinacionEconomica['inversores']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenInversorB">
+                            @php($image = $combinacionMediana['inversores']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenInversorC">
+                            @php($image = $combinacionOptima['inversores']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
                     </tr>
                     <tr>
@@ -564,6 +575,21 @@
                         <td id="tdCantidadEstructuraA">{{ $combinacionEconomica["estructura"]["cantidad"] }}</td>
                         <td id="tdCantidadEstructuraB">{{ $combinacionMediana["estructura"]["cantidad"] }}</td>
                         <td id="tdCantidadEstructuraC">{{ $combinacionOptima["estructura"]["cantidad"] }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Origen</strong></td>
+                        <td id="tdOrigenEstructuraA">
+                            @php($image = $combinacionEconomica['estructura']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenEstructuraB">
+                            @php($image = $combinacionMediana['estructura']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
+                        <td id="tdOrigenEstructuraC">
+                            @php($image = $combinacionOptima['estructura']['origen'] . '.png')
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image))) }}">
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>

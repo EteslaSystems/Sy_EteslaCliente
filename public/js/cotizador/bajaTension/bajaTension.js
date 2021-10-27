@@ -1131,18 +1131,21 @@ function getDataCombinacionesFiltrada(_Combinaciones){
                     nombre: Combinacion[0].paneles.nombre,
                     noModulos: Combinacion[0].paneles.noModulos,
                     potencia: Combinacion[0].paneles.potencia,
-                    marca: Combinacion[0].paneles.marca
+                    marca: Combinacion[0].paneles.marca,
+                    origen: Combinacion[0].paneles.origen
                 },
                 inversores: { 
                     vNombreMaterialFot: Combinacion[0].inversores.vNombreMaterialFot,
                     numeroDeInversores: Combinacion[0].inversores.numeroDeInversores,
                     fPotencia: Combinacion[0].inversores.fPotencia,
-                    marca: Combinacion[0].inversores.vMarca
+                    marca: Combinacion[0].inversores.vMarca,
+                    origen: Combinacion[0].inversores.vOrigen
                 },
                 estructura: { 
                     cantidad: Combinacion[0].estructura.cantidad,
                     marca: Combinacion[0].estructura._estructuras.vMarca,
-                    costoTotal: Combinacion[0].estructura.costoTotal
+                    costoTotal: Combinacion[0].estructura.costoTotal,
+                    origen: Combinacion[0].estructura._estructuras.vOrigen
                 },
                 power: { 
                     porcentajePotencia: Combinacion[0].power.porcentajePotencia,

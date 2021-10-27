@@ -4,7 +4,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
@@ -103,7 +102,7 @@
                                     <strong>PDF configuration</strong>
                                 </label>
                                 <button id="configPDF" type="button" class="btn btn-xs pull-right" data-toggle="modal" data-target="#mdlPDFConfiguration" title="Configuracion del PDF" disabled>
-                                    <img width="100%" height="30px" src="{{ asset('img/icon/configuration-icon.png') }}"/>
+                                    <img width="100%" height="30px" src="{{ asset('img/icon/pdf-config.png') }}"/>
                                 </button>
                             </div>
                             <!-- Modal => PDFConfiguration -->
@@ -656,4 +655,3 @@
         }
     </style>
 </body>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>

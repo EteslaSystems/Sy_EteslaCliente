@@ -6,6 +6,10 @@
 
 
 
+<?php $__env->startSection('links'); ?>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 <br>
     <div class="container-fluid">
@@ -363,6 +367,8 @@ unset($__errorArgs, $__bag); ?>
     <?php echo $__env->yieldContent('cotizadores'); ?>
 
     <?php $__env->startSection('scripts'); ?>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
         <script type="text/javascript">
             // Función invocada en los inputs tipo number, no permite insertar datos que no sean numéricos.
             $('#form-group-inputs input[type="number"]').keydown(function(event) {
@@ -483,4 +489,5 @@ unset($__errorArgs, $__bag); ?>
         </script>
     <?php $__env->stopSection(); ?>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make($layout, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/roles/seller/cotizador/cotizador.blade.php ENDPATH**/ ?>
