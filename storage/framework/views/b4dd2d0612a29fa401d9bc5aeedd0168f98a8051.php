@@ -258,7 +258,7 @@
                         <tr id="desgloceManoDeObra">
                             <td>Mano de obra</td>
                             <td></td>
-                            <td style="width:10%;"></td>
+                            <td></td>
                             <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                             <td></td>
                         </tr>
@@ -268,7 +268,7 @@
                         <tr>
                             <td>Otros</td>
                             <td></td>
-                            <td style="width:10%;"></td>
+                            <td></td>
                             <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                             <td id="costoTotalOtros"></td>
                         </tr>
@@ -276,21 +276,46 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="tdDescuento" style="background-color:green;">
+                                <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
+                                    Descuento (<?php echo e($descuento["porcentaje"]); ?>%)
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/></td>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px;">
+                                    $<?php echo e(number_format($descuento["descuento"],2)); ?> USD
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                         <td id="subtotalSinIVAUSD" align="center">$<?php echo e(number_format($totales["precio"], 2)); ?> USD</td>
                         <td id="subtotalSinIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNSinIVA"], 2)); ?> MXN</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
+                                <?php ($descuentoMXN = $descuento["descuento"] * $tipoDeCambio); ?>
+                                <p style="font-weight:bolder; text-align:center; font-style:15px;">
+                                    $<?php echo e(number_format($descuentoMXN,2)); ?> MXN
+                                </p> 
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                         <td id="totalConIVAUSD" align="center">$<?php echo e(number_format($totales["precioMasIVA"], 2)); ?> USD</td>
                         <td id="totalConIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?> MXN</td>
                     </tr>

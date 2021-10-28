@@ -162,11 +162,26 @@
         <div id="recuadroFlotante">
             <div>
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
-                <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}</p>
-                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}</p>
-                <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> {{ $vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"] }}</p>
-                <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $vendedor["vOficina"] }}</p>
-                <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>{{ $expiracion["cantidad"] . " " . $expiracion["unidadMedida"] }}</u></strong></p>
+                <p id="nombreCliente" class="textIncProupesta">
+                    <strong>Cliente: </strong>
+                    {{ $cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"] }}
+                </p>
+                <p id="direccionCliente" class="textIncProupesta">
+                    <strong>Direccion: </strong>
+                    {{ $cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}
+                </p>
+                <p id="asesor" class="textIncProupesta">
+                    <strong>Asesor:</strong> 
+                    {{ $vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"] }}
+                </p>
+                <p id="sucursal" class="textIncProupesta">
+                    <strong>Sucursal: </strong>{{ $vendedor["vOficina"] }}
+                </p>
+                <p id="caducidad-propuesta" style="margin-left:13px;">
+                    <strong>
+                        Validez de <u>{{ $expiracion["cantidad"] . " " . $expiracion["unidadMedida"] }}</u>
+                    </strong>
+                </p>
             </div>
         </div>
         <div class="container-table">
@@ -175,7 +190,7 @@
                     <tr>
                         <th scope="col">TIPO</th>
                         <th scope="col">MARCA</th>
-                        <th scope="col" style="width:10%;">CANTIDAD</th>
+                        <th scope="col">CANTIDAD</th>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">TOTAL</th>
                     </tr>
@@ -184,10 +199,12 @@
                     <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
                         <td id="marcaPanel">{{ $paneles["marca"] }}</td>
-                        <td id="cantidadPanel" style="width:10%;">{{ $paneles["noModulos"] }}</td>
+                        <td id="cantidadPanel">{{ $paneles["noModulos"] }}</td>
                         <td id="modeloPanel" style="font-size: 13px;">{{ $paneles["nombre"] }}</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalPanel">${{ number_format($paneles["costoTotal"],2) }} USD</td>
+                            <td id="costoTotalPanel">
+                                ${{ number_format($paneles["costoTotal"],2) }} USD
+                            </td>
                         @else
                             <td id="costoTotalPanel"></td>
                         @endif
@@ -195,10 +212,14 @@
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
                         <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
-                        <td id="cantidadInversor" style="width:10%;">{{ $inversores["numeroDeInversores"] }}</td>
-                        <td id="modeloInversor" style="font-size: 13px;">{{ $inversores["vNombreMaterialFot"] }}</td>
+                        <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
+                        <td id="modeloInversor" style="font-size: 13px;">
+                            {{ $inversores["vNombreMaterialFot"] }}
+                        </td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalInversor">${{ number_format($inversores["precioTotal"],2) }} USD</td>
+                            <td id="costoTotalInversor">
+                                ${{ number_format($inversores["precioTotal"],2) }} USD
+                            </td>
                         @else
                             <td></td>
                         @endif
@@ -206,10 +227,12 @@
                     <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
                         <td id="marcaEstructura">{{ $estructura["_estructuras"]["vMarca"] }}</td>
-                        <td id="cantidadEstructura" style="width:10%;">{{ $estructura["cantidad"] }}</td>
+                        <td id="cantidadEstructura">{{ $estructura["cantidad"] }}</td>
                         <td>Estructura de aluminio</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalEstructura">${{ number_format($estructura["costoTotal"],2) }} USD</td>
+                            <td id="costoTotalEstructura">
+                                ${{ number_format($estructura["costoTotal"],2) }} USD
+                            </td>
                         @else
                             <td></td>
                         @endif
@@ -217,10 +240,12 @@
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        <td></td>
                         <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalMO">${{ number_format($totales["manoDeObra"],2) }} USD</td>
+                            <td id="costoTotalMO">
+                                ${{ number_format($totales["manoDeObra"],2) }} USD
+                            </td>
                         @else
                             <td id="costoTotalMO"></td>
                         @endif
@@ -228,10 +253,12 @@
                     <tr style="background-color:#F2F1F0;">
                         <td>Otros</td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        <td></td>
                         <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalOtros">${{ number_format($totales["otrosTotal"],2) }} USD</td>
+                            <td id="costoTotalOtros">
+                                ${{ number_format($totales["otrosTotal"],2) }} USD
+                            </td>
                         @else
                             <td></td>
                         @endif
@@ -239,23 +266,56 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        @if($descuento["porcentaje"] >= 1)
+                            <td id="tdDescuento" style="background-color:green;">
+                                <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
+                                    Descuento ({{ $descuento["porcentaje"] }}%)
+                                </p>
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
                         <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/></td>
                         <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td style="width:10%;"></td>
-                        <td id="subtotalSinIVAUSD" align="center">${{ number_format($totales["precio"], 2) }} USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">${{ number_format($totales["precioMXNSinIVA"], 2) }} MXN</td>
+                        @if($descuento["porcentaje"] >= 1)
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
+                                    ${{ number_format($descuento["descuento"],2) }} USD
+                                </p>
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
+                        <td id="subtotalSinIVAUSD" align="center">
+                            ${{ number_format($totales["precio"], 2) }} USD
+                        </td>
+                        <td id="subtotalSinIVAMXN" align="center">
+                            ${{ number_format($totales["precioMXNSinIVA"], 2) }} MXN
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td style="width:10%;"></td>
-                        <td id="totalConIVAUSD" align="center">${{ number_format($totales["precioMasIVA"], 2) }} USD</td>
-                        <td id="totalConIVAMXN" align="center">${{ number_format($totales["precioMXNConIVA"], 2) }} MXN</td>
+                        @if($descuento["porcentaje"] >= 1)
+                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
+                                @php($descuentoMXN = $descuento["descuento"] * $tipoDeCambio)
+                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
+                                    ${{ number_format($descuentoMXN,2) }} MXN
+                                </p> 
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
+                        <td id="totalConIVAUSD" align="center">
+                            ${{ number_format($totales["precioMasIVA"], 2) }} USD
+                        </td>
+                        <td id="totalConIVAMXN" align="center">
+                            ${{ number_format($totales["precioMXNConIVA"], 2) }} MXN
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -282,8 +342,6 @@
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-
-        <hr class="linea-division" style="background-color:#5576F2;">
 
         <table class="table-contenedor">
             <tr>
@@ -329,10 +387,20 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO ({{ $power["old_dac_o_nodac"] }})</strong></p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">{{ $power["_consumos"]["_promCons"]["promConsumosBimestrales"] }} kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">${{ number_format($power["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }} MXN</p>
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
+                                            <strong>CONSUMO ({{ $power["old_dac_o_nodac"] }})</strong>
+                                        </p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
+                                            {{ $power["_consumos"]["_promCons"]["promConsumosBimestrales"] }} kW
+                                        </p>
+                                        <p>
+                                            <strong style="font-size: 9px; margin-left:10px;">
+                                                TOTAL A PAGAR
+                                            </strong>
+                                        </p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
+                                            ${{ number_format($power["objConsumoEnPesos"]["pagoPromedioBimestral"], 2) }} MXN
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -346,10 +414,18 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO ({{ $power["new_dac_o_nodac"] }})</strong></p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">{{ $power["nuevosConsumos"]["promedioNuevoConsumoBimestral"] }} kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }} MXN</p>
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
+                                            <strong>CONSUMO ({{ $power["new_dac_o_nodac"] }})</strong>
+                                        </p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
+                                            {{ $power["nuevosConsumos"]["promedioNuevoConsumoBimestral"] }} kW
+                                        </p>
+                                        <p style="font-size: 9px; margin-left:10px;">
+                                            <strong>TOTAL A PAGAR</strong>
+                                        </p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
+                                            ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }} MXN
+                                        </p>
                                     </div>
                                 </div>
                             </div> 
@@ -379,14 +455,50 @@
         </table>
         <!-- Tabla Financiamiento - ROI -->
         <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
-            <table class="tabFinanciamiento">
+            <table>
                 <tr>
-                    <th>Pago de contado</th>
-                    <td>${{ number_format($totales["precioMXNConIVA"], 2) }}</td>
-                    <th style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
-                    <td style="background-color: #03BABE;">${{ number_format($roi["ahorro"]["ahorroMensualEnPesosMXN"] ,2) }}</td>
-                    <th>Retorno de inversión</th>
-                    <td>{{ $roi["roiEnAnios"] }} año(s)</td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Pago de contado</p>
+                                </th>
+                                <td style="background-color:#03BABE;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">
+                                        ${{ number_format($totales["precioMXNConIVA"], 2) }}
+                                    </p>
+                                </td>
+                           </tr>
+                       </table> 
+                    </td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Ahorro mensual de luz</p>
+                                </th>
+                                <td style="background-color:#03BABE;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">
+                                        ${{ number_format($roi["ahorro"]["ahorroMensualEnPesosMXN"] ,2) }}
+                                    </p>
+                                </td> 
+                           </tr>
+                       </table> 
+                    </td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Retorno de inversión</p>
+                                </th>
+                                <td style="background-color:#FFB500;">
+                                    <p style="font-size:18px; margin-left:6px; margin-right:6px; font-weight:bolder;">
+                                        {{ $roi["roiEnAnios"] }} año(s)
+                                    </p>
+                                </td>
+                           </tr>
+                       </table> 
+                    </td>
                 </tr>
             </table>
             <br>

@@ -240,21 +240,23 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td class="descuento" style="background-color:green;">
+                            <p style="color:white; font-weight:bolder;">Descuento (10%)</p>
+                        </td>
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/usa-circular.png"/></td>
                         <td align="center"><img src="https://img.icons8.com/color/24/000000/mexico-circular.png"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td class="descuento">$1234 USD</td>
                         <td align="center";>$* USD</td>
                         <td align="center";>$* MXN</td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td></td>
+                        <td class="descuento">$1234 MXN</td>
                         <td align="center">$* USD</td>
                         <td align="center">$* MXN</td>
                     </tr>
@@ -522,14 +524,32 @@
         </table>
         <!-- Tabla Financiamiento - ROI -->
         <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
-            <table class="tabFinanciamiento">
+            <table>
                 <tr>
-                    <th>Pago de contado</th>
-                    <td>$x</td>
-                    <th style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
-                    <td style="background-color: #03BABE;">$x</td>
-                    <th>Retorno de inversión</th>
-                    <td>1 años</td>
+                    <td>
+                        <table class="tabFinanciamiento">
+                            <tr>
+                                <th style="height:50px; width:180px;">Pago de contado</th>
+                                <td style="background-color:#03BABE;">$1,234</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="tabFinanciamiento">
+                            <tr>
+                                <th style="height:50px; width:180px;">Ahorro mensual de luz</th>
+                                <td style="background-color:#03BABE;">$1,234</td> 
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                            <tr>
+                                <th style="height:50px; width:180px;">Retorno de inversión</th>
+                                <td style="background-color:#03BABE;">1 años</td>
+                            </tr>
+                        </table> 
+                    </td>
                 </tr>
             </table>
             <br>

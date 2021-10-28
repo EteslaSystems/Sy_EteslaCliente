@@ -162,11 +162,30 @@
         <div id="recuadroFlotante">
             <div>
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: <?php echo e(date('Y-m-d')); ?></strong></p>
-                <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong><?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?></p>
-                <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong><?php echo e($cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"]); ?></p>
-                <p id="asesor" class="textIncProupesta"><strong>Asesor:</strong> <?php echo e($vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"]); ?></p>
-                <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong><?php echo e($vendedor["vOficina"]); ?></p>
-                <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u><?php echo e($expiracion["cantidad"] . " " . $expiracion["unidadMedida"]); ?></u></strong></p>
+                <p id="nombreCliente" class="textIncProupesta">
+                    <strong>Cliente: </strong>
+                    <?php echo e($cliente["vNombrePersona"] ." ". $cliente["vPrimerApellido"] ." ". $cliente["vSegundoApellido"]); ?>
+
+                </p>
+                <p id="direccionCliente" class="textIncProupesta">
+                    <strong>Direccion: </strong>
+                    <?php echo e($cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"]); ?>
+
+                </p>
+                <p id="asesor" class="textIncProupesta">
+                    <strong>Asesor:</strong> 
+                    <?php echo e($vendedor["vNombrePersona"] ." ". $vendedor["vPrimerApellido"] ." ". $vendedor["vSegundoApellido"]); ?>
+
+                </p>
+                <p id="sucursal" class="textIncProupesta">
+                    <strong>Sucursal: </strong><?php echo e($vendedor["vOficina"]); ?>
+
+                </p>
+                <p id="caducidad-propuesta" style="margin-left:13px;">
+                    <strong>
+                        Validez de <u><?php echo e($expiracion["cantidad"] . " " . $expiracion["unidadMedida"]); ?></u>
+                    </strong>
+                </p>
             </div>
         </div>
         <div class="container-table">
@@ -175,7 +194,7 @@
                     <tr>
                         <th scope="col">TIPO</th>
                         <th scope="col">MARCA</th>
-                        <th scope="col" style="width:10%;">CANTIDAD</th>
+                        <th scope="col">CANTIDAD</th>
                         <th scope="col">NOMBRE</th>
                         <th scope="col">TOTAL</th>
                     </tr>
@@ -184,10 +203,12 @@
                     <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
                         <td id="marcaPanel"><?php echo e($paneles["marca"]); ?></td>
-                        <td id="cantidadPanel" style="width:10%;"><?php echo e($paneles["noModulos"]); ?></td>
+                        <td id="cantidadPanel"><?php echo e($paneles["noModulos"]); ?></td>
                         <td id="modeloPanel" style="font-size: 13px;"><?php echo e($paneles["nombre"]); ?></td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalPanel">$<?php echo e(number_format($paneles["costoTotal"],2)); ?> USD</td>
+                            <td id="costoTotalPanel">
+                                $<?php echo e(number_format($paneles["costoTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td id="costoTotalPanel"></td>
                         <?php endif; ?>
@@ -195,10 +216,15 @@
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
                         <td id="marcaInversor"><?php echo e($inversores["vMarca"]); ?></td>
-                        <td id="cantidadInversor" style="width:10%;"><?php echo e($inversores["numeroDeInversores"]); ?></td>
-                        <td id="modeloInversor" style="font-size: 13px;"><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
+                        <td id="cantidadInversor"><?php echo e($inversores["numeroDeInversores"]); ?></td>
+                        <td id="modeloInversor" style="font-size: 13px;">
+                            <?php echo e($inversores["vNombreMaterialFot"]); ?>
+
+                        </td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalInversor">$<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD</td>
+                            <td id="costoTotalInversor">
+                                $<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
@@ -206,10 +232,12 @@
                     <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
                         <td id="marcaEstructura"><?php echo e($estructura["_estructuras"]["vMarca"]); ?></td>
-                        <td id="cantidadEstructura" style="width:10%;"><?php echo e($estructura["cantidad"]); ?></td>
+                        <td id="cantidadEstructura"><?php echo e($estructura["cantidad"]); ?></td>
                         <td>Estructura de aluminio</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalEstructura">$<?php echo e(number_format($estructura["costoTotal"],2)); ?> USD</td>
+                            <td id="costoTotalEstructura">
+                                $<?php echo e(number_format($estructura["costoTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
@@ -217,10 +245,12 @@
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        <td></td>
                         <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalMO">$<?php echo e(number_format($totales["manoDeObra"],2)); ?> USD</td>
+                            <td id="costoTotalMO">
+                                $<?php echo e(number_format($totales["manoDeObra"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td id="costoTotalMO"></td>
                         <?php endif; ?>
@@ -228,10 +258,12 @@
                     <tr style="background-color:#F2F1F0;">
                         <td>Otros</td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        <td></td>
                         <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalOtros">$<?php echo e(number_format($totales["otrosTotal"],2)); ?> USD</td>
+                            <td id="costoTotalOtros">
+                                $<?php echo e(number_format($totales["otrosTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
@@ -239,23 +271,56 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td style="width:10%;"></td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="tdDescuento" style="background-color:green;">
+                                <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
+                                    Descuento (<?php echo e($descuento["porcentaje"]); ?>%)
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/></td>
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
                         <td></td>
-                        <td style="width:10%;"></td>
-                        <td id="subtotalSinIVAUSD" align="center">$<?php echo e(number_format($totales["precio"], 2)); ?> USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNSinIVA"], 2)); ?> MXN</td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px;">
+                                    $<?php echo e(number_format($descuento["descuento"],2)); ?> USD
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
+                        <td id="subtotalSinIVAUSD" align="center">
+                            $<?php echo e(number_format($totales["precio"], 2)); ?> USD
+                        </td>
+                        <td id="subtotalSinIVAMXN" align="center">
+                            $<?php echo e(number_format($totales["precioMXNSinIVA"], 2)); ?> MXN
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <td style="width:10%;"></td>
-                        <td id="totalConIVAUSD" align="center">$<?php echo e(number_format($totales["precioMasIVA"], 2)); ?> USD</td>
-                        <td id="totalConIVAMXN" align="center">$<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?> MXN</td>
+                        <?php if($descuento["porcentaje"] >= 1): ?>
+                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
+                                <?php ($descuentoMXN = $descuento["descuento"] * $tipoDeCambio); ?>
+                                <p style="font-weight:bolder; text-align:center; font-style:15px;">
+                                    $<?php echo e(number_format($descuentoMXN,2)); ?> MXN
+                                </p> 
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
+                        <td id="totalConIVAUSD" align="center">
+                            $<?php echo e(number_format($totales["precioMasIVA"], 2)); ?> USD
+                        </td>
+                        <td id="totalConIVAMXN" align="center">
+                            $<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?> MXN
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -282,8 +347,6 @@
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-
-        <hr class="linea-division" style="background-color:#5576F2;">
 
         <table class="table-contenedor">
             <tr>
@@ -379,14 +442,52 @@
         </table>
         <!-- Tabla Financiamiento - ROI -->
         <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
-            <table class="tabFinanciamiento">
+            <table>
                 <tr>
-                    <th>Pago de contado</th>
-                    <td>$<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?></td>
-                    <th style="background-color: #03BABE;">Ahorro mensual<br>de luz</th>
-                    <td style="background-color: #03BABE;">$<?php echo e(number_format($roi["ahorro"]["ahorroMensualEnPesosMXN"] ,2)); ?></td>
-                    <th>Retorno de inversión</th>
-                    <td><?php echo e($roi["roiEnAnios"]); ?> año(s)</td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Pago de contado</p>
+                                </th>
+                                <td style="background-color:#03BABE;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">
+                                        $<?php echo e(number_format($totales["precioMXNConIVA"], 2)); ?>
+
+                                    </p>
+                                </td>
+                           </tr>
+                       </table> 
+                    </td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Ahorro mensual de luz</p>
+                                </th>
+                                <td style="background-color:#03BABE;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">
+                                        $<?php echo e(number_format($roi["ahorro"]["ahorroMensualEnPesosMXN"] ,2)); ?>
+
+                                    </p>
+                                </td> 
+                           </tr>
+                       </table> 
+                    </td>
+                    <td>
+                       <table class="tabFinanciamiento">
+                           <tr>
+                                <th style="height:16px;">
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Retorno de inversión</p>
+                                </th>
+                                <td style="background-color:#FFB500;">
+                                    <p style="font-size:18px; margin-left:6px; margin-right:6px; font-weight:bolder;">
+                                        <?php echo e($roi["roiEnAnios"]); ?> año(s)
+                                    </p>
+                                </td>
+                           </tr>
+                       </table> 
+                    </td>
                 </tr>
             </table>
             <br>
