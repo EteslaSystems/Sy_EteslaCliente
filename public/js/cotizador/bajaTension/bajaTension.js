@@ -632,14 +632,14 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un Objeto {
 
         _inversores.filter((inversor, index, _inversore) => {
             if(index > 0){
-                //Se obtiene el -precioTotal- mas economico
-                if(costoMin > inversor.precioTotal){
-                    costoMin = inversor.precioTotal;
+                //Se obtiene el -costoTotal- mas economico
+                if(costoMin > inversor.preciocostoTotalTotal){
+                    costoMin = inversor.costoTotal;
                     objResult = inversor;
                 }
             }
             else if(index === 0 && _inversore.length > 1){ //Cuando -index- es igual a 0, pero la coleccion de inversores tiene mas de 1 equipo
-                costoMin = inversor.precioTotal;
+                costoMin = inversor.costoTotal;
                 objResult = inversor;
             }
             else if(index === 0 && _inversore.length === 1){ //Cuando -index- es igual a 0, pero la coleccion de inversores solo tiene 1 equipo

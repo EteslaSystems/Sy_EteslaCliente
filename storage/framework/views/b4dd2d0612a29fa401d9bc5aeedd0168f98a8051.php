@@ -219,11 +219,35 @@
                         <!-- SI LA COTIZACION TIENE *INVERSORES* -->
                         <tr id="desgloceInversor">
                             <td>Inversor</td>
-                            <td id="marcaInversor"><?php echo e($inversores["vMarca"]); ?></td>
-                            <td id="cantidadInversor"><?php echo e($inversores["numeroDeInversores"]); ?></td>
-                            <td id="modeloInversor"><?php echo e($inversores["vNombreMaterialFot"]); ?></td>
+                            <td id="marcaInversor">
+                                <?php echo e($inversores["vMarca"]); ?>
+
+                            </td>
+                            <?php if($inversores["combinacion"] === "true"): ?>
+                                <td colspan="2">
+                                    <p style="font-size:10px;">
+                                        <?php echo e($inversores["MicroUno"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["MicroUno"]["numeroDeInversores"]); ?>
+
+                                    </p>
+                                    <p style="font-size:10px;">
+                                        <?php echo e($inversores["MicroDos"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["MicroDos"]["numeroDeInversores"]); ?>
+
+                                    </p>
+                                </td>
+                            <?php else: ?>
+                                <td id="cantidadInversor">
+                                    <?php echo e($inversores["numeroDeInversores"]); ?>
+
+                                </td>
+                                <td id="modeloInversor" style="font-size: 13px;">
+                                    <?php echo e($inversores["vNombreMaterialFot"]); ?>
+
+                                </td>
+                            <?php endif; ?>
                             <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                                <td id="costoTotalInversor">$<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD</td>
+                                <td id="costoTotalInversor">
+                                    $<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD
+                                </td>
                             else
                                 <td id="costoTotalInversor"></td>
                             <?php endif; ?>
@@ -233,11 +257,19 @@
                         <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
                         <tr id="desgloceEstructura">
                             <td>Estructura</td>
-                            <td id="marcaEstructura"><?php echo e($estructura["_estructuras"]["vMarca"]); ?></td>
-                            <td id="cantidadEstructura"><?php echo e($estructura["cantidad"]); ?></td>
+                            <td id="marcaEstructura">
+                                <?php echo e($estructura["_estructuras"]["vMarca"]); ?>
+
+                            </td>
+                            <td id="cantidadEstructura">
+                                <?php echo e($estructura["cantidad"]); ?>
+
+                            </td>
                             <td>Estructura de aluminio</td>
                             <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                                <td id="costoTotalEstructuras">$<?php echo e(number_format($estructura["costoTotal"],2)); ?> USD</td>
+                                <td id="costoTotalEstructuras">
+                                    $<?php echo e(number_format($estructura["costoTotal"],2)); ?> USD
+                                </td>
                             else
                                 <td id="costoTotalEstructuras"></td>
                             <?php endif; ?>
@@ -293,7 +325,7 @@
                         <td></td>
                         <?php if($descuento["porcentaje"] >= 1): ?>
                             <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
-                                <p style="font-weight:bolder; text-align:center; font-size:15px;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($descuento["descuento"],2)); ?> USD
                                 </p>
                             </td>
@@ -309,7 +341,7 @@
                         <?php if($descuento["porcentaje"] >= 1): ?>
                             <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
                                 <?php ($descuentoMXN = $descuento["descuento"] * $tipoDeCambio); ?>
-                                <p style="font-weight:bolder; text-align:center; font-style:15px;">
+                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($descuentoMXN,2)); ?> MXN
                                 </p> 
                             </td>

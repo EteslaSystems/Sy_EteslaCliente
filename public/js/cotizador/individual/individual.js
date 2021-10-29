@@ -249,7 +249,7 @@ function pintarResultadoCotizacion(cotizacionResult){
 
     /// [ Inversores ]
     if(cotizacionIndividual.inversores != null){
-        costoInversor = cotizacionIndividual.inversores.precioTotal;
+        costoInversor = cotizacionIndividual.inversores.costoTotal;
     }
 
     /// [ Estructuras ]

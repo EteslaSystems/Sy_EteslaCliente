@@ -237,19 +237,42 @@
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
-                        <td id="marcaInversor">{{ $propuesta["inversores"]["vMarca"] }}</td>
-                        <td id="cantidadInversor">{{ $propuesta["inversores"]["numeroDeInversores"] }}</td>
-                        <td id="modeloInversor" style="font-size: 13px;">{{ $propuesta["inversores"]["vNombreMaterialFot"] }}</td>
+                        <td id="marcaInversor">
+                            {{ $propuesta["inversores"]["vMarca"] }}
+                        </td>
+                        @if($propuesta["inversores"]["combinacion"] === "true")
+                            <td colspan="2">
+                                <p style="font-size:10px;">
+                                    {{ $propuesta["inversores"]["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"] }}
+                                </p>
+                                <p style="font-size:10px;">
+                                    {{ $propuesta["inversores"]["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"] }}
+                                </p>
+                            </td>
+                        @else
+                            <td id="cantidadInversor">
+                                {{ $propuesta["inversores"]["numeroDeInversores"] }}
+                            </td>
+                            <td id="modeloInversor" style="font-size: 13px;">
+                                {{ $propuesta["inversores"]["vNombreMaterialFot"] }}
+                            </td>
+                        @endif
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalInversor">${{ number_format($propuesta["inversores"]["precioTotal"],2) }} USD</td>
+                            <td id="costoTotalInversor">
+                                ${{ number_format($propuesta["inversores"]["costoTotal"],2) }} USD
+                            </td>
                         @else
                             <td id="costoTotalInversor"></td>
                         @endif
                     </tr>
                     <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
-                        <td id="marcaEstructura">{{ $propuesta["estructura"]["_estructuras"]["vMarca"] }}</td>
-                        <td id="cantidadEstructura">{{ $propuesta["estructura"]["cantidad"] }}</td>
+                        <td id="marcaEstructura">
+                            {{ $propuesta["estructura"]["_estructuras"]["vMarca"] }}
+                        </td>
+                        <td id="cantidadEstructura">
+                            {{ $propuesta["estructura"]["cantidad"] }}
+                        </td>
                         <td>Estructura de aluminio</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
                             <td id="costoTotalEstructura">${{ number_format($propuesta["estructura"]["costoTotal"],2) }} USD</td>
@@ -263,7 +286,9 @@
                         <td></td>
                         <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalMO">${{ number_format($propuesta["totales"]["manoDeObra"],2) }} USD</td>
+                            <td id="costoTotalMO">
+                                ${{ number_format($propuesta["totales"]["manoDeObra"],2) }} USD
+                            </td>
                         @else
                             <td id="costoTotalMO"></td>
                         @endif
@@ -274,7 +299,9 @@
                         <td></td>
                         <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
-                            <td id="costoTotalOtros">${{ number_format($propuesta["totales"]["otrosTotal"],2) }} USD</td>
+                            <td id="costoTotalOtros">
+                                ${{ number_format($propuesta["totales"]["otrosTotal"],2) }} USD
+                            </td>
                         @else
                             <td id="costoTotalOtros"></td>
                         @endif
@@ -291,8 +318,12 @@
                         @else
                             <td></td>
                         @endif
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/></td>
+                        <td align="center">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/>
+                        </td>
+                        <td align="center">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/>
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -306,8 +337,12 @@
                         @else
                             <td></td>
                         @endif
-                        <td id="subtotalSinIVAUSD" align="center">${{ number_format($propuesta["totales"]["precio"],2) }} USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">${{ number_format($propuesta["totales"]["precioMasIVA"],2) }} MXN</td>
+                        <td id="subtotalSinIVAUSD" align="center">
+                            ${{ number_format($propuesta["totales"]["precio"],2) }} USD
+                        </td>
+                        <td id="subtotalSinIVAMXN" align="center">
+                            ${{ number_format($propuesta["totales"]["precioMasIVA"],2) }} MXN
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
@@ -322,8 +357,12 @@
                         @else
                             <td></td>
                         @endif
-                        <td id="totalConIVAUSD" align="center">${{ number_format($propuesta["totales"]["precioMXNSinIVA"],2) }} USD</td>
-                        <td id="totalConIVAMXN" align="center">${{ number_format($propuesta["totales"]["precioMXNConIVA"],2) }} MXN</td>
+                        <td id="totalConIVAUSD" align="center">
+                            ${{ number_format($propuesta["totales"]["precioMXNSinIVA"],2) }} USD
+                        </td>
+                        <td id="totalConIVAMXN" align="center">
+                            ${{ number_format($propuesta["totales"]["precioMXNConIVA"],2) }} MXN
+                        </td>
                     </tr>
                 </tbody>
             </table>

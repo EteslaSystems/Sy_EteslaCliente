@@ -412,7 +412,9 @@
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #C31801;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>CONSUMO (<?php echo e($power["old_dac_o_nodac"]); ?>)</strong>
+                                            <strong>
+                                                CONSUMO (<?php echo e($power["old_dac_o_nodac"]); ?>)
+                                            </strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
                                             <?php echo e($power["_consumos"]["_promCons"]["promConsumosBimestrales"]); ?> kW
@@ -439,7 +441,9 @@
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>CONSUMO (<?php echo e($power["new_dac_o_nodac"]); ?>)</strong>
+                                            <strong>
+                                                CONSUMO (<?php echo e($power["new_dac_o_nodac"]); ?>)
+                                            </strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             <?php echo e($power["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> kW
@@ -448,7 +452,7 @@
                                             <strong>TOTAL A PAGAR</strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2)); ?> MXN
+                                            $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2)); ?> MXN
                                         </p>
                                     </div>
                                 </div>

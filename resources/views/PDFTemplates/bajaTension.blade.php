@@ -233,7 +233,7 @@
                         @endif
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
                             <td id="costoTotalInversor">
-                                ${{ number_format($inversores["precioTotal"],2) }} USD
+                                ${{ number_format($inversores["costoTotal"],2) }} USD
                             </td>
                         @else
                             <td></td>
@@ -403,7 +403,9 @@
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #C31801;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>CONSUMO ({{ $power["old_dac_o_nodac"] }})</strong>
+                                            <strong>
+                                                CONSUMO ({{ $power["old_dac_o_nodac"] }})
+                                            </strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
                                             {{ $power["_consumos"]["_promCons"]["promConsumosBimestrales"] }} kW
@@ -430,7 +432,9 @@
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>CONSUMO ({{ $power["new_dac_o_nodac"] }})</strong>
+                                            <strong>
+                                                CONSUMO ({{ $power["new_dac_o_nodac"] }})
+                                            </strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             {{ $power["nuevosConsumos"]["promedioNuevoConsumoBimestral"] }} kW
@@ -439,7 +443,7 @@
                                             <strong>TOTAL A PAGAR</strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }} MXN
+                                            ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2) }} MXN
                                         </p>
                                     </div>
                                 </div>
