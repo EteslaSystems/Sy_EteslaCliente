@@ -471,9 +471,15 @@
                 <thead style="background-color:#D68910; color:#FFFFFF;">
                     <tr>
                         <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
-                        <th scope="col"><strong>A</strong></th>
-                        <th scope="col"><strong>B</strong></th>
-                        <th scope="col"><strong>C</strong></th>
+                        <th scope="col">
+                            <strong>Economica</strong>
+                        </th>
+                        <th scope="col">
+                            <strong>Recomendada</strong>
+                        </th>
+                        <th scope="col">
+                            <strong>Premium</strong>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -533,12 +539,6 @@
                         <td id="tdPotenciaInstaladaA"><?php echo e(number_format($combinacionEconomica["paneles"]["potenciaReal"],2)); ?> Kw</td>
                         <td id="tdPotenciaInstaladaB"><?php echo e(number_format($combinacionMediana["paneles"]["potenciaReal"],2)); ?> Kw</td>
                         <td id="tdPotenciaInstaladaC"><?php echo e(number_format($combinacionOptima["paneles"]["potenciaReal"],2)); ?> Kw</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Porcentaje de generacion</strong></td>
-                        <td id="tdPorcentajePropuestaA"><?php echo e($combinacionEconomica["power"]["porcentajePotencia"]); ?>%</td>
-                        <td id="tdPorcentajePropuestaB"><?php echo e($combinacionMediana["power"]["porcentajePotencia"]); ?>%</td>
-                        <td id="tdPorcentajePropuestaC"><?php echo e($combinacionOptima["power"]["porcentajePotencia"]); ?>%</td>
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
@@ -640,16 +640,46 @@
                         <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
                     </tr>
                     <tr>
-                        <td><strong>Energetico</strong></td>
-                        <td id="tdAhorroEnergeticoA"><?php echo e($combinacionEconomica["power"]["Ahorro"]["ahorroBimestral"]); ?> Kw/bim</td>
-                        <td id="tdAhorroEnergeticoB"><?php echo e($combinacionMediana["power"]["Ahorro"]["ahorroBimestral"]); ?> Kw/bim</td>
-                        <td id="tdAhorroEnergeticoC"><?php echo e($combinacionOptima["power"]["Ahorro"]["ahorroBimestral"]); ?> Kw/bim</td>
+                        <td colspan="4">
+                            <strong>Consumo sin Paneles</strong>
+                            <?php echo e(number_format($propuesta["promedioConsumosBimestrales"],2)); ?> kw  |  $<?php echo e(number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2)); ?> MXN
+                            <strong>[ Bimestrales ]</strong>
+                        </td>
                     </tr>
                     <tr>
-                        <td><strong>Economico</strong></td>
-                        <td id="tdAhorroEconomicoA">$<?php echo e(number_format($combinacionEconomica["roi"]["ahorro"]["ahorroBimestralEnPesosMXN"],2)); ?> MXN</td>
-                        <td id="tdAhorroEconomicoB">$<?php echo e(number_format($combinacionMediana["roi"]["ahorro"]["ahorroBimestralEnPesosMXN"],2)); ?> MXN</td>
-                        <td id="tdAhorroEconomicoC">$<?php echo e(number_format($combinacionOptima["roi"]["ahorro"]["ahorroBimestralEnPesosMXN"],2)); ?> MXN</td>
+                        <td><strong>% de generacion</strong></td>
+                        <td id="tdPorcentajePropuestaA">
+                            <?php echo e($combinacionEconomica["power"]["porcentajePotencia"]); ?>%
+                        </td>
+                        <td id="tdPorcentajePropuestaB">
+                            <?php echo e($combinacionMediana["power"]["porcentajePotencia"]); ?>%
+                        </td>
+                        <td id="tdPorcentajePropuestaC">
+                            <?php echo e($combinacionOptima["power"]["porcentajePotencia"]); ?>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nuevo consumo energetico</strong></td>
+                        <td id="tdNewConsumoEnergeticoA">
+                            <?php echo e($combinacionEconomica["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
+                        </td>
+                        <td id="tdNewConsumoEnergeticoB">
+                            <?php echo e($combinacionMediana["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim</td>
+                        <td id="tdNewConsumoEnergeticoC">
+                            <?php echo e($combinacionOptima["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nuevo consumo economico</strong></td>
+                        <td id="tdNewConsumoEconomicoA">
+                            $<?php echo e(number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        </td>
+                        <td id="tdNewConsumoEconomicoB">
+                            $<?php echo e(number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        </td>
+                        <td id="tdNewConsumoEconomicoC">
+                            $<?php echo e(number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
@@ -683,44 +713,6 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
-        <!-- Info. sobre los equipos seleccionados -->
-        <div class="div-contenedor">
-            <p style="text-align:center;">
-                <span style="background-color:#718AE2; color:white; font-weight: bolder;">
-                    Equipos seleccionados
-                </span>
-            </p>
-            <table>
-                <tr name="div-panel">
-                    <td name="img-equipo" width="30%">
-                        <div class="div-contenedor" style="margin-top:-40px; margin-left:-23px;">
-                            <?php ($image = $propuesta['paneles']['marca'] . '.png'); ?>
-                            <img height="195px" width="187px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/panel/' . $image)))); ?>">
-                        </div>
-                    </td>
-                    <td name="info-equipo" width="500px">
-                        <div class="div-contenedor recuadroInfo" style="margin-top:-35px; margin-left:-300px; margin-right:270px;">
-                            <p style="margin-left:10px; margin-right:10px;">AXITEC GmbH fué creada en 2001 y cuenta con su sede en Stuttgart (Alemania). Desde hace años pertenece a las principales empresas productoras de módulos fotovoltaicos a nivel internacional, debido a su calidad. AXITEC está especializada en la producción de módulos fotovoltaicos, y abarca toda la cadena de procesamiento del módulo solar. No sólo se encarga de su diseño y fabricación sino que también es responsable de su comercialización y de su servicio técnico.</p>
-                        </div>
-                    </td>
-                </tr>
-                <tr name="div-inversor">
-                    <td name="info-equipo" width="500px">
-                        <div class="div-contenedor recuadroInfo" style="margin-left:-12px;">
-                            <p style="margin-left:10px; margin-right:10px;">Al abandonar paulatinamente los combustibles fósiles, consumiremos más electricidad en los sectores de calefacción (sistemas modernos de calefacción con bomba de calor) y movilidad (automóviles eléctricos). Por lo tanto, es sensato empezar a pensar hoy acerca de cómo se puede satisfacer esta demanda creciente de manera sostenible y rentable.
-
-                            Con una instalación fotovoltaica, no solo podrá alimentar sus electrodomésticos con energía solar, sino también podrá calentar agua para ducharse o cargar su automóvil eléctrico.</p>
-                        </div>
-                    </td>
-                    <td name="img-equipo" width="30%">
-                        <div class="div-contenedor">
-                            <?php ($image = $propuesta['inversores']['vMarca'] . '.jpg'); ?>
-                            <img height="195px" width="187px" style="margin-top:-20px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/inversor/' . $image)))); ?>">
-                        </div>
-                    </td>
-                </tr>
             </table>
         </div>
         <div class="footer-page"></div>

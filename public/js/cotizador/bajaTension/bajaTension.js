@@ -1149,7 +1149,13 @@ function getDataCombinacionesFiltrada(_Combinaciones){
                 },
                 power: { 
                     porcentajePotencia: Combinacion[0].power.porcentajePotencia,
-                    Ahorro: { ahorroBimestral: Combinacion[0].power.Ahorro.ahorroBimestral }
+                    Ahorro: { ahorroBimestral: Combinacion[0].power.Ahorro.ahorroBimestral },
+                    nuevosConsumos: { 
+                        promedioNuevoConsumoBimestral: Combinacion[0].power.nuevosConsumos.promedioNuevoConsumoBimestral
+                    },
+                    objGeneracionEnpesos: {
+                        pagoPromedioBimestral: Combinacion[0].power.objGeneracionEnpesos.pagoPromedioBimestral
+                    }
                 },
                 roi: { 
                     ahorro: { ahorroBimestralEnPesosMXN: Combinacion[0].roi.ahorro.ahorroBimestralEnPesosMXN }

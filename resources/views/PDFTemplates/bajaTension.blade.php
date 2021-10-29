@@ -211,11 +211,26 @@
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
-                        <td id="marcaInversor">{{ $inversores["vMarca"] }}</td>
-                        <td id="cantidadInversor">{{ $inversores["numeroDeInversores"] }}</td>
-                        <td id="modeloInversor" style="font-size: 13px;">
-                            {{ $inversores["vNombreMaterialFot"] }}
+                        <td id="marcaInversor">
+                            {{ $inversores["vMarca"] }}
                         </td>
+                        @if($inversores["combinacion"] === "true")
+                            <td colspan="2">
+                                <p style="font-size:10px;">
+                                    {{ $inversores["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"] }}
+                                </p>
+                                <p style="font-size:10px;">
+                                    {{ $inversores["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"] }}
+                                </p>
+                            </td>
+                        @else
+                            <td id="cantidadInversor">
+                                {{ $inversores["numeroDeInversores"] }}
+                            </td>
+                            <td id="modeloInversor" style="font-size: 13px;">
+                                {{ $inversores["vNombreMaterialFot"] }}
+                            </td>
+                        @endif
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
                             <td id="costoTotalInversor">
                                 ${{ number_format($inversores["precioTotal"],2) }} USD

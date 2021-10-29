@@ -215,12 +215,31 @@
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
-                        <td id="marcaInversor"><?php echo e($inversores["vMarca"]); ?></td>
-                        <td id="cantidadInversor"><?php echo e($inversores["numeroDeInversores"]); ?></td>
-                        <td id="modeloInversor" style="font-size: 13px;">
-                            <?php echo e($inversores["vNombreMaterialFot"]); ?>
+                        <td id="marcaInversor">
+                            <?php echo e($inversores["vMarca"]); ?>
 
                         </td>
+                        <?php if($inversores["combinacion"] === "true"): ?>
+                            <td colspan="2">
+                                <p style="font-size:10px;">
+                                    <?php echo e($inversores["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"]); ?>
+
+                                </p>
+                                <p style="font-size:10px;">
+                                    <?php echo e($inversores["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"]); ?>
+
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td id="cantidadInversor">
+                                <?php echo e($inversores["numeroDeInversores"]); ?>
+
+                            </td>
+                            <td id="modeloInversor" style="font-size: 13px;">
+                                <?php echo e($inversores["vNombreMaterialFot"]); ?>
+
+                            </td>
+                        <?php endif; ?>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalInversor">
                                 $<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD
@@ -288,7 +307,7 @@
                         <td></td>
                         <?php if($descuento["porcentaje"] >= 1): ?>
                             <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
-                                <p style="font-weight:bolder; text-align:center; font-size:15px;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($descuento["descuento"],2)); ?> USD
                                 </p>
                             </td>
@@ -308,7 +327,7 @@
                         <?php if($descuento["porcentaje"] >= 1): ?>
                             <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
                                 <?php ($descuentoMXN = $descuento["descuento"] * $tipoDeCambio); ?>
-                                <p style="font-weight:bolder; text-align:center; font-style:15px;">
+                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($descuentoMXN,2)); ?> MXN
                                 </p> 
                             </td>
@@ -392,10 +411,20 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (<?php echo e($power["old_dac_o_nodac"]); ?>)</strong></p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;"><?php echo e($power["_consumos"]["_promCons"]["promConsumosBimestrales"]); ?> kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">$<?php echo e(number_format($power["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2)); ?> MXN</p>
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
+                                            <strong>CONSUMO (<?php echo e($power["old_dac_o_nodac"]); ?>)</strong>
+                                        </p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
+                                            <?php echo e($power["_consumos"]["_promCons"]["promConsumosBimestrales"]); ?> kW
+                                        </p>
+                                        <p>
+                                            <strong style="font-size: 9px; margin-left:10px;">
+                                                TOTAL A PAGAR
+                                            </strong>
+                                        </p>
+                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
+                                            $<?php echo e(number_format($power["objConsumoEnPesos"]["pagoPromedioBimestral"], 2)); ?> MXN
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -409,10 +438,18 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (<?php echo e($power["new_dac_o_nodac"]); ?>)</strong></p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;"><?php echo e($power["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">$<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2)); ?> MXN</p>
+                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
+                                            <strong>CONSUMO (<?php echo e($power["new_dac_o_nodac"]); ?>)</strong>
+                                        </p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
+                                            <?php echo e($power["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> kW
+                                        </p>
+                                        <p style="font-size: 9px; margin-left:10px;">
+                                            <strong>TOTAL A PAGAR</strong>
+                                        </p>
+                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
+                                            $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2)); ?> MXN
+                                        </p>
                                     </div>
                                 </div>
                             </div> 
