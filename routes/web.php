@@ -23,7 +23,7 @@ Route::get('/vendedor', 'vendedorController@index');
 Route::get('/clientes', 'vendedorController@clientes');
 
 //////COTIZACION
-Route::post('/PDFgenerate', 'CotizacionController@generatePDF');\
+Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
 
 /* --- Cotizacion Media Tension --- */
 Route::get('/mediaT', 'MediaTensionController@index');

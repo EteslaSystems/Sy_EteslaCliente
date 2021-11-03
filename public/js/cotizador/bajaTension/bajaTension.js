@@ -56,6 +56,7 @@ async function calcularPropuestaBT(e, dataEdite){ ///Main()
         }
     }
     catch(error){
+        console.log(error);
         alert(error);
     }
 }
@@ -765,7 +766,7 @@ function mostrarRespuestaConsumos(Consumo){
 function mostrarRespuestaPaneles(Panel){
     $('#tdPanelCantidad').text(Panel.noModulos);
     $('#tdPanelModelo').text(Panel.nombre);
-    $('#tdPanelPotencia').text(Panel.potencia.toLocaleString('es-MX') + ' W');
+    $('#tdPanelPotencia').text(Panel.fPotencia.toLocaleString('es-MX') + ' W');
     $('#tdPanelPotenciaReal').text(Panel.potenciaReal + ' Kw');
 }
 
@@ -901,58 +902,59 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
 /*#region Combinaciones*/
 function seleccionarCombinacion(ddlCombinaciones){
     let _combinaciones = JSON.parse(sessionStorage.getItem("arrayCombinaciones"));
-
+    _combinaciones = _combinaciones[0];
+    
     if(ddlCombinaciones.value != -1){
         let ddlCombinacionesValor = ddlCombinaciones.value;
 
         //Llenado de celdas de *RESULTADOS*
         /* PotenciaInstalada / CostoPorWatt  */
-        $('#tdPanelPotenciaReal').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.potenciaReal + ' Kw');
-        $('#tdCostoWatt').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precio_watt + ' USD');
+        $('#tdPanelPotenciaReal').text(_combinaciones[ddlCombinacionesValor].combinacion.paneles.potenciaReal + ' Kw');
+        $('#tdCostoWatt').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precio_watt + ' USD');
 
         /* Tarifas */
-        $('#tdTarifaActual').text(_combinaciones[0][ddlCombinacionesValor][0].power.old_dac_o_nodac);
-        $('#tdTarifaNueva').text(_combinaciones[0][ddlCombinacionesValor][0].power.new_dac_o_nodac);
+        $('#tdTarifaActual').text(_combinaciones[ddlCombinacionesValor].combinacion.power.old_dac_o_nodac);
+        $('#tdTarifaNueva').text(_combinaciones[ddlCombinacionesValor].combinacion.power.new_dac_o_nodac);
 
         /* % Generacion */
-        $('#tdPorcentajePropuesta').text(_combinaciones[0][ddlCombinacionesValor][0].power.porcentajePotencia + ' %');
+        $('#tdPorcentajePropuesta').text(_combinaciones[ddlCombinacionesValor].combinacion.power.porcentajePotencia + ' %');
         /* ROI */
-        $('#tdROIbruto').text(_combinaciones[0][ddlCombinacionesValor][0].roi.roiEnAnios + ' años');
-        $('#tdROIdeduccion').text(_combinaciones[0][ddlCombinacionesValor][0].roi.roiConDeduccion + ' años');
+        $('#tdROIbruto').text(_combinaciones[ddlCombinacionesValor].combinacion.roi.roiEnAnios + ' años');
+        $('#tdROIdeduccion').text(_combinaciones[ddlCombinacionesValor].combinacion.roi.roiConDeduccion + ' años');
 
         /* Panel */
-        $('#tdPanelModelo').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.nombre);
-        $('#tdPanelPotencia').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.potencia + ' W');
-        $('#tdPanelCantidad').text(_combinaciones[0][ddlCombinacionesValor][0].paneles.noModulos);
+        $('#tdPanelModelo').text(_combinaciones[ddlCombinacionesValor].combinacion.paneles.nombre);
+        $('#tdPanelPotencia').text(_combinaciones[ddlCombinacionesValor].combinacion.paneles.fPotencia + ' W');
+        $('#tdPanelCantidad').text(_combinaciones[ddlCombinacionesValor].combinacion.paneles.noModulos);
         
         /* Inversor */
-        $('#tdInversorModelo').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.vNombreMaterialFot);
-        $('#tdInversorPotencia').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.fPotencia + ' W');
-        $('#tdInversorCantidad').text(_combinaciones[0][ddlCombinacionesValor][0].inversores.numeroDeInversores);
+        $('#tdInversorModelo').text(_combinaciones[ddlCombinacionesValor].combinacion.inversores.vNombreMaterialFot);
+        $('#tdInversorPotencia').text(_combinaciones[ddlCombinacionesValor].combinacion.inversores.fPotencia + ' W');
+        $('#tdInversorCantidad').text(_combinaciones[ddlCombinacionesValor].combinacion.inversores.numeroDeInversores);
 
         /* [AhorroEnergetico] */
         //ConsumoActual
-        $('#tdConsumoActualKwMes').text(_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales.toLocaleString('es-MX') + ' Kw');
-        $('#tdConsumoActualKwBim').text(_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promConsumosBimestrales.toLocaleString('es-MX') + ' Kw');
+        $('#tdConsumoActualKwMes').text(_combinaciones[ddlCombinacionesValor].combinacion.power._consumos._promCons.promedioConsumosMensuales.toLocaleString('es-MX') + ' Kw');
+        $('#tdConsumoActualKwBim').text(_combinaciones[ddlCombinacionesValor].combinacion.power._consumos._promCons.promConsumosBimestrales.toLocaleString('es-MX') + ' Kw');
         //Generacion
-        $('#tdGeneracionKwMes').text(_combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion.toLocaleString('es-MX') + ' Kw');
-        $('#tdGeneracionKwBim').text(_combinaciones[0][ddlCombinacionesValor][0].power.generacion.promeDGeneracionBimestral.toLocaleString('es-MX') + ' Kw');
+        $('#tdGeneracionKwMes').text(_combinaciones[ddlCombinacionesValor].combinacion.power.generacion.promedioDeGeneracion.toLocaleString('es-MX') + ' Kw');
+        $('#tdGeneracionKwBim').text(_combinaciones[ddlCombinacionesValor].combinacion.power.generacion.promeDGeneracionBimestral.toLocaleString('es-MX') + ' Kw');
         //NuevoConsumo
-        $('#tdNuevoConsumoMes').text((_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales - _combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion).toLocaleString('es-MX') + ' Kw');
-        $('#tdNuevoConsumoBim').text(((_combinaciones[0][ddlCombinacionesValor][0].power._consumos._promCons.promedioConsumosMensuales - _combinaciones[0][ddlCombinacionesValor][0].power.generacion.promedioDeGeneracion) * 2).toLocaleString('es-MX') + ' Kw');
+        $('#tdNuevoConsumoMes').text((_combinaciones[ddlCombinacionesValor].combinacion.power._consumos._promCons.promedioConsumosMensuales - _combinaciones[ddlCombinacionesValor].combinacion.power.generacion.promedioDeGeneracion).toLocaleString('es-MX') + ' Kw');
+        $('#tdNuevoConsumoBim').text(((_combinaciones[ddlCombinacionesValor].combinacion.power._consumos._promCons.promedioConsumosMensuales - _combinaciones[ddlCombinacionesValor].combinacion.power.generacion.promedioDeGeneracion) * 2).toLocaleString('es-MX') + ' Kw');
         /* [AhorroEconomico] */
         //ConsumoActual
-        $('#tdConsumoActualDinMes').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objConsumoEnPesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
-        $('#tdConsumoActualDinBim').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objConsumoEnPesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
+        $('#tdConsumoActualDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objConsumoEnPesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
+        $('#tdConsumoActualDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objConsumoEnPesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
         //NuevoConsumo
-        $('#tdNuevoConsumoDinMes').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
-        $('#tdNuevoConsumoDinBim').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
+        $('#tdNuevoConsumoDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
+        $('#tdNuevoConsumoDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
 
         /* Totales */
-        $('#tdSubtotalUSD').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precio.toLocaleString('es-MX') + ' USD');
-        $('#tdTotalUSD').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
-        $('#tdSubtotalMXN').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMXNSinIVA.toLocaleString('es-MX') + ' MXN');
-        $('#tdTotalMXN').text('$ ' + _combinaciones[0][ddlCombinacionesValor][0].totales.precioMXNConIVA.toLocaleString('es-MX') + ' MXN');
+        $('#tdSubtotalUSD').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precio.toLocaleString('es-MX') + ' USD');
+        $('#tdTotalUSD').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
+        $('#tdSubtotalMXN').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMXNSinIVA.toLocaleString('es-MX') + ' MXN');
+        $('#tdTotalMXN').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMXNConIVA.toLocaleString('es-MX') + ' MXN');
     }
     else{
         limpiarCampos();
@@ -960,11 +962,20 @@ function seleccionarCombinacion(ddlCombinaciones){
 }
 
 function vaciarCombinacionesEnModal(combinaciones){
-    let CombinacionA = combinaciones[0].combinacionEconomica[0]; //CombinacionEconomica
-    let CombinacionB = combinaciones[0].combinacionMediana[0]; //CombinacionMediana
-    let CombinacionC = combinaciones[0].combinacionOptima[0]; //CombinacionOptima
+    combinaciones = combinaciones[0];//Formating
+
+    let CombinacionA = combinaciones.combinacionEconomica.combinacion; //CombinacionEconomica
+    Object.assign(CombinacionA,{ tipoCombinacion: combinaciones.combinacionEconomica.nombre });
+
+    let CombinacionB = combinaciones.combinacionMediana.combinacion; //CombinacionMediana
+    Object.assign(CombinacionB,{ tipoCombinacion: combinaciones.combinacionMediana.nombre });
+
+    let CombinacionC = combinaciones.combinacionOptima.combinacion; //CombinacionOptima
+    Object.assign(CombinacionC,{ tipoCombinacion: combinaciones.combinacionOptima.nombre });
 
     /* CombinacionA */
+    ///Title
+    $('#titleCombinacionA').text(CombinacionA.tipoCombinacion);
     ///ImagenesLogos
     $('#imgPanelA').prop("src","../img/equipos/logos/panel/" + CombinacionA.paneles.marca + '.png');
     $('#imgInversorA').prop("src","../img/equipos/logos/inversor/" + CombinacionA.inversores.vMarca + '.jpg');
@@ -978,7 +989,7 @@ function vaciarCombinacionesEnModal(combinaciones){
     ///Panel
     $('#tdModeloPanelA').text(CombinacionA.paneles.nombre);
     $('#tdCantidadPanelA').text(CombinacionA.paneles.noModulos);
-    $('#tdPotenciaPanelA').text(CombinacionA.paneles.potencia + ' W');
+    $('#tdPotenciaPanelA').text(CombinacionA.paneles.fPotencia + ' W');
     ///Inversor
     $('#tdModeloInversorA').text(CombinacionA.inversores.vNombreMaterialFot);
     $('#tdCantidadInversorA').text(CombinacionA.inversores.numeroDeInversores);
@@ -994,6 +1005,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#tdTotalA').text('$ ' + CombinacionA.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
 
     /* CombinacionB */
+    ///Title
+    $('#titleCombinacionB').text(CombinacionB.tipoCombinacion);
     ///ImagenesLogos
     $('#imgPanelB').prop("src","../img/equipos/logos/panel/" + CombinacionB.paneles.marca + '.png');
     $('#imgInversorB').prop("src","../img/equipos/logos/inversor/" + CombinacionB.inversores.vMarca + '.jpg');
@@ -1005,7 +1018,7 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#tdModeloPanelB').text(CombinacionB.paneles.nombre);
     $('#tdCantidadPanelB').text(CombinacionB.paneles.noModulos);
     ///Potencia instalada
-    $('#tdPotenciaPanelB').text(CombinacionB.paneles.potencia + ' W');
+    $('#tdPotenciaPanelB').text(CombinacionB.paneles.fPotencia + ' W');
     ///Porcentaje Generacion
     $('#tdPorcentajePropuestaB').text(CombinacionB.power.porcentajePotencia + ' %');
     ///Inversor
@@ -1023,6 +1036,8 @@ function vaciarCombinacionesEnModal(combinaciones){
     $('#tdTotalB').text('$ ' + CombinacionB.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
 
     /* CombinacionC */
+    ///Title
+    $('#titleCombinacionC').text(CombinacionC.tipoCombinacion);
     ///ImagenesLogos
     $('#imgPanelC').prop("src","../img/equipos/logos/panel/" + CombinacionC.paneles.marca + '.png');
     $('#imgInversorC').prop("src","../img/equipos/logos/inversor/" + CombinacionC.inversores.vMarca + '.jpg');
@@ -1036,7 +1051,7 @@ function vaciarCombinacionesEnModal(combinaciones){
     ///Panel
     $('#tdModeloPanelC').text(CombinacionC.paneles.nombre);
     $('#tdCantidadPanelC').text(CombinacionC.paneles.noModulos);
-    $('#tdPotenciaPanelC').text(CombinacionC.paneles.potencia + ' W');
+    $('#tdPotenciaPanelC').text(CombinacionC.paneles.fPotencia + ' W');
     ///Inversor
     $('#tdModeloInversorC').text(CombinacionC.inversores.vNombreMaterialFot);
     $('#tdCantidadInversorC').text(CombinacionC.inversores.numeroDeInversores);
@@ -1065,7 +1080,7 @@ function salvarCombinacion(){
 
         /*#region CombinacionSafe - Guardar Propuesta Salvada*/
         //Formatea el Object [CombinacionSalvada]
-        let CombinacionSalvada = { propuesta: _combinaciones[0][ddlCombinacionesValue][0] };
+        let CombinacionSalvada = { propuesta: _combinaciones[0][ddlCombinacionesValue].combinacion };
 
         //Settear las propiedades[Object] de ->cliente && ->vendedor
         CombinacionSalvada.propuesta.cliente = _combinaciones[0].cliente;
@@ -1113,7 +1128,7 @@ function getDataCombinacionesFiltrada(_Combinaciones){
     let nameCombinSalvada = $('#ddlCombinaciones').val();
 
     //Propuesta seleccionada
-    let dataFiltrada = { propuesta: _Combinaciones[nameCombinSalvada][0], propuestaSeleccionada: nameCombinSalvada };
+    let dataFiltrada = { propuesta: _Combinaciones[nameCombinSalvada].combinacion, propuestaSeleccionada: nameCombinSalvada };
 
     //Se *Settea* la data de -Cliente- && -Vendedor- al objeto Propuesta
     dataFiltrada.propuesta.cliente = _Combinaciones.cliente;
@@ -1122,48 +1137,48 @@ function getDataCombinacionesFiltrada(_Combinaciones){
     //Iterar toda la data para extraer las combinaciones *DISTINTAS* a la que fue seleccionada
     $.each(_Combinaciones, (iteracion, Combinacion) => {
         //Validar que son array (Solo las combinaciones *son Array*)
-        if(Array.isArray(Combinacion) === true){
+        if(Combinacion.combinacion){
             //Filtrar las demas combinaciones, *menos la "salvada" / seleccionada*
             //Tratar la data[combinacion] y retornar la data solo con las propiedades necesarias/filtrada
             let dataTratada = {
                 paneles: { 
-                    potenciaReal: Combinacion[0].paneles.potenciaReal,
-                    nombre: Combinacion[0].paneles.nombre,
-                    noModulos: Combinacion[0].paneles.noModulos,
-                    potencia: Combinacion[0].paneles.potencia,
-                    marca: Combinacion[0].paneles.marca,
-                    origen: Combinacion[0].paneles.origen
+                    potenciaReal: Combinacion.combinacion.paneles.potenciaReal,
+                    nombre: Combinacion.combinacion.paneles.nombre,
+                    noModulos: Combinacion.combinacion.paneles.noModulos,
+                    potencia: Combinacion.combinacion.paneles.potencia,
+                    marca: Combinacion.combinacion.paneles.marca,
+                    origen: Combinacion.combinacion.paneles.origen
                 },
                 inversores: { 
-                    vNombreMaterialFot: Combinacion[0].inversores.vNombreMaterialFot,
-                    numeroDeInversores: Combinacion[0].inversores.numeroDeInversores,
-                    fPotencia: Combinacion[0].inversores.fPotencia,
-                    marca: Combinacion[0].inversores.vMarca,
-                    origen: Combinacion[0].inversores.vOrigen
+                    vNombreMaterialFot: Combinacion.combinacion.inversores.vNombreMaterialFot,
+                    numeroDeInversores: Combinacion.combinacion.inversores.numeroDeInversores,
+                    fPotencia: Combinacion.combinacion.inversores.fPotencia,
+                    marca: Combinacion.combinacion.inversores.vMarca,
+                    origen: Combinacion.combinacion.inversores.vOrigen
                 },
                 estructura: { 
-                    cantidad: Combinacion[0].estructura.cantidad,
-                    marca: Combinacion[0].estructura._estructuras.vMarca,
-                    costoTotal: Combinacion[0].estructura.costoTotal,
-                    origen: Combinacion[0].estructura._estructuras.vOrigen
+                    cantidad: Combinacion.combinacion.estructura.cantidad,
+                    marca: Combinacion.combinacion.estructura._estructuras.vMarca,
+                    costoTotal: Combinacion.combinacion.estructura.costoTotal,
+                    origen: Combinacion.combinacion.estructura._estructuras.vOrigen
                 },
                 power: { 
-                    porcentajePotencia: Combinacion[0].power.porcentajePotencia,
-                    Ahorro: { ahorroBimestral: Combinacion[0].power.Ahorro.ahorroBimestral },
+                    porcentajePotencia: Combinacion.combinacion.power.porcentajePotencia,
+                    Ahorro: { ahorroBimestral: Combinacion.combinacion.power.Ahorro.ahorroBimestral },
                     nuevosConsumos: { 
-                        promedioNuevoConsumoBimestral: Combinacion[0].power.nuevosConsumos.promedioNuevoConsumoBimestral
+                        promedioNuevoConsumoBimestral: Combinacion.combinacion.power.nuevosConsumos.promedioNuevoConsumoBimestral
                     },
                     objGeneracionEnpesos: {
-                        pagoPromedioBimestral: Combinacion[0].power.objGeneracionEnpesos.pagoPromedioBimestral
+                        pagoPromedioBimestral: Combinacion.combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral
                     }
                 },
                 roi: { 
-                    ahorro: { ahorroBimestralEnPesosMXN: Combinacion[0].roi.ahorro.ahorroBimestralEnPesosMXN }
+                    ahorro: { ahorroBimestralEnPesosMXN: Combinacion.combinacion.roi.ahorro.ahorroBimestralEnPesosMXN }
                 },
                 totales: { 
-                    precio_watt: Combinacion[0].totales.precio_watt,
-                    precio: Combinacion[0].totales.precio,
-                    precioMasIVA: Combinacion[0].totales.precioMasIVA
+                    precio_watt: Combinacion.combinacion.totales.precio_watt,
+                    precio: Combinacion.combinacion.totales.precio,
+                    precioMasIVA: Combinacion.combinacion.totales.precioMasIVA
                 }
             };
 

@@ -237,19 +237,49 @@
                     </tr>
                     <tr id="desgloceInversor">
                         <td>Inversor</td>
-                        <td id="marcaInversor"><?php echo e($propuesta["inversores"]["vMarca"]); ?></td>
-                        <td id="cantidadInversor"><?php echo e($propuesta["inversores"]["numeroDeInversores"]); ?></td>
-                        <td id="modeloInversor" style="font-size: 13px;"><?php echo e($propuesta["inversores"]["vNombreMaterialFot"]); ?></td>
+                        <td id="marcaInversor">
+                            <?php echo e($propuesta["inversores"]["vMarca"]); ?>
+
+                        </td>
+                        <?php if($propuesta["inversores"]["combinacion"] === "true"): ?>
+                            <td colspan="2">
+                                <p style="font-size:10px;">
+                                    <?php echo e($propuesta["inversores"]["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"]); ?>
+
+                                </p>
+                                <p style="font-size:10px;">
+                                    <?php echo e($propuesta["inversores"]["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"]); ?>: <?php echo e($inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"]); ?>
+
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td id="cantidadInversor">
+                                <?php echo e($propuesta["inversores"]["numeroDeInversores"]); ?>
+
+                            </td>
+                            <td id="modeloInversor" style="font-size: 13px;">
+                                <?php echo e($propuesta["inversores"]["vNombreMaterialFot"]); ?>
+
+                            </td>
+                        <?php endif; ?>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalInversor">$<?php echo e(number_format($propuesta["inversores"]["precioTotal"],2)); ?> USD</td>
+                            <td id="costoTotalInversor">
+                                $<?php echo e(number_format($propuesta["inversores"]["costoTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td id="costoTotalInversor"></td>
                         <?php endif; ?>
                     </tr>
                     <tr id="desgloceEstructura" style="background-color:#F2F1F0;">
                         <td>Estructura</td>
-                        <td id="marcaEstructura"><?php echo e($propuesta["estructura"]["_estructuras"]["vMarca"]); ?></td>
-                        <td id="cantidadEstructura"><?php echo e($propuesta["estructura"]["cantidad"]); ?></td>
+                        <td id="marcaEstructura">
+                            <?php echo e($propuesta["estructura"]["_estructuras"]["vMarca"]); ?>
+
+                        </td>
+                        <td id="cantidadEstructura">
+                            <?php echo e($propuesta["estructura"]["cantidad"]); ?>
+
+                        </td>
                         <td>Estructura de aluminio</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalEstructura">$<?php echo e(number_format($propuesta["estructura"]["costoTotal"],2)); ?> USD</td>
@@ -263,7 +293,9 @@
                         <td></td>
                         <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalMO">$<?php echo e(number_format($propuesta["totales"]["manoDeObra"],2)); ?> USD</td>
+                            <td id="costoTotalMO">
+                                $<?php echo e(number_format($propuesta["totales"]["manoDeObra"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td id="costoTotalMO"></td>
                         <?php endif; ?>
@@ -274,7 +306,9 @@
                         <td></td>
                         <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
-                            <td id="costoTotalOtros">$<?php echo e(number_format($propuesta["totales"]["otrosTotal"],2)); ?> USD</td>
+                            <td id="costoTotalOtros">
+                                $<?php echo e(number_format($propuesta["totales"]["otrosTotal"],2)); ?> USD
+                            </td>
                         <?php else: ?>
                             <td id="costoTotalOtros"></td>
                         <?php endif; ?>
@@ -291,8 +325,12 @@
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/></td>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/></td>
+                        <td align="center">
+                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/>
+                        </td>
+                        <td align="center">
+                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/>
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -306,8 +344,12 @@
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
-                        <td id="subtotalSinIVAUSD" align="center">$<?php echo e(number_format($propuesta["totales"]["precio"],2)); ?> USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMasIVA"],2)); ?> MXN</td>
+                        <td id="subtotalSinIVAUSD" align="center">
+                            $<?php echo e(number_format($propuesta["totales"]["precio"],2)); ?> USD
+                        </td>
+                        <td id="subtotalSinIVAMXN" align="center">
+                            $<?php echo e(number_format($propuesta["totales"]["precioMasIVA"],2)); ?> MXN
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
@@ -322,8 +364,12 @@
                         <?php else: ?>
                             <td></td>
                         <?php endif; ?>
-                        <td id="totalConIVAUSD" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMXNSinIVA"],2)); ?> USD</td>
-                        <td id="totalConIVAMXN" align="center">$<?php echo e(number_format($propuesta["totales"]["precioMXNConIVA"],2)); ?> MXN</td>
+                        <td id="totalConIVAUSD" align="center">
+                            $<?php echo e(number_format($propuesta["totales"]["precioMXNSinIVA"],2)); ?> USD
+                        </td>
+                        <td id="totalConIVAMXN" align="center">
+                            $<?php echo e(number_format($propuesta["totales"]["precioMXNConIVA"],2)); ?> MXN
+                        </td>
                     </tr>
                 </tbody>
             </table>

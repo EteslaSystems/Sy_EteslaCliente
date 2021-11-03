@@ -239,9 +239,21 @@
                                             <thead style="background-color:#D68910; color:#FFFFFF;">
                                                 <tr>
                                                     <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
-                                                    <th scope="col"><strong>A</strong></th>
-                                                    <th scope="col"><strong>B</strong></th>
-                                                    <th scope="col"><strong>C</strong></th>
+                                                    <th scope="col">
+                                                        <p id="titleCombinacionA">
+                                                            <strong>*</strong>
+                                                        </p>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <p id="titleCombinacionB">
+                                                            <strong>*</strong>
+                                                        </p>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <p id="titleCombinacionC">
+                                                            <strong>*</strong>
+                                                        </p>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -306,7 +318,7 @@
                                                     <td id="tdPotenciaInstaladaC">*</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Porcentaje de generacion</strong></td>
+                                                    <td><strong>% de generacion</strong></td>
                                                     <td id="tdPorcentajePropuestaA">*</td>
                                                     <td id="tdPorcentajePropuestaB">*</td>
                                                     <td id="tdPorcentajePropuestaC">*</td>
