@@ -242,7 +242,7 @@
                         <?php endif; ?>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
                             <td id="costoTotalInversor">
-                                $<?php echo e(number_format($inversores["precioTotal"],2)); ?> USD
+                                $<?php echo e(number_format($inversores["costoTotal"],2)); ?> USD
                             </td>
                         <?php else: ?>
                             <td></td>

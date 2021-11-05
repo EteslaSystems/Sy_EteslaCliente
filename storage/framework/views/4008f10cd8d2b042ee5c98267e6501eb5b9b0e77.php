@@ -137,7 +137,7 @@
                                                             <div class="tab-content">
                                                                 <div id="configurationPdf-paginaUno" class="tab-pane fade show active" role="tabpanel">
                                                                     <label for="swtSubtDesglozados">Subtotales desglozados</label>
-                                                                    <input id="swtSubtDesglozados" type="checkbox" data-toggle="toggle" data-width="135" data-on="Habilitado" data-off="Deshabilitado" data-onstyle="success" data-offstyle="danger" checked>
+                                                                    <input id="swtSubtDesglozados" type="checkbox" data-toggle="toggle" data-width="135" data-on="Habilitado" data-off="Deshabilitado" data-onstyle="success" data-offstyle="danger">
                                                                 </div>
                                                             </div>
                                                         </div>
