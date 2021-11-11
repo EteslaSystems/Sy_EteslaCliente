@@ -198,7 +198,7 @@
                 <tbody>
                     <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
-                        <td id="marcaPanel">{{ $paneles["marca"] }}</td>
+                        <td id="marcaPanel">{{ $paneles["vMarca"] }}</td>
                         <td id="cantidadPanel">{{ $paneles["noModulos"] }}</td>
                         <td id="modeloPanel" style="font-size: 13px;">{{ $paneles["nombre"] }}</td>
                         @if($PdfConfig["subtotalesDesglozados"] === "true")
@@ -343,7 +343,7 @@
         <table class="table-contenedor">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
-                    @php($image = $paneles['marca'] . '.png')
+                    @php($image = $paneles['vMarca'] . '.png')
                     <img style="width: 140px; height: 67px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
@@ -404,7 +404,7 @@
                                     <div class="rectangulo-into-card" style="border: #C31801;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
                                             <strong>
-                                                CONSUMO ({{ $power["old_dac_o_nodac"] }})
+                                                CONSUMO [BIM.] ({{ $power["old_dac_o_nodac"] }})
                                             </strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
@@ -412,7 +412,7 @@
                                         </p>
                                         <p>
                                             <strong style="font-size: 9px; margin-left:10px;">
-                                                TOTAL A PAGAR
+                                                TOTAL A PAGAR [BIM.]
                                             </strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
@@ -433,14 +433,14 @@
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
                                             <strong>
-                                                CONSUMO ({{ $power["new_dac_o_nodac"] }})
+                                                CONSUMO [BIM.] ({{ $power["new_dac_o_nodac"] }})
                                             </strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             {{ $power["nuevosConsumos"]["promedioNuevoConsumoBimestral"] }} kW
                                         </p>
                                         <p style="font-size: 9px; margin-left:10px;">
-                                            <strong>TOTAL A PAGAR</strong>
+                                            <strong>TOTAL A PAGAR [BIM.]</strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2) }} MXN
@@ -468,7 +468,9 @@
                     <img id="logoTipoEtesla" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}"> 
                 </td>
                 <td style="padding-left: 75px;">
-                    <h1 style="font-size:25px; text-align:right; margin-right: 27px;">FINANCIAMIENTO Y RETORNO DE INVERSIÓN</h1>
+                    <h1 style="font-size:25px; text-align:right; margin-right: 27px;">
+                        FINANCIAMIENTO Y RETORNO DE INVERSIÓN
+                    </h1>
                 </td>
             </tr>
         </table>
@@ -480,7 +482,9 @@
                        <table class="tabFinanciamiento">
                            <tr>
                                 <th style="height:16px;">
-                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">Pago de contado</p>
+                                    <p style="font-size:14px; margin-left:6px; margin-right:6px;">
+                                        Pago de contado
+                                    </p>
                                 </th>
                                 <td style="background-color:#03BABE;">
                                     <p style="font-size:14px; margin-left:6px; margin-right:6px;">
@@ -532,11 +536,21 @@
                 </tr>
                 <tr>
                     <th> Pago mensual</th>
-                    <td>${{ number_format($financiamiento["objMensualidadesCreditCard"]["tresMeses"] ,2) }}</td>
-                    <td>${{ number_format($financiamiento["objMensualidadesCreditCard"]["seisMeses"], 2) }}</td>
-                    <td>${{ number_format($financiamiento["objMensualidadesCreditCard"]["nueveMeses"], 2) }}</td>
-                    <td>${{ number_format($financiamiento["objMensualidadesCreditCard"]["doceMeses"], 2) }}</td>
-                    <td>${{ number_format($financiamiento["objMensualidadesCreditCard"]["dieciochoMeses"], 2) }}</td>
+                    <td>
+                        ${{ number_format($financiamiento["objMensualidadesCreditCard"]["tresMeses"] ,2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objMensualidadesCreditCard"]["seisMeses"], 2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objMensualidadesCreditCard"]["nueveMeses"], 2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objMensualidadesCreditCard"]["doceMeses"], 2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objMensualidadesCreditCard"]["dieciochoMeses"], 2) }}
+                    </td>
                 </tr>
             </table>
             <br>
@@ -549,9 +563,15 @@
                 </tr>
                 <tr>
                     <th>Enganche</th>
-                    <td>${{ number_format($financiamiento["objEnganche"]["quincePorcent"], 2) }}</td>
-                    <td>${{ number_format($financiamiento["objEnganche"]["treintacincoPorcent"], 2) }}</td>
-                    <td>${{ number_format($financiamiento["objEnganche"]["cincuentaPorcent"], 2) }}</td>
+                    <td>
+                        ${{ number_format($financiamiento["objEnganche"]["quincePorcent"], 2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objEnganche"]["treintacincoPorcent"], 2) }}
+                    </td>
+                    <td>
+                        ${{ number_format($financiamiento["objEnganche"]["cincuentaPorcent"], 2) }}
+                    </td>
                 </tr>
             </table>
             <br>
@@ -584,11 +604,17 @@
                             @endswitch
                             
                             @if($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] > $roi["ahorro"]["ahorroMensualEnPesosMXN"] && $financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] < ($roi["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10))
-                                <td id="amarillo" style="background-color:#E0D30C">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
+                                <td id="amarillo" style="background-color:#E0D30C">
+                                    ${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}
+                                </td>
                             @elseif($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent] <= $roi["ahorro"]["ahorroMensualEnPesosMXN"])
-                                <td id="verde" style="background-color:#44C331">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
+                                <td id="verde" style="background-color:#44C331">
+                                    ${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}
+                                </td>
                             @else
-                                <td id="normal" style="background-color:#3A565E">${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}</td>
+                                <td id="normal" style="background-color:#3A565E">
+                                    ${{ number_format($financiamiento["_pagosMensualesPorPlazo"][$x][$porcent], 2) }}
+                                </td>
                             @endif
                         @endfor
                     </tr>
@@ -625,7 +651,9 @@
         <table>
             <tr>
                 <td style="width: 450px;">
-                    <p style="margin-top: -10px; margin-left: 55px; text-align: left; font-weight: bold;">EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA PROPUESTA, EQUIVALE A <strong style="color:#8AADCE;">{{ $power["objImpactoAmbiental"]["numeroArboles"] }}</strong> ÁRBOLES PLANTADOS AL AÑO.</p>
+                    <p style="margin-top: -10px; margin-left: 55px; text-align: left; font-weight: bold;">
+                        EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA PROPUESTA, EQUIVALE A <strong style="color:#8AADCE;">{{ $power["objImpactoAmbiental"]["numeroArboles"] }}</strong> ÁRBOLES PLANTADOS AL AÑO.
+                    </p>
                 </td>
                 <td align="center">
                     <img width="30%" height="170px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/tree.png'))) }}"/>

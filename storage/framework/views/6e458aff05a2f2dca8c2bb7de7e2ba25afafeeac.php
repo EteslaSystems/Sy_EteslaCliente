@@ -30,12 +30,7 @@
                                             </svg>
                                         </button>
                                         <button id="btnEliminar" type="button" class="btn btn-danger btn-sm" title="Eliminar">
-                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
-                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                                    <g fill="#ffffff"><path d="M75.25,21.5c-6.22962,0 -10.75,4.52038 -10.75,10.75v5.375h-32.25v10.75h5.375v86c0,8.89025 7.23475,16.125 16.125,16.125h52.52173l10.75,-10.75h-63.27173c-2.96162,0 -5.375,-2.408 -5.375,-5.375v-86h75.25v51.98633l10.75,10.75v-62.73633h5.375v-10.75h-32.25v-5.375c0,-6.22962 -4.52038,-10.75 -10.75,-10.75zM75.25,32.25h21.5v5.375h-21.5zM59.125,64.5v59.125h10.75v-59.125zM80.625,64.5v59.125h10.75v-59.125zM102.125,64.5v40.16553l10.75,-10.75v-29.41553zM115.0271,106.9646l-7.5271,7.5271l24.99585,24.98535l-24.99585,24.99585l7.5271,7.5271l24.99585,-24.99585l24.44995,24.46045l7.5271,-7.5271l-24.46045,-24.46045l24.46045,-24.44995l-7.5271,-7.5271l-24.44995,24.46045z"></path></g>
-                                                </g>
-                                            </svg>
+                                            <img src="<?php echo e(asset('img/icon/papelera-icon.png')); ?>" height="19px"/>
                                         </button>
                                     </div>
                                 </td>
@@ -65,14 +60,14 @@
                                         </div>
                                         <div class="col">
                                             <button id="editClienteDetails" type="button" class="btn btn-xs btn-warning pull-right" title="Editar" onclick="editarClienteDetails(0)">
-                                                <img src="https://img.icons8.com/material-rounded/16/000000/edit--v1.png"/>
+                                                <img src="<?php echo e(asset('img/icon/editar-icon.png')); ?>" height="19px"/>
                                             </button>
                                             <div id="grBttnsDetails" class="btn-group pull-right" role="group" aria-label="Basic example" style="display: none;">
                                                 <button id="guardarClienteDetails" type="button" class="btn btn-xs btn-success" title="Guardar cambios" onclick="editarClienteDetails(1)">
-                                                    <img src="https://img.icons8.com/ios-glyphs/16/000000/save--v1.png"/>
+                                                    <img src="<?php echo e(asset('img/icon/guardar.png')); ?>"/>
                                                 </button>
                                                 <button id="cancelClienteDetails" type="button" class="btn btn-xs btn-danger" title="Cancelar" onclick="editarClienteDetails(2)">
-                                                    <img src="https://img.icons8.com/external-becris-lineal-becris/16/000000/external-cancel-mintab-for-ios-becris-lineal-becris.png"/>
+                                                    <img src="<?php echo e(asset('img/icon/cancelar.png')); ?>" height="19px"/>
                                                 </button>
                                             </div>
                                         </div>

@@ -580,28 +580,48 @@
                                                         <div class="col">
                                                             <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:6px;">
                                                                 <thead>
-                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Informacion de consumo</th>
+                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">
+                                                                        Informacion de consumo
+                                                                    </th>
                                                                     <tr>
-                                                                        <td colspan="2"><strong>Consumo actual</strong></td>
-                                                                        <td colspan="2"><strong>Generacion c/paneles</strong></td>
-                                                                        <td colspan="2"><strong>Nuevo consumo</strong></td>
+                                                                        <td colspan="2">
+                                                                            <strong>Consumo actual</strong>
+                                                                        </td>
+                                                                        <td colspan="2">
+                                                                            <strong>Generacion c/paneles</strong>
+                                                                        </td>
+                                                                        <td colspan="2">
+                                                                            <strong>Ahorro energetico</strong>
+                                                                        </td>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="tdMes"><strong>Mes(kw)</strong></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdConsumoActualKwMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes"><strong>Mes(kw)</strong></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdGeneracionKwMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes"><strong>Mes(kw)</strong></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdNuevoConsumoMes" class="tdAnsw"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="tdBim"><strong>Bim(kw)</strong></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdConsumoActualKwBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim"><strong>Bim(kw)</strong></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdGeneracionKwBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim"><strong>Bim(kw)</strong></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim(kw)</strong>
+                                                                        </td>
                                                                         <td id="tdNuevoConsumoBim" class="tdAnsw"></td>
                                                                     </tr>
                                                                 </tbody>
@@ -614,22 +634,45 @@
                                                                 <thead>
                                                                     <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Informacion economica</th>
                                                                     <tr>
-                                                                        <td colspan="2"><strong>Gasto actual</strong></td>
-                                                                        <td colspan="2"><strong>Pago c/paneles</strong></td>
+                                                                        <td colspan="2">
+                                                                            <strong>Gasto actual</strong>
+                                                                        </td>
+                                                                        <td colspan="2">
+                                                                            <strong>Pago c/paneles</strong>
+                                                                        </td>
+                                                                        <td colspan="2">
+                                                                            <strong>Ahorro economico</strong>
+                                                                        </td>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="tdMes"><strong>Mes($)</strong></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes($)</strong>
+                                                                        </td>
                                                                         <td id="tdConsumoActualDinMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes"><strong>Mes($)</strong></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes($)</strong>
+                                                                        </td>
                                                                         <td id="tdNuevoConsumoDinMes" class="tdAnsw"></td>
+                                                                        <td class="tdMes">
+                                                                            <strong>Mes($)</strong>
+                                                                        </td>
+                                                                        <td id="tdAhorroDinMes" class="tdAnsw"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="tdBim"><strong>Bim($)</strong></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim($)</strong>
+                                                                        </td>
                                                                         <td id="tdConsumoActualDinBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim"><strong>Bim($)</strong></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim($)</strong>
+                                                                        </td>
                                                                         <td id="tdNuevoConsumoDinBim" class="tdAnsw"></td>
+                                                                        <td class="tdBim">
+                                                                            <strong>Bim($)</strong>
+                                                                        </td>
+                                                                        <td id="tdAhorroDinBim" class="tdAnsw"></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

@@ -154,8 +154,12 @@
                         <td><?php echo e($panel->fVMP); ?></td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-sm btn-warning" onclick='editarPanel("<?php echo e($panel->idPanel); ?>")' title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <a href="<?php echo e(url('eliminar-panel',$panel->idPanel)); ?>" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
+                                <a type="button" class="btn btn-sm btn-warning" onclick='editarPanel("<?php echo e($panel->idPanel); ?>")' title="Editar">
+                                    <img src="<?php echo e(asset('img/icon/editar-icon.png')); ?>" height="19px"/>
+                                </a>
+                                <a href="<?php echo e(url('eliminar-panel',$panel->idPanel)); ?>" class="btn btn-danger btn-sm" title="Eliminar">
+                                    <img src="<?php echo e(asset('img/icon/papelera-icon.png')); ?>" height="19px"/>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -313,8 +317,12 @@
                         <td><?php echo e($inversor->fISC); ?></td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button id="btnEditarInversor" type="button" onclick='editarInversor("<?php echo e($inversor->idInversor); ?>")' class="btn btn-sm btn-warning" title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <a href="<?php echo e(url('eliminar-inversor',$inversor->idInversor)); ?>" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
+                                <a id="btnEditarInversor" type="button" onclick='editarInversor("<?php echo e($inversor->idInversor); ?>")' class="btn btn-sm btn-warning" title="Editar">
+                                    <img src="<?php echo e(asset('img/icon/editar-icon.png')); ?>" height="19px"/>
+                                </a>
+                                <a href="<?php echo e(url('eliminar-inversor',$inversor->idInversor)); ?>" class="btn btn-danger btn-sm" title="Eliminar">
+                                    <img src="<?php echo e(asset('img/icon/papelera-icon.png')); ?>" height="19px"/>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -409,8 +417,12 @@
                         <td><?php echo e($estructura->vOrigen); ?></td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button id="btnEditarEstructura" type="button" onclick='editarEstructura("<?php echo e($estructura->idEstructura); ?>")' class="btn btn-sm btn-warning" title="Editar"><img src="https://img.icons8.com/ios/20/000000/edit--v1.png"/></button>
-                                <a href="<?php echo e(url('eliminar-estructura',$estructura->idEstructura)); ?>" title="Eliminar"><span class="btn btn-danger btn-sm"><img src="https://img.icons8.com/ios/20/000000/delete-forever--v1.png"/></span></a>
+                                <a id="btnEditarEstructura" type="button" onclick='editarEstructura("<?php echo e($estructura->idEstructura); ?>")' class="btn btn-sm btn-warning" title="Editar">
+                                    <img src="<?php echo e(asset('img/icon/editar-icon.png')); ?>" height="19px"/>
+                                </a>
+                                <a href="<?php echo e(url('eliminar-estructura',$estructura->idEstructura)); ?>" class="btn btn-danger btn-sm" type="button" title="Eliminar">
+                                    <img src="<?php echo e(asset('img/icon/papelera-icon.png')); ?>" height="19px"/>
+                                </a>
                             </div>
                         </td>
                     </tr>

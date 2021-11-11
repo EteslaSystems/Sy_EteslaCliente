@@ -11,6 +11,18 @@
     html{
         margin: 0;
     }
+    .marca-de-agua{
+        background-image: url('data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>');
+        background-position: center center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: 10;
+        opacity: 0.5;
+    }
     .footer-page{
         position: fixed;
         bottom: 0cm; 
@@ -111,20 +123,25 @@
     .table-comparative{
         width: 100%;
         border-collapse: collapse;
-        border-radius: 10px;
+        border-radius: 20px;
         overflow: hidden;
         text-align: center;
-        border-color: #DE1616;
     }
 
     .table-comparative th, .table-comparative td{
-        border: 1px solid black;
+        border: 2px solid #EFEFEF;
         width: 45%;
     }
+    .title-tab-comparativa{
+        font-size: 13px;
+        font-weight: bolder;
+    }
+    .text-tab-comparativa{
+        font-size: 12px;
+    }
     .imgLogos{
-        height: 40px;
-        width: 55px;
-        margin-top: 6px;
+        width: 62px;
+        height: 45px;
     }
     .recuadroInfo{
         /* Recuadro */
@@ -226,7 +243,7 @@
                 <tbody>
                     <tr id="desglocePanel" style="background-color:#F2F1F0;">
                         <td>Panel</td>
-                        <td id="marcaPanel"><?php echo e($propuesta["paneles"]["marca"]); ?></td>
+                        <td id="marcaPanel"><?php echo e($propuesta["paneles"]["vMarca"]); ?></td>
                         <td id="cantidadPanel"><?php echo e($propuesta["paneles"]["noModulos"]); ?></td>
                         <td id="modeloPanel" style="font-size: 13px;"><?php echo e($propuesta["paneles"]["nombre"]); ?></td>
                         <?php if($PdfConfig["subtotalesDesglozados"] === "true"): ?>
@@ -382,7 +399,7 @@
         <table class="table-contenedor">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
-                    <?php ($image = $propuesta['paneles']['marca'] . '.png'); ?>
+                    <?php ($image = $propuesta['paneles']['vMarca'] . '.png'); ?>
                     <img style="width: 140px; height: 100px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
                 </td>
                 <td id="imgLogoInversor" align="center" style="border: none;">
@@ -396,7 +413,6 @@
             </tr>
         </table>
         <!-- Fin logos/marcas equip. -->
-
         <hr class="linea-division" style="background-color:#5576F2;">
 
         <table class="table-contenedor">
@@ -445,14 +461,14 @@
                                     <div class="rectangulo-into-card" style="border: #C31801;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
                                             <strong>
-                                                CONSUMO (<?php echo e($propuesta["power"]["old_dac_o_nodac"]); ?>)
+                                                CONSUMO [BIM.] (<?php echo e($propuesta["power"]["old_dac_o_nodac"]); ?>)
                                             </strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
                                             <?php echo e(number_format($propuesta["promedioConsumosBimestrales"],2)); ?> kW/bim
                                         </p>
                                         <p style="font-size: 9px; margin-left:10px;">
-                                            <strong>TOTAL A PAGAR</strong>
+                                            <strong>TOTAL A PAGAR [BIM.]</strong>
                                         </p>
                                         <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
                                             $<?php echo e(number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2)); ?> MXN
@@ -472,14 +488,14 @@
                                     <div class="rectangulo-into-card" style="border: #1E9F26;">
                                         <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
                                             <strong>
-                                                CONSUMO (<?php echo e($propuesta["power"]["new_dac_o_nodac"]); ?>)
+                                                CONSUMO [BIM.] (<?php echo e($propuesta["power"]["new_dac_o_nodac"]); ?>)
                                             </strong>
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             <?php echo e(number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2)); ?> kW/bim
                                         </p>
                                         <p style="font-size: 9px; margin-left:10px;">
-                                           <strong>TOTAL A PAGAR</strong> 
+                                           <strong>TOTAL A PAGAR [BIM.]</strong> 
                                         </p>
                                         <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
                                             $<?php echo e(number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN
@@ -495,11 +511,10 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 1 -->
-    
     <hr class="salto-pagina">
 
     <!-- Pagina 2 - Comparativa[combinaciones] -->
-    <div class="container-fluid">
+    <div class="container-fluid marca-de-agua">
         <table>
             <tr>
                 <td>
@@ -512,260 +527,389 @@
                 </td>
             </tr>
         </table>
-        <div class="div-contenedor">
+        <div id="comparativas-combinaciones"  class="div-contenedor">
+            <!-- Tabla comparativa - [ COMBINACIONES ] -->
             <table class="table-comparative">
                 <thead style="background-color:#D68910; color:#FFFFFF;">
                     <tr>
                         <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
                         <th scope="col">
-                            <strong>Economica</strong>
+                            <?php if($propuestaSeleccionada === "combinacionEconomica"): ?>
+                                <img height="29x" width="29x" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png')))); ?>" style="margin-top:3px; margin-left:-10px;"/>
+                            <?php endif; ?>
+                            <strong class="title-tab-comparativa">Economica</strong>
                         </th>
                         <th scope="col">
-                            <strong>Recomendada</strong>
+                            <?php if($propuestaSeleccionada === "combinacionMediana"): ?>
+                                <img height="29x" width="29x" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png')))); ?>" style="margin-top:3px; margin-left:-10px;"/>
+                            <?php endif; ?>
+                            <strong class="title-tab-comparativa">Recomendada</strong>
                         </th>
                         <th scope="col">
-                            <strong>Premium</strong>
+                            <?php if($propuestaSeleccionada === "combinacionOptima"): ?>
+                                <img height="29x" width="29x" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png')))); ?>" style="margin-top:3px; margin-left:-10px;"/>
+                            <?php endif; ?>
+                            <strong class="title-tab-comparativa">Premium</strong>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td name="tdInvisible" style="border-left:0px; border-top:0px;"></td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <?php ($image = $combinacionEconomica["paneles"]["marca"] . '.png'); ?>
-                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <?php ($image = $combinacionEconomica["inversores"]["marca"] . '.jpg'); ?>
-                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
-                            </div>
-                            <div>
-                                <?php ($image = $combinacionEconomica['estructura']['marca'] . '.png'); ?>
-                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
-                            </div>
+                     <tr>
+                        <td class="title-tab-comparativa">
+                            Costo por watt
                         </td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <?php ($image = $combinacionMediana["paneles"]["marca"] . '.png'); ?>
-                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <?php ($image = $combinacionMediana["inversores"]["marca"] . '.jpg'); ?>
-                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
-                            </div>
-                            <div>
-                                <?php ($image = $combinacionMediana['estructura']['marca'] . '.png'); ?>
-                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
-                            </div>
+                        <td id="tdCostoWattA" class="text-tab-comparativa">
+                            $<?php echo e(number_format($combinacionEconomica["totales"]["precio_watt"],2)); ?> USD
                         </td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <?php ($image = $combinacionOptima["paneles"]["marca"] . '.png'); ?>
-                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <?php ($image = $combinacionOptima["inversores"]["marca"] . '.jpg'); ?>
-                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <?php ($image = $combinacionOptima['estructura']['marca'] . '.png'); ?>
-                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
-                            </div>
+                        <td id="tdCostoWattB" class="text-tab-comparativa">
+                            $<?php echo e(number_format($combinacionMediana["totales"]["precio_watt"],2)); ?> USD
+                        </td>
+                        <td id="tdCostoWattC" class="text-tab-comparativa">
+                            $<?php echo e(number_format($combinacionOptima["totales"]["precio_watt"],2)); ?> USD
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>Costo por watt</strong></td>
-                        <td id="tdCostoWattA">$<?php echo e(number_format($combinacionEconomica["totales"]["precio_watt"],2)); ?> USD</td>
-                        <td id="tdCostoWattB">$<?php echo e(number_format($combinacionMediana["totales"]["precio_watt"],2)); ?> USD</td>
-                        <td id="tdCostoWattC">$<?php echo e(number_format($combinacionOptima["totales"]["precio_watt"],2)); ?> USD</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Potencia instalada</strong></td>
-                        <td id="tdPotenciaInstaladaA"><?php echo e(number_format($combinacionEconomica["paneles"]["potenciaReal"],2)); ?> Kw</td>
-                        <td id="tdPotenciaInstaladaB"><?php echo e(number_format($combinacionMediana["paneles"]["potenciaReal"],2)); ?> Kw</td>
-                        <td id="tdPotenciaInstaladaC"><?php echo e(number_format($combinacionOptima["paneles"]["potenciaReal"],2)); ?> Kw</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloPanelA"><?php echo e($combinacionEconomica["paneles"]["nombre"]); ?></td>
-                        <td id="tdModeloPanelB"><?php echo e($combinacionMediana["paneles"]["nombre"]); ?></td>
-                        <td id="tdModeloPanelC"><?php echo e($combinacionOptima["paneles"]["nombre"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadPanelA"><?php echo e($combinacionEconomica["paneles"]["noModulos"]); ?></td>
-                        <td id="tdCantidadPanelB"><?php echo e($combinacionMediana["paneles"]["noModulos"]); ?></td>
-                        <td id="tdCantidadPanelC"><?php echo e($combinacionOptima["paneles"]["noModulos"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Origen</strong></td>
-                        <td id="tdOrigenPanelA">
-                            <?php ($image = $combinacionEconomica['paneles']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                        <td class="title-tab-comparativa">
+                            Potencia instalada
                         </td>
-                        <td id="tdOrigenPanelB">
-                            <?php ($image = $combinacionMediana['paneles']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                        <td id="tdPotenciaInstaladaA" class="text-tab-comparativa">
+                            <?php echo e(number_format($combinacionEconomica["paneles"]["potenciaReal"],2)); ?> Kw
                         </td>
-                        <td id="tdOrigenPanelC">
-                            <?php ($image = $combinacionOptima['paneles']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                        <td id="tdPotenciaInstaladaB" class="text-tab-comparativa">
+                            <?php echo e(number_format($combinacionMediana["paneles"]["potenciaReal"],2)); ?> Kw
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloInversorA"><?php echo e($combinacionEconomica["inversores"]["vNombreMaterialFot"]); ?></td>
-                        <td id="tdModeloInversorB"><?php echo e($combinacionMediana["inversores"]["vNombreMaterialFot"]); ?></td>
-                        <td id="tdModeloInversorC"><?php echo e($combinacionOptima["inversores"]["vNombreMaterialFot"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadInversorA"><?php echo e($combinacionEconomica["inversores"]["numeroDeInversores"]); ?></td>
-                        <td id="tdCantidadInversorB"><?php echo e($combinacionMediana["inversores"]["numeroDeInversores"]); ?></td>
-                        <td id="tdCantidadInversorC"><?php echo e($combinacionOptima["inversores"]["numeroDeInversores"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Potencia</strong></td>
-                        <td id="tdPotenciaInversorA"><?php echo e($combinacionEconomica["inversores"]["fPotencia"]); ?> W</td>
-                        <td id="tdPotenciaInversorB"><?php echo e($combinacionMediana["inversores"]["fPotencia"]); ?> W</td>
-                        <td id="tdPotenciaInversorC"><?php echo e($combinacionOptima["inversores"]["fPotencia"]); ?> W</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Origen</strong></td>
-                        <td id="tdOrigenInversorA">
-                            <?php ($image = $combinacionEconomica['inversores']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                        <td id="tdOrigenInversorB">
-                            <?php ($image = $combinacionMediana['inversores']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                        <td id="tdOrigenInversorC">
-                            <?php ($image = $combinacionOptima['inversores']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloEstructuraA"><?php echo e($combinacionEconomica["estructura"]["marca"]); ?></td>
-                        <td id="tdModeloEstructuraB"><?php echo e($combinacionMediana["estructura"]["marca"]); ?></td>
-                        <td id="tdModeloEstructuraC"><?php echo e($combinacionOptima["estructura"]["marca"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadEstructuraA"><?php echo e($combinacionEconomica["estructura"]["cantidad"]); ?></td>
-                        <td id="tdCantidadEstructuraB"><?php echo e($combinacionMediana["estructura"]["cantidad"]); ?></td>
-                        <td id="tdCantidadEstructuraC"><?php echo e($combinacionOptima["estructura"]["cantidad"]); ?></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Origen</strong></td>
-                        <td id="tdOrigenEstructuraA">
-                            <?php ($image = $combinacionEconomica['estructura']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                        <td id="tdOrigenEstructuraB">
-                            <?php ($image = $combinacionMediana['estructura']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                        <td id="tdOrigenEstructuraC">
-                            <?php ($image = $combinacionOptima['estructura']['origen'] . '.png'); ?>
-                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            <strong>Consumo sin Paneles</strong>
-                            <?php echo e(number_format($propuesta["promedioConsumosBimestrales"],2)); ?> kw  |  $<?php echo e(number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2)); ?> MXN
-                            <strong>[ Bimestrales ]</strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>% de generacion</strong></td>
-                        <td id="tdPorcentajePropuestaA">
-                            <?php echo e($combinacionEconomica["power"]["porcentajePotencia"]); ?>%
-                        </td>
-                        <td id="tdPorcentajePropuestaB">
-                            <?php echo e($combinacionMediana["power"]["porcentajePotencia"]); ?>%
-                        </td>
-                        <td id="tdPorcentajePropuestaC">
-                            <?php echo e($combinacionOptima["power"]["porcentajePotencia"]); ?>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nuevo consumo energetico</strong></td>
-                        <td id="tdNewConsumoEnergeticoA">
-                            <?php echo e($combinacionEconomica["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
-                        </td>
-                        <td id="tdNewConsumoEnergeticoB">
-                            <?php echo e($combinacionMediana["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim</td>
-                        <td id="tdNewConsumoEnergeticoC">
-                            <?php echo e($combinacionOptima["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nuevo consumo economico</strong></td>
-                        <td id="tdNewConsumoEconomicoA">
-                            $<?php echo e(number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
-                        </td>
-                        <td id="tdNewConsumoEconomicoB">
-                            $<?php echo e(number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
-                        </td>
-                        <td id="tdNewConsumoEconomicoC">
-                            $<?php echo e(number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Subtotal s/IVA</strong>
-                        </td>
-                        <td id="tdSubtotalA">
-                            $<?php echo e(number_format($combinacionEconomica["totales"]["precio"],2)); ?> USD
-                        </td>
-                        <td id="tdSubtotalB">
-                            $<?php echo e(number_format($combinacionMediana["totales"]["precio"],2)); ?> USD
-                        </td>
-                        <td id="tdSubtotalC">
-                            $<?php echo e(number_format($combinacionOptima["totales"]["precio"],2)); ?> USD
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Total c/IVA</strong>
-                        </td>
-                        <td id="tdTotalA">
-                            $<?php echo e(number_format($combinacionEconomica["totales"]["precioMasIVA"],2)); ?> USD
-                        </td>
-                        <td id="tdTotalB">
-                            $<?php echo e(number_format($combinacionMediana["totales"]["precioMasIVA"],2)); ?> USD
-                        </td>
-                        <td id="tdTotalC">
-                            $<?php echo e(number_format($combinacionOptima["totales"]["precioMasIVA"],2)); ?> USD
+                        <td id="tdPotenciaInstaladaC" class="text-tab-comparativa">
+                            <?php echo e(number_format($combinacionOptima["paneles"]["potenciaReal"],2)); ?> Kw
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <table id="panel" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Marca
+                    </td>
+                    <td id="tdMarcaPanelA">
+                        <?php ($image = $combinacionEconomica["paneles"]["marca"] . '.png'); ?>
+                        <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaPanelB">
+                        <?php ($image = $combinacionMediana["paneles"]["marca"] . '.png'); ?>
+                        <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaPanelC">
+                        <?php ($image = $combinacionOptima["paneles"]["marca"] . '.png'); ?>
+                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Modelo
+                    </td>
+                    <td id="tdModeloPanelA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["paneles"]["nombre"]); ?>
+
+                    </td>
+                    <td id="tdModeloPanelB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["paneles"]["nombre"]); ?>
+
+                    </td>
+                    <td id="tdModeloPanelC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["paneles"]["nombre"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Cantidad
+                    </td>
+                    <td id="tdCantidadPanelA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["paneles"]["noModulos"]); ?>
+
+                    </td>
+                    <td id="tdCantidadPanelB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["paneles"]["noModulos"]); ?>
+
+                    </td>
+                    <td id="tdCantidadPanelC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["paneles"]["noModulos"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Origen
+                    </td>
+                    <td id="tdOrigenPanelA">
+                        <?php ($image = $combinacionEconomica['paneles']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                     </td>
+                    <td id="tdOrigenPanelB">
+                        <?php ($image = $combinacionMediana['paneles']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                    <td id="tdOrigenPanelC">
+                        <?php ($image = $combinacionOptima['paneles']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                </tr>
+            </table>
+            <table id="inversor" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Marca
+                    </td>
+                    <td id="tdMarcaInversorA">
+                        <?php ($image = $combinacionEconomica["inversores"]["marca"] . '.jpg'); ?>
+                        <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaInversorB">
+                        <?php ($image = $combinacionMediana["inversores"]["marca"] . '.jpg'); ?>
+                        <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaInversorC">
+                        <?php ($image = $combinacionOptima["inversores"]["marca"] . '.jpg'); ?>
+                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Modelo
+                    </td>
+                    <td id="tdModeloInversorA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["inversores"]["vNombreMaterialFot"]); ?>
+
+                    </td>
+                    <td id="tdModeloInversorB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["inversores"]["vNombreMaterialFot"]); ?>
+
+                    </td>
+                    <td id="tdModeloInversorC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["inversores"]["vNombreMaterialFot"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Cantidad
+                    </td>
+                    <td id="tdCantidadInversorA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["inversores"]["numeroDeInversores"]); ?>
+
+                    </td>
+                    <td id="tdCantidadInversorB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["inversores"]["numeroDeInversores"]); ?>
+
+                    </td>
+                    <td id="tdCantidadInversorC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["inversores"]["numeroDeInversores"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Potencia
+                    </td>
+                    <td id="tdPotenciaInversorA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["inversores"]["fPotencia"]); ?> W
+                    </td>
+                    <td id="tdPotenciaInversorB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["inversores"]["fPotencia"]); ?> W
+                    </td>
+                    <td id="tdPotenciaInversorC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["inversores"]["fPotencia"]); ?> W
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Origen
+                    </td>
+                    <td id="tdOrigenInversorA">
+                        <?php ($image = $combinacionEconomica['inversores']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                    <td id="tdOrigenInversorB">
+                        <?php ($image = $combinacionMediana['inversores']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                    <td id="tdOrigenInversorC">
+                        <?php ($image = $combinacionOptima['inversores']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                </tr>
+            </table>
+            <table id="estructura" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Marca
+                    </td>
+                    <td id="tdMarcaEstructuraA">
+                        <?php ($image = $combinacionEconomica['estructura']['marca'] . '.png'); ?>
+                        <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaEstructuraB">
+                        <?php ($image = $combinacionMediana['estructura']['marca'] . '.png'); ?>
+                        <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
+                    </td>
+                    <td id="tdMarcaEstructuraC">
+                        <?php ($image = $combinacionOptima['estructura']['marca'] . '.png'); ?>
+                        <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image)))); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Modelo
+                    </td>
+                    <td id="tdModeloEstructuraA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["estructura"]["marca"]); ?>
+
+                    </td>
+                    <td id="tdModeloEstructuraB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["estructura"]["marca"]); ?>
+
+                    </td>
+                    <td id="tdModeloEstructuraC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["estructura"]["marca"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Cantidad
+                    </td>
+                    <td id="tdCantidadEstructuraA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["estructura"]["cantidad"]); ?>
+
+                    </td>
+                    <td id="tdCantidadEstructuraB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["estructura"]["cantidad"]); ?>
+
+                    </td>
+                    <td id="tdCantidadEstructuraC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["estructura"]["cantidad"]); ?>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Origen
+                    </td>
+                    <td id="tdOrigenEstructuraA">
+                        <?php ($image = $combinacionEconomica['estructura']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                    <td id="tdOrigenEstructuraB">
+                        <?php ($image = $combinacionMediana['estructura']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                    <td id="tdOrigenEstructuraC">
+                        <?php ($image = $combinacionOptima['estructura']['origen'] . '.png'); ?>
+                        <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/' . $image)))); ?>">
+                    </td>
+                </tr>  
+            </table>
+            <table id="ahorro" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-tab-comparativa">
+                        <strong class="title-tab-comparativa">Consumo sin Paneles</strong>
+                        <?php echo e(number_format($propuesta["promedioConsumosBimestrales"],2)); ?> kw  |  $<?php echo e(number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2)); ?> MXN
+                        <strong class="title-tab-comparativa">[ Bimestrales ]</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        % de generacion
+                    </td>
+                    <td id="tdPorcentajePropuestaA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["power"]["porcentajePotencia"]); ?>%
+                    </td>
+                    <td id="tdPorcentajePropuestaB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["power"]["porcentajePotencia"]); ?>%
+                    </td>
+                    <td id="tdPorcentajePropuestaC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["power"]["porcentajePotencia"]); ?>%
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Nuevo consumo energetico
+                    </td>
+                    <td id="tdNewConsumoEnergeticoA" class="text-tab-comparativa">
+                        <?php echo e($combinacionEconomica["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
+                    </td>
+                    <td id="tdNewConsumoEnergeticoB" class="text-tab-comparativa">
+                        <?php echo e($combinacionMediana["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
+                    </td>
+                    <td id="tdNewConsumoEnergeticoC" class="text-tab-comparativa">
+                        <?php echo e($combinacionOptima["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> Kw/bim
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Nuevo consumo economico
+                    </td>
+                    <td id="tdNewConsumoEconomicoA" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                    </td>
+                    <td id="tdNewConsumoEconomicoB" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                    </td>
+                    <td id="tdNewConsumoEconomicoC" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                    </td>
+                </tr>
+            </table>
+            <table id="totales" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Subtotal s/IVA
+                    </td>
+                    <td id="tdSubtotalA" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionEconomica["totales"]["precio"],2)); ?> USD
+                    </td>
+                    <td id="tdSubtotalB" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionMediana["totales"]["precio"],2)); ?> USD
+                    </td>
+                    <td id="tdSubtotalC" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionOptima["totales"]["precio"],2)); ?> USD
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-tab-comparativa">
+                        Total c/IVA
+                    </td>
+                    <td id="tdTotalA" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionEconomica["totales"]["precioMasIVA"],2)); ?> USD
+                    </td>
+                    <td id="tdTotalB" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionMediana["totales"]["precioMasIVA"],2)); ?> USD
+                    </td>
+                    <td id="tdTotalC" class="text-tab-comparativa">
+                        $<?php echo e(number_format($combinacionOptima["totales"]["precioMasIVA"],2)); ?> USD
+                    </td>
+                </tr>
+            </table>
+            <!-- Fin - Tabla comparativa - [ COMBINACIONES ] -->
         </div>
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 2 -->
     <hr class="salto-pagina">
-    
     <!-- Pagina 3 -->
     <div class="container-fluid" style="border-top: 10px solid #5576F2;">
         <table>
@@ -897,11 +1041,20 @@
                             <?php endswitch; ?>
                             
                             <?php if($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent] > $propuesta["roi"]["ahorro"]["ahorroMensualEnPesosMXN"] && $propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent] < ($propuesta["roi"]["ahorro"]["ahorroMensualEnPesosMXN"] * 1.10)): ?>
-                                <td id="amarillo" style="background-color:#E0D30C">$<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
+                                <td id="amarillo" style="background-color:#E0D30C">
+                                    $<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?>
+
+                                </td>
                             <?php elseif($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent] <= $propuesta["roi"]["ahorro"]["ahorroMensualEnPesosMXN"]): ?>
-                                <td id="verde" style="background-color:#44C331">$<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
+                                <td id="verde" style="background-color:#44C331">
+                                    $<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?>
+
+                                </td>
                             <?php else: ?>
-                                <td id="normal" style="background-color:#3A565E">$<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?></td>
+                                <td id="normal" style="background-color:#3A565E">
+                                    $<?php echo e(number_format($propuesta["financiamiento"]["_pagosMensualesPorPlazo"][$x][$porcent], 2)); ?>
+
+                                </td>
                             <?php endif; ?>
                         <?php endfor; ?>
                     </tr>

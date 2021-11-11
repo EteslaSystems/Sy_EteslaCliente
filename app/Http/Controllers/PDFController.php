@@ -85,7 +85,7 @@ class PDFController extends Controller
 
     public function visualizarPDF()
     {
-        $pdf = PDF::loadview('PDFTemplates.machotes.bajaTension')
+        $pdf = PDF::loadview('PDFTemplates.machotes.propuestaCombinaciones')
         ->setOptions(['isRemoteEnabled' => false])
         ->setPaper('A4');
 

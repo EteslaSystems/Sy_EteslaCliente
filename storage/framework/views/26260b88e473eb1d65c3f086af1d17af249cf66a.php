@@ -11,6 +11,18 @@
     html{
         margin: 0;
     }
+    .marca-de-agua{
+        background-image: url('data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>');
+        background-position: center center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: 10;
+        opacity: 0.5;
+    }
     .footer-page{
         position: fixed;
         bottom: 0cm; 
@@ -120,14 +132,13 @@
     .table-comparative{
         width: 100%;
         border-collapse: collapse;
-        border-radius: 10px;
+        border-radius: 20px;
         overflow: hidden;
         text-align: center;
-        border-color: #DE1616;
     }
 
     .table-comparative th, .table-comparative td{
-        border: 1px solid black;
+        border: 2px solid #EFEFEF;
         width: 45%;
     }
     .imgLogos{
@@ -272,8 +283,12 @@
                         <td></td>
                         <td></td>
                         <td style="width:10%;"></td>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/eu.png')))); ?>"/></td>
-                        <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/complementos/mx.png')))); ?>"/></td>
+                        <td align="center">
+                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png')))); ?>"/>
+                        </td>
+                        <td align="center">
+                            <img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/>
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Subtotal sin IVA</strong></td>
@@ -393,7 +408,7 @@
     <hr class="salto-pagina">
 
     <!-- Pagina 2 - Comparativa[combinaciones] -->
-    <div class="container-fluid">
+    <div class="container-fluid marca-de-agua">
         <table>
             <tr>
                 <td>
@@ -406,7 +421,7 @@
                 </td>
             </tr>
         </table>
-        <div class="div-contenedor">
+        <div id="comparativas-combinaciones" class="div-contenedor">
             <table class="table-comparative">
                 <thead style="background-color:#D68910; color:#FFFFFF;">
                     <tr>
@@ -417,42 +432,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td name="tdInvisible" style="border-left:0px; border-top:0px;"></td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="margin-left:-80px;">
-                                <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
-                            </div>
-                            <div style="margin-left:90px; margin-top:-55px;">
-                                <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
-                            </div>
-                            <div>
-                                <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
-                            </div>
-                        </td>
-                    </tr>
                     <tr>
                         <td><strong>Costo por watt</strong></td>
                         <td id="tdCostoWattA">$* USD</td>
@@ -471,128 +450,156 @@
                         <td id="tdPorcentajePropuestaB">* %</td>
                         <td id="tdPorcentajePropuestaC">* %</td>
                     </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloPanelA">*</td>
-                        <td id="tdModeloPanelB">*</td>
-                        <td id="tdModeloPanelC">*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadPanelA">*</td>
-                        <td id="tdCantidadPanelB">*</td>
-                        <td id="tdCantidadPanelC">*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Potencia</strong></td>
-                        <td id="tdPotenciaPanelA">* W</td>
-                        <td id="tdPotenciaPanelB">* W</td>
-                        <td id="tdPotenciaPanelC">* W</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloInversorA">*</td>
-                        <td id="tdModeloInversorB">*</td>
-                        <td id="tdModeloInversorC">*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadInversorA">*</td>
-                        <td id="tdCantidadInversorB">*</td>
-                        <td id="tdCantidadInversorC">*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Potencia</strong></td>
-                        <td id="tdPotenciaInversorA">* W</td>
-                        <td id="tdPotenciaInversorB">* W</td>
-                        <td id="tdPotenciaInversorC">* W</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
-                        <td id="tdModeloEstructuraA">*</td>
-                        <td id="tdModeloEstructuraB">*</td>
-                        <td id="tdModeloEstructuraC">*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
-                        <td id="tdCantidadEstructuraA">*</td>
-                        <td id="tdCantidadEstructuraB">*</td>
-                        <td id="tdCantidadEstructuraC">*</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Energetico</strong></td>
-                        <td id="tdAhorroEnergeticoA">* Kw/bim</td>
-                        <td id="tdAhorroEnergeticoB">* Kw/bim</td>
-                        <td id="tdAhorroEnergeticoC">* Kw/bim</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Economico</strong></td>
-                        <td id="tdAhorroEconomicoA">$* MXN</td>
-                        <td id="tdAhorroEconomicoB">$* MXN</td>
-                        <td id="tdAhorroEconomicoC">$* MXN</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Subtotal s/IVA</strong></td>
-                        <td id="tdSubtotalA">$* USD</td>
-                        <td id="tdSubtotalB">$* USD</td>
-                        <td id="tdSubtotalC">$* USD</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Total c/IVA</strong></td>
-                        <td id="tdTotalA">$* USD</td>
-                        <td id="tdTotalB">$* USD</td>
-                        <td id="tdTotalC">$* USD</td>
-                    </tr>
-                </tbody>
+                </tbody> 
             </table>
-        </div>
-        <!-- Info. sobre los equipos seleccionados -->
-        <div class="div-contenedor">
-            <p style="text-align:center;">
-                <span style="background-color:#718AE2; color:white; font-weight: bolder;">
-                    Equipos seleccionados
-                </span>
-            </p>
-            <table>
-                <tr name="div-panel">
-                    <td name="img-equipo" width="30%">
-                        <div class="div-contenedor" style="margin-top:-40px; margin-left:-23px;">
-                            <img height="195px" width="187px" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/panel/Axitec.png')))); ?>">
-                        </div>
+            <table id="panel" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca</strong></td>
+                    <td id="tdMarcaPanelA">
+                        <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
                     </td>
-                    <td name="info-equipo" width="500px">
-                        <div class="div-contenedor recuadroInfo" style="margin-top:-35px; margin-left:-300px; margin-right:270px;">
-                            <p style="margin-left:10px; margin-right:10px;">AXITEC GmbH fué creada en 2001 y cuenta con su sede en Stuttgart (Alemania). Desde hace años pertenece a las principales empresas productoras de módulos fotovoltaicos a nivel internacional, debido a su calidad. AXITEC está especializada en la producción de módulos fotovoltaicos, y abarca toda la cadena de procesamiento del módulo solar. No sólo se encarga de su diseño y fabricación sino que también es responsable de su comercialización y de su servicio técnico.</p>
-                        </div>
+                    <td id="tdMarcaPanelB">
+                        <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                    </td>
+                    <td id="tdMarcaPanelC">
+                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
                     </td>
                 </tr>
-                <tr name="div-inversor">
-                    <td name="info-equipo" width="500px">
-                        <div class="div-contenedor recuadroInfo" style="margin-left:-12px;">
-                            <p style="margin-left:10px; margin-right:10px;">Al abandonar paulatinamente los combustibles fósiles, consumiremos más electricidad en los sectores de calefacción (sistemas modernos de calefacción con bomba de calor) y movilidad (automóviles eléctricos). Por lo tanto, es sensato empezar a pensar hoy acerca de cómo se puede satisfacer esta demanda creciente de manera sostenible y rentable.
-
-                            Con una instalación fotovoltaica, no solo podrá alimentar sus electrodomésticos con energía solar, sino también podrá calentar agua para ducharse o cargar su automóvil eléctrico.</p>
-                        </div>
+                <tr>
+                    <td><strong>Modelo</strong></td>
+                    <td id="tdModeloPanelA">*</td>
+                    <td id="tdModeloPanelB">*</td>
+                    <td id="tdModeloPanelC">*</td>
+                </tr>
+                <tr>
+                    <td><strong>Cantidad</strong></td>
+                    <td id="tdCantidadPanelA">*</td>
+                    <td id="tdCantidadPanelB">*</td>
+                    <td id="tdCantidadPanelC">*</td>
+                </tr>
+                <tr>
+                    <td><strong>Potencia</strong></td>
+                    <td id="tdPotenciaPanelA">* W</td>
+                    <td id="tdPotenciaPanelB">* W</td>
+                    <td id="tdPotenciaPanelC">* W</td>
+                </tr>
+            </table>
+            <table id="inversor" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca</strong></td>
+                    <td id="tdMarcaInversorA">
+                        <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
                     </td>
-                    <td name="img-equipo" width="30%">
-                        <div class="div-contenedor">
-                            <img height="195px" width="187px" style="margin-top:-20px;" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/instrumentos/inversor/Fronius Solar.jpg')))); ?>">
-                        </div>
+                    <td id="tdMarcaInversorB">
+                        <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
+                    </td>
+                    <td id="tdMarcaInversorC">
+                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Modelo</strong></td>
+                    <td id="tdModeloInversorA">*</td>
+                    <td id="tdModeloInversorB">*</td>
+                    <td id="tdModeloInversorC">*</td>
+                </tr>
+                <tr>
+                    <td><strong>Cantidad</strong></td>
+                    <td id="tdCantidadInversorA">*</td>
+                    <td id="tdCantidadInversorB">*</td>
+                    <td id="tdCantidadInversorC">*</td>
+                </tr>
+                <tr>
+                    <td><strong>Potencia</strong></td>
+                    <td id="tdPotenciaInversorA">* W</td>
+                    <td id="tdPotenciaInversorB">* W</td>
+                    <td id="tdPotenciaInversorC">* W</td>
+                </tr>
+            </table>
+            <table id="estructura" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca</strong></td>
+                    <td id="tdMarcaEstructuraA">
+                        <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
+                    </td>
+                    <td id="tdMarcaEstructuraB">
+                        <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                    </td>
+                    <td id="tdMarcaEstructuraC">
+                        <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/Everest.png')))); ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Modelo</strong></td>
+                    <td id="tdModeloEstructuraA">*</td>
+                    <td id="tdModeloEstructuraB">*</td>
+                    <td id="tdModeloEstructuraC">*</td>
+                </tr>
+                <tr>
+                    <td><strong>Cantidad</strong></td>
+                    <td id="tdCantidadEstructuraA">*</td>
+                    <td id="tdCantidadEstructuraB">*</td>
+                    <td id="tdCantidadEstructuraC">*</td>
+                </tr>
+            </table>
+            <table id="ahorro" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Energetico</strong></td>
+                    <td id="tdAhorroEnergeticoA">* Kw/bim</td>
+                    <td id="tdAhorroEnergeticoB">* Kw/bim</td>
+                    <td id="tdAhorroEnergeticoC">* Kw/bim</td>
+                </tr>
+                <tr>
+                    <td><strong>Economico</strong></td>
+                    <td id="tdAhorroEconomicoA">$* MXN</td>
+                    <td id="tdAhorroEconomicoB">$* MXN</td>
+                    <td id="tdAhorroEconomicoC">$* MXN</td>
+                </tr>
+            </table>
+            <table id="totales" class="table-comparative" style="margin-top:20px;">
+                <tr>
+                    <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal s/IVA</strong></td>
+                    <td id="tdSubtotalA">$* USD</td>
+                    <td id="tdSubtotalB">$* USD</td>
+                    <td id="tdSubtotalC">$* USD</td>
+                </tr>
+                <tr>
+                    <td><strong>Total c/IVA</strong></td>
+                    <td id="tdTotalA">$* USD</td>
+                    <td id="tdTotalB">$* USD</td>
+                    <td id="tdTotalC">$* USD</td>
+                </tr>
+            </table>
+            <!-- Nota * Costo por watt -->
+            <table></table>
+            <!-- Fin - Nota * Costo por watt -->
+        
+            <table id="nota-costo-watt" class="table-comparative" style="margin-top:70px;">
+                <tr>
+                    <td style="background-color:#9AC5E7;">
+                        <p style="font-size:13px; font-weight:bold; color:#FFFFFF;">NOTA IMPORTANTE</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            Entre los costos, lo más importante a revisar es el <strong style="background-color:#ECFF00;">costo por watt</strong> del proyecto, pues va en función del costo del proyecto y la potencia instalada. Puede ser que un proyecto se note económico pero es posible que estén proponiendo menos potencia y por ende la cotización a comparar no tenga equivalente.
+                        </p>
                     </td>
                 </tr>
             </table>

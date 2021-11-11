@@ -171,6 +171,7 @@ function filtrarEstructura(idEstruct){
             type: 'PUT',
             url: "/editar-estructura",
             data: { idEstructura: idEstruct },
+            dataType: 'json',
             succes: function(estructuraFiltrada){
                 console.log(estructuraFiltrada);
 

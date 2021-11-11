@@ -339,7 +339,7 @@ function mostrarPanelSelected(){
             _paneles = JSON.parse(_paneles);
             /*#endregion*/
     
-            $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.marca);
+            $('#inpMarcaPanelS').val(_paneles[ddlPanelesValue].panel.vMarca);
     
             //Consumos
             let promedioConsumoMensual = _paneles[0].consumo._promCons.consumoMensual.promedioConsumoMensual;
