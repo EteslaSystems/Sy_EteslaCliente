@@ -44,6 +44,11 @@ class vendedorController extends Controller
 
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
 		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
+
+		if($consultarClientes->status == 500){
+			return redirect('index')->with('status-fail', 'Error al consultar clientes: '.$consultarClientes->message);
+		}
+
 		$consultarClientes = $consultarClientes->message;
 
 		return view('template.clientes', compact('consultarClientes'));

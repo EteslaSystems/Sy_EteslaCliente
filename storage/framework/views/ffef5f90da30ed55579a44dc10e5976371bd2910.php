@@ -669,7 +669,7 @@
                                                                             <strong>Bim($)</strong>
                                                                         </td>
                                                                         <td id="tdNuevoConsumoDinBim" class="tdAnsw"></td>
-                                                                        <td class="tdMes">
+                                                                        <td class="tdBim">
                                                                             <strong>Bim($)</strong>
                                                                         </td>
                                                                         <td id="tdAhorroDinBim" class="tdAnsw"></td>

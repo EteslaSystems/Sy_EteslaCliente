@@ -393,7 +393,7 @@
                 </td>
             </tr>
         </table>
-        <!-- Fin logos/marcas equip. -->
+        <!-- Fin logos/marcas equip. -->    
         <hr class="linea-division" style="background-color:#5576F2;">
 
         <table class="table-contenedor">
@@ -868,6 +868,22 @@
                 </tr>
             </table>
             <!-- Fin - Tabla comparativa - [ COMBINACIONES ] -->
+            <!-- Nota * Costo por watt -->
+            <table id="nota-costo-watt" class="table-comparative" style="margin-top:55px;">
+                <tr>
+                    <td style="background-color:#9AC5E7;">
+                        <p style="font-size:11px; font-weight:bold;">NOTA IMPORTANTE</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-size:9px;">
+                            Entre los costos, lo más importante a revisar es el <strong style="background-color:#ECFF00;">costo por watt</strong> del proyecto, pues va en función del costo del proyecto y la potencia instalada. Puede ser que un proyecto se note económico pero es posible que estén proponiendo menos potencia y por ende la cotización a comparar no tenga equivalente.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- Fin - Nota * Costo por watt -->
         </div>
         <div class="footer-page"></div>
     </div>

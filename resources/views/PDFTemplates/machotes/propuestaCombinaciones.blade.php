@@ -586,9 +586,6 @@
                 </tr>
             </table>
             <!-- Nota * Costo por watt -->
-            <table></table>
-            <!-- Fin - Nota * Costo por watt -->
-        
             <table id="nota-costo-watt" class="table-comparative" style="margin-top:70px;">
                 <tr>
                     <td style="background-color:#9AC5E7;">
@@ -603,6 +600,7 @@
                     </td>
                 </tr>
             </table>
+            <!-- Fin - Nota * Costo por watt -->
         </div>
         <div class="footer-page"></div>
     </div>

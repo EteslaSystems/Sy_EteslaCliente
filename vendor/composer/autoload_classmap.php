@@ -44,7 +44,6 @@ return array(
     'App\\Http\\Controllers\\clienteController' => $baseDir . '/app/Http/Controllers/clienteController.php',
     'App\\Http\\Controllers\\ingenieroController' => $baseDir . '/app/Http/Controllers/ingenieroController.php',
     'App\\Http\\Controllers\\operacionesController' => $baseDir . '/app/Http/Controllers/operacionesController.php',
-    'App\\Http\\Controllers\\sellerController' => $baseDir . '/app/Http/Controllers/sellerController.php',
     'App\\Http\\Controllers\\usuarioController' => $baseDir . '/app/Http/Controllers/usuarioController.php',
     'App\\Http\\Controllers\\vendedorController' => $baseDir . '/app/Http/Controllers/vendedorController.php',
     'App\\Http\\Controllers\\verificacionController' => $baseDir . '/app/Http/Controllers/verificacionController.php',
