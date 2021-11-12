@@ -26,7 +26,6 @@ class PropuestasController extends Controller
 
     public function guardarPropuesta(Request $request){
 		$propuesta["idVendedor"] = session('dataUsuario')->idUsuario;
-		$propuesta["idCliente"] = $request->propuesta->cliente->idCliente;
 		$propuesta["propuesta"] = $request->propuesta;
 
 		$response = $this->propuesta->save(['json' => $propuesta]);
