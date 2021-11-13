@@ -527,17 +527,32 @@
                                         <!-- Ahorro -->
                                         <div class="container">
                                             <div class="row">
-                                                <!--div class="col-5">
-                                                    <div class="form-row">
-                                                        <select id="ddlGraficoView" class="custom-select custom-select-sm" onchange="pintarGrafico()">
-                                                            <option value="-1">Escoge una opcion</option>
-                                                            <option value="ahorroEnergetico">Ahorro energetico</option>
-                                                            <option value="ahorroEconomico">Ahorro economico</option>
-                                                        </select>
-                                                        <canvas id="crtGraficos" width="150px" height="100px"></canvas>
-                                                        <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados bimestralmente</p>
+                                                <div class="col-5">
+                                                    <div id="carouselGraficas" class="carousel slide" data-interval="false" style="margin-top:15px;">
+                                                        <div class="carousel-inner text-center">
+                                                            <div class="carousel-item">
+                                                                <div class="custom-control grafico">
+                                                                    <canvas id="grafEnergetico" width="150px" height="100px"></canvas>
+                                                                    <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="carousel-item active">
+                                                                <div class="custom-control grafico">
+                                                                    <canvas id="grafEconomico" width="150px" height="100px"></canvas>
+                                                                    <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselGraficas" role="button" data-slide="prev">
+                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carouselGraficas" role="button" data-slide="next">
+                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
                                                     </div>
-                                                </div-->
+                                                </div>
                                                 <div class="col">
                                                     <div class="row">
                                                         <div class="col">

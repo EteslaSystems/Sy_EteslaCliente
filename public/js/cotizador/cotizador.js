@@ -327,120 +327,113 @@ function guardarPropuesta(){
 }
 /*#endregion*/
 /*#region Graficos*/
-function pintarGrafico(){
-    let tipoCotizacion = null;
-    let grafico = document.getElementById('crtGraficos').getContext('2d');
-    let confingChart = {};
-    let dataToSetGraphic = { sinPaneles: null, conPaneles: null };
-    let data = {};
-
-    let optionSelected = $('#ddlGraficoView').val();
-
-    //Formating... * BajaTension || MediaTension *
-    tipoCotizacion = JSON.parse(sessionStorage.getItem("answPropuesta")); //get - [data_propuesta]
-    tipoCotizacion = tipoCotizacion[0].tipoCotizacion;
+function pintarGrafico(Data){
+    // let tipoCotizacion = null;
+    let graficoEnergetico = document.getElementById('grafEnergetico').getContext('2d');
+    let graficoEconomico = document.getElementById('grafEconomico').getContext('2d');
 
     try{
-        if(optionSelected != '-1'){
-            //Llenado de la DATA para pintar las graficas [ 'energetico' || 'economico' ]
-            if(tipoCotizacion === 'bajaTension'){ //BajaTension
-                data = JSON.parse(sessionStorage.getItem('answPropuesta'));
+        //Formating *
+        /* Energetico */
+        let _consumosEnergActualesBim = Data.objResp.consumo._promCons._consumosBimestrales;
+        let _generacionBim = Data._viaticos[0].power.generacion._generacionBimestral;
+        let _consumosEnergNuevosBim = Data._viaticos[0].power.nuevosConsumos._consumosNuevosBimestrales;
+        /* Economico */
+        let _consumosEconActualesBim = Data._viaticos[0].power.objConsumoEnPesos._pagosBimestrales;
+        let _consumosEconNuevosBim = Data._viaticos[0].power.objGeneracionEnpesos._pagosBimestrales;
 
-                if(optionSelected == 'ahorroEnergetico'){ //[DATA] Ahorro energetico
-                    dataToSetGraphic.sinPaneles = data[0].power._consumos._promCons._consumosBimestrales;
-                    dataToSetGraphic.conPaneles = data[0].power.nuevosConsumos._consumosNuevosBimestrales;
-                }
-                else{ //[DATA] Ahorro economico
-                    dataToSetGraphic.sinPaneles = data[0].power.objConsumoEnPesos._pagosBimestrales;
-                    dataToSetGraphic.conPaneles = data[0].power.objGeneracionEnpesos._pagosBimestrales;
-                }
-            }
-            // else{ //MediaTension
-
-            // }
-
-            //Configuracion - Graficos
-            switch(tipoCotizacion)
-            {
-                case 'bajaTension':
-                    confingChart = {
-                        type: 'bar',
-                        data: {
-                            labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
-                            datasets: [
-                                {
-                                    label: 'Consumo actual',
-                                    data: null,
-                                    borderColor: 'rgb(235, 68, 65)',
-                                    backgroundColor: 'rgb(235, 68, 65, 0.51)',
-                                },
-                                {
-                                    label: 'Nuevo consumo',
-                                    data: null,
-                                    borderColor: 'rgb(109, 198, 20)',
-                                    backgroundColor: 'rgba(109, 198, 20, 0.21)',
-                                }
-                            ]
-                        },
-                        options: {
-                            title:{
-                                display: true,
-                                position: 'top',
-                                text: null
-                            },
-                            scales: {
-                                yAxes: []
-                            } 
-                        }
-                    };
-
-                    if(optionSelected == 'ahorroEnergetico'){ //[DATA] Ahorro energetico
-                        //Title graphic
-                        confingChart.options.title.text = 'Ahorro energetico';
-
-                        //Formateado de data - Ahorro energetico
-                        confingChart.data.datasets[0].data = dataToSetGraphic.sinPaneles;
-                        confingChart.data.datasets[1].data = dataToSetGraphic.conPaneles;
-
-                        //Formateado -Eje Y- 'kw'
-                        confingChart.options.scales.yAxes[0] = {
+        ///
+        let confingChartEnergetico = {
+            type: 'bar',
+            data: {
+                labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
+                datasets: [
+                    {
+                        label: 'Generacion c/paneles [Bimestral]',
+                        data: _generacionBim,
+                        borderColor: 'rgb(109, 198, 20)',
+                        backgroundColor: 'rgba(109, 198, 20, 0.21)',
+                    },
+                    {
+                        label: 'Consumos s/paneles [Bimestral]',
+                        data: _consumosEnergActualesBim,
+                        borderColor: 'rgb(235, 68, 65)',
+                        backgroundColor: 'rgb(235, 68, 65, 0.51)',
+                    },
+                    {
+                        label: 'Consumos c/paneles [Bimestral]',
+                        data: _consumosEnergNuevosBim,
+                        borderColor: 'rgb(7, 161, 167)',
+                        backgroundColor: 'rgb(181, 238, 242)',
+                    }
+                ]
+            },
+            options: {
+                title:{
+                    display: true,
+                    position: 'top',
+                    text: 'Consumo energetico'
+                },
+                scales: {
+                    yAxes: [
+                        {
                             ticks: {
-                                //Incluye -'kw'- a los valores que se muestran en el eje Y
+                                beginAtZero: true,
                                 callback: function(value, index, values) {
+                                    //Incluye -'kw'- a los valores que se muestran en el eje Y
                                     return value.toLocaleString('es-MX') + ' kw';
                                 }
                             }
-                        };
+                        }
+                    ]
+                } 
+            }
+        };
+
+        ///
+        let configChartEconomico = {
+            type: 'bar',
+            data: {
+                labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
+                datasets: [
+                    {
+                        label: 'Consumo s/paneles [Bimestral]',
+                        data: _consumosEconActualesBim,
+                        borderColor: 'rgb(235, 68, 65)',
+                        backgroundColor: 'rgb(235, 68, 65, 0.51)',
+                    },
+                    {
+                        label: 'Consumo c/paneles [Bimestral]',
+                        data: _consumosEconNuevosBim,
+                        borderColor: 'rgb(7, 161, 167)',
+                        backgroundColor: 'rgb(181, 238, 242)',
                     }
-                    else{ //[DATA] Ahorro economico
-                        //Title graphic
-                        confingChart.options.title.text = 'Ahorro economico';
-
-                        //Formateado de data - Ahorro energetico
-                        confingChart.data.datasets[0].data = dataToSetGraphic.sinPaneles;
-                        confingChart.data.datasets[1].data = dataToSetGraphic.conPaneles;
-
-                        //Formateado de -Eje Y- '$'
-                        confingChart.options.scales.yAxes[0] = {
+                ]
+            },
+            options: {
+                title:{
+                    display: true,
+                    position: 'top',
+                    text: 'Consumo economico'
+                },
+                scales: {
+                    yAxes: [
+                        {
+                            beginAtZero: true,
                             ticks: {
-                                //Incluye -'kw'- a los valores que se muestran en el eje Y
                                 callback: function(value, index, values) {
-                                    return '$' + value.toLocaleString('es-MX');
+                                    //Incluye -'kw'- a los valores que se muestran en el eje Y
+                                    return '$ ' + value.toLocaleString('es-MX') + ' MXN';
                                 }
                             }
-                        };
-                    }
-                break;
-                case 'mediaTension':
-                    confingChart = {};
-                break;
-                default:
-                    -1;
-                break;
+                        }
+                    ]
+                } 
             }
+        };
 
-            window.grafico = new Chart(grafico, confingChart);
-        }
+        window.graficoEnergetico = new Chart(graficoEnergetico,confingChartEnergetico);
+        window.graficoEconomico = new Chart(graficoEconomico,configChartEconomico);
     }
     catch(error){
         console.log(error);

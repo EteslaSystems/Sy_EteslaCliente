@@ -235,13 +235,6 @@ function calcularViaticosBT(objInversor){
                             //Se llena el storage
                             sessionStorage.setItem('answPropuesta',JSON.stringify(resultViaticos.message));
                             
-                            /*#region Graficos*/
-                            //Se selecciona de primera instancia 'AhorroEnergetico' en el <select>
-                            $('#ddlGraficoView option[value="ahorroEnergetico"]').attr("selected",true);
-                            //Se pinta el grafico
-                            // pintarGrafico();
-                            /*#endregion*/
-                            
                             resolve(resultViaticos);
                         },
                         error: function(error){
@@ -783,6 +776,9 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     objResp = JSON.parse(objResp);
     /*#endregion*/
     
+    //Se pinta el grafico
+    pintarGrafico({_viaticos,objResp});
+
     if(_viaticos[0].inversores.combinacion === "true"){
         $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores.MicroUno.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroUno.numeroDeInversores + '\n' + _viaticos[0].inversores.numeroDeInversores.MicroDos.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroDos.numeroDeInversores);
     }
