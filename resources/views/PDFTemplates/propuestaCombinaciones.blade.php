@@ -156,6 +156,11 @@
         line-height: 5%;
         text-align: center;
     }
+    .nota{
+        font-size:11px; 
+        color: #969696;
+        text-align: center;
+    }
 
     /* Cards */
     .card{
@@ -331,10 +336,10 @@
                         </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
-                        <td><strong>Subtotal sin IVA</strong></td>
+                        <td><strong>Total sin IVA</strong></td>
                         <td></td>
-                         @if($propuesta["descuento"]["porcentaje"] >= 1)
-                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                         @if($propuesta["descuento"]["porcentaje"] > 0)
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
                                 <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     ${{ number_format($propuesta["descuento"]["descuento"],2) }} USD
                                 </p>
@@ -352,16 +357,7 @@
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        @if($propuesta["descuento"]["porcentaje"] >= 1)
-                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
-                                @php($descuentoMXN = $propuesta["descuento"]["descuento"] * $propuesta["tipoDeCambio"])
-                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
-                                    ${{ number_format($descuentoMXN,2) }} MXN
-                                </p> 
-                            </td>
-                        @else
-                            <td></td>
-                        @endif
+                        <td></td>
                         <td id="totalConIVAUSD" align="center">
                             ${{ number_format($propuesta["totales"]["precioMXNSinIVA"],2) }} USD
                         </td>
@@ -374,7 +370,7 @@
         </div>
         <!-- Leyenda - Tipo de cambio -->
         <div id="leyendaTipoDeCambio" style="margin-left:20px; margin-right:20px;">
-            <p style="font-size:11px; color: #969696;" align="center"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+            <p  class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
         <table class="table-contenedor">
@@ -821,7 +817,7 @@
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
-                        Nuevo consumo economico
+                        Nuevo pago de luz
                     </td>
                     <td id="tdNewConsumoEconomicoA" class="text-tab-comparativa">
                         ${{ number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2) }} MXN / bim
@@ -838,9 +834,39 @@
                 <tr>
                     <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
                 </tr>
+                @if($propuesta["descuento"]["porcentaje"] > 0)
+                    <tr>
+                        <td class="title-tab-comparativa" style="background-color:#2593F0; color:white;">
+                            Total s/Descuento  
+                        </td>
+                        <td id="tdCostoSinDescuentoA" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                            ${{ number_format($combinacionEconomica["descuento"]["precioSinDescuento"],2) }} USD
+                        </td>
+                        <td id="tdCostoSinDescuentoB" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                            ${{ number_format($combinacionMediana["descuento"]["precioSinDescuento"],2) }} USD
+                        </td>
+                        <td id="tdCostoSinDescuentoC" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                            ${{ number_format($combinacionOptima["descuento"]["precioSinDescuento"],2) }} USD
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title-tab-comparativa" style="background-color:green; color:white;">
+                            Descuento (<strong>{{ $propuesta["descuento"]["porcentaje"] }}%</strong>)
+                        </td>
+                        <td id="tdDescuentoA" class="text-tab-comparativa" style="background-color:green; color:white;">
+                            ${{ number_format($combinacionEconomica["descuento"]["descuento"],2) }} USD
+                        </td>
+                        <td id="tdDescuentoB" class="text-tab-comparativa" style="background-color:green; color:white;">
+                            ${{ number_format($combinacionMediana["descuento"]["descuento"],2) }} USD
+                        </td>
+                        <td id="tdDescuentoC" class="text-tab-comparativa" style="background-color:green; color:white;">
+                            ${{ number_format($combinacionOptima["descuento"]["descuento"],2) }} USD
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td class="title-tab-comparativa">
-                        Subtotal s/IVA
+                        Total s/IVA
                     </td>
                     <td id="tdSubtotalA" class="text-tab-comparativa">
                         ${{ number_format($combinacionEconomica["totales"]["precio"],2) }} USD
@@ -869,7 +895,7 @@
             </table>
             <!-- Fin - Tabla comparativa - [ COMBINACIONES ] -->
             <!-- Nota * Costo por watt -->
-            <table id="nota-costo-watt" class="table-comparative" style="margin-top:55px;">
+            <table id="nota-costo-watt" class="table-comparative" style="margin-top:25px;">
                 <tr>
                     <td style="background-color:#9AC5E7;">
                         <p style="font-size:11px; font-weight:bold;">NOTA IMPORTANTE</p>
@@ -903,7 +929,11 @@
             </tr>
         </table>
         <!-- Tabla Financiamiento - ROI -->
-        <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
+        <p class="nota" style="margin-top:-20px; text-align:left; margin-left:60px;">
+            <strong>NOTA: </strong>
+            El calculo del retorno incluye deduccion fiscal
+        </p>
+        <div style="margin-left:40px; margin-right:40px;">
             <table>
                 <tr>
                     <td>
@@ -984,7 +1014,10 @@
                     <td>${{ number_format($propuesta["financiamiento"]["objEnganche"]["cincuentaPorcent"], 2) }}</td>
                 </tr>
             </table>
-            <br>
+            <p class="nota" style="text-align:left; margin-left:20px;">
+                <strong>NOTA: </strong>
+                Esa tabla de financiamiento es de referencia y puede variar en funcion de las condiciones de la financiera.
+            </p>
             <table id="tabFinanciamient" class="tabFinanciamiento">
                 <tr>
                     <th>Pagos mensuales</br> por plazo</th>
@@ -1031,33 +1064,96 @@
                 @endfor
             </table>
             <!-- Fin_Tabla financiamiento -->
-            <!-- Graficas -->
-            <!-- Grafico ROI -->
-            <div class="container-fluid">
-                <!-- Eje X - Grafico Proyeccion -->
-                @php($anioActual = now()->year)
-                @php($aniosProyeccion = [])
-                @php($aniosProyeccion[0] = $anioActual)
-
-                @for($i=1; $i<=10; $i++)
-                    @php($aniosProyeccion[$i] = (int)$anioActual + $i)
-                @endfor
-
-                <!--table class="table-contenedor" style="margin-top: -20px;">
-                    <tr>
-                        <td id="graficaPuntos" align="center" style="border: none;">
-                            <h3>Con paneles / Sin paneles</h3>
-                            <! Aqui va la grafica 1 - [ Puntos ] >
-                        </td>
-                        <td id="graficaBarras" align="center" style="border: none;">
-                            <h3>Consumo actual <strong>Vs.</strong> Nuevo consumo c/paneles solares</h3>
-                            <! Aqui va la grafica 2 - [ Barras ] >
-                        </td>
-                    </tr>
-                </table -->
-            </div>
         </div>
         <hr class="linea-division" style="background-color:#5576F2; margin-left:-15px; margin-right:-15px;">
+        <table id="tableGraficas">
+            <tr>
+                <td id="grfEnergetico">
+                    <img style="width:40%; height:210px; margin-left:55px;" src='https://quickchart.io/chart?c={
+                        type: "bar",
+                        data:{
+                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
+                            datasets: [
+                                {
+                                    label: "Consumo s/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
+                                    borderColor: "rgba(245, 62, 29, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Generacion [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
+                                    borderColor: "rgba(85, 177, 62, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Nuevo consumo c/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(29, 170, 245, 0.55)",
+                                    borderColor: "rgba(29, 170, 245, 1)",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            title:{
+                                display: true,
+                                position: "bottom",
+                                text: "Consumo electrico"
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            } 
+                        }
+                    }
+                '/>
+                </td>
+                <td id="grfEconomico">
+                    <img style="width:40%; height:210px; margin-left:85px;" src='https://quickchart.io/chart?c={
+                        type: "bar",
+                        data: {
+                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
+                            datasets: [
+                                {
+                                    label: "Consumo s/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
+                                    borderColor: "rgba(245, 62, 29, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Consumo c/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
+                                    borderColor: "rgba(85, 177, 62, 1)",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title:{
+                                display: true,
+                                position: "bottom",
+                                text: "Consumo economico"
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            } 
+                        }
+                    }'/>
+                </td>
+            </tr>  
+        </table>
         <table>
             <tr>
                 <td style="width: 450px;">

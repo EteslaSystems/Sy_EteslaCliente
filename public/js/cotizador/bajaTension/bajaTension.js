@@ -490,6 +490,7 @@ async function mostrarPanelSeleccionado(){
     let valueDDLPaneles = $('#listPaneles').val();
 
     limpiarCampos();
+    // limpiarGrafico();
 
     if(valueDDLPaneles != "-1" || typeof valueDDLPaneles === "undefined"){
         /*#region Formating _respuestaPaneles*/
@@ -777,7 +778,13 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     /*#endregion*/
     
     //Se pinta el grafico
-    pintarGrafico({_viaticos,objResp});
+    let Data = _viaticos[0];
+    Object.assign(Data,{
+        objResp: objResp
+    });
+
+    // limpiarGrafico();
+    pintarGrafico(Data);
 
     if(_viaticos[0].inversores.combinacion === "true"){
         $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores.MicroUno.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroUno.numeroDeInversores + '\n' + _viaticos[0].inversores.numeroDeInversores.MicroDos.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroDos.numeroDeInversores);
@@ -832,8 +839,10 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     switch(_viaticos[0].tipoCotizacion)
     {
         case 'bajaTension':
-            //Tarifas (actual y nueva)
+            //Tarifas (actual)
             $('#tdTarifaActual').text(_viaticos[0].power.old_dac_o_nodac);
+
+            //Tarifa (nueva)
             $('#tdTarifaNueva').text(_viaticos[0].power.new_dac_o_nodac);
             
             //Consumo energetico (actual)
@@ -967,6 +976,22 @@ function seleccionarCombinacion(ddlCombinaciones){
         $('#tdTotalUSD').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMasIVA.toLocaleString('es-MX') + ' USD');
         $('#tdSubtotalMXN').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMXNSinIVA.toLocaleString('es-MX') + ' MXN');
         $('#tdTotalMXN').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precioMXNConIVA.toLocaleString('es-MX') + ' MXN');
+
+        ///
+        Object.assign(_combinaciones[ddlCombinacionesValor].combinacion,{
+            objResp: null
+        });
+
+        ///
+        _combinaciones[ddlCombinacionesValor].combinacion.objResp = { 
+            consumo: {
+                _promCons: _combinaciones[ddlCombinacionesValor].combinacion.power._consumos._promCons
+            }
+        };
+
+        ///
+        // limpiarGrafico();
+        // pintarGrafico(_combinaciones[ddlCombinacionesValor].combinacion);
     }
     else{
         limpiarCampos();
@@ -1187,6 +1212,7 @@ function getDataCombinacionesFiltrada(_Combinaciones){
                 roi: { 
                     ahorro: { ahorroBimestralEnPesosMXN: Combinacion.combinacion.roi.ahorro.ahorroBimestralEnPesosMXN }
                 },
+                descuento: Combinacion.combinacion.descuento,
                 totales: { 
                     precio_watt: Combinacion.combinacion.totales.precio_watt,
                     precio: Combinacion.combinacion.totales.precio,

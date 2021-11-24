@@ -1,7 +1,5 @@
 /app/Providers/AppServiceProvider.php
 /node_modules
-/public/storage
-/storage
 /storage/*
 /vendor/*
 .env

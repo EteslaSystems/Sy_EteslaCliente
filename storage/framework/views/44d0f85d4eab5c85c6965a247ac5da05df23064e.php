@@ -111,6 +111,11 @@
         line-height: 5%;
         text-align: center;
     }
+    .nota{
+        font-size:11px; 
+        color: #969696;
+        text-align: center;
+    }
     /* Cards */
     .card{
         margin-top: 3px;
@@ -289,8 +294,16 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
-                        <?php if($descuento["porcentaje"] >= 1): ?>
+                        <?php if($descuento["porcentaje"] > 0): ?>
+                            <td style="background-color:#2593F0;">
+                                <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
+                                    Total s/Descuento
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
+                        <?php if($descuento["porcentaje"] > 0): ?>
                             <td id="tdDescuento" style="background-color:green;">
                                 <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
                                     Descuento (<?php echo e($descuento["porcentaje"]); ?>%)
@@ -303,10 +316,18 @@
                         <td align="center"><img src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png')))); ?>"/></td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
-                        <td><strong>Subtotal sin IVA</strong></td>
-                        <td></td>
-                        <?php if($descuento["porcentaje"] >= 1): ?>
-                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                        <td><strong>Total sin IVA</strong></td>
+                        <?php if($descuento["porcentaje"] > 0): ?>
+                            <td id="tdTotalAntesDeDescuento" style="border-right:solid #2593F0; border-left:solid #2593F0; border-bottom:solid #2593F0;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
+                                    $<?php echo e(number_format($descuento["precioSinDescuento"])); ?> USD
+                                </p>
+                            </td>
+                        <?php else: ?>
+                            <td></td>
+                        <?php endif; ?>
+                        <?php if($descuento["porcentaje"] > 0): ?>
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
                                 <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($descuento["descuento"],2)); ?> USD
                                 </p>
@@ -324,16 +345,7 @@
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        <?php if($descuento["porcentaje"] >= 1): ?>
-                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
-                                <?php ($descuentoMXN = $descuento["descuento"] * $tipoDeCambio); ?>
-                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
-                                    $<?php echo e(number_format($descuentoMXN,2)); ?> MXN
-                                </p> 
-                            </td>
-                        <?php else: ?>
-                            <td></td>
-                        <?php endif; ?>
+                        <td></td>
                         <td id="totalConIVAUSD" align="center">
                             $<?php echo e(number_format($totales["precioMasIVA"], 2)); ?> USD
                         </td>
@@ -346,10 +358,10 @@
         </div>
         <!-- Leyenda - Tipo de cambio -->
         <div id="leyendaTipoDeCambio" style="margin-left:20px; margin-right:20px;">
-            <p style="font-size:11px; color: #969696;" align="center"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">($<?php echo e($tipoDeCambio); ?> mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+            <p class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">($<?php echo e($tipoDeCambio); ?> mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
-        <table class="table-contenedor">
+        <table class="table-contenedor" style="margin-top:20px;">
             <tr>
                 <td id="imgLogoPanel" align="center" style="border: none;">
                     <?php ($image = $paneles['vMarca'] . '.png'); ?>
@@ -367,7 +379,7 @@
         </table>
         <!-- Fin logos/marcas equip. -->
 
-        <table class="table-contenedor">
+        <table class="table-contenedor" style="margin-top:20px;">
             <tr>
                 <td style="padding-right: 60px;">
                     <div name="ANCE">
@@ -484,7 +496,11 @@
             </tr>
         </table>
         <!-- Tabla Financiamiento - ROI -->
-        <div style="margin-left:40px; margin-right:40px; margin-top:20px;">
+        <p class="nota" style="margin-top:-20px; text-align:left; margin-left:60px;">
+            <strong>NOTA: </strong>
+            El calculo del retorno incluye deduccion fiscal
+        </p>
+        <div style="margin-left:40px; margin-right:40px;">
             <table>
                 <tr>
                     <td>
@@ -526,12 +542,12 @@
                                     <p style="font-size:14px; margin-left:6px; margin-right:6px;">Retorno de inversión</p>
                                 </th>
                                 <td style="background-color:#FFB500;">
-                                    <p style="font-size:18px; margin-left:6px; margin-right:6px; font-weight:bolder;">
+                                    <p style="font-size:16px; margin-left:6px; margin-right:6px; font-weight:bolder;">
                                         <?php echo e($roi["roiEnAnios"]); ?> año(s)
                                     </p>
                                 </td>
                            </tr>
-                       </table> 
+                       </table>
                     </td>
                 </tr>
             </table>
@@ -593,10 +609,13 @@
                     </td>
                 </tr>
             </table>
-            <br>
+            <p class="nota" style="text-align:left; margin-left:20px;">
+                <strong>NOTA: </strong>
+                Esa tabla de financiamiento es de referencia y puede variar en funcion de las condiciones de la financiera.
+            </p>
             <table id="tabFinanciamient" class="tabFinanciamiento">
                 <tr>
-                    <th>Pagos mensuales</br> por plazo</th>
+                    <th>Pagos mensuales por plazo</th>
                     <th style="background-color: #F5B070;">15%</th>
                     <th style="background-color: #F5B070;">35%</th>
                     <th style="background-color: #F5B070;">50%</th>
@@ -647,34 +666,105 @@
                 <?php endfor; ?>
             </table>
             <!-- Fin_Tabla financiamiento -->
-            <!-- Graficas -->
-            <!-- Grafico ROI -->
-            <div class="container-fluid">
-                <!-- Eje X - Grafico Proyeccion -->
-                <?php ($anioActual = now()->year); ?>
-                <?php ($aniosProyeccion = []); ?>
-                <?php ($aniosProyeccion[0] = $anioActual); ?>
-
-                <?php for($i=1; $i<=10; $i++): ?>
-                    <?php ($aniosProyeccion[$i] = (int)$anioActual + $i); ?>
-                <?php endfor; ?>
-
-                <!-- table class="table-contenedor" style="margin-top: -20px;">
-                    <tr>
-                        <td id="graficaPuntos" align="center" style="border: none;">
-                            <h3>Con paneles / Sin paneles</h3>
-                            <! Aqui va la grafica 1 - [ Puntos ] !>
-                        </td>
-                        <td id="graficaBarras" align="center" style="border: none;">
-                            <h3>Consumo actual <strong>Vs.</strong> Nuevo consumo c/paneles solares</h3>
-                            <! Aqui va la grafica 2 - [ Barras ] !>
-                        </td>
-                    </tr>
-                </table-->
-            </div>
         </div>
         <hr class="linea-division" style="background-color:#5576F2; margin-left:-15px; margin-right:-15px;">
-        <table>
+        <table id="tableGraficas">
+            <tr>
+                <td id="grfEnergetico">
+                    <img style="width:40%; height:210px; margin-left:55px;" src='https://quickchart.io/chart?c={
+                        type: "bar",
+                        data:{
+                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
+                            datasets: [
+                                {
+                                    label: "Consumo s/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
+                                    borderColor: "rgba(245, 62, 29, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Generacion [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
+                                    borderColor: "rgba(85, 177, 62, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Nuevo consumo c/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(29, 170, 245, 0.55)",
+                                    borderColor: "rgba(29, 170, 245, 1)",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            title:{
+                                display: true,
+                                position: "bottom",
+                                text: "Consumo electrico"
+                            },
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        callback: function(value, index, values) {
+                                            return value.toLocaleString("es-MX") + " kw";
+                                        }
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                '/>
+                </td>
+                <td id="grfEconomico">
+                    <img style="width:40%; height:210px; margin-left:85px;" src='https://quickchart.io/chart?c={
+                        type: "bar",
+                        data: {
+                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
+                            datasets: [
+                                {
+                                    label: "Consumo s/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
+                                    borderColor: "rgba(245, 62, 29, 1)",
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: "Consumo c/paneles [Bimestral]",
+                                    data: [1,2,3,4,5,6],
+                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
+                                    borderColor: "rgba(85, 177, 62, 1)",
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            title:{
+                                display: true,
+                                position: "bottom",
+                                text: "Consumo economico"
+                            },
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        callback: function(value, index, values) {
+                                            return "$" + value.toLocaleString("es-MX") + "mxn";
+                                        }
+                                    }
+                                }
+                            } 
+                        }
+                    }'/>
+                </td>
+            </tr>  
+        </table>
+        <table id="tableArboles">
             <tr>
                 <td style="width: 450px;">
                     <p style="margin-top: -10px; margin-left: 55px; text-align: left; font-weight: bold;">

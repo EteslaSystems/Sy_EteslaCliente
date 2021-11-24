@@ -20,9 +20,8 @@
                             </div>
                         @endif
                         <div class="col-sm-3">
-                            @if($rol == 2)
-                            <!-- Controles accesibles unicamente para Operaciones -->
-                                <div class="form-check">
+                             <!-- Controles accesibles unicamente para Operaciones -->
+                             <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" id="chbFletes" onclick="cambiaValorCheckBox(this)" checked>
                                     <label class="form-check-label" for="chbFletes" style="color: #888;">Fletes</label>
                                 </div>
@@ -32,7 +31,6 @@
                                         <a href="#" data-toggle="modal" data-target=".bd-viaticos-modal-sm">Viaticos</a>
                                     </label>
                                 </div>
-                            @endif
                             <!-- Modal viaticos -->
                             <div class="modal fade bd-viaticos-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">

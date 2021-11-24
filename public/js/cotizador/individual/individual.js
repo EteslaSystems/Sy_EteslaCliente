@@ -175,7 +175,7 @@ function catchDataCotizacionIndividual(){
         complementos: { 
             manoObra: null, 
             otros: null, 
-            viaticos: {}, 
+            viaticos: null, 
             fletes: null 
         }, 
         agregados: null, 
@@ -200,7 +200,7 @@ function catchDataCotizacionIndividual(){
     };
 
     dataCotIndividual.cliente.id = $('#inpClienteId').val();
-    dataCotIndividual.cliente.direccion = catchDireccion;
+    dataCotIndividual.cliente.direccion = catchDireccion();
 
     /* Cliente */
     if(validarUsuarioCargado(dataCotIndividual.cliente.id) == true){
@@ -212,13 +212,17 @@ function catchDataCotizacionIndividual(){
             /* Complementos [ManoObra, Otros, Viaticos, Fletes] */
             dataCotIndividual.complementos.manoObra = $('#chbMO').val();
             dataCotIndividual.complementos.otros = $('#chbOtros').val();
-            dataCotIndividual.complementos.viaticos = {
-                /* Viaticos - Complementos */
-                viaticos: $('#chbViaticos').val(),
-                hospedaje: $('#chbHospedaje').val(),
-                pasaje: $('#chbPasaje').val(),
-                comida: $('#chbComida').val()
-            };
+
+            ///
+            if($('#chbViaticos').is(':checked')){
+                dataCotIndividual.complementos.viaticos = {
+                    /* Viaticos - Complementos */
+                    hospedaje: $('#chbHospedaje').val(),
+                    pasaje: $('#chbPasaje').val(),
+                    comida: $('#chbComida').val()
+                };
+            }
+
             dataCotIndividual.complementos.fletes = $('#chbFletes').val();
 
             /* Agregados */

@@ -329,115 +329,47 @@ function guardarPropuesta(){
 /*#region Graficos*/
 function pintarGrafico(Data){
     // let tipoCotizacion = null;
-    let graficoEnergetico = document.getElementById('grafEnergetico').getContext('2d');
-    let graficoEconomico = document.getElementById('grafEconomico').getContext('2d');
+
+    //Graficos
+    const graficoEnergetico = document.getElementById('chartEnergetico');
+    const graficoEconomico = document.getElementById('chartEconomico');
 
     try{
         //Formating *
         /* Energetico */
         let _consumosEnergActualesBim = Data.objResp.consumo._promCons._consumosBimestrales;
-        let _generacionBim = Data._viaticos[0].power.generacion._generacionBimestral;
-        let _consumosEnergNuevosBim = Data._viaticos[0].power.nuevosConsumos._consumosNuevosBimestrales;
+        let _generacionBim = Data.power.generacion._generacionBimestral;
+        let _consumosEnergNuevosBim = Data.power.nuevosConsumos._consumosNuevosBimestrales;
         /* Economico */
-        let _consumosEconActualesBim = Data._viaticos[0].power.objConsumoEnPesos._pagosBimestrales;
-        let _consumosEconNuevosBim = Data._viaticos[0].power.objGeneracionEnpesos._pagosBimestrales;
+        let _consumosEconActualesBim = Data.power.objConsumoEnPesos._pagosBimestrales;
+        let _consumosEconNuevosBim = Data.power.objGeneracionEnpesos._pagosBimestrales;
 
-        ///
-        let confingChartEnergetico = {
-            type: 'bar',
-            data: {
-                labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
-                datasets: [
-                    {
-                        label: 'Generacion c/paneles [Bimestral]',
-                        data: _generacionBim,
-                        borderColor: 'rgb(109, 198, 20)',
-                        backgroundColor: 'rgba(109, 198, 20, 0.21)',
-                    },
-                    {
-                        label: 'Consumos s/paneles [Bimestral]',
-                        data: _consumosEnergActualesBim,
-                        borderColor: 'rgb(235, 68, 65)',
-                        backgroundColor: 'rgb(235, 68, 65, 0.51)',
-                    },
-                    {
-                        label: 'Consumos c/paneles [Bimestral]',
-                        data: _consumosEnergNuevosBim,
-                        borderColor: 'rgb(7, 161, 167)',
-                        backgroundColor: 'rgb(181, 238, 242)',
-                    }
-                ]
-            },
-            options: {
-                title:{
-                    display: true,
-                    position: 'top',
-                    text: 'Consumo energetico'
-                },
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true,
-                                callback: function(value, index, values) {
-                                    //Incluye -'kw'- a los valores que se muestran en el eje Y
-                                    return value.toLocaleString('es-MX') + ' kw';
-                                }
-                            }
-                        }
-                    ]
-                } 
-            }
-        };
+        
 
-        ///
-        let configChartEconomico = {
-            type: 'bar',
-            data: {
-                labels: ['1er', '2do', '3ro', '4to', '5to', '6to'],
-                datasets: [
-                    {
-                        label: 'Consumo s/paneles [Bimestral]',
-                        data: _consumosEconActualesBim,
-                        borderColor: 'rgb(235, 68, 65)',
-                        backgroundColor: 'rgb(235, 68, 65, 0.51)',
-                    },
-                    {
-                        label: 'Consumo c/paneles [Bimestral]',
-                        data: _consumosEconNuevosBim,
-                        borderColor: 'rgb(7, 161, 167)',
-                        backgroundColor: 'rgb(181, 238, 242)',
-                    }
-                ]
-            },
-            options: {
-                title:{
-                    display: true,
-                    position: 'top',
-                    text: 'Consumo economico'
-                },
-                scales: {
-                    yAxes: [
-                        {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    //Incluye -'kw'- a los valores que se muestran en el eje Y
-                                    return '$ ' + value.toLocaleString('es-MX') + ' MXN';
-                                }
-                            }
-                        }
-                    ]
-                } 
-            }
-        };
 
-        window.graficoEnergetico = new Chart(graficoEnergetico,confingChartEnergetico);
-        window.graficoEconomico = new Chart(graficoEconomico,configChartEconomico);
+
     }
     catch(error){
         console.log(error);
         alert('Error al intentar pintar las graficas');
     }
+}
+
+function limpiarGrafico(){
+    /* < Grafico - Energetico > */
+    $('#grafEnergetico').remove(); //Se elimina el <canvas> anterior 
+    $('#canvasEnergetico').append('<canvas id="grafEnergetico"></canvas>'); //Se agrega un nuevo <canvas>
+    let canvasEnergetico = document.querySelector('#grafEnergetico');
+    ctx = canvasEnergetico.getContext('2d');
+    ctx.canvas.width = '150px';
+    ctx.canvas.height = '90px';
+
+    /* < Grafico - Economico > */
+    $('#grafEconomico').remove(); //Se elimina el <canvas> anterior 
+    $('#canvasEconomico').append('<canvas id="grafEconomico"></canvas>'); //Se agrega un nuevo <canvas>
+    let graficoEconomico = document.querySelector('#grafEconomico');
+    ctx = graficoEconomico.getContext('2d');
+    ctx.canvas.width = '150px';
+    ctx.canvas.height = '90px';
 }
 /*#endregion*/

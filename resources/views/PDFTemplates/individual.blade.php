@@ -274,7 +274,9 @@
                             <td>Agregados</td>
                             <td></td>
                             <td></td>
-                            <td><strong>Agregados (Desgloce en pag. 2)</strong></td>
+                            <td>
+                                <strong>Agregados (Desgloce en pag. 2)</strong>
+                            </td>
                             <td></td>
                         </tr>
                     @endif
@@ -284,7 +286,9 @@
                             <td>Mano de obra</td>
                             <td></td>
                             <td></td>
-                            <td style="font-size:10px;">*Instalacion *Servicio *Anclaje *Fijacion</td>
+                            <td style="font-size:10px;">
+                                *Instalacion *Servicio *Anclaje *Fijacion
+                            </td>
                             <td></td>
                         </tr>
                     @endif
@@ -294,13 +298,23 @@
                             <td>Otros</td>
                             <td></td>
                             <td></td>
-                            <td style="font-size:10px;">*Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)</td>
+                            <td style="font-size:10px;">
+                                *Cableado *Protecciones *Tramite CFE *Monitoreo PostVenta (permanente)
+                            </td>
                             <td id="costoTotalOtros"></td>
                         </tr>
                     @endif
                     <tr>
                         <td></td>
-                        <td></td>
+                        @if($descuento["porcentaje"] > 0)
+                            <td style="background-color:#2593F0;">
+                                <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
+                                    Total s/Descuento
+                                </p>
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
                         @if($descuento["porcentaje"] >= 1)
                             <td id="tdDescuento" style="background-color:green;">
                                 <p style="text-align:center; color:white; font-weight:bolder; font-size:12px;">
@@ -310,14 +324,26 @@
                         @else
                             <td></td>
                         @endif
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/></td>
-                        <td align="center"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/></td>
+                        <td align="center">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/estados-unidos.png'))) }}"/>
+                        </td>
+                        <td align="center">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/banderas/mexico.png'))) }}"/>
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
-                        <td><strong>Subtotal sin IVA</strong></td>
-                        <td></td>
+                        <td><strong>Total sin IVA</strong></td>
+                        @if($descuento["porcentaje"] > 0)
+                            <td id="tdTotalAntesDeDescuento" style="border-right:solid #2593F0; border-left:solid #2593F0; border-bottom:solid #2593F0;">
+                                <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
+                                    ${{ number_format($descuento["precioSinDescuento"]) }} USD
+                                </p>
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
                         @if($descuento["porcentaje"] >= 1)
-                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
                                 <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     ${{ number_format($descuento["descuento"],2) }} USD
                                 </p>
@@ -325,24 +351,23 @@
                         @else
                             <td></td>
                         @endif
-                        <td id="subtotalSinIVAUSD" align="center">${{ number_format($totales["precio"], 2) }} USD</td>
-                        <td id="subtotalSinIVAMXN" align="center">${{ number_format($totales["precioMXNSinIVA"], 2) }} MXN</td>
+                        <td id="subtotalSinIVAUSD" align="center">
+                            ${{ number_format($totales["precio"], 2) }} USD
+                        </td>
+                        <td id="subtotalSinIVAMXN" align="center">
+                            ${{ number_format($totales["precioMXNSinIVA"], 2) }} MXN
+                        </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
                         <td><strong>Total con IVA</strong></td>
                         <td></td>
-                        @if($descuento["porcentaje"] >= 1)
-                            <td id="descuentoMXN" style="border-right:solid green; border-left:solid green; border-bottom:solid green; border-top:solid green;">
-                                @php($descuentoMXN = $descuento["descuento"] * $tipoDeCambio)
-                                <p style="font-weight:bolder; text-align:center; font-style:15px; background-color:#FFF66D;">
-                                    ${{ number_format($descuentoMXN,2) }} MXN
-                                </p> 
-                            </td>
-                        @else
-                            <td></td>
-                        @endif
-                        <td id="totalConIVAUSD" align="center">${{ number_format($totales["precioMasIVA"], 2) }} USD</td>
-                        <td id="totalConIVAMXN" align="center">${{ number_format($totales["precioMXNConIVA"], 2) }} MXN</td>
+                        <td></td>
+                        <td id="totalConIVAUSD" align="center">
+                            ${{ number_format($totales["precioMasIVA"], 2) }} USD
+                        </td>
+                        <td id="totalConIVAMXN" align="center">
+                            ${{ number_format($totales["precioMXNConIVA"], 2) }} MXN
+                        </td>
                     </tr>
                 </tbody>
             </table>

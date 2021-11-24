@@ -424,8 +424,15 @@
                             <div class="col">
                                 <nav>
                                     <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-                                        <a id="cotizacion-tab" class="nav-item nav-link active"  data-toggle="tab" href="#cotizacion" role="tab" aria-controls="cotizacion" aria-selected="true">Cotizacion</a>
-                                        <a id="ahorro-tab" class="nav-item nav-link" data-toggle="tab" href="#ahorro" role="tab" aria-controls="ahorro" aria-selected="false">Ahorro</a>
+                                        <a id="cotizacion-tab" class="nav-item nav-link active"  data-toggle="tab" href="#cotizacion" role="tab" aria-controls="cotizacion" aria-selected="true">
+                                            Cotizacion
+                                        </a>
+                                        <a id="energia-tab" class="nav-item nav-link" data-toggle="tab" href="#energia" role="tab" aria-controls="energia" aria-selected="false">
+                                            Energia
+                                        </a>
+                                        <a id="ahorro-tab" class="nav-item nav-link" data-toggle="tab" href="#ahorro" role="tab" aria-controls="ahorro" aria-selected="false">
+                                            Ahorro
+                                        </a>
                                     </div>
                                 </nav>
                                 <div class="tab-content">
@@ -523,177 +530,188 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane fade" id="energia" role="tabpanel" aria-labelledby="energia-tab">
+                                        <div class="container-fluid">
+                                            <!-- div class="col">
+                                                <div id="chartEnergetico" style="height:1000px; width:1000px;"></div>
+                                            </div-->
+                                            <div class="col">
+                                                <div class="d-flex align-items-start">
+                                                    <table id="tableTarifas" class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <th colspan="2" class="bg-dark text-light text-center">
+                                                                <strong>
+                                                                    Tarifas
+                                                                </strong>
+                                                            </th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF;">
+                                                                    <strong>Actual</strong>
+                                                                </td>
+                                                                <td id="tdTarifaActual" class="tdAnsw"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="background-color:rgba(29, 170, 245, 0.55);  color:#FFFFFF;">
+                                                                    <strong>Nueva</strong>
+                                                                </td>
+                                                                <td id="tdTarifaNueva" class="tdAnsw"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF;">
+                                                                    <strong>
+                                                                        % generacion
+                                                                    </strong>
+                                                                </td>
+                                                                <td colspan="2" id="tdPorcentajePropuesta" class="tdAnsw"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="d-flex align-items-end">
+                                                    <table id="tableConsumosEnergeticos" class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">
+                                                                Consumo energetico
+                                                            </th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td rowspan="2"  class="align-middle" style="background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF; font-weight:bolder;">
+                                                                    Consumo s/paneles
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF;">
+                                                                    Mensual
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF;">
+                                                                    Bimestral
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="tdConsumoActualKwMes" class="tdAnsw"></td>
+                                                                <td id="tdConsumoActualKwBim" class="tdAnsw"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="2" class="align-middle" style="background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF; font-weight:bolder;">
+                                                                    Generacion
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF;">
+                                                                    Mensual
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF;">
+                                                                    Bimestral
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="tdGeneracionKwMes" class="tdAnsw"></td>
+                                                                <td id="tdGeneracionKwBim" class="tdAnsw"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="2" class="align-middle" style="background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF; font-weight:bolder;">
+                                                                    Nuevo consumo c/paneles
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF;">
+                                                                    Mensual
+                                                                </td>
+                                                                <td style="font-weight:bolder; background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF;">
+                                                                    Bimestral
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td id="tdNuevoConsumoMes" class="tdAnsw"></td>
+                                                                <td id="tdNuevoConsumoBim" class="tdAnsw"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="tab-pane fade" id="ahorro" role="tabpanel" aria-labelledby="ahorro-tab">
                                         <!-- Ahorro -->
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <div id="carouselGraficas" class="carousel slide" data-interval="false" style="margin-top:15px;">
-                                                        <div class="carousel-inner text-center">
-                                                            <div class="carousel-item">
-                                                                <div class="custom-control grafico">
-                                                                    <canvas id="grafEnergetico" width="150px" height="100px"></canvas>
-                                                                    <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="carousel-item active">
-                                                                <div class="custom-control grafico">
-                                                                    <canvas id="grafEconomico" width="150px" height="100px"></canvas>
-                                                                    <p style="font-size: 12px;" class="text-center">Los datos mostrados son consumos promediados</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <a class="carousel-control-prev" href="#carouselGraficas" role="button" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                        <a class="carousel-control-next" href="#carouselGraficas" role="button" data-slide="next">
-                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:7px;">
-                                                                <thead>
-                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">Tarifas</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><strong>Tarifa actual</strong></td>
-                                                                        <td id="tdTarifaActual" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                    <tr id="trTarifaNueva">
-                                                                        <td><strong>Tarifa nueva</strong></td>
-                                                                        <td id="tdTarifaNueva" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="col" style="margin-top:6px;">
-                                                            <table id="costos" class="table table-sm table-striped table-bordered">
-                                                                <tbody> 
-                                                                    <tr>
-                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>% generacion</strong></td>
-                                                                        <td id="tdPorcentajePropuesta" class="text-center tdAnsw"></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>ROI bruto</strong></td>
-                                                                        <td id="tdROIbruto" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center" style="background-color:#03B1FF; color:white;"><strong>ROI con deduccion</strong></td>
-                                                                        <td id="tdROIdeduccion" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <table id="ahorroKw" class="table table-sm table-bordered" style="margin-top:6px;">
-                                                                <thead>
-                                                                    <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">
-                                                                        Informacion de consumo
-                                                                    </th>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <strong>Consumo actual</strong>
-                                                                        </td>
-                                                                        <td colspan="2">
-                                                                            <strong>Generacion c/paneles</strong>
-                                                                        </td>
-                                                                        <td colspan="2">
-                                                                            <strong>Ahorro energetico</strong>
-                                                                        </td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdConsumoActualKwMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdGeneracionKwMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdNuevoConsumoMes" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdConsumoActualKwBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdGeneracionKwBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim(kw)</strong>
-                                                                        </td>
-                                                                        <td id="tdNuevoConsumoBim" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <table id="ahorroEconomico" class="table table-sm table-bordered" style="margin-top:6px;">
-                                                                <thead>
-                                                                    <th scope="col" colspan="6" class="text-center" style="background-color:black; color:white;">Informacion economica</th>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <strong>Gasto actual</strong>
-                                                                        </td>
-                                                                        <td colspan="2">
-                                                                            <strong>Pago c/paneles</strong>
-                                                                        </td>
-                                                                        <td colspan="2">
-                                                                            <strong>Ahorro economico</strong>
-                                                                        </td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes($)</strong>
-                                                                        </td>
-                                                                        <td id="tdConsumoActualDinMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes($)</strong>
-                                                                        </td>
-                                                                        <td id="tdNuevoConsumoDinMes" class="tdAnsw"></td>
-                                                                        <td class="tdMes">
-                                                                            <strong>Mes($)</strong>
-                                                                        </td>
-                                                                        <td id="tdAhorroDinMes" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim($)</strong>
-                                                                        </td>
-                                                                        <td id="tdConsumoActualDinBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim($)</strong>
-                                                                        </td>
-                                                                        <td id="tdNuevoConsumoDinBim" class="tdAnsw"></td>
-                                                                        <td class="tdBim">
-                                                                            <strong>Bim($)</strong>
-                                                                        </td>
-                                                                        <td id="tdAhorroDinBim" class="tdAnsw"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="container-fluid">
+                                            <!--div class="col">
+                                                <div id="chartEconomico" style="height:250px;"></div>
+                                            </div-->
+                                            <div class="col">
+                                                <table id="tableROI" class="table table-sm table-bordered">
+                                                    <thead>
+                                                        <th colspan="2" class="bg-dark text-light text-center">
+                                                            ROI
+                                                        </th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="background-color:#03B1FF; color:white;">
+                                                                <strong>Bruto</strong>
+                                                            </td>
+                                                            <td id="tdROIbruto" class="tdAnsw"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="background-color:#03B1FF; color:white;">
+                                                                <strong>c / Deduccion</strong>
+                                                            </td>
+                                                            <td id="tdROIdeduccion" class="tdAnsw"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="d-flex align-items-end">
+                                                <table id="tableConsumosEnergeticos" class="table table-sm table-bordered">
+                                                    <thead>
+                                                        <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">
+                                                            Consumo economico
+                                                        </th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td rowspan="2"  class="align-middle" style="background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF; font-weight:bolder;">
+                                                                Consumo s/paneles
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF;">
+                                                                Mensual
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(245, 62, 29, 0.61); color:#FFFFFF;">
+                                                                Bimestral
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="tdConsumoActualDinMes" class="tdAnsw"></td>
+                                                            <td id="tdConsumoActualDinBim" class="tdAnsw"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2" class="align-middle" style="background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF; font-weight:bolder;">
+                                                                Consumo c/paneles
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF;">
+                                                                Mensual
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(102, 196, 79, 0.54); color:#FFFFFF;">
+                                                                 Bimestral
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="tdNuevoConsumoDinMes" class="tdAnsw"></td>
+                                                            <td id="tdNuevoConsumoDinBim" class="tdAnsw"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td rowspan="2" class="align-middle" style="background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF; font-weight:bolder;">
+                                                                Ahorro
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF;">
+                                                                Mensual
+                                                            </td>
+                                                            <td style="font-weight:bolder; background-color:rgba(29, 170, 245, 0.55); color:#FFFFFF;">
+                                                                Bimestral
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="tdAhorroDinMes" class="tdAnsw"></td>
+                                                            <td id="tdAhorroDinBim" class="tdAnsw"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
