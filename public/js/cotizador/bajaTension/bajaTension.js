@@ -784,7 +784,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
     });
 
     // limpiarGrafico();
-    pintarGrafico(Data);
+    // pintarGrafico(Data);
 
     if(_viaticos[0].inversores.combinacion === "true"){
         $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores.MicroUno.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroUno.numeroDeInversores + '\n' + _viaticos[0].inversores.numeroDeInversores.MicroDos.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroDos.numeroDeInversores);
