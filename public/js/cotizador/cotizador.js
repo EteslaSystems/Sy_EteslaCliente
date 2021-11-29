@@ -331,8 +331,8 @@ function pintarGrafico(Data){
     // let tipoCotizacion = null;
 
     //Graficos
-    const graficoEnergetico = document.getElementById('chartEnergetico');
-    const graficoEconomico = document.getElementById('chartEconomico');
+    const graficoEnergetico = document.getElementById('chartEnergetico').getContext('2d');
+    const graficoEconomico = document.getElementById('chartEconomico').getContext('2d');
 
     try{
         //Formating *
@@ -344,10 +344,95 @@ function pintarGrafico(Data){
         let _consumosEconActualesBim = Data.power.objConsumoEnPesos._pagosBimestrales;
         let _consumosEconNuevosBim = Data.power.objGeneracionEnpesos._pagosBimestrales;
 
-        
+        /*                      Grafico - Energetico                        */
+        const configGraficoEnergetico = { 
+            type: 'bar',
+            data: {
+                labels: ['1er', '2do', '3er', '4to', '5to', '6to'],
+                datasets: [
+                    //Consumo Actual
+                    {
+                        label: 'Consumo s/Paneles',
+                        data: _consumosEnergActualesBim,
+                        borderColor: 'rgb(252, 42, 42)',
+                        backgroundColor: 'rgba(219, 10, 13, 0.55)',
+                        borderWidth: 1
+                    },
+                    //Generacion
+                    {
+                        label: 'Generacion Paneles',
+                        data: _generacionBim,
+                        borderColor: 'rgb(13, 219, 10)',
+                        backgroundColor: 'rgba(13, 219, 10, 0.58)',
+                        borderWidth: 1
+                    },
+                    //Nuevo consumo
+                    {
+                        label: 'Consumo c/Paneles',
+                        data: _consumosEnergNuevosBim,
+                        borderColor: 'rgba(10, 219, 208, 0.91)',
+                        backgroundColor: 'rgba(10, 219, 208, 0.48)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values){
+                                return value.toLocaleString("es-MX") + " kw";
+                            }
+                        }
+                    }
+                }
+            }
+        };
 
+        /*                      Grafico - Economico                        */
+        const configGraficoEconomico = {
+            type: 'bar',
+            data: {
+                labels: ['1er', '2do', '3er', '4to', '5to', '6to'],
+                datasets: [
+                    {
+                        label: 'Pago a CFE s/Paneles',
+                        data: _consumosEconActualesBim,
+                        borderColor: 'rgb(252, 42, 42)',
+                        backgroundColor: 'rgba(219, 10, 13, 0.55)',
+                        borderWidth: 1
+                    },
+                    //Generacion
+                    {
+                        label: 'Pago a CFE c/Paneles',
+                        data: _consumosEconNuevosBim,
+                        borderColor: 'rgb(13, 219, 10)',
+                        backgroundColor: 'rgba(13, 219, 10, 0.58)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values){
+                                return "$" + value.toLocaleString("es-MX") + " mxn";
+                            }
+                        }
+                    }
+                }
+            }
+        };
 
-
+        const chartEnergetico = new Chart(graficoEnergetico,configGraficoEnergetico);
+        const chartEconomico = new Chart(graficoEconomico,configGraficoEconomico);
     }
     catch(error){
         console.log(error);
@@ -357,17 +442,17 @@ function pintarGrafico(Data){
 
 function limpiarGrafico(){
     /* < Grafico - Energetico > */
-    $('#grafEnergetico').remove(); //Se elimina el <canvas> anterior 
-    $('#canvasEnergetico').append('<canvas id="grafEnergetico"></canvas>'); //Se agrega un nuevo <canvas>
-    let canvasEnergetico = document.querySelector('#grafEnergetico');
+    $('#chartEnergetico').remove(); //Se elimina el <canvas> anterior 
+    $('#divChartEnergetico').append('<canvas id="chartEnergetico"></canvas>'); //Se agrega un nuevo <canvas>
+    let canvasEnergetico = document.querySelector('#chartEnergetico');
     ctx = canvasEnergetico.getContext('2d');
     ctx.canvas.width = '150px';
     ctx.canvas.height = '90px';
 
     /* < Grafico - Economico > */
-    $('#grafEconomico').remove(); //Se elimina el <canvas> anterior 
-    $('#canvasEconomico').append('<canvas id="grafEconomico"></canvas>'); //Se agrega un nuevo <canvas>
-    let graficoEconomico = document.querySelector('#grafEconomico');
+    $('#chartEconomico').remove(); //Se elimina el <canvas> anterior 
+    $('#divChartEconomico').append('<canvas id="chartEconomico"></canvas>'); //Se agrega un nuevo <canvas>
+    let graficoEconomico = document.querySelector('#chartEconomico');
     ctx = graficoEconomico.getContext('2d');
     ctx.canvas.width = '150px';
     ctx.canvas.height = '90px';

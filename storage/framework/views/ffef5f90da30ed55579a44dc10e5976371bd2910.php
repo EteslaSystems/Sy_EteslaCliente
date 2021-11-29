@@ -531,12 +531,14 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="energia" role="tabpanel" aria-labelledby="energia-tab">
-                                        <div class="container-fluid">
-                                            <!-- div class="col">
-                                                <div id="chartEnergetico" style="height:1000px; width:1000px;"></div>
-                                            </div-->
-                                            <div class="col">
-                                                <div class="d-flex align-items-start">
+                                        <div class="d-flex">
+                                            <div class="d-flex align-items-center">
+                                                <div id="divChartEnergetico" style="height:40vh; width:40vw;">
+                                                    <canvas id="chartEnergetico"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="d-flex flex-row">
                                                     <table id="tableTarifas" class="table table-sm table-bordered">
                                                         <thead>
                                                             <th colspan="2" class="bg-dark text-light text-center">
@@ -569,7 +571,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="d-flex align-items-end">
+                                                <div class="d-flex flex-row">
                                                     <table id="tableConsumosEnergeticos" class="table table-sm table-bordered">
                                                         <thead>
                                                             <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">
@@ -630,11 +632,15 @@
                                     </div>
                                     <div class="tab-pane fade" id="ahorro" role="tabpanel" aria-labelledby="ahorro-tab">
                                         <!-- Ahorro -->
-                                        <div class="container-fluid">
-                                            <!--div class="col">
-                                                <div id="chartEconomico" style="height:250px;"></div>
-                                            </div-->
-                                            <div class="col">
+                                        <div class="d-flex">
+                                            <div class="d-flex align-items-center">
+                                                <div id="divChartEconomico" style="height:40vh; width:40vw;">
+                                                    <canvas id="chartEconomico"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="d-flex flex-row">
                                                 <table id="tableROI" class="table table-sm table-bordered">
                                                     <thead>
                                                         <th colspan="2" class="bg-dark text-light text-center">
@@ -657,7 +663,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="d-flex align-items-end">
+                                            <div class="d-flex flex-row">
                                                 <table id="tableConsumosEnergeticos" class="table table-sm table-bordered">
                                                     <thead>
                                                         <th scope="col" colspan="9" class="text-center" style="background-color:black; color:white;">

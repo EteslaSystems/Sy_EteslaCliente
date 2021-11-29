@@ -128,6 +128,10 @@
     <?php $__env->startSection('scripts'); ?>
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
+        <!-- Graficos -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Graficos -->
+
         <script type="text/javascript">
             // Función invocada en los inputs tipo number, no permite insertar datos que no sean numéricos.
             $('#form-group-inputs input[type="number"]').keydown(function(event) {

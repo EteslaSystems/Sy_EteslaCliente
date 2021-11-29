@@ -346,7 +346,7 @@
                         <td><strong>Total sin IVA</strong></td>
                         <td></td>
                          <?php if($propuesta["descuento"]["porcentaje"] > 0): ?>
-                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green;">
+                            <td id="descuentoUSD" style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
                                 <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                                     $<?php echo e(number_format($propuesta["descuento"]["descuento"],2)); ?> USD
                                 </p>
@@ -1103,88 +1103,10 @@
         <table id="tableGraficas">
             <tr>
                 <td id="grfEnergetico">
-                    <img style="width:40%; height:210px; margin-left:55px;" src='https://quickchart.io/chart?c={
-                        type: "bar",
-                        data:{
-                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
-                            datasets: [
-                                {
-                                    label: "Consumo s/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
-                                    borderColor: "rgba(245, 62, 29, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Generacion [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
-                                    borderColor: "rgba(85, 177, 62, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Nuevo consumo c/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(29, 170, 245, 0.55)",
-                                    borderColor: "rgba(29, 170, 245, 1)",
-                                    borderWidth: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            title:{
-                                display: true,
-                                position: "bottom",
-                                text: "Consumo electrico"
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            } 
-                        }
-                    }
-                '/>
+                    <img style="width:40%; height:210px; margin-left:55px;" src='<?php echo e($Chart["chartEnergetico"]); ?>'/>
                 </td>
                 <td id="grfEconomico">
-                    <img style="width:40%; height:210px; margin-left:85px;" src='https://quickchart.io/chart?c={
-                        type: "bar",
-                        data: {
-                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
-                            datasets: [
-                                {
-                                    label: "Consumo s/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
-                                    borderColor: "rgba(245, 62, 29, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Consumo c/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
-                                    borderColor: "rgba(85, 177, 62, 1)",
-                                    borderWidth: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            title:{
-                                display: true,
-                                position: "bottom",
-                                text: "Consumo economico"
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            } 
-                        }
-                    }'/>
+                    <img style="width:40%; height:210px; margin-left:85px;" src='<?php echo e($Chart["chartEconomico"]); ?>'/>
                 </td>
             </tr>  
         </table>

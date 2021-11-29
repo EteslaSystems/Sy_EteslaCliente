@@ -8,8 +8,9 @@ class PDFController extends Controller
 {
     public function generatePDF($propuesta)
     {  
+        $pdfTemplate = '';
+
         try{
-            $pdfTemplate = '';
             $tipoCotizacion = $propuesta["tipoCotizacion"];
 
             //Nombre del documento PDF
@@ -25,6 +26,14 @@ class PDFController extends Controller
 
             if($tipoCotizacion === "individual"){
                 $pdfTemplate = 'PDFTemplates.individual';
+            }
+
+            //Obtener graficos
+            if($tipoCotizacion === "CombinacionCotizacion" || $tipoCotizacion === "bajaTension"){
+                $ConfigChart = $this->getChartsPDF($propuesta);
+
+                //Agregar a la [data] el apartado de -Chart- (graficos)
+                $propuesta["Chart"] = $ConfigChart;
             }
 
             $pdf = PDF::loadview($pdfTemplate, $propuesta)
@@ -52,18 +61,18 @@ class PDFController extends Controller
 
     public function getFileName($data)
     {
-        if($data["tipoCotizacion"] != "CombinacionCotizacion"){
-            /* La *data.tipioCotizacion* que sea diferente a "CombinacionCotizacion"
-               es un [object:request]. Obtener el arrayData del Object:Request, para
-               que este sea manipulable y no genere un error.
-            */
-            $data = $data->all();
-        }
-        else{ ///Combinaciones
-            $data = $data["propuesta"];
-        }
-
         try{
+            if($data["tipoCotizacion"] != "CombinacionCotizacion"){
+                /* La *data.tipioCotizacion* que sea diferente a "CombinacionCotizacion"
+                   es un [object:request]. Obtener el arrayData del Object:Request, para
+                   que este sea manipulable y no genere un error.
+                */
+                $data = $data->all();
+            }
+            else{ ///Combinaciones
+                $data = $data["propuesta"];
+            }
+
             /* Nombre del cliente - Estructurado */
             $nombre = is_null($data["cliente"]["vNombrePersona"]) ? ' ' : $data["cliente"]["vNombrePersona"];
             $primerApellido = is_null($data["cliente"]["vPrimerApellido"]) ? ' ' : $data["cliente"]["vPrimerApellido"];
@@ -77,6 +86,140 @@ class PDFController extends Controller
             $nombrePropuesta = $fullName . '_' . $tipoCotizacion . '_'  . time() . '.pdf';
 
             return $nombrePropuesta;
+        }
+        catch(Throwable $error){
+            throw $error;
+        }
+    }
+
+    public function getChartsPDF($data)
+    {
+        $chartURI = 'https://quickchart.io/chart?c=';
+
+        try{
+            $tipoCotizacion = $data["tipoCotizacion"];
+
+            //Validar -tipoCotizacion-
+            if($tipoCotizacion === "CombinacionCotizacion"){
+                $data = $data["propuesta"];
+            }
+ 
+            /* [DATA] */
+            ///Energetica
+            $consumoActualBim = $data["power"]["_consumos"]["_promCons"]["_consumosBimestrales"];
+            $generacionBim = $data["power"]["generacion"]["_generacionBimestral"];
+            $consumoNuevoBim = $data["power"]["nuevosConsumos"]["_consumosNuevosBimestrales"];
+
+            ///Economica
+            $consumosEconActualesBim = $data["power"]["objConsumoEnPesos"]["_pagosBimestrales"];
+            $consumosEconNuevosBim = $data["power"]["objGeneracionEnpesos"]["_pagosBimestrales"];
+
+            /* #region ChartEnergetico */
+            ///[CONFIG]
+            $confChrtEnergetico = [
+                "type" => 'bar',
+                "data" => [
+                    "labels" => ['1er', '2do', '3ro', '4to', '5to', '6to'],
+                    "datasets" => [
+                        [
+                            "label" => "Consumo s/paneles [Bimestral]",
+                            "data" => $consumoActualBim,
+                            "backgroundColor" => 'rgba(245, 62, 29, 0.61)',
+                            "borderColor" => 'rgba(245, 62, 29, 1)',
+                            "borderWidth" => 1 
+                        ],
+                        [
+                            "label" => "Generacion [Bimestral]",
+                            "data" => $generacionBim,
+                            "backgroundColor" => 'rgba(102, 196, 79, 0.54)',
+                            "borderColor" => 'rgba(85, 177, 62, 1)',
+                            "borderWidth" => 1 
+                        ],
+                        [
+                            "label" => "Nuevo consumo c/paneles [Bimestral]",
+                            "data" => $consumoNuevoBim,
+                            "backgroundColor" => 'rgba(29, 170, 245, 0.55)',
+                            "borderColor" => 'rgba(29, 170, 245, 1)',
+                            "borderWidth" => 1 
+                        ]
+                    ]
+                ],
+                "options" => [
+                    "responsive" => true,
+                    "maintainAspectRatio" => true,
+                    "title" => [
+                        "display" => true,
+                        "position" => "top",
+                        "text" => "Consumo electrico"
+                    ]
+                ]
+            ];
+
+            $confChrtEnergetico = json_encode($confChrtEnergetico);
+
+            ///[URI]
+            $chartURIEnerg = $chartURI . urlencode($confChrtEnergetico);
+            
+            ///[GET_FILE_CONTENTS]
+            $confChrtEnergetico = file_get_contents($chartURIEnerg);
+
+            //Grafico_Energetico
+            $chartEnergetico = 'data:image/png;base64,'. base64_encode($confChrtEnergetico);
+            /* #endregion */
+
+            /* #region ChartEconomico */
+            ///[CONFIG]
+            $confChrtEconomico = [
+                "type" => 'bar',
+                "data" => [
+                    "labels" => ['1er', '2do', '3ro', '4to', '5to', '6to'],
+                    "datasets" => [
+                        [
+                            "label" => "Consumo s/paneles [Bimestral]",
+                            "data" => $consumosEconActualesBim,
+                            "backgroundColor" => 'rgba(245, 62, 29, 0.61)',
+                            "borderColor" => 'rgba(245, 62, 29, 1)',
+                            "borderWidth" => 1 
+                        ],
+                        [
+                            "label" => "Consumo c/paneles [Bimestral]",
+                            "data" => $consumosEconNuevosBim,
+                            "backgroundColor" => 'rgba(102, 196, 79, 0.54)',
+                            "borderColor" => 'rgba(85, 177, 62, 1)',
+                            "borderWidth" => 1 
+                        ]
+                    ]
+                ],
+                "options" => [
+                    "responsive" => true,
+                    "maintainAspectRatio" => true,
+                    "title" => [
+                        "display" => true,
+                        "position" => "top",
+                        "text" => "Consumo economico"
+                    ]
+                ]
+            ];
+
+            $confChrtEconomico = json_encode($confChrtEconomico);
+
+            ///[URI]
+            $chartURIEcon = $chartURI . urlencode($confChrtEconomico);
+            
+            ///[GET_FILE_CONTENTS]
+            $confChrtEconomico = file_get_contents($chartURIEcon);
+
+            //Grafico_Economico
+            $chartEconomico = 'data:image/png;base64,' . base64_encode($confChrtEconomico);
+            /* #endregion */
+
+            $charts = [
+                "chartEnergetico" => $chartEnergetico,
+                "chartEconomico" => $chartEconomico
+            ];
+
+            return $charts;
+            
         }
         catch(Throwable $error){
             throw $error;

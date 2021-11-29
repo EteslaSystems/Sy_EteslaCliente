@@ -671,96 +671,10 @@
         <table id="tableGraficas">
             <tr>
                 <td id="grfEnergetico">
-                    <img style="width:40%; height:210px; margin-left:55px;" src='https://quickchart.io/chart?c={
-                        type: "bar",
-                        data:{
-                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
-                            datasets: [
-                                {
-                                    label: "Consumo s/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
-                                    borderColor: "rgba(245, 62, 29, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Generacion [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
-                                    borderColor: "rgba(85, 177, 62, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Nuevo consumo c/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(29, 170, 245, 0.55)",
-                                    borderColor: "rgba(29, 170, 245, 1)",
-                                    borderWidth: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            title:{
-                                display: true,
-                                position: "bottom",
-                                text: "Consumo electrico"
-                            },
-                            scales: {
-                                y: {
-                                    ticks: {
-                                        callback: function(value, index, values) {
-                                            return value.toLocaleString("es-MX") + " kw";
-                                        }
-                                    }
-                                }
-                            } 
-                        }
-                    }
-                '/>
+                    <img style="width:40%; height:210px; margin-left:85px;" src='<?php echo e($Chart["chartEnergetico"]); ?>'/>
                 </td>
                 <td id="grfEconomico">
-                    <img style="width:40%; height:210px; margin-left:85px;" src='https://quickchart.io/chart?c={
-                        type: "bar",
-                        data: {
-                            labels: ["1er", "2do", "3ro", "4to", "5to", "6to"],
-                            datasets: [
-                                {
-                                    label: "Consumo s/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(245, 62, 29, 0.61)",
-                                    borderColor: "rgba(245, 62, 29, 1)",
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: "Consumo c/paneles [Bimestral]",
-                                    data: [1,2,3,4,5,6],
-                                    backgroundColor: "rgba(102, 196, 79, 0.54)",
-                                    borderColor: "rgba(85, 177, 62, 1)",
-                                    borderWidth: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            title:{
-                                display: true,
-                                position: "bottom",
-                                text: "Consumo economico"
-                            },
-                            scales: {
-                                y: {
-                                    ticks: {
-                                        callback: function(value, index, values) {
-                                            return "$" + value.toLocaleString("es-MX") + "mxn";
-                                        }
-                                    }
-                                }
-                            } 
-                        }
-                    }'/>
+                    <img style="width:40%; height:210px; margin-left:85px;" src='<?php echo e($Chart["chartEconomico"]); ?>'/>
                 </td>
             </tr>  
         </table>

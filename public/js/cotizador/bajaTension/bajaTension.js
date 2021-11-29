@@ -490,7 +490,7 @@ async function mostrarPanelSeleccionado(){
     let valueDDLPaneles = $('#listPaneles').val();
 
     limpiarCampos();
-    // limpiarGrafico();
+    limpiarGrafico();
 
     if(valueDDLPaneles != "-1" || typeof valueDDLPaneles === "undefined"){
         /*#region Formating _respuestaPaneles*/
@@ -783,8 +783,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
         objResp: objResp
     });
 
-    // limpiarGrafico();
-    // pintarGrafico(Data);
+    limpiarGrafico();
+    pintarGrafico(Data);
 
     if(_viaticos[0].inversores.combinacion === "true"){
         $('#tdInversorCantidad').text(_viaticos[0].inversores.numeroDeInversores.MicroUno.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroUno.numeroDeInversores + '\n' + _viaticos[0].inversores.numeroDeInversores.MicroDos.vNombreMaterialFot + ': ' + _viaticos[0].inversores.numeroDeInversores.MicroDos.numeroDeInversores);
@@ -970,6 +970,9 @@ function seleccionarCombinacion(ddlCombinaciones){
         //NuevoConsumo
         $('#tdNuevoConsumoDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
         $('#tdNuevoConsumoDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
+        //Ahorro
+        $('#tdAhorroDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroMensualEnPesosMXN);
+        $('#tdAhorroDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroBimestralEnPesosMXN);
 
         /* Totales */
         $('#tdSubtotalUSD').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precio.toLocaleString('es-MX') + ' USD');
@@ -990,8 +993,8 @@ function seleccionarCombinacion(ddlCombinaciones){
         };
 
         ///
-        // limpiarGrafico();
-        // pintarGrafico(_combinaciones[ddlCombinacionesValor].combinacion);
+        limpiarGrafico();
+        pintarGrafico(_combinaciones[ddlCombinacionesValor].combinacion);
     }
     else{
         limpiarCampos();

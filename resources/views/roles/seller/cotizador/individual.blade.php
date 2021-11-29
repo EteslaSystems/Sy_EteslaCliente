@@ -19,53 +19,55 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-sm-3">
-                             <!-- Controles accesibles unicamente para Operaciones -->
-                             <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="chbFletes" onclick="cambiaValorCheckBox(this)" checked>
-                                    <label class="form-check-label" for="chbFletes" style="color: #888;">Fletes</label>
-                                </div>
+                        @if($rol == 2)
+                            <div class="col-sm-3">
+                                <!-- Controles accesibles unicamente para Operaciones -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="chbViaticos" onclick="cambiaValorCheckBox(this)" checked>
-                                    <label class="form-check-label" for="chbViaticos" style="color: #888;">
-                                        <a href="#" data-toggle="modal" data-target=".bd-viaticos-modal-sm">Viaticos</a>
-                                    </label>
-                                </div>
-                            <!-- Modal viaticos -->
-                            <div class="modal fade bd-viaticos-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 id="exampleModalLabel" class="modal-title">Componentes - Viaticos</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body row">
-                                            <div class="col">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="chbPasaje" onclick="cambiaValorCheckBox(this)" checked>
-                                                    <label class="form-check-label" for="chbPasaje" style="color: #888;">Pasaje</label>
-                                                </div>
+                                        <input class="form-check-input" type="checkbox" value="1" id="chbFletes" onclick="cambiaValorCheckBox(this)" checked>
+                                        <label class="form-check-label" for="chbFletes" style="color: #888;">Fletes</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="chbViaticos" onclick="cambiaValorCheckBox(this)" checked>
+                                        <label class="form-check-label" for="chbViaticos" style="color: #888;">
+                                            <a href="#" data-toggle="modal" data-target=".bd-viaticos-modal-sm">Viaticos</a>
+                                        </label>
+                                    </div>
+                                <!-- Modal viaticos -->
+                                <div class="modal fade bd-viaticos-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 id="exampleModalLabel" class="modal-title">Componentes - Viaticos</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="chbHospedaje" onclick="cambiaValorCheckBox(this)" checked>
-                                                    <label class="form-check-label" for="chbHospedaje" style="color: #888;">Hospedaje</label>
+                                            <div class="modal-body row">
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="chbPasaje" onclick="cambiaValorCheckBox(this)" checked>
+                                                        <label class="form-check-label" for="chbPasaje" style="color: #888;">Pasaje</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="chbComida" onclick="cambiaValorCheckBox(this)" checked>
-                                                    <label class="form-check-label" for="chbComida" style="color: #888;">Comida</label>
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="chbHospedaje" onclick="cambiaValorCheckBox(this)" checked>
+                                                        <label class="form-check-label" for="chbHospedaje" style="color: #888;">Hospedaje</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="chbComida" onclick="cambiaValorCheckBox(this)" checked>
+                                                        <label class="form-check-label" for="chbComida" style="color: #888;">Comida</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Fin - Modal viaticos -->
                             </div>
-                            <!-- Fin - Modal viaticos -->
-                        </div>
+                        @endif
                         <!-- Controles Generar Entregable -->
                         <div class="col">
                             <div id="carouselExampleControls" class="carousel slide" data-interval="false">
