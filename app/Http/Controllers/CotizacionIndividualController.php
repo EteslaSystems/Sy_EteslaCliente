@@ -44,11 +44,9 @@ class CotizacionIndividualController extends Controller
 		$vEstructuras = $this->estructuras->view();
 		$vEstructuras = $vEstructuras->message;
 		$dataUsuario["id"] = session('dataUsuario')->idUsuario;
-		$consultarClientes = $this->vendedor->listarPorUsuario(['json' => $dataUsuario]);
-		$consultarClientes = $consultarClientes->message;
 		$rol = session('dataUsuario')->rol;
 
-		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'vEstructuras', 'consultarClientes', 'rol'));
+		return view('roles/seller/cotizador/individual', compact('vPaneles', 'vInversores', 'vEstructuras', 'rol'));
 	}
 
 	public function create(Request $request)

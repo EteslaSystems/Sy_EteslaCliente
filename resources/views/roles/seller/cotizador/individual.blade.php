@@ -1,5 +1,6 @@
 @extends('roles/seller/cotizador/cotizador')
 @section('cotizadores')
+<input id="rolUser" value="{{ $rol }}" class="d-none"></input>
 <div class="card">
     <div class="card-body container-fluid">
         <div class="row">
@@ -10,11 +11,11 @@
                         <!-- Controles accesibles unicamente para Operaciones -->
                             <div class="col">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="chbMO" onclick="cambiaValorCheckBox(this)" checked>
+                                    <input id="chbMO" class="form-check-input" type="checkbox" value="1" onclick="cambiaValorCheckBox(this)" checked>
                                     <label class="form-check-label" for="chbMO" style="color: #888;">Mano de obra</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" id="chbOtros" onclick="cambiaValorCheckBox(this)" checked>
+                                    <input id="chbOtros" class="form-check-input" type="checkbox" value="1" onclick="cambiaValorCheckBox(this)" checked>
                                     <label class="form-check-label" for="chbOtros" style="color: #888;">Otros</label>
                                 </div>
                             </div>

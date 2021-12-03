@@ -8,41 +8,46 @@ function getCotizacionIndividual(dataCotInd){
     sessionStorage.removeItem("tarifaMT");
     sessionStorage.setItem("tarifaMT", "individual");
 
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'POST',
-            url: '/enviarCotizIndiv',
-            data: { dataCotInd: dataCotInd },
-            dataType: 'json',
-            success: function(cotizacionIndividual){
-                if(cotizacionIndividual.status == 200){
-                    cotizacionIndividual = cotizacionIndividual.message;
-
-                    //***
-                    console.log(cotizacionIndividual);
-
-                    //Activar botones de -guardar- y -generar
-                    $('#generarPDF').prop('disabled',false);
-                    $('#guardarPropuesta').prop('disabled',false);
-
-                    //Guardar PropuestaResult en un SessionStorage
-                    sessionStorage.removeItem('ssPropuestaIndividual');
-                    sessionStorage.setItem('ssPropuestaIndividual',JSON.stringify(cotizacionIndividual[0]))
-
-                    resolve(cotizacionIndividual);
+    try{
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                type: 'POST',
+                url: '/enviarCotizIndiv',
+                data: { dataCotInd: dataCotInd },
+                dataType: 'json',
+                success: function(cotizacionIndividual){
+                    if(cotizacionIndividual.status == 200){
+                        cotizacionIndividual = cotizacionIndividual.message;
+    
+                        //***
+                        console.log(cotizacionIndividual);
+    
+                        //Activar botones de -guardar- y -generar
+                        $('#generarPDF').prop('disabled',false);
+                        $('#guardarPropuesta').prop('disabled',false);
+    
+                        //Guardar PropuestaResult en un SessionStorage
+                        sessionStorage.removeItem('ssPropuestaIndividual');
+                        sessionStorage.setItem('ssPropuestaIndividual',JSON.stringify(cotizacionIndividual[0]))
+    
+                        resolve(cotizacionIndividual);
+                    }
+                    else{
+                        console.log(cotizacionIndividual);
+                        throw 'Error! Status Server 500!';
+                    }
+                },
+                error: function(error){
+                    console.log(error);
+                    throw 'Ocurrio un error';
                 }
-                else{
-                    console.log(cotizacionIndividual);
-                    throw 'Error! Status Server 500!';
-                }
-            },
-            error: function(error){
-                console.log(error);
-                throw 'Ocurrio un error';
-            }
+            });
         });
-    });
+    }
+    catch(error){
+        throw error;
+    }
 }
 /*#endregion*/
 
@@ -54,6 +59,7 @@ async function calcularCotizacionIndividual(){ //:Main()
         pintarResultadoCotizacion(CotizacionIndividual); //:void
     }
     catch(error){
+        console.log(error);
         alert(error);
     }
 }
@@ -173,10 +179,10 @@ function catchDataCotizacionIndividual(){
         cliente: { id: null, direccion: null },
         ajustePropuesta: { aumento: null, descuento: null },
         complementos: { 
-            manoObra: null, 
-            otros: null, 
-            viaticos: null, 
-            fletes: null 
+            manoObra: "1", 
+            otros: "1", 
+            viaticos: { hospedaje: "1", comida: "1", pasaje: "1" }, 
+            fletes: "1" 
         }, 
         agregados: null, 
         equipos: null
@@ -199,6 +205,8 @@ function catchDataCotizacionIndividual(){
         }
     };
 
+    let rolUser = $('#rolUser').val();
+
     dataCotIndividual.cliente.id = $('#inpClienteId').val();
     dataCotIndividual.cliente.direccion = catchDireccion();
 
@@ -209,21 +217,23 @@ function catchDataCotizacionIndividual(){
             /* Equipos (paneles, inversores, estructuras) */
             dataCotIndividual.equipos = catchDataEquipos();
 
-            /* Complementos [ManoObra, Otros, Viaticos, Fletes] */
-            dataCotIndividual.complementos.manoObra = $('#chbMO').val();
-            dataCotIndividual.complementos.otros = $('#chbOtros').val();
+            // Se valida que solo sean los roles que pueden visualizar dichos controles [0: SU, 1: Admin, 2: Operaciones]
+            if(rolUser === '0' || rolUser === '1' || rolUser === '2'){
+                /* Complementos [ManoObra, Otros, Viaticos, Fletes] */
+                dataCotIndividual.complementos.manoObra = $('#chbMO').val();
+                dataCotIndividual.complementos.otros = $('#chbOtros').val();
 
-            ///
-            if($('#chbViaticos').is(':checked')){
-                dataCotIndividual.complementos.viaticos = {
-                    /* Viaticos - Complementos */
-                    hospedaje: $('#chbHospedaje').val(),
-                    pasaje: $('#chbPasaje').val(),
-                    comida: $('#chbComida').val()
-                };
+                if($('#chbViaticos').is(':checked')){
+                    dataCotIndividual.complementos.viaticos = {
+                        /* Viaticos - Complementos */
+                        hospedaje: $('#chbHospedaje').val(),
+                        pasaje: $('#chbPasaje').val(),
+                        comida: $('#chbComida').val()
+                    };
+                }
+    
+                dataCotIndividual.complementos.fletes = $('#chbFletes').val();
             }
-
-            dataCotIndividual.complementos.fletes = $('#chbFletes').val();
 
             /* Agregados */
             _agregado = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
