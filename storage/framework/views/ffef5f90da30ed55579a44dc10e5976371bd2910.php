@@ -53,35 +53,49 @@
                             <!-- Seccion "Elegir un equipo" -->
                             <div class="col form-group" id="divElegirEquipo" style="display:none;">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-sm">
                                         <div class="form-group">
-                                            <select id="listPaneles" class="form-control" onchange="mostrarPanelSeleccionado()" disabled>
+                                            <select id="listPaneles" class="form-control input-sm" onchange="mostrarPanelSeleccionado()" disabled>
                                                 <option selected value="-1">Elige un panel</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <select id="listEstructura" class="form-control" onchange="cambiarEstructura();" disabled>
+                                            <select id="listEstructura" class="form-control input-sm" onchange="cambiarEstructura();" disabled>
                                                 <option selected value="-1">Elige una estructura</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md">
                                         <div class="form-group">
-                                            <select class="form-control" id="listInversores" onchange="mostrarInversorSeleccionado()" disabled>
+                                            <select id="listInversores" class="form-control input-sm" onchange="mostrarInversorSeleccionado()" disabled>
                                                 <option selected value="-1">Elige un inversor (marca)</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <select id="listModelosInversor" class="form-control" onchange="mostrarInversorModeloSeleccionado()" disabled>
+                                            <select id="listModelosInversor" class="form-control input-sm" onchange="mostrarInversorModeloSeleccionado()" disabled>
                                                 <option selected value="-1">Elige un inversor (modelo)</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-auto">
-                                        <!-- Boton ajuste-propuesta -->
-                                        <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej" title="Ajuste de propuesta">
-                                            <img width="100%" height="35px" src="<?php echo e(asset('/img/icon/configuration-icon.png')); ?>"/>
-                                        </button>
+                                    <div class="col-auto">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <!-- Boton ajuste-propuesta -->
+                                                    <button id="btnModalAjustePropuesta" class="btn btn-xs" data-toggle="modal" data-target=".bd-modal-ej" title="Ajuste de propuesta">
+                                                        <img width="100%" height="35px" src="<?php echo e(asset('/img/icon/configuration-icon.png')); ?>"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <!-- Boton *[AGREGADOS]* -->
+                                                    <button id="btnAgregadosBajMedT" type="button" class="btn btn-sm" title="Agregados">
+                                                        <img width="100%" height="35px" src="<?php echo e(asset('/img/icon/agregados.png')); ?>"/>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
