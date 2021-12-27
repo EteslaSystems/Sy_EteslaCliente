@@ -20,7 +20,7 @@ function addAgregado(){
         let Agregado = {
             nombreAgregado: nombreAgregao,
             cantidadAgregado: cantidadAgregado,
-            precioAgregado: precioAgregado
+            precioAgregadoMXN: precioAgregado
         };
 
         //[]
