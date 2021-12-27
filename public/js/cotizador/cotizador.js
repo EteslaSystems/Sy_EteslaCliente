@@ -7,7 +7,6 @@ $(document).on('ready',function(){
 /*#region Logica*/
 function addAgregado(){
     let _agregados = [];
-    let Agregado = { nombreAgregado: null, cantidadAgregado: null, precioAgregado: null };
     let nombreAgregao = $('#inpAgregado').val();
     let cantidadAgregado = $('#inpCantidadAg').val();
     let precioAgregado = $('#inpPrecioAg').val();
@@ -18,9 +17,11 @@ function addAgregado(){
     contadorDeAgregados = contadorDeAgregados != null ? parseInt(contadorDeAgregados) : 0;
 
     if(validarInputsVaciosAg(nombreAgregao) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
-        Agregado.nombreAgregado = nombreAgregao;
-        Agregado.cantidadAgregado = cantidadAgregado;
-        Agregado.precioAgregado = precioAgregado;
+        let Agregado = {
+            nombreAgregado: nombreAgregao,
+            cantidadAgregado: cantidadAgregado,
+            precioAgregado: precioAgregado
+        };
 
         //[]
         if(contadorDeAgregados === 0){
