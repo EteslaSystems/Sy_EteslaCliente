@@ -81,6 +81,19 @@
         width: 100%;
         border-collapse: collapse;
     }
+    /* Tab - Agregados */
+    .table-agregados{
+        width: 100%;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin-top:25px; 
+        margin-left:25px; 
+        margin-right:25px;
+    }
+    .table-agregados td{
+        border: 1px solid black;
+    }
     /* Tab - Financiamiento */
     .tabFinanciamiento{
         width: 100%;
@@ -266,6 +279,18 @@
                             <td></td>
                         <?php endif; ?>
                     </tr>
+                    <?php if(!is_null($agregados["_agregados"])): ?>
+                        <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
+                        <tr id="desgloceAgregados">
+                            <td>Agregados</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>Agregados (Desgloce en pag. 2)</strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                    <?php endif; ?>
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
@@ -693,5 +718,48 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 2 -->
+    <!-- Pagina 3 - Agregados -->
+    <?php if(!is_null($agregados["_agregados"])): ?>
+        <hr class="salto-pagina">
+
+        <!-- HeaderPage -->
+        <table>
+            <tr>
+                <td>
+                    <!-- LogoTipo Etesla -->
+                    <img id="logoTipoEtesla" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/etesla-logo.png')))); ?>"> 
+                </td>
+                <td>
+                    <h1 style="font-size:35px; margin-left: 425px;">Agregados</h1>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Tabla de agregados -->
+        <table class="table-agregados">
+            <thead>
+                <tr>
+                    <th>Agregado</th>
+                    <th>Cantidad</th>
+                    <th>Precio unit.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $__currentLoopData = $agregados["_agregados"]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $agregado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td><?php echo e($agregado["nombreAgregado"]); ?></td>
+                        <td><?php echo e($agregado["cantidadAgregado"]); ?></td>
+                        <td>$ <?php echo e($agregado["precioUnitarioMXN"]); ?> MXN</td>
+                    </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td></td>
+                    <td><strong>Costo total</strong></td>
+                    <td>$ <?php echo e($agregados["costoTotal"] * $tipoDeCambio); ?> MXN</td>
+                </tr>
+            </tbody>
+        </table>
+    <?php endif; ?>
+    <!-- Fin pagina 3 -->
 </body>
 </html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/bajaTension.blade.php ENDPATH**/ ?>

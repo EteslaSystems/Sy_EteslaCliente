@@ -81,6 +81,19 @@
         width: 100%;
         border-collapse: collapse;
     }
+    /* Tab - Agregados */
+    .table-agregados{
+        width: 100%;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin-top:25px; 
+        margin-left:25px; 
+        margin-right:25px;
+    }
+    .table-agregados td{
+        border: 1px solid black;
+    }
     /* Tab - Financiamiento */
     .tabFinanciamiento{
         width: 100%;
@@ -257,6 +270,18 @@
                             <td></td>
                         @endif
                     </tr>
+                    @if(!is_null($agregados["_agregados"]))
+                        <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
+                        <tr id="desgloceAgregados">
+                            <td>Agregados</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>Agregados (Desgloce en pag. 2)</strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>Mano de obra</td>
                         <td></td>
@@ -667,5 +692,48 @@
         <div class="footer-page"></div>
     </div>
     <!-- Fin pagina 2 -->
+    <!-- Pagina 3 - Agregados -->
+    @if(!is_null($agregados["_agregados"]))
+        <hr class="salto-pagina">
+
+        <!-- HeaderPage -->
+        <table>
+            <tr>
+                <td>
+                    <!-- LogoTipo Etesla -->
+                    <img id="logoTipoEtesla" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}"> 
+                </td>
+                <td>
+                    <h1 style="font-size:35px; margin-left: 425px;">Agregados</h1>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Tabla de agregados -->
+        <table class="table-agregados">
+            <thead>
+                <tr>
+                    <th>Agregado</th>
+                    <th>Cantidad</th>
+                    <th>Precio unit.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($agregados["_agregados"] as $agregado)
+                    <tr>
+                        <td>{{ $agregado["nombreAgregado"] }}</td>
+                        <td>{{ $agregado["cantidadAgregado"] }}</td>
+                        <td>$ {{ $agregado["precioUnitarioMXN"] }} MXN</td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td></td>
+                    <td><strong>Costo total</strong></td>
+                    <td>$ {{ $agregados["costoTotal"] * $tipoDeCambio }} MXN</td>
+                </tr>
+            </tbody>
+        </table>
+    @endif
+    <!-- Fin pagina 3 -->
 </body>
 </html>

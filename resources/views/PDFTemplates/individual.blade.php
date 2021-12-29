@@ -269,7 +269,7 @@
                     @endif
                     @if(!is_null($agregados["_agregados"]))
                         <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
-                        <tr id="desgloceEstructura">
+                        <tr id="desgloceAgregados">
                             <td>Agregados</td>
                             <td></td>
                             <td></td>
@@ -497,7 +497,7 @@
                         <tr>
                             <td>{{ $agregado["nombreAgregado"] }}</td>
                             <td>{{ $agregado["cantidadAgregado"] }}</td>
-                            <td>$ {{ $agregado["precioAgregado"] }} MXN</td>
+                            <td>$ {{ $agregado["precioUnitarioMXN"] }} MXN</td>
                         </tr>
                     @endforeach
                     <tr>

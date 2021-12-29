@@ -7,7 +7,6 @@ $(document).on('ready',function(){
 /*#region Logica*/
 function addAgregado(){
     let _agregados = [];
-    let Agregado = { nombreAgregado: null, cantidadAgregado: null, precioAgregado: null };
     let nombreAgregao = $('#inpAgregado').val();
     let cantidadAgregado = $('#inpCantidadAg').val();
     let precioAgregado = $('#inpPrecioAg').val();
@@ -18,9 +17,11 @@ function addAgregado(){
     contadorDeAgregados = contadorDeAgregados != null ? parseInt(contadorDeAgregados) : 0;
 
     if(validarInputsVaciosAg(nombreAgregao) == true && validarInputsVaciosAg(cantidadAgregado) == true && validarInputsVaciosAg(precioAgregado) == true){
-        Agregado.nombreAgregado = nombreAgregao;
-        Agregado.cantidadAgregado = cantidadAgregado;
-        Agregado.precioAgregado = precioAgregado;
+        let Agregado = {
+            nombreAgregado: nombreAgregao,
+            cantidadAgregado: cantidadAgregado,
+            precioUnitarioMXN: precioAgregado
+        };
 
         //[]
         if(contadorDeAgregados === 0){
@@ -33,10 +34,10 @@ function addAgregado(){
 
         //Pintar <td>'Agregado'</td> en tabla
         let tableBody = $('#tblAgregados > tbody');
-        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdAgregado'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregados[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregados[contadorDeAgregados].cantidadAgregado+'</td><td id="tdPrecioUnitario">$ '+_agregados[contadorDeAgregados].precioAgregado.toLocaleString('es-MX')+' MXN</td><td id="tdSubtotal">$ '+(_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioAgregado).toLocaleString('es-MX')+' MXN</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(this);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
+        tableBody.append('<tr id="trContAg'+contadorDeAgregados+'"><td id="tdAgregado'+contadorDeAgregados+'">'+(contadorDeAgregados+1)+'</td><td>'+_agregados[contadorDeAgregados].nombreAgregado+'</td><td>'+_agregados[contadorDeAgregados].cantidadAgregado+'</td><td id="tdPrecioUnitario">$ '+_agregados[contadorDeAgregados].precioUnitarioMXN.toLocaleString('es-MX')+' MXN</td><td id="tdSubtotal">$ '+(_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioUnitarioMXN).toLocaleString('es-MX')+' MXN</td><td><button id="'+contadorDeAgregados+'" class="btn btn-xs btn-danger deleteAg" title="Eliminar" onclick="eliminarAgregado(this);"><img src="https://img.icons8.com/android/12/000000/delete.png"/></button></td></tr>');
 
         //Se afecta[SUMA] el contador -costoTotalAgregados-
-        costoTotalAgregados(0, (_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioAgregado));
+        costoTotalAgregados(0, (_agregados[contadorDeAgregados].cantidadAgregado * _agregados[contadorDeAgregados].precioUnitarioMXN));
 
         //
         sessionStorage.setItem("_agregados", JSON.stringify(_agregados));

@@ -13,7 +13,7 @@
     </a>
     <ul class="collapse list-unstyled" id="cotizadorSubmenu">
         <li>
-            <a class="list-group-item list-group-item-action bg-ligth" href="#">Media tensión</a>
+            <a class="list-group-item list-group-item-action bg-ligth" href="/mediaTension">Media tensión</a>
         </li>
         <li>
             <a class="list-group-item list-group-item-action bg-ligth" href="/bajaTension">Baja tensión</a>
