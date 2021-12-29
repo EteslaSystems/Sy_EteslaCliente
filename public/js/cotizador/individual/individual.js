@@ -187,7 +187,6 @@ function catchDataCotizacionIndividual(){
         agregados: null, 
         equipos: null
     };
-    let _agregado = null;
     
     let catchDireccion = () => {
         let calle = $('#inpClienteCalle').val() || '';
@@ -236,8 +235,7 @@ function catchDataCotizacionIndividual(){
             }
 
             /* Agregados */
-            _agregado = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
-            dataCotIndividual.agregados = _agregado;
+            dataCotIndividual.agregados = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
 
             /* AjustePropuesta */
             dataCotIndividual.ajustePropuesta = {

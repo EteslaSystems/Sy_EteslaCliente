@@ -90,9 +90,78 @@
                                             <div class="row">
                                                 <div class="col-sm">
                                                     <!-- Boton *[AGREGADOS]* -->
-                                                    <button id="btnAgregadosBajMedT" type="button" class="btn btn-sm" title="Agregados">
+                                                    <button id="btnAgregadosBajMedT" type="button" class="btn btn-sm" title="Agregados" data-toggle="modal" data-target=".modl-agregados-modal-lg">
                                                         <img width="100%" height="35px" src="<?php echo e(asset('/img/icon/agregados.png')); ?>"/>
                                                     </button>
+                                                    <!-- Modal [AGREGADOS] -->
+                                                    <div class="modal fade modl-agregados-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-center">Agregados</h5>
+                                                                    <div class="form-group text-right">
+                                                                        <label for="costoTotalAgregados">Costo total:</label>
+                                                                        <p id="costoTotalAgregados" class="bg-warning text-white"></p>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-sm btn-warning" onclick="calcularAgregados()">
+                                                                        <p class="font-weight-bold text-center">
+                                                                            Calcular
+                                                                        </p>
+                                                                    </button>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>    
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="container-fluid">
+                                                                        <div class="row">
+                                                                        <!-- Controles_CRUD_Agregadoss -->
+                                                                            <div class="col">
+                                                                                <form class="form-inline">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inpCantidadAg">Cantidad</label>
+                                                                                        <input id="inpCantidadAg" type="number" class="form-control inpAg" style="width: 85px;">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="inpAgregado">Concepto</label>
+                                                                                        <input id="inpAgregado" type="text" class="form-control inpAg">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="inpPrecioAg">Precio</label>
+                                                                                        <input id="inpPrecioAg" type="number" min=".50" step="any" class="form-control inpAg" >
+                                                                                    </div>
+                                                                                    <button id="btnAddAg" type="button" class="btn btn-primary" onclick="addAgregado();">+</button>
+                                                                                </form>
+                                                                            </div>
+                                                                            <!-- Final_Controles_CRUD_Agregados -->
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="row">
+                                                                            <!-- Tabla_Agregados -->
+                                                                            <div class="col-xl table-responsive-xl">
+                                                                                <table class="table table-sm" id="tblAgregados">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col" style="text-align:center;">#</th>
+                                                                                            <th scope="col" style="text-align:center;">Concepto</th>
+                                                                                            <th scope="col" style="text-align:center;">Cantidad</th>
+                                                                                            <th scope="col" style="text-align:center;">Precio unit.</th>
+                                                                                            <th scope="col" style="text-align:center;">Subtotal</th>
+                                                                                            <th scope="col" style="text-align:center;">Acción</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <!-- Contenido dinamico c/JavaScript -->
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            <!-- Final_Tabla_Agregados -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -103,8 +103,8 @@ class BajaTensionController extends Controller
 	public function calculaViaticos_BT(Request $request)
 	{
 		$arrayCompleto["idUsuario"] = session('dataUsuario')->idPersona;
-		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["origen"] = session('dataUsuario')->oficina;
+		$arrayCompleto["idCliente"] = $request->idCliente;
 		$arrayCompleto["destino"] = $request->direccionCliente;
 		$arrayCompleto["arrayBTI"] = $request->arrayBTI;
 		$arrayCompleto["consumos"] = $request->consumos;
@@ -112,6 +112,7 @@ class BajaTensionController extends Controller
 		$arrayCompleto["descuento"] = $request->descuentoPropuesta;
 		$arrayCompleto["aumento"] = $request->aumentoPropuesta;
 		$arrayCompleto["estructura"] = $request->estructura;
+		$arrayCompleto["_agregados"] = $request->agregados;
 		$arrayCompleto["tipoCotizacion"] = "bajaTension";
 		$arrayCompleto["bInstalacion"] = 1; //1 || true
 

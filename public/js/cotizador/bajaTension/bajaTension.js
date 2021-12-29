@@ -208,6 +208,8 @@ function calcularViaticosBT(objInversor){
                 }
 
                 let estructuraSeleccionada = $('#listEstructura').val();
+
+                let _agregados = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
             
                 objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento, aumento };
                 _cotizarViaticos[0] = objEquiposSeleccionados;
@@ -226,7 +228,8 @@ function calcularViaticosBT(objInversor){
                             "tarifa": datosPropuesta.tarifa,
                             "descuentoPropuesta": descuento,
                             "aumentoPropuesta": aumento,
-                            "estructura": estructuraSeleccionada
+                            "estructura": estructuraSeleccionada,
+                            "agregados": _agregados
                         },
                         dataType: 'json',
                         success: function(resultViaticos){
@@ -253,6 +256,27 @@ function calcularViaticosBT(objInversor){
     }
     else{
         alert('Seleccione un panel');
+    }
+}
+
+async function calcularAgregados(){
+    let ResultViaticos = {};
+
+    try{
+        let tipoCotizacion = sessionStorage.getItem('tarifaMT');
+
+        //Se realiza nuevamente la propuesta
+        if(tipoCotizacion === "null" || typeof tipoCotizacion === 'undefined'){ ///BajaTension
+            ResultViaticos = await calcularViaticosBT();
+        }
+        else{ ///MediaTension
+            // ResultViaticos = await calcularPropuestaMT(dataPorcentajes);
+        }
+
+        mostrarRespuestaViaticos(ResultViaticos);
+    }
+    catch(error){
+        alert(error);
     }
 }
 /*#endregion*/
@@ -300,6 +324,7 @@ function cacharDatosPropuesta(){
     _consumosBimestres = _consumosBimestres();
     direccionCliente = direccionCliente();
 
+    //Si no hay error se forma y retorna la [data]
     if(banderaDelError != 1){
         datosPropuesta = {
             idCliente: idCliente,
