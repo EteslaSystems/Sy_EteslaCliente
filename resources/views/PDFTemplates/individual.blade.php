@@ -270,7 +270,7 @@
                     @endif
                     @if(!is_null($agregados["_agregados"]))
                         <!-- SI LA COTIZACION TIENE *ESTRUCTURAS* -->
-                        <tr id="desgloceEstructura">
+                        <tr id="desgloceAgregados">
                             <td>Agregados</td>
                             <td></td>
                             <td></td>
