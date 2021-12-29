@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
