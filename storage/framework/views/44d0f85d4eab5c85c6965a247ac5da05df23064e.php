@@ -749,7 +749,7 @@
                     <tr>
                         <td><?php echo e($agregado["nombreAgregado"]); ?></td>
                         <td><?php echo e($agregado["cantidadAgregado"]); ?></td>
-                        <td>$ <?php echo e($agregado["precioAgregado"]); ?> MXN</td>
+                        <td>$ <?php echo e($agregado["precioUnitarioMXN"]); ?> MXN</td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <tr>

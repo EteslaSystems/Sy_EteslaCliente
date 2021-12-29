@@ -498,7 +498,7 @@
                         <tr>
                             <td>{{ $agregado["nombreAgregado"] }}</td>
                             <td>{{ $agregado["cantidadAgregado"] }}</td>
-                            <td>$ {{ $agregado["precioAgregado"] }} MXN</td>
+                            <td>$ {{ $agregado["precioUnitarioMXN"] }} MXN</td>
                         </tr>
                     @endforeach
                     <tr>
