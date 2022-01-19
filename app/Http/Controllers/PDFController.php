@@ -20,7 +20,7 @@ class PDFController extends Controller
                 $pdfTemplate = 'PDFTemplates.bajaTension';
             }
 
-            if($tipoCotizacion === "CombinacionCotizacion"){
+            if($tipoCotizacion === "Combinacion"){
                 $pdfTemplate = 'PDFTemplates.propuestaCombinaciones';
             }
 
@@ -29,7 +29,7 @@ class PDFController extends Controller
             }
 
             //Obtener graficos
-            if($tipoCotizacion === "CombinacionCotizacion" || $tipoCotizacion === "bajaTension"){
+            if($tipoCotizacion === "Combinacion" || $tipoCotizacion === "bajaTension"){
                 $ConfigChart = $this->getChartsPDF($propuesta);
 
                 //Agregar a la [data] el apartado de -Chart- (graficos)
@@ -62,7 +62,7 @@ class PDFController extends Controller
     public function getFileName($data)
     {
         try{
-            if($data["tipoCotizacion"] != "CombinacionCotizacion"){
+            if($data["tipoCotizacion"] != "Combinacion"){
                 /* La *data.tipioCotizacion* que sea diferente a "CombinacionCotizacion"
                    es un [object:request]. Obtener el arrayData del Object:Request, para
                    que este sea manipulable y no genere un error.
@@ -100,7 +100,7 @@ class PDFController extends Controller
             $tipoCotizacion = $data["tipoCotizacion"];
 
             //Validar -tipoCotizacion-
-            if($tipoCotizacion === "CombinacionCotizacion"){
+            if($tipoCotizacion === "Combinacion"){
                 $data = $data["propuesta"];
             }
  

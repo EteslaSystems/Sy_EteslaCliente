@@ -1147,6 +1147,15 @@ function salvarCombinacion(){
         //Formatea el Object [CombinacionSalvada]
         let CombinacionSalvada = { propuesta: _combinaciones[0][ddlCombinacionesValue].combinacion };
 
+        //
+        CombinacionSalvada.propuesta.tipoCotizacion = CombinacionSalvada.propuesta.tipoCotizacion + '-' + _combinaciones[0].tipoCotizacion;
+
+        //Agregar una propiedad en donde quede especificaco el tipo de cotizacion -Combinacion- => [ bajaTension || mediaTension ]
+        Object.assign(CombinacionSalvada.propuesta, { 
+            tipoCombinacion: _combinaciones[0][ddlCombinacionesValue].nombre,
+            combinacion: true
+        });
+
         //Settear las propiedades[Object] de ->cliente && ->vendedor
         CombinacionSalvada.propuesta.cliente = _combinaciones[0].cliente;
         CombinacionSalvada.propuesta.vendedor = _combinaciones[0].vendedor;
