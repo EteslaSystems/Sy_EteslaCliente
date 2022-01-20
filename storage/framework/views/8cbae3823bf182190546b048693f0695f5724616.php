@@ -586,7 +586,7 @@
                     </td>
                     <td id="tdMarcaPanelC">
                         <?php ($image = $combinacionOptima["paneles"]["marca"] . '.png'); ?>
-                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/Axitec.png')))); ?>">
+                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image)))); ?>">
                     </td>
                 </tr>
                 <tr>
@@ -659,7 +659,7 @@
                     </td>
                     <td id="tdMarcaInversorC">
                         <?php ($image = $combinacionOptima["inversores"]["marca"] . '.jpg'); ?>
-                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/ABB Fimer.jpg')))); ?>">
+                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image)))); ?>">
                     </td>
                 </tr>
                 <tr>
