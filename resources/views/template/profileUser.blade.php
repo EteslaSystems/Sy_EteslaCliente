@@ -11,7 +11,7 @@
         <div class="container-fluid" style="padding: unset;">
             <div class="row" style="padding: unset;">
                 <div class="col-12 image-section" style="padding: unset;">
-                    <img src="https://innovandtalent.es/wp-content/uploads/2019/06/innov-2-1-2000x800.jpg">
+                    <img src="{{ asset('img/Paneles-solares-tesla.jpg') }}">
                 </div>
             </div>
             <div class="row">
@@ -91,7 +91,7 @@
                                                             <strong>{{$usuario->vOficina}}</strong>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <!--tr>
                                                         <th>
                                                             <strong>Contraseña:</strong>
                                                         </th>
@@ -103,7 +103,7 @@
                                                                 </button>
                                                             </strong>
                                                         </td>
-                                                    </tr>
+                                                    </tr-->
                                                 </tbody>
                                             </table>
                                         </p><hr>
@@ -181,7 +181,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group row">
+                                                        <!-- div class="form-group row">
                                                             <label for="inputPassword" class="col-sm-4 col-form-label">Contraseña</label>
                                                             
                                                             <div class="col-sm-8">
@@ -190,7 +190,7 @@
                                                                     <button id="btn-pass" class="btn btn-primary" type="button"><span class="fa fa-eye-slash icon"></span></button>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div-->
                                                     @endif
                                                 </form>
                                             </div>
