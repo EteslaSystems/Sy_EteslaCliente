@@ -232,7 +232,7 @@ function generarPDF(){
         let _dataFiltrada = getDataCombinacionesFiltrada(data);
 
         //Agregar el -tipoCotizacion- a *_dataFiltrada*
-        Object.assign(_dataFiltrada, { tipoCotizacion: 'CombinacionCotizacion' });
+        Object.assign(_dataFiltrada, { tipoCotizacion: 'Combinacion' });
 
         //Se *settea* la nueva data [_dataFiltrada] con la data original [data]
         data = _dataFiltrada;
@@ -268,7 +268,7 @@ function generarPDF(){
 
 function getPDFFileName(dataPropuesta){
     //Validar si la propuesta es -NORMAL- o -COMBINACIONES-
-    dataPropuesta = dataPropuesta.tipoCotizacion != "CombinacionCotizacion" ? dataPropuesta : dataPropuesta.propuesta;
+    dataPropuesta = dataPropuesta.tipoCotizacion != "Combinacion" ? dataPropuesta : dataPropuesta.propuesta;
 
     let nombreCliente = dataPropuesta.cliente.vNombrePersona + dataPropuesta.cliente.vPrimerApellido + dataPropuesta.cliente.vSegundoApellido;
     let tipoCotizacion = dataPropuesta.tipoCotizacion;
