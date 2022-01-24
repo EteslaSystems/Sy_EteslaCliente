@@ -18,16 +18,11 @@
                         <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($cliente->vNombrePersona); ?> <?php echo e($cliente->vPrimerApellido); ?> <?php echo e($cliente->vSegundoApellido); ?></td>
-                                <td><?php echo e($cliente->created_at); ?></td>
+                                <td><?php echo e(date('d-M-y', strtotime($cliente->created_at))); ?></td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button id="btnDetails" type="button" class="btn btn-primary btn-sm" title="Detalles" data-toggle="modal" data-target="#modalDetailsClient" onclick="mostrarClienteDetails('<?php echo e($cliente->idCliente); ?>')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
-                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                                    <g fill="#ffffff"><path d="M136.16667,21.5h-100.33333c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v100.33333c0,7.91917 6.41417,14.33333 14.33333,14.33333h71.66667l43,-43v-71.66667c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM136.16667,100.33333h-35.83333v35.83333h-64.5v-100.33333h100.33333z"></path></g>
-                                                </g>
-                                            </svg>
+                                            <img src="<?php echo e(asset('img/icon/details.png')); ?>" height="19px">
                                         </button>
                                         <button id="btnEliminar" type="button" class="btn btn-danger btn-sm" title="Eliminar">
                                             <img src="<?php echo e(asset('img/icon/papelera-icon.png')); ?>" height="19px"/>
