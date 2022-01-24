@@ -19,11 +19,11 @@
                         @foreach($consultarClientes as $cliente)
                             <tr>
                                 <td>{{ $cliente->vNombrePersona }} {{ $cliente->vPrimerApellido }} {{ $cliente->vSegundoApellido }}</td>
-                                <td>{{ $cliente->created_at }}</td>
+                                <td>{{ date('d-M-y', strtotime($cliente->created_at)) }}</td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button id="btnDetails" type="button" class="btn btn-primary btn-sm" title="Detalles" data-toggle="modal" data-target="#modalDetailsClient" onclick="mostrarClienteDetails('{{ $cliente->idCliente }}')">
-                                            <img src="{{ asset() }}">
+                                            <img src="{{ asset('img/icon/details.png') }}" height="19px">
                                         </button>
                                         <button id="btnEliminar" type="button" class="btn btn-danger btn-sm" title="Eliminar">
                                             <img src="{{ asset('img/icon/papelera-icon.png') }}" height="19px"/>

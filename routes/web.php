@@ -19,8 +19,13 @@ Route::get('/verificarEmail/{email}', 'usuarioController@verificarEmail');
 
 /* --------------- Vendedor --------------- */
 Route::get('/vendedor', 'vendedorController@index');
-
 Route::get('/clientes', 'vendedorController@clientes');
+
+/* -------- */
+Route::get('/clienteDetails', function(){
+    return view('template/clienteDetails');
+});
+/* -------- */
 
 //////COTIZACION
 Route::post('/PDFgenerate', 'CotizacionController@generatePDF');
