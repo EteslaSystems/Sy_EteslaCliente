@@ -97,6 +97,15 @@
     .tabCombinaciones th, .tabCombinaciones td{
         border: 1px solid black;
     }
+    .tdCombinacionA{
+        background-color:#70D85F;
+    }
+    .tdCombinacionB{
+        background-color:#31AEC1;
+    }
+    .tdCombinacionC{
+        background-color:#C7CACA;
+    }
 
     /* Tab - Financiamiento */
     .tabFinanciamiento{
@@ -135,27 +144,36 @@
         margin-top: 3px;
         width: 175px;
         padding: 20px;
-        border-radius: 20px;
+        border-width:3px;
+        border-style:solid;
+        border-color:green;
+
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
     .card-header{
-        background: rgb(52, 181, 69); 
-        color: rgb(255, 255, 255);
+        background: green; 
+        color: #FFFFFF;
         margin: -20px;
         padding: 10px;
         font-size: 10px;
-        height: 10px;
+        height: 2px;
         text-align: center;
+
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
     }
     .card-body{ 
+        background: #FCFAEB;
         margin: -20px;
         padding: 20px;
         font-size: 18px;
         line-height: 20%;
 
-        border-top: none;
-        border-left: 1px solid #D9D9D9;
-        border-right: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
     .rectangulo-into-card{
         border-style: groove;
@@ -329,15 +347,21 @@
                             <div class="card" style="margin-right: -65px; margin-left: 10px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (DAC)</strong></p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">1234 kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">$234 MXN</p>
-                                    </div>
+                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                        $5,356
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-6px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
+                                        Pago actual s/paneles
+                                    </p>
+                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
                                 </div>
                             </div>
                         </div>
@@ -387,9 +411,15 @@
                 <thead>
                     <tr>
                         <th style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
-                        <th scope="col" style="background-color:#70D85F; color:#FFFFFF;"><strong>A</strong></th>
-                        <th scope="col" style="background-color:#31AEC1; color:#FFFFFF;"><strong>B</strong></th>
-                        <th scope="col" style="background-color:#C7CACA; color:#FFFFFF;"><strong>C</strong></th>
+                        <th scope="col" class="tdCombinacionA">
+                            <strong>A</strong>
+                        </th>
+                        <th scope="col" class="tdCombinacionB">
+                            <strong>B</strong>
+                        </th>
+                        <th scope="col" class="tdCombinacionC">
+                            <strong>C</strong>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -430,73 +460,103 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
                     </tr>
                     <tr>
-                        <td><strong>Modelo</strong></td>
                         <td>*</td>
-                        <td>*</td>
-                        <td>*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Potencia</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
+                        <td>
+                            <strong>Potencia</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Cantidad</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Modelo</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Potencia</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
+                        <td>
+                            <strong>Potencia</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Cantidad</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Modelo</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Subtotal s/IVA</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Total c/IVA</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Subtotal s/IVA</strong>
+                        </td>
+                        <td>*</td>
+                        <td>*</td>
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Total c/IVA</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>

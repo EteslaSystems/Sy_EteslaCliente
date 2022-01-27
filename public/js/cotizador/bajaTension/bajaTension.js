@@ -835,7 +835,7 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
         promedioConsumoBimestral = objResp.consumo._promCons.promConsumosBimestrales;
         generacionMensual = _viaticos[0].power.generacion.promedioGeneracionMensual;
         generacionBimestral = _viaticos[0].power.generacion.promedioGeneracionBimestral;
-        nuevoConsumoMensual = promedioConsumoMensual - generacionMensual;
+        nuevoConsumoMensual = this.isNegative((promedioConsumoMensual - generacionMensual));
         nuevoConsumoBimestral = nuevoConsumoMensual * 2;
     }
     else{ //BajaTension
@@ -848,8 +848,8 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
             promedioConsumoBimestral = _viaticos[0].power._consumos._promCons.promConsumosBimestrales;
         
             if(_viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral){ //Kw
-                nuevoConsumoBimestral = _viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral;
-                nuevoConsumoMensual = _viaticos[0].power.nuevosConsumos.promedioNuevosConsumosMensuales;
+                nuevoConsumoBimestral = this.isNegative(_viaticos[0].power.nuevosConsumos.promedioNuevoConsumoBimestral);
+                nuevoConsumoMensual = this.isNegative(_viaticos[0].power.nuevosConsumos.promedioNuevosConsumosMensuales);
             }
         }
         else{
@@ -1425,3 +1425,7 @@ async function cambiarEstructura(){
     mostrarRespuestaViaticos(viaticosResult);
 }
 /*#endregion*/
+
+function isNegative(numero){
+    return numero = numero < 0 ? 0 : numero;
+}
