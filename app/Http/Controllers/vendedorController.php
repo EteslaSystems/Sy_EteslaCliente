@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\APIModels\APIVendedor;
 
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\clienteController;
+
+// use Illuminate\Pagination\Paginator;
+// use Illuminate\Support\Collection;
+// use Illuminate\Pagination\LengthAwarePaginator;
 
 class vendedorController extends Controller
 {
 	protected $vendedor;
+	protected $clienteController;
 
-	public function __construct(APIVendedor $vendedor)
+	public function __construct(APIVendedor $vendedor, clienteController $clienteController)
 	{
 		$this->vendedor = $vendedor;
+		$this->clienteController = $clienteController;
 	}
 
 	public function index()
@@ -52,6 +57,11 @@ class vendedorController extends Controller
 		$consultarClientes = $consultarClientes->message;
 
 		return view('template.clientes', compact('consultarClientes'));
+	}
+
+	public function clienteDetails(Request $request)
+	{
+		$ClienteDetails = $this->clienteController->consultarClientePorId();
 	}
 
 	public function validarSesion()
