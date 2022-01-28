@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
     *{
-        font-family: 'Roboto', sans-serif;
+        font-family: "Calibri, sans-serif";
     }
     html{
         margin: 0;
@@ -131,36 +130,36 @@
     }
     /* Cards */
     .card{
-        margin-top: 3px;
         width: 175px;
         padding: 20px;
-        border-radius: 20px;
+        text-align:center;
+        border-width:3px;
+        border-style:solid;
+        border-color:green;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
     .card-header{
-        background: rgb(52, 181, 69); 
-        color: rgb(255, 255, 255);
+        background: green; 
+        color: #FFFFFF;
         margin: -20px;
         padding: 10px;
         font-size: 10px;
-        height: 10px;
-        text-align: center;
+        height: 2px;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
     }
     .card-body{ 
+        height:115px;
+        background: #FCFAEB;
         margin: -20px;
         padding: 20px;
         font-size: 18px;
         line-height: 20%;
-        border-top: none;
-        border-left: 1px solid #D9D9D9;
-        border-right: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
-    }
-    .rectangulo-into-card{
-        border-style: groove;
-        border: 1px solid;
-        width: 160px;
-        height: 100px;
-        margin-left: 10px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
 </style>
 <body>
@@ -404,14 +403,16 @@
         </table>
         <!-- Fin logos/marcas equip. -->
 
-        <table class="table-contenedor" style="margin-top:20px;">
+        <hr class="linea-division" style="background-color:green;">
+
+        <table class="table-contenedor" style="margin-top:115px;">
             <tr>
-                <td style="padding-right: 60px;">
-                    <div name="ANCE">
+                <td style="padding-right:60px;">
+                    <div name="ANCE" style="margin-top:-80px;">
                         <div style="margin-left:20px;">
                             <img height="68px" width="60px" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg')))); ?>">
                         </div>
-                        <div style="margin-top:-50px; margin-left:80px;">
+                        <div style="margin-top:-50px; margin-left:100px;">
                             <p class="text-inferior-pag1">
                                 Certificado de proveedor confiable
                             </p>
@@ -420,11 +421,11 @@
                             </p>
                         </div>
                     </div>
-                    <div>
+                    <div name="WWF" style="margin-top:-130px;">
                         <div style="margin-left:20px;">
                             <img height="68px" width="60px" src="data:image/jpg;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg')))); ?>">
                         </div>
-                        <div style="margin-top: -50px; margin-left:98px;">
+                        <div style="margin-top:-60px; margin-left:92px;">
                             <p class="text-inferior-pag1">World Wildlife Fund</p>
                             <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
                                 Ren Mx | WWF México
@@ -438,60 +439,60 @@
                 </td>
                 <td>
                     <!-- CARDS -->
-                    <div style="margin-top:-100px;">
+                    <div style="margin-top:-80px;">
                         <!-- CARD - "ANTES" -->
-                        <div>
-                            <div class="card" style="margin-left:-250px; margin-top:120px;">
+                        <div style="margin-left:-230px; margin-top:-15px;">
+                            <div class="card" style="margin-right:-65px; margin-left:10px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>
-                                                CONSUMO [BIM.] (<?php echo e($power["old_dac_o_nodac"]); ?>)
-                                            </strong>
-                                        </p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
-                                            <?php echo e($power["_consumos"]["_promCons"]["promConsumosBimestrales"]); ?> kW
-                                        </p>
-                                        <p>
-                                            <strong style="font-size: 9px; margin-left:10px;">
-                                                TOTAL A PAGAR [BIM.]
-                                            </strong>
-                                        </p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
-                                            $<?php echo e(number_format($power["objConsumoEnPesos"]["pagoPromedioBimestral"], 2)); ?> MXN
-                                        </p>
-                                    </div>
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
+                                        $<?php echo e(number_format($power["objConsumoEnPesos"]["pagoPromedioBimestral"],2)); ?>
+
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-152px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/icon/flecha.png')))); ?>"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Pago actual s/paneles
+                                    </p>
+                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/icon/flecha.png')))); ?>"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
+                                        <?php echo e(number_format($power["_consumos"]["_promCons"]["promConsumosBimestrales"])); ?> Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(<?php echo e($power["old_dac_o_nodac"]); ?>)</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- CARD - "NUEVO" -->
-                        <div>
-                            <div class="card" style="margin-right:-70px; margin-top:-163px;">
-                                <!-- NUEVO CONSUMO -->
+                        <!-- CARD - "NUEVO_CONSUMO" -->
+                        <div style="margin-top:-300px; margin-right:-26px;">
+                            <div class="card" style="margin-right:-65px; margin-left:10px;">
+                                <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">AHORA</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>
-                                                CONSUMO [BIM.] (<?php echo e($power["new_dac_o_nodac"]); ?>)
-                                            </strong>
-                                        </p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            <?php echo e($power["nuevosConsumos"]["promedioNuevoConsumoBimestral"]); ?> kW
-                                        </p>
-                                        <p style="font-size: 9px; margin-left:10px;">
-                                            <strong>TOTAL A PAGAR [BIM.]</strong>
-                                        </p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2)); ?> MXN
-                                        </p>
-                                    </div>
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
+                                        $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2)); ?>
+
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-152px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/icon/flecha.png')))); ?>"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Nuevo pago c/paneles
+                                    </p>
+                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,<?php echo e(base64_encode(file_get_contents(public_path('/img/icon/flecha.png')))); ?>"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
+                                        <?php echo e(number_format($power["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2)); ?> Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(<?php echo e($power["new_dac_o_nodac"]); ?>)</p>
                                 </div>
                             </div> 
                         </div>
@@ -762,4 +763,5 @@
     <?php endif; ?>
     <!-- Fin pagina 3 -->
 </body>
-</html><?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/bajaTension.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\xampp\htdocs\Sy_EteslaCliente\resources\views/PDFTemplates/bajaTension.blade.php ENDPATH**/ ?>

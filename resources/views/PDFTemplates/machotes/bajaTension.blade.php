@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
     *{
-        font-family: 'Roboto', sans-serif;
+        font-family: "Calibri, sans-serif";
     }
     html{
         margin: 0;
@@ -97,6 +96,15 @@
     .tabCombinaciones th, .tabCombinaciones td{
         border: 1px solid black;
     }
+    .tdCombinacionA{
+        background-color:#70D85F;
+    }
+    .tdCombinacionB{
+        background-color:#31AEC1;
+    }
+    .tdCombinacionC{
+        background-color:#C7CACA;
+    }
 
     /* Tab - Financiamiento */
     .tabFinanciamiento{
@@ -132,38 +140,36 @@
 
     /* Cards */
     .card{
-        margin-top: 3px;
         width: 175px;
         padding: 20px;
-        border-radius: 20px;
+        text-align:center;
+        border-width:3px;
+        border-style:solid;
+        border-color:green;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
     .card-header{
-        background: rgb(52, 181, 69); 
-        color: rgb(255, 255, 255);
+        background: green; 
+        color: #FFFFFF;
         margin: -20px;
         padding: 10px;
         font-size: 10px;
-        height: 10px;
-        text-align: center;
+        height: 2px;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
     }
     .card-body{ 
+        height:115px;
+        background: #FCFAEB;
         margin: -20px;
         padding: 20px;
         font-size: 18px;
         line-height: 20%;
-
-        border-top: none;
-        border-left: 1px solid #D9D9D9;
-        border-right: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
-    }
-    .rectangulo-into-card{
-        border-style: groove;
-        border: 1px solid;
-
-        width: 160px;
-        height: 100px;
-        margin-left: 10px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
 </style>
 <body>
@@ -323,38 +329,58 @@
                 </td>
                 <td>
                     <!-- CARDS -->
-                    <div>
+                    <div style="margin-top:20px;">
                         <!-- CARD - "ANTES" -->
-                        <div style="margin-left: -230px; margin-top: -15px;">
-                            <div class="card" style="margin-right: -65px; margin-left: 10px;">
+                        <div style="margin-left:-230px; margin-top:-15px;">
+                            <div class="card" style="margin-right:-65px; margin-left:10px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (DAC)</strong></p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">1234 kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">$234 MXN</p>
-                                    </div>
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
+                                        $5,356
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img class="flechaIzquierda" height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Pago actual s/paneles
+                                    </p>
+                                    <img class="flechaDerecha" height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
+                                        1,000 Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(DAC)</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- CARD - "NUEVO" -->
-                        <div style="margin-top: -300px; margin-left: 16px;">
-                            <div class="card" style="margin-right: -80px;">
-                                <!-- NUEVO CONSUMO -->
+                        <!-- CARD - "NUEVO_CONSUMO" -->
+                        <div style="margin-top: -300px; margin-right:-26px;">
+                            <div class="card" style="margin-right: -65px; margin-left: 10px;">
+                                <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">AHORA</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (1c)</strong></p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">234 kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">$234 MXN</p>
-                                    </div>
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
+                                        $5,356
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img class="flechaIzquierda" height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Pago actual c/paneles
+                                    </p>
+                                    <img class="flechaDerecha" height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
+                                        100 Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(1c)</p>
                                 </div>
                             </div> 
                         </div>
@@ -387,9 +413,15 @@
                 <thead>
                     <tr>
                         <th style="border-left:0px; border-top:0px; border-bottom:0px;"></th>
-                        <th scope="col" style="background-color:#70D85F; color:#FFFFFF;"><strong>A</strong></th>
-                        <th scope="col" style="background-color:#31AEC1; color:#FFFFFF;"><strong>B</strong></th>
-                        <th scope="col" style="background-color:#C7CACA; color:#FFFFFF;"><strong>C</strong></th>
+                        <th scope="col" class="tdCombinacionA">
+                            <strong>A</strong>
+                        </th>
+                        <th scope="col" class="tdCombinacionB">
+                            <strong>B</strong>
+                        </th>
+                        <th scope="col" class="tdCombinacionC">
+                            <strong>C</strong>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -430,73 +462,103 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
                     </tr>
                     <tr>
-                        <td><strong>Modelo</strong></td>
                         <td>*</td>
-                        <td>*</td>
-                        <td>*</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cantidad</strong></td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Potencia</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
+                        <td>
+                            <strong>Potencia</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Cantidad</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Modelo</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Potencia</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Modelo</strong></td>
+                        <td>
+                            <strong>Potencia</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Cantidad</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Modelo</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Subtotal s/IVA</strong></td>
+                        <td>
+                            <strong>Cantidad</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
                     </tr>
                     <tr>
-                        <td><strong>Total c/IVA</strong></td>
+                        <td>*</td>
+                        <td class="tdCombinacionA"></td>
+                        <td class="tdCombinacionB"></td>
+                        <td class="tdCombinacionC"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Subtotal s/IVA</strong>
+                        </td>
+                        <td>*</td>
+                        <td>*</td>
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Total c/IVA</strong>
+                        </td>
                         <td>*</td>
                         <td>*</td>
                         <td>*</td>
