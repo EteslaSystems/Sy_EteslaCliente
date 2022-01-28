@@ -5,9 +5,9 @@
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
-    /* *{
-        font-family: 'Roboto', sans-serif;
-    } */
+     *{
+        font-family: "Calibri, sans-serif";
+    } 
     html{
         margin: 0;
     }
@@ -164,38 +164,36 @@
 
     /* Cards */
     .card{
-        margin-top: 3px;
         width: 175px;
         padding: 20px;
-        border-radius: 20px;
+        text-align:center;
+        border-width:3px;
+        border-style:solid;
+        border-color:green;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
     .card-header{
-        background: rgb(52, 181, 69); 
-        color: rgb(255, 255, 255);
+        background: green; 
+        color: #FFFFFF;
         margin: -20px;
         padding: 10px;
         font-size: 10px;
-        height: 10px;
-        text-align: center;
+        height: 2px;
+        border-top-left-radius: 30px 30px;
+        border-top-right-radius: 30px 30px;
     }
     .card-body{ 
+        height:115px;
+        background: #FCFAEB;
         margin: -20px;
         padding: 20px;
         font-size: 18px;
         line-height: 20%;
-
-        border-top: none;
-        border-left: 1px solid #D9D9D9;
-        border-right: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
-    }
-    .rectangulo-into-card{
-        border-style: groove;
-        border: 1px solid;
-
-        width: 160px;
-        height: 100px;
-        margin-left: 10px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
 </style>
 <body>
@@ -395,89 +393,83 @@
         <table class="table-contenedor">
             <tr>
                 <td style="padding-right: 60px;">
-                    <div name="ANCE">
-                        <div style="margin-left:20px;">
-                            <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                    <div style="margin-top:30px;">
+                        <div name="ANCE">
+                            <div style="margin-left:20px;">
+                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                            </div>
+                            <div style="margin-top:-66px; margin-left:80px;">
+                                <p class="text-inferior-pag1">
+                                    Certificado de proveedor<br>confiable
+                                </p>
+                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
+                                    Clave: 20FIR00010A00R00
+                                </p>
+                            </div>
                         </div>
-                        <div style="margin-top:-50px; margin-left:80px;">
-                            <p class="text-inferior-pag1">
-                                Certificado de proveedor confiable
-                            </p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
-                                Clave: 20FIR00010A00R00
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-left:20px;">
-                            <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
-                        </div>
-                        <div style="margin-top: -50px; margin-left:98px;">
-                            <p class="text-inferior-pag1">World Wildlife Fund</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
-                                Ren Mx | WWF México
-                                <br>
-                                <a href="https://www.wwf.org.mx/">
-                                    https://www.wwf.org.mx/
-                                </a>
-                            </p>
+                        <div>
+                            <div style="margin-left:20px;">
+                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
+                            </div>
+                            <div style="margin-top:-60px; margin-left:98px;">
+                                <p class="text-inferior-pag1">World Wildlife Fund</p>
+                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
+                                    Ren Mx | WWF México
+                                    <br>
+                                    <a href="https://www.wwf.org.mx/">
+                                        https://www.wwf.org.mx/
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </td>
                 <td>
                     <!-- CARDS -->
-                    <div style="margin-top:-100px;">
+                    <div style="margin-top:30px;">
                         <!-- CARD - "ANTES" -->
-                        <div>
-                            <div class="card" style="margin-left:-250px; margin-top:120px;">
+                        <div style="margin-left:-205px; margin-top:-15px;">
+                            <div class="card" style="margin-left:-50px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">ANTES</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #C31801;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>
-                                                CONSUMO [BIM.] ({{ $propuesta["power"]["old_dac_o_nodac"] }})
-                                            </strong>
-                                        </p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
-                                            {{ number_format($propuesta["promedioConsumosBimestrales"],2) }} kW/bim
-                                        </p>
-                                        <p style="font-size: 9px; margin-left:10px;">
-                                            <strong>TOTAL A PAGAR [BIM.]</strong>
-                                        </p>
-                                        <p style="color: #C31801; font-weight: bolder; margin-left:10px;">
-                                            ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2) }} MXN
-                                        </p>
-                                    </div>
+                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                        ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"], 2) }}
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
+                                        Pago actual s/paneles
+                                    </p>
+                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
                                 </div>
                             </div>
                         </div>
-                        <!-- CARD - "NUEVO" -->
-                        <div>
-                            <div class="card" style="margin-right:-70px; margin-top:-163px;">
-                                <!-- NUEVO CONSUMO -->
+                        <!-- CARD - "NUEVO_CONSUMO" -->
+                        <div style="margin-top: -300px; margin-right:-26px;">
+                            <div class="card" style="margin-right: -65px; margin-left: 10px;">
+                                <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
-                                    <h2 style="margin-top: -4px;">AHORA</h2>
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;">
-                                            <strong>
-                                                CONSUMO [BIM.] ({{ $propuesta["power"]["new_dac_o_nodac"] }})
-                                            </strong>
-                                        </p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }} kW/bim
-                                        </p>
-                                        <p style="font-size: 9px; margin-left:10px;">
-                                           <strong>TOTAL A PAGAR [BIM.]</strong> 
-                                        </p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">
-                                            ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2) }} MXN
-                                        </p>
-                                    </div>
+                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                        ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2) }}
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
+                                        Pago actual c/paneles
+                                    </p>
+                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
                                 </div>
                             </div> 
                         </div>
@@ -507,22 +499,22 @@
         <div id="comparativas-combinaciones"  class="div-contenedor">
             <!-- Tabla comparativa - [ COMBINACIONES ] -->
             <table class="table-comparative">
-                <thead style="background-color:#D68910; color:#FFFFFF;">
+                <thead style="color:#FFFFFF;">
                     <tr>
                         <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
-                        <th scope="col">
+                        <th scope="col" style="background-color:#ADFB98;">
                             @if($propuestaSeleccionada === "combinacionEconomica")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
                             <strong class="title-tab-comparativa">Economica</strong>
                         </th>
-                        <th scope="col">
+                        <th scope="col" style="background-color:#43E0DB;">
                             @if($propuestaSeleccionada === "combinacionMediana")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
                             <strong class="title-tab-comparativa">Recomendada</strong>
                         </th>
-                        <th scope="col">
+                        <th scope="col" style="background-color:#D68910;">
                             @if($propuestaSeleccionada === "combinacionOptima")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
@@ -563,7 +555,10 @@
             </table>
             <table id="panel" class="table-comparative" style="margin-top:20px;">
                 <tr>
-                    <td colspan="4" style="background-color:#70D85F; color:#FFFFFF;"><strong>Panel</strong></td>
+                    <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Panel</td>
+                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Panel</td>
+                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Panel</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
@@ -630,7 +625,10 @@
             </table>
             <table id="inversor" class="table-comparative" style="margin-top:20px;">
                 <tr>
-                    <td colspan="4" style="background-color:#31AEC1; color:#FFFFFF;"><strong>Inversor</strong></td>
+                    <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Inversor</td>
+                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Inversor</td>
+                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Inversor</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
@@ -711,7 +709,10 @@
             </table>
             <table id="estructura" class="table-comparative" style="margin-top:20px;">
                 <tr>
-                    <td colspan="4" style="background-color:#C7CACA; color:#FFFFFF;"><strong>Estructura</strong></td>
+                    <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Estructura</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
@@ -778,7 +779,10 @@
             </table>
             <table id="ahorro" class="table-comparative" style="margin-top:20px;">
                 <tr>
-                    <td colspan="4" style="background-color:#DEEC4A; color:#FFFFFF;"><strong>Ahorro</strong></td>
+                    <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
+                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
+                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
                 </tr>
                 <tr>
                     <td colspan="4" class="text-tab-comparativa">
@@ -832,7 +836,10 @@
             </table>
             <table id="totales" class="table-comparative" style="margin-top:20px;">
                 <tr>
-                    <td colspan="4" style="background-color:#FFD485; color:#FFFFFF;"><strong>Totales</strong></td>
+                    <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Totales</td>
+                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Totales</td>
+                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Totales</td>
                 </tr>
                 @if($propuesta["descuento"]["porcentaje"] > 0)
                     <tr>

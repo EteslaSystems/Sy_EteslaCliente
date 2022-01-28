@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
     *{
-        font-family: 'Roboto', sans-serif;
+        font-family: "Calibri, sans-serif";
     }
     html{
         margin: 0;
@@ -141,13 +140,12 @@
 
     /* Cards */
     .card{
-        margin-top: 3px;
         width: 175px;
         padding: 20px;
+        text-align:center;
         border-width:3px;
         border-style:solid;
         border-color:green;
-
         border-top-left-radius: 30px 30px;
         border-top-right-radius: 30px 30px;
         border-bottom-left-radius: 30px 30px;
@@ -160,28 +158,18 @@
         padding: 10px;
         font-size: 10px;
         height: 2px;
-        text-align: center;
-
         border-top-left-radius: 30px 30px;
         border-top-right-radius: 30px 30px;
     }
     .card-body{ 
+        height:115px;
         background: #FCFAEB;
         margin: -20px;
         padding: 20px;
         font-size: 18px;
         line-height: 20%;
-
         border-bottom-left-radius: 30px 30px;
         border-bottom-right-radius: 30px 30px;
-    }
-    .rectangulo-into-card{
-        border-style: groove;
-        border: 1px solid;
-
-        width: 160px;
-        height: 100px;
-        margin-left: 10px;
     }
 </style>
 <body>
@@ -341,9 +329,36 @@
                 </td>
                 <td>
                     <!-- CARDS -->
-                    <div>
+                    <div style="margin-top:20px;">
                         <!-- CARD - "ANTES" -->
-                        <div style="margin-left: -230px; margin-top: -15px;">
+                        <div style="margin-left:-230px; margin-top:-15px;">
+                            <div class="card" style="margin-right:-65px; margin-left:10px;">
+                                <!-- CONSUMO ACTUAL -->
+                                <div class="card-header">
+                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                        Total a pagar del periodo facturado
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
+                                        $5,356
+                                    </p>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
+                                    <img class="flechaIzquierda" height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Pago actual s/paneles
+                                    </p>
+                                    <img class="flechaDerecha" height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
+                                        1,000 Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(DAC)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CARD - "NUEVO_CONSUMO" -->
+                        <div style="margin-top: -300px; margin-right:-26px;">
                             <div class="card" style="margin-right: -65px; margin-left: 10px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
@@ -352,33 +367,20 @@
                                     </p>
                                 </div>
                                 <div class="card-body">
-                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                    <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
                                         $5,356
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
-                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-6px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
-                                        Pago actual s/paneles
+                                    <img class="flechaIzquierda" height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <p style="font-size:14px; margin-top:-10px;">
+                                        Pago actual c/paneles
                                     </p>
-                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <img class="flechaDerecha" height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                                     <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- CARD - "NUEVO" -->
-                        <div style="margin-top: -300px; margin-left: 16px;">
-                            <div class="card" style="margin-right: -80px;">
-                                <!-- NUEVO CONSUMO -->
-                                <div class="card-header">
-                                    <h2 style="margin-top: -4px;">AHORA</h2>
-                                </div>
-                                <div class="card-body">
-                                    <div class="rectangulo-into-card" style="border: #1E9F26;">
-                                        <p style="font-size: 9px; margin-left:10px; margin-top:15px;"><strong>CONSUMO (1c)</strong></p>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">234 kW</p>
-                                        <strong style="font-size: 9px; margin-left:10px;">TOTAL A PAGAR</strong>
-                                        <p style="color: #1E9F26; font-weight: bolder; margin-left:10px;">$234 MXN</p>
-                                    </div>
+                                    <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
+                                        100 Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">(1c)</p>
                                 </div>
                             </div> 
                         </div>
