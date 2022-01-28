@@ -349,7 +349,7 @@
                             ${{ number_format($propuesta["totales"]["precio"],2) }} USD
                         </td>
                         <td id="subtotalSinIVAMXN" align="center">
-                            ${{ number_format($propuesta["totales"]["precioMasIVA"],2) }} MXN
+                            ${{ number_format($propuesta["totales"]["precioMXNSinIVA"],2) }} USD
                         </td>
                     </tr>
                     <tr style="background-color: #E8E8E8;">
@@ -357,7 +357,7 @@
                         <td></td>
                         <td></td>
                         <td id="totalConIVAUSD" align="center">
-                            ${{ number_format($propuesta["totales"]["precioMXNSinIVA"],2) }} USD
+                            ${{ number_format($propuesta["totales"]["precioMasIVA"],2) }} MXN
                         </td>
                         <td id="totalConIVAMXN" align="center">
                             ${{ number_format($propuesta["totales"]["precioMXNConIVA"],2) }} MXN

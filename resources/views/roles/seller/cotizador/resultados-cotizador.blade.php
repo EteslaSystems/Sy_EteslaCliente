@@ -32,8 +32,8 @@
                                 <div class="form-row">
                                     <select class="form-control" id="ddlCombinaciones" onchange="seleccionarCombinacion(this)" disabled>
                                         <option selected value="-1">Elige una combinacion</option>
-                                        <option value="combinacionOptima">Óptima</option>
-                                        <option value="combinacionMediana">Mediana</option>
+                                        <option value="combinacionOptima">Premium</option>
+                                        <option value="combinacionMediana">Recomendada</option>
                                         <option value="combinacionEconomica">Económica</option>
                                     </select>
                                 </div>
