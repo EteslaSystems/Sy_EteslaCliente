@@ -191,15 +191,34 @@ hr{
   color: white;
 }
   
-  /* - - Cotizador - - */
-  /*Baja tension*/
-  .tab-content {
-    border-left: 1px solid #339FE1;
-    border-right: 1px solid #339FE1;
-    border-bottom: 1px solid #339FE1;
-    border-top: 1px solid #339FE1;
-    border-radius: 8px;
-    padding: 10px;
+/* - - Cotizador - - */
+/*Table - Head*/
+.static-thead{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background-color:#273D66;
+  color:#FFFFFF;
+}
+
+/*Table - Scroll*/
+.my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+/*Baja tension*/
+.tab-content {
+  border-left: 1px solid #339FE1;
+  border-right: 1px solid #339FE1;
+  border-bottom: 1px solid #339FE1;
+  border-top: 1px solid #339FE1;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .nav-pills>li {

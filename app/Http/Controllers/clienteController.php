@@ -78,9 +78,11 @@ class clienteController extends Controller
 
     public function consultarClientePorId(Request $request)
     {
-        $clientee["id"] = $request->id;
+        $clientee["id"] = $request->idCliente;
         $clienteEncontrado = $this->cliente->consultarClientePorId(['json' => $clientee]);
-        return response()->json($clienteEncontrado);
+        $clienteEncontrado = $clienteEncontrado->message[0];
+
+        return $clienteEncontrado;
     }
 
     public function consultarClientePorNombre(Request $request)

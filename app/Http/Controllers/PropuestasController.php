@@ -15,13 +15,12 @@ class PropuestasController extends Controller
         $this->propuesta = $propuesta;
     }
 
-    public function getPropuestasByClient(Request $request)
+    public function getPropuestasByClient($idCliente)
     {
-        $solicitudPropuesta["id"] = $request->idCliente;
+        $propuestas = $this->propuesta->getPropuestasByCliente(['json' => ['id' => $idCliente]]); 
+        $propuestas = $propuestas->message;
 
-        $propuestas = $this->propuesta->getPropuestasByCliente(['json' => $solicitudPropuesta]); 
-
-		return response()->json($propuestas);
+        return $propuestas;
     }
 
     public function guardarPropuesta(Request $request){

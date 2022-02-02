@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 use App\APIModels\APIVendedor;
 
 use App\Http\Controllers\clienteController;
-
-// use Illuminate\Pagination\Paginator;
-// use Illuminate\Support\Collection;
-// use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\PropuestasController;
 
 class vendedorController extends Controller
 {
 	protected $vendedor;
 	protected $clienteController;
+	protected $propuestaController;
 
-	public function __construct(APIVendedor $vendedor, clienteController $clienteController)
+	public function __construct(APIVendedor $vendedor, clienteController $clienteController, PropuestasController $propuestasController)
 	{
 		$this->vendedor = $vendedor;
 		$this->clienteController = $clienteController;
+		$this->propuestaController = $propuestasController;
 	}
 
 	public function index()
@@ -59,9 +58,12 @@ class vendedorController extends Controller
 		return view('template.clientes', compact('consultarClientes'));
 	}
 
-	public function clienteDetails(Request $request)
+	public function ClienteDetails(Request $request)
 	{
-		$ClienteDetails = $this->clienteController->consultarClientePorId();
+		$ClienteInfo = $this->clienteController->consultarClientePorId($request);
+		$_propuestas = $this->propuestaController->getPropuestasByClient($ClienteInfo->idCliente);
+
+		return view('template.clienteDetails', compact('ClienteInfo','_propuestas'));
 	}
 
 	public function validarSesion()

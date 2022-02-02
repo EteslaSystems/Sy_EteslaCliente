@@ -22,7 +22,7 @@ Route::get('/vendedor', 'vendedorController@index');
 Route::get('/clientes', 'vendedorController@clientes');
 
 /* -------- */
-// Route::get('/clienteDetails', 'clienteController');
+Route::get('/clienteDetails/{idCliente}', 'vendedorController@ClienteDetails');
 /* -------- */
 
 //////COTIZACION
