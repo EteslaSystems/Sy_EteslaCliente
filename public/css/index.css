@@ -199,6 +199,7 @@ hr{
   z-index:10;
   background-color:#273D66;
   color:#FFFFFF;
+  text-align:center;
 }
 
 /*Table - Scroll*/
@@ -222,18 +223,14 @@ hr{
 }
 
 .nav-pills>li {
-    border-left: 1px solid #339FE1;
-    border-right: 1px solid #339FE1;
-    border-bottom: 1px solid #339FE1;
-    border-top: 1px solid #339FE1;
-    border-radius: 8px;
+  border-left: 1px solid #339FE1;
+  border-right: 1px solid #339FE1;
+  border-bottom: 1px solid #339FE1;
+  border-top: 1px solid #339FE1;
+  border-radius: 8px;
 }
 /*Media tension*/
 /*Coti_individual*/
-td{
-  text-align: center;
-}
-
 .minh-100 {
   height: 100vh;
 }

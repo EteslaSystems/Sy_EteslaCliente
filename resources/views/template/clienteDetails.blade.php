@@ -2,7 +2,17 @@
 @section('content')
 @section('agregarClientes')
 @show
+    <style>
+        .cabezales-info-propuesta{
+            background-color: #F9B100;
+            color:#FFFF;
+        }
+    </style>
+
     <div class="card">
+        <div class="card-header text-center" style="height:35px;">
+            <p class="font-weight-bold">Datos cliente</p>
+        </div>
         <div class="card-body">
             <form>
                 <div class="form-row">
@@ -62,7 +72,12 @@
         </div>
     </div>
 
+    <br>
+
     <div class="card">
+        <div class="card-header text-center" style="height:35px;">
+            <p class="font-weight-bold">Propuestas</p>
+        </div>
         <div class="card-body">
             @unless($_propuestas)
                 <small>
@@ -70,7 +85,7 @@
                 </small>
             @else
                 <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y" style="min-height:45vh;">
-                    <table id="tblPropuestas" class="table table-sm table-bordered table-striped text-center">
+                    <table id="tblPropuestas" class="table table-sm table-bordered table-striped">
                         <thead class="static-thead">
                             <tr>
                                 <th scope="col">Tipo</th>
@@ -120,20 +135,131 @@
     <div class="modal fade modal-propuesta-details" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="nav nav-tabs" role="tablist">
-                    <a class="nav-item nav-link active" href="#tab-propuesta-info" data-toggle="tab" role="tabpanel" aria-selected="true">
-                        Propuesta
-                    </a>
-                    <a class="nav-item nav-link" href="#tab-propuesta-agregados" data-toggle="tab" role="tabpanel" aria-selected="false">
-                        Agregados
-                    </a>
+                <div class="modal-header">
+                    <h5 id="tlTipoCotizacion" class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="tab-content">
-                    <div id="tab-propuesta-info" class="tab-pane fade show active" role="tabpanel">
-                        Propuesta info
-                    </div>
-                    <div id="tab-propuesta-agregados" class="tab-pane fade" role="tabpanel">
-                        Agregados
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <table class="table table-sm table-bordered">
+                                <thead class="cabezales-info-propuesta">
+                                    <th class="text-center">Equipos</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Panel
+                                        </td>
+                                        <td id="tdModeloPanel">2</td>
+                                        <td class="font-weight-bold">
+                                            Cantidad
+                                        </td>
+                                        <td id="tdCantidadInversor">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Inversor
+                                        </td>
+                                        <td id="tdModeloInversor">2</td>
+                                        <td class="font-weight-bold">
+                                            Cantidad
+                                        </td>
+                                        <td id="tdCantidadInversor">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Estructura
+                                        </td>
+                                        <td id="tdModeloEstructura">2</td>
+                                        <td class="font-weight-bold">
+                                            Cantidad
+                                        </td>
+                                        <td id="tdCantidadEstructura">4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table class="table table-sm table-bordered">
+                                <thead class="cabezales-info-propuesta">
+                                    <th class="text-center">Energia</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Vieja tarifa
+                                        </td>
+                                        <td id="tdViejaTarifa">DAC</td>
+                                        <td class="font-weight-bold">
+                                            Nueva tarifa
+                                        </td>
+                                        <td id="tdNuevaTarifa">1c</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Consumo anterior (mes)
+                                        </td>
+                                        <td id="tdConsumoAnteriorMes">2</td>
+                                        <td class="font-weight-bold">
+                                            Consumo nuevo (mes)
+                                        </td>
+                                        <td id="tdConsumoNuevoMes">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Consumo anterior (bim)
+                                        </td>
+                                        <td id="tdConsumoAnteriorBim">2</td>
+                                        <td class="font-weight-bold">
+                                            Consumo nuevo (bim)
+                                        </td>
+                                        <td id="tdConsumoNuevoBim">4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table class="table table-sm table-bordered">
+                                <thead class="cabezales-info-propuesta">
+                                    <th class="text-center">Totales</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            % propuesta
+                                        </td>
+                                        <td id="tdViejaTarifa">DAC</td>
+                                        <td class="font-weight-bold">
+                                            % descuento
+                                        </td>
+                                        <td id="tdNuevaTarifa">1c</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Total s/IVA (USD)
+                                        </td>
+                                        <td id="tdConsumoAnteriorMes">2</td>
+                                        <td class="font-weight-bold">
+                                            Total c/IVA (USD)
+                                        </td>
+                                        <td id="tdConsumoNuevoMes">4</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            Total s/IVA (MXN)
+                                        </td>
+                                        <td id="tdConsumoAnteriorBim">2</td>
+                                        <td class="font-weight-bold">
+                                            Total c/IVA (MXN)
+                                        </td>
+                                        <td id="tdConsumoNuevoBim">4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
