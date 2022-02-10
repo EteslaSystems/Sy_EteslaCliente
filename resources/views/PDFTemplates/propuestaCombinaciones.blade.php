@@ -221,6 +221,7 @@
             </div>
         </div>
         <div class="container-table">
+            <h3>Paquete fotovoltaico de {{ $propuesta["paneles"]["potenciaReal"] }} kWp</h3>
             <table class="table-costos-proyecto">
                 <thead>
                     <tr>
@@ -438,7 +439,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"], 2) }}
+                                        ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }}
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
                                     <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
@@ -447,6 +448,12 @@
                                     </p>
                                     <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                                     <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
+                                        {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">
+                                        ({{ $propuesta["power"]["old_dac_o_nodac"] }})
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -461,7 +468,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2) }}
+                                        ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }}
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
                                     <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
@@ -470,6 +477,12 @@
                                     </p>
                                     <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                                     <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
+                                    <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
+                                        {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }} Kw
+                                    </p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">
+                                        ( {{ $propuesta["power"]["new_dac_o_nodac"] }} )
+                                    </p>
                                 </div>
                             </div> 
                         </div>

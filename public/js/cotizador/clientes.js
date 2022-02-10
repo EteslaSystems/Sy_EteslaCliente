@@ -141,7 +141,7 @@ function pintarClienteDetails(Clientee){
     $('#inpDetailsClienteEstado').val(Cliente.vEstado);
 }
 /*#region Logica - Botones*/
-async function mostrarClienteDetails(idCliente){
+async function mostrarPropuestaDetails(idCliente){
 
     let Cliente = await buscarClientePorId(idCliente);
     pintarClienteDetails(Cliente); //:void()
@@ -265,24 +265,6 @@ function estadoBusqueda(estado){
 }
 
 /*#region Server*/
-function buscarClientePorId(idClientee){
-    return new Promise((resolve,reject) => {
-        $.ajax({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            type: 'PUT',
-            url: '/consultarClientePorId',
-            data: { id: idClientee },
-            dataType: 'json',
-            success: function(clienteEncontrado){
-                resolve(clienteEncontrado.message);
-            },
-            error: function(error){
-                console.log(error);
-                reject('Se ha generado un error al intentar buscar al cliente por su Id');
-            }
-        });
-    });
-}
 
 function buscarClientePorNombre(cliente){
     return new Promise((resolve,reject) => {
@@ -354,21 +336,22 @@ function limpiarTablaPropuestas(){
 }
 /*#endregion*/
 /*#region Server*/
-function getPropuestasByCliente(idCliente){
-    return new Promise((resolve, reject) => {
+function getPropuestaDetails(idPropuesta){
+    /* Obtener detalles de propuesta (data && agregados) */
+
+    return new Promise((resolve,reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'PUT',
-            url: '/propuestasByClient',
-            data: { idCliente: idCliente },
+            url: '/propuestaDetails',
+            data: { idPropuesta: idPropuesta },
             dataType: 'json',
-            success: function(propuestas){
-                //Formating
-                resolve(propuestas.message); 
+            success: function(clienteEncontrado){
+                resolve(clienteEncontrado.message);
             },
             error: function(error){
                 console.log(error);
-                reject('Al parecer hubo un error al intentar consultar las propuestas');
+                reject('Se ha generado un error al intentar buscar al cliente por su Id');
             }
         });
     });

@@ -34,9 +34,12 @@ class PropuestasController extends Controller
 	}
 
 
-
-
     /* ------ NUEVA FUNCIONALIDAD -------- (BORRAR ESTE COMENT) */
+    // public function getPropuestaDetails(Request $request)
+    // {
+        
+    // }
+
 
     public function getPropuestaById(Request $request)
     {

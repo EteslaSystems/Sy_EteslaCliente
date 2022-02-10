@@ -9,24 +9,41 @@
                 <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y" style="min-height:89vh;">
                     <table class="table table-sm table-striped table-bordered">
                         <thead class="static-thead">
-                            <tr>
-                                <th scope="col" class="text-center">
-                                    Cliente
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Creacion
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Acciones
-                                </th>
-                            </tr>
+                            <th scope="col">
+                                Cliente
+                            </th>
+                            <th scope="col">
+                                Direccion
+                            </th>
+                            <th scope="col">
+                                Creacion
+                            </th>
+                            <th scope="col">
+                                Acciones
+                            </th>
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $consultarClientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cliente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td><?php echo e($cliente->vNombrePersona); ?> <?php echo e($cliente->vPrimerApellido); ?> <?php echo e($cliente->vSegundoApellido); ?></td>
-                                    <td><?php echo e(date('d-M-y', strtotime($cliente->created_at))); ?></td>
-                                    <td>
+                                    <td class="font-weight-bold text-justify">
+                                        <?php echo e($cliente->vNombrePersona); ?> <?php echo e($cliente->vPrimerApellido); ?> <?php echo e($cliente->vSegundoApellido); ?>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo e($cliente->vCalle); ?>, C.P. <?php echo e($cliente->cCodigoPostal); ?>, 
+
+                                        <?php if(!is_null($cliente->vMunicipio)): ?>
+                                            <?php echo e($cliente->vMunicipio); ?>,
+                                        <?php endif; ?>
+
+                                         <?php echo e($cliente->vCiudad); ?>, <?php echo e($cliente->vEstado); ?>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <?php echo e(date('d-M-y', strtotime($cliente->created_at))); ?>
+
+                                    </td>
+                                    <td class="text-center">
                                         <div class="btn-group" role="group">
                                             <a id="btnDetails" type="button" href="<?php echo e(url('/clienteDetails',[$cliente->idCliente])); ?>" class="btn btn-primary btn-sm" title="Detalles">
                                                 <img src="<?php echo e(asset('img/icon/details.png')); ?>" height="19px">

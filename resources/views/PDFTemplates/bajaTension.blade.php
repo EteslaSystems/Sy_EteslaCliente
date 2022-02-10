@@ -202,6 +202,7 @@
             </div>
         </div>
         <div class="container-table">
+            <h3>Paquete fotovoltaico de {{ $paneles["potenciaReal"] }} kWp</h3>
             <table class="table-costos-proyecto">
                 <thead>
                     <tr>
@@ -442,7 +443,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($power["objConsumoEnPesos"]["pagoPromedioBimestral"],2) }}
+                                        ${{ number_format($power["objConsumoEnPesos"]["pagoPromedioBimestralConIva"],2) }}
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
                                     <img height="19px" width="19px" style="margin-top:2px; margin-left:-152px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
@@ -454,7 +455,9 @@
                                     <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
                                         {{ number_format($power["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
                                     </p>
-                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">({{ $power["old_dac_o_nodac"] }})</p>
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">
+                                        ({{ $power["old_dac_o_nodac"] }})
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -469,7 +472,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2) }}
+                                        ${{ number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }}
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
                                     <img height="19px" width="19px" style="margin-top:2px; margin-left:-152px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>

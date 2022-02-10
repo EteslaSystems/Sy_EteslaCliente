@@ -10,24 +10,38 @@
                 <div class="table-responsive my-custom-scrollbar table-wrapper-scroll-y" style="min-height:89vh;">
                     <table class="table table-sm table-striped table-bordered">
                         <thead class="static-thead">
-                            <tr>
-                                <th scope="col" class="text-center">
-                                    Cliente
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Creacion
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Acciones
-                                </th>
-                            </tr>
+                            <th scope="col">
+                                Cliente
+                            </th>
+                            <th scope="col">
+                                Direccion
+                            </th>
+                            <th scope="col">
+                                Creacion
+                            </th>
+                            <th scope="col">
+                                Acciones
+                            </th>
                         </thead>
                         <tbody>
                             @foreach($consultarClientes as $cliente)
                                 <tr>
-                                    <td>{{ $cliente->vNombrePersona }} {{ $cliente->vPrimerApellido }} {{ $cliente->vSegundoApellido }}</td>
-                                    <td>{{ date('d-M-y', strtotime($cliente->created_at)) }}</td>
-                                    <td>
+                                    <td class="font-weight-bold text-justify">
+                                        {{ $cliente->vNombrePersona }} {{ $cliente->vPrimerApellido }} {{ $cliente->vSegundoApellido }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $cliente->vCalle }}, C.P. {{ $cliente->cCodigoPostal }}, 
+
+                                        @if(!is_null($cliente->vMunicipio))
+                                            {{ $cliente->vMunicipio }},
+                                        @endif
+
+                                         {{ $cliente->vCiudad }}, {{ $cliente->vEstado }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ date('d-M-y', strtotime($cliente->created_at)) }}
+                                    </td>
+                                    <td class="text-center">
                                         <div class="btn-group" role="group">
                                             <a id="btnDetails" type="button" href="{{ url('/clienteDetails',[$cliente->idCliente]) }}" class="btn btn-primary btn-sm" title="Detalles">
                                                 <img src="{{ asset('img/icon/details.png') }}" height="19px">

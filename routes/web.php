@@ -75,6 +75,8 @@ Route::get('/detallesPropuesta/{idPropuesta?}','PropuestasController@getPropuest
 Route::get('/eliminarPropuesta/{idPropuesta?}','PropuestasController@eliminarPropuesta');
 ///
 Route::put('/propuestasByClient/{idCliente?}', 'PropuestasController@getPropuestasByClient');
+///Detalles de propuesta c/agregados
+Route::put('/propuestaDetails{idPropuesta?}', 'PropuestaController@');
 /* ------------------------------------------------ */
 
 
