@@ -183,12 +183,23 @@ function calcularViaticosBT(objInversor){
     let datosPropuesta = cacharDatosPropuesta();
     //Equipos seleccionados
     let sspanel = sessionStorage.getItem('__ssPanelSeleccionado');
-    let ssinversor = '';
-    let consumptions = JSON.parse(sessionStorage.getItem("_consumsFormated")); ///Consumos formateados -> promedioMensual,Bimestral,Anual,etc
-    consumptions = consumptions.consumo;
+    let ssinversor = {};
+    let route = '';
+    let consumptions = [];
     let descuento = 0, aumento = 0;
 
     let bndPropuestaNueva = sessionStorage.getItem("bndPropuestaEditada"); //Bandra Propuesta Nueva
+    let tipoCotizador = sessionStorage.getItem('tarifaMT'); /*[bajatension || mediatension]*/
+
+    if(tipoCotizador === "null" || typeof tipoCotizador === 'undefined'){ /* [BajaTension] */
+        route = '/calcularViaticosBTI';
+        consumptions = JSON.parse(sessionStorage.getItem("_consumsFormated"));
+        consumptions = consumptions.consumo;
+    }
+    else{ /* [MediaTension] */
+        route = '/calcularVT';
+        consumptions = JSON.parse(sessionStorage.getItem("_periodosMT"));
+    }
 
     //Validacion de que no haya datos vacios
     if($('#listPaneles option:selected').val() != -1 || $('#listPaneles option:selected').val() != '-1'){
@@ -211,16 +222,16 @@ function calcularViaticosBT(objInversor){
 
                 let _agregados = sessionStorage.getItem("_agregados") === null ? null : JSON.parse(sessionStorage.getItem("_agregados"));//Comprobacion de que no venga vacio
             
-                objEquiposSeleccionados = { panel: sspanel, inversor: ssinversor, descuento, aumento };
-                _cotizarViaticos[0] = objEquiposSeleccionados;
+                //
+                _cotizarViaticos[0] = { panel: sspanel, inversor: ssinversor, descuento, aumento };
             
+                /* */
                 return new Promise((resolve, reject) => {
                     $.ajax({
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         type: 'POST',
-                        url: '/calcularViaticosBTI',
+                        url: route,
                         data: {
-                            "_token": $("meta[name='csrf-token']").attr('content'),
                             "idCliente": datosPropuesta.idCliente,
                             "arrayBTI": _cotizarViaticos,
                             "direccionCliente": datosPropuesta.direccionCliente,
@@ -285,6 +296,7 @@ async function calcularAgregados(){
 function cacharDatosPropuesta(){
     let banderaDelError = 0; //Bandera para validar si en algun proceso hubo un error
     let idCliente = $('#inpClienteId').val();
+    let tarifaSeleccionada = '';
 
     let _consumosBimestres = () => {
         __consumosBimestres = [];
@@ -320,9 +332,21 @@ function cacharDatosPropuesta(){
         }
     };
 
-    let tarifaSeleccionada = $('#tarifa-actual').val();
-    _consumosBimestres = _consumosBimestres();
+    //
     direccionCliente = direccionCliente();
+
+    //
+    let tipoCotizacion = sessionStorage.getItem('tarifaMT');
+
+    ///
+    if(tipoCotizacion === "null" || typeof tipoCotizacion === 'undefined'){ ///BajaTension
+        _consumosBimestres = _consumosBimestres();
+        tarifaSeleccionada = $('#tarifa-actual').val();
+    }
+    else{ ///MediaTension
+        _consumosBimestres = JSON.parse(sessionStorage.getItem("_periodosMT"));
+        tarifaSeleccionada = tipoCotizacion;
+    }
 
     //Si no hay error se forma y retorna la [data]
     if(banderaDelError != 1){
@@ -493,7 +517,7 @@ function vaciarRespuestaPaneles(resultPaneles){
         limpiarDropDownListPaneles();
 
         //DropDownList-Paneles
-        for(var i=1; i<resultPaneles.length; i++)
+        for(let i=1; i<resultPaneles.length; i++)
         {
             dropDownListPaneles.append(
                 $('<option/>', {
@@ -556,8 +580,9 @@ async function mostrarPanelSeleccionado(){
         $('#listInversores option[value="'+InversorCostoBeneficio.vMarca+'"]').attr("selected", true);
         $('#listModelosInversor option[value="'+InversorCostoBeneficio.vNombreMaterialFot+'"]').attr("selected", true);
 
-        //Viaticos
+        /* [Viaticos] */
         let _viaticos = await calcularViaticosBT(InversorCostoBeneficio);
+
         mostrarRespuestaViaticos(_viaticos); //:void()
     }
     else{

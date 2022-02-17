@@ -111,13 +111,19 @@ class MediaTensionController extends Controller
 	//3er. Paso
 	public function calculateViaticsTotals(Request $request)
 	{
+		$array["idUsuario"] = session('dataUsuario')->idPersona;
+		$array["origen"] = session('dataUsuario')->oficina;
 		$array["idCliente"] = $request->idCliente;
-		$array["propuesta"] = $request->propuesta;
-		$array["destino"] = $request->direccionCliente; //Municipo_Estado (direccion) del Cliente
-		$array["origen"] = session('dataUsuario')->oficina; //Sucursal Etesla
-		$array["tarifa"] = $request->tarifa; //tarifaMT
-		$array["_agregados"] = $request->_agregados; //Agregados
+		$array["destino"] = $request->direccionCliente;
+		$array["arrayBTI"] = $request->arrayBTI;
+		$array["consumos"] = $request->consumos;
+		$array["tarifa"] = $request->tarifa;
+		$array["descuento"] = $request->descuentoPropuesta;
+		$array["aumento"] = $request->aumentoPropuesta;
+		$array["estructura"] = $request->estructura;
+		$array["_agregados"] = $request->agregados;
 		$array["tipoCotizacion"] = "mediaTension";
+		$array["bInstalacion"] = 1; //1 || true
 
 		$response = $this->cotizacion->calcularViaticos_Totales(['json' => $array]);
 		$response = response()->json($response);
