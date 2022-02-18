@@ -1021,8 +1021,8 @@ function seleccionarCombinacion(ddlCombinaciones){
         $('#tdNuevoConsumoDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') + ' MXN');
         $('#tdNuevoConsumoDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') + ' MXN');
         //Ahorro
-        $('#tdAhorroDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroMensualEnPesosMXN);
-        $('#tdAhorroDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroBimestralEnPesosMXN);
+        $('#tdAhorroDinMes').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroMensualEnPesosMXN.toLocaleString('es-MX') + ' MXN');
+        $('#tdAhorroDinBim').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.roi.ahorro.ahorroBimestralEnPesosMXN.toLocaleString('es-MX') + ' MXN');
 
         /* Totales */
         $('#tdSubtotalUSD').text('$ ' + _combinaciones[ddlCombinacionesValor].combinacion.totales.precio.toLocaleString('es-MX') + ' USD');
