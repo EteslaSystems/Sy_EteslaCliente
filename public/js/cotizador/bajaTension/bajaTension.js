@@ -678,7 +678,7 @@ function getInversorCostoBeneficio(banderaMarcaSelected){ ///Retorna un Objeto {
         _inversores.filter((inversor, index, _inversore) => {
             if(index > 0){
                 //Se obtiene el -costoTotal- mas economico
-                if(costoMin > inversor.preciocostoTotalTotal){
+                if(costoMin > inversor.costoTotal){
                     costoMin = inversor.costoTotal;
                     objResult = inversor;
                 }
