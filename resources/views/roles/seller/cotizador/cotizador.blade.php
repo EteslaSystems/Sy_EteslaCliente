@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col form-row">
                                     <div class="col-sm">
-                                        <input id="inpCP" name="inpCP" class="form-control datosCliente" placeholder="C.P." required readonly/>
+                                        <input id="inpCP" name="inpCP" class="form-control datosCliente" placeholder="C.P." maxlength="5" required readonly/>
                                     </div>
                                     <div class="col-sm-auto">
                                         <button id="searchCP" type="button" class="btn btn-success btn-xs" onclick="buscarCPInfo()" disabled>

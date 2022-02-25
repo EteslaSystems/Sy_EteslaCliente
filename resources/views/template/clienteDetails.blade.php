@@ -44,7 +44,7 @@
                 <div class="form-row">
                     <div class="form-group col-sm-1">
                         <label for="inpCPCliente">C. P.</label>
-                        <input id="inpCPCliente" class="form-control" type="number" value="{{ $ClienteInfo->cCodigoPostal }}" disabled/>
+                        <input id="inpCPCliente" class="form-control" type="number" maxlength="5" value="{{ $ClienteInfo->cCodigoPostal }}" disabled/>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inpCalleCliente">Calle</label>
