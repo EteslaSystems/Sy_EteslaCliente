@@ -97,14 +97,15 @@ function enviarCotizacion(data){ //Paneles
     });
 }
 
-function obtenerInversoresParaPanelSeleccionado(panelSeleccionado){ //Inversores
+function obtenerInversoresParaPanelSeleccionado(PanelSeleccionado){ //Inversores
     return new Promise((resolve, reject) => {
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             type: 'POST',
             url: '/inversoresSelectos',
             data: {
-                "objPanelSelect": panelSeleccionado
+                potenciaReal: PanelSeleccionado.potenciaReal,
+                numeroPaneles: PanelSeleccionado.numeroPaneles
             },
             dataType: 'json',
             success: function(_inversores){
@@ -558,7 +559,10 @@ async function mostrarPanelSeleccionado(){
 
         //[Inversores]
         //Se obtienen los inveresores
-        let _inversores = await obtenerInversoresParaPanelSeleccionado(_paneles[valueDDLPaneles].panel);
+        let _inversores = await obtenerInversoresParaPanelSeleccionado({
+            potenciaReal: _paneles[valueDDLPaneles].panel.potenciaReal,
+            numeroPaneles: _paneles[valueDDLPaneles].panel.noModulos
+        });
         _inversores = _inversores.message; //Formating
         sessionStorage.removeItem("_respInversores");
         sessionStorage.setItem("_respInversores",JSON.stringify(_inversores));
