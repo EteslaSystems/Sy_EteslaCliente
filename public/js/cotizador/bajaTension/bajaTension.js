@@ -105,7 +105,8 @@ function obtenerInversoresParaPanelSeleccionado(PanelSeleccionado){ //Inversores
             url: '/inversoresSelectos',
             data: {
                 potenciaReal: PanelSeleccionado.potenciaReal,
-                numeroPaneles: PanelSeleccionado.numeroPaneles
+                numeroPaneles: PanelSeleccionado.numeroPaneles,
+                potenciaPanel: PanelSeleccionado.potenciaPanel
             },
             dataType: 'json',
             success: function(_inversores){
@@ -561,7 +562,8 @@ async function mostrarPanelSeleccionado(){
         //Se obtienen los inveresores
         let _inversores = await obtenerInversoresParaPanelSeleccionado({
             potenciaReal: _paneles[valueDDLPaneles].panel.potenciaReal,
-            numeroPaneles: _paneles[valueDDLPaneles].panel.noModulos
+            numeroPaneles: _paneles[valueDDLPaneles].panel.noModulos,
+            potenciaPanel: _paneles[valueDDLPaneles].panel.fPotencia
         });
         _inversores = _inversores.message; //Formating
         sessionStorage.removeItem("_respInversores");

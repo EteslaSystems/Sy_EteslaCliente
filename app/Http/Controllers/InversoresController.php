@@ -137,6 +137,7 @@ class InversoresController extends Controller
     {
         $array["potenciaReal"] = $request->potenciaReal;
         $array["numeroPaneles"] = $request->numeroPaneles;
+        $array["potenciaPanel"] = $request->potenciaPanel;
         $vInversores = $this->inversores->inversores_selectos(['json' => $array]);
         $vInversores = response()->json($vInversores);
 
