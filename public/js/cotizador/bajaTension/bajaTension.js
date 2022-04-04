@@ -1274,7 +1274,8 @@ function getDataCombinacionesFiltrada(_Combinaciones){
                         promedioNuevoConsumoBimestral: Combinacion.combinacion.power.nuevosConsumos.promedioNuevoConsumoBimestral
                     },
                     objGeneracionEnpesos: {
-                        pagoPromedioBimestral: Combinacion.combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral
+                        pagoPromedioBimestral: Combinacion.combinacion.power.objGeneracionEnpesos.pagoPromedioBimestral,
+                        pagoPromedioBimestralConIva: Combinacion.combinacion.power.objGeneracionEnpesos.pagoPromedioBimestralConIva
                     }
                 },
                 roi: { 

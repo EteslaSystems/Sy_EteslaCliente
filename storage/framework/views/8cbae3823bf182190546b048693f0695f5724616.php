@@ -864,13 +864,13 @@
                         Nuevo pago de luz
                     </td>
                     <td id="tdNewConsumoEconomicoA" class="text-tab-comparativa">
-                        $<?php echo e(number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        $<?php echo e(number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2)); ?> MXN / bim
                     </td>
                     <td id="tdNewConsumoEconomicoB" class="text-tab-comparativa">
-                        $<?php echo e(number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        $<?php echo e(number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2)); ?> MXN / bim
                     </td>
                     <td id="tdNewConsumoEconomicoC" class="text-tab-comparativa">
-                        $<?php echo e(number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestral"],2)); ?> MXN / bim
+                        $<?php echo e(number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2)); ?> MXN / bim
                     </td>
                 </tr>
             </table>
