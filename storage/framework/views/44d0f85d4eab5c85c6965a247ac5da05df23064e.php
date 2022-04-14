@@ -452,7 +452,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
-                                        $<?php echo e(number_format($power["objConsumoEnPesos"]["pagoPromedioBimestralConIva"],2)); ?>
+                                        $<?php echo e(number_format($roi["consumo"]["consumoBimestralPesosMXN"],2)); ?>
 
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
@@ -482,7 +482,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p style="font-weight:bolder; margin-top:10px; font-size:29px;">
-                                        $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2)); ?>
+                                        $<?php echo e(number_format($power["objGeneracionEnpesos"]["pagoPromedioBimestral"] ,2)); ?>
 
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">

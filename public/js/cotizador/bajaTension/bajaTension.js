@@ -906,16 +906,16 @@ function mostrarRespuestaViaticos(_viatics){ ///Pintar resultados de inversores,
             $('#tdConsumoActualKwBim').text(promedioConsumoBimestral.toLocaleString('es-MX') + ' kW');
             
             //Consumo economico (actual)
-            $('#tdConsumoActualDinMes').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioMensual.toLocaleString('es-MX') +' MXN');
-            $('#tdConsumoActualDinBim').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestral.toLocaleString('es-MX') +' MXN');
+            $('#tdConsumoActualDinMes').text('$ '+ (_viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestralConIva / 2).toLocaleString('es-MX') +' MXN');
+            $('#tdConsumoActualDinBim').text('$ '+ _viaticos[0].power.objConsumoEnPesos.pagoPromedioBimestralConIva.toLocaleString('es-MX') +' MXN');
             
             //Generacion energetica
             $('#tdGeneracionKwMes').text(generacionMensual.toLocaleString('es-MX') + ' kW');
             $('#tdGeneracionKwBim').text(generacionBimestral.toLocaleString('es-MX') + ' kW');
 
             //Generacion economica
-            $('#tdNuevoConsumoDinMes').text('$ ' + _viaticos[0].power.objGeneracionEnpesos.pagoPromedioMensual.toLocaleString('es-MX') +' MXN');
-            $('#tdNuevoConsumoDinBim').text('$ ' + _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestral.toLocaleString('es-MX') +' MXN');
+            $('#tdNuevoConsumoDinMes').text('$ ' + (_viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestralConIva / 2).toLocaleString('es-MX') +' MXN');
+            $('#tdNuevoConsumoDinBim').text('$ ' + _viaticos[0].power.objGeneracionEnpesos.pagoPromedioBimestralConIva.toLocaleString('es-MX') +' MXN');
 
             //Ahorro energetico
             $('#tdNuevoConsumoMes').text(nuevoConsumoMensual.toLocaleString('es-MX') + ' kw');
