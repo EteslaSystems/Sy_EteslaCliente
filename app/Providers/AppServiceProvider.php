@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('GuzzleHttp\Client', function(){
             return new Client([
-                'base_uri' => 'http://localhost:3000/'
+                'base_uri' => 'http://localhost:4000/'
             ]);
         });
     }
