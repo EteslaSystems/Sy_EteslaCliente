@@ -8,7 +8,7 @@
             <section class="col-12 col-sm-6 col-md-3">
                 <form method="post" class="fmc form-container">
                     {{csrf_field()}}
-                    <img src="img/panel-etesla.jpg" class="clg rounded-circle mx-auto d-block" width="90" height="90">
+                    <img src="img/panel-etesla.jpg" class="clg rounded-circle mx-auto d-block" width="90" height="90" alt="panel etesla">
                     <div class="form-group">
                         <label for="inputEmailLogin">Correo electronico</label>
                         <input type="email" class="form-control" id="inputEmailLogin" name="email" aria-describedby="emailHelp" placeholder="example@etesla.mx" required>
@@ -18,7 +18,7 @@
                         <div class="input-group mb-2">
                             <input type="password" class="form-control" id="inpPasswd" name="contrasenia" placeholder="********" required>
                             <div class="input-group-prepend">
-                                <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarContrasenia()"><span class="fa fa-eye-slash icon"></span></button>
+                                <button id="show_password" class="btn btn-primary" type="button" name="showPassword" onclick="mostrarContrasenia()"><span class="fa fa-eye-slash icon"></span></button>
                             </div>
                         </div>
                     </div>

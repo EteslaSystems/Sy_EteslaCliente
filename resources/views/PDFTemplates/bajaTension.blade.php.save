@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
 </head>
@@ -186,6 +186,14 @@
                 <p id="direccionCliente" class="textIncProupesta">
                     <strong>Direccion: </strong>
                     {{ $cliente["vCalle"] .", ". $cliente["cCodigoPostal"] .", ". $cliente["vMunicipio"] ." ". $cliente["vCiudad"] ." ". $cliente["vEstado"] }}
+                </p>
+                <p id="email" class="textIncProupesta">
+                    <strong>Correo electrónico: </strong>
+                    {{ $cliente["vEmail"] }}
+                </p>
+                <p id="telefono" class="textIncProupesta">
+                    <strong>Telefóno: </strong>
+                    {{ $cliente["vTelefono"] }}
                 </p>
                 <p id="asesor" class="textIncProupesta">
                     <strong>Asesor:</strong> 
@@ -638,10 +646,10 @@
                                     {{ $porcent = 'fifteenPorcent' }}
                                 @break
                                 @case(2)
-                                    {{ $porcent = 'fiftyPorcent' }}
+                                    {{ $porcent = 'thirtyFive' }}
                                 @break
                                 @case(3)
-                                    {{ $porcent = 'thirtyFive' }}
+                                    {{ $porcent = 'fiftyPorcent' }}
                                 @break
                                 @default
                                     {{ $i == 3 }}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
 </head>
@@ -393,44 +393,13 @@
 
         <table class="table-contenedor">
             <tr>
-                <td style="padding-right: 60px;">
-                    <div style="margin-top:30px;">
-                        <div name="ANCE">
-                            <div style="margin-left:20px;">
-                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
-                            </div>
-                            <div style="margin-top:-66px; margin-left:80px;">
-                                <p class="text-inferior-pag1">
-                                    Certificado de proveedor<br>confiable
-                                </p>
-                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
-                                    Clave: 20FIR00010A00R00
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div style="margin-left:20px;">
-                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
-                            </div>
-                            <div style="margin-top:-60px; margin-left:98px;">
-                                <p class="text-inferior-pag1">World Wildlife Fund</p>
-                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
-                                    Ren Mx | WWF México
-                                    <br>
-                                    <a href="https://www.wwf.org.mx/">
-                                        https://www.wwf.org.mx/
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </td>
+                
                 <td>
                     <!-- CARDS -->
                     <div style="margin-top:30px;">
                         <!-- CARD - "ANTES" -->
-                        <div style="margin-left:-205px; margin-top:-15px;">
-                            <div class="card" style="margin-left:-50px;">
+                        <div style="margin-left:225px; margin-top:-15px;">
+                            <div class="card" style="margin-left:70px;">
                                 <!-- CONSUMO ACTUAL -->
                                 <div class="card-header">
                                     <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
@@ -442,16 +411,16 @@
                                         ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }}
                                     </p>
                                     <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
-                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:176px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                                     <p style="font-size:14px; text-align:center; margin-top:-10px;">
                                         Pago actual s/paneles
                                     </p>
-                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                    <img height="19px" width="19px" style="margin-left:175px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                                     <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
                                     <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
                                         {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
                                     </p>
-                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">
+                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:92px; ">
                                         ({{ $propuesta["power"]["old_dac_o_nodac"] }})
                                     </p>
                                 </div>
@@ -1056,10 +1025,10 @@
                                     {{ $porcent = 'fifteenPorcent' }}
                                 @break
                                 @case(2)
-                                    {{ $porcent = 'fiftyPorcent' }}
+                                    {{ $porcent = 'thirtyFive' }}
                                 @break
                                 @case(3)
-                                    {{ $porcent = 'thirtyFive' }}
+                                    {{ $porcent = 'fiftyPorcent' }}
                                 @break
                                 @default
                                     {{ $i == 3 }}
@@ -1099,10 +1068,44 @@
         <table>
             <tr>
                 <td style="width: 450px;">
-                    <p style="margin-top: -10px; margin-left: 55px; text-align: left; font-weight: bold;">EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA PROPUESTA, EQUIVALE A <strong style="color:#8AADCE;">{{ $propuesta["power"]["objImpactoAmbiental"]["numeroArboles"] }}</strong> ÁRBOLES PLANTADOS AL AÑO.</p>
+                    
+                    <p style="margin-top: 10px; margin-left: 55px; text-align: left; font-weight: bold;">Somos una empresa avalada por:</p>
+                    <div style="margin-top:10px;">
+                        <div name="ANCE">
+                            <div style="margin-left:55px;">
+                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                            </div>
+                            <div style="margin-top:-66px; margin-left:133px;">
+                                <p class="text-inferior-pag1">
+                                    Certificado de proveedor<br>confiable
+                                </p>
+                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
+                                    Clave: 20FIR00010A00R00
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="margin-left:55px;">
+                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
+                            </div>
+                            <div style="margin-top:-60px; margin-left:133px;">
+                                <p class="text-inferior-pag1">World Wildlife Fund</p>
+                                <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
+                                    Ren Mx | WWF México
+                                    <br>
+                                    <a href="https://www.wwf.org.mx/">
+                                        https://www.wwf.org.mx/
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td align="center">
-                    <img width="30%" height="170px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/tree.png'))) }}"/>
+                    <div style="margin-left:-55px; margin-right:55px;">
+                        <p style="text-align: center; font-weight: bold;">EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA PROPUESTA, EQUIVALE A <strong style="color:#8AADCE;">{{ $propuesta["power"]["objImpactoAmbiental"]["numeroArboles"] }}</strong> ÁRBOLES PLANTADOS AL AÑO.</p>    
+                        <img width="25%" height="130px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/tree.png'))) }}"/>
+                    </div>
                 </td>
             </tr>
         </table>

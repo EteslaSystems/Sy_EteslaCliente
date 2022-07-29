@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
 </head>
@@ -639,10 +639,10 @@
                                     {{ $porcent = 'fifteenPorcent' }}
                                 @break
                                 @case(2)
-                                    {{ $porcent = 'fiftyPorcent' }}
+                                    {{ $porcent = 'thirtyFive' }}
                                 @break
                                 @case(3)
-                                    {{ $porcent = 'thirtyFive' }}
+                                    {{ $porcent = 'fiftyPorcent' }}
                                 @break
                                 @default
                                     {{ $i == 3 }}
