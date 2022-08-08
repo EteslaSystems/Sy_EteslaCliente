@@ -63,11 +63,11 @@
 
     #recuadroFlotante{
         background-color: white;
-        margin-top: -260px;
+        margin-top: -290px;
         margin-left: 80px;
         border-radius: 15px;
-        width: 360px;
-        height: 260px;
+        width: 390px;
+        height: 290px;
         text-align: left;
     }
 
@@ -215,6 +215,12 @@
                 <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
                 <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $propuesta["cliente"]["vNombrePersona"] ." ". $propuesta["cliente"]["vPrimerApellido"] ." ". $propuesta["cliente"]["vSegundoApellido"] }}</p>
                 <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $propuesta["cliente"]["vCalle"] .", ". $propuesta["cliente"]["cCodigoPostal"] .", ". $propuesta["cliente"]["vCiudad"] ." ". $propuesta["cliente"]["vEstado"] }}</p>
+                @if($propuesta["cliente"]["vEmail"] != "")
+                <p id="email" class="textIncProupesta"><strong>Correo electrónico: </strong>{{ $propuesta["cliente"]["vEmail"] }}</p>
+                @endif
+                @if($propuesta["cliente"]["vTelefono"] != "" || $propuesta["cliente"]["vCelular"] != "")
+                <p id="telefono" class="textIncProupesta"><strong>Contacto: </strong>{{ $propuesta["cliente"]["vTelefono"]  . "  /  " .  $propuesta["cliente"]["vCelular"] }}</p>
+                @endif
                 <p id="asesor" class="textIncProupesta"><strong>Asesor: </strong>{{ $propuesta["vendedor"]["vNombrePersona"] ." ". $propuesta["vendedor"]["vPrimerApellido"] ." ". $propuesta["vendedor"]["vSegundoApellido"] }}</p>
                 <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $propuesta["vendedor"]["vOficina"] }}</p>
                 <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>{{ $propuesta["expiracion"]["cantidad"] . " " . $propuesta["expiracion"]["unidadMedida"] }}</u></strong></p>
@@ -369,7 +375,7 @@
         </div>
         <!-- Leyenda - Tipo de cambio -->
         <div id="leyendaTipoDeCambio" style="margin-left:20px; margin-right:20px;">
-            <p  class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere de un 50% de anticipo a la aprobación del proyecto, 35% antes de realizar el embarque de equipos, y 15% posterior a la instalación. El proyecto se entrega preparado para conexión con CFE.</p>
+            <p class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere 50% de anticipo a la aprobación del proyecto, 35% a la recepción de los equipos y 15% una vez culminada la instalación. Los documentos para trámite CFE se entregan para firma el día que se realiza el finiquito del proyecto.</p>
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
         <table class="table-contenedor">
@@ -393,68 +399,75 @@
 
         <table class="table-contenedor">
             <tr>
-                
-                <td>
-                    <!-- CARDS -->
-                    <div style="margin-top:30px;">
-                        <!-- CARD - "ANTES" -->
-                        <div style="margin-left:225px; margin-top:-15px;">
-                            <div class="card" style="margin-left:70px;">
-                                <!-- CONSUMO ACTUAL -->
-                                <div class="card-header">
-                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
-                                        Total a pagar del periodo facturado
-                                    </p>
-                                </div>
-                                <div class="card-body">
-                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }}
-                                    </p>
-                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
-                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:176px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
-                                        Pago actual s/paneles
-                                    </p>
-                                    <img height="19px" width="19px" style="margin-left:175px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
-                                    <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
-                                        {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
-                                    </p>
-                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:92px; ">
-                                        ({{ $propuesta["power"]["old_dac_o_nodac"] }})
-                                    </p>
-                                </div>
+                <!-- CARDS -->
+                <td align="center" >
+                    <!-- CARD - "ANTES" -->
+                     <div style="margin-left:30px;">
+                        <div class="card">
+                            <!-- CONSUMO ACTUAL -->
+                            <div class="card-header">
+                                <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                    Total a pagar del periodo facturado
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                    ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }}
+                                </p>
+                                <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
+                                <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                <p style="font-size:14px; text-align:center; margin-top:-10px;">
+                                    Pago actual s/paneles
+                                </p>
+                                <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
+                                <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
+                                    {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
+                                </p>
+                                <p style="font-size:9px; background-color:#F7FB0C; font-weight:bolder; margin-top:-12px; text-align:center;">
+                                    ({{ $propuesta["power"]["old_dac_o_nodac"] }})
+                                </p>
                             </div>
                         </div>
-                        <!-- CARD - "NUEVO_CONSUMO" -->
-                        <div style="margin-top: -300px; margin-right:-26px;">
-                            <div class="card" style="margin-right: -65px; margin-left: 10px;">
-                                <!-- CONSUMO ACTUAL -->
-                                <div class="card-header">
-                                    <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
-                                        Total a pagar del periodo facturado
-                                    </p>
-                                </div>
-                                <div class="card-body">
-                                    <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
-                                        ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }}
-                                    </p>
-                                    <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-22px; height:15px;">
-                                    <img height="19px" width="19px" style="margin-top:2px; margin-left:-156px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                                    <p style="font-size:14px; text-align:center; margin-top:-10px;">
-                                        Pago actual c/paneles
-                                    </p>
-                                    <img height="19px" width="19px" style="margin-left:155px; margin-top:-29px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                                    <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-22px; margin-right:-22px; height:15px;">
-                                    <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
-                                        {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }} Kw
-                                    </p>
-                                    <p style="font-size:9px; background-color:#F7FB0C; width:15%; font-weight:bolder; margin-top:-12px; margin-left:72px; ">
-                                        ( {{ $propuesta["power"]["new_dac_o_nodac"] }} )
-                                    </p>
-                                </div>
-                            </div> 
+                    </div>
+                </td>
+                <td align="center">
+                    <!-- CARD - "NUEVO_CONSUMO" -->
+                    <div style="margin-left:-80px;">
+                        <div class="card" >
+                            <!-- CONSUMO ACTUAL -->
+                            <div class="card-header">
+                                <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
+                                    Total a pagar del periodo facturado
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
+                                    ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }}
+                                </p>
+                                <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
+                                <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                <p style="font-size:14px; text-align:center; margin-top:-10px;">
+                                    Pago actual c/paneles
+                                </p>
+                                <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                                <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
+                                <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
+                                    {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }} Kw
+                                </p>
+                                <p style="font-size:9px; background-color:#F7FB0C; font-weight:bolder; margin-top:-12px; text-align:center;">
+                                    ( {{ $propuesta["power"]["new_dac_o_nodac"] }} )
+                                </p>
+                            </div>
                         </div>
+                    </div>
+                </td>
+                <td align="center">
+                    <!-- CARD - "PROMEDIO CONSUMO BIMESTRAR" $propuesta["power"]["generacion"]["_generacionBimestral"];-->
+                    <div style="margin-right:20px;">
+                        <img height="32px" width="32px" style="margin-top:15px; margin-left:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/generation-sun-electricity.png'))) }}"/>
+                        <h3 style="margin-left:-50px;">Generación bimestral promedio:</h3>
+                        <h2 style="color:#3333FF; margin-left:-50px;">{{ $propuesta["power"]["generacion"]["promeDGeneracionBimestral"] }} kWh</h2>
                     </div>
                 </td>
             </tr>
