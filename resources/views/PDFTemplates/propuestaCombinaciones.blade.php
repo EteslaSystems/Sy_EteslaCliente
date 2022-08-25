@@ -128,9 +128,19 @@
         font-size: 12px;
     }
     .imgLogos{
-        width: 62px;
-        height: 45px;
+        width:100%;
+        height:auto;
     }
+
+    .divImgLogos{
+        width: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .recuadroInfo{
         /* Recuadro */
         width: 100%;
@@ -378,19 +388,19 @@
             <p class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere 50% de anticipo a la aprobación del proyecto, 35% a la recepción de los equipos y 15% una vez culminada la instalación. Los documentos para trámite CFE se entregan para firma el día que se realiza el finiquito del proyecto.</p>
         </div>
         <!-- Logotipos && garantias de las marcas de los equipos -->
-        <table class="table-contenedor">
+        <table class="table-contenedor" style="margin-left: auto; margin-right: auto;">
             <tr>
-                <td id="imgLogoPanel" align="center" style="border: none;">
-                    @php($image = $propuesta['paneles']['vMarca'] . '.png')
-                    <img style="width: 140px; height: 100px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                <td id="imgLogoPanel" align="center" style="border: none; width: 110px; height: 90px;">
+                    @php($image = $propuesta['paneles']['vMarca'] . '.png')                    
+                    <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
                 </td>
-                <td id="imgLogoInversor" align="center" style="border: none;">
+                <td id="imgLogoInversor" align="center" style="border: none; width: 110px; height: 90px;">
                     @php($image = $propuesta['inversores']['vMarca'] . '.jpg')
-                    <img style="width: 140px; height: 100px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                    <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
                 </td>
-                <td id="imgLogoInversor" align="center" style="border: none;">
+                <td id="imgLogoInversor" align="center" style="border: none; width: 110px; height: 90px;">
                     @php($image = $propuesta['estructura']['_estructuras']['vMarca'] . '.png')
-                    <img style="width: 140px; height: 100px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                    <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
                 </td>
             </tr>
         </table>
@@ -497,19 +507,19 @@
                 <thead style="color:#FFFFFF;">
                     <tr>
                         <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
-                        <th scope="col" style="background-color:#ADFB98;">
+                        <th scope="col" style="background-color:#112B3C;">
                             @if($propuestaSeleccionada === "combinacionEconomica")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
                             <strong class="title-tab-comparativa">Economica</strong>
                         </th>
-                        <th scope="col" style="background-color:#43E0DB;">
+                        <th scope="col" style="background-color:#205375;">
                             @if($propuestaSeleccionada === "combinacionMediana")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
                             <strong class="title-tab-comparativa">Recomendada</strong>
                         </th>
-                        <th scope="col" style="background-color:#D68910;">
+                        <th scope="col" style="background-color:#F66B0E;">
                             @if($propuestaSeleccionada === "combinacionOptima")
                                 <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
                             @endif
@@ -518,7 +528,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                     <tr>
+                     <!--<tr>
                         <td class="title-tab-comparativa">
                             Costo por watt
                         </td>
@@ -531,7 +541,7 @@
                         <td id="tdCostoWattC" class="text-tab-comparativa">
                             ${{ number_format($combinacionOptima["totales"]["precio_watt"],2) }} USD
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td class="title-tab-comparativa">
                             Potencia instalada
@@ -548,28 +558,34 @@
                     </tr>
                 </tbody>
             </table>
-            <table id="panel" class="table-comparative" style="margin-top:20px;">
+            <table id="panel" class="table-comparative" style="margin-top:20px; width: 100%;">
                 <tr>
                     <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Panel</td>
-                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Panel</td>
-                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Panel</td>
+                    <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Panel</td>
+                    <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Panel</td>
+                    <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Panel</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
                         Marca
                     </td>
                     <td id="tdMarcaPanelA">
-                        @php($image = $combinacionEconomica["paneles"]["marca"] . '.png')
-                        <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionEconomica["paneles"]["marca"] . '.png')
+                            <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        </div>
                     </td>
                     <td id="tdMarcaPanelB">
-                        @php($image = $combinacionMediana["paneles"]["marca"] . '.png')
-                        <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionMediana["paneles"]["marca"] . '.png')
+                            <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        </div>
                     </td>
                     <td id="tdMarcaPanelC">
-                        @php($image = $combinacionOptima["paneles"]["marca"] . '.png')
-                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionOptima["paneles"]["marca"] . '.png')
+                            <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -621,25 +637,31 @@
             <table id="inversor" class="table-comparative" style="margin-top:20px;">
                 <tr>
                     <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Inversor</td>
-                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Inversor</td>
-                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Inversor</td>
+                    <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Inversor</td>
+                    <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Inversor</td>
+                    <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Inversor</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
                         Marca
                     </td>
                     <td id="tdMarcaInversorA">
-                        @php($image = $combinacionEconomica["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionEconomica["inversores"]["marca"] . '.jpg')
+                            <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        </div>
                     </td>
                     <td id="tdMarcaInversorB">
-                        @php($image = $combinacionMediana["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionMediana["inversores"]["marca"] . '.jpg')
+                            <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        </div>
                     </td>
                     <td id="tdMarcaInversorC">
-                        @php($image = $combinacionOptima["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionOptima["inversores"]["marca"] . '.jpg')
+                            <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -705,25 +727,30 @@
             <table id="estructura" class="table-comparative" style="margin-top:20px;">
                 <tr>
                     <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Estructura</td>
-                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Estructura</td>
-                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                    <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                    <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                    <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Estructura</td>
                 </tr>
                 <tr>
                     <td class="title-tab-comparativa">
                         Marca
                     </td>
                     <td id="tdMarcaEstructuraA">
-                        @php($image = $combinacionEconomica['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionEconomica['estructura']['marca'] . '.png')
+                            <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        </div>
                     </td>
                     <td id="tdMarcaEstructuraB">
-                        @php($image = $combinacionMediana['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionMediana['estructura']['marca'] . '.png')
+                            <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
                     </td>
                     <td id="tdMarcaEstructuraC">
-                        @php($image = $combinacionOptima['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <div class="divImgLogos">
+                            @php($image = $combinacionOptima['estructura']['marca'] . '.png')
+                            <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -775,9 +802,9 @@
             <table id="ahorro" class="table-comparative" style="margin-top:20px;">
                 <tr>
                     <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
-                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
-                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
+                    <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
+                    <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
+                    <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
                 </tr>
                 <tr>
                     <td colspan="4" class="text-tab-comparativa">
@@ -832,9 +859,9 @@
             <table id="totales" class="table-comparative" style="margin-top:20px;">
                 <tr>
                     <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                    <td id="tdPropuestaA" style="background-color:#ADFB98; font-weight:bolder; color:#FFFFFF;">Totales</td>
-                    <td id="tdPropuestaB" style="background-color:#43E0DB; font-weight:bolder; color:#FFFFFF;">Totales</td>
-                    <td id="tdPropuestaC" style="background-color:#D68910; font-weight:bolder; color:#FFFFFF;">Totales</td>
+                    <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Totales</td>
+                    <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Totales</td>
+                    <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Totales</td>
                 </tr>
                 @if($propuesta["descuento"]["porcentaje"] > 0)
                     <tr>
@@ -1085,10 +1112,10 @@
                     <p style="margin-top: 10px; margin-left: 55px; text-align: left; font-weight: bold;">Somos una empresa avalada por:</p>
                     <div style="margin-top:10px;">
                         <div name="ANCE">
-                            <div style="margin-left:55px;">
-                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                            <div style="margin-left:55px; height:68px; width:60px">
+                                <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
                             </div>
-                            <div style="margin-top:-66px; margin-left:133px;">
+                            <div style="margin-top:-70px; margin-left:133px;">
                                 <p class="text-inferior-pag1">
                                     Certificado de proveedor<br>confiable
                                 </p>
@@ -1098,10 +1125,10 @@
                             </div>
                         </div>
                         <div>
-                            <div style="margin-left:55px;">
-                                <img height="68px" width="60px" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
+                            <div style="margin-left:55px; height:68px; width:60px">
+                                <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
                             </div>
-                            <div style="margin-top:-60px; margin-left:133px;">
+                            <div style="margin-top:-70px; margin-left:133px;">
                                 <p class="text-inferior-pag1">World Wildlife Fund</p>
                                 <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
                                     Ren Mx | WWF México

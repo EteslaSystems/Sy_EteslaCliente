@@ -380,29 +380,30 @@
             <tr>
                 @if(!is_null($paneles))
                     @php($image = $paneles['vMarca'] . '.png')
-                    <td id="imgLogoPanel" align="center" style="border: none;">
-                        <img style="width: 140px; height: 85px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
-                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                    <td id="imgLogoPanel" align="center" style="border: none; width: 110px; height: 90px;">
+                        <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <!--
+                        <p style="text-align:center; font-size:10px; margin-top:-35px;">
                             <strong>{{ $paneles['vMarca'] }}</strong>
-                        </p>
+                        </p>-->
                     </td>
                 @endif
                 @if(!is_null($inversores))
                     @php($image = $inversores['vMarca'] . '.jpg')
-                    <td id="imgLogoInversor" align="center" style="border: none;">
-                        <img style="width: 140px; height: 85px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
-                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                    <td id="imgLogoInversor" align="center" style="border: none; width: 110px; height: 90px;">
+                        <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <!--<p style="text-align:center; font-size:10px; margin-top:-35px;">
                             <strong>{{ $inversores['vMarca'] }}</strong>
-                        </p>
+                        </p>-->
                     </td>
                 @endif
                 @if(!is_null($estructura["_estructuras"]))
                     @php($image = $estructura["_estructuras"]['vMarca'] . '.png')
-                    <td id="imgLogoEstructuras" align="center" style="border: none;">
-                        <img style="width: 120px; height: 85px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
-                        <p style="text-align:center; font-size:10px; margin-top:-15px;">
+                    <td id="imgLogoEstructuras" align="center" style="border: none; width: 110px; height: 90px;">
+                        <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <!--<p style="text-align:center; font-size:10px; margin-top:-15px;">
                             <strong>{{ $estructura["_estructuras"]['vMarca'] }}</strong>
-                        </p>
+                        </p>-->
                     </td>
                 @endif
             </tr>
@@ -411,53 +412,47 @@
         <hr class="linea-division" style="background-color: #5576F2; margin-top:9px;">
         
         <!-- * Sellos * -->
-        <table class="table-contenedor" style="margin-top:20px;">
+        <table class="table-contenedor" style="margin-top:20px; margin-left: 20px; margin-right: 20px;">
             <tr>
-                <td style="padding-right: 60px;">
-                    <div name="ANCE">
-                        <div style="margin-left:20px;">
-                            <img height="90px" width="12%" style="margin-top:15px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
-                        </div>
-                        <div style="margin-top:-70px; margin-left:120px;">
-                            <p class="text-inferior-pag1">
-                                Certificado de proveedor<br>confiable
-                            </p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px; width: 30%;">
-                                Clave: 20FIR00010A00R00
-                            </p>
-                        </div>
+                <td>
+                    <div style="height:90px; width:10%;">
+                        <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                    </div>
+                    <div style="margin-top:-110px; margin-left:90px;">
+                        <p class="text-inferior-pag1">
+                            Certificado de proveedor<br>confiable
+                        </p>
+                        <p class="text-inferior-pag1-secundary">
+                            Clave: 20FIR00010A00R00
+                        </p>
                     </div>
                 </td>
                 <td>
-                    <div style="margin-top:-50px; margin-left:480px;">
-                        <div style="margin-left:-305px; margin-top:60px;">
-                            <img height="100px" width="20%" style="margin-left:-220px; margin-bottom:20px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
-                        </div>
-                        <div style="margin-top:-100px; margin-left:-390px;">
-                            <p class="text-inferior-pag1">World Wildlife Fund</p>
-                            <p class="text-inferior-pag1-secundary" style="margin-top:-9px;">
-                                Ren Mx | WWF México
-                                <br>
-                                <a href="https://www.wwf.org.mx/">
-                                    https://www.wwf.org.mx/
-                                </a>
-                            </p>
-                        </div>
+                    <div style="height:90px; width:10%;">
+                        <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
+                    </div>
+                    <div style="margin-top:-110px; margin-left:70px;">
+                        <p class="text-inferior-pag1">World Wildlife Fund</p>
+                        <p class="text-inferior-pag1-secundary">
+                            Ren Mx | WWF México
+                            <br>
+                            <a href="https://www.wwf.org.mx/">
+                                https://www.wwf.org.mx/
+                            </a>
+                        </p>
                     </div>
                 </td>
                 <td>
-                    <div style="margin-left:-266px;">
-                        <div>
-                           <img height="50px" width="27%" style="margin-left:15px;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/csolar.jpg'))) }}"> 
-                        </div>
-                        <div>
-                            <p style="text-align:center; font-size:9px;">Programa avalado por INEEL, NAFIN, ICM y el Programa de las<br>Naciones Unidas para el Medio Ambiente (ONU)</p>
-                            <p class="text-inferior-pag1-secundary" style="text-align:center;">
-                                <a href="https://csolarmexico.com/empresas-fotovoltaicas-participantes/">
-                                    https://csolarmexico.com/empresas-fotovoltaicas-participantes/
-                                </a>
-                            </p>
-                        </div>
+                    <div style="height:50px; width:200px; margin-left: auto; margin-right: auto;">
+                        <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/csolar.jpg'))) }}"> 
+                    </div>
+                    <div>
+                        <p style="text-align:center; font-size:9px;">Programa avalado por INEEL, NAFIN, ICM y el Programa de las<br>Naciones Unidas para el Medio Ambiente (ONU)</p>
+                        <p class="text-inferior-pag1-secundary" style="text-align:center;">
+                            <a href="https://csolarmexico.com/empresas-fotovoltaicas-participantes/">
+                                https://csolarmexico.com/empresas-fotovoltaicas-participantes/
+                            </a>
+                        </p>
                     </div>
                 </td>
             </tr>
