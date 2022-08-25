@@ -18,6 +18,14 @@
                     <div class="col-12 col-sm-8 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-12 col-md-3 fx-1">
+                                <label for="tarifa-actual" class="mn-1">Extraer datos de recibo de CFE</label>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
+                                <input type="file" name="ReciboCFE" accept=".pdf">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12 col-sm-12 col-md-3 fx-1">
                                 <label for="tarifa-actual" class="mn-1">Tarifa actual</label>
                             </div>
                             <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
