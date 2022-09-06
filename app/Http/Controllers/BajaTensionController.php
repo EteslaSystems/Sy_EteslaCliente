@@ -159,12 +159,12 @@ class BajaTensionController extends Controller
 					//copy($file, $ruta);
 					$path = $request->file('urlpdf')->store('CFE_PDF');
 					$parts_route = pathinfo($path);
-					$command = "pdftohtml -xml -i -c " . storage_path('\\app\\' . $path);
+					$command = "pdftohtml -xml -i -c " . storage_path('/app/' . $path);
 					exec($command);
 					$datos += array("command"=>$command);
 					$datos += array("path"=>$path);
 					$xmlDoc = new DOMDocument();
-					$xmlDoc->load(storage_path('\\app\\CFE_PDF\\') . $parts_route['filename'] . ".xml") or die("ERROR: No se pudo cargar el archivo");
+					$xmlDoc->load(storage_path('/app/CFE_PDF/') . $parts_route['filename'] . ".xml") or die("ERROR: No se pudo cargar el archivo");
 
 					$xmlPage = $xmlDoc->getElementsByTagName("page");
 
