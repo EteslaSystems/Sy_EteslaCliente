@@ -545,7 +545,7 @@ class BajaTensionController extends Controller
 				if (File::exists($fileNameXML)) {
 					File::delete($fileNameXML);
 				}*/
-				$datos += array("error"=>"No es posible leer el recibo de luz " + $e);
+				$datos += array("error"=>"No es posible leer el recibo de luz ".$e);
 				$response = response()->json($datos);
 				return $response;
 			}
