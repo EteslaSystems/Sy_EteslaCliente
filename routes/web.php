@@ -50,6 +50,7 @@ Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotat
 Route::get('/bajaTension', 'BajaTensionController@index');
 Route::post('/sendPeriodsBT', 'BajaTensionController@getCotizacionBT');
 Route::post('/calcularViaticosBTI', 'BajaTensionController@calculaViaticos_BT');
+Route::post('/extractInfoCFE', 'BajaTensionController@extractInfoCFE');
 //Busqueda_inteligente
 Route::post('/askCombinations', 'BajaTensionController@askCombination');
 //[ Hoja:POWER ]

@@ -1,8 +1,47 @@
 $(document).ready(function(){
     sessionStorage.clear();
     sessionStorage.setItem("bndPropuestaEditada", 0);
-});
 
+    $('#ReciboCFEImage').on('click', function () {
+        $('#urlpdf').click();
+    });
+
+    $('#urlpdf').on('change', function () {
+        var form = $('#fileUploadForm')[0];
+        var data = new FormData(form);
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/extractInfoCFE",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                try{
+                    const obj = JSON.parse(data);
+                    if(obj.error=="") {
+                        document.getElementById("men-val-1").value = Number(obj.Periodos["0"].kwh) + Number(obj.Periodos["11"].kwh);
+                        document.getElementById("men-val-2").value = Number(obj.Periodos["1"].kwh) + Number(obj.Periodos["2"].kwh);
+                        document.getElementById("men-val-3").value = Number(obj.Periodos["3"].kwh) + Number(obj.Periodos["4"].kwh);
+                        document.getElementById("men-val-4").value = Number(obj.Periodos["5"].kwh) + Number(obj.Periodos["6"].kwh);
+                        document.getElementById("men-val-5").value = Number(obj.Periodos["7"].kwh) + Number(obj.Periodos["8"].kwh);
+                        document.getElementById("men-val-6").value = Number(obj.Periodos["9"].kwh) + Number(obj.Periodos["10"].kwh);
+                    }else{
+                        alert(data.error);
+                    }
+                }catch (e) {
+                    alert(e.message);
+                }
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+
+    });
+});
 
 /*#region Datos*/
 async function calcularPropuestaBT(e, dataEdite){ ///Main()

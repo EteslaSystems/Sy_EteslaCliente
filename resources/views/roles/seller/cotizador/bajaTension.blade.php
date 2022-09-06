@@ -18,14 +18,6 @@
                     <div class="col-12 col-sm-8 col-md-6">
                         <div class="form-group row">
                             <div class="col-12 col-sm-12 col-md-3 fx-1">
-                                <label for="tarifa-actual" class="mn-1">Extraer datos de recibo de CFE</label>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
-                                <input type="file" name="ReciboCFE" accept=".pdf">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-3 fx-1">
                                 <label for="tarifa-actual" class="mn-1">Tarifa actual</label>
                             </div>
                             <div class="col-12 col-sm-12 col-md-9 pa-ma-3">
@@ -53,8 +45,17 @@
                         <div id="fm-mensual" class="collapse" aria-labelledby="headingTwo" data-parent="#tarifa-actual">
                             <div class="card-body">
                                 <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-6 offset-6 col-md-4 offset-md-8">
+                                    <div class="row align-items-center justify-content-md-center">
+                                        <div class="col-md-auto">
+                                            <div class="custom-control custom-switch text-center">
+                                                <img src="{{ asset('/img/file_cfe.png')}}" id="ReciboCFEImage" width="50" height="50">
+                                                <label style="align-items: center">Extraer datos.</label>
+                                                <form method="GET" enctype="multipart/form-data" id="fileUploadForm" style="display: none" >
+                                                    <input type="file" name="urlpdf" id="urlpdf" accept="application/pdf">
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col col-lg-4">
                                             <div class="custom-control custom-switch text-center">
                                                 <input type="checkbox" class="custom-control-input" id="switch-2">
                                                 <label class="custom-control-label" for="switch-2">Generar promedio.</label>
