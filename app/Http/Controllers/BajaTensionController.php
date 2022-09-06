@@ -284,6 +284,8 @@ class BajaTensionController extends Controller
 						}
 
 						# Tarifa y Medidor
+						$rate = "";
+						$meter = "";
 						if (preg_match('/^\w{2}\sNO.\sMEDIDOR:\w{6}$/', $v["texto"])) {
 							$tmp = explode('NO. MEDIDOR:', $v["texto"]);
 							$rate = $tmp[0];
@@ -445,13 +447,13 @@ class BajaTensionController extends Controller
 
 # CREACIÓN DEL ARRAY PARA CONVERTIRLO EN JSON
 
-					$datos = array(
+					$datos = [
 						"Nombre" => $name,
 						"Direccion" => $address,
-						"Total a Pagar" => array(
+						"Total a Pagar" => [
 							"Numero" => $totalNo,
 							"Letra" => $totalLetter
-						),
+						],
 						"No. de Servicio" => $noService,
 						"RMU" => $rmu,
 						"Corte a Partir" => $curt,
@@ -459,12 +461,12 @@ class BajaTensionController extends Controller
 						"Tarifa" => $rate,
 						"Medidor" => $meter,
 						"Multiplicador" => $multiplier,
-						"Periodo Facturado" => array(
+						"Periodo Facturado" => [
 							"Fecha Inicio" => $dateStart,
 							"Fecha Fin" => $dateEnd
-						),
+						],
 
-					);
+					];
 
 					if (empty($sum[1])) {
 						$period0 = array(
