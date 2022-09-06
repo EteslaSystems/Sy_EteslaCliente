@@ -8,6 +8,7 @@ use App\APIModels\APIInversores;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
 use App\APIModels\APICotizacion;
+use Illuminate\Support\Facades\Storage;
 use DOMDocument;
 use File;
 
@@ -148,21 +149,22 @@ class BajaTensionController extends Controller
 
 			try {
 				$file = $request->file("urlpdf");
-
-				$nombre = "pdf_" . time() . "." . $file->guessExtension();
+				/*$nombre = "pdf_" . time() . "." . $file->guessExtension();
 				$ruta = public_path($nombre);
-				if (!is_dir($ruta))
-					mkdir($ruta, 0777, true);
 				$newLocation = $ruta . "/" . $nombre;
 				$parts_route = pathinfo($newLocation);
-				$fileNameXML = $parts_route['filename'] . ".xml";
+				$fileNameXML = $parts_route['filename'] . ".xml";*/
 
-				if ($file->guessExtension() == "pdf") {
-					copy($file, $ruta);
-					$command = "pdftohtml -xml -i -c " . $ruta;
+				if ("pdf" == $file->guessExtension()) {
+					//copy($file, $ruta);
+					$path = $request->file('urlpdf')->store('CFE_PDF');
+					$parts_route = pathinfo($path);
+					$command = "pdftohtml -xml -i -c " . storage_path() . '\\app\\' . $path;
 					exec($command);
+					$datos += array("command"=>$command);
+					$datos += array("path"=>$path);
 					$xmlDoc = new DOMDocument();
-					$xmlDoc->load($parts_route['filename'] . ".xml") or die("ERROR: No se pudo cargar el archivo");
+					$xmlDoc->load(storage_path() . '\\app\\CFE_PDF\\' . $parts_route['filename'] . ".xml") or die("ERROR: No se pudo cargar el archivo");
 
 					$xmlPage = $xmlDoc->getElementsByTagName("page");
 
@@ -529,14 +531,15 @@ class BajaTensionController extends Controller
 					if (File::exists($fileNameXML)) {
 						File::delete($fileNameXML);
 					}*/
-
+					Storage::delete([$path, 'CFE_PDF\\' . $parts_route['filename'] . ".xml"]);
 					$datos += array("error"=>"");
 					$response = json_encode($datos);
 					$response = response()->json($response);
 					return $response;
 				} else {
 					$datos += array("error"=>"NO ES UN PDF");
-					$response = response()->json($datos);
+					$response = json_encode($datos);
+					$response = response()->json($response);
 					return $response;
 				}
 			}catch (\Exception $e){
@@ -546,9 +549,10 @@ class BajaTensionController extends Controller
 				if (File::exists($fileNameXML)) {
 					File::delete($fileNameXML);
 				}*/
-				$datos += array("error"=>"No es posible leer el recibo de luz ".$e);
-				$response = response()->json($datos);
-				return $response;
+				$datos += array("error"=>"No es posible leer el recibo de luz ");
+				$datos += array("code"=>" ".$e);
+				$response = json_encode($datos);
+				return response()->json($response);
 			}
         }
     }
