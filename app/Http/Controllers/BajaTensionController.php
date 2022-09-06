@@ -521,13 +521,13 @@ class BajaTensionController extends Controller
 					//echo "<pre>";
 					//print_r($datos);
 					//echo "<pre/><br/><br/>";
-					if (File::exists($ruta)) {
+					/*if (File::exists($ruta)) {
 						File::delete($ruta);
 					}
 
 					if (File::exists($fileNameXML)) {
 						File::delete($fileNameXML);
-					}
+					}*/
 
 					$datos += array("error"=>"");
 					$response = json_encode($datos);
@@ -539,13 +539,13 @@ class BajaTensionController extends Controller
 					return $response;
 				}
 			}catch (\Exception $e){
-				if (File::exists($ruta)) {
+				/*if (File::exists($ruta)) {
 					File::delete($ruta);
 				}
 				if (File::exists($fileNameXML)) {
 					File::delete($fileNameXML);
-				}
-				$datos += array("error"=>"No es posible leer el recibo de luz");
+				}*/
+				$datos += array("error"=>"No es posible leer el recibo de luz " + $e);
 				$response = response()->json($datos);
 				return $response;
 			}
