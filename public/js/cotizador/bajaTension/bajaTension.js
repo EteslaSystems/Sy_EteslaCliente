@@ -20,6 +20,7 @@ $(document).ready(function(){
             cache: false,
             success: function (data) {
                 try{
+                    console.log(data);
                     const obj = JSON.parse(data);
                     if(obj.error=="") {
                         document.getElementById("men-val-1").value = Number(obj.Periodos["0"].kwh) + Number(obj.Periodos["11"].kwh);
