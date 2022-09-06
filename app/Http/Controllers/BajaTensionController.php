@@ -150,8 +150,9 @@ class BajaTensionController extends Controller
 				$file = $request->file("urlpdf");
 
 				$nombre = "pdf_" . time() . "." . $file->guessExtension();
-
 				$ruta = public_path($nombre);
+				if (!is_dir($ruta))
+					mkdir($ruta, 0777, true);
 				$newLocation = $ruta . "/" . $nombre;
 				$parts_route = pathinfo($newLocation);
 				$fileNameXML = $parts_route['filename'] . ".xml";
