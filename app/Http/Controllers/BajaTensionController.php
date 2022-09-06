@@ -145,24 +145,22 @@ class BajaTensionController extends Controller
     public function extractInfoCFE(Request $request){
         if($request->hasFile("urlpdf")){
 	        $datos = array();
+
 			try {
 				$file = $request->file("urlpdf");
 
 				$nombre = "pdf_" . time() . "." . $file->guessExtension();
 
 				$ruta = public_path($nombre);
+				$newLocation = $ruta . "/" . $nombre;
+				$parts_route = pathinfo($newLocation);
+				$fileNameXML = $parts_route['filename'] . ".xml";
 
 				if ($file->guessExtension() == "pdf") {
 					copy($file, $ruta);
 					$command = "pdftohtml -xml -i -c " . $ruta;
 					exec($command);
-					$newLocation = $ruta . "/" . $nombre;
-					$parts_route = pathinfo($newLocation);
-
-					$fileNameXML = $parts_route['filename'] . ".xml";
-
 					$xmlDoc = new DOMDocument();
-
 					$xmlDoc->load($parts_route['filename'] . ".xml") or die("ERROR: No se pudo cargar el archivo");
 
 					$xmlPage = $xmlDoc->getElementsByTagName("page");
