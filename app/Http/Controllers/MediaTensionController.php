@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers;
-
+use DOMDocument;
 use App\APIModels\APICliente;
 use App\APIModels\APIVendedor;
 use App\APIModels\APICotizacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class MediaTensionController extends Controller
 {
@@ -129,5 +131,28 @@ class MediaTensionController extends Controller
 		$response = response()->json($response);
 		
 		return $response;
+	}
+
+	public function extractInfoCFEXml(Request $request)
+	{
+
+		if ($request->hasFile("urlxmlEnero")) {
+			$datos = array();
+			try {
+
+				$path = $request->file('urlxmlEnero')->store('CFE_XML');
+				$parts_route = pathinfo($path);
+
+				$xmlDoc = new DOMDocument();
+				$xmlDoc->load(storage_path('/app/CFE_XML/') . $parts_route['basename']);
+
+				return $xmlDoc->saveXML();
+			} catch (\Exception $e) {
+				$datos += array("error" => "No es posible leer el recibo de luz ");
+				$datos += array("code" => " " . $e);
+				$response = json_encode($datos);
+				return response()->json($response);
+			}
+		}
 	}
 }

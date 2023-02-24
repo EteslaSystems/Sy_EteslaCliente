@@ -42,6 +42,8 @@ Route::post('/calcularVT','MediaTensionController@calculateViaticsTotals');//Cal
 //Resultados cotizacion MT
 Route::get('/resultados', 'ResultadosController@index');
 
+Route::post('/extractInfoCFEXml', 'MediaTensionController@extractInfoCFEXml');
+
 /* --- Cotizacion Individual --- */
 Route::get('/individual', 'CotizacionIndividualController@index');
 Route::post('/enviarCotizIndiv','CotizacionIndividualController@sendSingleQuotation');

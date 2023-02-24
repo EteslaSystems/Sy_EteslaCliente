@@ -3,6 +3,97 @@ var _periodos = [];
 $(document).ready(function(){
     sessionStorage.removeItem("tarifaMT");
     sessionStorage.setItem("tarifaMT", "GDMTO"); ///Tarifa seleccionada -(Inicia en GDMTO, porque es la primera propuesta que se muestra en pantalla)-
+    $('#xmlEnero').on('click', function () {
+        $('#urlxmlEnero').click();
+    });
+
+    $('#urlxmlEnero').on('change', function () {
+        var form = $('#fileUploadForm')[0];
+        var data = new FormData(form);
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/extractInfoCFEXml",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (data) {
+                try{
+                    const xmlStr = data;
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(xmlStr, "application/xml");
+                    // print the name of the root element or error message
+                    const errorNode = doc.querySelector("parsererror");
+                    if (errorNode) {
+                        console.log("error while parsing");
+                    } else {
+                        let rootElement = doc.documentElement;
+                        let firstTier = rootElement.childNodes;
+                        let receptor = rootElement.getElementsByTagName('cfdi:Receptor');
+                        let addenda = rootElement.getElementsByTagName('cfdi:Addenda');
+                        let clsRegArchFact = addenda[0].getElementsByTagName('clsRegArchFact');
+
+                        let nombre = receptor[0].getAttribute('Nombre');
+                        let direccion = clsRegArchFact[0].getElementsByTagName('DIRECC')[0].textContent;
+                        let colonia = clsRegArchFact[0].getElementsByTagName('COLONIA')[0].textContent;
+                        let poblacion = clsRegArchFact[0].getElementsByTagName('NOMPOB')[0].textContent;
+                        let estado = clsRegArchFact[0].getElementsByTagName('NOMEST')[0].textContent;
+                        let rpu = clsRegArchFact[0].getElementsByTagName('RPU')[0].textContent;
+                        let consumo_kWh_base = clsRegArchFact[0].getElementsByTagName('CONSUMO3F')[0].textContent;
+                        let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO2F')[0].textContent;
+                        let consumo_kWh_punta = clsRegArchFact[0].getElementsByTagName('CONSUMO1F')[0].textContent;
+
+                        let demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('DEMANDA3P')[0].textContent;
+                        let demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('DEMANDA2P')[0].textContent;
+                        let demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('DEMANDA1P')[0].textContent;
+
+                        let Distribucion = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_2')[0].textContent;
+
+                        let Transmision = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_3')[0].textContent;
+                        let Generacion_B  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_5')[0].textContent;
+                        let Generacion_I  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_6')[0].textContent;
+                        let Generacion_P  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_7')[0].textContent;
+                        let Capacidad  = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_8')[0].textContent;
+
+
+
+                        // firstTier el la NodeList de los hijos directos del elemento raízof the direct children of the root element
+                        document.getElementById("nombre").innerHTML = 'Nombre: ' + nombre;
+                        document.getElementById("direccion").innerHTML = 'Direccion: ' + direccion + ' ' + colonia + ' ' + poblacion + ' ' + estado;
+                        document.getElementById("rpu").innerHTML = 'RPU: ' + rpu;
+                        document.getElementById("consumo_kWh_base").innerHTML = 'Consumo kWh base: ' + consumo_kWh_base;
+                        document.getElementById("consumo_kWh_intermedia").innerHTML = 'Consumo kWh intermedia: ' + consumo_kWh_intermedia;
+                        document.getElementById("consumo_kWh_punta").innerHTML = 'Consumo kWh punta: ' + consumo_kWh_punta;
+                        document.getElementById("demanda_kWh_base").innerHTML = 'Demanda kWh base: ' + demanda_kWh_base;
+                        document.getElementById("demanda_kWh_intermedia").innerHTML = 'Demanda kWh intermedia: ' + demanda_kWh_intermedia;
+                        document.getElementById("demanda_kWh_punta").innerHTML = 'Demanda kWh punta: ' + demanda_kWh_punta;
+                        document.getElementById("Distribucion").innerHTML = 'Distribucion: ' + Distribucion;
+                        document.getElementById("Transmision").innerHTML = 'Transmision: ' + Transmision;
+                        document.getElementById("Generacion_B").innerHTML = 'Generacion_B: ' + Generacion_B;
+                        document.getElementById("Generacion_I").innerHTML = 'Generacion_I: ' + Generacion_I;
+                        document.getElementById("Generacion_P").innerHTML = 'Generacion_P: ' + Generacion_P;
+                        document.getElementById("Capacidad").innerHTML = 'Capacidad: ' + Capacidad;
+
+                    }
+                    //console.log(data);
+                    /*const obj = JSON.parse(data);
+                    if(obj.error=="") {
+                        console.log(data);
+                    }else{
+                        alert(data.error);
+                    }*/
+                }catch (e) {
+                    alert(e.message);
+                }
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+
+    });
 });
 
 /*#region Solicitudes Servidor*/

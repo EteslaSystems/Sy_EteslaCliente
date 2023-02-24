@@ -222,4 +222,127 @@
         Calcular
     </button>
 </div>
+
+<div class="card-header p-3">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 fx-1 align-middle">
+            <p class="d-block mn-1 p-titulos">
+                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                Extracción de datos
+            </p>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3 bg-light p-3 border">
+                                <img src="{{ asset('/img/xml.png')}}" id="xmlEnero" width="25" height="25">
+                                <form method="GET" enctype="multipart/form-data" id="fileUploadForm" style="display: none" >
+                                    <input type="file" name="urlxmlEnero" id="urlxmlEnero" accept="application/xml">
+                                </form>
+                            </div>
+                            <div class="col-sm-9 bg-light p-3 border">
+                                <h5 class="card-title"> Enero</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-text" id="nombre"></p>
+                    <p class="card-text" id="direccion"></p>
+                    <p class="card-text" id="rpu"></p>
+                    <p class="card-text" id="consumo_kWh_base"></p>
+                    <p class="card-text" id="consumo_kWh_intermedia"></p>
+                    <p class="card-text" id="consumo_kWh_punta"></p>
+                    <p class="card-text" id="demanda_kWh_base"></p>
+                    <p class="card-text" id="demanda_kWh_intermedia"></p>
+                    <p class="card-text" id="demanda_kWh_punta"></p>
+                    <p class="card-text" id="Distribucion"></p>
+                    <p class="card-text" id="Transmision"></p>
+                    <p class="card-text" id="Generacion_B"></p>
+                    <p class="card-text" id="Generacion_I"></p>
+                    <p class="card-text" id="Generacion_P"></p>
+                    <p class="card-text" id="Capacidad"></p>
+
+
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 fx-1 align-middle">
+            <p class="d-block mn-1 p-titulos">
+                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                Extracción de datos
+            </p>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
