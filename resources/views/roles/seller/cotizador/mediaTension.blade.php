@@ -250,27 +250,53 @@
                             </div>
                         </div>
                     </div>
-                    <p class="card-text" id="nombre"></p>
-                    <p class="card-text" id="direccion"></p>
-                    <p class="card-text" id="rpu"></p>
-                    <p class="card-text" id="consumo_kWh_base"></p>
-                    <p class="card-text" id="consumo_kWh_intermedia"></p>
-                    <p class="card-text" id="consumo_kWh_punta"></p>
-                    
-                    <p class="card-text" id="demanda_kWh_base"></p>
-                    <p class="card-text" id="demanda_kWh_intermedia"></p>
-                    <p class="card-text" id="demanda_kWh_punta"></p>
+                    <div style="float: left; width: 35%;" >
+                        <p class="card-text">Nombre</p>
+                        <p class="card-text">Direccion</p>
+                        <p class="card-text">Colonia</p>
+                        <p class="card-text">Población</p>
+                        <p class="card-text">Estado</p>
+                        <p class="card-text">RPU</p>
+                        <p class="card-text">consumo_kWh_base</p>
+                        <p class="card-text">consumo_kWh_intermedia</p>
+                        <p class="card-text">consumo_kWh_punta</p>
 
+                        <p class="card-text">demanda_kWh_base</p>
+                        <p class="card-text">demanda_kWh_intermedia</p>
+                        <p class="card-text">demanda_kWh_punta</p>
 
-                    <p class="card-text" id="Generacion_B"></p>
-                    <p class="card-text" id="Generacion_I"></p>
-                    <p class="card-text" id="Generacion_P"></p>
-                    <p class="card-text" id="Distribucion"></p>
-                    <p class="card-text" id="Capacidad"></p>
+                        <p class="card-text">Generacion_B</p>
+                        <p class="card-text">Generacion_I</p>
+                        <p class="card-text">Generacion_P</p>
+                        <p class="card-text">Distribucion</p>
+                        <p class="card-text">Capacidad</p>
 
-                    <p class="card-text" id="Transmision"></p>
+                        <p class="card-text">Transmision</p>
+                    </div>
 
+                    <div style="float: right; width: 65%;" >
+                        <p class="card-text" id="nombre"></p>
+                        <p class="card-text" id="direccion"></p>
+                        <p class="card-text" id="colonia"></p>
+                        <p class="card-text" id="poblacion"></p>
+                        <p class="card-text" id="estado"></p>
+                        <p class="card-text" id="rpu"></p>
+                        <p class="card-text" id="consumo_kWh_base"></p>
+                        <p class="card-text" id="consumo_kWh_intermedia"></p>
+                        <p class="card-text" id="consumo_kWh_punta"></p>
 
+                        <p class="card-text" id="demanda_kWh_base"></p>
+                        <p class="card-text" id="demanda_kWh_intermedia"></p>
+                        <p class="card-text" id="demanda_kWh_punta"></p>
+
+                        <p class="card-text" id="Generacion_B"></p>
+                        <p class="card-text" id="Generacion_I"></p>
+                        <p class="card-text" id="Generacion_P"></p>
+                        <p class="card-text" id="Distribucion"></p>
+                        <p class="card-text" id="Capacidad"></p>
+
+                        <p class="card-text" id="Transmision"></p>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Last updated 3 mins ago</small>
@@ -289,64 +315,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-sm-6 fx-1 align-middle">
-            <p class="d-block mn-1 p-titulos">
-                <i class="fa fa-list-alt" aria-hidden="true"></i>
-                Extracción de datos
-            </p>
-        </div>
-    </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 @endsection
