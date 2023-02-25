@@ -256,15 +256,19 @@
                     <p class="card-text" id="consumo_kWh_base"></p>
                     <p class="card-text" id="consumo_kWh_intermedia"></p>
                     <p class="card-text" id="consumo_kWh_punta"></p>
+                    
                     <p class="card-text" id="demanda_kWh_base"></p>
                     <p class="card-text" id="demanda_kWh_intermedia"></p>
                     <p class="card-text" id="demanda_kWh_punta"></p>
-                    <p class="card-text" id="Distribucion"></p>
-                    <p class="card-text" id="Transmision"></p>
+
+
                     <p class="card-text" id="Generacion_B"></p>
                     <p class="card-text" id="Generacion_I"></p>
                     <p class="card-text" id="Generacion_P"></p>
+                    <p class="card-text" id="Distribucion"></p>
                     <p class="card-text" id="Capacidad"></p>
+
+                    <p class="card-text" id="Transmision"></p>
 
 
                 </div>

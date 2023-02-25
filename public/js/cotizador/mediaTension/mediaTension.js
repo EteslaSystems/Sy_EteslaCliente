@@ -30,7 +30,6 @@ $(document).ready(function(){
                         console.log("error while parsing");
                     } else {
                         let rootElement = doc.documentElement;
-                        let firstTier = rootElement.childNodes;
                         let receptor = rootElement.getElementsByTagName('cfdi:Receptor');
                         let addenda = rootElement.getElementsByTagName('cfdi:Addenda');
                         let clsRegArchFact = addenda[0].getElementsByTagName('clsRegArchFact');
@@ -63,18 +62,34 @@ $(document).ready(function(){
                         document.getElementById("nombre").innerHTML = 'Nombre: ' + nombre;
                         document.getElementById("direccion").innerHTML = 'Direccion: ' + direccion + ' ' + colonia + ' ' + poblacion + ' ' + estado;
                         document.getElementById("rpu").innerHTML = 'RPU: ' + rpu;
-                        document.getElementById("consumo_kWh_base").innerHTML = 'Consumo kWh base: ' + consumo_kWh_base;
-                        document.getElementById("consumo_kWh_intermedia").innerHTML = 'Consumo kWh intermedia: ' + consumo_kWh_intermedia;
-                        document.getElementById("consumo_kWh_punta").innerHTML = 'Consumo kWh punta: ' + consumo_kWh_punta;
-                        document.getElementById("demanda_kWh_base").innerHTML = 'Demanda kWh base: ' + demanda_kWh_base;
-                        document.getElementById("demanda_kWh_intermedia").innerHTML = 'Demanda kWh intermedia: ' + demanda_kWh_intermedia;
-                        document.getElementById("demanda_kWh_punta").innerHTML = 'Demanda kWh punta: ' + demanda_kWh_punta;
-                        document.getElementById("Distribucion").innerHTML = 'Distribucion: ' + Distribucion;
-                        document.getElementById("Transmision").innerHTML = 'Transmision: ' + Transmision;
-                        document.getElementById("Generacion_B").innerHTML = 'Generacion_B: ' + Generacion_B;
-                        document.getElementById("Generacion_I").innerHTML = 'Generacion_I: ' + Generacion_I;
-                        document.getElementById("Generacion_P").innerHTML = 'Generacion_P: ' + Generacion_P;
-                        document.getElementById("Capacidad").innerHTML = 'Capacidad: ' + Capacidad;
+
+
+                        if (document.getElementById("OCR_MM_NOM").innerHTML === 'ABR'){
+                            document.getElementById("demanda_kWh_base").innerHTML = 'Demanda kWh base: ' + demanda_kWh_base;
+                            document.getElementById("demanda_kWh_intermedia").innerHTML = 'Demanda kWh intermedia: ' + demanda_kWh_intermedia;
+                            document.getElementById("demanda_kWh_punta").innerHTML = 'Demanda kWh punta: ' + demanda_kWh_punta;
+                        }else if(document.getElementById("OCR_MM_NOM").innerHTML === 'OCT'){
+                            demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('KWB15')[0].textContent;
+                            demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('KWI15')[0].textContent;
+                            demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('KWP15')[0].textContent;
+                            document.getElementById("demanda_kWh_base").innerHTML = 'Demanda kWh base: ' + demanda_kWh_base;
+                            document.getElementById("demanda_kWh_intermedia").innerHTML = 'Demanda kWh intermedia: ' + demanda_kWh_intermedia;
+                            document.getElementById("demanda_kWh_punta").innerHTML = 'Demanda kWh punta: ' + demanda_kWh_punta;
+                        }else{
+                            document.getElementById("consumo_kWh_base").innerHTML = 'Consumo kWh base: ' + consumo_kWh_base;
+                            document.getElementById("consumo_kWh_intermedia").innerHTML = 'Consumo kWh intermedia: ' + consumo_kWh_intermedia;
+                            document.getElementById("consumo_kWh_punta").innerHTML = 'Consumo kWh punta: ' + consumo_kWh_punta;
+                            document.getElementById("demanda_kWh_base").innerHTML = 'Demanda kWh base: ' + demanda_kWh_base;
+                            document.getElementById("demanda_kWh_intermedia").innerHTML = 'Demanda kWh intermedia: ' + demanda_kWh_intermedia;
+                            document.getElementById("demanda_kWh_punta").innerHTML = 'Demanda kWh punta: ' + demanda_kWh_punta;
+                            document.getElementById("Distribucion").innerHTML = 'Distribucion: ' + Distribucion;
+                            document.getElementById("Transmision").innerHTML = 'Transmision: ' + Transmision;
+                            document.getElementById("Generacion_B").innerHTML = 'Generacion_B: ' + Generacion_B;
+                            document.getElementById("Generacion_I").innerHTML = 'Generacion_I: ' + Generacion_I;
+                            document.getElementById("Generacion_P").innerHTML = 'Generacion_P: ' + Generacion_P;
+                            document.getElementById("Capacidad").innerHTML = 'Capacidad: ' + Capacidad;
+                        }
+
 
                     }
                     //console.log(data);
