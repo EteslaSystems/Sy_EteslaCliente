@@ -281,13 +281,13 @@
                         <p class="card-text" id="poblacion"></p>
                         <p class="card-text" id="estado"></p>
                         <p class="card-text" id="rpu"></p>
-                        <p class="card-text" id="consumo_kWh_base"></p>
-                        <p class="card-text" id="consumo_kWh_intermedia"></p>
-                        <p class="card-text" id="consumo_kWh_punta"></p>
+                        <p class="card-text" id="consumo B"></p>
+                        <p class="card-text" id="consumo I"></p>
+                        <p class="card-text" id="consumo P"></p>
 
-                        <p class="card-text" id="demanda_kWh_base"></p>
-                        <p class="card-text" id="demanda_kWh_intermedia"></p>
-                        <p class="card-text" id="demanda_kWh_punta"></p>
+                        <p class="card-text" id="demanda B"></p>
+                        <p class="card-text" id="demanda I"></p>
+                        <p class="card-text" id="demanda P"></p>
 
                         <p class="card-text" id="Generacion_B"></p>
                         <p class="card-text" id="Generacion_I"></p>
