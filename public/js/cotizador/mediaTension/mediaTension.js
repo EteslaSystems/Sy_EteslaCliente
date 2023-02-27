@@ -31,32 +31,19 @@ $(document).ready(function(){
                     } else {
                         let rootElement = doc.documentElement;
                         let receptor = rootElement.getElementsByTagName('cfdi:Receptor');
-                        let addenda = rootElement.getElementsByTagName('cfdi:Addenda');
-                        let clsRegArchFact = addenda[0].getElementsByTagName('clsRegArchFact');
 
-                        let nombre = receptor[0].getAttribute('Nombre');
+                        let addenda = rootElement.getElementsByTagName('cfdi:Addenda');
+                        console.log(2);
+                        let clsRegArchFact = addenda[0].getElementsByTagName('clsRegArchFact');
+                        console.log(3);
+
+                        let nombre = clsRegArchFact[0].getElementsByTagName('NOMBRE')[0].textContent;
+                        console.log(4);
                         let direccion = clsRegArchFact[0].getElementsByTagName('DIRECC')[0].textContent;
                         let colonia = clsRegArchFact[0].getElementsByTagName('COLONIA')[0].textContent;
                         let poblacion = clsRegArchFact[0].getElementsByTagName('NOMPOB')[0].textContent;
                         let estado = clsRegArchFact[0].getElementsByTagName('NOMEST')[0].textContent;
                         let rpu = clsRegArchFact[0].getElementsByTagName('RPU')[0].textContent;
-                        let consumo_kWh_base = clsRegArchFact[0].getElementsByTagName('CONSUMO3F')[0].textContent;
-                        let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO2F')[0].textContent;
-                        let consumo_kWh_punta = clsRegArchFact[0].getElementsByTagName('CONSUMO1F')[0].textContent;
-
-                        let demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('DEMANDA3P')[0].textContent;
-                        let demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('DEMANDA2P')[0].textContent;
-                        let demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('DEMANDA1P')[0].textContent;
-
-                        let Distribucion = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_2')[0].textContent;
-
-                        let Transmision = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_3')[0].textContent;
-                        let Generacion_B  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_5')[0].textContent;
-                        let Generacion_I  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_6')[0].textContent;
-                        let Generacion_P  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_7')[0].textContent;
-                        let Capacidad  = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_8')[0].textContent;
-
-
 
                         // firstTier el la NodeList de los hijos directos del elemento raízof the direct children of the root element
                         document.getElementById("nombre").innerHTML = nombre;
@@ -66,35 +53,88 @@ $(document).ready(function(){
                         document.getElementById("estado").innerHTML = estado;
                         document.getElementById("rpu").innerHTML = rpu;
 
-                        document.getElementById("consumo_kWh_base").innerHTML = consumo_kWh_base;
-                        document.getElementById("consumo_kWh_intermedia").innerHTML = consumo_kWh_intermedia;
-                        document.getElementById("consumo_kWh_punta").innerHTML = consumo_kWh_punta;
+                        let Distribucion = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_2')[0].textContent;
+                        let Transmision = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_3')[0].textContent;
+                        let Generacion_B  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_5')[0].textContent;
+                        let Generacion_I  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_6')[0].textContent;
+                        let Generacion_P  = clsRegArchFact[0].getElementsByTagName('IMPTE_KWH_REG_7')[0].textContent;
+                        let Capacidad  = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_8')[0].textContent;
+
+                        let Capacidad2  = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_6')[0].textContent;
+
+                        let tarifaReg = clsRegArchFact[0].getElementsByTagName('TARIFA_REG')[0].textContent;
+
+                        console.log(tarifaReg);
 
 
-                        if (clsRegArchFact[0].getElementsByTagName("OCR_MM_NOM")[0].textContent === 'ABR'){
-                            document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
+                        if(tarifaReg==='GDMTO'){
+                             let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO_R')[0].textContent;
+                             let demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('DEMANDA')[0].textContent;
+                            document.getElementById("consumo_kWh_base").innerHTML = 0
+                            document.getElementById("consumo_kWh_intermedia").innerHTML = consumo_kWh_intermedia;
+                            document.getElementById("consumo_kWh_punta").innerHTML = 0
+                            document.getElementById("demanda_kWh_base").innerHTML = 0;
                             document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
-                            document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
-                        }else if(clsRegArchFact[0].getElementsByTagName("OCR_MM_NOM")[0].textContent === 'OCT'){
-                            demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('KWB15')[0].textContent;
-                            demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('KWI15')[0].textContent;
-                            demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('KWP15')[0].textContent;
-                            document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
-                            document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
-                            document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
+                            document.getElementById("demanda_kWh_punta").innerHTML = 0;
+
+                            document.getElementById("Distribucion").innerHTML = Distribucion;
+                            document.getElementById("Transmision").innerHTML = Transmision;
+                            document.getElementById("Generacion_B").innerHTML = 0;
+                            document.getElementById("Generacion_I").innerHTML = Generacion_B;
+                            document.getElementById("Generacion_P").innerHTML = 0;
+                            document.getElementById("Capacidad").innerHTML = Capacidad2;
                         }else{
+                            let consumo_kWh_base = clsRegArchFact[0].getElementsByTagName('CONSUMO3F')[0].textContent;
+                             let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO2F')[0].textContent;
+                            let consumo_kWh_punta = clsRegArchFact[0].getElementsByTagName('CONSUMO1F')[0].textContent;
 
-                            document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
-                            document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
-                            document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
+                            let demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('DEMANDA3P')[0].textContent;
+                             let demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('DEMANDA2P')[0].textContent;
+                            let demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('DEMANDA1P')[0].textContent;
+
+                            document.getElementById("consumo_kWh_base").innerHTML = consumo_kWh_base;
+                            document.getElementById("consumo_kWh_intermedia").innerHTML = consumo_kWh_intermedia;
+                            document.getElementById("consumo_kWh_punta").innerHTML = consumo_kWh_punta;
+
+
+                            if (clsRegArchFact[0].getElementsByTagName("OCR_MM_NOM")[0].textContent === 'ABR'){
+                                document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
+                                document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
+                                document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
+                            }else if(clsRegArchFact[0].getElementsByTagName("OCR_MM_NOM")[0].textContent === 'OCT'){
+                                demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('KWB15')[0].textContent;
+                                demanda_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('KWI15')[0].textContent;
+                                demanda_kWh_punta = clsRegArchFact[0].getElementsByTagName('KWP15')[0].textContent;
+                                document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
+                                document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
+                                document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
+                            }else{
+
+                                document.getElementById("demanda_kWh_base").innerHTML = demanda_kWh_base;
+                                document.getElementById("demanda_kWh_intermedia").innerHTML = demanda_kWh_intermedia;
+                                document.getElementById("demanda_kWh_punta").innerHTML = demanda_kWh_punta;
+                            }
+                            document.getElementById("Distribucion").innerHTML = Distribucion;
+                            document.getElementById("Transmision").innerHTML = Transmision;
+                            document.getElementById("Generacion_B").innerHTML = Generacion_B;
+                            document.getElementById("Generacion_I").innerHTML = Generacion_I;
+                            document.getElementById("Generacion_P").innerHTML = Generacion_P;
+                            document.getElementById("Capacidad").innerHTML = Capacidad;
+
+
                         }
 
-                        document.getElementById("Distribucion").innerHTML = Distribucion;
-                        document.getElementById("Transmision").innerHTML = Transmision;
-                        document.getElementById("Generacion_B").innerHTML = Generacion_B;
-                        document.getElementById("Generacion_I").innerHTML = Generacion_I;
-                        document.getElementById("Generacion_P").innerHTML = Generacion_P;
-                        document.getElementById("Capacidad").innerHTML = Capacidad;
+
+
+
+
+
+
+
+
+
+
+
 
 
                     }
