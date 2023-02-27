@@ -252,26 +252,26 @@
                     </div>
                     <div style="float: left; width: 35%;" >
                         <p class="card-text">Nombre</p>
-                        <p class="card-text">Direccion</p>
+                        <p class="card-text">Dirección</p>
                         <p class="card-text">Colonia</p>
                         <p class="card-text">Población</p>
                         <p class="card-text">Estado</p>
                         <p class="card-text">RPU</p>
-                        <p class="card-text">consumo_kWh_base</p>
-                        <p class="card-text">consumo_kWh_intermedia</p>
-                        <p class="card-text">consumo_kWh_punta</p>
+                        <p class="card-text">Consumo kWh B</p>
+                        <p class="card-text">Consumo kWh I</p>
+                        <p class="card-text">Consumo kWh P</p>
 
-                        <p class="card-text">demanda_kWh_base</p>
-                        <p class="card-text">demanda_kWh_intermedia</p>
-                        <p class="card-text">demanda_kWh_punta</p>
+                        <p class="card-text">Demanda kW B</p>
+                        <p class="card-text">Demanda kW I</p>
+                        <p class="card-text">Demanda kW P</p>
 
-                        <p class="card-text">Generacion_B</p>
-                        <p class="card-text">Generacion_I</p>
-                        <p class="card-text">Generacion_P</p>
-                        <p class="card-text">Distribucion</p>
+                        <p class="card-text">Generación B</p>
+                        <p class="card-text">Generación I</p>
+                        <p class="card-text">Generación P</p>
+                        <p class="card-text">Distribución</p>
                         <p class="card-text">Capacidad</p>
 
-                        <p class="card-text">Transmision</p>
+                        <p class="card-text">Transmisión</p>
                     </div>
 
                     <div style="float: right; width: 65%;" >
@@ -281,13 +281,13 @@
                         <p class="card-text" id="poblacion"></p>
                         <p class="card-text" id="estado"></p>
                         <p class="card-text" id="rpu"></p>
-                        <p class="card-text" id="consumo B"></p>
-                        <p class="card-text" id="consumo I"></p>
-                        <p class="card-text" id="consumo P"></p>
+                        <p class="card-text" id="consumo_kWh_base"></p>
+                        <p class="card-text" id="consumo_kWh_intermedia"></p>
+                        <p class="card-text" id="consumo_kWh_punta"></p>
 
-                        <p class="card-text" id="demanda B"></p>
-                        <p class="card-text" id="demanda I"></p>
-                        <p class="card-text" id="demanda P"></p>
+                        <p class="card-text" id="demanda_kWh_base"></p>
+                        <p class="card-text" id="demanda_kWh_intermedia"></p>
+                        <p class="card-text" id="demanda_kWh_punta"></p>
 
                         <p class="card-text" id="Generacion_B"></p>
                         <p class="card-text" id="Generacion_I"></p>
