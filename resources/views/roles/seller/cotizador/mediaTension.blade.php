@@ -256,6 +256,7 @@
                         <p class="card-text">Colonia</p>
                         <p class="card-text">Población</p>
                         <p class="card-text">Estado</p>
+                        <p class="card-text">Código postal</p>
                         <p class="card-text">RPU</p>
                         <p class="card-text">Consumo kWh B</p>
                         <p class="card-text">Consumo kWh I</p>
@@ -280,6 +281,7 @@
                         <p class="card-text" id="colonia"></p>
                         <p class="card-text" id="poblacion"></p>
                         <p class="card-text" id="estado"></p>
+                        <p class="card-text" id="codigo_postal"></p>
                         <p class="card-text" id="rpu"></p>
                         <p class="card-text" id="consumo_kWh_base"></p>
                         <p class="card-text" id="consumo_kWh_intermedia"></p>

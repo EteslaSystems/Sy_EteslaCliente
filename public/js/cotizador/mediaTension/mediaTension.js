@@ -43,6 +43,7 @@ $(document).ready(function(){
                         let colonia = clsRegArchFact[0].getElementsByTagName('COLONIA')[0].textContent;
                         let poblacion = clsRegArchFact[0].getElementsByTagName('NOMPOB')[0].textContent;
                         let estado = clsRegArchFact[0].getElementsByTagName('NOMEST')[0].textContent;
+                        let codigo_postal = clsRegArchFact[0].getElementsByTagName('CODIGO_POSTAL')[0].textContent;
                         let rpu = clsRegArchFact[0].getElementsByTagName('RPU')[0].textContent;
 
                         // firstTier el la NodeList de los hijos directos del elemento raízof the direct children of the root element
@@ -51,6 +52,7 @@ $(document).ready(function(){
                         document.getElementById("colonia").innerHTML = colonia;
                         document.getElementById("poblacion").innerHTML = poblacion;
                         document.getElementById("estado").innerHTML = estado;
+                        document.getElementById("codigo_postal").innerHTML = codigo_postal;
                         document.getElementById("rpu").innerHTML = rpu;
 
                         let Distribucion = clsRegArchFact[0].getElementsByTagName('IMPTE_KW_REG_2')[0].textContent;
@@ -85,7 +87,7 @@ $(document).ready(function(){
                             document.getElementById("Capacidad").innerHTML = Capacidad2;
                         }else{
                             let consumo_kWh_base = clsRegArchFact[0].getElementsByTagName('CONSUMO3F')[0].textContent;
-                             let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO2F')[0].textContent;
+                            let consumo_kWh_intermedia = clsRegArchFact[0].getElementsByTagName('CONSUMO2F')[0].textContent;
                             let consumo_kWh_punta = clsRegArchFact[0].getElementsByTagName('CONSUMO1F')[0].textContent;
 
                             let demanda_kWh_base = clsRegArchFact[0].getElementsByTagName('DEMANDA3P')[0].textContent;
