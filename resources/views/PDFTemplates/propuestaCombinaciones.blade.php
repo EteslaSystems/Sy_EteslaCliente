@@ -5,13 +5,15 @@
 </head>
 <style type="text/css">
     /* --------------- ---------------------- */
-    *{
+    * {
         font-family: "Calibri, sans-serif";
     }
-    html{
+
+    html {
         margin: 0;
     }
-    .footer-page{
+
+    .footer-page {
         position: fixed;
         bottom: 0cm;
         left: 0cm;
@@ -21,27 +23,31 @@
     }
 
     /* Contenedores */
-    .container-fluid{
+    .container-fluid {
         padding: 0 !important;
     }
-    .container-table{
+
+    .container-table {
         margin-top: -30px;
         margin-left: 25px;
         margin-right: 20px;
     }
-    .div-contenedor{
-        margin-left:40px;
-        margin-right:40px;
-        margin-top:7px;
+
+    .div-contenedor {
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 7px;
     }
+
     /* Salto de pagina [hr] */
-    hr.salto-pagina{
+    hr.salto-pagina {
         page-break-after: always;
         border: 0;
         margin: 0;
         padding: 0;
     }
-    hr.linea-division{
+
+    hr.linea-division {
         height: 6.5px;
         border-style: none;
     }
@@ -49,19 +55,19 @@
     /* --------------- ---------------------- */
 
     /* Contenido hoja */
-    #logoTipoEtesla{
+    #logoTipoEtesla {
         width: 22%;
     }
 
-    #recuadroPaneles{
-        width:100%;
+    #recuadroPaneles {
+        width: 100%;
         height: 315px;
         background-repeat: no-repeat;
         margin-left: 80px;
         border-radius: 15px;
     }
 
-    #recuadroFlotante{
+    #recuadroFlotante {
         background-color: white;
         margin-top: -290px;
         margin-left: 80px;
@@ -72,7 +78,7 @@
     }
 
     /* Tablas */
-    .table-costos-proyecto{
+    .table-costos-proyecto {
         width: 100%;
         text-align: center;
         border-collapse: collapse;
@@ -80,20 +86,21 @@
         border: 1px solid black;
         overflow: hidden;
     }
-    .table-costos-proyecto thead{
+
+    .table-costos-proyecto thead {
         background-color: green;
         color: white;
         font-size: 16px;
         font-weight: bold;
     }
 
-    .table-contenedor{
+    .table-contenedor {
         width: 100%;
         border-collapse: collapse;
     }
 
     /* Tab - Financiamiento */
-    .tabFinanciamiento{
+    .tabFinanciamiento {
         width: 100%;
         color: #fff;
         background-color: #3A565E;
@@ -101,14 +108,15 @@
         border-radius: 20px;
         overflow: hidden;
     }
-    .tabFinanciamiento th, .tabFinanciamiento td{
+
+    .tabFinanciamiento th, .tabFinanciamiento td {
         border: 3px solid white;
         color: white;
         text-align: center;
     }
 
     /* Tab - Comparativa [Combinaciones] */
-    .table-comparative{
+    .table-comparative {
         width: 100%;
         border-collapse: collapse;
         border-radius: 20px;
@@ -116,23 +124,26 @@
         text-align: center;
     }
 
-    .table-comparative th, .table-comparative td{
+    .table-comparative th, .table-comparative td {
         border: 2px solid #EFEFEF;
         width: 45%;
     }
-    .title-tab-comparativa{
+
+    .title-tab-comparativa {
         font-size: 13px;
         font-weight: bolder;
     }
-    .text-tab-comparativa{
+
+    .text-tab-comparativa {
         font-size: 12px;
     }
-    .imgLogos{
-        width:100%;
-        height:auto;
+
+    .imgLogos {
+        width: 100%;
+        height: auto;
     }
 
-    .divImgLogos{
+    .divImgLogos {
         width: 80px;
         display: flex;
         justify-content: center;
@@ -141,7 +152,7 @@
         margin-right: auto;
     }
 
-    .recuadroInfo{
+    .recuadroInfo {
         /* Recuadro */
         width: 100%;
         border-style: ridge;
@@ -151,41 +162,46 @@
     }
 
     /* Textos */
-    .textIncProupesta{
+    .textIncProupesta {
         margin-left: 15px;
         line-height: 90%;
     }
-    .text-inferior-pag1{
+
+    .text-inferior-pag1 {
         font-size: 11px;
         font-weight: bolder;
     }
-    .text-inferior-pag1-secundary{
+
+    .text-inferior-pag1-secundary {
         font-size: 10px;
     }
-    .garantias{
+
+    .garantias {
         line-height: 5%;
         text-align: center;
     }
-    .nota{
-        font-size:11px;
+
+    .nota {
+        font-size: 11px;
         color: #969696;
         text-align: center;
     }
 
     /* Cards */
-    .card{
+    .card {
         width: 175px;
         padding: 20px;
-        text-align:center;
-        border-width:3px;
-        border-style:solid;
-        border-color:green;
+        text-align: center;
+        border-width: 3px;
+        border-style: solid;
+        border-color: green;
         border-top-left-radius: 30px 30px;
         border-top-right-radius: 30px 30px;
         border-bottom-left-radius: 30px 30px;
         border-bottom-right-radius: 30px 30px;
     }
-    .card-header{
+
+    .card-header {
         background: green;
         color: #FFFFFF;
         margin: -20px;
@@ -195,8 +211,9 @@
         border-top-left-radius: 30px 30px;
         border-top-right-radius: 30px 30px;
     }
-    .card-body{
-        height:115px;
+
+    .card-body {
+        height: 115px;
         background: #FCFAEB;
         margin: -20px;
         padding: 20px;
@@ -207,35 +224,51 @@
     }
 </style>
 <body>
-<!-- Pagina 1 -->
+
 <div class="container-fluid" style="border-top: 10px solid #5576F2;">
     <table>
         <tr>
             <td>
-                <img id="logoTipoEtesla" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
+                <img id="logoTipoEtesla"
+                     src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
             </td>
             <td>
-                <h1 style="font-size:25px; text-align:right; margin-right: 27px;">SISTEMA FOTOVOLTAICO INTERCONECTADO A LA RED DE CFE</h1>
+                <h1 style="font-size:25px; text-align:right; margin-right: 27px;">SISTEMA FOTOVOLTAICO INTERCONECTADO A
+                    LA RED DE CFE</h1>
             </td>
         </tr>
     </table>
-    <img id="recuadroPaneles" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/Paneles-solares-tesla.jpg'))) }}"/>
+    <img id="recuadroPaneles"
+         src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/Paneles-solares-tesla.jpg'))) }}"/>
     <div id="recuadroFlotante">
         <div>
             <p id="fechaCreacion" class="textIncProupesta"><strong>Fecha de creacion: {{ date('Y-m-d') }}</strong></p>
-            <p id="nombreCliente" class="textIncProupesta"><strong>Cliente: </strong>{{ $propuesta["cliente"]["vNombrePersona"] ." ". $propuesta["cliente"]["vPrimerApellido"] ." ". $propuesta["cliente"]["vSegundoApellido"] }}</p>
-            <p id="direccionCliente" class="textIncProupesta"><strong>Direccion: </strong>{{ $propuesta["cliente"]["vCalle"] .", ". $propuesta["cliente"]["cCodigoPostal"] .", ". $propuesta["cliente"]["vCiudad"] ." ". $propuesta["cliente"]["vEstado"] }}</p>
+            <p id="nombreCliente" class="textIncProupesta">
+                <strong>Cliente: </strong>{{ $propuesta["cliente"]["vNombrePersona"] ." ". $propuesta["cliente"]["vPrimerApellido"] ." ". $propuesta["cliente"]["vSegundoApellido"] }}
+            </p>
+            <p id="direccionCliente" class="textIncProupesta">
+                <strong>Direccion: </strong>{{ $propuesta["cliente"]["vCalle"] .", ". $propuesta["cliente"]["cCodigoPostal"] .", ". $propuesta["cliente"]["vCiudad"] ." ". $propuesta["cliente"]["vEstado"] }}
+            </p>
             @if($propuesta["cliente"]["vEmail"] != "")
-                <p id="email" class="textIncProupesta"><strong>Correo electrónico: </strong>{{ $propuesta["cliente"]["vEmail"] }}</p>
+                <p id="email" class="textIncProupesta"><strong>Correo
+                        electrónico: </strong>{{ $propuesta["cliente"]["vEmail"] }}</p>
             @endif
             @if($propuesta["cliente"]["vTelefono"] != "" || $propuesta["cliente"]["vCelular"] != "")
-                <p id="telefono" class="textIncProupesta"><strong>Contacto: </strong>{{ $propuesta["cliente"]["vTelefono"]  . "  /  " .  $propuesta["cliente"]["vCelular"] }}</p>
+                <p id="telefono" class="textIncProupesta">
+                    <strong>Contacto: </strong>{{ $propuesta["cliente"]["vTelefono"]  . "  /  " .  $propuesta["cliente"]["vCelular"] }}
+                </p>
             @endif
-            <p id="asesor" class="textIncProupesta"><strong>Asesor: </strong>{{ $propuesta["vendedor"]["vNombrePersona"] ." ". $propuesta["vendedor"]["vPrimerApellido"] ." ". $propuesta["vendedor"]["vSegundoApellido"] }}</p>
-            <p id="sucursal" class="textIncProupesta"><strong>Sucursal: </strong>{{ $propuesta["vendedor"]["vOficina"] }}</p>
-            <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de <u>{{ $propuesta["expiracion"]["cantidad"] . " " . $propuesta["expiracion"]["unidadMedida"] }}</u></strong></p>
+            <p id="asesor" class="textIncProupesta">
+                <strong>Asesor: </strong>{{ $propuesta["vendedor"]["vNombrePersona"] ." ". $propuesta["vendedor"]["vPrimerApellido"] ." ". $propuesta["vendedor"]["vSegundoApellido"] }}
+            </p>
+            <p id="sucursal" class="textIncProupesta">
+                <strong>Sucursal: </strong>{{ $propuesta["vendedor"]["vOficina"] }}</p>
+            <p id="caducidad-propuesta" style="margin-left:13px;"><strong>Validez de
+                    <u>{{ $propuesta["expiracion"]["cantidad"] . " " . $propuesta["expiracion"]["unidadMedida"] }}</u></strong>
+            </p>
         </div>
     </div>
+
     <div class="container-table">
         <h3>Paquete fotovoltaico de {{ $propuesta["paneles"]["potenciaReal"] }} kWp</h3>
         <table class="table-costos-proyecto">
@@ -268,10 +301,12 @@
                 @if($propuesta["inversores"]["combinacion"] === "true")
                     <td colspan="2">
                         <p style="font-size:10px;">
-                            {{ $propuesta["inversores"]["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"] }}
+                            {{ $propuesta["inversores"]["numeroDeInversores"]["MicroUno"]["vNombreMaterialFot"] }}
+                            : {{ $inversores["numeroDeInversores"]["MicroUno"]["numeroDeInversores"] }}
                         </p>
                         <p style="font-size:10px;">
-                            {{ $propuesta["inversores"]["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"] }}: {{ $inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"] }}
+                            {{ $propuesta["inversores"]["numeroDeInversores"]["MicroDos"]["vNombreMaterialFot"] }}
+                            : {{ $inversores["numeroDeInversores"]["MicroDos"]["numeroDeInversores"] }}
                         </p>
                     </td>
                 @else
@@ -300,7 +335,8 @@
                 </td>
                 <td>Estructura de aluminio</td>
                 @if($PdfConfig["subtotalesDesglozados"] === "true")
-                    <td id="costoTotalEstructura">${{ number_format($propuesta["estructura"]["costoTotal"],2) }} USD</td>
+                    <td id="costoTotalEstructura">${{ number_format($propuesta["estructura"]["costoTotal"],2) }}USD
+                    </td>
                 @else
                     <td id="costoTotalEstructura"></td>
                 @endif
@@ -354,7 +390,8 @@
                 <td><strong>Subtotal</strong></td>
                 <td></td>
                 @if($propuesta["descuento"]["porcentaje"] > 0)
-                    <td id="descuentoUSD" style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
+                    <td id="descuentoUSD"
+                        style="border-right:solid green; border-left:solid green; border-bottom:solid green;">
                         <p style="font-weight:bolder; text-align:center; font-size:15px; background-color:#FFF66D;">
                             ${{ number_format($propuesta["descuento"]["descuento"],2) }} USD
                         </p>
@@ -383,38 +420,45 @@
             </tbody>
         </table>
     </div>
-    <!-- Leyenda - Tipo de cambio -->
+
     <div id="leyendaTipoDeCambio" style="margin-left:20px; margin-right:20px;">
-        <p class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por Banorte a la Venta del día en que se realice cada pago. Se requiere 50% de anticipo a la aprobación del proyecto, 35% a la recepción de los equipos y 15% una vez culminada la instalación. Los documentos para trámite CFE se entregan para firma el día que se realiza el finiquito del proyecto.</p>
+        <p class="nota"><strong style="color: #2E2D2D;">NOTA: </strong>El tipo de cambio <strong
+                    style="color: #2E2D2D;">(${{ $propuesta["tipoDeCambio"] }} mxn)</strong> se tomará el reportado por
+            Banorte a la Venta del día en que se realice cada pago. Se requiere 50% de anticipo a la aprobación del
+            proyecto, 35% a la recepción de los equipos y 15% una vez culminada la instalación. Los documentos para
+            trámite CFE se entregan para firma el día que se realiza el finiquito del proyecto.</p>
     </div>
-    <!-- Logotipos && garantias de las marcas de los equipos -->
+
     <table class="table-contenedor" style="margin-left: auto; margin-right: auto;">
         <tr>
             <td id="imgLogoPanel" align="center" style="border: none; width: 110px; height: 90px;">
                 @php($image = $propuesta['paneles']['vMarca'] . '.png')
-                <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                <img style="width:100%; height:auto;"
+                     src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
             </td>
             <td id="imgLogoInversor" align="center" style="border: none; width: 110px; height: 90px;">
                 @php($image = $propuesta['inversores']['vMarca'] . '.jpg')
-                <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                <img style="width:100%; height:auto;"
+                     src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
             </td>
             <td id="imgLogoInversor" align="center" style="border: none; width: 110px; height: 90px;">
                 @php($image = $propuesta['estructura']['_estructuras']['vMarca'] . '.png')
-                <img style="width:100%; height:auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                <img style="width:100%; height:auto;"
+                     src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
             </td>
         </tr>
     </table>
-    <!-- Fin logos/marcas equip. -->
+
     <hr class="linea-division" style="background-color:#5576F2;">
 
     <table class="table-contenedor">
         <tr>
-            <!-- CARDS -->
-            <td align="center" >
-                <!-- CARD - "ANTES" -->
+
+            <td align="center">
+
                 <div style="margin-left:30px;">
                     <div class="card">
-                        <!-- CONSUMO ACTUAL -->
+
                         <div class="card-header">
                             <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
                                 Total a pagar del periodo facturado
@@ -424,15 +468,20 @@
                             <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
                                 ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestralConIva"], 2) }}
                             </p>
-                            <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
-                            <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                            <hr class="linea-division"
+                                style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
+                            <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;"
+                                 src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                             <p style="font-size:14px; text-align:center; margin-top:-10px;">
                                 Pago actual s/paneles
                             </p>
-                            <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                            <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
+                            <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;"
+                                 src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                            <hr class="linea-division"
+                                style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
                             <p style="font-weight:bolder; margin-top:25px; font-size:19px;">
-                                {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }} Kw
+                                {{ number_format($propuesta["power"]["_consumos"]["_promCons"]["promConsumosBimestrales"]) }}
+                                Kw
                             </p>
                             <p style="font-size:9px; background-color:#F7FB0C; font-weight:bolder; margin-top:-12px; text-align:center;">
                                 ({{ $propuesta["power"]["old_dac_o_nodac"] }})
@@ -442,10 +491,10 @@
                 </div>
             </td>
             <td align="center">
-                <!-- CARD - "NUEVO_CONSUMO" -->
+
                 <div style="margin-left:-80px;">
-                    <div class="card" >
-                        <!-- CONSUMO ACTUAL -->
+                    <div class="card">
+
                         <div class="card-header">
                             <p style="color:#FFFFFF; margin-top:-6px; font-weight:bolder;">
                                 Total a pagar del periodo facturado
@@ -455,15 +504,20 @@
                             <p style="font-weight:bolder; text-align:center; margin-top:10px; font-size:29px;">
                                 ${{ number_format($propuesta["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"] ,2) }}
                             </p>
-                            <hr class="linea-division" style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
-                            <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                            <hr class="linea-division"
+                                style="background-color:green; margin-top:-17px; margin-left:-20px; margin-right:-20px; height:15px;">
+                            <img height="19px" width="19px" style="margin-top:2px; margin-left:-170px;"
+                                 src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
                             <p style="font-size:14px; text-align:center; margin-top:-10px;">
                                 Pago actual c/paneles
                             </p>
-                            <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
-                            <hr class="linea-division" style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
+                            <img height="19px" width="19px" style="margin-left:170px; margin-top:-30px;"
+                                 src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/flecha.png'))) }}"/>
+                            <hr class="linea-division"
+                                style="background-color:green; margin-top:-5px; margin-left:-20px; margin-right:-20px; height:15px;">
                             <p style="font-weight:bolder; text-align:center; margin-top:25px; font-size:19px;">
-                                {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }} Kw
+                                {{ number_format($propuesta["power"]["nuevosConsumos"]["promedioNuevoConsumoBimestral"],2) }}
+                                Kw
                             </p>
                             <p style="font-size:9px; background-color:#F7FB0C; font-weight:bolder; margin-top:-12px; text-align:center;">
                                 ( {{ $propuesta["power"]["new_dac_o_nodac"] }} )
@@ -473,26 +527,29 @@
                 </div>
             </td>
             <td align="center">
-                <!-- CARD - "PROMEDIO CONSUMO BIMESTRAR" $propuesta["power"]["generacion"]["_generacionBimestral"];-->
+
                 <div style="margin-right:20px;">
-                    <img height="32px" width="32px" style="margin-top:15px; margin-left:-30px;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/generation-sun-electricity.png'))) }}"/>
+                    <img height="32px" width="32px" style="margin-top:15px; margin-left:-30px;"
+                         src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/icon/generation-sun-electricity.png'))) }}"/>
                     <h3 style="margin-left:-50px;">Generación bimestral promedio:</h3>
-                    <h2 style="color:#3333FF; margin-left:-50px;">{{ $propuesta["power"]["generacion"]["promeDGeneracionBimestral"] }} kWh</h2>
+                    <h2 style="color:#3333FF; margin-left:-50px;">{{ $propuesta["power"]["generacion"]["promeDGeneracionBimestral"] }}
+                        kWh</h2>
                 </div>
             </td>
         </tr>
     </table>
     <div class="footer-page"></div>
 </div>
-<!-- Fin pagina 1 -->
+
 <hr class="salto-pagina">
 
-<!-- Pagina 2 - Comparativa[combinaciones] -->
+
 <div class="container-fluid">
     <table>
         <tr>
             <td>
-                <img id="logoTipoEtesla" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
+                <img id="logoTipoEtesla"
+                     src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
             </td>
             <td>
                 <h1 style="font-size:25px;">
@@ -501,47 +558,40 @@
             </td>
         </tr>
     </table>
-    <div id="comparativas-combinaciones"  class="div-contenedor">
-        <!-- Tabla comparativa - [ COMBINACIONES ] -->
+    <div id="comparativas-combinaciones" class="div-contenedor">
+
         <table class="table-comparative">
             <thead style="color:#FFFFFF;">
             <tr>
-                <th id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
+                <th id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></th>
                 <th scope="col" style="background-color:#112B3C;">
                     @if($propuestaSeleccionada === "combinacionEconomica")
-                        <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
+                        <img height="29x" width="29x"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}"
+                             style="margin-top:3px; margin-left:-10px;"/>
                     @endif
                     <strong class="title-tab-comparativa">Economica</strong>
                 </th>
                 <th scope="col" style="background-color:#205375;">
                     @if($propuestaSeleccionada === "combinacionMediana")
-                        <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
+                        <img height="29x" width="29x"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}"
+                             style="margin-top:3px; margin-left:-10px;"/>
                     @endif
                     <strong class="title-tab-comparativa">Recomendada</strong>
                 </th>
                 <th scope="col" style="background-color:#F66B0E;">
                     @if($propuestaSeleccionada === "combinacionOptima")
-                        <img height="29x" width="29x" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}" style="margin-top:3px; margin-left:-10px;"/>
+                        <img height="29x" width="29x"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/estrella.png'))) }}"
+                             style="margin-top:3px; margin-left:-10px;"/>
                     @endif
                     <strong class="title-tab-comparativa">Premium</strong>
                 </th>
             </tr>
             </thead>
             <tbody>
-            <!--<tr>
-                        <td class="title-tab-comparativa">
-                            Costo por watt
-                        </td>
-                        <td id="tdCostoWattA" class="text-tab-comparativa">
-                            ${{ number_format($combinacionEconomica["totales"]["precio_watt"],2) }} USD
-                        </td>
-                        <td id="tdCostoWattB" class="text-tab-comparativa">
-                            ${{ number_format($combinacionMediana["totales"]["precio_watt"],2) }} USD
-                        </td>
-                        <td id="tdCostoWattC" class="text-tab-comparativa">
-                            ${{ number_format($combinacionOptima["totales"]["precio_watt"],2) }} USD
-                        </td>
-                    </tr>-->
             <tr>
                 <td class="title-tab-comparativa">
                     Potencia instalada
@@ -560,7 +610,8 @@
         </table>
         <table id="panel" class="table-comparative" style="margin-top:20px; width: 100%;">
             <tr>
-                <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                <td id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
                 <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Panel</td>
                 <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Panel</td>
                 <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Panel</td>
@@ -572,19 +623,22 @@
                 <td id="tdMarcaPanelA">
                     <div class="divImgLogos">
                         @php($image = $combinacionEconomica["paneles"]["marca"] . '.png')
-                        <img id="imgPanelA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <img id="imgPanelA" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
                     </div>
                 </td>
                 <td id="tdMarcaPanelB">
                     <div class="divImgLogos">
                         @php($image = $combinacionMediana["paneles"]["marca"] . '.png')
-                        <img id="imgPanelB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <img id="imgPanelB" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
                     </div>
                 </td>
                 <td id="tdMarcaPanelC">
                     <div class="divImgLogos">
                         @php($image = $combinacionOptima["paneles"]["marca"] . '.png')
-                        <img id="imgPanelC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
+                        <img id="imgPanelC" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/panel/' . $image))) }}">
                     </div>
                 </td>
             </tr>
@@ -636,7 +690,8 @@
         </table>
         <table id="inversor" class="table-comparative" style="margin-top:20px;">
             <tr>
-                <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                <td id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
                 <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Inversor</td>
                 <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Inversor</td>
                 <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Inversor</td>
@@ -648,19 +703,22 @@
                 <td id="tdMarcaInversorA">
                     <div class="divImgLogos">
                         @php($image = $combinacionEconomica["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorA" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <img id="imgInversorA" class="imgLogos"
+                             src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
                     </div>
                 </td>
                 <td id="tdMarcaInversorB">
                     <div class="divImgLogos">
                         @php($image = $combinacionMediana["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorB" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <img id="imgInversorB" class="imgLogos"
+                             src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
                     </div>
                 </td>
                 <td id="tdMarcaInversorC">
                     <div class="divImgLogos">
                         @php($image = $combinacionOptima["inversores"]["marca"] . '.jpg')
-                        <img id="imgInversorC" class="imgLogos" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
+                        <img id="imgInversorC" class="imgLogos"
+                             src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/inversor/' . $image))) }}">
                     </div>
                 </td>
             </tr>
@@ -726,10 +784,14 @@
         </table>
         <table id="estructura" class="table-comparative" style="margin-top:20px;">
             <tr>
-                <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
-                <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Estructura</td>
-                <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Estructura</td>
-                <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Estructura</td>
+                <td id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Estructura
+                </td>
+                <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Estructura
+                </td>
+                <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Estructura
+                </td>
             </tr>
             <tr>
                 <td class="title-tab-comparativa">
@@ -738,18 +800,21 @@
                 <td id="tdMarcaEstructuraA">
                     <div class="divImgLogos">
                         @php($image = $combinacionEconomica['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraA" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <img id="imgEstructuraA" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
                     </div>
                 </td>
                 <td id="tdMarcaEstructuraB">
                     <div class="divImgLogos">
                         @php($image = $combinacionMediana['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraB" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <img id="imgEstructuraB" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
                 </td>
                 <td id="tdMarcaEstructuraC">
                     <div class="divImgLogos">
                         @php($image = $combinacionOptima['estructura']['marca'] . '.png')
-                        <img id="imgEstructuraC" class="imgLogos" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
+                        <img id="imgEstructuraC" class="imgLogos"
+                             src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/equipos/logos/estructura/' . $image))) }}">
                     </div>
                 </td>
             </tr>
@@ -801,7 +866,8 @@
         </table>
         <table id="ahorro" class="table-comparative" style="margin-top:20px;">
             <tr>
-                <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                <td id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
                 <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
                 <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
                 <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Ahorro</td>
@@ -809,7 +875,8 @@
             <tr>
                 <td colspan="4" class="text-tab-comparativa">
                     <strong class="title-tab-comparativa">Consumo sin Paneles</strong>
-                    {{ number_format($propuesta["promedioConsumosBimestrales"],2) }} kw  |  ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2) }} MXN
+                    {{ number_format($propuesta["promedioConsumosBimestrales"],2) }} kw |
+                    ${{ number_format($propuesta["power"]["objConsumoEnPesos"]["pagoPromedioBimestral"],2) }} MXN
                     <strong class="title-tab-comparativa">[ Bimestrales ]</strong>
                 </td>
             </tr>
@@ -846,19 +913,23 @@
                     Nuevo pago de luz
                 </td>
                 <td id="tdNewConsumoEconomicoA" class="text-tab-comparativa">
-                    ${{ number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }} MXN / bim
+                    ${{ number_format($combinacionEconomica["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }}
+                    MXN / bim
                 </td>
                 <td id="tdNewConsumoEconomicoB" class="text-tab-comparativa">
-                    ${{ number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }} MXN / bim
+                    ${{ number_format($combinacionMediana["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }}
+                    MXN / bim
                 </td>
                 <td id="tdNewConsumoEconomicoC" class="text-tab-comparativa">
-                    ${{ number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }} MXN / bim
+                    ${{ number_format($combinacionOptima["power"]["objGeneracionEnpesos"]["pagoPromedioBimestralConIva"],2) }}
+                    MXN / bim
                 </td>
             </tr>
         </table>
         <table id="totales" class="table-comparative" style="margin-top:20px;">
             <tr>
-                <td id="td-invisible" style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
+                <td id="td-invisible"
+                    style="border-left:0px; border-top:0px; border-bottom:0px; background-color:#FFFFFF"></td>
                 <td id="tdPropuestaA" style="background-color:#112B3C; font-weight:bolder; color:#FFFFFF;">Totales</td>
                 <td id="tdPropuestaB" style="background-color:#205375; font-weight:bolder; color:#FFFFFF;">Totales</td>
                 <td id="tdPropuestaC" style="background-color:#F66B0E; font-weight:bolder; color:#FFFFFF;">Totales</td>
@@ -868,13 +939,16 @@
                     <td class="title-tab-comparativa" style="background-color:#2593F0; color:white;">
                         Total s/Descuento
                     </td>
-                    <td id="tdCostoSinDescuentoA" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                    <td id="tdCostoSinDescuentoA" class="text-tab-comparativa"
+                        style="background-color:#2593F0; color:white;">
                         ${{ number_format($combinacionEconomica["descuento"]["precioSinDescuento"],2) }} USD
                     </td>
-                    <td id="tdCostoSinDescuentoB" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                    <td id="tdCostoSinDescuentoB" class="text-tab-comparativa"
+                        style="background-color:#2593F0; color:white;">
                         ${{ number_format($combinacionMediana["descuento"]["precioSinDescuento"],2) }} USD
                     </td>
-                    <td id="tdCostoSinDescuentoC" class="text-tab-comparativa" style="background-color:#2593F0; color:white;">
+                    <td id="tdCostoSinDescuentoC" class="text-tab-comparativa"
+                        style="background-color:#2593F0; color:white;">
                         ${{ number_format($combinacionOptima["descuento"]["precioSinDescuento"],2) }} USD
                     </td>
                 </tr>
@@ -922,8 +996,8 @@
                 </td>
             </tr>
         </table>
-        <!-- Fin - Tabla comparativa - [ COMBINACIONES ] -->
-        <!-- Nota * Costo por watt -->
+
+
         <table id="nota-costo-watt" class="table-comparative" style="margin-top:25px;">
             <tr>
                 <td style="background-color:#9AC5E7;">
@@ -933,35 +1007,41 @@
             <tr>
                 <td>
                     <p style="font-size:9px;">
-                        Entre los costos, lo más importante a revisar es el <strong style="background-color:#ECFF00;">costo por watt</strong> del proyecto, pues va en función del costo del proyecto y la potencia instalada. Puede ser que un proyecto se note económico pero es posible que estén proponiendo menos potencia y por ende la cotización a comparar no tenga equivalente.
+                        Entre los costos, lo más importante a revisar es el <strong style="background-color:#ECFF00;">costo
+                            por watt</strong> del proyecto, pues va en función del costo del proyecto y la potencia
+                        instalada. Puede ser que un proyecto se note económico pero es posible que estén proponiendo
+                        menos potencia y por ende la cotización a comparar no tenga equivalente.
                     </p>
                 </td>
             </tr>
         </table>
-        <!-- Fin - Nota * Costo por watt -->
+
     </div>
     <div class="footer-page"></div>
 </div>
-<!-- Fin pagina 2 -->
+
 <hr class="salto-pagina">
-<!-- Pagina 3 -->
+
+
 <div class="container-fluid" style="border-top: 10px solid #5576F2;">
     <table>
         <tr>
             <td>
-                <!-- LogoTipo Etesla -->
-                <img id="logoTipoEtesla" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
+                <img id="logoTipoEtesla"
+                     src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/etesla-logo.png'))) }}">
             </td>
             <td style="padding-left: 75px;">
-                <h1 style="font-size:25px; text-align:right; margin-right: 27px;">FINANCIAMIENTO Y RETORNO DE INVERSIÓN</h1>
+                <h1 style="font-size:25px; text-align:right; margin-right: 27px;">FINANCIAMIENTO Y RETORNO DE
+                    INVERSIÓN</h1>
             </td>
         </tr>
     </table>
-    <!-- Tabla Financiamiento - ROI -->
+
     <p class="nota" style="margin-top:-20px; text-align:left; margin-left:60px;">
         <strong>NOTA: </strong>
         El calculo del retorno incluye deduccion fiscal
     </p>
+
     <div style="margin-left:40px; margin-right:40px;">
         <table>
             <tr>
@@ -1021,11 +1101,16 @@
             </tr>
             <tr>
                 <th> Pago mensual</th>
-                <td>${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["tresMeses"] ,2) }}</td>
-                <td>${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["seisMeses"], 2) }}</td>
-                <td>${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["nueveMeses"], 2) }}</td>
-                <td>${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["doceMeses"], 2) }}</td>
-                <td>${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["dieciochoMeses"], 2) }}</td>
+                <td>
+                    ${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["tresMeses"] ,2) }}</td>
+                <td>
+                    ${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["seisMeses"], 2) }}</td>
+                <td>
+                    ${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["nueveMeses"], 2) }}</td>
+                <td>
+                    ${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["doceMeses"], 2) }}</td>
+                <td>
+                    ${{ number_format($propuesta["financiamiento"]["objMensualidadesCreditCard"]["dieciochoMeses"], 2) }}</td>
             </tr>
         </table>
         <br>
@@ -1092,9 +1177,12 @@
                 </tr>
             @endfor
         </table>
-        <!-- Fin_Tabla financiamiento -->
+
     </div>
+
+
     <hr class="linea-division" style="background-color:#5576F2; margin-left:-15px; margin-right:-15px;">
+
     <table id="tableGraficas">
         <tr>
             <td id="grfEnergetico">
@@ -1105,15 +1193,18 @@
             </td>
         </tr>
     </table>
+
+
     <table>
         <tr>
             <td style="width: 450px;">
-
-                <p style="margin-top: 10px; margin-left: 55px; text-align: left; font-weight: bold;">Somos una empresa avalada por:</p>
+                <p style="margin-top: 10px; margin-left: 55px; text-align: left; font-weight: bold;">Somos una empresa
+                    avalada por:</p>
                 <div style="margin-top:10px;">
                     <div name="ANCE">
                         <div style="margin-left:55px; height:68px; width:60px">
-                            <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
+                            <img style="width:100%; height:auto;"
+                                 src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/ance.jpg'))) }}">
                         </div>
                         <div style="margin-top:-70px; margin-left:133px;">
                             <p class="text-inferior-pag1">
@@ -1126,7 +1217,8 @@
                     </div>
                     <div>
                         <div style="margin-left:55px; height:68px; width:60px">
-                            <img style="width:100%; height:auto;" src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
+                            <img style="width:100%; height:auto;"
+                                 src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/wwf.jpg'))) }}">
                         </div>
                         <div style="margin-top:-70px; margin-left:133px;">
                             <p class="text-inferior-pag1">World Wildlife Fund</p>
@@ -1143,14 +1235,18 @@
             </td>
             <td align="center">
                 <div style="margin-left:-55px; margin-right:55px;">
-                    <p style="text-align: center; font-weight: bold;">EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA PROPUESTA, EQUIVALE A <strong style="color:#8AADCE;">{{ $propuesta["power"]["objImpactoAmbiental"]["numeroArboles"] }}</strong> ÁRBOLES PLANTADOS AL AÑO.</p>
-                    <img width="25%" height="130px" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/tree.png'))) }}"/>
+                    <p style="text-align: center; font-weight: bold;">EL SISTEMA FOTOVOLTAICO PRESENTADO EN ESTA
+                        PROPUESTA, EQUIVALE A <strong
+                                style="color:#8AADCE;">{{ $propuesta["power"]["objImpactoAmbiental"]["numeroArboles"] }}</strong>
+                        ÁRBOLES PLANTADOS AL AÑO.</p>
+                    <img width="25%" height="130px"
+                         src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/img/pdf/complementos/tree.png'))) }}"/>
                 </div>
             </td>
         </tr>
     </table>
+
     <div class="footer-page"></div>
 </div>
-<!-- Fin pagina 3 -->
 </body>
 </html>
